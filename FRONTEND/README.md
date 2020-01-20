@@ -12,7 +12,7 @@
 
 ## 페이지
 
-<img src="./prototype/광고판_상세페이지_UI.JPG" width="50%">
+<img src="./prototype/frontend_adpage.JPG" width="50%">
 
 ### 광고 뷰
 
