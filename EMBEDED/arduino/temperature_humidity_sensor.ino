@@ -2,7 +2,7 @@
 #define DHTPIN 8   //어떤 핀에 꽂았는지
 #define DHTTYPE DHT11 //센서 이름
 DHT dht(DHTPIN, DHTTYPE); //변수에 저장
-
+//hi
 
 void setup(){
   Serial.begin(9600);
