@@ -15,6 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import OpacityIcon from '@material-ui/icons/Opacity';
 import styled from 'styled-components';
+import NFSlider from './NFSlider';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -46,6 +47,9 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
     margin-right: 2%;
   `;
 
+  const slider = {
+    zIndex: '9999',
+  };
   return (
     <div>
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -75,18 +79,7 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
             <OpacityIcon /> &nbsp;<Icon> 0 %</Icon>
           </Toolbar>
         </AppBar>
-        <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
-          </ListItem>
-        </List>
+        <NFSlider style={slider} />
       </Dialog>
     </div>
   );
