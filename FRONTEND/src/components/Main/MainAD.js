@@ -21,6 +21,9 @@ const Content = styled.div`
 `;
 
 const MainADBlock = styled.div`
+  * {
+    padding: 0;
+  }
   .bg {
     width: 100%;
     height: 100vh;
