@@ -1,0 +1,5 @@
+package com.yb.rest.vo;
+
+public class ReqForm {
+
+}

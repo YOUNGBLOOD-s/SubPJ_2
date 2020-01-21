@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.ssafy.rest.controller" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="75" width="186" x="233" y="68"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="com.ssafy.rest.dao" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/dao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="75" width="173" x="554" y="60"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="com.ssafy.rest.service" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="72" width="188" x="870" y="57"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="com.ssafy.rest.vo" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/vo" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="70" width="189" x="878" y="615"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="5" language="java" name="com.ssafy.rest.AppConfig" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/AppConfig.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="86" width="175" x="15" y="160"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="6" language="java" name="com.ssafy.rest" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="86" width="174" x="14" y="59"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="7" language="java" name="com.ssafy.rest.SpringSafeFoodApplication" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/SpringSafeFoodApplication.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="82" width="177" x="16" y="270"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.ssafy.rest.SwaggerConfig" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/SwaggerConfig.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="180" x="14" y="366"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.ssafy.rest.WebConfig" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/WebConfig.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="176" x="15" y="475"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.ssafy.rest.controller.BoardController" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/BoardController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="192" x="230" y="166"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.ssafy.rest.controller.delivery.Point" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/delivery.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="194" x="227" y="561"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.ssafy.rest.controller.delivery" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/delivery.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="194" x="227" y="332"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.ssafy.rest.controller.FoodController" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/FoodController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="262" width="202" x="226" y="710"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.ssafy.rest.controller.FoodController.cnt_keyword" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/FoodController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="82" width="195" x="227" y="993"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.ssafy.rest.controller.MemberController" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/MemberController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="260" width="202" x="19" y="1107"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.ssafy.rest.controller.RestFoodController" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/RestFoodController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="363" y="1240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.ssafy.rest.controller.RestFoodController.cnt_keyword" 
+    project="SpringSafeFood" file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/RestFoodController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="589" y="1173"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.ssafy.rest.controller.RestMemberController" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/RestMemberController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="652" y="1352"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.ssafy.rest.dao.BoardDaoImpl" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/dao/BoardDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="128" width="140" x="483" y="151"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.ssafy.rest.dao.FoodDaoImpl" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/dao/FoodDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="125" width="122" x="484" y="297"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="21" language="java" name="com.ssafy.rest.dao.IBoardDao" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/dao/IBoardDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="125" width="141" x="651" y="150"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="22" language="java" name="com.ssafy.rest.dao.IFoodDao" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/dao/IFoodDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="138" width="146" x="652" y="290"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="23" language="java" name="com.ssafy.rest.dao.IMemberDao" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/dao/IMemberDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="138" width="144" x="655" y="446"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="24" language="java" name="com.ssafy.rest.dao.MemberDaoImpl" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/dao/MemberDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="132" width="138" x="478" y="446"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.ssafy.rest.service.BoardServiceImpl" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/service/BoardServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="958" y="433"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="26" language="java" name="com.ssafy.rest.service.IBoardService" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/service/IBoardService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="957" y="242"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="27" language="java" name="com.ssafy.rest.service.IFoodService" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/service/IFoodService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="157" width="206" x="1069" y="168"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="28" language="java" name="com.ssafy.rest.service.FoodServiceImpl" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/service/FoodServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="163" width="215" x="1074" y="349"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="29" language="java" name="com.ssafy.rest.service.IMemberService" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/service/IMemberService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="151" width="208" x="1294" y="168"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="30" language="java" name="com.ssafy.rest.service.MemberServiceImpl" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/service/MemberServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="159" width="215" x="1305" y="349"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.ssafy.rest.vo.Board" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/vo/Board.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="149" width="156" x="879" y="694"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.ssafy.rest.vo.Food_count" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/vo/Food_count.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="213" width="164" x="1285" y="866"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="com.ssafy.rest.vo.Food_foodMaker" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/vo/Food_foodMaker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="215" width="207" x="1060" y="866"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="com.ssafy.rest.vo.Food" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/vo/Food.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="215" width="168" x="875" y="868"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="com.ssafy.rest.vo.Member" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/vo/Member.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="232" width="167" x="876" y="1107"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="com.ssafy.rest.vo.Member_searchPw" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/vo/Member_searchPw.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1160" y="1209"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="com.ssafy.rest.vo.Member_isLogin" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/vo/Member_isLogin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1362" y="1207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="com.ssafy.rest.controller.RestBoardController" project="SpringSafeFood" 
+    file="/SpringSafeFood/src/main/java/com/ssafy/rest/controller/RestBoardController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="168" width="185" x="12" y="577"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <nesting id="39">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <realization id="40">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <realization id="41">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="42">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="43" name="ser"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="45">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <association id="46">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="47" name="ser">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="49">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="17"/>  
+  </nesting>  
+  <association id="50">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="51" name="memrepo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="52" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="54" name="ser">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="57" name="ser">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="59">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <association id="60">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="61" name="ser">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="64" name="list">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="65" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="67" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="68" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="70" name="ser">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="71" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="72">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <nesting id="73">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </nesting>  
+  <association id="74">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="75" name="list">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="76" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="78" name="repo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="79" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="80">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
