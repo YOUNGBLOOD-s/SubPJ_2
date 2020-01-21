@@ -1,6 +1,6 @@
 .show-details-button {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
   opacity: 0;
@@ -15,5 +15,6 @@
     width: 14px;
     margin: 0 auto;
     color: white;
+    transform: rotateZ(180deg);
   }
 }

@@ -47,9 +47,6 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
     margin-right: 2%;
   `;
 
-  const slider = {
-    zIndex: '9999',
-  };
   return (
     <div>
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -79,7 +76,7 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
             <OpacityIcon /> &nbsp;<Icon> 0 %</Icon>
           </Toolbar>
         </AppBar>
-        <NFSlider style={slider} />
+        <NFSlider />
       </Dialog>
     </div>
   );
