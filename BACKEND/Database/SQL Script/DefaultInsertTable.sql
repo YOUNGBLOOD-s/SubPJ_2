@@ -5,7 +5,7 @@ desc nationtb;
 select * from nationtb;
 
 -- [Europe] 
-insert into nationtb(name, dust, continents) values('Germany', 80, 1); 
+insert into nationtb(name, dust, continents, speech) values('Germany', 80, 1, '독일문화의 이해 수업 들었었는데 성적 잘 안 나왔어 짱나 -_-'); 
 insert into nationtb(name, dust, continents) values('Italy', 168, 1); 
 insert into nationtb(name, dust, continents) values('France', 33, 1); 
 
@@ -24,10 +24,6 @@ insert into nationtb(name, dust, continents) values('Thailand', 91, 3);
 insert into nationtb(name, dust, continents) values('USA', 4, 4); 
 insert into nationtb(name, dust, continents) values('Canada', 52, 4); 
 insert into nationtb(name, dust, continents) values('California', 35, 4); 
-
--- test 나라 별 대표사진 update
-update nationtb set url='https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80'
-	where idx=13;
     
 -- 월평균 table
 desc monthtb;
@@ -83,15 +79,6 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 -- 이미지 테이블
 desc imagetb;
 select * from imagetb;
-
--- 합성 테이블
-desc speechtb;
-select * from speechtb;
-insert into speechtb(text) values('추운 날, 여기 어떠세요?');
-insert into speechtb(text) values('더운 날, 여기 어떠세요?');
-insert into speechtb(text) values('습한 날, 여기 어떠세요?');
-insert into speechtb(text) values('안 습한 날, 여기 어떠세요?');
-
 
 -- 전광판 정보
 desc adboardtb;
