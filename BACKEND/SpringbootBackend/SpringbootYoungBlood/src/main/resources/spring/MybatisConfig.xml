@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-  	
+  	<typeAlias type="com.yb.rest.vo.Sendtofront" alias="sendtofront"/>
   </typeAliases>
   <mappers>
-    
+    <mapper resource="spring/ad_sql.xml"/>
   </mappers>
 </configuration>
