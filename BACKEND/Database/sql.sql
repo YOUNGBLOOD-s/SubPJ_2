@@ -6,7 +6,8 @@ create table nationtb (
 	 idx int auto_increment primary key,
      name varchar(30) UNIQUE,
      dust int, 
-     continents int
+     continents int,
+     url varchar(200)
 );
 drop table nationtb;
 desc nationtb;
@@ -31,16 +32,21 @@ insert into nationtb(name, dust, continents) values('Thailand', 91, 3);
 -- [North America]
 insert into nationtb(name, dust, continents) values('USA', 4, 4); 
 insert into nationtb(name, dust, continents) values('Canada', 52, 4); 
-insert into nationtb(name, dust, continents) values('California ', 35, 4); 
+insert into nationtb(name, dust, continents) values('California', 35, 4); 
+
+-- test 나라 별 대표사진 update
+update nationtb set url='https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80'
+	where idx=13;
+
 
 -- 월평균 table
 create table avertb(
 	idx int auto_increment primary key,
     nation int UNIQUE,
-    tem1 int, tem2 int, tem3 int, tem4 int, tem5 int, tem6 int,
-    tem7 int, tem8 int, tem9 int, tem10 int, tem11 int, tem12 int,
-	hum1 int, hum2 int, hum3 int, hum4 int, hum5 int, hum6 int,
-    hum7 int, hum8 int, hum9 int, hum10 int, hum11 int, hum12 int,
+    tem1 float, tem2 float, tem3 float, tem4 float, tem5 float, tem6 float,
+    tem7 float, tem8 float, tem9 float, tem10 float, tem11 float, tem12 float,
+	hum1 float, hum2 float, hum3 float, hum4 float, hum5 float, hum6 float,
+    hum7 float, hum8 float, hum9 float, hum10 float, hum11 float, hum12 float,
     foreign key (nation) references nationtb(idx)
 );
 drop table avertb;
@@ -83,20 +89,52 @@ insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9,
 
 
 -- 경로 및 상세정보 table
-create table contents (
+create table contentstb (
 	idx int auto_increment primary key,
     nation int,
+    day int,
     seq int,
+    title varchar(50),
     detail varchar(10000),
     image varchar(500),
-    foreign key (nation) references nation(idx)
+    tofrom varchar(50),
+    transport varchar(20),
+    foreign key (nation) references nationtb(idx)
 );
+drop table contentstb;
+desc contentstb;
+select * from contentstb;
+
+-- 초기 값
+insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
+	values(13, 1, 1, '맨스차이니스 극장 관광', '맨스차이니스 극장을 관리하는데, 할리우드 스타들을 만날 수 있습니다.','https://images.unsplash.com/photo', '인천 → 로스앤젤레스', '비행기');
+insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
+	values(13, 1, 2, '라스베이거스 시티투어', '라스베이거스 시티를 투어합니다. 스타의 거리 관광합니다.','https://images.unsplash.com/photo', '바스토우 → 라스베이거스', '버스');
+insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
+	values(13, 2, 1, '브라이스캐년 국립공원 관광', '브라이스캐년 국립공원을 관광합니다. 아주 멋지다구요.','https://images.unsplash.com/photo', '자이언 캐년 → 브라이스 캐년', '버스');
 
 -- 이미지 테이블
-create table image (
+create table imagetb (
 	idx int auto_increment primary key,
     nation int,
     type int,
     url varchar(500),
-    foreign key (nation) references nation(idx)
+    foreign key (nation) references nationtb(idx)
 );
+drop table imagetb;
+desc imagetb;
+select * from imagetb;
+
+
+-- 합성
+create table speechtb (
+	idx int auto_increment primary key,
+    text varchar(50)
+);
+drop table speechtb;
+desc speechtb;
+select * from speechtb;
+insert into speechtb(text) values('추운 날, 여기 어떠세요?');
+insert into speechtb(text) values('더운 날, 여기 어떠세요?');
+insert into speechtb(text) values('습한 날, 여기 어떠세요?');
+insert into speechtb(text) values('안 습한 날, 여기 어떠세요?');
