@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import component from '../../lib/material/component';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -31,15 +31,17 @@ const SubTitle = withStyles({
   root: {
     fontWeight: 'bold',
   },
-})(Typography);
+})(component.Typography);
 
 const AuthTemplate = ({ children }) => {
   return (
     <AuthTemplateBlock>
       <Box>
         <TitleWrapper>
-          <Typography variant="caption">NEARBY AD</Typography>
-          <SubTitle variant="h2">네곁에</SubTitle>
+          <component.Typography variant="caption">
+            NEARBY AD
+          </component.Typography>
+          <SubTitle variant="h2">네곁에.</SubTitle>
         </TitleWrapper>
         {children}
       </Box>
