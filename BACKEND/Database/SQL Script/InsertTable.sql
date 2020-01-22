@@ -1,15 +1,6 @@
-create database yb_travel;
 use yb_travel;
 
 -- 나라 table
-create table nationtb (
-	 idx int auto_increment primary key,
-     name varchar(30) UNIQUE,
-     dust int, 
-     continents int,
-     url varchar(200)
-);
-drop table nationtb;
 desc nationtb;
 select * from nationtb;
 
@@ -37,71 +28,46 @@ insert into nationtb(name, dust, continents) values('California', 35, 4);
 -- test 나라 별 대표사진 update
 update nationtb set url='https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80'
 	where idx=13;
-
-
+    
 -- 월평균 table
-create table avertb(
-	idx int auto_increment primary key,
-    nation int UNIQUE,
-    tem1 float, tem2 float, tem3 float, tem4 float, tem5 float, tem6 float,
-    tem7 float, tem8 float, tem9 float, tem10 float, tem11 float, tem12 float,
-	hum1 float, hum2 float, hum3 float, hum4 float, hum5 float, hum6 float,
-    hum7 float, hum8 float, hum9 float, hum10 float, hum11 float, hum12 float,
-    foreign key (nation) references nationtb(idx)
-);
-drop table avertb;
-desc avertb;
-select * from avertb;
+desc monthtb;
+select * from monthtb;
 
 -- [Europe]
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(1, 1, 1, 5, 9, 14, 17, 19, 19, 15, 10, 5, 2, 0, 0, 0, 2, 10, 30, 48, 38, 18, 5, 0, 0);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(2, 7, 9, 14, 20, 24, 30, 33, 32, 27, 23, 14, 7, 0, 0, 3, 20, 54, 90, 92, 94, 80, 50, 21, 2);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(3, -1, 2, 8, 13, 16, 23, 26, 23, 22, 12, 3, 0, 0, 0, 0, 8, 23, 47, 54, 58, 35, 18, 8, 0);
 
 -- [Africa]
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(4, 14, 15, 17, 21, 24, 27, 28, 28, 26, 23, 19, 15, 0, 3, 6, 18, 47, 80, 93, 95, 73, 25, 20, 8);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(5, 20, 23, 22, 20, 19, 18, 17, 18, 20, 21, 19, 20, 53, 42, 61, 90, 83, 55, 23, 21, 24, 60, 83, 65);
 
 -- [Asia]
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(6, -26, -21, -10, 0, 8, 15, 17, 15, 8, -2, -14, -24, 0, 0, 0, 0, 0, 8, 17, 8, 0, 0, 0, 0);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(7, 17, 18, 19, 22, 26, 30, 29, 29, 26, 24, 10, 19, 51, 68, 85, 98, 100, 100, 100, 100, 100, 96, 83, 58);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(8, -10, -8, -5, 4, 9, 14, 16, 20, 14, 5, -5, -10, 0, 0, 0, 0, 5, 50, 93, 93, 45, 10, 0, 0);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(9, 4, 6, 9, 12, 20, 25, 29, 26, 24, 19, 14, 9, 0, 3, 6, 35, 75, 97, 100, 100, 95, 65, 20, 4);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(10, 26, 25, 28, 30, 30, 29, 28, 28, 28, 28, 27, 25, 93, 95, 100, 100, 100, 100, 100, 100, 100, 100, 100, 95);
 
 -- [North America]
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(11, 1, 3, 5, 10, 15, 20, 22, 21, 20, 14, 10, 6, 0, 0, 0, 8, 33, 65, 89, 83, 53, 25, 6, 0);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(12, -5, -3, 0, 4, 10, 16, 21, 18, 16, 11, 5, 1, 0, 0, 0, 3, 13, 45, 70, 72, 40, 10, 0, 0);
-insert into avertb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
+insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(13, 15, 16, 16, 18, 20, 22, 23, 24, 22, 18, 15, 14, 2, 2, 3, 4, 30, 68, 92, 92, 78, 40, 10, 2);
 
-
 -- 경로 및 상세정보 table
-create table contentstb (
-	idx int auto_increment primary key,
-    nation int,
-    day int,
-    seq int,
-    title varchar(50),
-    detail varchar(10000),
-    image varchar(500),
-    tofrom varchar(50),
-    transport varchar(20),
-    foreign key (nation) references nationtb(idx)
-);
-drop table contentstb;
 desc contentstb;
 select * from contentstb;
 
@@ -113,25 +79,12 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
 	values(13, 2, 1, '브라이스캐년 국립공원 관광', '브라이스캐년 국립공원을 관광합니다. 아주 멋지다구요.','https://images.unsplash.com/photo', '자이언 캐년 → 브라이스 캐년', '버스');
 
+
 -- 이미지 테이블
-create table imagetb (
-	idx int auto_increment primary key,
-    nation int,
-    type int,
-    url varchar(500),
-    foreign key (nation) references nationtb(idx)
-);
-drop table imagetb;
 desc imagetb;
 select * from imagetb;
 
-
--- 합성
-create table speechtb (
-	idx int auto_increment primary key,
-    text varchar(50)
-);
-drop table speechtb;
+-- 합성 테이블
 desc speechtb;
 select * from speechtb;
 insert into speechtb(text) values('추운 날, 여기 어떠세요?');
