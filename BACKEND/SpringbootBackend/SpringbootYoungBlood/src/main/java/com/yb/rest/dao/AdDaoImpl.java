@@ -15,11 +15,11 @@ public class AdDaoImpl implements IAdDao{
 	
 	@Override
 	public List<String> getImgs(int id) {
-		return session.selectList("ad.selectimglist", id);
+		return session.selectList("sendtofront.selectimglist", id);
 	}
 
 	@Override
 	public List<String> getModalcontents(int id) {
-		return session.selectList("ad.selectmodallist", id);
+		return session.selectList("sendtofront.selectmodallist", id);
 	}
 }
