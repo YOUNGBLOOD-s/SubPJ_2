@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+C:\Users\multicampus\Desktop\gitlab\s02p12c110\BACKEND\SpringbootBackend\.metadata\.plugins\org.eclipse.jdt.core
-4071399424.index
-3517747777.index
