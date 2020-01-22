@@ -21,9 +21,9 @@ const Content = ({ movie, onClose }) => (
           quis quam congue, non fringilla orci placerat. Praesent sollicitudin
         </div>
       </div>
-      <button className="content__close" onClick={onClose}>
+      {/* <button className="content__close" onClick={onClose}>
         <IconCross />
-      </button>
+      </button> */}
     </div>
   </div>
 );

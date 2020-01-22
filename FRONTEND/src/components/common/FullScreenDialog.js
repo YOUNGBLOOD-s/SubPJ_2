@@ -16,10 +16,14 @@ import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import OpacityIcon from '@material-ui/icons/Opacity';
 import styled from 'styled-components';
 import NFSlider from './NFSlider';
+import ADNavBar from './ADNavBar';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    position: 'relative',
+    position: 'fixed',
+    background: 'transparent',
+    color: 'white',
+    boxShadow: 'none',
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -76,6 +80,7 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
             <OpacityIcon /> &nbsp;<Icon> 0 %</Icon>
           </Toolbar>
         </AppBar>
+
         <NFSlider />
       </Dialog>
     </div>
