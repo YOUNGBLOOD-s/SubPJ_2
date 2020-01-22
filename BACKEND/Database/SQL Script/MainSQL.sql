@@ -7,8 +7,8 @@ create table nationtb (
      name varchar(30) UNIQUE,
      dust int, 
      continents int,
-     url varchar(200),
-     cnt int default 0
+     cnt int default 0,
+     speech varchar(100)
 );
 drop table nationtb;
 desc nationtb;
@@ -53,16 +53,6 @@ create table imagetb (
 );
 drop table imagetb;
 desc imagetb;
-
-
--- 합성
-create table speechtb (
-	idx int auto_increment primary key,
-    text varchar(50)
-);
-drop table speechtb;
-desc speechtb;
-
 
 -- 전광판 정보
 create table adboardtb (
