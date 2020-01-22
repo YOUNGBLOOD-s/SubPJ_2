@@ -5,25 +5,25 @@ desc nationtb;
 select * from nationtb;
 
 -- [Europe] 
-insert into nationtb(name, dust, continents, speech) values('Germany', 80, 1, '독일문화의 이해 수업 들었었는데 성적 잘 안 나왔어 짱나 -_-'); 
-insert into nationtb(name, dust, continents) values('Italy', 168, 1); 
-insert into nationtb(name, dust, continents) values('France', 33, 1); 
+insert into nationtb(name, dust, continents, speech) values('Germany', 2, 1, '독일문화의 이해 수업 들었었는데 성적 잘 안 나왔어 짱나 -_-'); 
+insert into nationtb(name, dust, continents) values('Italy', 4, 1); 
+insert into nationtb(name, dust, continents) values('France', 2, 1); 
 
 -- [Africa]
-insert into nationtb(name, dust, continents) values('Egypt', 105, 2); 
-insert into nationtb(name, dust, continents) values('Kenya', 110, 2); 
+insert into nationtb(name, dust, continents) values('Egypt', 3, 2); 
+insert into nationtb(name, dust, continents) values('Kenya', 3, 2); 
 
 -- [Asia]
-insert into nationtb(name, dust, continents) values('Mongolia', 184, 3); 
-insert into nationtb(name, dust, continents) values('Vietnam', 95, 3); 
-insert into nationtb(name, dust, continents) values('Vladivostok', 72, 3); 
-insert into nationtb(name, dust, continents) values('Shanghai', 97, 3); 
-insert into nationtb(name, dust, continents) values('Thailand', 91, 3); 
+insert into nationtb(name, dust, continents) values('Mongolia', 4, 3); 
+insert into nationtb(name, dust, continents) values('Vietnam', 3, 3); 
+insert into nationtb(name, dust, continents) values('Vladivostok', 3, 3); 
+insert into nationtb(name, dust, continents) values('Shanghai', 3, 3); 
+insert into nationtb(name, dust, continents) values('Thailand', 3, 3); 
 
 -- [North America]
-insert into nationtb(name, dust, continents) values('USA', 4, 4); 
-insert into nationtb(name, dust, continents) values('Canada', 52, 4); 
-insert into nationtb(name, dust, continents) values('California', 35, 4); 
+insert into nationtb(name, dust, continents) values('USA', 1, 4); 
+insert into nationtb(name, dust, continents) values('Canada', 2, 4); 
+insert into nationtb(name, dust, continents) values('California', 2, 4); 
     
 -- 월평균 table
 desc monthtb;
