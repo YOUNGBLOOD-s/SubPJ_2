@@ -7,10 +7,13 @@ create table nationtb (
      name varchar(30) UNIQUE,
      dust int, 
      continents int,
-     cnt int default 0,
-     speech varchar(100)
+     clickcnt int default 0,
+     showcnt int default 0,
+     customer int,
+     weight int,
+     speech varchar(100),
+     foreign key (customer) references membertb(idx)
 );
-drop table nationtb;
 desc nationtb;
 
 
@@ -24,7 +27,6 @@ create table monthtb(
     hum7 float, hum8 float, hum9 float, hum10 float, hum11 float, hum12 float,
     foreign key (nation) references nationtb(idx)
 );
-drop table monthtb;
 desc monthtb;
 
 -- 경로 및 상세정보 table
@@ -40,7 +42,6 @@ create table contentstb (
     transport varchar(20),
     foreign key (nation) references nationtb(idx)
 );
-drop table contentstb;
 desc contentstb;
 
 -- 이미지 테이블
@@ -51,7 +52,6 @@ create table imagetb (
     url varchar(500),
     foreign key (nation) references nationtb(idx)
 );
-drop table imagetb;
 desc imagetb;
 
 -- 전광판 정보
@@ -59,7 +59,8 @@ create table adboardtb (
 	idx int auto_increment primary key,
     temp float,
     humid float,
+    dust float,
+    rough float,
     info varchar(100)
 );
-drop table adboardtb;
 desc adboardtb;
