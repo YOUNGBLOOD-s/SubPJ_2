@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yb.rest.service.IAdService;
-import com.yb.rest.vo.RecoCountry;
+import com.yb.rest.vo.Sendtofront;
 
 @CrossOrigin
 @RestController
@@ -27,9 +27,9 @@ public class AdController {
 
 	}
 	
+	/** 센서값을 받는다. */
 	@GetMapping("/sensor/{temp}/{hum}")
 	public void sensor(@PathVariable String temp, @PathVariable String hum) {
-		System.out.println("ㅋㅋ");
 		System.out.println(temp);
 		System.out.println(hum);
 		
@@ -41,18 +41,27 @@ public class AdController {
 		
 		selectnation(nation);
 	}
-	
-	/**
-	 *  센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
-	 * */
+	 
+	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. */
 	public void selectnation(List<Integer> nation) {
-		List<RecoCountry> Countrylist = new LinkedList<>();
+		List<Sendtofront> Countrylist = new LinkedList<>();
 		for(int idx=0; idx<nation.size(); idx++) {
 			int id = Countrylist.get(idx).getId();
 			List<String> imgs = ser.getImgs(id);
 			List<String> modalContents = ser.getModalcontents(id);
-			//List<String> modalContent = ser.getModalcontent();
-			//Countrylist.add(new Clickdetail(id, temp, humid, name, content, thumbnail, imgs, modalContent));
+			
+			//avertb
+			float humid = 0;
+			float temp = 0;
+			
+			//nationtb
+			String name = null;
+			String thumbnail = null;
+			
+			//contents
+			String speechtext = null;
+			
+			Countrylist.add(new Sendtofront (id, temp, humid, name, speechtext, thumbnail, imgs, modalContents));
 		}
 		
 		//json 형식으로 바꾸고

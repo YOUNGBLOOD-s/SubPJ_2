@@ -5,7 +5,73 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2020-01-17T03:21:33Z</updated>
+  <updated>2020-01-21T14:10:40Z</updated>
+  <entry>
+    <title>This Week in Spring - January 21st, 2020</title>
+    <link rel="alternate" href="https://spring.io/blog/2020/01/21/this-week-in-spring-january-21st-2020" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2020-01-21:3936</id>
+    <updated>2020-01-21T14:10:40Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! It&amp;rsquo;s 6 am Tuesday, January 21st, 2020, and I&amp;rsquo;m buckled in and ready to take off for Atlanta, Georgia (by way of Denver, Colorado&amp;hellip;), where I&amp;rsquo;ll be speaking at the Atlanta Java User Group tonight! I&amp;rsquo;m so looking forward to seeing everyone there. It&amp;rsquo;s my first JUG appearance in the new year, too! &lt;/p&gt;
+&lt;p&gt;So, let&amp;rsquo;s get to it!&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/01/20/spring-boot-2-2-4-released"&gt;Spring Boot 2.2.4 released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/01/17/spring-vault-2-2-1-release-and-2-1-5-release-available"&gt;Spring Vault 2.2.1.RELEASE and 2.1.5.RELEASE available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;In last week&amp;rsquo;s installment of &lt;a href="https://spring.io/blog/2020/01/17/a-bootiful-podcast-spring-cloud-services-bella-yuxin-bai"&gt;&lt;em&gt;A Bootiful Podcast&lt;/em&gt;, I talk to Spring Cloud Services&amp;rsquo; Bella (Yuxin) Bai&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/01/16/spring-boot-2-2-3-released"&gt;Spring Boot 2.2.3 released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/01/16/spring-boot-2-1-12-released"&gt;Spring Boot 2.1.12 released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/01/16/spring-framework-5-2-3-5-1-13-5-0-16-and-4-3-26-releases"&gt;Spring Framework 5.2.3, 5.1.13, 5.0.16, and 4.3.26 releases&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/01/16/spring-data-neumann-m1-released"&gt;Spring Data Neumann M1 released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/01/15/spring-data-moore-sr4-and-lovelace-sr15-released"&gt;Spring Data Moore SR4 and Lovelace SR15 released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;This is an interesting post on two of my favorite pieces of cloud infrastructure: &lt;a href="https://www.starkandwayne.com/blog/running-cloud-foundry-on-kubernetes-using-kubecf/"&gt;Running Cloud Foundry on Kubernetes using KubeCF&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.wavefront.com/how-to-instrument-and-monitor-your-springboot-2-application-on-kubernetes-using-wavefront/"&gt;How to Instrument and Monitor Your Spring Boot 2 Application in Kubernetes Using Wavefront - Wavefront by VMware&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Boot 2.2.4 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2020/01/20/spring-boot-2-2-4-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>St?phane Nicoll</name>
+    </author>
+    <id>tag:spring.io,2020-01-20:3935</id>
+    <updated>2020-01-20T20:27:23Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot 2.2.4 has been released and is now available from &lt;a href="https://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and Maven Central.&lt;/p&gt;
+&lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.2.4.RELEASE"&gt;6 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt; and was released shortly after Spring Boot 2.2.3 to &lt;a href="https://github.com/spring-projects/spring-boot/issues/19783"&gt;work around a dependency resolution problem with Gradle 5.3 to 5.6&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="http://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="http://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Vault 2.2.1.RELEASE and 2.1.5.RELEASE available</title>
+    <link rel="alternate" href="https://spring.io/blog/2020/01/17/spring-vault-2-2-1-release-and-2-1-5-release-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Mark Paluch</name>
+    </author>
+    <id>tag:spring.io,2020-01-16:3930</id>
+    <updated>2020-01-17T08:42:00Z</updated>
+    <content type="html">&lt;div class="paragraph"&gt;
+&lt;p&gt;On behalf of the community, I&amp;#8217;d like to announce the availability of Spring Vault releases &lt;code&gt;2.2.1.RELEASE&lt;/code&gt; and &lt;code&gt;2.1.5.RELEASE&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Both releases ship with mostly bugfixes and dependency upgrades. Spring Vault &lt;code&gt;2.2.1.RELEASE&lt;/code&gt; ships also support to disable authentication and session management so it can be used with Vault Agent&amp;#8217;s cached authentication.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;For a complete list of changes, see the &lt;a href="http://docs.spring.io/spring-vault/docs/2.2.1.RELEASE/changelog.txt"&gt;2.2.1.RELEASE changelog&lt;/a&gt; respective &lt;a href="http://docs.spring.io/spring-vault/docs/2.1.5.RELEASE/changelog.txt"&gt;2.1.5.RELEASE changelog&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;With this release, we&amp;#8217;d also like to announce that Spring Vault 2.1.x is going to end of life in November 2020. We encourage all users to upgrade to the latest release of the 2.2.x line. You can find more details about the supported versions on our &lt;a href="https://github.com/spring-projects/spring-vault/wiki/Spring-Vault-Versions"&gt;versions overview&lt;/a&gt; in the GitHub repository.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="http://projects.spring.io/spring-vault/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-vault"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-vault/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-vault/docs/2.2.1.RELEASE/reference/html/"&gt;Documentation for 2.2.1.RELEASE&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-vault/docs/2.1.5.RELEASE/reference/html/"&gt;Documentation for 2.1.5.RELEASE&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-vault"&gt;Stack Overflow&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>A Bootiful Podcast: Spring Cloud Services' Bella (Yuxin) Bai</title>
     <link rel="alternate" href="https://spring.io/blog/2020/01/17/a-bootiful-podcast-spring-cloud-services-bella-yuxin-bai" />
@@ -787,244 +853,6 @@ Spring Security 5.3.0.M1! You can find the complete details in the &lt;a href="h
 &lt;div class="paragraph"&gt;
 &lt;p&gt;&lt;a href="https://spring.io/projects/spring-kafka/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-kafka"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-kafka/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-kafka/docs/2.4.0..RELEASE/reference/html/"&gt;Documentation&lt;/a&gt; | &lt;a href="https://stackoverflow.com/questions/tagged/spring-kafka"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-kafka"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Roadmap and Hoxton and Greenwich Maintenance and EOL Announcements</title>
-    <link rel="alternate" href="https://spring.io/blog/2019/12/23/spring-cloud-roadmap-and-hoxton-and-greenwich-maintenance-and-eol-announcements" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Spencer Gibb</name>
-    </author>
-    <id>tag:spring.io,2019-12-21:3916</id>
-    <updated>2019-12-23T14:27:00Z</updated>
-    <content type="html">&lt;p&gt;With the recent &lt;a href="https://spring.io/blog/2019/12/03/spring-framework-maintenance-roadmap-in-2020-including-4-3-eol"&gt;Spring Framework&lt;/a&gt; and &lt;a href="https://spring.io/blog/2019/12/10/spring-boot-2-1-x-eol-november-1st-2020"&gt;Spring Boot&lt;/a&gt; maintenance and roadmap posts, the Spring Cloud team is taking the opportunity to provide some insight to our future roadmap as well as the lifetimes of the Greenwich and Hoxton release trains.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-cloud-ilford" class="anchor" name="spring-cloud-ilford"&gt;&lt;/a&gt;Spring Cloud Ilford&lt;/h2&gt;
-&lt;p&gt;We would like to announce our next major release, Spring Cloud Ilford. This will be the first major release since the release of Spring Cloud Finchley, which provided support for Spring Boot 2.x and Spring Framework 5.x. By making Ilford a major release, it will allow us to remove modules that have entered &lt;a href="https://spring.io/blog/2018/12/12/spring-cloud-greenwich-rc1-available-now#spring-cloud-netflix-projects-entering-maintenance-mode"&gt;maintenance mode&lt;/a&gt; and to complete the simplification of the release train &lt;a href="https://spring.io/blog/2019/07/24/simplifying-the-spring-cloud-release-train"&gt;announced earlier this year&lt;/a&gt;. It will also allow us to do some API refactoring that may introduce breaking changes.&lt;/p&gt;
-&lt;p&gt;Ilford will be released following Spring Framework 5.3 and Spring Boot 2.4 sometime in Q4 2020.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-cloud-hoxton" class="anchor" name="spring-cloud-hoxton"&gt;&lt;/a&gt;Spring Cloud Hoxton&lt;/h2&gt;
-&lt;p&gt;According to the &lt;a href="https://pivotal.io/support/oss"&gt;Pivotal Open Source Support Policy&lt;/a&gt;, major releases are supported for a period of three years. Finchley was first released in June 2018. Therefore, Hoxton, a minor release of the Finchley release train, will be supported until the end of June 2021 with regular releases. Starting in July 2021 Hoxton will enter a special maintenance period where only critical bug fixes and security patches will be released until the end of December 2021.&lt;/p&gt;
-&lt;p&gt;This will allow a full year of overlap between major versions.&lt;/p&gt;
-&lt;p&gt;Spring Boot 2.3.x, scheduled for release in Q2 2020, will be supported by a Hoxton Service Release soon after the Spring Boot release.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-cloud-greenwich" class="anchor" name="spring-cloud-greenwich"&gt;&lt;/a&gt;Spring Cloud Greenwich&lt;/h2&gt;
-&lt;p&gt;Greenwich, a minor release of the Finchley release train, was released in January 2019. Its last regular Service Release will be in Jan 2020. After that, it will enter a special maintenance period where only critical bug fixes and security patches will be released until the end of December 2020. This will be the last release train to support Spring Boot 2.1.x.&lt;/p&gt;
-&lt;p&gt;Please see the &lt;a href="https://github.com/spring-cloud/spring-cloud-release/milestones?direction=asc&amp;sort=due_date&amp;state=open"&gt;release train milestones&lt;/a&gt; to track future releases and the new &lt;a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Supported-Versions"&gt;Supported Versions&lt;/a&gt; page to see version lifetime.&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Hoxton Service Release 1 (SR1) is available.</title>
-    <link rel="alternate" href="https://spring.io/blog/2019/12/21/spring-cloud-hoxton-service-release-1-sr1-is-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Spencer Gibb</name>
-    </author>
-    <id>tag:spring.io,2019-12-21:3915</id>
-    <updated>2019-12-21T03:34:00Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the community, I am pleased to announce that the Service Release 1 (SR1) of the &lt;a href="https://cloud.spring.io"&gt;Spring Cloud Hoxton&lt;/a&gt; Release Train is available today. The release can be found in &lt;a href="https://repo1.maven.org/maven2/org/springframework/cloud/spring-cloud-dependencies/Hoxton.SR1/"&gt;Maven Central&lt;/a&gt;. You can check out the Hoxton &lt;a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Hoxton-Release-Notes"&gt;release notes for more information&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#notable-changes-in-the-hoxton-release-train" class="anchor" name="notable-changes-in-the-hoxton-release-train"&gt;&lt;/a&gt;Notable Changes in the Hoxton Release Train&lt;/h2&gt;
-&lt;p&gt;This milestone was primarily a bugfix release.&lt;/p&gt;
-&lt;p&gt;Please see the Hoxton.SR1 &lt;a href="https://github.com/orgs/spring-cloud/projects/34"&gt;Github Project&lt;/a&gt; for all issues closed.&lt;/p&gt;
-&lt;p&gt;This milestone release is built with Spring Boot 2.2.2.RELEASE.&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-cloud-config" class="anchor" name="spring-cloud-config"&gt;&lt;/a&gt;Spring Cloud Config&lt;/h3&gt;
-&lt;p&gt;Besides bug fixes, Vault authentication was changed to use the Spring Vault project providing more options. Plain text resources are now available through the AWS S3 environment repository.&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-cloud-contract" class="anchor" name="spring-cloud-contract"&gt;&lt;/a&gt;Spring Cloud Contract&lt;/h3&gt;
-&lt;p&gt;Mappings may now be reset after each test.&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-cloud-commons" class="anchor" name="spring-cloud-commons"&gt;&lt;/a&gt;Spring Cloud Commons&lt;/h3&gt;
-&lt;p&gt;Support was added for zone awareness in Spring Cloud Loadbalancer.&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-cloud-sleuth" class="anchor" name="spring-cloud-sleuth"&gt;&lt;/a&gt;Spring Cloud Sleuth&lt;/h3&gt;
-&lt;p&gt;Support was added for Spring Cloud Circuitbreaker&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-cloud-gateway" class="anchor" name="spring-cloud-gateway"&gt;&lt;/a&gt;Spring Cloud Gateway&lt;/h3&gt;
-&lt;p&gt;Besides bug fixes, support was added for new configuration properties.&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-cloud-netflix" class="anchor" name="spring-cloud-netflix"&gt;&lt;/a&gt;Spring Cloud Netflix&lt;/h3&gt;
-&lt;p&gt;Eureka support for zone awareness in Spring Cloud Loadbalancer was added.&lt;/p&gt;
-&lt;p&gt;The following modules were updated as part of Hoxton.SR1:&lt;/p&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Module &lt;/th&gt;
-      &lt;th&gt;Version &lt;/th&gt;
-      &lt;th&gt;Issues&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Config &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-config/milestone/74?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Cloudfoundry &lt;/td&gt;
-      &lt;td&gt;2.2.0.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Vault &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-vault/milestone/36?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Aws &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Bus &lt;/td&gt;
-      &lt;td&gt;2.2.0.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Cli &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Gcp &lt;/td&gt;
-      &lt;td&gt;1.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Contract &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-contract/milestone/61?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Consul &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Starter &lt;/td&gt;
-      &lt;td&gt;Hoxton.SR1 &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Dependencies &lt;/td&gt;
-      &lt;td&gt;Hoxton.SR1 &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Starter Parent &lt;/td&gt;
-      &lt;td&gt;Hoxton.SR1 &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Sleuth &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-sleuth/milestone/72?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Commons &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-commons/milestone/70?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Openfeign &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-openfeign/milestone/21?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Zookeeper &lt;/td&gt;
-      &lt;td&gt;2.2.0.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-zookeeper/milestone/27?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Kubernetes &lt;/td&gt;
-      &lt;td&gt;1.1.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Security &lt;/td&gt;
-      &lt;td&gt;2.2.0.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Circuitbreaker &lt;/td&gt;
-      &lt;td&gt;1.0.0.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-circuitbreaker/milestone/1?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Stream &lt;/td&gt;
-      &lt;td&gt;Horsham.SR1 &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-stream/milestone/68?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Gateway &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-gateway/milestone/34?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Netflix &lt;/td&gt;
-      &lt;td&gt;2.2.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-netflix/milestone/85?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Function &lt;/td&gt;
-      &lt;td&gt;3.0.1.RELEASE &lt;/td&gt;
-      &lt;td&gt;(&lt;a href="https://github.com/spring-cloud/spring-cloud-function/milestone/27?closed=1"&gt;issues&lt;/a&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Task &lt;/td&gt;
-      &lt;td&gt;2.2.2.RELEASE &lt;/td&gt;
-      &lt;td&gt;&amp;nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;As always, we welcome feedback on &lt;a href="https://github.com/spring-cloud/"&gt;GitHub&lt;/a&gt;, on &lt;a href="https://gitter.im/spring-cloud/spring-cloud"&gt;Gitter&lt;/a&gt;, on &lt;a href="https://stackoverflow.com/questions/tagged/spring-cloud"&gt;Stack Overflow&lt;/a&gt;, or on &lt;a href="https://twitter.com/SpringCloud"&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To get started with Maven with a BOM (dependency management only):&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;&lt;br/&gt;&amp;lt;dependencyManagement&amp;gt;&#xD;
-    &amp;lt;dependencies&amp;gt;&#xD;
-        &amp;lt;dependency&amp;gt;&#xD;
-            &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-            &amp;lt;artifactId&amp;gt;spring-cloud-dependencies&amp;lt;/artifactId&amp;gt;&#xD;
-            &amp;lt;version&amp;gt;Hoxton.SR1&amp;lt;/version&amp;gt;&#xD;
-            &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
-            &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
-        &amp;lt;/dependency&amp;gt;&#xD;
-    &amp;lt;/dependencies&amp;gt;&#xD;
-&amp;lt;/dependencyManagement&amp;gt;&#xD;
-&amp;lt;dependencies&amp;gt;&#xD;
-    &amp;lt;dependency&amp;gt;&#xD;
-        &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-        &amp;lt;artifactId&amp;gt;spring-cloud-starter-config&amp;lt;/artifactId&amp;gt;&#xD;
-    &amp;lt;/dependency&amp;gt;&#xD;
-    &amp;lt;dependency&amp;gt;&#xD;
-        &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-        &amp;lt;artifactId&amp;gt;spring-cloud-starter-netflix-eureka-client&amp;lt;/artifactId&amp;gt;&#xD;
-    &amp;lt;/dependency&amp;gt;&#xD;
-    ...&#xD;
-&amp;lt;/dependencies&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;or with Gradle:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;buildscript {&#xD;
-dependencies {&#xD;
-classpath &amp;quot;io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE&amp;quot;&#xD;
-}&#xD;
-}&#xD;
-&#xD;
-&#xD;
-&#xD;
-apply plugin: &amp;quot;io.spring.dependency-management&amp;quot;&#xD;
-&#xD;
-dependencyManagement {&#xD;
-imports {&#xD;
-mavenBom &amp;#39;org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR1&amp;#39;&#xD;
-}&#xD;
-}&#xD;
-&#xD;
-dependencies {&#xD;
-compile &amp;#39;org.springframework.cloud:spring-cloud-starter-config&amp;#39;&#xD;
-compile &amp;#39;org.springframework.cloud:spring-cloud-starter-netflix-eureka-client&amp;#39;&#xD;
-...&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>A Bootiful Podcast: Reactor teammate Simon Basl?</title>
-    <link rel="alternate" href="https://spring.io/blog/2019/12/20/a-bootiful-podcast-reactor-teammate-simon-basl" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2019-12-20:3914</id>
-    <updated>2019-12-20T11:43:41Z</updated>
-    <content type="html">&lt;p&gt;Hi, Spring fans! In this episode, I talk to Reactor teammate &lt;a href="http://twitter.com/SimonBasle"&gt;Simon Basl?&lt;/a&gt; about Nantes, France; DevFest Nantes; &lt;a href="http://Twitter.com/ProjectReactor"&gt;Project Reactor&lt;/a&gt; operators, and so much more.&lt;/p&gt;
-&lt;p&gt;Happy holidays from your friends on the Spring team to all of you!&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="http://twitter.com/SimonBasle"&gt;Simon Basl?&lt;/a&gt; on Twitter&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://www.ProjectReactor.io"&gt;Project Reactor&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/731355979&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"&gt;&lt;/iframe&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
