@@ -91,3 +91,9 @@ insert into speechtb(text) values('추운 날, 여기 어떠세요?');
 insert into speechtb(text) values('더운 날, 여기 어떠세요?');
 insert into speechtb(text) values('습한 날, 여기 어떠세요?');
 insert into speechtb(text) values('안 습한 날, 여기 어떠세요?');
+
+
+-- 전광판 정보
+desc adboardtb;
+select * from adboardtb;
+insert into adboardtb(temp, humid, info) values(23.5, 38.4, '첫번째 테스트용 전광판');

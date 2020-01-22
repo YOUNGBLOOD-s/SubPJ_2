@@ -62,3 +62,14 @@ create table speechtb (
 );
 drop table speechtb;
 desc speechtb;
+
+
+-- 전광판 정보
+create table adboardtb (
+	idx int auto_increment primary key,
+    temp float,
+    humid float,
+    info varchar(100)
+);
+drop table adboardtb;
+desc adboardtb;
