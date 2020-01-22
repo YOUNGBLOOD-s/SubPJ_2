@@ -40,10 +40,10 @@ const movies = [
   },
 ];
 
-const NFSlider = () => {
+const NFSlider = ({ data }) => {
   return (
     <div className="app">
-      <Slider>
+      <Slider activeSlide={movies[data.id - 1]}>
         {movies.map(movie => (
           <Slider.Item movie={movie} key={movie.id}>
             item1

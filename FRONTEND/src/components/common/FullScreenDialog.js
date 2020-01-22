@@ -81,7 +81,7 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
           </Toolbar>
         </AppBar>
 
-        <NFSlider />
+        <NFSlider data={data} />
       </Dialog>
     </div>
   );

@@ -1,9 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
-import SliderContext from './context'
-import ShowDetailsButton from './ShowDetailsButton'
-import Mark from './Mark'
-import './Item.scss'
+import SliderContext from './context';
+import ShowDetailsButton from './ShowDetailsButton';
+import Mark from './Mark';
+import './Item.scss';
 
 const Item = ({ movie }) => (
   <SliderContext.Consumer>
