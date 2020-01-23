@@ -38,9 +38,10 @@ public class AdController {
 
 	}
 	
-	/** 센서값을 받는다. */
+	/** 센서값을 받는다. 
+	 * @throws JsonProcessingException */
 	@GetMapping("/sensor/{temp}/{hum}")
-	public void sensor(@PathVariable String temp, @PathVariable String hum) {
+	public void sensor(@PathVariable String temp, @PathVariable String hum) throws JsonProcessingException {
 		System.out.println(temp);
 		System.out.println(hum);
 		
