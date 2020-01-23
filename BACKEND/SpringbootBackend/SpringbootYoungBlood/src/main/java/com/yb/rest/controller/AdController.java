@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yb.rest.service.IAdService;
 import com.yb.rest.vo.Receivefromsensor;
 import com.yb.rest.vo.Sendtofront;
@@ -47,8 +49,9 @@ public class AdController {
 		selectnation(nation);
 	}
 	 
-	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. */
-	public void selectnation(List<Receivefromsensor> nation) {
+	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. 
+	 * @throws JsonProcessingException */
+	public void selectnation(List<Receivefromsensor> nation) throws JsonProcessingException {
 		List<Sendtofront> Countrylist = new LinkedList<>();
 		for(int idx=0; idx<nation.size(); idx++) {
 			int id = Countrylist.get(idx).getId();
@@ -60,10 +63,14 @@ public class AdController {
 			map.put("nationidx", nation.get(idx).getNationidx());
 			map.put("type",nation.get(idx).getType());
 			Countrylist.add(ser.getInfo(map));
-			
 		}
 		
 		//json 형식으로 바꾸고
+		String[] send = new String[Countrylist.size()];
+		for(int i=0; i<send.length; i++) {
+			ObjectMapper objectMapper = new ObjectMapper();
+			send[i] = objectMapper.writeValueAsString(Countrylist.get(i));
+		}
 		//프론트로 전송하기
 		
 	}
