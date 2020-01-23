@@ -47,10 +47,6 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
     setOpen(false);
   };
 
-  const Icon = styled.span`
-    margin-right: 2%;
-  `;
-
   return (
     <div>
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -73,11 +69,15 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              {data['title']}
+              {/* {data['title']} */}
             </Typography>
             {/* <Button autoFocus color="inherit" onClick={handleClose}> */}
-            <WbSunnyIcon /> &nbsp;<Icon>-17&deg;C ~ -3&deg;C</Icon>
-            <OpacityIcon /> &nbsp;<Icon> 0 %</Icon>
+            <h2>
+              <WbSunnyIcon /> 17&deg;C ~ -3&deg;C&nbsp;&nbsp;&nbsp;
+            </h2>
+            <h2>
+              <OpacityIcon /> 0 %
+            </h2>
           </Toolbar>
         </AppBar>
 
