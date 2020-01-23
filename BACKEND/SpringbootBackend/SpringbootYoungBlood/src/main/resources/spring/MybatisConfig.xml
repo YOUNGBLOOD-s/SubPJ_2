@@ -5,14 +5,8 @@
 <configuration>
   <typeAliases>
   	<typeAlias type="com.yb.rest.vo.Sendtofront" alias="sendtofront"/>
-  	
-  	<!-- 희수 2020-01-23 -->
-  	<typeAlias type="com.yb.rest.vo.Sensor" alias="sen"/>
   </typeAliases>
   <mappers>
     <mapper resource="spring/ad_sql.xml"/>
-    
-    <!-- 희수 2020-01-23 -->
-    <mapper resource="spring/sensor.xml"/>
   </mappers>
 </configuration>
