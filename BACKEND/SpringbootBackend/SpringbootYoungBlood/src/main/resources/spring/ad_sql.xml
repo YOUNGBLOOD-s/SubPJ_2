@@ -16,6 +16,17 @@
 	from contentstb 
 	where nation= #{id};	
 	</select>
+	
+	<select id="selectinfo" resultType="Sendtofront" parameterType="map">
+	select nationtb.idx, nationtb.name, nationtb.speech, monthtb.tem1, monthtb.tem2, monthtb.tem3, monthtb.tem4, monthtb.tem5, monthtb.tem6, monthtb.tem7, monthtb.tem8, monthtb.tem9, monthtb.tem10, monthtb.tem11, monthtb.tem12,
+			monthtb.hum1, monthtb.hum2, monthtb.hum3, monthtb.hum4, monthtb.hum5, monthtb.hum6, monthtb.hum7, monthtb.hum8, monthtb.hum9, monthtb.hum10, monthtb.hum11, monthtb.hum12,
+			(select url
+    		from imagetb
+    		where imagetb.type=#{type} && nationtb.idx=imagetb.nation) as url
+	from monthtb inner join nationtb
+	on monthtb.nation=nationtb.idx
+	where nationtb.idx=#{nationidx};
+	</select>
 
 </mapper>
  

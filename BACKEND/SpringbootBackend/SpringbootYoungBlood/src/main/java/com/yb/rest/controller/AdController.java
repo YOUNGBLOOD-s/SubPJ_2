@@ -1,7 +1,9 @@
 package com.yb.rest.controller;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yb.rest.service.IAdService;
+import com.yb.rest.vo.Receivefromsensor;
 import com.yb.rest.vo.Sendtofront;
 
 @CrossOrigin
@@ -36,7 +39,7 @@ public class AdController {
 		// INSERT
 		
 		//두개 받아서 계산해서 나라 인덱스를 뽑아내기
-		List<Integer> nation = new LinkedList<>();
+		List<Receivefromsensor> nation = new LinkedList<>();
 		
 		//계산 값 받기
 		//nation = ser.~~;
@@ -45,7 +48,7 @@ public class AdController {
 	}
 	 
 	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. */
-	public void selectnation(List<Integer> nation) {
+	public void selectnation(List<Receivefromsensor> nation) {
 		List<Sendtofront> Countrylist = new LinkedList<>();
 		for(int idx=0; idx<nation.size(); idx++) {
 			int id = Countrylist.get(idx).getId();
@@ -53,13 +56,11 @@ public class AdController {
 			List<String> modalContents = ser.getModalcontents(id);
 			
 			//join
-			float humid = 0;
-			float temp = 0;
-			String name = null;
-			String thumbnail = null;
-			String speechtext = null;
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("nationidx", nation.get(idx).getNationidx());
+			map.put("type",nation.get(idx).getType());
+			Countrylist.add(ser.getInfo(map));
 			
-			Countrylist.add(new Sendtofront (id, temp, humid, name, speechtext, thumbnail, imgs, modalContents));
 		}
 		
 		//json 형식으로 바꾸고
