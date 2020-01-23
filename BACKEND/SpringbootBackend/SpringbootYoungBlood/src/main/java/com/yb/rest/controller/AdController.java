@@ -52,15 +52,11 @@ public class AdController {
 			List<String> imgs = ser.getImgs(id);
 			List<String> modalContents = ser.getModalcontents(id);
 			
-			//avertb
+			//join
 			float humid = 0;
 			float temp = 0;
-			
-			//nationtb
 			String name = null;
 			String thumbnail = null;
-			
-			//contents
 			String speechtext = null;
 			
 			Countrylist.add(new Sendtofront (id, temp, humid, name, speechtext, thumbnail, imgs, modalContents));
