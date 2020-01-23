@@ -52,7 +52,7 @@ public class AdController {
 			List<String> imgs = ser.getImgs(id);
 			List<String> modalContents = ser.getModalcontents(id);
 			
-			//join
+			//join zz
 			float humid = 0;
 			float temp = 0;
 			String name = null;
