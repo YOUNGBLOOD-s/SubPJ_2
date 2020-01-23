@@ -22,7 +22,7 @@
 			monthtb.hum1, monthtb.hum2, monthtb.hum3, monthtb.hum4, monthtb.hum5, monthtb.hum6, monthtb.hum7, monthtb.hum8, monthtb.hum9, monthtb.hum10, monthtb.hum11, monthtb.hum12,
 			(select url
     		from imagetb
-    		where imagetb.type=#{type} && nationtb.idx=imagetb.nation) as url
+    		where imagetb.type=#{type} AND nationtb.idx=imagetb.nation) as url
 	from monthtb inner join nationtb
 	on monthtb.nation=nationtb.idx
 	where nationtb.idx=#{nationidx};
