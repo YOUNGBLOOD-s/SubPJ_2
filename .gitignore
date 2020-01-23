@@ -232,3 +232,4 @@ sketch
 # End of https://www.gitignore.io/api/node,java,react,python
 
 /BACKEND/SpringbootBackend/.metadata
+/BACKEND/SpringbootBackend/Servers
