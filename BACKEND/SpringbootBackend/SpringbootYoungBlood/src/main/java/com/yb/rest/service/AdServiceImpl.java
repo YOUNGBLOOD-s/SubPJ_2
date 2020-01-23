@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.yb.rest.dao.IAdDao;
 import com.yb.rest.vo.Sendtofront;
+import com.yb.rest.vo.Sensor;
 
 
 @Service
@@ -29,6 +30,13 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public Sendtofront getInfo(Map value) {
 		return repo.getInfo(value);
+	}
+
+	//희수 2020-01-23
+	@Override
+	public void insertSensor(Sensor sen) {
+		// TODO Auto-generated method stub
+		repo.insertSen(sen);
 	}
 
 }
