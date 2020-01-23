@@ -83,17 +83,30 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
           autoComplete="new-password"
         />
         {type === 'register' && (
-          <StyledTextField
-            label="비밀번호 확인"
-            variant="outlined"
-            onChange={onChange}
-            value={form.passwordConfirm}
-            name="passwordConfirm"
-            type="password"
-            autoComplete="new-password"
-          />
+          <>
+            <StyledTextField
+              label="비밀번호 확인"
+              variant="outlined"
+              onChange={onChange}
+              value={form.passwordConfirm}
+              name="passwordConfirm"
+              type="password"
+              autoComplete="new-password"
+            />
+            <StyledTextField
+              label="회사명"
+              variant="outlined"
+              onChange={onChange}
+              value={form.company}
+              name="company"
+              type="text"
+              autoComplete="company"
+            />
+          </>
         )}
-        <StyledButton variant="contained">{text}</StyledButton>
+        <StyledButton variant="contained" type="submit">
+          {text}
+        </StyledButton>
         <Footer>
           {type === 'login' ? (
             <Link to="/register">회원가입</Link>
