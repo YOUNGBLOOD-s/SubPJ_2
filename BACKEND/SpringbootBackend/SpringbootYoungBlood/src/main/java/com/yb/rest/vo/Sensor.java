@@ -6,7 +6,7 @@ public class Sensor {
 	private float dust;
 	private float rough;
 	private String info;
-	
+	//haeun
 	public Sensor() {
 		
 	}
