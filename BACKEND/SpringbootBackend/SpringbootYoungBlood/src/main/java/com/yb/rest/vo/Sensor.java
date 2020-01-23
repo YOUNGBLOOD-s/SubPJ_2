@@ -1,5 +1,5 @@
 package com.yb.rest.vo;
-//push test
+//push test2223334444444444
 public class Sensor {
 	private float temp;
 	private float humid;
