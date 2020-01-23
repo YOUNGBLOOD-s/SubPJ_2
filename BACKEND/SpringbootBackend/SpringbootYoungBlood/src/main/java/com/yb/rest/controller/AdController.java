@@ -39,7 +39,7 @@ public class AdController {
 		// INSERT
 		
 		//두개 받아서 계산해서 나라 인덱스를 뽑아내기
-		List<Integer> nation = new LinkedList<>();
+		List<Receivefromsensor> nation = new LinkedList<>();
 		
 		//계산 값 받기
 		//nation = ser.~~;
