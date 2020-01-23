@@ -67,7 +67,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -141,25 +140,7 @@ __pycache__/
 # C extensions
 *.so
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -249,3 +230,6 @@ thumb
 sketch
 
 # End of https://www.gitignore.io/api/node,java,react,python
+
+/BACKEND/SpringbootBackend/.metadata
+/BACKEND/SpringbootBackend/Servers
