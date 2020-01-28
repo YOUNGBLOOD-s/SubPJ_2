@@ -173,10 +173,8 @@ public class AdController {
             finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
         }
         
-        
+        //조도와 온도로 사진 phototype 선택
         List<Receivefromsensor> nation = new LinkedList<>();
-        // 계산 값 받기
-        // nation = ser.~~;
         selectnation(nation);
     }
 
