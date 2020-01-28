@@ -3,13 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import AuthForm from '../../components/auth/AuthForm';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import { withRouter } from 'react-router-dom';
+import { check } from '../../modules/user';
+import { iif } from '../../../../../../AppData/Local/Microsoft/TypeScript/3.7/node_modules/rxjs/index';
 
 const RegisterForm = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }) => ({
+  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
+    user: user.user
   }));
 
   const onChange = e => {
@@ -42,11 +45,16 @@ const RegisterForm = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      // TODO : 세션 스토리지에 저장?
+      dispatch(check(auth.token))
       sessionStorage.setItem('access_token', auth.token);
+    }
+  }, [auth, authError, dispatch]);
+
+  useEffect(() => {
+    if (user) {
       history.push('/');
     }
-  }, [auth, authError, dispatch, history]);
+  }, [history, user])
 
   return (
     <AuthForm
