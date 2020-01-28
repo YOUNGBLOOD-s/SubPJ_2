@@ -96,4 +96,11 @@ public class AdController {
 		re = new ResponseEntity<>(result, HttpStatus.OK);
 		return re;
 	}
+	
+	@GetMapping("/detail/{id}")
+	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() {
+		ResponseEntity<Map<String, Object>> re = null;
+		
+		return null;
+	}
 }

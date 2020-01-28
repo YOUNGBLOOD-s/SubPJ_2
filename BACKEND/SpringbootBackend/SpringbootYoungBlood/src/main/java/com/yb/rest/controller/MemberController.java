@@ -1,5 +1,10 @@
 package com.yb.rest.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,29 +21,65 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yb.rest.vo.Member;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class MemberController {
 	
-//	public static String createTocken() {
-//		String key = "A";
-//		Map<String, Object> headers = new HashMap<>();
-//		headers.compute(key, remappingFunction)
-//	}
+	/**비밀키 읽기*/
+	public static String getKey() {
+		String key = "";
+		try{
+            File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
+            FileReader filereader = new FileReader(file);
+            int singleCh = 0;
+            while((singleCh = filereader.read()) != -1){
+            	key += ((char)singleCh);
+            }
+            filereader.close();
+        }catch (FileNotFoundException e) {
+            // TODO: handle exception
+        }catch(IOException e){
+            System.out.println(e);
+        }
+		return key;
+    }
+
+	
+	/**토큰 생성*/
+	public static String createTocken() {
+
+		String key = getKey();
+		Map<String, Object> headers = new HashMap<>();
+		headers.put("typ", "JWT");
+		headers.put("alg", "HS256");
+		
+		Map<String, Object> payloads = new HashMap<>();
+		Date now = new Date();
+		now.setTime(now.getTime());
+		
+		payloads.put("exp", now);
+		payloads.put("data", "hello world!");
+		
+		String jwt = Jwts.builder()
+				.setHeader(headers)
+				.setClaims(payloads)
+				.signWith(SignatureAlgorithm.HS256, key.getBytes())
+				.compact();
+		return jwt;
+	}
 
 	/** 회원가입 */
 	@PostMapping("/auth/register")
 	public ResponseEntity<Map<String, Object>> meminsert(@RequestBody Member reg) {
 		ResponseEntity<Map<String, Object>> res = null;
 
-		// 토큰 생성하기
-
 		Map<String, Object> msg = new HashMap<String, Object>();
 		msg.put("username", reg.getUsername()); // 혁준오빠한테 {test: 0} 으로 전송됨
 		msg.put("company", reg.getCompany());
-		// msg.put("token", jws);
+		msg.put("token", createTocken());
 		res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		return res;
 	}
