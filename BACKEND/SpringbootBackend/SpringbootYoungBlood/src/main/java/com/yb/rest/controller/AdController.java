@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yb.rest.service.IAdService;
 import com.yb.rest.vo.Receivefromsensor;
 import com.yb.rest.vo.Sendtofront;
+import com.yb.rest.vo.Sensor;
 
 @CrossOrigin
 @RestController
@@ -40,14 +41,23 @@ public class AdController {
 	
 	/** 센서값을 받는다. 
 	 * @throws JsonProcessingException */
+	//희수 2020-01-23
 	@GetMapping("/sensor/{temp}/{hum}")
 	public void sensor(@PathVariable String temp, @PathVariable String hum) throws JsonProcessingException {
 		System.out.println(temp);
 		System.out.println(hum);
-		
+		Sensor sen=new Sensor(Float.parseFloat(temp), Float.parseFloat(hum));
+		// sensor data INSERT
+		ser.insertSensor(sen);
+		System.out.println("testing");
 		// INSERT
+		//온도 22이도 이상일 경우 => 온도 미만 온도들에 가산점 부여
 		
+		//리스트들에게 습도로 점수
+				
+		//미세먼지로 점수화
 		//두개 받아서 계산해서 나라 인덱스를 뽑아내기
+		
 		List<Receivefromsensor> nation = new LinkedList<>();
 		
 		//계산 값 받기

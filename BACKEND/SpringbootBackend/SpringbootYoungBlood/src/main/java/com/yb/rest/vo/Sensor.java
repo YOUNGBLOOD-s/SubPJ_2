@@ -1,22 +1,22 @@
 package com.yb.rest.vo;
-//push test2223334444444444
 public class Sensor {
 	private float temp;
 	private float humid;
 	private float dust;
 	private float rough;
 	private String info;
-	//haeun
+	
 	public Sensor() {
 		
 	}
-	public Sensor(float temp, float humid, float dust, float rough, String info) {
+	//미세먼지,조도센서를 임의로 밖아서 test하기 위해서
+	public Sensor(float temp, float humid) {
 		super();
 		this.temp = temp;
 		this.humid = humid;
-		this.dust = dust;
-		this.rough = rough;
-		this.info = info;
+		this.dust = 0;
+		this.rough = 0;
+		this.info = "tmp";
 	}
 	public float getTemp() {
 		return temp;
