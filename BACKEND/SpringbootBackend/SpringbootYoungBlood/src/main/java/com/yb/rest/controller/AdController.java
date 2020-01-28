@@ -174,9 +174,7 @@ public class AdController {
         }
         
         //조도와 온도로 사진 phototype 선택
-        
         List<Receivefromsensor> nation = new LinkedList<>();
-        //
         selectnation(nation);
     }
 
