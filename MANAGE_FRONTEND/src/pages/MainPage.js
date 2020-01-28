@@ -1,10 +1,10 @@
 import React from 'react';
-import Navigation from '../components/common/Navigation';
+import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
 
 const MainPage = () => {
   return (
     <>
-      <Navigation />
+      <ButtonAppbarContainer />
     </>
   );
 };
