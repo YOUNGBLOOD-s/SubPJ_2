@@ -27,7 +27,7 @@ const ADNavBar = () => {
             <span className="icon-bar"></span>
           </button>
           <a className="navbar-brand" href="#">
-            Transparent to Solid Nav v
+            Transparent to Solid Nav
           </a>
         </div>
         <div id="navbar" className="collapse navbar-collapse">
