@@ -60,17 +60,53 @@ const Footer = styled.div`
   }
 `;
 
-const AuthForm = ({ type }) => {
+const AuthForm = ({ type, form, onChange, onSubmit }) => {
   const text = textMap[type];
   return (
     <AuthFormBlcok>
-      <AuthFormWrapper>
-        <StyledTextField label="아이디" variant="outlined" />
-        <StyledTextField label="비밀번호" variant="outlined" />
+      <AuthFormWrapper onSubmit={onSubmit}>
+        <StyledTextField
+          label="아이디"
+          variant="outlined"
+          onChange={onChange}
+          value={form.username}
+          name="username"
+          autoComplete="username"
+        />
+        <StyledTextField
+          label="비밀번호"
+          variant="outlined"
+          onChange={onChange}
+          value={form.password}
+          name="password"
+          type="password"
+          autoComplete="new-password"
+        />
         {type === 'register' && (
-          <StyledTextField label="비밀번호 확인" variant="outlined" />
+          <>
+            <StyledTextField
+              label="비밀번호 확인"
+              variant="outlined"
+              onChange={onChange}
+              value={form.passwordConfirm}
+              name="passwordConfirm"
+              type="password"
+              autoComplete="new-password"
+            />
+            <StyledTextField
+              label="회사명"
+              variant="outlined"
+              onChange={onChange}
+              value={form.company}
+              name="company"
+              type="text"
+              autoComplete="company"
+            />
+          </>
         )}
-        <StyledButton variant="contained">{text}</StyledButton>
+        <StyledButton variant="contained" type="submit">
+          {text}
+        </StyledButton>
         <Footer>
           {type === 'login' ? (
             <Link to="/register">회원가입</Link>
