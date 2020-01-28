@@ -1,6 +1,5 @@
 package com.yb.rest.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
@@ -49,6 +50,14 @@ public class AdDaoImpl implements IAdDao{
 	}
 
 	@Override
+	public List<QRcode> getRoutes(int idx) {
+		return session.selectList("sendtofront.selectroutelist", idx);
+	}
+
+	@Override
+	public Nation getNationdetail(Map value) {
+		return session.selectOne("sendtofront.selectNationdetail", value);
+
 	public void updateScore(ForScore forScore) {
 		// TODO Auto-generated method stub
 		session.update("sensor.updateScore", forScore);

@@ -3,7 +3,7 @@ package com.yb.rest.vo;
 import java.util.List;
 
 public class Sendtofront {
-	private int id;
+	private int idx;
 	private float temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12;
 	private float humid1, humid2, humid3, humid4, humid5, humid6, humid7, humid8, humid9, humid10, humid11, humid12;
 	private String name, thumbnail, speechtext;
@@ -11,12 +11,12 @@ public class Sendtofront {
 	
 	public Sendtofront() {}
 
-	public Sendtofront(int id, float temp1, float temp2, float temp3, float temp4, float temp5, float temp6,
+	public Sendtofront(int idx, float temp1, float temp2, float temp3, float temp4, float temp5, float temp6,
 			float temp7, float temp8, float temp9, float temp10, float temp11, float temp12, float humid1, float humid2,
 			float humid3, float humid4, float humid5, float humid6, float humid7, float humid8, float humid9,
 			float humid10, float humid11, float humid12, String name, String thumbnail, String speechtext,
 			List<String> imgs, List<String> modalContents) {
-		this.id = id;
+		this.idx = idx;
 		this.temp1 = temp1;
 		this.temp2 = temp2;
 		this.temp3 = temp3;
@@ -49,12 +49,12 @@ public class Sendtofront {
 	}
 
 	//희수 2020-01-28
-	public Sendtofront(int id, float temp1, float temp2, float temp3, float temp4, float temp5, float temp6,
+	public Sendtofront(int idx, float temp1, float temp2, float temp3, float temp4, float temp5, float temp6,
 			float temp7, float temp8, float temp9, float temp10, float temp11, float temp12, float humid1, float humid2,
 			float humid3, float humid4, float humid5, float humid6, float humid7, float humid8, float humid9,
 			float humid10, float humid11, float humid12) {
 		super();
-		this.id = id;
+		this.idx = idx;
 		this.temp1 = temp1;
 		this.temp2 = temp2;
 		this.temp3 = temp3;
@@ -81,12 +81,12 @@ public class Sendtofront {
 		this.humid12 = humid12;
 	}
 
-	public int getId() {
-		return id;
+	public int getIdx() {
+		return idx;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 
 	public float getTemp1() {
@@ -323,7 +323,7 @@ public class Sendtofront {
 
 	@Override
 	public String toString() {
-		return "Sendtofront [id=" + id + ", temp1=" + temp1 + ", temp2=" + temp2 + ", temp3=" + temp3 + ", temp4="
+		return "Sendtofront [idx=" + idx + ", temp1=" + temp1 + ", temp2=" + temp2 + ", temp3=" + temp3 + ", temp4="
 				+ temp4 + ", temp5=" + temp5 + ", temp6=" + temp6 + ", temp7=" + temp7 + ", temp8=" + temp8 + ", temp9="
 				+ temp9 + ", temp10=" + temp10 + ", temp11=" + temp11 + ", temp12=" + temp12 + ", humid1=" + humid1
 				+ ", humid2=" + humid2 + ", humid3=" + humid3 + ", humid4=" + humid4 + ", humid5=" + humid5

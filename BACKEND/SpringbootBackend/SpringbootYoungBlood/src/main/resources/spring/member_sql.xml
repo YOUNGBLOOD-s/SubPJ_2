@@ -4,11 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
-	
-	<select id="selectpassword" resultType="String" parameterType="String">
+
+	<select id="selectpassword" resultType="String"
+		parameterType="String">
 		select password from membertb where username=#{username}
 	</select>
-		
 
+	<update id="updateMember" parameterType="Member">
+		update membertb
+		set
+		username=#{username},password=#{password},company=#{company},grade=#{grade}
+		where password=#{password}
+
+	</update>
+
+	<delete id="deleteMember" parameterType="string">
+		delete from membertb
+		where password=#{password}
+	</delete>
+
+
+	<insert id="insertMember" parameterType="Member">
+		insert into
+		membertb(username, password, company, grade) values(
+		#{username},#{password},#{company},#{grade}
+		)
+	</insert>
+
+	<select id="selectmemList" resultType="Member">
+		select * from membertb
+	</select>
+
+	<select id="selectmemInfo" parameterType="string"
+		resultType="Member">
+		select * from membertb where username=#{username}
+	</select>
 </mapper>
  
