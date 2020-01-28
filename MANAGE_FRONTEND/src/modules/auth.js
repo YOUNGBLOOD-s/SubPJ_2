@@ -16,6 +16,8 @@ const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
   'auth/LOGIN',
 );
 
+const AUTH_LOGOUT = 'auth/AUTH_LOGOUT'
+
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ form, key, value }) => ({
@@ -40,9 +42,12 @@ export const login = createAction(LOGIN, ({ username, password }) => ({
   password,
 }));
 
+export const authLogout = createAction(AUTH_LOGOUT)
+
 // 사가 생성
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
+
 export function* authSaga() {
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
@@ -93,6 +98,10 @@ const auth = handleActions(
       ...state,
       authError: error,
     }),
+    [AUTH_LOGOUT]: state => ({
+      ...state,
+      auth: null
+    })
   },
   initialState,
 );

@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ButtonAppBar = ({ user }) => {
+const ButtonAppBar = ({ user, onLogout }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -30,7 +30,10 @@ const ButtonAppBar = ({ user }) => {
             네곁에 통합 관리 페이지
           </Typography>
           {user ? (
-            <p>환영합니다. {user.username}님.</p>
+            <>
+              <p>환영합니다. {user.username}님.</p>
+              <Button color="inherit" onClick={onLogout}>로그아웃</Button>
+            </>
           ) : (<>
             <Link to="/register">
               <Button color="inherit">회원가입</Button>
@@ -40,7 +43,6 @@ const ButtonAppBar = ({ user }) => {
             </Link>
           </>
             )}
-
         </Toolbar>
       </AppBar>
     </div>
