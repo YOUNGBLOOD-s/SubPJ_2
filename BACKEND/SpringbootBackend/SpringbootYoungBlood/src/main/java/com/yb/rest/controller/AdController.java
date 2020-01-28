@@ -1,8 +1,15 @@
 package com.yb.rest.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
+import com.yb.rest.vo.ForScore;
+import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Receivefromsensor;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Sensor;
@@ -26,83 +35,196 @@ import com.yb.rest.vo.Sensor;
 @RestController
 @RequestMapping("/api")
 public class AdController {
-	
+
 	@Autowired
 	private IAdService ser;
-	
+
 	@ExceptionHandler(Exception.class)
 	public void ExceptionMethod(Exception e) {
 
 	}
-	
-	/** 센서값을 받는다. 
-	 * @throws JsonProcessingException */
-	//희수 2020-01-23
+
+	/**
+	 * 센서값을 받는다.
+	 * 
+	 * @throws JsonProcessingException
+	 */
+	// 희수 2020-01-23
 	@GetMapping("/sensor/{temp}/{hum}")
 	public void sensor(@PathVariable String temp, @PathVariable String hum) throws JsonProcessingException {
 		System.out.println(temp);
 		System.out.println(hum);
-		Sensor sen=new Sensor(Float.parseFloat(temp), Float.parseFloat(hum));
-		// sensor data INSERT
-		ser.insertSensor(sen); 
-		System.out.println("testing");
-		List<Sendtofront> li=ser.selectAll();
-		System.out.println(li.get(1));
-		for(int i=0;i<li.size();i++) {
-			System.out.println(li.get(i));
+		float tmp = Float.parseFloat(temp); // 온도 값
+		float hu = Float.parseFloat(hum); // 습도 값
+		Sensor sen = new Sensor(tmp, hu);
+		// sensor data UPDATE
+		ser.insertSensor(sen);
+		// 현재 월 가져옴
+		Calendar calender = new GregorianCalendar(Locale.KOREA);
+		int nMonth = calender.get(Calendar.MONTH) + 1;
+
+		List<Monthtb> li = ser.selectAll();
+		ArrayList<Sensor> nations = new ArrayList<>();
+		// 1. 22도 미만 => 높은 온도 쳐다보기 / 22도 이상 => 낮은 온도 쳐다보기
+		boolean up = true;
+		if (tmp >= 22) {
+			up = false;
 		}
-		System.out.println("???");
+		for (int i = 0; i < li.size(); i++) {
+			switch (nMonth) {
+			case 1:
+				if ((up && li.get(i).getTem1() >= tmp) || (!up && li.get(i).getTem1() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem1(), li.get(i).getHum1()));
+				}
+				break;
+			case 2:
+				if ((up && li.get(i).getTem2() >= tmp) || (!up && li.get(i).getTem2() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem2(), li.get(i).getHum2()));
+				}
+				break;
+			case 3:
+				if ((up && li.get(i).getTem3() >= tmp) || (!up && li.get(i).getTem3() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem3(), li.get(i).getHum3()));
+				}
+				break;
+			case 4:
+				if ((up && li.get(i).getTem4() >= tmp) || (!up && li.get(i).getTem4() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem4(), li.get(i).getHum4()));
+				}
+				break;
+			case 5:
+				if ((up && li.get(i).getTem5() >= tmp) || (!up && li.get(i).getTem5() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem5(), li.get(i).getHum5()));
+				}
+				break;
+			case 6:
+				if ((up && li.get(i).getTem6() >= tmp) || (!up && li.get(i).getTem6() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem6(), li.get(i).getHum6()));
+				}
+				break;
+			case 7:
+				if ((up && li.get(i).getTem7() >= tmp) || (!up && li.get(i).getTem7() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem7(), li.get(i).getHum7()));
+				}
+				break;
+			case 8:
+				if ((up && li.get(i).getTem8() >= tmp) || (!up && li.get(i).getTem8() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem8(), li.get(i).getHum8()));
+				}
+				break;
+			case 9:
+				if ((up && li.get(i).getTem9() >= tmp) || (!up && li.get(i).getTem9() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem9(), li.get(i).getHum9()));
+				}
+				break;
+			case 10:
+				if ((up && li.get(i).getTem10() >= tmp) || (!up && li.get(i).getTem10() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem10(), li.get(i).getHum10()));
+				}
+				break;
+			case 11:
+				if ((up && li.get(i).getTem11() >= tmp) || (!up && li.get(i).getTem11() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem11(), li.get(i).getHum11()));
+				}
+				break;
+			case 12:
+				if ((up && li.get(i).getTem12() >= tmp) || (!up && li.get(i).getTem12() < tmp)) {
+					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem12(), li.get(i).getHum12()));
+				}
+				break;
+			}
+		}
+
 		// INSERT
-		//온도 22이도 이상일 경우 => 온도 미만 온도들에 가산점 부여
+		// 온도: 현재 온도와 5도 차이 이하 10점, 5도 이상 10 미만 20점 ...
+		for (int j = 0; j < nations.size(); j++) {
+			int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
+			ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
+			System.out.println("온도 이후 : " + nations.get(j).getIdx() + " " + ser.getScore(nations.get(j).getIdx()));
+		}
+		// 습도: 오름차순으로, 5개 묶음으로 -10,-20... 점수 할당(즉, 습도 높을수록 점수 깎이는거야)
+		Collections.sort(nations, new Comparator<Sensor>() {
+
+			@Override
+			public int compare(Sensor o1, Sensor o2) {
+				// TODO Auto-generated method stub
+				return (int) (o1.getHumid() - o2.getHumid());
+			}
+		});
+		for (int j = 0; j < nations.size(); j++) {
+			System.out.println("*" + nations.get(j).toString());
+		}
+		for (int j = 0; j < nations.size(); j++) {
+			int originScore = ser.getScore(nations.get(j).getIdx());
+			int minus = j / 5 == 0 ? 10 : (j / 5) * (10);
+			originScore -= minus;
+			System.out.println(nations.get(j).getIdx() + "에서 " + minus + "감소합니다");
+			ser.updateScore(new ForScore(nations.get(j).getIdx(), originScore));
+			System.out.println(nations.get(j).getIdx() + "의 점수가 요렇게 변함 " + originScore);
+		}
+
+		// 미세먼지로 점수화
+		for (int j = 0; j < nations.size(); j++) {
+			int score = ser.getScore(nations.get(j).getIdx());
+			int minus = ser.getDust(nations.get(j).getIdx()) * 10;
+			score-=minus;
+			ser.updateScore(new ForScore(nations.get(j).getIdx(),score));
+		}
 		
-		//리스트들에게 습도로 점수
-				
-		//미세먼지로 점수화
-		//두개 받아서 계산해서 나라 인덱스를 뽑아내기
+		// 최종 나라+점수 뽑기
+		List<ForScore> finallist=new ArrayList<ForScore>();
+		for (int j = 0; j <nations.size(); j++) {
+			finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
+		}
+		
 		
 		List<Receivefromsensor> nation = new LinkedList<>();
-		
-		//계산 값 받기
-		//nation = ser.~~;
-		
+
+		// 계산 값 받기
+		// nation = ser.~~;
+
 		selectnation(nation);
 	}
-	 
-	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. 
-	 * @throws JsonProcessingException */
-	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(List<Receivefromsensor> nation) throws JsonProcessingException {
+
+	/**
+	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
+	 * 
+	 * @throws JsonProcessingException
+	 */
+	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(List<Receivefromsensor> nation)
+			throws JsonProcessingException {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
 		List<Sendtofront> Countrylist = new LinkedList<>();
-		for(int idx=0; idx<nation.size(); idx++) {
-			
+		for (int idx = 0; idx < nation.size(); idx++) {
+
 			int id = Countrylist.get(idx).getId();
 			List<String> imgs = ser.getImgs(id);
 			List<String> modalContents = ser.getModalcontents(id);
-		
-			//join
+
+			// join
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("nationidx", nation.get(idx).getNationidx());
-			map.put("type",nation.get(idx).getType());
+			map.put("type", nation.get(idx).getType());
 			Sendtofront stf = ser.getInfo(map);
-			
-			//setting & json(map)
+
+			// setting & json(map)
 			stf.setImgs(imgs);
 			stf.setModalContents(modalContents);
 			Countrylist.add(stf);
-			
+
 		}
-		
-		//send to front
+
+		// send to front
 		result.put("datas", Countrylist);
 		re = new ResponseEntity<>(result, HttpStatus.OK);
 		return re;
 	}
-	
+
 	@GetMapping("/detail/{id}")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() {
 		ResponseEntity<Map<String, Object>> re = null;
-		
+
 		return null;
 	}
 }
