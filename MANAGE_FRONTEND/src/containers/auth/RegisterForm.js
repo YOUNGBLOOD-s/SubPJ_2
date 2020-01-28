@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AuthForm from '../../components/auth/AuthForm';
 import { changeField, initializeForm, register } from '../../modules/auth';
+import { withRouter } from 'react-router-dom';
 
-const RegisterForm = () => {
+const RegisterForm = ({ history }) => {
   const dispatch = useDispatch();
   const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.register,
@@ -20,7 +21,7 @@ const RegisterForm = () => {
     e.preventDefault();
     const { username, password, passwordConfirm, company } = form;
     if (password !== passwordConfirm) {
-      // ToDo : 오류처리
+      // TODO : 오류처리
       return;
     }
 
@@ -41,8 +42,11 @@ const RegisterForm = () => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
+      // TODO : 세션 스토리지에 저장?
+      sessionStorage.setItem('access_token', auth.token);
+      history.push('/');
     }
-  }, [auth, authError]);
+  }, [auth, authError, dispatch, history]);
 
   return (
     <AuthForm
@@ -54,4 +58,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default withRouter(RegisterForm);
