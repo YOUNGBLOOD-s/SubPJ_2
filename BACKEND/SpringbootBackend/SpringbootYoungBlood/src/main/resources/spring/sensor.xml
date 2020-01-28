@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 희수 2020-01-23 -->
+<mapper namespace="sensor">
+	
+	<insert id="insert" parameterType="sen">
+		update adboardtb 
+		set temp=#{temp},humid=#{humid},dust=#{dust},rough=#{rough},info=#{info}
+		where idx=1
+	</insert>
+
+	<select id="selectall" resultType="sendtofront">
+		select * from monthtb
+	</select>
+</mapper>

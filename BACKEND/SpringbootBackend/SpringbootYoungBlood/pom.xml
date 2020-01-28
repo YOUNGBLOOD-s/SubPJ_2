@@ -51,7 +51,6 @@
 			<version>0.7.0</version>
 		</dependency>
 
-
 		<!-- jsp jar -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>

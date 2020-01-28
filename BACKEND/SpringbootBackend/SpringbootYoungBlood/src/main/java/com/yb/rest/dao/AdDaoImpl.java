@@ -1,5 +1,6 @@
 package com.yb.rest.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yb.rest.vo.Sendtofront;
+import com.yb.rest.vo.Sensor;
 
 
 @Repository
@@ -29,5 +31,18 @@ public class AdDaoImpl implements IAdDao{
 	@Override
 	public Sendtofront getInfo(Map value) {
 		return session.selectOne("sendtofront.selectinfo", value);
+	}
+	
+	//희수 2020-01-23
+	@Override
+	public Object insertSen(Sensor sen) {
+		// TODO Auto-generated method stub
+		return session.insert("sensor.insert", sen);
+	}
+
+	@Override
+	public List<Sendtofront> selectall() {
+		// TODO Auto-generated method stub
+		return session.selectList("sensor.selectall");
 	}
 }
