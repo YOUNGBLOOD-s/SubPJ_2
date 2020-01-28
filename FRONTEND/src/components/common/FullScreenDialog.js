@@ -35,7 +35,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const FullScreenDialog = ({ data, open, setOpen }) => {
+const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
   const classes = useStyles();
   //   const [open, setOpen] = React.useState(false);
 
@@ -48,6 +48,17 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
   };
 
   var timer = undefined;
+
+  const QrImage = styled.img`
+    z-index: 999;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    padding: 7px;
+    background: rgba(0, 0, 0, 0.5);
+  `;
 
   return (
     <div>
@@ -83,6 +94,10 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
           </Toolbar>
         </AppBar>
 
+        <QrImage
+          className="qr"
+          src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${nextURL}`}
+        />
         <NFSlider data={data} setOpen={setOpen} />
       </Dialog>
     </div>
