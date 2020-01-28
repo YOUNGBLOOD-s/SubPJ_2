@@ -1,6 +1,8 @@
 import React from 'react';
 import IconCross from './../Icons/IconCross';
 import './Content.scss';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import OpacityIcon from '@material-ui/icons/Opacity';
 
 const Content = ({ movie, onClose }) => (
   <div className="content">
@@ -15,6 +17,12 @@ const Content = ({ movie, onClose }) => (
       <div className="content__area__container">
         <div className="content__title">{movie.title}</div>
         <div className="content__description">
+          <h2>
+            <WbSunnyIcon /> 17&deg;C ~ -3&deg;C&nbsp;&nbsp;&nbsp;
+          </h2>
+          <h2>
+            <OpacityIcon /> 0 %
+          </h2>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
           et euismod ligula. Morbi mattis pretium eros, ut mollis leo tempus
           eget. Sed in dui ac ipsum feugiat ultricies. Phasellus vestibulum enim

@@ -12,8 +12,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import WbSunnyIcon from '@material-ui/icons/WbSunny';
-import OpacityIcon from '@material-ui/icons/Opacity';
 import styled from 'styled-components';
 import NFSlider from './NFSlider';
 import ADNavBar from './ADNavBar';
@@ -81,16 +79,10 @@ const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
             >
               <CloseIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              {/* {data['title']} */}
-            </Typography>
+            {/* <Typography variant="h6" className={classes.title}> */}
+            {/* {data['title']} */}
+            {/* </Typography> */}
             {/* <Button autoFocus color="inherit" onClick={handleClose}> */}
-            <h2>
-              <WbSunnyIcon /> 17&deg;C ~ -3&deg;C&nbsp;&nbsp;&nbsp;
-            </h2>
-            <h2>
-              <OpacityIcon /> 0 %
-            </h2>
           </Toolbar>
         </AppBar>
 
