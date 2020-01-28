@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -47,6 +47,8 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
     setOpen(false);
   };
 
+  var timer = undefined;
+
   return (
     <div>
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -81,7 +83,7 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
           </Toolbar>
         </AppBar>
 
-        <NFSlider data={data} />
+        <NFSlider data={data} setOpen={setOpen} />
       </Dialog>
     </div>
   );

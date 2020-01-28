@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import SliderContext from './context';
 import Content from './Content';
@@ -8,7 +8,7 @@ import useSliding from './useSliding';
 import useSizeElement from './useSizeElement';
 import './Slider.scss';
 
-const Slider = ({ children, activeSlide }) => {
+const Slider = ({ children, activeSlide, setCurrent }) => {
   const [currentSlide, setCurrentSlide] = useState(activeSlide);
   const { width, elementRef } = useSizeElement();
   const {
@@ -34,6 +34,10 @@ const Slider = ({ children, activeSlide }) => {
     elementRef,
     currentSlide,
   };
+
+  useEffect(() => {
+    setCurrent(currentSlide);
+  }, [currentSlide]);
 
   return (
     <SliderContext.Provider value={contextValue}>

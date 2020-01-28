@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from '../NFSlider/NetflixSlider';
 
 const movies = [
@@ -40,10 +40,31 @@ const movies = [
   },
 ];
 
-const NFSlider = ({ data }) => {
+var timer = undefined;
+
+const NFSlider = ({ data, setOpen }) => {
+  const [current, setCurrent] = useState(1);
+
+  const timerTerm = 3000;
+
+  const setTimer = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      setOpen(false);
+    }, timerTerm);
+    console.log(timer);
+  };
+
+  useEffect(() => {
+    setTimer();
+  });
+
+  useEffect(() => {
+    setTimer();
+  }, [current]);
   return (
     <div className="app">
-      <Slider activeSlide={movies[data.id - 1]}>
+      <Slider activeSlide={movies[data.id]} setCurrent={setCurrent}>
         {movies.map(movie => (
           <Slider.Item movie={movie} key={movie.id}>
             item1
