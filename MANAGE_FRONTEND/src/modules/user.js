@@ -14,8 +14,16 @@ export const tempSetUser = createAction(TEMP_SET_USER, user => user);
 export const check = createAction(CHECK);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
+function checkFailureSaga() {
+  try {
+    localStorage.removeItem('user')
+  } catch (e) {
+    console.log('로컬 스토리지가 정상 동작하지 않습니다.')
+  }
+}
 export function* userSaga() {
   yield takeLatest(CHECK, checkSaga);
+  yield takeLatest(CHECK_FAILURE, checkFailureSaga)
 }
 
 const initialState = {

@@ -4,7 +4,6 @@ import AuthForm from '../../components/auth/AuthForm';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import { withRouter } from 'react-router-dom';
 import { check } from '../../modules/user';
-import { iif } from '../../../../../../AppData/Local/Microsoft/TypeScript/3.7/node_modules/rxjs/index';
 
 const RegisterForm = ({ history }) => {
   const dispatch = useDispatch();
