@@ -1,8 +1,12 @@
 create database yb_travel;
 use yb_travel;
 
--- 나라 table
+-- member table
 create table membertb (
 	 idx int auto_increment primary key,
-     name varchar(30) UNIQUE
+     username varchar(20) UNIQUE,
+     password varchar(20),
+     company varchar(20),
+     grade int default 1
 );
+desc membertb;

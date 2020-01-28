@@ -5,12 +5,12 @@
 <configuration>
   <typeAliases>
   	<typeAlias type="com.yb.rest.vo.Sendtofront" alias="sendtofront"/>
-  		<!-- 희수 2020-01-23 -->
   	<typeAlias type="com.yb.rest.vo.Sensor" alias="sen"/>
+  	<typeAlias type="com.yb.rest.vo.Member" alias="member"/>
   </typeAliases>
   <mappers>
     <mapper resource="spring/ad_sql.xml"/>
-    <!-- 희수 2020-01-23 -->
+    <mapper resource="spring/member_sql.xml"/>
     <mapper resource="spring/sensor.xml"/>
   </mappers>
 </configuration>

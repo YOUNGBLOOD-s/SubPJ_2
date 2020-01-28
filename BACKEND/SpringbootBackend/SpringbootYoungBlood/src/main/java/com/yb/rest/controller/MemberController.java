@@ -1,6 +1,5 @@
 package com.yb.rest.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,15 +8,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yb.rest.service.IMemService;
 import com.yb.rest.vo.Member;
 
 import io.jsonwebtoken.Jwts;
@@ -27,6 +28,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @RestController
 @RequestMapping("/api")
 public class MemberController {
+	
+	@Autowired
+	private IMemService ser;
+	
+	@ExceptionHandler(Exception.class)
+	public void ExceptionMethod(Exception e) {
+
+	}
 	
 	/**비밀키 읽기*/
 	public static String getKey() {
@@ -40,7 +49,6 @@ public class MemberController {
             }
             filereader.close();
         }catch (FileNotFoundException e) {
-            // TODO: handle exception
         }catch(IOException e){
             System.out.println(e);
         }
@@ -49,7 +57,7 @@ public class MemberController {
 
 	
 	/**토큰 생성*/
-	public static String createTocken() {
+	public static String createToken(String username) {
 
 		String key = getKey();
 		Map<String, Object> headers = new HashMap<>();
@@ -61,7 +69,7 @@ public class MemberController {
 		now.setTime(now.getTime());
 		
 		payloads.put("exp", now);
-		payloads.put("data", "hello world!");
+		payloads.put("username", username);
 		
 		String jwt = Jwts.builder()
 				.setHeader(headers)
@@ -79,7 +87,7 @@ public class MemberController {
 		Map<String, Object> msg = new HashMap<String, Object>();
 		msg.put("username", reg.getUsername()); // 혁준오빠한테 {test: 0} 으로 전송됨
 		msg.put("company", reg.getCompany());
-		msg.put("token", createTocken());
+		msg.put("token", createToken(reg.getUsername()));
 		res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		return res;
 	}
@@ -87,14 +95,26 @@ public class MemberController {
 	/** 로그인 */
 	@PostMapping("/auth/login")
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
-		System.out.println(login.toString());
-		return null;
+		ResponseEntity<Map<String, Object>> res = null;
+		String realpassword = ser.getPassword(login.getUsername());
+		Map<String, Object> msg = new HashMap<String, Object>();
+		
+		if(realpassword.equals(login.getPassword())) {
+			msg.put("username", login.getUsername());
+			msg.put("token", createToken(login.getUsername()));
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); //correct
+		} else {
+			msg.put("username", login.getUsername());
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND); //wrong
+		}
+		
+		return res;
 	}
 
 	/** 로그인 상태 확인 */
 	@PostMapping("/auth/check")
 	public ResponseEntity<Map<String, Object>> memloginfo() {
-		System.out.println("zzz");
+		System.out.println("로그인 상태확인");
 		return null;
 	}
 }

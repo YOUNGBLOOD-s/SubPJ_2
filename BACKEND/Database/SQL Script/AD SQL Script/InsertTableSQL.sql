@@ -1,4 +1,4 @@
-create database yb_travel;
+-- create database yb_travel;
 use yb_travel;
 
 -- 나라 table
@@ -9,10 +9,10 @@ create table nationtb (
      continents int,
      clickcnt int default 0,
      showcnt int default 0,
-     customer int,
+     customer varchar(20),
      weight int,
      speech varchar(100),
-     foreign key (customer) references membertb(idx)
+     foreign key (customer) references membertb(username)
 );
 desc nationtb;
 
