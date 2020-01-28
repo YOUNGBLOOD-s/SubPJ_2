@@ -6,14 +6,9 @@ import com.yb.rest.vo.Member;
 
 public interface IMemService {
 	public String getPassword(String username);
-
 	public boolean registerMem(String username, String password, String company, int grade);
-
 	public ArrayList<Member> listMem();
-
 	public Member InfoMem(String username);
-
 	public boolean UpdateMem(String username, String password, String company, int grade);
-
 	public boolean DeleteMem(String password);
 }
