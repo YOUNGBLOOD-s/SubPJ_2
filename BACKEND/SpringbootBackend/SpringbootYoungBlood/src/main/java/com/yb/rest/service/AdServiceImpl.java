@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.yb.rest.dao.IAdDao;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
+import com.yb.rest.vo.ForScore;
+import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Sensor;
 
@@ -54,4 +56,22 @@ public class AdServiceImpl implements IAdService {
 	public Nation getNationdetail(Map value) {
 		return repo.getNationdetail(value);
 	}
+  
+  		@Override
+		public void updateScore(ForScore forScore) {
+			// TODO Auto-generated method stub
+			repo.updateScore(forScore);
+		}
+
+		@Override
+		public int getScore(int idx) {
+			// TODO Auto-generated method stub
+			return repo.getScore(idx);
+		}
+
+		@Override
+		public int getDust(int idx) {
+			// TODO Auto-generated method stub
+			return repo.getDust(idx);
+		}
 }

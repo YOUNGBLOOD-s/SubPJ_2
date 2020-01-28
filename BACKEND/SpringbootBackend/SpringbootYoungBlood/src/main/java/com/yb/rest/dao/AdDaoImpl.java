@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
+import com.yb.rest.vo.ForScore;
+import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Sensor;
 
@@ -36,13 +38,13 @@ public class AdDaoImpl implements IAdDao{
 	
 	//희수 2020-01-23
 	@Override
-	public Object insertSen(Sensor sen) {
+	public void insertSen(Sensor sen) {
 		// TODO Auto-generated method stub
-		return session.insert("sensor.insert", sen);
+		session.update("sensor.insert", sen);
 	}
 
 	@Override
-	public List<Sendtofront> selectall() {
+	public List<Monthtb> selectall() {
 		// TODO Auto-generated method stub
 		return session.selectList("sensor.selectall");
 	}
@@ -55,5 +57,21 @@ public class AdDaoImpl implements IAdDao{
 	@Override
 	public Nation getNationdetail(Map value) {
 		return session.selectOne("sendtofront.selectNationdetail", value);
+
+	public void updateScore(ForScore forScore) {
+		// TODO Auto-generated method stub
+		session.update("sensor.updateScore", forScore);
+	}
+
+	@Override
+	public int getScore(int idx) {
+		// TODO Auto-generated method stub
+		return session.selectOne("sensor.selectscore", idx);
+	}
+
+	@Override
+	public int getDust(int idx) {
+		// TODO Auto-generated method stub
+		return session.selectOne("sensor.selectdust", idx);
 	}
 }
