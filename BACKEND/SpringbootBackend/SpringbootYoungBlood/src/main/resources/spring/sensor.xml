@@ -7,8 +7,12 @@
 <mapper namespace="sensor">
 	
 	<insert id="insert" parameterType="sen">
-		insert into adboardtb 
-		values (0,#{temp},#{humid},#{dust},#{rough},#{info})
+		update adboardtb 
+		set temp=#{temp},humid=#{humid},dust=#{dust},rough=#{rough},info=#{info}
+		where idx=1
 	</insert>
 
+	<select id="selectall" resultType="sendtofront">
+		select * from monthtb
+	</select>
 </mapper>

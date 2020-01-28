@@ -44,8 +44,14 @@ public class AdController {
 		System.out.println(hum);
 		Sensor sen=new Sensor(Float.parseFloat(temp), Float.parseFloat(hum));
 		// sensor data INSERT
-		ser.insertSensor(sen);
+		ser.insertSensor(sen); 
 		System.out.println("testing");
+		List<Sendtofront> li=ser.selectAll();
+		System.out.println(li.get(1));
+		for(int i=0;i<li.size();i++) {
+			System.out.println(li.get(i));
+		}
+		System.out.println("???");
 		// INSERT
 		//온도 22이도 이상일 경우 => 온도 미만 온도들에 가산점 부여
 		

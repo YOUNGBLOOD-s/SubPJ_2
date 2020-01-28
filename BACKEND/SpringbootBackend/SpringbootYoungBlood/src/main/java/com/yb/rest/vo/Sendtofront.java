@@ -48,6 +48,39 @@ public class Sendtofront {
 		this.modalContents = modalContents;
 	}
 
+	//희수 2020-01-28
+	public Sendtofront(int id, float temp1, float temp2, float temp3, float temp4, float temp5, float temp6,
+			float temp7, float temp8, float temp9, float temp10, float temp11, float temp12, float humid1, float humid2,
+			float humid3, float humid4, float humid5, float humid6, float humid7, float humid8, float humid9,
+			float humid10, float humid11, float humid12) {
+		super();
+		this.id = id;
+		this.temp1 = temp1;
+		this.temp2 = temp2;
+		this.temp3 = temp3;
+		this.temp4 = temp4;
+		this.temp5 = temp5;
+		this.temp6 = temp6;
+		this.temp7 = temp7;
+		this.temp8 = temp8;
+		this.temp9 = temp9;
+		this.temp10 = temp10;
+		this.temp11 = temp11;
+		this.temp12 = temp12;
+		this.humid1 = humid1;
+		this.humid2 = humid2;
+		this.humid3 = humid3;
+		this.humid4 = humid4;
+		this.humid5 = humid5;
+		this.humid6 = humid6;
+		this.humid7 = humid7;
+		this.humid8 = humid8;
+		this.humid9 = humid9;
+		this.humid10 = humid10;
+		this.humid11 = humid11;
+		this.humid12 = humid12;
+	}
+
 	public int getId() {
 		return id;
 	}
