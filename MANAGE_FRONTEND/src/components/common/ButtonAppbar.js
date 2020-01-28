@@ -1,45 +1,51 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom'
+import component from '../../lib/material/component';
+import palette from '../../lib/styles/palette';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
+  paper: {
+    backgroundColor: palette.teal[300],
+    color: 'white'
   },
   title: {
     flexGrow: 1,
   },
+  welcome: {
+    marginLeft: '0.5rem'
+  },
+  button: {
+    padding: 0,
+    marginLeft: '0.5rem'
+  }
 }));
 
 const ButtonAppBar = ({ user, onLogout }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="inherit" className={classes.paper}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            네곁에 통합 관리 페이지
-          </Typography>
+          <component.Typography variant="h6" className={classes.title}>
+            NEARBY AD 관리페이지
+          </component.Typography>
           {user ? (
             <>
-              <p>환영합니다. {user.username}님.</p>
-              <Button color="inherit" onClick={onLogout}>로그아웃</Button>
+              <component.Typography className={classes.welcome}>환영합니다. {user.username}님.</component.Typography>
+              <component.Button className={classes.button} color="inherit" onClick={onLogout}>로그아웃</component.Button>
             </>
           ) : (<>
             <Link to="/register">
-              <Button color="inherit">회원가입</Button>
+              <component.Button className={classes.button} color="inherit">회원가입</component.Button>
             </Link>
             <Link to="/login">
-              <Button color="inherit">로그인</Button>
+              <component.Button className={classes.button} color="inherit">로그인</component.Button>
             </Link>
           </>
             )}
