@@ -42,13 +42,17 @@ const LoginForm = ({ history }) => {
       console.log(auth);
       dispatch(check(auth.token))
       sessionStorage.setItem('access_token', auth.token);
-
     }
   }, [auth, authError, dispatch]);
 
   useEffect(() => {
     if (user) {
       history.push('/');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log('로컬 스토리지가 정상 동작하지 않습니다.')
+      }
     }
   }, [user, history])
 

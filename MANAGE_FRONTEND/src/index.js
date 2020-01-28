@@ -10,13 +10,29 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './modules';
 import { rootSaga } from './modules/index';
+import { tempSetUser, check } from './modules/user';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
+
+function loadUser() {
+  try {
+    const user = localStorage.getItem('user');
+    if (!user) return;
+    store.dispatch(tempSetUser(user))
+    const token = sessionStorage.getItem('access_token')
+    store.dispatch(check(token))
+  } catch (e) {
+    console.log('로컬스토리지가 정상 동작하지 않습니다.')
+  }
+}
+
+
 sagaMiddleware.run(rootSaga);
+loadUser()
 
 ReactDOM.render(
   <Provider store={store}>
