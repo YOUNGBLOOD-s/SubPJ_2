@@ -4,43 +4,42 @@ import java.util.List;
 
 public class Sendtofront {
 	private int idx;
-	private float temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12;
-	private float humid1, humid2, humid3, humid4, humid5, humid6, humid7, humid8, humid9, humid10, humid11, humid12;
+	private float tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
+	private float hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12;
 	private String name, thumbnail, speechtext;
 	private List<String> imgs, modalContents;
-	
-	public Sendtofront() {}
 
-	public Sendtofront(int idx, float temp1, float temp2, float temp3, float temp4, float temp5, float temp6,
-			float temp7, float temp8, float temp9, float temp10, float temp11, float temp12, float humid1, float humid2,
-			float humid3, float humid4, float humid5, float humid6, float humid7, float humid8, float humid9,
-			float humid10, float humid11, float humid12, String name, String thumbnail, String speechtext,
-			List<String> imgs, List<String> modalContents) {
+	public Sendtofront() {}
+	public Sendtofront(int idx, float tmp1, float tmp2, float tmp3, float tmp4, float tmp5, float tmp6, float tmp7,
+			float tmp8, float tmp9, float tmp10, float tmp11, float tmp12, float hum1, float hum2, float hum3,
+			float hum4, float hum5, float hum6, float hum7, float hum8, float hum9, float hum10, float hum11,
+			float hum12, String name, String thumbnail, String speechtext, List<String> imgs,
+			List<String> modalContents) {
 		this.idx = idx;
-		this.temp1 = temp1;
-		this.temp2 = temp2;
-		this.temp3 = temp3;
-		this.temp4 = temp4;
-		this.temp5 = temp5;
-		this.temp6 = temp6;
-		this.temp7 = temp7;
-		this.temp8 = temp8;
-		this.temp9 = temp9;
-		this.temp10 = temp10;
-		this.temp11 = temp11;
-		this.temp12 = temp12;
-		this.humid1 = humid1;
-		this.humid2 = humid2;
-		this.humid3 = humid3;
-		this.humid4 = humid4;
-		this.humid5 = humid5;
-		this.humid6 = humid6;
-		this.humid7 = humid7;
-		this.humid8 = humid8;
-		this.humid9 = humid9;
-		this.humid10 = humid10;
-		this.humid11 = humid11;
-		this.humid12 = humid12;
+		this.tmp1 = tmp1;
+		this.tmp2 = tmp2;
+		this.tmp3 = tmp3;
+		this.tmp4 = tmp4;
+		this.tmp5 = tmp5;
+		this.tmp6 = tmp6;
+		this.tmp7 = tmp7;
+		this.tmp8 = tmp8;
+		this.tmp9 = tmp9;
+		this.tmp10 = tmp10;
+		this.tmp11 = tmp11;
+		this.tmp12 = tmp12;
+		this.hum1 = hum1;
+		this.hum2 = hum2;
+		this.hum3 = hum3;
+		this.hum4 = hum4;
+		this.hum5 = hum5;
+		this.hum6 = hum6;
+		this.hum7 = hum7;
+		this.hum8 = hum8;
+		this.hum9 = hum9;
+		this.hum10 = hum10;
+		this.hum11 = hum11;
+		this.hum12 = hum12;
 		this.name = name;
 		this.thumbnail = thumbnail;
 		this.speechtext = speechtext;
@@ -48,37 +47,35 @@ public class Sendtofront {
 		this.modalContents = modalContents;
 	}
 
-	//희수 2020-01-28
-	public Sendtofront(int idx, float temp1, float temp2, float temp3, float temp4, float temp5, float temp6,
-			float temp7, float temp8, float temp9, float temp10, float temp11, float temp12, float humid1, float humid2,
-			float humid3, float humid4, float humid5, float humid6, float humid7, float humid8, float humid9,
-			float humid10, float humid11, float humid12) {
-		super();
+	public Sendtofront(int idx, float tmp1, float tmp2, float tmp3, float tmp4, float tmp5, float tmp6, float tmp7,
+			float tmp8, float tmp9, float tmp10, float tmp11, float tmp12, float hum1, float hum2, float hum3,
+			float hum4, float hum5, float hum6, float hum7, float hum8, float hum9, float hum10, float hum11,
+			float hum12) {
 		this.idx = idx;
-		this.temp1 = temp1;
-		this.temp2 = temp2;
-		this.temp3 = temp3;
-		this.temp4 = temp4;
-		this.temp5 = temp5;
-		this.temp6 = temp6;
-		this.temp7 = temp7;
-		this.temp8 = temp8;
-		this.temp9 = temp9;
-		this.temp10 = temp10;
-		this.temp11 = temp11;
-		this.temp12 = temp12;
-		this.humid1 = humid1;
-		this.humid2 = humid2;
-		this.humid3 = humid3;
-		this.humid4 = humid4;
-		this.humid5 = humid5;
-		this.humid6 = humid6;
-		this.humid7 = humid7;
-		this.humid8 = humid8;
-		this.humid9 = humid9;
-		this.humid10 = humid10;
-		this.humid11 = humid11;
-		this.humid12 = humid12;
+		this.tmp1 = tmp1;
+		this.tmp2 = tmp2;
+		this.tmp3 = tmp3;
+		this.tmp4 = tmp4;
+		this.tmp5 = tmp5;
+		this.tmp6 = tmp6;
+		this.tmp7 = tmp7;
+		this.tmp8 = tmp8;
+		this.tmp9 = tmp9;
+		this.tmp10 = tmp10;
+		this.tmp11 = tmp11;
+		this.tmp12 = tmp12;
+		this.hum1 = hum1;
+		this.hum2 = hum2;
+		this.hum3 = hum3;
+		this.hum4 = hum4;
+		this.hum5 = hum5;
+		this.hum6 = hum6;
+		this.hum7 = hum7;
+		this.hum8 = hum8;
+		this.hum9 = hum9;
+		this.hum10 = hum10;
+		this.hum11 = hum11;
+		this.hum12 = hum12;
 	}
 
 	public int getIdx() {
@@ -89,196 +86,196 @@ public class Sendtofront {
 		this.idx = idx;
 	}
 
-	public float getTemp1() {
-		return temp1;
+	public float getTmp1() {
+		return tmp1;
 	}
 
-	public void setTemp1(float temp1) {
-		this.temp1 = temp1;
+	public void setTmp1(float tmp1) {
+		this.tmp1 = tmp1;
 	}
 
-	public float getTemp2() {
-		return temp2;
+	public float getTmp2() {
+		return tmp2;
 	}
 
-	public void setTemp2(float temp2) {
-		this.temp2 = temp2;
+	public void setTmp2(float tmp2) {
+		this.tmp2 = tmp2;
 	}
 
-	public float getTemp3() {
-		return temp3;
+	public float getTmp3() {
+		return tmp3;
 	}
 
-	public void setTemp3(float temp3) {
-		this.temp3 = temp3;
+	public void setTmp3(float tmp3) {
+		this.tmp3 = tmp3;
 	}
 
-	public float getTemp4() {
-		return temp4;
+	public float getTmp4() {
+		return tmp4;
 	}
 
-	public void setTemp4(float temp4) {
-		this.temp4 = temp4;
+	public void setTmp4(float tmp4) {
+		this.tmp4 = tmp4;
 	}
 
-	public float getTemp5() {
-		return temp5;
+	public float getTmp5() {
+		return tmp5;
 	}
 
-	public void setTemp5(float temp5) {
-		this.temp5 = temp5;
+	public void setTmp5(float tmp5) {
+		this.tmp5 = tmp5;
 	}
 
-	public float getTemp6() {
-		return temp6;
+	public float getTmp6() {
+		return tmp6;
 	}
 
-	public void setTemp6(float temp6) {
-		this.temp6 = temp6;
+	public void setTmp6(float tmp6) {
+		this.tmp6 = tmp6;
 	}
 
-	public float getTemp7() {
-		return temp7;
+	public float getTmp7() {
+		return tmp7;
 	}
 
-	public void setTemp7(float temp7) {
-		this.temp7 = temp7;
+	public void setTmp7(float tmp7) {
+		this.tmp7 = tmp7;
 	}
 
-	public float getTemp8() {
-		return temp8;
+	public float getTmp8() {
+		return tmp8;
 	}
 
-	public void setTemp8(float temp8) {
-		this.temp8 = temp8;
+	public void setTmp8(float tmp8) {
+		this.tmp8 = tmp8;
 	}
 
-	public float getTemp9() {
-		return temp9;
+	public float getTmp9() {
+		return tmp9;
 	}
 
-	public void setTemp9(float temp9) {
-		this.temp9 = temp9;
+	public void setTmp9(float tmp9) {
+		this.tmp9 = tmp9;
 	}
 
-	public float getTemp10() {
-		return temp10;
+	public float getTmp10() {
+		return tmp10;
 	}
 
-	public void setTemp10(float temp10) {
-		this.temp10 = temp10;
+	public void setTmp10(float tmp10) {
+		this.tmp10 = tmp10;
 	}
 
-	public float getTemp11() {
-		return temp11;
+	public float getTmp11() {
+		return tmp11;
 	}
 
-	public void setTemp11(float temp11) {
-		this.temp11 = temp11;
+	public void setTmp11(float tmp11) {
+		this.tmp11 = tmp11;
 	}
 
-	public float getTemp12() {
-		return temp12;
+	public float getTmp12() {
+		return tmp12;
 	}
 
-	public void setTemp12(float temp12) {
-		this.temp12 = temp12;
+	public void setTmp12(float tmp12) {
+		this.tmp12 = tmp12;
 	}
 
-	public float getHumid1() {
-		return humid1;
+	public float getHum1() {
+		return hum1;
 	}
 
-	public void setHumid1(float humid1) {
-		this.humid1 = humid1;
+	public void setHum1(float hum1) {
+		this.hum1 = hum1;
 	}
 
-	public float getHumid2() {
-		return humid2;
+	public float getHum2() {
+		return hum2;
 	}
 
-	public void setHumid2(float humid2) {
-		this.humid2 = humid2;
+	public void setHum2(float hum2) {
+		this.hum2 = hum2;
 	}
 
-	public float getHumid3() {
-		return humid3;
+	public float getHum3() {
+		return hum3;
 	}
 
-	public void setHumid3(float humid3) {
-		this.humid3 = humid3;
+	public void setHum3(float hum3) {
+		this.hum3 = hum3;
 	}
 
-	public float getHumid4() {
-		return humid4;
+	public float getHum4() {
+		return hum4;
 	}
 
-	public void setHumid4(float humid4) {
-		this.humid4 = humid4;
+	public void setHum4(float hum4) {
+		this.hum4 = hum4;
 	}
 
-	public float getHumid5() {
-		return humid5;
+	public float getHum5() {
+		return hum5;
 	}
 
-	public void setHumid5(float humid5) {
-		this.humid5 = humid5;
+	public void setHum5(float hum5) {
+		this.hum5 = hum5;
 	}
 
-	public float getHumid6() {
-		return humid6;
+	public float getHum6() {
+		return hum6;
 	}
 
-	public void setHumid6(float humid6) {
-		this.humid6 = humid6;
+	public void setHum6(float hum6) {
+		this.hum6 = hum6;
 	}
 
-	public float getHumid7() {
-		return humid7;
+	public float getHum7() {
+		return hum7;
 	}
 
-	public void setHumid7(float humid7) {
-		this.humid7 = humid7;
+	public void setHum7(float hum7) {
+		this.hum7 = hum7;
 	}
 
-	public float getHumid8() {
-		return humid8;
+	public float getHum8() {
+		return hum8;
 	}
 
-	public void setHumid8(float humid8) {
-		this.humid8 = humid8;
+	public void setHum8(float hum8) {
+		this.hum8 = hum8;
 	}
 
-	public float getHumid9() {
-		return humid9;
+	public float getHum9() {
+		return hum9;
 	}
 
-	public void setHumid9(float humid9) {
-		this.humid9 = humid9;
+	public void setHum9(float hum9) {
+		this.hum9 = hum9;
 	}
 
-	public float getHumid10() {
-		return humid10;
+	public float getHum10() {
+		return hum10;
 	}
 
-	public void setHumid10(float humid10) {
-		this.humid10 = humid10;
+	public void setHum10(float hum10) {
+		this.hum10 = hum10;
 	}
 
-	public float getHumid11() {
-		return humid11;
+	public float getHum11() {
+		return hum11;
 	}
 
-	public void setHumid11(float humid11) {
-		this.humid11 = humid11;
+	public void setHum11(float hum11) {
+		this.hum11 = hum11;
 	}
 
-	public float getHumid12() {
-		return humid12;
+	public float getHum12() {
+		return hum12;
 	}
 
-	public void setHumid12(float humid12) {
-		this.humid12 = humid12;
+	public void setHum12(float hum12) {
+		this.hum12 = hum12;
 	}
 
 	public String getName() {
@@ -323,14 +320,13 @@ public class Sendtofront {
 
 	@Override
 	public String toString() {
-		return "Sendtofront [idx=" + idx + ", temp1=" + temp1 + ", temp2=" + temp2 + ", temp3=" + temp3 + ", temp4="
-				+ temp4 + ", temp5=" + temp5 + ", temp6=" + temp6 + ", temp7=" + temp7 + ", temp8=" + temp8 + ", temp9="
-				+ temp9 + ", temp10=" + temp10 + ", temp11=" + temp11 + ", temp12=" + temp12 + ", humid1=" + humid1
-				+ ", humid2=" + humid2 + ", humid3=" + humid3 + ", humid4=" + humid4 + ", humid5=" + humid5
-				+ ", humid6=" + humid6 + ", humid7=" + humid7 + ", humid8=" + humid8 + ", humid9=" + humid9
-				+ ", humid10=" + humid10 + ", humid11=" + humid11 + ", humid12=" + humid12 + ", name=" + name
-				+ ", thumbnail=" + thumbnail + ", speechtext=" + speechtext + ", imgs=" + imgs + ", modalContents="
-				+ modalContents + "]";
+		return "Sendtofront [idx=" + idx + ", tmp1=" + tmp1 + ", tmp2=" + tmp2 + ", tmp3=" + tmp3 + ", tmp4=" + tmp4
+				+ ", tmp5=" + tmp5 + ", tmp6=" + tmp6 + ", tmp7=" + tmp7 + ", tmp8=" + tmp8 + ", tmp9=" + tmp9
+				+ ", tmp10=" + tmp10 + ", tmp11=" + tmp11 + ", tmp12=" + tmp12 + ", hum1=" + hum1 + ", hum2=" + hum2
+				+ ", hum3=" + hum3 + ", hum4=" + hum4 + ", hum5=" + hum5 + ", hum6=" + hum6 + ", hum7=" + hum7
+				+ ", hum8=" + hum8 + ", hum9=" + hum9 + ", hum10=" + hum10 + ", hum11=" + hum11 + ", hum12=" + hum12
+				+ ", name=" + name + ", thumbnail=" + thumbnail + ", speechtext=" + speechtext + ", imgs=" + imgs
+				+ ", modalContents=" + modalContents + "]";
 	}
-
+	
 }

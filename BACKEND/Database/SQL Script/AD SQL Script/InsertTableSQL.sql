@@ -13,6 +13,7 @@ create table nationtb (
      weight int,
      speech varchar(100),
      price int,
+     type int,
      foreign key (customer) references membertb(username)
 );
 desc nationtb;

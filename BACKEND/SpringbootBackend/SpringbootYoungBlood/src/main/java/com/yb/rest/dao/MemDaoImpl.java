@@ -19,7 +19,6 @@ public class MemDaoImpl implements IMemDao {
 	public String getPassword(String username) {
 		return session.selectOne("member.selectpassword", username);
 	}
-	
 
 	@Override
 	public boolean registerMem(String username, String password, String company, int grade) {
@@ -40,28 +39,22 @@ public class MemDaoImpl implements IMemDao {
 
 	@Override
 	public Member InfoMem(String username) {
-		// TODO Auto-generated method stub
-		// selectmemInfo
 		return session.selectOne("member.selectmemInfo", username);
 	}
 
 	@Override
 	public boolean UpdateMem(String username, String password, String company, int grade) {
-		// TODO Auto-generated method stub
 		Member m = new Member(username, password, company, grade);
 		int update = session.update("member.updateMember", m);
 		if (update == 0)
 			return false;
 		else
 			return true;
-
 	}
 
 	@Override
 	public boolean DeleteMem(String password) {
-		// TODO Auto-generated method stub
 		int delete = session.delete("member.deleteMember", password);
-
 		if (delete == 0)
 			return false;
 		else

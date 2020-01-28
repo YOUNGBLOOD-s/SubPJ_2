@@ -37,14 +37,7 @@ public class AdServiceImpl implements IAdService {
 
 	@Override
 	public void insertSensor(Sensor sen) {
-		// TODO Auto-generated method stub
 		repo.insertSen(sen);
-	}
-
-	@Override
-	public List<Sendtofront> selectAll() {
-		// TODO Auto-generated method stub
-		return repo.selectall();
 	}
 
 	@Override
@@ -56,22 +49,24 @@ public class AdServiceImpl implements IAdService {
 	public Nation getNationdetail(Map value) {
 		return repo.getNationdetail(value);
 	}
-  
-  		@Override
-		public void updateScore(ForScore forScore) {
-			// TODO Auto-generated method stub
-			repo.updateScore(forScore);
-		}
 
-		@Override
-		public int getScore(int idx) {
-			// TODO Auto-generated method stub
-			return repo.getScore(idx);
-		}
+	@Override
+	public void updateScore(ForScore forScore) {
+		repo.updateScore(forScore);
+	}
 
-		@Override
-		public int getDust(int idx) {
-			// TODO Auto-generated method stub
-			return repo.getDust(idx);
-		}
+	@Override
+	public int getScore(int idx) {
+		return repo.getScore(idx);
+	}
+
+	@Override
+	public int getDust(int idx) {
+		return repo.getDust(idx);
+	}
+
+	@Override
+	public List<Monthtb> selectAll() {
+		return repo.selectall();
+	}
 }

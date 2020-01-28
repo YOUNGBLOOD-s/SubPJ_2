@@ -1,6 +1,5 @@
 package com.yb.rest.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +16,9 @@ public interface IAdDao {
 	public Sendtofront getInfo(Map value);
 	public List<QRcode> getRoutes(int idx);
 	public Nation getNationdetail(Map value);
-	
-	//희수 2020-01-23
-		public void insertSen(Sensor sen);
-		public List<Monthtb> selectall();
-		public void updateScore(ForScore forScore);
-		public int getScore(int idx);
-		public int getDust(int idx);
+	public void insertSen(Sensor sen);
+	public List<Monthtb> selectall();
+	public void updateScore(ForScore forScore);
+	public int getScore(int idx);
+	public int getDust(int idx);
 }
