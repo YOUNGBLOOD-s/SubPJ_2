@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
+import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.Receivefromsensor;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Sensor;
@@ -43,6 +45,7 @@ public class AdController {
 		System.out.println(temp);
 		System.out.println(hum);
 		Sensor sen=new Sensor(Float.parseFloat(temp), Float.parseFloat(hum));
+		
 		// sensor data INSERT
 		ser.insertSensor(sen); 
 		System.out.println("testing");
@@ -76,7 +79,7 @@ public class AdController {
 		List<Sendtofront> Countrylist = new LinkedList<>();
 		for(int idx=0; idx<nation.size(); idx++) {
 			
-			int id = Countrylist.get(idx).getId();
+			int id = Countrylist.get(idx).getIdx();
 			List<String> imgs = ser.getImgs(id);
 			List<String> modalContents = ser.getModalcontents(id);
 		
@@ -100,9 +103,38 @@ public class AdController {
 	}
 	
 	@GetMapping("/detail/{id}")
-	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() {
+	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(@PathVariable String id) {
+		int idx = Integer.parseInt(id);
 		ResponseEntity<Map<String, Object>> re = null;
+		Map<String, Object> result = new HashMap<>();
 		
-		return null;
+		//type 계산하기
+		int type = 1;
+		List<QRcode> routelist = ser.getRoutes(idx);
+		
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("nationidx", idx);
+		map.put("type", type);
+		Nation nation = ser.getNationdetail(map);
+		System.out.println(nation);
+		
+		//send to front
+		result.put("id", nation.getIdx());
+		result.put("name", nation.getName());
+		result.put("thumbnail", nation.getUrl());
+		result.put("price", nation.getPrice());
+		if(nation.getContinents().equals("1")) {
+			result.put("category", "Europe");
+		} else if(nation.getContinents().equals("2")) {
+			result.put("category", "Africa");
+		} else if(nation.getContinents().equals("3")) {
+			result.put("category", "Asia");
+		} else {
+			result.put("category", "North America");
+		}
+		result.put("routes", routelist);
+		re = new ResponseEntity<>(result, HttpStatus.OK);
+		return re;
 	}
 }

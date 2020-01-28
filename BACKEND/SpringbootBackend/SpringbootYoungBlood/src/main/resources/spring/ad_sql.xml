@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="sendtofrontt">
+<mapper namespace="sendtofront">
 	
 	<select id="selectimglist" resultType="string" parameterType="int">
 	select image from contentstb where nation= #{id}
@@ -22,6 +22,18 @@
 	on monthtb.nation=nationtb.idx
 	where nationtb.idx=#{nationidx}
 	</select>
-
+	
+	<select id="selectroutelist" resultType="route" parameterType="int">
+	select nation, day, seq, title, detail, image, tofrom, transport 
+	from contentstb 
+	where nation=#{idx};
+	</select>
+	
+	<select id="selectNationdetail" resultType="nation" parameterType="map">
+	select idx, name, (select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, continents
+	from nationtb
+	where idx=#{nationidx};
+	</select>
+	
 </mapper>
  
