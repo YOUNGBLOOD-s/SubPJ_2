@@ -45,7 +45,7 @@ var timer = undefined;
 const NFSlider = ({ data, setOpen }) => {
   const [current, setCurrent] = useState(1);
 
-  const timerTerm = 3000;
+  const timerTerm = 10000;
 
   const setTimer = () => {
     clearTimeout(timer);

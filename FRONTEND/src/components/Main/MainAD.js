@@ -118,7 +118,12 @@ const MainAD = ({ history }) => {
           </div>
         ))}
       </Carousel>
-      <FullScreenDialog data={datas[pid - 1]} setOpen={setOpen} open={open} />
+      <FullScreenDialog
+        data={datas[pid - 1]}
+        setOpen={setOpen}
+        open={open}
+        nextURL={datas[pid - 1].nextURL}
+      />
     </MainADBlock>
   );
 };
