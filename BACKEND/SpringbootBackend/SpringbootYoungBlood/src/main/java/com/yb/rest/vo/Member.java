@@ -1,16 +1,19 @@
 package com.yb.rest.vo;
 
 public class Member {
-	private String username, password, company, grade;
+	private String username, password, company;
+	private int grade;
 
-	public Member() {};
+	public Member() {
+	};
 
 	public Member(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
 
-	public Member(String username, String password, String company, String grade) {
+	public Member(String username, String password, String company, int grade) {
+		super();
 		this.username = username;
 		this.password = password;
 		this.company = company;
@@ -41,11 +44,11 @@ public class Member {
 		this.company = company;
 	}
 
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
 
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 
