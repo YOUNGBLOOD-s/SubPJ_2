@@ -1,5 +1,6 @@
 package com.yb.rest.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,5 +37,11 @@ public class AdServiceImpl implements IAdService {
 		public void insertSensor(Sensor sen) {
 			// TODO Auto-generated method stub
 			repo.insertSen(sen);
+		}
+
+		@Override
+		public List<Sendtofront> selectAll() {
+			// TODO Auto-generated method stub
+			return repo.selectall();
 		}
 }
