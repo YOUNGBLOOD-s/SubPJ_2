@@ -42,7 +42,7 @@ const LoginForm = ({ history }) => {
       sessionStorage.setItem('access_token', auth.token);
       history.push('/');
     }
-  });
+  }, [auth, authError, dispatch, history]);
 
   return (
     <AuthForm
