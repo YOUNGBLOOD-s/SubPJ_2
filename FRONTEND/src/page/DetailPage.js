@@ -6,12 +6,14 @@ import CautionText from '../components/Detail/CautionText';
 import ReservationForm from '../components/Detail/ReservationForm';
 import KakaoChat from '../components/Detail/KakaoChat';
 import SimpleBackdrop from '../components/common/LoadingBackdrop';
+import axios from '../../node_modules/axios/index';
 
 const DetailPageWrapper = styled.div`
   max-width: 1000px;
   margin: 0 auto;
 `;
 
+// TODO: 다시 오는 API 정보들로 재구성
 const DetailPage = ({ match }) => {
   const { id } = match.params;
   const [country, setCountry] = useState(null);
@@ -22,6 +24,13 @@ const DetailPage = ({ match }) => {
     const searchCountry = fakeCountries.find(cty => cty.id === parseInt(id)); // 나중에 api요청
     if (!searchCountry) return;
     setCountry(searchCountry);
+    axios
+      .get(`http://192.168.100.66:9090/api/detail/${id}`)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    // TODO: 정보 제대로 오는지 확인하기
+
+    // TODO: 가져온 정보 잘 가공하기
     setLoading(false);
   }, [id]);
 
