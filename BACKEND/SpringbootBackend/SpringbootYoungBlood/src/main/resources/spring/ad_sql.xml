@@ -35,5 +35,6 @@
 	where idx=#{nationidx};
 	</select>
 	
+	
 </mapper>
  

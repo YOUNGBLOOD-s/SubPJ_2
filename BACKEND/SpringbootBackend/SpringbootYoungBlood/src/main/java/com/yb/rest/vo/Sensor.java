@@ -4,15 +4,16 @@ public class Sensor {
 	private float temp;
 	private float humid;
 	private float dust;
-	private float rough;
+	private float rough; //조도
 	private String info;
 	
 	public Sensor() {
 		
 	}
 	
-	public Sensor(float temp, float humid, float dust, float rough, String info) {
+	public Sensor(int idx,float temp, float humid, float dust, float rough, String info) {
 		super();
+		this.idx=idx;
 		this.temp = temp;
 		this.humid = humid;
 		this.dust = dust;
@@ -20,13 +21,13 @@ public class Sensor {
 		this.info = info;
 	}
 
-	//미세먼지,조도센서를 임의로 밖아서 test하기 위해서
-	public Sensor(float temp, float humid) {
+	//센서 데이터 저장 위해서
+	public Sensor(float temp, float humid, float dust, float rough) {
 		super();
 		this.temp = temp;
 		this.humid = humid;
-		this.dust = 0;
-		this.rough = 0;
+		this.dust = dust;
+		this.rough = rough;
 		this.info = "tmp";
 	}
 	

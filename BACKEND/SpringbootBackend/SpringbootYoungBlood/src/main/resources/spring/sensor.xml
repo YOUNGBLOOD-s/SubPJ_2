@@ -6,12 +6,17 @@
 <!-- 희수 2020-01-23 -->
 <mapper namespace="sensor">
 	
-	<update id="insert" parameterType="sen">
+	<update id="update" parameterType="sen">
 		update adboardtb 
-		set temp=#{temp},humid=#{humid},dust=#{dust},rough=#{rough},info=#{info}
+		set temp=#{temp},humid=#{humid},dust=#{dust},rough=#{rough}
 		where idx=1
 	</update>
 
+	<select id="selectData" parameterType="int" resultType="sen">
+		select * from adboardtb
+		where idx=#{idx}
+	</select>
+	
 	<select id="selectall" resultType="monthtb">
 		select * from monthtb
 	</select>
@@ -30,5 +35,11 @@
 		update nationtb 
 		set weight=#{score} 
 		where idx=#{idx}
+	</update>
+	
+	<update id="photoType" parameterType="score">
+	update nationtb 
+	set type=#{score} 
+	where idx=#{idx}
 	</update>
 </mapper>
