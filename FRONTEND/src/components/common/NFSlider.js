@@ -61,6 +61,7 @@ const NFSlider = ({ data, setOpen }) => {
 
   useEffect(() => {
     setTimer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);
   return (
     <div className="app">

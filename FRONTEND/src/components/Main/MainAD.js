@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import FullScreenDialog from '../common/FullScreenDialog';
 
 const Title = styled.div`
@@ -109,11 +109,12 @@ const MainAD = ({ history }) => {
                 <Title>{title}</Title>
                 <Content>{content}</Content>
               </div>
-              <img className="bg" src={publicURL + img} />
+              <img className="bg" src={publicURL + img} alt="" />
             </div>
             <img
               className="qr"
               src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${nextURL}`}
+              alt=""
             />
           </div>
         ))}
