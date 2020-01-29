@@ -16,11 +16,13 @@ public interface IAdDao {
 	public Sendtofront getInfo(Map value);
 	public List<QRcode> getRoutes(int idx);
 	public Nation getNationdetail(Map value);
-	public void insertSen(Sensor sen);
+	public void updateSensor(Sensor sen);
 	public List<Monthtb> selectall();
 	public void updateScore(ForScore forScore);
 	public int getScore(int idx);
 	public int getDust(int idx);
+	public Sensor selectData(int idx);
+	public void updateType(ForScore forScore);
 	
 	public int getType(int idx);
 }
