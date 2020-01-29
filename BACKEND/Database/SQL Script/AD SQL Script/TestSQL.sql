@@ -29,3 +29,4 @@ select idx, name, (select url from imagetb where type=2 and nation=1), price, co
 from nationtb
 where idx=1;
 
+

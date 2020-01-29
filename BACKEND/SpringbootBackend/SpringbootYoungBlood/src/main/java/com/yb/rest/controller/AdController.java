@@ -50,12 +50,14 @@ public class AdController {
 	 * 센서값을 받는다. 
 	 * @throws JsonProcessingException
 	 */
-	@GetMapping("/sensor/{temp}/{hum}")
-    public void sensor(@PathVariable String temp, @PathVariable String hum) throws JsonProcessingException {
+	@GetMapping("/sensor/{temp}/{hum}/{light}")
+    public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light) throws JsonProcessingException {
         System.out.println(temp);
         System.out.println(hum);
+        System.out.println(light);
         float tmp = Float.parseFloat(temp); // 온도 값
         float hu = Float.parseFloat(hum); // 습도 값
+        float lig=Float.parseFloat(light); //조도 값
         Sensor sen = new Sensor(tmp, hu);
         // sensor data UPDATE
         ser.insertSensor(sen);
@@ -172,9 +174,29 @@ public class AdController {
         for (int j = 0; j <nations.size(); j++) {
             finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
         }
+        //우선 나라 3개 보내는 것으로 test
+        Collections.sort(finallist, new Comparator<ForScore>() {
+			@Override
+			public int compare(ForScore o1, ForScore o2) {
+				// TODO Auto-generated method stub
+				return o1.getScore()-o2.getScore();
+			}
+		});
         
         //조도와 온도로 사진 phototype 선택
         List<Receivefromsensor> nation = new LinkedList<>();
+        for (int i = 0; i < 3; i++) {
+        	int finalScore=0;
+        	//조도 임의로 50이상이면 밝다(10). 50미만이면 어둡다로 처리(5)
+        	finalScore+=lig<50?5:10;
+        	//저온도(1) 고온도(0)
+        	finalScore+=nations.get(i).getTemp()<22?1:0;
+        	finalScore=finalScore==5?3:finalScore==10?1:finalScore==6?4:2;
+			nation.add(new Receivefromsensor(finallist.get(i).getIdx(), finalScore));
+		}
+        for (int i = 0; i < nation.size(); i++) {
+			System.out.println("최종결과 : "+nation.get(i).toString());
+		}
         selectnation(nation);
     }
 
@@ -219,7 +241,7 @@ public class AdController {
 		Map<String, Object> result = new HashMap<>();
 		
 		//type 계산하기
-		int type = 1;
+		int type = 1; 
 		List<QRcode> routelist = ser.getRoutes(idx);
 		
 		

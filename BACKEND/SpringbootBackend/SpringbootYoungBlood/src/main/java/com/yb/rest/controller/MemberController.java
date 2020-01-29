@@ -10,6 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yb.rest.service.IMemService;
 import com.yb.rest.vo.Member;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.swagger.annotations.ApiOperation;
@@ -73,16 +79,29 @@ public class MemberController {
 
 		Map<String, Object> payloads = new HashMap<>();
 		Date now = new Date();
+		
 		now.setTime(now.getTime());
 
 		payloads.put("exp", now);
 		payloads.put("username", username);
 
-		String jwt = Jwts.builder().setHeader(headers).setClaims(payloads)
+		String jwt = Jwts.builder()
+				.setHeader(headers)
+				.setClaims(payloads)
 				.signWith(SignatureAlgorithm.HS256, key.getBytes()).compact();
 		return jwt;
 	}
-
+	
+	/** 토큰 검증 */
+	public static Claims verification(String token) {
+		Claims c = Jwts.parser()
+				.setSigningKey(getKey().getBytes())
+				.parseClaimsJws(token)
+				.getBody();
+		//String data = c.get("username")+"";
+		return c;
+	}
+	
 	/** 회원가입 */
 	@PostMapping("/auth/register")
 	public ResponseEntity<Map<String, Object>> meminsert(@RequestBody Member reg) {
@@ -97,11 +116,13 @@ public class MemberController {
 			msg.put("resvalue", result);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
-			msg = new HashMap();
-			msg.put("resmsg", "입력실패");
-			msg.put("username", ""); // 혁준오빠한테 {test: 0} 으로 전송됨
-			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
-
+			if(e.getMessage().contains("Duplicate")) {
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.CONFLICT);
+				System.out.println(e.getMessage());
+			} else {
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.INTERNAL_SERVER_ERROR);
+				System.out.println(e.getMessage());
+			}	
 		}
 		return res;
 	}
@@ -109,27 +130,37 @@ public class MemberController {
 	/** 로그인 */
 	@PostMapping("/auth/login")
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
+		if(login.getUsername()=="" || login.getPassword()=="") {
+			Map<String, Object> msg = new HashMap<String, Object>();
+			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		}
 		ResponseEntity<Map<String, Object>> res = null;
 		String realpassword = ser.getPassword(login.getUsername());
 		Map<String, Object> msg = new HashMap<String, Object>();
-
 		if (realpassword.equals(login.getPassword())) {
 			msg.put("username", login.getUsername());
 			msg.put("token", createToken(login.getUsername()));
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
 		} else {
 			msg.put("username", login.getUsername());
-			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND); // wrong
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); // wrong
 		}
-
 		return res;
 	}
 
 	/** 로그인 상태 확인 */
-	@PostMapping("/auth/check")
-	public ResponseEntity<Map<String, Object>> memloginfo() {
-		System.out.println("로그인 상태확인");
-		return null;
+	@GetMapping("/auth/check")
+	public ResponseEntity<Map<String, Object>> memloginfo(@RequestHeader(value="Authorization") String token) {
+		ResponseEntity<Map<String, Object>> res = null;	
+		Map<String, Object> msg = new HashMap<String, Object>();
+		try {
+			Claims de = verification(token);
+			msg.put("username", de.get("username"));
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		} catch(Exception e) {
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		}
+		return res;
 	}
 	
 	/** 멤버 조회 서비스 */
