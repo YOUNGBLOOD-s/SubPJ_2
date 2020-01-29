@@ -37,6 +37,7 @@ const Slider = ({ children, activeSlide, setCurrent }) => {
 
   useEffect(() => {
     setCurrent(currentSlide);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlide]);
 
   return (

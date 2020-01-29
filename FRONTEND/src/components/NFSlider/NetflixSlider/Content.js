@@ -1,5 +1,4 @@
 import React from 'react';
-import IconCross from './../Icons/IconCross';
 import './Content.scss';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import OpacityIcon from '@material-ui/icons/Opacity';
