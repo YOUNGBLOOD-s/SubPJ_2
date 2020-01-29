@@ -36,8 +36,8 @@ public class AdDaoImpl implements IAdDao {
 	}
 
 	@Override
-	public void insertSen(Sensor sen) {
-		session.update("sensor.insert", sen);
+	public void updateSensor(Sensor sen) {
+		session.update("sensor.update", sen);
 	}
 
 	@Override
@@ -68,5 +68,17 @@ public class AdDaoImpl implements IAdDao {
 	@Override
 	public int getDust(int idx) {
 		return session.selectOne("sensor.selectdust", idx);
+	}
+
+	@Override
+	public Sensor selectData(int idx) {
+		// TODO Auto-generated method stub
+		return session.selectOne("sensor.selectData", idx);
+	}
+
+	@Override
+	public void updateType(ForScore forScore) {
+		// TODO Auto-generated method stub
+		session.update("sensor.photoType",forScore);
 	}
 }
