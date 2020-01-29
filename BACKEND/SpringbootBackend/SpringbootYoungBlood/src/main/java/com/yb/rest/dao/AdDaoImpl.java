@@ -69,4 +69,9 @@ public class AdDaoImpl implements IAdDao {
 	public int getDust(int idx) {
 		return session.selectOne("sensor.selectdust", idx);
 	}
+
+	@Override
+	public int getType(int idx) {
+		return session.selectOne("sensor.selectType", idx);
+	}
 }

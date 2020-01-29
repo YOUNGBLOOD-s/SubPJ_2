@@ -31,4 +31,9 @@
 		set weight=#{score} 
 		where idx=#{idx}
 	</update>
+	
+	<select id="selectType" parameterType="int" resultType="int">
+	select type from nationtb
+	where idx=#{idx}
+	</select>
 </mapper>

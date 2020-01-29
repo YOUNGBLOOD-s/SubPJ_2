@@ -45,7 +45,7 @@ public class AdController {
 
 	}
 	
-	static int type;
+	//static int type;
 	/**
 	 * 센서값을 받는다. 
 	 * @throws JsonProcessingException
@@ -65,7 +65,7 @@ public class AdController {
     }
 	
 	//(1) return type list<Integer> -> 나라의 idx만 나오게 하기
-	public List<Receivefromsensor> weightcal() {
+	public List<Integer> weightcal() {
 		//(2) tem, hu, li, dust db에서 가져오기
 		//(3) type db에 저장하기
 		
@@ -213,31 +213,32 @@ public class AdController {
 	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
 	 * @throws JsonProcessingException
 	 */
-	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(List<Receivefromsensor> nation)
-			throws JsonProcessingException {
+	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
+	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
+		
+		//가중치 계산 algorithm
+		List<Integer> nation = weightcal();
+		
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
 		List<Sendtofront> Countrylist = new LinkedList<>();
 		for(int idx=0; idx<nation.size(); idx++) {
 			
-			int id = Countrylist.get(idx).getIdx();
-			List<String> imgs = ser.getImgs(id);
-			List<String> modalContents = ser.getModalcontents(id);
-			
-			//(4) type db에서 가져오는 걸로 변경하기
-			type = nation.get(idx).getType();
-			
+			int nationId = nation.get(idx);
+			int type = ser.getType(nationId);
+			List<String> imgs = ser.getImgs(nationId);
+			List<String> modalContents = ser.getModalcontents(nationId);
+		
 			// join
 			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("nationidx", nation.get(idx).getNationidx());
-			map.put("type", nation.get(idx).getType());
+			map.put("nationidx", nationId);
+			map.put("type", type);
 			Sendtofront stf = ser.getInfo(map);
 
 			// setting & json(map)
 			stf.setImgs(imgs);
 			stf.setModalContents(modalContents);
 			Countrylist.add(stf);
-
 		}
 
 		// send to front
@@ -256,7 +257,7 @@ public class AdController {
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("nationidx", idx);
-		map.put("type", type);
+		map.put("type", ser.getType(idx));
 		Nation nation = ser.getNationdetail(map);
 		
 		//send to front

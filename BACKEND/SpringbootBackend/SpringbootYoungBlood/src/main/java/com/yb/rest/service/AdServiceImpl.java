@@ -69,4 +69,9 @@ public class AdServiceImpl implements IAdService {
 	public List<Monthtb> selectAll() {
 		return repo.selectall();
 	}
+
+	@Override
+	public int getType(int idx) {
+		return repo.getType(idx);
+	}
 }

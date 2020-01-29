@@ -21,4 +21,5 @@ public interface IAdService {
 	public void updateScore(ForScore forScore);
 	public int getScore(int idx);
 	public int getDust(int idx);
+	public int getType(int idx);
 }
