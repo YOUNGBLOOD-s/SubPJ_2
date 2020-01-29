@@ -17,6 +17,7 @@ create table nationtb (
      foreign key (customer) references membertb(username)
 );
 desc nationtb;
+select * from nationtb;
 
 
 -- 월평균 table

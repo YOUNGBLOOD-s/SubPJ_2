@@ -26,10 +26,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
+import com.yb.rest.vo.Route;
+import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
-import com.yb.rest.vo.Receivefromsensor;
-import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Sensor;
 
 @CrossOrigin
@@ -52,22 +52,18 @@ public class AdController {
 	 */
 	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
     public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light,@PathVariable String dust) throws JsonProcessingException {
-        System.out.println(temp);
-        System.out.println(hum);
-        System.out.println(light);
-        System.out.println(dust);
+        System.out.println("센서로부터 데이터를 받았습니다." + temp + " " + hum + " " + light + " " + dust);
         float tmp = Float.parseFloat(temp); // 온도 값
         float hu = Float.parseFloat(hum); // 습도 값
         float dus=Float.parseFloat(dust); //미세먼지
         float lig=Float.parseFloat(light); //조도 값
         Sensor sen = new Sensor(tmp, hu,dus,lig);
+        
         // sensor data UPDATE
         ser.updateSensor(sen);
     }
 	
-	//(1) return type list<Integer> -> 나라의 idx만 나오게 하기
 	public List<Integer> weightcal() {
-		//(2) tem, hu, li, dust db에서 가져오기
 		Sensor sen=ser.selectData(1); // 지금은 1이지만 전광판에 따른 센서 데이터 많으면 해당 전광판의 넘버 넣으면 됨
 		float tmp=sen.getTemp();
 		float hu=sen.getHumid();
@@ -210,35 +206,49 @@ public class AdController {
 	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
 	 * @throws JsonProcessingException
 	 */
-	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
+	@GetMapping("/sensor/reco")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
 		
 		//가중치 계산 algorithm
 		List<Integer> nation = weightcal();
+		System.out.println(nation.size());
 		
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
-		List<Sendtofront> Countrylist = new LinkedList<>();
+		List<Map> Countrylist = new LinkedList<>();
+		
 		for(int idx=0; idx<nation.size(); idx++) {
-			
 			int nationId = nation.get(idx);
-			int type = ser.getType(nationId);
+			int type = ser.getType(nationId);			
 			List<String> imgs = ser.getImgs(nationId);
 			List<String> modalContents = ser.getModalcontents(nationId);
 		
-			// join
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("nationidx", nationId);
 			map.put("type", type);
+			
 			Sendtofront stf = ser.getInfo(map);
-
-			// setting & json(map)
 			stf.setImgs(imgs);
 			stf.setModalContents(modalContents);
-			Countrylist.add(stf);
+			
+			//ㅋㅋ 이제 tem와 hum만 불러오면 돼 아주 간단하니까 괜찮아 ^^
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("id", stf.getIdx());
+			data.put("name", stf.getName());
+			data.put("content", stf.getSpeech());
+			data.put("thumbnail", stf.getUrl());
+			data.put("price", stf.getPrice());
+			data.put("imgs", stf.getImgs());
+			data.put("modalContent", stf.getModalContents());
+			
+			data.put("temp", "");
+			data.put("humid", "");
+			
+			Countrylist.add(data);
 		}
 
 		// send to front
+		System.out.println(Countrylist);
 		result.put("datas", Countrylist);
 		re = new ResponseEntity<>(result, HttpStatus.OK);
 		return re;
@@ -249,7 +259,7 @@ public class AdController {
 		int idx = Integer.parseInt(id);
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
-		List<QRcode> routelist = ser.getRoutes(idx);
+		List<Route> routelist = ser.getRoutes(idx);
 		
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
