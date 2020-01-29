@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -45,12 +44,13 @@ public class AdController {
 	public void ExceptionMethod(Exception e) {
 
 	}
-
+	
+	static int type;
 	/**
 	 * 센서값을 받는다. 
 	 * @throws JsonProcessingException
 	 */
-	@GetMapping("/sensor/{temp}/{hum}/{light}")
+	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
     public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light) throws JsonProcessingException {
         System.out.println(temp);
         System.out.println(hum);
@@ -61,7 +61,15 @@ public class AdController {
         Sensor sen = new Sensor(tmp, hu);
         // sensor data UPDATE
         ser.insertSensor(sen);
-        // 현재 월 가져옴
+        
+    }
+	
+	//(1) return type list<Integer> -> 나라의 idx만 나오게 하기
+	public List<Receivefromsensor> weightcal() {
+		//(2) tem, hu, li, dust db에서 가져오기
+		//(3) type db에 저장하기
+		
+		// 현재 월 가져옴
         Calendar calender = new GregorianCalendar(Locale.KOREA);
         int nMonth = calender.get(Calendar.MONTH) + 1;
         List<Monthtb> li = ser.selectAll();
@@ -197,8 +205,9 @@ public class AdController {
         for (int i = 0; i < nation.size(); i++) {
 			System.out.println("최종결과 : "+nation.get(i).toString());
 		}
-        selectnation(nation);
-    }
+        
+        return nation;
+	}
 
 	/**
 	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
@@ -214,7 +223,10 @@ public class AdController {
 			int id = Countrylist.get(idx).getIdx();
 			List<String> imgs = ser.getImgs(id);
 			List<String> modalContents = ser.getModalcontents(id);
-
+			
+			//(4) type db에서 가져오는 걸로 변경하기
+			type = nation.get(idx).getType();
+			
 			// join
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("nationidx", nation.get(idx).getNationidx());
@@ -239,9 +251,6 @@ public class AdController {
 		int idx = Integer.parseInt(id);
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
-		
-		//type 계산하기
-		int type = 1; 
 		List<QRcode> routelist = ser.getRoutes(idx);
 		
 		
@@ -249,7 +258,6 @@ public class AdController {
 		map.put("nationidx", idx);
 		map.put("type", type);
 		Nation nation = ser.getNationdetail(map);
-		System.out.println(nation);
 		
 		//send to front
 		result.put("id", nation.getIdx());
