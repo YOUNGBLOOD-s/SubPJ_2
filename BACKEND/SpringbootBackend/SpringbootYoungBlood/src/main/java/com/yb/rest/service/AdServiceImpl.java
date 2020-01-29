@@ -36,8 +36,8 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public void insertSensor(Sensor sen) {
-		repo.insertSen(sen);
+	public void updateSensor(Sensor sen) {
+		repo.updateSensor(sen);
 	}
 
 	@Override
@@ -68,5 +68,22 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public List<Monthtb> selectAll() {
 		return repo.selectall();
+	}
+
+	@Override
+	public Sensor selectData(int idx) {
+		// TODO Auto-generated method stub
+		return repo.selectData(idx);
+	}
+
+	@Override
+	public void updateType(ForScore forScore) {
+		// TODO Auto-generated method stub
+		repo.updateType(forScore);
+	}
+
+	@Override
+	public int getType(int idx) {
+		return repo.getType(idx);
 	}
 }

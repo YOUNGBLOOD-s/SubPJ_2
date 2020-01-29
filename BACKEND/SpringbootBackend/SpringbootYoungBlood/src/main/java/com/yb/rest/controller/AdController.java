@@ -45,29 +45,34 @@ public class AdController {
 
 	}
 	
-	static int type;
+	//static int type;
 	/**
 	 * 센서값을 받는다. 
 	 * @throws JsonProcessingException
 	 */
 	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
-    public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light) throws JsonProcessingException {
+    public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light,@PathVariable String dust) throws JsonProcessingException {
         System.out.println(temp);
         System.out.println(hum);
         System.out.println(light);
+        System.out.println(dust);
         float tmp = Float.parseFloat(temp); // 온도 값
         float hu = Float.parseFloat(hum); // 습도 값
+        float dus=Float.parseFloat(dust); //미세먼지
         float lig=Float.parseFloat(light); //조도 값
-        Sensor sen = new Sensor(tmp, hu);
+        Sensor sen = new Sensor(tmp, hu,dus,lig);
         // sensor data UPDATE
-        ser.insertSensor(sen);
-        
+        ser.updateSensor(sen);
     }
 	
 	//(1) return type list<Integer> -> 나라의 idx만 나오게 하기
-	public List<Receivefromsensor> weightcal() {
+	public List<Integer> weightcal() {
 		//(2) tem, hu, li, dust db에서 가져오기
-		//(3) type db에 저장하기
+		Sensor sen=ser.selectData(1); // 지금은 1이지만 전광판에 따른 센서 데이터 많으면 해당 전광판의 넘버 넣으면 됨
+		float tmp=sen.getTemp();
+		float hu=sen.getHumid();
+		float dus=sen.getDust();
+		float lig=sen.getRough();
 		
 		// 현재 월 가져옴
         Calendar calender = new GregorianCalendar(Locale.KOREA);
@@ -143,12 +148,13 @@ public class AdController {
                 break;
             }
         }
+        
         // INSERT
         // 온도: 현재 온도와 5도 차이 이하 10점, 5도 이상 10 미만 20점 ...
         for (int j = 0; j < nations.size(); j++) {
             int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
             ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
-            System.out.println("온도 이후 : " + nations.get(j).getIdx() + " " + ser.getScore(nations.get(j).getIdx()));
+            //System.out.println("온도 이후 : " + nations.get(j).getIdx() + " " + ser.getScore(nations.get(j).getIdx()));
         }
         // 습도: 오름차순으로, 5개 묶음으로 -10,-20... 점수 할당(즉, 습도 높을수록 점수 깎이는거야)
         Collections.sort(nations, new Comparator<Sensor>() {
@@ -159,15 +165,10 @@ public class AdController {
             }
         });
         for (int j = 0; j < nations.size(); j++) {
-            System.out.println("*" + nations.get(j).toString());
-        }
-        for (int j = 0; j < nations.size(); j++) {
             int originScore = ser.getScore(nations.get(j).getIdx());
             int minus = j / 5 == 0 ? 10 : (j / 5) * (10);
             originScore -= minus;
-            System.out.println(nations.get(j).getIdx() + "에서 " + minus + "감소합니다");
             ser.updateScore(new ForScore(nations.get(j).getIdx(), originScore));
-            System.out.println(nations.get(j).getIdx() + "의 점수가 요렇게 변함 " + originScore);
         }
         // 미세먼지로 점수화
         for (int j = 0; j < nations.size(); j++) {
@@ -176,7 +177,6 @@ public class AdController {
             score-=minus;
             ser.updateScore(new ForScore(nations.get(j).getIdx(),score));
         }
-        
         // 최종 나라+점수 뽑기
         List<ForScore> finallist=new ArrayList<ForScore>();
         for (int j = 0; j <nations.size(); j++) {
@@ -191,8 +191,8 @@ public class AdController {
 			}
 		});
         
-        //조도와 온도로 사진 phototype 선택
-        List<Receivefromsensor> nation = new LinkedList<>();
+        //조도와 온도로 사진 phototype 선택=>type db에 저장하기
+        List<Integer> nation = new LinkedList<>();
         for (int i = 0; i < 3; i++) {
         	int finalScore=0;
         	//조도 임의로 50이상이면 밝다(10). 50미만이면 어둡다로 처리(5)
@@ -200,12 +200,9 @@ public class AdController {
         	//저온도(1) 고온도(0)
         	finalScore+=nations.get(i).getTemp()<22?1:0;
         	finalScore=finalScore==5?3:finalScore==10?1:finalScore==6?4:2;
-			nation.add(new Receivefromsensor(finallist.get(i).getIdx(), finalScore));
+        	ser.updateType(new ForScore(nations.get(i).getIdx(),finalScore));
+			nation.add(finallist.get(i).getIdx());
 		}
-        for (int i = 0; i < nation.size(); i++) {
-			System.out.println("최종결과 : "+nation.get(i).toString());
-		}
-        
         return nation;
 	}
 
@@ -213,31 +210,32 @@ public class AdController {
 	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
 	 * @throws JsonProcessingException
 	 */
-	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(List<Receivefromsensor> nation)
-			throws JsonProcessingException {
+	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
+	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
+		
+		//가중치 계산 algorithm
+		List<Integer> nation = weightcal();
+		
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
 		List<Sendtofront> Countrylist = new LinkedList<>();
 		for(int idx=0; idx<nation.size(); idx++) {
 			
-			int id = Countrylist.get(idx).getIdx();
-			List<String> imgs = ser.getImgs(id);
-			List<String> modalContents = ser.getModalcontents(id);
-			
-			//(4) type db에서 가져오는 걸로 변경하기
-			type = nation.get(idx).getType();
-			
+			int nationId = nation.get(idx);
+			int type = ser.getType(nationId);
+			List<String> imgs = ser.getImgs(nationId);
+			List<String> modalContents = ser.getModalcontents(nationId);
+		
 			// join
 			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("nationidx", nation.get(idx).getNationidx());
-			map.put("type", nation.get(idx).getType());
+			map.put("nationidx", nationId);
+			map.put("type", type);
 			Sendtofront stf = ser.getInfo(map);
 
 			// setting & json(map)
 			stf.setImgs(imgs);
 			stf.setModalContents(modalContents);
 			Countrylist.add(stf);
-
 		}
 
 		// send to front
@@ -256,7 +254,7 @@ public class AdController {
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("nationidx", idx);
-		map.put("type", type);
+		map.put("type", ser.getType(idx));
 		Nation nation = ser.getNationdetail(map);
 		
 		//send to front
