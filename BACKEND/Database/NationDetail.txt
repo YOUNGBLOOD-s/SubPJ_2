@@ -1,20 +1,29 @@
 [Europe]
-1 µ¶ÀÏ Germany
-2 ÀÌÅ»¸®¾Æ Italy
-3 ÇÁ¶û½º France
+1 ë…ì¼ Germany
+2 ì´íƒˆë¦¬ì•„ Italy
+3 í”„ë‘ìŠ¤ France
+4 ê·¸ë¦¬ìŠ¤ Greece
+5 í¬ë¡œì•„í‹°ì•„ Croatia
+6 ìŠ¤ìœ„ìŠ¤ switzerland
 
+[North Pacific Ocean]
+7 í•˜ì™€ì´ hawai
+ 
 [Africa]
-4 ÀÌÁıÆ® Egypt
-5 ÄÉ³Ä Kenya
+8 ì´ì§‘íŠ¸+ë‘ë°”ì´ Egypt, dubai
+9 ì¼€ëƒ Kenya
 
 [Asia]
-6 ¸ù°ñ Mongolia
-7 º£Æ®³² Vietnam
-8 ºí¶óµğº¸½ºÅå Vladivostok
-9 »óÇØ Shanghai
-10 ÅÂ±¹ Thailand
+10 í™ì½© hongkong
+11 í›„ì¿ ì˜¤ì¹´ hukuoka
+12 ì˜¤ì‚¬ì¹´ osaka
+13 ëª½ê³¨ Mongolia
+14 ë² íŠ¸ë‚¨ Vietnam
+15 ë¸”ë¼ë””ë³´ìŠ¤í†¡ Vladivostok
+16 ìƒí•´ Shanghai
+17 íƒœêµ­ Thailand
 
 [North America]
-11 ¹Ì±¹ USA
-12 Ä³³ª´Ù Canada
-13 Ä¶¸®Æ÷´Ï¾Æ California
+18 ë¯¸êµ­_ì„œë¶€ america_west
+19 ë‰´ìš• NewYork
+20 ìºë‚˜ë‹¤ Canada
