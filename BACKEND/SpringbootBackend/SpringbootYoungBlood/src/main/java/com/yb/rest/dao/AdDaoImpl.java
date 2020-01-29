@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
+import com.yb.rest.vo.Route;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
@@ -46,7 +47,7 @@ public class AdDaoImpl implements IAdDao {
 	}
 
 	@Override
-	public List<QRcode> getRoutes(int idx) {
+	public List<Route> getRoutes(int idx) {
 		return session.selectList("sendtofront.selectroutelist", idx);
 	}
 
