@@ -93,16 +93,13 @@ public class MemberController {
 	}
 	
 	/** 토큰 검증 */
-	public static String verification(String token) {
+	public static Claims verification(String token) {
 		Claims c = Jwts.parser()
 				.setSigningKey(getKey().getBytes())
 				.parseClaimsJws(token)
 				.getBody();
-		Data expiration = c.get("exp", Data.class);
-		System.out.println(expiration);
-		String data = c.get("data", String.class);
-		System.out.println(data);
-		return data;
+		//String data = c.get("username")+"";
+		return c;
 	}
 	
 	/** 회원가입 */
@@ -154,22 +151,12 @@ public class MemberController {
 	/** 로그인 상태 확인 */
 	@GetMapping("/auth/check")
 	public ResponseEntity<Map<String, Object>> memloginfo(@RequestHeader(value="Authorization") String token) {
-		ResponseEntity<Map<String, Object>> res = null;
-//		if(token=="undefined" || token==null || token=="") {
-//			Map<String, Object> msg = new HashMap<String, Object>();
-//			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
-//		}
-		System.out.println("=====");
-		System.out.println("로그인 상태확인");
-		System.out.println(token);
-		String de_token = verification(token);
-		System.out.println(de_token);
-		System.out.println("=====");
-		
+		ResponseEntity<Map<String, Object>> res = null;	
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
-			msg.put("data", de_token);
-			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
+			Claims de = verification(token);
+			msg.put("username", de.get("username"));
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch(Exception e) {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}

@@ -219,7 +219,7 @@ public class AdController {
 		Map<String, Object> result = new HashMap<>();
 		
 		//type 계산하기
-		int type = 1;
+		int type = 1; 
 		List<QRcode> routelist = ser.getRoutes(idx);
 		
 		
