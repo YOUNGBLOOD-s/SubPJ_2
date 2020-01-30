@@ -55,7 +55,7 @@ public class MemberController {
 	public static String getKey() {
 		String key = "";
 		try {
-			File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
+			File file = new File("/usr/local/key/key.txt");
 			FileReader filereader = new FileReader(file);
 			int singleCh = 0;
 			while ((singleCh = filereader.read()) != -1) {
