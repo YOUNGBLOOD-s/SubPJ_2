@@ -5,10 +5,10 @@ desc nationtb;
 select * from nationtb;
 
 -- [Europe] 
-insert into nationtb(name, dust, continents, speech, price) values('Germany', 2, 1, '독일을 열차로 여행하시면 눈과 입, 마음이 즐거워집니다!', 2652400); 
-insert into nationtb(name, dust, continents, speech, price) values('Italy', 4, 1, '마치 각기 다른 나라처럼 뚜렷한 특징으로 존재하는 이탈리아 도시들!', 3962400); 
+insert into nationtb(name, dust, continents, speech, price) values('Germany', 1, 1, '독일을 열차로 여행하시면 눈과 입, 마음이 즐거워집니다!', 2652400); 
+insert into nationtb(name, dust, continents, speech, price) values('Italy', 1, 1, '마치 각기 다른 나라처럼 뚜렷한 특징으로 존재하는 이탈리아 도시들!', 3962400); 
 insert into nationtb(name, dust, continents, speech, price) values('France', 2, 1, '프랑스는 서유럽의 본토와 남아메리카의 프랑스령 기아나를 비롯해 여러 대륙에 걸쳐 있는 해외 레지옹과 해외 영토로 이루어진 국가', 1252400); 
-insert into nationtb(name, dust, continents, speech, price) values('Greece', 1, 1, '짙푸른 바다와 눈부시게 흰 건물!', 2550000); 
+insert into nationtb(name, dust, continents, speech, price) values('Greece', 2, 1, '짙푸른 바다와 눈부시게 흰 건물!', 2550000); 
 insert into nationtb(name, dust, continents, speech, price) values('Croatia', 2, 1, '발칸 반도의 판노니아 평원', 2123400); 
 insert into nationtb(name, dust, continents, speech, price) values('switzerland', 1, 1, '푸른 초원부터 만년설, 빛나는 호수까지 천혜의 자연환경을 갖춘 최고의 여행지 스위스! ', 2333400); 
 
@@ -20,19 +20,18 @@ insert into nationtb(name, dust, continents, speech, price) values('Dubai', 3, 3
 insert into nationtb(name, dust, continents, speech, price) values('Kenya', 3, 3, '많은 사람들이 가지고 있는 꿈의 여행지는 빅토리아 폭포!', 157856); 
 
 -- [Asia]
-insert into nationtb(name, dust, continents, speech, price) values('hongkong', 2, 4, '미식, 쇼핑, 야경 모두 놓치지 않을 거예요~!', 800000); 
-insert into nationtb(name, dust, continents, speech, price) values('hukuoka', 1, 4, '일본에서 가장 활기찬 도시 중 하나', 697000); 
-insert into nationtb(name, dust, continents, speech, price) values('osaka', 1, 4, '근교에는 교토와 고베, 나라, 히메지 등 매력적인 도시들!', 900000); 
-insert into nationtb(name, dust, continents, speech, price) values('Mongolia', 4, 4, '힐링이 필요하다면 몽골로 떠나보는 것 어떠세요? 드넓은 초원과 머리 위로 쏟아질 듯 하늘을 가~득 채운 별빛이 위로해줄 거에요', 898374); 
-insert into nationtb(name, dust, continents, speech, price) values('Vietnam', 3, 4, '우리나라 인기여행지 TOP 5!', 615000); 
+insert into nationtb(name, dust, continents, speech, price) values('hongkong', 2, 4, '미식, 쇼핑, 야경 모두 놓치지 않을 거예요~!', 800000);
+insert into nationtb(name, dust, continents, speech, price) values('hukuoka', 2, 4, '일본에서 가장 활기찬 도시 중 하나', 697000);
+insert into nationtb(name, dust, continents, speech, price) values('osaka', 2, 4, '근교에는 교토와 고베, 나라, 히메지 등 매력적인 도시들!', 900000);
+insert into nationtb(name, dust, continents, speech, price) values('Mongolia', 2, 4, '힐링이 필요하다면 몽골로 떠나보는 것 어떠세요? 드넓은 초원과 머리 위로 쏟아질 듯 하늘을 가~득 채운 별빛이 위로해줄 거에요', 898374);
+insert into nationtb(name, dust, continents, speech, price) values('Vietnam', 1, 4, '우리나라 인기여행지 TOP 5!', 615000);
 insert into nationtb(name, dust, continents, speech, price) values('Vladivostok', 3, 4, '아르바트 거리로 이어지고 여러 명소와도 가까워yo~', 593000);
-insert into nationtb(name, dust, continents, speech, price) values('Shanghai', 3, 4, '샹하이샹하이샹하이 트위스트 추면서 난생처음 상하이를 알았고~', 880000); 
-insert into nationtb(name, dust, continents, speech, price) values('Thailand', 3, 4, '저렴한 물가와 많은 볼거리로 세계 많은 나라 사람들이 방문하는 곳!', 750000); 
-
+insert into nationtb(name, dust, continents, speech, price) values('Shanghai', 4, 4, '샹하이샹하이샹하이 트위스트 추면서 난생처음 상하이를 알았고~', 880000);
+insert into nationtb(name, dust, continents, speech, price) values('Thailand', 4, 4, '저렴한 물가와 많은 볼거리로 세계 많은 나라 사람들이 방문하는 곳!', 750000);
 -- [North America]
-insert into nationtb(name, dust, continents, speech, price) values('America_west', 1, 5, '캐년하늘의 쏟아지는 별과 은하수, 신개념 낭만투어, 지금 즉시 상담하세요! ', 1245673 ); 
-insert into nationtb(name, dust, continents, speech, price) values('NewYork', 2, 5, '수많은 박물관, 다양한 식당 문화 등 볼거리가 넘쳐나', 3495739); 
-insert into nationtb(name, dust, continents, speech, price) values('Canada', 2, 5, '캐나다오로라 캐나다로키 나이아가라 나만을 위한 여행도 가족과 함께 하는 여행!', 5937493); 
+insert into nationtb(name, dust, continents, speech, price) values('America_west', 2, 5, '캐년하늘의 쏟아지는 별과 은하수, 신개념 낭만투어, 지금 즉시 상담하세요! ', 1245673 );
+insert into nationtb(name, dust, continents, speech, price) values('NewYork', 2, 5, '수많은 박물관, 다양한 식당 문화 등 볼거리가 넘쳐나', 3495739);
+insert into nationtb(name, dust, continents, speech, price) values('Canada', 2, 5, '캐나다오로라 캐나다로키 나이아가라 나만을 위한 여행도 가족과 함께 하는 여행!', 5937493);
 
     
 -- 월평균 table
