@@ -1,16 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import AirplanemodeActiveIcon from '@material-ui/icons/AirplanemodeActive';
-import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
-import component from '../../lib/material/component';
+import FlightTakeoffOutlinedIcon from '@material-ui/icons/FlightTakeoffOutlined';
+import AirportShuttleOutlinedIcon from '@material-ui/icons/AirportShuttleOutlined';
+import TrainOutlinedIcon from '@material-ui/icons/TrainOutlined';
+import DirectionsCarOutlinedIcon from '@material-ui/icons/DirectionsCarOutlined';
+import DirectionsBoatOutlinedIcon from '@material-ui/icons/DirectionsBoatOutlined';
+import palette from '../../lib/styles/palette';
 
 const TravelIcons = ({ type }) => {
-  if (type === '비행기') {
-    return <AirplanemodeActiveIcon />;
+  if (type === '비행기' || type === '경비행기') {
+    return <FlightTakeoffOutlinedIcon style={{ color: palette.theme }} />;
   } else if (type === '버스') {
-    return <AirportShuttleIcon />;
+    return <AirportShuttleOutlinedIcon style={{ color: palette.theme }} />;
   } else if (type === '기차') {
-    return null;
+    return <TrainOutlinedIcon style={{ color: palette.theme }} />;
+  } else if (type === '차량') {
+    return <DirectionsCarOutlinedIcon style={{ color: palette.theme }} />;
+  } else if (type === '유람선' || type === '배') {
+    return <DirectionsBoatOutlinedIcon style={{ color: palette.theme }} />;
   } else {
     return null;
   }
@@ -26,9 +33,14 @@ const TravelRouteItemBlock = styled.div`
 const RouteImage = styled.img`
   width: 100%;
   border-radius: 5px;
+  margin-bottom: 1rem;
 `;
 
-const ToFromText = styled(component.Typography)``;
+const ToFromText = styled.h4`
+  font-family: 'Nanum Myeongjo', serif;
+  margin: 0.5rem 0;
+  font-weight: bold;
+`;
 
 const TravelRouteItem = ({ dayRoutes }) => {
   console.log(dayRoutes);
@@ -42,19 +54,17 @@ const TravelRouteItem = ({ dayRoutes }) => {
           {/* NOTICE: title과 detail이 같은 경우는 경유지? 같은느낌 */}
           {title === detail ? (
             <>
-              <ToFromText variant="h4">
-                <TravelIcons type={transport} /> {tofrom}까지
-              </ToFromText>
+              <TravelIcons type={transport} />
+              <ToFromText>{tofrom}까지</ToFromText>
               <RouteImage src={image} alt="경로별 이미지" />
             </>
           ) : (
             <>
-              <ToFromText variant="h4">
-                <TravelIcons type={transport} /> {tofrom}
-              </ToFromText>
-              <div>{title}</div>
-              <div>{detail}</div>
+              <TravelIcons type={transport} />
+              <ToFromText variant="h4">{tofrom}</ToFromText>
               <RouteImage src={image} alt="경로별 이미지" />
+              {/* <div>{title}</div> */}
+              <div>{detail}</div>
             </>
           )}
         </TravelRouteItemBlock>
