@@ -46,37 +46,31 @@ public class AdController {
 
 	}
 	
-	//static int type;
 	/**
 	 * 센서값을 받는다. 
 	 * @throws JsonProcessingException
 	 */
 	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
     public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light,@PathVariable String dust) throws JsonProcessingException {
-        System.out.println("센서로부터 데이터를 받았습니다." + temp + " " + hum + " " + light + " " + dust);
-        float tmp = Float.parseFloat(temp); // 온도 값
-        float hu = Float.parseFloat(hum); // 습도 값
-        float dus=Float.parseFloat(dust); //미세먼지
-        float lig=Float.parseFloat(light); //조도 값
+        float tmp = Float.parseFloat(temp);
+        float hu = Float.parseFloat(hum);
+        float dus=Float.parseFloat(dust);
+        float lig=Float.parseFloat(light);
         Sensor sen = new Sensor(tmp, hu,dus,lig);
-        
-        // sensor data UPDATE
         ser.updateSensor(sen);
     }
 	
 	public List<Integer> weightcal() {
-		Sensor sen=ser.selectData(1); // 지금은 1이지만 전광판에 따른 센서 데이터 많으면 해당 전광판의 넘버 넣으면 됨
+		Sensor sen=ser.selectData(1);
 		float tmp=sen.getTemp();
 		float hu=sen.getHumid();
 		float dus=sen.getDust();
 		float lig=sen.getRough();
 		
-		// 현재 월 가져옴
         Calendar calender = new GregorianCalendar(Locale.KOREA);
         int nMonth = calender.get(Calendar.MONTH) + 1;
         List<Monthtb> li = ser.selectAll();
         ArrayList<Sensor> nations = new ArrayList<>();
-        // 1. 22도 미만 => 높은 온도 쳐다보기 / 22도 이상 => 낮은 온도 쳐다보기
         boolean up = true;
         if (tmp >= 22) {
             up = false;
@@ -157,7 +151,6 @@ public class AdController {
         Collections.sort(nations, new Comparator<Sensor>() {
             @Override
             public int compare(Sensor o1, Sensor o2) {
-                // TODO Auto-generated method stub
                 return (int) (o1.getHumid() - o2.getHumid());
             }
         });
@@ -183,7 +176,6 @@ public class AdController {
         Collections.sort(finallist, new Comparator<ForScore>() {
 			@Override
 			public int compare(ForScore o1, ForScore o2) {
-				// TODO Auto-generated method stub
 				return o1.getScore()-o2.getScore();
 			}
 		});
@@ -300,11 +292,8 @@ public class AdController {
 			
 			}
 			Countrylist.add(data);
-			System.out.println("추가된 데이터 "+Countrylist);
 		}
 
-		// send to front
-		System.out.println(Countrylist);
 		result.put("datas", Countrylist);
 		re = new ResponseEntity<>(result, HttpStatus.OK);
 		return re;
@@ -316,17 +305,16 @@ public class AdController {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
 		List<Route> routelist = ser.getRoutes(idx);
-		System.out.println("나라의 콘텐츠 정보들"+routelist);
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("nationidx", idx);
 		map.put("type", ser.getType(idx));
 		Nation nation = ser.getNationdetail(map);
 		Sendtofront stf = ser.getInfo(map);
+		
 		SimpleDateFormat monthformat = new SimpleDateFormat("MM");
 		Date time = new Date();
 		int month = Integer.parseInt(monthformat.format(time));
-		
 		switch (month) {
 		case 1:
 			result.put("temp", stf.getTem1());
@@ -376,7 +364,6 @@ public class AdController {
 			result.put("temp", stf.getTem12());
 			result.put("humid", stf.getHum12());
 			break;
-		
 		}
 				
 		//send to front

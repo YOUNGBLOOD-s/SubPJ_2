@@ -73,13 +73,11 @@ public class AdServiceImpl implements IAdService {
 
 	@Override
 	public Sensor selectData(int idx) {
-		// TODO Auto-generated method stub
 		return repo.selectData(idx);
 	}
 
 	@Override
 	public void updateType(ForScore forScore) {
-		// TODO Auto-generated method stub
 		repo.updateType(forScore);
 	}
 
