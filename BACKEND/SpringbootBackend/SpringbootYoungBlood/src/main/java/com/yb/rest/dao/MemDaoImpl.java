@@ -22,7 +22,6 @@ public class MemDaoImpl implements IMemDao {
 
 	@Override
 	public boolean registerMem(String username, String password, String company, int grade) {
-		// TODO Auto-generated method stub
 		Member m = new Member(username, password, company, grade);
 		int insert = session.insert("member.insertMember", m);
 		if (insert == 0)
@@ -33,7 +32,6 @@ public class MemDaoImpl implements IMemDao {
 
 	@Override
 	public ArrayList<Member> listMem() {
-		// TODO Auto-generated method stub
 		return (ArrayList) session.selectList("member.selectmemList");
 	}
 

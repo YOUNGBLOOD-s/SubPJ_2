@@ -1,9 +1,9 @@
 package com.yb.rest.vo;
 
 public class Route {
-	private String nation, day, seq, title, detail, image, tofrom;
+	private String nation, day, seq, title, detail, image, tofrom, transport;
 	public Route() {}
-	public Route(String nation, String day, String seq, String title, String detail, String image, String tofrom) {
+	public Route(String nation, String day, String seq, String title, String detail, String image, String tofrom, String transport) {
 		this.nation = nation;
 		this.day = day;
 		this.seq = seq;
@@ -11,6 +11,13 @@ public class Route {
 		this.detail = detail;
 		this.image = image;
 		this.tofrom = tofrom;
+		this.transport = transport;
+	}
+	public String getTransport() {
+		return transport;
+	}
+	public void setTransport(String transport) {
+		this.transport = transport;
 	}
 	public String getNation() {
 		return nation;
@@ -57,7 +64,7 @@ public class Route {
 	@Override
 	public String toString() {
 		return "Route [nation=" + nation + ", day=" + day + ", seq=" + seq + ", title=" + title + ", detail=" + detail
-				+ ", image=" + image + ", tofrom=" + tofrom + "]";
+				+ ", image=" + image + ", tofrom=" + tofrom + ", transport=" + transport + "]";
 	};
 	
 }
