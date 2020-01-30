@@ -242,7 +242,7 @@ public class AdController {
 
             Map<String, Object> d = new HashMap<String, Object>();
 
-            for (int j = 0; j < imgs.length; j++) {
+            for (int j = 0; j < imgs.size(); j++) {
                 d.put("id", stf.getIdx());
                 d.put("price", stf.getPrice());
                 d.put("img", imgs.get(j));
