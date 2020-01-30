@@ -6,7 +6,7 @@ import requests
 
 sensor = Adafruit_DHT.DHT11
 
-pin = 4
+pin = 17
 try:
     tmpT, tmpH = 0, 0
     cnt = 0

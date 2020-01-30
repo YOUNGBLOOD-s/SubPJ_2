@@ -200,6 +200,7 @@ public class AdController {
 	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
 	 * @throws JsonProcessingException
 	 */
+
 	@GetMapping("/sensor/reco")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
 		
