@@ -87,18 +87,6 @@ insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9
 	values(19, 15, 16, 16, 18, 20, 22, 23, 24, 22, 18, 15, 14, 2, 2, 3, 4, 30, 68, 92, 92, 78, 40, 10, 2);
 insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
 	values(20, -5, -3, 0, 4, 10, 16, 21, 18, 16, 11, 5, 1, 0, 0, 0, 3, 13, 45, 70, 72, 40, 10, 0, 0);
--- 경로 및 상세정보 table
-desc contentstb;
-select * from contentstb;
-
--- 초기 값
-insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(13, 1, 1, '맨스차이니스 극장 관광', '맨스차이니스 극장을 관리하는데, 할리우드 스타들을 만날 수 있습니다.','https://images.unsplash.com/photo', '인천 → 로스앤젤레스', '비행기');
-insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(13, 1, 2, '라스베이거스 시티투어', '라스베이거스 시티를 투어합니다. 스타의 거리 관광합니다.','https://images.unsplash.com/photo', '바스토우 → 라스베이거스', '버스');
-insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(13, 2, 1, '브라이스캐년 국립공원 관광', '브라이스캐년 국립공원을 관광합니다. 아주 멋지다구요.','https://images.unsplash.com/photo', '자이언 캐년 → 브라이스 캐년', '버스');
-
 
 -- 이미지 테이블
 desc imagetb;
