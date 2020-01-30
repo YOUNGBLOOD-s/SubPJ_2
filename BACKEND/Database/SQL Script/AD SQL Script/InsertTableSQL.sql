@@ -17,6 +17,7 @@ create table nationtb (
      foreign key (customer) references membertb(username)
 );
 desc nationtb;
+select * from nationtb;
 
 
 -- 월평균 table
@@ -45,6 +46,8 @@ create table contentstb (
     foreign key (nation) references nationtb(idx)
 );
 desc contentstb;
+select * from contentstb;
+select * from imagetb;
 
 -- 이미지 테이블
 create table imagetb (

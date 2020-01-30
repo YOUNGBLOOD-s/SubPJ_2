@@ -17,7 +17,6 @@
 
 # Package Files #
 *.jar
-*.war
 *.nar
 *.ear
 *.zip
@@ -233,3 +232,6 @@ sketch
 
 /BACKEND/SpringbootBackend/.metadata
 /BACKEND/SpringbootBackend/Servers
+
+.vscode/
+sftp.json

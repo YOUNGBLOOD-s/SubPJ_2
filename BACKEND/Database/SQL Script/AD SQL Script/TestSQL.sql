@@ -9,7 +9,7 @@ monthtb.hum1, monthtb.hum2, monthtb.hum3, monthtb.hum4, monthtb.hum5, monthtb.hu
     where imagetb.type=2 AND nationtb.idx=imagetb.nation) as url
 from monthtb inner join nationtb
 on monthtb.nation=nationtb.idx
-where nationtb.idx=1;
+where nationtb.idx=8;
 
 -- 현재 온도 0도 시, 뽑아야 할 데이터 목록임. 여기서 온도와 습도, 미세먼지 점수화하여 ㅇㅇ
 select * from monthtb;
@@ -28,4 +28,5 @@ desc nationtb;
 select idx, name, (select url from imagetb where type=2 and nation=1), price, continents
 from nationtb
 where idx=1;
+
 

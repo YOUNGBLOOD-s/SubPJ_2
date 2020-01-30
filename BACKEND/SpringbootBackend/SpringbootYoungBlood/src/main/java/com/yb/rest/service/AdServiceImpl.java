@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.yb.rest.dao.IAdDao;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
+import com.yb.rest.vo.Route;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
@@ -36,12 +37,12 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public void insertSensor(Sensor sen) {
-		repo.insertSen(sen);
+	public void updateSensor(Sensor sen) {
+		repo.updateSensor(sen);
 	}
 
 	@Override
-	public List<QRcode> getRoutes(int idx) {
+	public List<Route> getRoutes(int idx) {
 		return repo.getRoutes(idx);
 	}
 
@@ -68,5 +69,20 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public List<Monthtb> selectAll() {
 		return repo.selectall();
+	}
+
+	@Override
+	public Sensor selectData(int idx) {
+		return repo.selectData(idx);
+	}
+
+	@Override
+	public void updateType(ForScore forScore) {
+		repo.updateType(forScore);
+	}
+
+	@Override
+	public int getType(int idx) {
+		return repo.getType(idx);
 	}
 }
