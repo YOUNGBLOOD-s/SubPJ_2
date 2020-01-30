@@ -25,13 +25,13 @@
 	</select>
 	
 	<select id="selectroutelist" resultType="route" parameterType="int">
-	select nation, day, seq, title, detail, image, tofrom 
+	select nation, day, seq, title, detail, image, tofrom, transport
 	from contentstb 
 	where nation=#{idx};
 	</select>
 	
 	<select id="selectNationdetail" resultType="nation" parameterType="map">
-	select idx, name, (select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, continents
+	select idx, name, dust, continents, clickcnt, showcnt, customer, weight, speech,(select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, type
 	from nationtb
 	where idx=#{nationidx};
 	</select>

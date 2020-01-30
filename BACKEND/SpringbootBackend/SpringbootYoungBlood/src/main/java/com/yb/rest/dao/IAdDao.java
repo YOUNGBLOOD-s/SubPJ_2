@@ -23,8 +23,6 @@ public interface IAdDao {
 	public int getScore(int idx);
 	public int getDust(int idx);
 	public Sensor selectData(int idx);
-	public void updateType(ForScore forScore);
-	
+	public void updateType(ForScore forScore);	
 	public int getType(int idx);
-	
 }

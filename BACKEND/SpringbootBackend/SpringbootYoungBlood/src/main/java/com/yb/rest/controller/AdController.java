@@ -1,9 +1,11 @@
 package com.yb.rest.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -24,12 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
-import com.yb.rest.vo.Nation;
-import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.Route;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
+import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Sensor;
 
 @CrossOrigin
@@ -196,7 +197,8 @@ public class AdController {
         	//저온도(1) 고온도(0)
         	finalScore+=nations.get(i).getTemp()<22?1:0;
         	finalScore=finalScore==5?3:finalScore==10?1:finalScore==6?4:2;
-        	ser.updateType(new ForScore(nations.get(i).getIdx(),finalScore));
+        	ser.updateType(new ForScore(finallist.get(i).getIdx(),finalScore));
+        	
 			nation.add(finallist.get(i).getIdx());
 		}
         return nation;
@@ -211,14 +213,15 @@ public class AdController {
 		
 		//가중치 계산 algorithm
 		List<Integer> nation = weightcal();
-		System.out.println(nation.size());
-		
+		System.out.println(nation);
+
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
-		List<Map> Countrylist = new LinkedList<>();
+		List<Map<String, Object>> Countrylist = new LinkedList<>();
 		
 		for(int idx=0; idx<nation.size(); idx++) {
 			int nationId = nation.get(idx);
+			System.out.println(nationId);
 			int type = ser.getType(nationId);			
 			List<String> imgs = ser.getImgs(nationId);
 			List<String> modalContents = ser.getModalcontents(nationId);
@@ -231,8 +234,8 @@ public class AdController {
 			stf.setImgs(imgs);
 			stf.setModalContents(modalContents);
 			
-			//ㅋㅋ 이제 tem와 hum만 불러오면 돼 아주 간단하니까 괜찮아 ^^
 			Map<String, Object> data = new HashMap<String, Object>();
+			
 			data.put("id", stf.getIdx());
 			data.put("name", stf.getName());
 			data.put("content", stf.getSpeech());
@@ -241,10 +244,63 @@ public class AdController {
 			data.put("imgs", stf.getImgs());
 			data.put("modalContent", stf.getModalContents());
 			
-			data.put("temp", "");
-			data.put("humid", "");
+			SimpleDateFormat monthformat = new SimpleDateFormat("MM");
+			Date time = new Date();
+			int month = Integer.parseInt(monthformat.format(time));
+
+			switch (month) {
+			case 1:
+				data.put("temp", stf.getTem1());
+				data.put("humid", stf.getHum1());
+				break;
+			case 2:
+				data.put("temp", stf.getTem2());
+				data.put("humid", stf.getHum2());
+				break;
+			case 3:
+				data.put("temp", stf.getTem3());
+				data.put("humid", stf.getHum3());
+				break;
+			case 4:
+				data.put("temp", stf.getTem4());
+				data.put("humid", stf.getHum4());
+				break;
+			case 5:
+				data.put("temp", stf.getTem5());
+				data.put("humid", stf.getHum5());
+				break;
+			case 6:
+				data.put("temp", stf.getTem6());
+				data.put("humid", stf.getHum6());
+				break;
+			case 7:
+				data.put("temp", stf.getTem7());
+				data.put("humid", stf.getHum7());
+				break;
+			case 8:
+				data.put("temp", stf.getTem8());
+				data.put("humid", stf.getHum8());
+				break;
+			case 9:
+				data.put("temp", stf.getTem9());
+				data.put("humid", stf.getHum9());
+				break;
+			case 10:
+				data.put("temp", stf.getTem10());
+				data.put("humid", stf.getHum10());
+				break;
+			case 11:
+				data.put("temp", stf.getTem11());
+				data.put("humid", stf.getHum11());
+				break;
+			case 12:
+				data.put("temp", stf.getTem12());
+				data.put("humid", stf.getHum12());
+				break;
 			
+			}
 			Countrylist.add(data);
+			System.out.println("추가된 데이터 "+Countrylist);
 		}
 
 		// send to front
@@ -260,16 +316,79 @@ public class AdController {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
 		List<Route> routelist = ser.getRoutes(idx);
-		
+		System.out.println("나라의 콘텐츠 정보들"+routelist);
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("nationidx", idx);
 		map.put("type", ser.getType(idx));
 		Nation nation = ser.getNationdetail(map);
+		Sendtofront stf = ser.getInfo(map);
+		SimpleDateFormat monthformat = new SimpleDateFormat("MM");
+		Date time = new Date();
+		int month = Integer.parseInt(monthformat.format(time));
 		
+		switch (month) {
+		case 1:
+			result.put("temp", stf.getTem1());
+			result.put("humid", stf.getHum1());
+			break;
+		case 2:
+			result.put("temp", stf.getTem2());
+			result.put("humid", stf.getHum2());
+			break;
+		case 3:
+			result.put("temp", stf.getTem3());
+			result.put("humid", stf.getHum3());
+			break;
+		case 4:
+			result.put("temp", stf.getTem4());
+			result.put("humid", stf.getHum4());
+			break;
+		case 5:
+			result.put("temp", stf.getTem5());
+			result.put("humid", stf.getHum5());
+			break;
+		case 6:
+			result.put("temp", stf.getTem6());
+			result.put("humid", stf.getHum6());
+			break;
+		case 7:
+			result.put("temp", stf.getTem7());
+			result.put("humid", stf.getHum7());
+			break;
+		case 8:
+			result.put("temp", stf.getTem8());
+			result.put("humid", stf.getHum8());
+			break;
+		case 9:
+			result.put("temp", stf.getTem9());
+			result.put("humid", stf.getHum9());
+			break;
+		case 10:
+			result.put("temp", stf.getTem10());
+			result.put("humid", stf.getHum10());
+			break;
+		case 11:
+			result.put("temp", stf.getTem11());
+			result.put("humid", stf.getHum11());
+			break;
+		case 12:
+			result.put("temp", stf.getTem12());
+			result.put("humid", stf.getHum12());
+			break;
+		
+		}
+				
 		//send to front
 		result.put("id", nation.getIdx());
 		result.put("name", nation.getName());
+		result.put("dust",nation.getDust());
+		result.put("clickcnt",nation.getClickcnt());
+		result.put("showcnt",nation.getShowcnt());
+		result.put("customer",nation.getCustomer());
+		result.put("weight",nation.getWeight());
+		result.put("speech",nation.getSpeech());
+		result.put("type",nation.getType());
 		result.put("thumbnail", nation.getUrl());
 		result.put("price", nation.getPrice());
 		if(nation.getContinents().equals("1")) {
