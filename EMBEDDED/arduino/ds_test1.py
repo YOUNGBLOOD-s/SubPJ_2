@@ -113,7 +113,7 @@ if __name__ == "__main__":
 
     while True:
         # measure at the same time ---------------------------------------------
-        s10.measureStart()
+        '''s10.measureStart()
         s25.measureStart()
         time.sleep(30)
         s10.measureStop()
@@ -140,12 +140,11 @@ if __name__ == "__main__":
         print("PM2.5 time: {}, Interval: {}, Ratio: {:.3f}, Count: {}, Total Interrupt: {}, Wrong Interrupt: {}".
               format(timestamp, int(interval25), r25, int(PM25count), total_interrupt_count25, wrong_level_count25))
 
-        print()
-
+        print() '''
         # measure PM1.0 first, then PM2.5 ---------------------------------------------
         # measure PM1.0
         s10.measureStart()
-        time.sleep(30)
+        time.sleep(60)
         s10.measureStop()
 
         timestamp = datetime.now()
@@ -158,7 +157,7 @@ if __name__ == "__main__":
         print("PM1.0 time: {}, Interval: {}, Ratio: {:.3f}, Count: {}, Total Interrupt: {}, Wrong Interrupt: {}".
               format(timestamp, int(interval10), r10, int(PM10count), total_interrupt_count10, wrong_level_count10))
 
-        # measure PM2.5
+        '''# measure PM2.5
         s25.measureStart()
         time.sleep(30)
         s25.measureStop()
@@ -171,6 +170,6 @@ if __name__ == "__main__":
 
         print("PM2.5 time: {}, Interval: {}, Ratio: {:.3f}, Count: {}, Total Interrupt: {}, Wrong Interrupt: {}".
               format(timestamp, int(interval25), r25, int(PM25count), total_interrupt_count25, wrong_level_count25))
-        print("--")
+        print("--")'''
 
     pi.stop()  # Disconnect from Pi.

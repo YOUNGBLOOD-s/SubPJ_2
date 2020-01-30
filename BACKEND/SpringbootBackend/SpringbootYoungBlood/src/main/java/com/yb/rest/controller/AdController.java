@@ -58,6 +58,7 @@ public class AdController {
         float hu = Float.parseFloat(hum);
         float dus = Float.parseFloat(dust);
         float lig = Float.parseFloat(light);
+        System.out.println("온도: "+tmp+"습도: "+hum+"미세먼지: "+dus);
         Sensor sen = new Sensor(tmp, hu, dus, lig);
         ser.updateSensor(sen);
     }
@@ -242,7 +243,7 @@ public class AdController {
 
             Map<String, Object> d = new HashMap<String, Object>();
 
-            for (int j = 0; j < imgs.length; j++) {
+            for (int j = 0; j < imgs.size(); j++) {
                 d.put("id", stf.getIdx());
                 d.put("price", stf.getPrice());
                 d.put("img", imgs.get(j));
