@@ -22,15 +22,22 @@ const TextWrapper = styled.div`
 `;
 
 const BasicInformation = ({ country }) => {
-  const { name, thumbnail, price, category } = country;
+  console.log(country);
+  const { id, name, thumbnail, price, category } = country;
   return (
     <BasicInformationBlock>
       <ImageWrapper>
-        <StyledImg src={thumbnail} alt="" />
+        {/* TODO: 썸네일 제대로 받아지면 이미지 변경 */}
+        <StyledImg
+          src={
+            'https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80'
+          }
+          alt="썸네일"
+        />
       </ImageWrapper>
       <TextWrapper>
         <Typography variant="h3">
-          {name}({category})
+          {name} ({category})
         </Typography>
         <h2>{price}원</h2>
       </TextWrapper>

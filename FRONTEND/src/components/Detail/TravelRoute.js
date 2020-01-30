@@ -29,23 +29,24 @@ const TravelIcons = ({ type }) => {
 };
 
 const TravelRoute = ({ routes }) => {
+  console.log(routes);
   return (
     <TravleRouteBlock>
       <TitleBar text="여행 경로" />
-      {routes.map(({ id, imageId, toFrom, description, transport }) => (
-        <ExpansionPanel key={id}>
+      {routes.map(({ nation, day, seq, title, detail, image, tofrom }, idx) => (
+        <ExpansionPanel key={idx}>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <Typography>
-              <TravelIcons type={transport} />
-              <StyledDay>{id}일차</StyledDay> {toFrom}
+              {/* <TravelIcons type={transport} /> */}
+              <StyledDay>{day} 일차</StyledDay> {tofrom}
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography varient="body1">{description}</Typography>
+            <Typography varient="body1">{detail}</Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       ))}

@@ -36,7 +36,7 @@ const CautionText = ({ category }) => {
 export default CautionText;
 
 const fakeAlert = {
-  미주지역: [
+  Europe: [
     {
       title: '여행 시 유의 사항',
       content: `
