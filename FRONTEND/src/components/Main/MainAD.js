@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { withRouter } from 'react-router-dom';
 import FullScreenDialog from '../common/FullScreenDialog';
+import Axios from '../../../node_modules/axios/index';
+import LoadingBackdrop from '../common/LoadingBackdrop';
 
 const Title = styled.div`
   font-size: 2.3em;
@@ -58,73 +60,90 @@ const MainADBlock = styled.div`
   }
 `;
 
-const datas = [
-  {
-    id: '1',
-    title: '코타키나발루',
-    content:
-      '말레이시아 코타키나발루(KKUM)는 보르네오섬 북동쪽에 있는 사바(Sabah) 주의 주도로 보르네오 섬 최대의 도시입니다.',
-    img: '/static/img/코타키나발루.jpg',
-    nextURL: 'http://choiys.kr',
-  },
-  {
-    id: '2',
-    title: '블라디보스토크',
-    content:
-      '블라디보스토크(러시아어: Владивосто́к)는 러시아의 도시이다. 러시아 극동의 중심지이며 프리모르스키 지방의 행정중심지이다.',
-    img: '/static/img/블라디보스토크.jpg',
-    nextURL: 'http://portfolio.choiys.kr',
-  },
-];
+// const datas = [
+//   {
+//     id: '1',
+//     title: '코타키나발루',
+//     content:
+//       '말레이시아 코타키나발루(KKUM)는 보르네오섬 북동쪽에 있는 사바(Sabah) 주의 주도로 보르네오 섬 최대의 도시입니다.',
+//     img: '/static/img/코타키나발루.jpg',
+//     nextURL: 'http://choiys.kr',
+//   },
+//   {
+//     id: '2',
+//     title: '블라디보스토크',
+//     content:
+//       '블라디보스토크(러시아어: Владивосто́к)는 러시아의 도시이다. 러시아 극동의 중심지이며 프리모르스키 지방의 행정중심지이다.',
+//     img: '/static/img/블라디보스토크.jpg',
+//     nextURL: 'http://portfolio.choiys.kr',
+//   },
+// ];
 
-const MainAD = ({ history }) => {
+const MainAD = () => {
   const publicURL = process.env.PUBLIC_URL;
 
   const [pid, setPid] = useState(1);
-
   const [open, setOpen] = useState(false);
+  const [datas, setDatas] = useState(null);
 
-  const onDoubleClick = id => {
+  const onDoubleClick = index => {
     // history.push(`/detail/${id}`);
-    setPid(id);
+    setPid(index);
     setOpen(true);
   };
 
+  useEffect(() => {
+    Axios.get('http://192.168.100.66:9090/api/sensor/reco')
+      .then(res => {
+        setDatas(res.data.datas);
+      })
+      .then(err => console.log(err));
+  }, []);
+
   return (
     <MainADBlock>
-      <Carousel
-        infiniteLoop
-        autoPlay
-        emulateTouch
-        showStatus={false}
-        showArrows={false}
-        showThumbs={false}
-        transitionTime={1000}
-        interval={5000}
-      >
-        {datas.map(({ id, title, content, img, nextURL }) => (
-          <div key={id} onDoubleClick={() => onDoubleClick(id)}>
-            <div className="style">
-              <div className="box">
-                <Title>{title}</Title>
-                <Content>{content}</Content>
+      {datas ? (
+        <>
+          <Carousel
+            infiniteLoop
+            autoPlay
+            emulateTouch
+            showStatus={false}
+            showArrows={false}
+            showThumbs={false}
+            transitionTime={1000}
+            interval={5000}
+          >
+            {datas.map(({ id, name, content, thumbnail }, index) => (
+              <div key={id} onDoubleClick={() => onDoubleClick(index)}>
+                <div className="style">
+                  <div className="box">
+                    <Title>{name}</Title>
+                    <Content>{content}</Content>
+                  </div>
+                  <img
+                    className="bg"
+                    src={publicURL + '/static/img/코타키나발루.jpg'}
+                    alt=""
+                  />
+                </div>
+                <img
+                  className="qr"
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
+                  alt=""
+                />
               </div>
-              <img className="bg" src={publicURL + img} alt="" />
-            </div>
-            <img
-              className="qr"
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${nextURL}`}
-              alt=""
-            />
-          </div>
-        ))}
-      </Carousel>
-      <FullScreenDialog
-        data={datas[pid - 1]}
-        setOpen={setOpen}
-        open={open}
-        nextURL={datas[pid - 1].nextURL}
-      />
+            ))}
+          </Carousel>
+          <FullScreenDialog
+            data={datas[pid - 1]}
+            setOpen={setOpen}
+            open={open}
+          />
+        </>
+      ) : (
+        <LoadingBackdrop loading={true} />
+      )}
     </MainADBlock>
   );
 };
