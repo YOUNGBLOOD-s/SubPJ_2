@@ -58,6 +58,7 @@ public class AdController {
         float hu = Float.parseFloat(hum);
         float dus = Float.parseFloat(dust);
         float lig = Float.parseFloat(light);
+        System.out.println("온도: "+tmp+"습도: "+hum+"미세먼지: "+dus);
         Sensor sen = new Sensor(tmp, hu, dus, lig);
         ser.updateSensor(sen);
     }
