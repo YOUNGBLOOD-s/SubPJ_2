@@ -54,17 +54,24 @@ public class AdController {
     @GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
     public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light,
             @PathVariable String dust) throws JsonProcessingException {
-        float tmp = Float.parseFloat(temp);
+    	float tmp = Float.parseFloat(temp);
         float hu = Float.parseFloat(hum);
         float dus = Float.parseFloat(dust);
         float lig = Float.parseFloat(light);
         System.out.println("온도: "+tmp+"습도: "+hum+"미세먼지: "+dus);
         Sensor sen = new Sensor(tmp, hu, dus, lig);
+        System.out.println("==============");
+        System.out.println("안녕하세요. 센서값을 전광판으로부터 받았습니다. 받은 정보는 다음과 같습니다.");
+        System.out.println(sen.toString());
+        System.out.println("==============");
         ser.updateSensor(sen);
     }
 
     public List<Integer> weightcal() {
-        Sensor sen = ser.selectData(1);
+        System.out.println("==============");
+        System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
+        System.out.println("==============");
+    	Sensor sen = ser.selectData(1);
         float tmp = sen.getTemp();
         float hu = sen.getHumid();
         float dus = sen.getDust();
@@ -206,9 +213,11 @@ public class AdController {
 	 */
 	@GetMapping("/sensor/reco")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
-		
+
 		//가중치 계산 algorithm
 		List<Integer> nation = weightcal();
+        System.out.println("==============");
+		System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
 		System.out.println(nation);
 
         ResponseEntity<Map<String, Object>> re = null;
@@ -304,23 +313,30 @@ public class AdController {
         }
 
         result.put("datas", Countrylist);
+        System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
+        System.out.println(Countrylist);
+        System.out.println("==============");
         re = new ResponseEntity<>(result, HttpStatus.OK);
         return re;
     }
 
     @GetMapping("/detail/{id}")
     public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(@PathVariable String id) {
+        
+        System.out.println("==============");
+        System.out.println("안녕하세요. 고객님이 요청하신 "+id+"번호에 해당하는 나라 상세정보를 조회해드릴게요.");
+        
+    	ResponseEntity<Map<String, Object>> re = null;
+        Map<String, Object> result = null;
+        try {
         int idx = Integer.parseInt(id);
-        ResponseEntity<Map<String, Object>> re = null;
-        Map<String, Object> result = new HashMap<>();
+        result = new HashMap<>();
         List<Route> routelist = ser.getRoutes(idx);
-
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("nationidx", idx);
         map.put("type", ser.getType(idx));
         Nation nation = ser.getNationdetail(map);
         Sendtofront stf = ser.getInfo(map);
-
         SimpleDateFormat monthformat = new SimpleDateFormat("MM");
         Date time = new Date();
         int month = Integer.parseInt(monthformat.format(time));
@@ -398,6 +414,11 @@ public class AdController {
         }
         result.put("routes", routelist);
         re = new ResponseEntity<>(result, HttpStatus.OK);
+    	} catch(Exception e) {
+    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
+        System.out.println("전달이 완료됐습니다. 안녕히가세요!");
+        System.out.println("==============");
         return re;
     }
 }

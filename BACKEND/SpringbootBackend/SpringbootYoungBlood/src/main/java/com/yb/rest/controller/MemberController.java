@@ -53,9 +53,14 @@ public class MemberController {
 
 	/** 비밀키 읽기 */
 	public static String getKey() {
+        
+		System.out.println("==============");
+		System.out.println("안녕하세요. 키를 가져갈게요!");
+		
 		String key = "";
 		try {
-			File file = new File("/usr/local/key/key.txt");
+			//File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
+			File file = new File("/usr/local/key/key.txt"); //AWS
 			FileReader filereader = new FileReader(file);
 			int singleCh = 0;
 			while ((singleCh = filereader.read()) != -1) {
@@ -66,12 +71,15 @@ public class MemberController {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
+		System.out.println("키 잘 가져갑니다요. ^^7");
+        System.out.println("==============");
 		return key;
 	}
 
 	/** 토큰 생성 */
 	public static String createToken(String username) {
-
+        System.out.println("==============");
+        System.out.println("토큰을 생성할게요.");
 		String key = getKey();
 		Map<String, Object> headers = new HashMap<>();
 		headers.put("typ", "JWT");
@@ -89,22 +97,33 @@ public class MemberController {
 				.setHeader(headers)
 				.setClaims(payloads)
 				.signWith(SignatureAlgorithm.HS256, key.getBytes()).compact();
+        System.out.println("토큰 생성 완료!");
+		System.out.println("==============");
 		return jwt;
 	}
 	
 	/** 토큰 검증 */
 	public static Claims verification(String token) {
+        System.out.println("==============");
+        System.out.println("토큰을 검증할게요");
 		Claims c = Jwts.parser()
 				.setSigningKey(getKey().getBytes())
 				.parseClaimsJws(token)
 				.getBody();
 		//String data = c.get("username")+"";
+		System.out.println("검증 객체를 보내드립니다.");
+        System.out.println("==============");
+
 		return c;
 	}
 	
 	/** 회원가입 */
 	@PostMapping("/auth/register")
 	public ResponseEntity<Map<String, Object>> meminsert(@RequestBody Member reg) {
+        
+		System.out.println("==============");
+        System.out.println("회원가입 요청이 왔습니다.");
+        
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -124,12 +143,16 @@ public class MemberController {
 				System.out.println(e.getMessage());
 			}	
 		}
+		System.out.println("회원가입이 완료됐습니다.");
+        System.out.println("==============");
 		return res;
 	}
 
 	/** 로그인 */
 	@PostMapping("/auth/login")
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
+        System.out.println("==============");
+        System.out.println("로그인 요청이 왔습니다.");
 		if(login.getUsername()=="" || login.getPassword()=="") {
 			Map<String, Object> msg = new HashMap<String, Object>();
 			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -141,16 +164,22 @@ public class MemberController {
 			msg.put("username", login.getUsername());
 			msg.put("token", createToken(login.getUsername()));
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
+			System.out.println("로그인 성공!");
 		} else {
 			msg.put("username", login.getUsername());
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); // wrong
+			System.out.println("로그인 실패-_-!");
 		}
+		
+        System.out.println("==============");
 		return res;
 	}
 
 	/** 로그인 상태 확인 */
 	@GetMapping("/auth/check")
 	public ResponseEntity<Map<String, Object>> memloginfo(@RequestHeader(value="Authorization") String token) {
+        System.out.println("==============");
+		System.out.println("로그인 상태를 확인합니다.");
 		ResponseEntity<Map<String, Object>> res = null;	
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -160,6 +189,8 @@ public class MemberController {
 		} catch(Exception e) {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
+		System.out.println("로그인 상태 확인 완료");
+        System.out.println("==============");
 		return res;
 	}
 	
