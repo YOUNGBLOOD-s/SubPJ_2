@@ -1,4 +1,4 @@
-create database yb_travel;
+# create database yb_travel;
 use yb_travel;
 
 -- member table
