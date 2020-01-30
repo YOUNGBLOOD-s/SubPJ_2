@@ -6,8 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styled from 'styled-components';
 import TitleBar from './TitleBar';
-import AirplanemodeActiveIcon from '@material-ui/icons/AirplanemodeActive';
-import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import DayRouteDetail from './DayRouteDetail';
 
 const TravleRouteBlock = styled.div`
   margin: 1rem;
@@ -18,38 +19,48 @@ const StyledDay = styled.span`
   font-weight: bold;
 `;
 
-const TravelIcons = ({ type }) => {
-  if (type === '비행기') {
-    return <AirplanemodeActiveIcon />;
-  } else if (type === '버스') {
-    return <AirportShuttleIcon />;
-  } else {
-    return null;
-  }
-};
-
 const TravelRoute = ({ routes }) => {
-  console.log(routes);
+  const [newRoutes, setNewRoutes] = useState(null);
+
+  useEffect(() => {
+    let new_nation = {};
+    for (let route of routes) {
+      if (new_nation[route.day]) {
+        new_nation[route.day].push(route);
+      } else {
+        new_nation[route.day] = [route];
+      }
+    }
+    setNewRoutes(new_nation);
+  }, [routes]);
+
   return (
     <TravleRouteBlock>
       <TitleBar text="여행 경로" />
-      {routes.map(({ nation, day, seq, title, detail, image, tofrom }, idx) => (
-        <ExpansionPanel key={idx}>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>
-              {/* <TravelIcons type={transport} /> */}
-              <StyledDay>{day} 일차</StyledDay> {tofrom}
-            </Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography varient="body1">{detail}</Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      ))}
+      {newRoutes ? (
+        Object.keys(newRoutes).map(day => {
+          const dayRoutes = newRoutes[day];
+          return (
+            <ExpansionPanel key={day}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>
+                  <StyledDay>{day} 일차</StyledDay>
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <DayRouteDetail dayRoutes={dayRoutes} />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          );
+        })
+      ) : (
+        // STYLE: 깔끔한 컴포넌트로 바꿀것
+        <div>loading...</div>
+      )}
     </TravleRouteBlock>
   );
 };

@@ -27,7 +27,7 @@ const BasicInformation = ({ country }) => {
   return (
     <BasicInformationBlock>
       <ImageWrapper>
-        {/* TODO: 썸네일 제대로 받아지면 이미지 변경 */}
+        {/* FIXME: 썸네일 제대로 받아지면 이미지 변경 */}
         <StyledImg
           src={
             'https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80'

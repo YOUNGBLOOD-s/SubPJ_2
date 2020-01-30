@@ -28,7 +28,6 @@ const DetailPage = ({ match }) => {
         setCountry(data); // 나라 설정
       })
       .catch(err => console.log(err));
-    // TODO: 가져온 정보 잘 가공하기
     setLoading(false);
   }, [id]);
 
