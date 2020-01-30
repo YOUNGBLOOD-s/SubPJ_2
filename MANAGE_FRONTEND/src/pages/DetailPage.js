@@ -22,7 +22,7 @@ const DetailPage = ({ match }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://192.168.100.66:9090/api/detail/${id}`)
+      .get(`http://192.168.100.66:8887/api/detail/${id}`)
       .then(res => {
         const { data } = res;
         setCountry(data); // 나라 설정

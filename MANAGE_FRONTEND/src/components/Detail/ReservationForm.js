@@ -8,7 +8,7 @@ import {
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TitleBar from './TitleBar';
-import component from '../../lib/component';
+import component from '../../lib/material/component';
 
 const ReservationFormBlock = styled.div`
   padding: 1rem;

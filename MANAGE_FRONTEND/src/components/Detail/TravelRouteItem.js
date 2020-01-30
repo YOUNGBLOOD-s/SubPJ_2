@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AirplanemodeActiveIcon from '@material-ui/icons/AirplanemodeActive';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
-import component from '../../lib/component/index';
+import component from '../../lib/material/component';
 
 const TravelIcons = ({ type }) => {
   if (type === '비행기') {
@@ -16,7 +16,7 @@ const TravelIcons = ({ type }) => {
   }
 };
 
-const DayRouteBlock = styled.div`
+const TravelRouteItemBlock = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +30,7 @@ const RouteImage = styled.img`
 
 const ToFromText = styled(component.Typography)``;
 
-const DayRouteDetail = ({ dayRoutes }) => {
+const TravelRouteItem = ({ dayRoutes }) => {
   console.log(dayRoutes);
   // FIXME: 나중에 이미지 넣어지면 경로를 dayRoutes에서 받는걸로 수정할것
   const image =
@@ -38,7 +38,7 @@ const DayRouteDetail = ({ dayRoutes }) => {
   return (
     <div>
       {dayRoutes.map(({ seq, title, detail, transport, tofrom }) => (
-        <DayRouteBlock key={seq}>
+        <TravelRouteItemBlock key={seq}>
           {/* NOTICE: title과 detail이 같은 경우는 경유지? 같은느낌 */}
           {title === detail ? (
             <>
@@ -57,10 +57,10 @@ const DayRouteDetail = ({ dayRoutes }) => {
               <RouteImage src={image} alt="경로별 이미지" />
             </>
           )}
-        </DayRouteBlock>
+        </TravelRouteItemBlock>
       ))}
     </div>
   );
 };
 
-export default DayRouteDetail;
+export default TravelRouteItem;

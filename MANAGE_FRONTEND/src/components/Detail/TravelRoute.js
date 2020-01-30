@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import TitleBar from './TitleBar';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import DayRouteDetail from './DayRouteDetail';
+import TravelRouteItem from './TravelRouteItem';
 
 const TravleRouteBlock = styled.div`
   margin: 1rem;
@@ -52,7 +52,7 @@ const TravelRoute = ({ routes }) => {
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <DayRouteDetail dayRoutes={dayRoutes} />
+                <TravelRouteItem dayRoutes={dayRoutes} />
               </ExpansionPanelDetails>
             </ExpansionPanel>
           );
