@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
+import com.yb.rest.vo.Route;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
@@ -46,7 +47,7 @@ public class AdDaoImpl implements IAdDao {
 	}
 
 	@Override
-	public List<QRcode> getRoutes(int idx) {
+	public List<Route> getRoutes(int idx) {
 		return session.selectList("sendtofront.selectroutelist", idx);
 	}
 
@@ -72,13 +73,11 @@ public class AdDaoImpl implements IAdDao {
 
 	@Override
 	public Sensor selectData(int idx) {
-		// TODO Auto-generated method stub
 		return session.selectOne("sensor.selectData", idx);
 	}
 
 	@Override
 	public void updateType(ForScore forScore) {
-		// TODO Auto-generated method stub
 		session.update("sensor.photoType",forScore);
 	}
 
@@ -86,4 +85,6 @@ public class AdDaoImpl implements IAdDao {
 	public int getType(int idx) {
 		return session.selectOne("sensor.selectType", idx);
 	}
+
+	
 }
