@@ -301,7 +301,7 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 
 
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(4, 1, 1, '테살로니키', '테살로니키 시티투어', 'null', '인천공항에서 그리스공항', '버스');
+	values(4, 1, 1, '테살로니키', '테살로니키 시티투어', 'null', '인천공항에서 그리스공항', '비행기');
 
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
 	values(4, 2, 1, '메테오라 수도원', '웅장함이 살아있는 메테오라 수도원 관광', 'null', '테살로니키에서 메테오라수도원', '버스');
@@ -479,7 +479,7 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 	values(13, 1, 1, '칭키스칸기마상', '몽골의 랜드마크이자, 칭키스칸의 고향을 바라보며 서있는 동상', 'null', '인천국제공항에서 몽골', '비행기');
 
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(13, 1, 1, '테렐지 국립공원', '아름다운 초원과 기암괴석이 있는 테렐지 국립공원', 'null', '칭키스칸기마상에서 테렐지 국립공원', '차량');
+	values(13, 1, 2, '테렐지 국립공원', '아름다운 초원과 기암괴석이 있는 테렐지 국립공원', 'null', '칭키스칸기마상에서 테렐지 국립공원', '차량');
 
 
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
