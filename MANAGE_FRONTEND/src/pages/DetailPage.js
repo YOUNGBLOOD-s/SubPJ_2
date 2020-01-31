@@ -13,8 +13,7 @@ const DetailPageWrapper = styled.div`
   margin: 0 auto;
 `;
 
-// TODO: 다시 오는 API 정보들로 재구성
-const DetailPage = ({ match }) => {
+const DetailPage = ({ match, history }) => {
   const { id } = match.params;
   const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -28,11 +27,13 @@ const DetailPage = ({ match }) => {
         setCountry(data); // 나라 설정
       })
       .catch(err => {
-        //TODO: 에러처리 해주세요
-        console.log(err, '에러에러');
+        const { status } = err.response;
+        if (status === 404) {
+          history.push('/');
+        }
       });
     setLoading(false);
-  }, [id]);
+  }, [id, history]);
 
   return (
     <>
@@ -42,7 +43,7 @@ const DetailPage = ({ match }) => {
           <DetailPageWrapper>
             <TravelRoute routes={country.routes} />
             {/* <CautionText category={country.category} /> */}
-            <ReservationForm />
+            <ReservationForm nationId={country.id} />
             <KakaoChat />
           </DetailPageWrapper>
         </div>
