@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
 body {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box; /* 엘리먼트의 box-sizing 값을 border-box로 설정 */
   min-height: 100%;
-  background-color: #fafafa;
+  background-color: #ffffff;
 }
 
 #root {
