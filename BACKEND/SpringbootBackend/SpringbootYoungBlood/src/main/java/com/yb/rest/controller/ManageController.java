@@ -40,12 +40,10 @@ public class ManageController {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
+			int customer = ser.getIdx(username);
+			System.out.println(customer);
 			
-			//admin의 idx를 가져올게요.
-			//int customer = ser.getIdx(username);
-			
-			
-			//????
+			//리스트 뽑아오면 됨
 			
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch(Exception e) {
@@ -56,8 +54,70 @@ public class ManageController {
 	}
 	
 	/** 사용자 상품 등록 */
+	@GetMapping("/man/insert")
+	public ResponseEntity<Map<String, Object>> insertProduct(@RequestHeader(value="Authorization") String token) {
+		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+		try {
+			Claims de = MemberController.verification(token);
+			msg.put("username", de.get("username"));
+			String username = (String) de.get("username");
+			int customer = ser.getIdx(username);
+			System.out.println(customer);
+			
+			//상품 등록 하면 됨
+			
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		} catch(Exception e) {
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		}
+		
+		return res;
+	}
+	
 	
 	/** 사용자 상품 삭제 */
+	@GetMapping("/man/del")
+	public ResponseEntity<Map<String, Object>> deleteProduct(@RequestHeader(value="Authorization") String token) {
+		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+		try {
+			Claims de = MemberController.verification(token);
+			msg.put("username", de.get("username"));
+			String username = (String) de.get("username");
+			int customer = ser.getIdx(username);
+			System.out.println(customer);
+			
+			//상품 삭제하면 됨
+			
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		} catch(Exception e) {
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		}
+		return res;
+	}
 	
 	/** 사용자 상품 수정 */
+	@GetMapping("/man/update")
+	public ResponseEntity<Map<String, Object>> deleteUpdate(@RequestHeader(value="Authorization") String token) {
+		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+		try {
+			Claims de = MemberController.verification(token);
+			msg.put("username", de.get("username"));
+			String username = (String) de.get("username");
+			int customer = ser.getIdx(username);
+			System.out.println(customer);
+			
+			//상품 수정하면 됨
+			
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		} catch(Exception e) {
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		}
+		return res;
+	}
 }
