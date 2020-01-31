@@ -32,13 +32,14 @@ create table monthtb(
 );
 desc monthtb;
 
+DROP TABLE CONTENTSTB;
 -- 경로 및 상세정보 table
 create table contentstb (
 	idx int auto_increment primary key,
     nation int,
     day int,
     seq int,
-    title varchar(50),
+    title varchar(50) UNIQUE,
     detail varchar(10000),
     image varchar(500),
     tofrom varchar(50),
@@ -53,7 +54,7 @@ select * from imagetb;
 create table imagetb (
 	idx int auto_increment primary key,
     nation int,
-    type int,
+    type int UNIQUE,
     url varchar(500),
     foreign key (nation) references nationtb(idx)
 );
@@ -73,11 +74,11 @@ desc adboardtb;
 -- 1:1 상담 테이블
 create table counseltb (
 	idx int auto_increment primary key,
-    name varchar(20),
-    age int,
-    email varchar(100),
-    tel varchar(100),
-    date varchar(100),
+    name varchar(20) NOT NULL,
+    age int NOT NULL,
+    email varchar(100) NOT NULL,
+    tel varchar(100) NOT NULL,
+    date varchar(100) NOT NULL,
     text varchar(1000)
 );
 desc counseltb;

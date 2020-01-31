@@ -1,4 +1,7 @@
+# 등록된 데이터는 80개 입니다.
+
 use yb_travel;
+select * from imagetb;
 
 -- 독일
 insert into imagetb(nation, type, url)
