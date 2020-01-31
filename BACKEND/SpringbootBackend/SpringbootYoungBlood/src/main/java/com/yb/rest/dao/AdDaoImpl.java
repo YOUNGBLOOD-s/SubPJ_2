@@ -86,5 +86,20 @@ public class AdDaoImpl implements IAdDao {
 		return session.selectOne("sensor.selectType", idx);
 	}
 
+	@Override
+	public void updateClickcnt(int idx) {
+		session.update("sendtofront.updateClickcnt", idx);
+	}
+
+	@Override
+	public void updateShowcnt(int idx) {
+		session.update("sendtofront.updateShowcnt", idx);
+	}
+
+	@Override
+	public Nation getNationdetail(int idx) {
+		return session.selectOne("sendtofront.selectNationall", idx);
+	}
+
 	
 }

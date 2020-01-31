@@ -2,10 +2,10 @@ package com.yb.rest.vo;
 
 public class Nation {
 	private String idx, name, dust, continents, clickcnt, showcnt, customer, weight, speech, price, type;
-	private String url, transport;
+	private String url;
 	public Nation() {}
 	public Nation(String idx, String name, String dust, String continents, String clickcnt, String showcnt,
-			String customer, String weight, String speech, String price, String type, String url, String transport) {
+			String customer, String weight, String speech, String price, String type, String url) {
 		this.idx = idx;
 		this.name = name;
 		this.dust = dust;
@@ -18,7 +18,6 @@ public class Nation {
 		this.price = price;
 		this.type = type;
 		this.url = url;
-		this.transport = transport;
 	}
 	public String getIdx() {
 		return idx;
@@ -92,18 +91,12 @@ public class Nation {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getTransport() {
-		return transport;
-	}
-	public void setTransport(String transport) {
-		this.transport = transport;
-	}
-	
+
 	@Override
 	public String toString() {
 		return "Nation [idx=" + idx + ", name=" + name + ", dust=" + dust + ", continents=" + continents + ", clickcnt="
 				+ clickcnt + ", showcnt=" + showcnt + ", customer=" + customer + ", weight=" + weight + ", speech="
-				+ speech + ", price=" + price + ", type=" + type + ", url=" + url + ", transport=" + transport + "]";
+				+ speech + ", price=" + price + ", type=" + type + ", url=" + url + "]";
 	};
 	
 }

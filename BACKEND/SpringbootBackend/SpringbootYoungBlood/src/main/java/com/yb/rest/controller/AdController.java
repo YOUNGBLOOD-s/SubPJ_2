@@ -48,17 +48,15 @@ public class AdController {
 
     /**
      * 센서값을 받는다.
-     * 
      * @throws JsonProcessingException
      */
     @GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
-    public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light,
-            @PathVariable String dust) throws JsonProcessingException {
-        float tmp = Float.parseFloat(temp);
+    public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light, @PathVariable String dust) throws JsonProcessingException {
+    	float tmp = Float.parseFloat(temp);
         float hu = Float.parseFloat(hum);
         float dus = Float.parseFloat(dust);
         float lig = Float.parseFloat(light);
-        System.out.println("온도: " + tmp + "습도: " + hum + "미세먼지: " + dus);
+        System.out.println("온도: "+tmp+"습도: "+hum+"미세먼지: "+dus);
         Sensor sen = new Sensor(tmp, hu, dus, lig);
         System.out.println("==============");
         System.out.println("안녕하세요. 센서값을 전광판으로부터 받았습니다. 받은 정보는 다음과 같습니다.");
@@ -71,7 +69,7 @@ public class AdController {
         System.out.println("==============");
         System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
         System.out.println("==============");
-        Sensor sen = ser.selectData(1);
+    	Sensor sen = ser.selectData(1);
         float tmp = sen.getTemp();
         float hu = sen.getHumid();
         float dus = sen.getDust();
@@ -155,8 +153,6 @@ public class AdController {
         for (int j = 0; j < nations.size(); j++) {
             int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
             ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
-            // System.out.println("온도 이후 : " + nations.get(j).getIdx() + " " +
-            // ser.getScore(nations.get(j).getIdx()));
         }
         // 습도: 오름차순으로, 5개 묶음으로 -10,-20... 점수 할당(즉, 습도 높을수록 점수 깎이는거야)
         Collections.sort(nations, new Comparator<Sensor>() {
@@ -207,11 +203,10 @@ public class AdController {
         return nation;
     }
 
-    /**
-     * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
-     * 
-     * @throws JsonProcessingException
-     */
+	/**
+	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
+	 * @throws JsonProcessingException
+	 */
     @GetMapping("/sensor/reco")
     public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
 
@@ -227,7 +222,6 @@ public class AdController {
 
         for (int idx = 0; idx < nation.size(); idx++) {
             int nationId = nation.get(idx);
-            System.out.println(nationId);
             int type = ser.getType(nationId);
             List<String> imgs = ser.getImgs(nationId);
             List<String> modalContents = ser.getModalcontents(nationId);
@@ -255,7 +249,7 @@ public class AdController {
 
             for (int j = 0; j < imgs.size(); j++) {
                 Map<String, Object> d = new HashMap<String, Object>();
-                d.put("id", stf.getIdx());
+                d.put("id", j);
                 d.put("name", stf.getName());
                 d.put("price", stf.getPrice());
                 d.put("img", imgs.get(j));
@@ -324,106 +318,162 @@ public class AdController {
         re = new ResponseEntity<>(result, HttpStatus.OK);
         return re;
     }
-
+	
+	/** 나라 상세정보 조회 */
     @GetMapping("/detail/{id}")
     public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(@PathVariable String id) {
-
+        
         System.out.println("==============");
-        System.out.println("안녕하세요. 고객님이 요청하신 " + id + "번호에 해당하는 나라 상세정보를 조회해드릴게요.");
-
-        ResponseEntity<Map<String, Object>> re = null;
+        System.out.println("안녕하세요. 고객님이 요청하신 "+id+"번호에 해당하는 나라 상세정보를 조회해드릴게요.");
+    	ResponseEntity<Map<String, Object>> re = null;
         Map<String, Object> result = null;
         try {
-            int idx = Integer.parseInt(id);
-            result = new HashMap<>();
-            List<Route> routelist = ser.getRoutes(idx);
-            Map<String, Integer> map = new HashMap<String, Integer>();
-            map.put("nationidx", idx);
-            map.put("type", ser.getType(idx));
-            Nation nation = ser.getNationdetail(map);
-            Sendtofront stf = ser.getInfo(map);
-            SimpleDateFormat monthformat = new SimpleDateFormat("MM");
-            Date time = new Date();
-            int month = Integer.parseInt(monthformat.format(time));
-            switch (month) {
-            case 1:
-                result.put("temp", stf.getTem1());
-                result.put("humid", stf.getHum1());
-                break;
-            case 2:
-                result.put("temp", stf.getTem2());
-                result.put("humid", stf.getHum2());
-                break;
-            case 3:
-                result.put("temp", stf.getTem3());
-                result.put("humid", stf.getHum3());
-                break;
-            case 4:
-                result.put("temp", stf.getTem4());
-                result.put("humid", stf.getHum4());
-                break;
-            case 5:
-                result.put("temp", stf.getTem5());
-                result.put("humid", stf.getHum5());
-                break;
-            case 6:
-                result.put("temp", stf.getTem6());
-                result.put("humid", stf.getHum6());
-                break;
-            case 7:
-                result.put("temp", stf.getTem7());
-                result.put("humid", stf.getHum7());
-                break;
-            case 8:
-                result.put("temp", stf.getTem8());
-                result.put("humid", stf.getHum8());
-                break;
-            case 9:
-                result.put("temp", stf.getTem9());
-                result.put("humid", stf.getHum9());
-                break;
-            case 10:
-                result.put("temp", stf.getTem10());
-                result.put("humid", stf.getHum10());
-                break;
-            case 11:
-                result.put("temp", stf.getTem11());
-                result.put("humid", stf.getHum11());
-                break;
-            case 12:
-                result.put("temp", stf.getTem12());
-                result.put("humid", stf.getHum12());
-                break;
-            }
-
-            // send to front
-            result.put("id", nation.getIdx());
-            result.put("name", nation.getName());
-            result.put("dust", nation.getDust());
-            result.put("clickcnt", nation.getClickcnt());
-            result.put("showcnt", nation.getShowcnt());
-            result.put("customer", nation.getCustomer());
-            result.put("weight", nation.getWeight());
-            result.put("speech", nation.getSpeech());
-            result.put("type", nation.getType());
-            result.put("thumbnail", nation.getUrl());
-            result.put("price", nation.getPrice());
-            if (nation.getContinents().equals("1")) {
-                result.put("category", "Europe");
-            } else if (nation.getContinents().equals("2")) {
-                result.put("category", "Africa");
-            } else if (nation.getContinents().equals("3")) {
-                result.put("category", "Asia");
-            } else {
-                result.put("category", "North America");
-            }
-            result.put("routes", routelist);
-            re = new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (Exception e) {
-            re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
-        }
-        System.out.println("전달이 완료됐습니다. 안녕히가세요!");
-        System.out.println("==============");
-        return re;
+        	int idx = Integer.parseInt(id);
+        	result = new HashMap<>();
+        	List<Route> routelist = ser.getRoutes(idx);
+        	Map<String, Integer> map = new HashMap<String, Integer>();
+        	map.put("nationidx", idx);
+        	map.put("type", ser.getType(idx));
+        
+        	Nation nation = ser.getNationdetail(map);
+        	Sendtofront stf = ser.getInfo(map);
+        	
+        	SimpleDateFormat monthformat = new SimpleDateFormat("MM");
+        	Date time = new Date();
+        	int month = Integer.parseInt(monthformat.format(time));
+        	switch (month) {
+        		case 1:
+        			result.put("temp", stf.getTem1());
+        			result.put("humid", stf.getHum1());
+        			break;
+        		case 2:
+        			result.put("temp", stf.getTem2());
+        			result.put("humid", stf.getHum2());
+        			break;
+        		case 3:
+        			result.put("temp", stf.getTem3());
+        			result.put("humid", stf.getHum3());
+        			break;
+        		case 4:
+        			result.put("temp", stf.getTem4());
+        			result.put("humid", stf.getHum4());
+        			break;
+        		case 5:
+        			result.put("temp", stf.getTem5());
+        			result.put("humid", stf.getHum5());
+        			break;
+        		case 6:
+        			result.put("temp", stf.getTem6());
+        			result.put("humid", stf.getHum6());
+        			break;
+        		case 7:
+        			result.put("temp", stf.getTem7());
+        			result.put("humid", stf.getHum7());
+        			break;
+        		case 8:
+        			result.put("temp", stf.getTem8());
+        			result.put("humid", stf.getHum8());
+        			break;
+        		case 9:
+        			result.put("temp", stf.getTem9());
+        			result.put("humid", stf.getHum9());
+        			break;
+        		case 10:
+        			result.put("temp", stf.getTem10());
+        			result.put("humid", stf.getHum10());
+        			break;
+        		case 11:
+        			result.put("temp", stf.getTem11());
+        			result.put("humid", stf.getHum11());
+        			break;
+        		case 12:
+        			result.put("temp", stf.getTem12());
+        			result.put("humid", stf.getHum12());
+        			break;
+        	}
+        
+        	// send to front
+        	result.put("id", nation.getIdx());
+        	result.put("name", nation.getName());
+        	result.put("dust", nation.getDust());
+        	result.put("clickcnt", nation.getClickcnt());
+        	result.put("showcnt", nation.getShowcnt());
+        	result.put("customer", nation.getCustomer());
+        	result.put("weight", nation.getWeight());
+        	result.put("speech", nation.getSpeech());
+        	result.put("type", nation.getType());
+        	result.put("thumbnail", nation.getUrl());
+        	result.put("price", nation.getPrice());
+        	if (nation.getContinents().equals("1")) {
+        		result.put("category", "Europe");
+        	} else if (nation.getContinents().equals("2")) {
+        		result.put("category", "Africa");
+        	} else if (nation.getContinents().equals("3")) {
+        		result.put("category", "Asia");
+        	} else {
+        		result.put("category", "North America");
+        	}
+        	result.put("routes", routelist);
+        	re = new ResponseEntity<>(result, HttpStatus.OK);
+    	} catch(Exception e) {
+    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
+        
+       	System.out.println("전달이 완료됐습니다. 안녕히가세요!");
+       	System.out.println("==============");
+       	return re;
+    }
+    
+    /** 클릭 요청 시 카운팅하는 메소드 */
+    @GetMapping("/click/{id}")
+    public @ResponseBody ResponseEntity<Map<String, Object>> updateclick(@PathVariable String id) {
+    	ResponseEntity<Map<String, Object>> re = null;
+    	Map<String, Object> result = null;
+    	try {
+    		int idx = Integer.parseInt(id);
+    		ser.updateClickcnt(idx);
+    		re = new ResponseEntity<>(result, HttpStatus.OK);
+    	} catch(Exception e) {
+    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
+    	return re;
+    }
+    
+    public void updateshowcnt(List<Integer> nation) {
+    	for(int i=0; i<nation.size(); i++) {
+    		int idx = nation.get(i);
+    		ser.updateShowcnt(idx);
+    	}
+    }
+    
+    /** 나라 전체 정보를 보내는 메소드 */
+    @GetMapping("/all")
+    public @ResponseBody ResponseEntity<Map<String, Object>> selectAllnationdetail() {
+    	ResponseEntity<Map<String, Object>> re = null;
+    	Map<String, Object> result = new HashMap<String, Object>();
+    	List<Map<String, Object>> Countrylist = new LinkedList<>();
+    	
+    	for(int idx=2; idx<=20; idx++) {	
+    		Map<String, Object> con = new HashMap<String, Object>();
+    		Nation nation = ser.getNationdetail(idx);
+    		
+    		con.put("idx", nation.getIdx());
+    		con.put("name", nation.getName());
+    		con.put("dust", nation.getDust());
+    		con.put("continents", nation.getContinents());
+    		con.put("clickcnt", nation.getClickcnt());
+    		con.put("showcnt", nation.getShowcnt());
+    		con.put("customer", nation.getCustomer());
+    		con.put("weight", nation.getWeight());
+    		con.put("speech", nation.getSpeech());
+    		con.put("price", nation.getPrice());
+    		con.put("type", nation.getType());
+    		
+    		Countrylist.add(con);
+    	}
+    	
+    	result.put("AllNationDatas", Countrylist);
+    	re = new ResponseEntity<>(result, HttpStatus.OK);
+    	return re;
     }
 }
