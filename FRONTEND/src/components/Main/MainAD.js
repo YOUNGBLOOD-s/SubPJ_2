@@ -93,7 +93,8 @@ const MainAD = () => {
   };
 
   useEffect(() => {
-    Axios.get('http://52.78.218.79:8887/api/sensor/reco')
+    // Axios.get('http://52.78.218.79:8887/api/sensor/reco')
+    Axios.get('http://192.168.100.66:8887/api/sensor/reco') // test backend
       .then(res => {
         setDatas(res.data.datas);
       })

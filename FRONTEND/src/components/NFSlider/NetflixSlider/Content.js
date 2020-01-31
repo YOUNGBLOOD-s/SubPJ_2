@@ -4,30 +4,34 @@ import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import OpacityIcon from '@material-ui/icons/Opacity';
 import styled from 'styled-components';
 
-const Content = ({ data, onClose }) => {
+const Content = ({ detail, onClose }) => {
   const Weather = styled.h2`
     color: white;
   `;
+  console.log(detail); // debug
   return (
     <div className="content">
       <div className="content__background">
         <div className="content__background__shadow" />
         <div
           className="content__background__image"
-          style={{ backgroundImage: `url(${data.img})` }}
+          // style={{ backgroundImage: `url(${detail.img})` }}
+          style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/static/img/코타키나발루.jpg)`,
+          }}
         />
       </div>
       <div className="content__area">
         <div className="content__area__container">
-          <div className="content__title">{data.name}</div>
+          <div className="content__title">{detail.name}</div>
           <div className="content__description">
             <Weather>
-              <WbSunnyIcon /> {{data.temp}}&deg;C&nbsp;&nbsp;&nbsp;
+              <WbSunnyIcon /> {detail.temp}&deg;C&nbsp;&nbsp;&nbsp;
             </Weather>
             <Weather>
-              <OpacityIcon /> {{data.humid}} %
+              <OpacityIcon /> {detail.humid} %
             </Weather>
-            {{data.content}}
+            {detail.content}
           </div>
         </div>
         {/* <button className="content__close" onClick={onClose}>
