@@ -10,9 +10,10 @@ import styled from 'styled-components';
 import TitleBar from './TitleBar';
 import component from '../../lib/material/component';
 import MaterialCard from '../common/MaterialCard';
+import axios from 'axios';
 
 const ReservationFormBlock = styled.div`
-  padding: 1rem;
+  padding: 1rem 0.5rem;
 `;
 
 const FieldWrapper = styled.div`
@@ -64,7 +65,6 @@ const ReservationForm = () => {
   const [form, setForm] = useState(initialState.form);
   const [isReserved, setIsReserved] = useState(false);
   const [error, setError] = useState(initialState.error);
-
   const onChange = e => {
     const { name, value } = e.target;
     setForm({
@@ -87,11 +87,26 @@ const ReservationForm = () => {
       setError({ ...error, email: true });
       return;
     }
-
+    console.log(form);
     // TODO: form axios 요청
+    const now = new Date(form.date);
+    const reform_date = `${now.getFullYear()}-${now.getMonth() +
+      1}-${now.getDate()}`;
+    console.log(reform_date);
+    axios
+      .post('/api/counsel', {
+        name: form.name,
+        email: form.email,
+        tel: form.tel,
+        age: form.age,
+        date: reform_date,
+        text: form.text,
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
 
     // 모든 검증이 완료되고 요청을 보내고 완료되면 예약 상태를 true로 변경
-    console.log(form);
+
     setIsReserved(true);
   };
 

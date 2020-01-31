@@ -9,16 +9,18 @@ import palette from '../../lib/styles/palette';
 import component from '../../lib/material/component';
 
 const TravelIcons = ({ type }) => {
+  const IconStyle = { color: palette.theme };
+
   if (type === '비행기' || type === '경비행기') {
-    return <FlightTakeoffOutlinedIcon style={{ color: palette.theme }} />;
+    return <FlightTakeoffOutlinedIcon style={IconStyle} />;
   } else if (type === '버스') {
-    return <AirportShuttleOutlinedIcon style={{ color: palette.theme }} />;
+    return <AirportShuttleOutlinedIcon style={IconStyle} />;
   } else if (type === '기차') {
-    return <TrainOutlinedIcon style={{ color: palette.theme }} />;
+    return <TrainOutlinedIcon style={IconStyle} />;
   } else if (type === '차량') {
-    return <DirectionsCarOutlinedIcon style={{ color: palette.theme }} />;
+    return <DirectionsCarOutlinedIcon style={IconStyle} />;
   } else if (type === '유람선' || type === '배') {
-    return <DirectionsBoatOutlinedIcon style={{ color: palette.theme }} />;
+    return <DirectionsBoatOutlinedIcon style={IconStyle} />;
   } else {
     return null;
   }
@@ -34,17 +36,49 @@ const RouteImage = styled.img`
   border-radius: 5px;
 `;
 
+const ToFromWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
+
 const ToFromText = styled.div`
   font-family: 'Nanum Myeongjo', serif;
-  /* margin: 0.5rem 0; */
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
-  text-align: center;
+`;
+
+const IconWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const DetailText = styled.div`
-  text-align: cetner;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.8rem;
+  color: ${palette.grey[500]};
 `;
+
+const BarContainer = styled.div`
+  height: 100%;
+`;
+
+const Bar = styled.div`
+  height: 100%;
+  width: 0;
+  margin: 0 auto;
+  border-left: 1px dashed ${palette.grey[400]};
+`;
+
+const DottedBar = () => (
+  <BarContainer>
+    <Bar />
+  </BarContainer>
+);
 
 const TravelRouteItem = ({ dayRoutes }) => {
   console.log(dayRoutes);
@@ -55,49 +89,30 @@ const TravelRouteItem = ({ dayRoutes }) => {
     <div>
       {dayRoutes.map(({ seq, title, detail, transport, tofrom }) => (
         <GridContainer container key={seq} spacing={1}>
-          {/* NOTICE: title과 detail이 같은 경우는 경유지? 같은느낌 */}
-          {title === detail ? (
-            <>
-              <GridItem item xs={1}>
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <TravelIcons type={transport} />
-                </div>
-              </GridItem>
-              <GridItem item xs={11}>
-                <ToFromText>{tofrom}까지</ToFromText>
-              </GridItem>
-              <GridItem item xs={1}>
-                ...
-              </GridItem>
-              <GridItem item xs={11}>
-                <div>
-                  <RouteImage src={image} alt="경로별 이미지" />
-                </div>
-              </GridItem>
-            </>
-          ) : (
-            <>
-              <GridItem item xs={1}>
-                <TravelIcons type={transport} />
-              </GridItem>
-              <GridItem item xs={11}>
-                <ToFromText>{tofrom}까지</ToFromText>
-              </GridItem>
-              <GridItem item xs={1}>
-                ...
-              </GridItem>
-              <GridItem item xs={11}>
-                <component.Grid container>
-                  <component.Grid item xs={12}>
-                    <RouteImage src={image} alt="경로별 이미지" />
-                  </component.Grid>
-                  <component.Grid item xs={12}>
-                    <DetailText>{detail}</DetailText>
-                  </component.Grid>
-                </component.Grid>
-              </GridItem>
-            </>
-          )}
+          <GridItem item xs={1}>
+            <IconWrapper>
+              <TravelIcons type={transport} />
+            </IconWrapper>
+          </GridItem>
+          <GridItem item xs={11}>
+            <ToFromWrapper>
+              <ToFromText>{tofrom}까지</ToFromText>
+            </ToFromWrapper>
+          </GridItem>
+          <component.Grid item xs={1}>
+            <DottedBar />
+          </component.Grid>
+          <GridItem item xs={11}>
+            <component.Grid item xs={12}>
+              <RouteImage src={image} alt="경로별 이미지" />
+            </component.Grid>
+            {/* NOTICE: title과 detail이 같은 경우는 경유지? 같은느낌. 디테일 생략 */}
+            {title === detail ? null : (
+              <component.Grid item xs={12}>
+                <DetailText>{detail}</DetailText>
+              </component.Grid>
+            )}
+          </GridItem>
         </GridContainer>
       ))}
     </div>

@@ -9,11 +9,13 @@ import TitleBar from './TitleBar';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import TravelRouteItem from './TravelRouteItem';
-import palette from '../../lib/styles/palette';
 
 const TravleRouteBlock = styled.div`
-  margin: 1rem;
+  margin: 1rem 0.5rem;
   width: '100%';
+  .MuiExpansionPanelDetails-root {
+    padding: 8px 12px;
+  }
 `;
 
 const StyledDay = styled.span`
@@ -42,7 +44,7 @@ const TravelRoute = ({ routes }) => {
 
   return (
     <TravleRouteBlock>
-      <TitleBar text="여행 경로" />
+      <TitleBar text="🚵🏾‍♂️ 여행지 한눈에 보기" />
       {newRoutes ? (
         Object.keys(newRoutes).map(day => {
           const dayRoutes = newRoutes[day];
