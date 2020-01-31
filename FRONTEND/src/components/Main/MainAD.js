@@ -93,7 +93,7 @@ const MainAD = () => {
   };
 
   useEffect(() => {
-    Axios.get('http://192.168.100.66:9090/api/sensor/reco')
+    Axios.get('http://52.78.218.79:8887/api/sensor/reco')
       .then(res => {
         setDatas(res.data.datas);
       })
@@ -135,11 +135,7 @@ const MainAD = () => {
               </div>
             ))}
           </Carousel>
-          <FullScreenDialog
-            data={datas[pid - 1]}
-            setOpen={setOpen}
-            open={open}
-          />
+          <FullScreenDialog data={datas[pid]} setOpen={setOpen} open={open} />
         </>
       ) : (
         <LoadingBackdrop loading={true} />
