@@ -6,6 +6,7 @@ import java.util.Map;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.Route;
+import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
@@ -28,4 +29,5 @@ public interface IAdDao {
 	public int getType(int idx);
 	public void updateClickcnt(int idx);
 	public void updateShowcnt(int idx);
+	public void updateCounsel(Counsel counvalue);
 }

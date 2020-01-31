@@ -53,6 +53,13 @@
 	set showcnt=showcnt+1
 	where idx=#{idx}
 	</update>
+	
+	<insert id="insertCounvalue" parameterType="counsel">
+	insert into
+	counseltb(age, name, email, tel, date, text)
+	values(#{age},#{name},#{email},#{tel}, #{date}, #{text})
+	</insert>
+	
 
 </mapper>
  

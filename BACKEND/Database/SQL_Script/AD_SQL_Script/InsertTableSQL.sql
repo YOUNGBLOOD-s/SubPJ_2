@@ -69,3 +69,15 @@ create table adboardtb (
     info varchar(100)
 );
 desc adboardtb;
+
+-- 1:1 상담 테이블
+create table counseltb (
+	idx int auto_increment primary key,
+    name varchar(20),
+    age int,
+    email varchar(100),
+    tel varchar(100),
+    date varchar(100),
+    text varchar(1000)
+);
+desc counseltb;
