@@ -54,11 +54,11 @@ public class AdController {
     @GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
     public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light,
             @PathVariable String dust) throws JsonProcessingException {
-    	float tmp = Float.parseFloat(temp);
+        float tmp = Float.parseFloat(temp);
         float hu = Float.parseFloat(hum);
         float dus = Float.parseFloat(dust);
         float lig = Float.parseFloat(light);
-        System.out.println("온도: "+tmp+"습도: "+hum+"미세먼지: "+dus);
+        System.out.println("온도: " + tmp + "습도: " + hum + "미세먼지: " + dus);
         Sensor sen = new Sensor(tmp, hu, dus, lig);
         System.out.println("==============");
         System.out.println("안녕하세요. 센서값을 전광판으로부터 받았습니다. 받은 정보는 다음과 같습니다.");
@@ -71,7 +71,7 @@ public class AdController {
         System.out.println("==============");
         System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
         System.out.println("==============");
-    	Sensor sen = ser.selectData(1);
+        Sensor sen = ser.selectData(1);
         float tmp = sen.getTemp();
         float hu = sen.getHumid();
         float dus = sen.getDust();
@@ -207,18 +207,19 @@ public class AdController {
         return nation;
     }
 
-	/**
-	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
-	 * @throws JsonProcessingException
-	 */
-	@GetMapping("/sensor/reco")
-	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
+    /**
+     * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
+     * 
+     * @throws JsonProcessingException
+     */
+    @GetMapping("/sensor/reco")
+    public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
 
-		//가중치 계산 algorithm
-		List<Integer> nation = weightcal();
+        // 가중치 계산 algorithm
+        List<Integer> nation = weightcal();
         System.out.println("==============");
-		System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
-		System.out.println(nation);
+        System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
+        System.out.println(nation);
 
         ResponseEntity<Map<String, Object>> re = null;
         Map<String, Object> result = new HashMap<>();
@@ -250,10 +251,12 @@ public class AdController {
             Date time = new Date();
             int month = Integer.parseInt(monthformat.format(time));
 
-            Map<String, Object> d = new HashMap<String, Object>();
+            List<Map<String, Object>> detail = new LinkedList<>();
 
             for (int j = 0; j < imgs.size(); j++) {
+                Map<String, Object> d = new HashMap<String, Object>();
                 d.put("id", stf.getIdx());
+                d.put("name", stf.getName());
                 d.put("price", stf.getPrice());
                 d.put("img", imgs.get(j));
                 d.put("content", modalContents.get(j));
@@ -307,8 +310,10 @@ public class AdController {
                     d.put("humid", stf.getHum12());
                     break;
                 }
+                detail.add(d);
             }
-            data.put("details", d);
+
+            data.put("details", detail);
             Countrylist.add(data);
         }
 
@@ -322,101 +327,101 @@ public class AdController {
 
     @GetMapping("/detail/{id}")
     public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(@PathVariable String id) {
-        
+
         System.out.println("==============");
-        System.out.println("안녕하세요. 고객님이 요청하신 "+id+"번호에 해당하는 나라 상세정보를 조회해드릴게요.");
-        
-    	ResponseEntity<Map<String, Object>> re = null;
+        System.out.println("안녕하세요. 고객님이 요청하신 " + id + "번호에 해당하는 나라 상세정보를 조회해드릴게요.");
+
+        ResponseEntity<Map<String, Object>> re = null;
         Map<String, Object> result = null;
         try {
-        int idx = Integer.parseInt(id);
-        result = new HashMap<>();
-        List<Route> routelist = ser.getRoutes(idx);
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("nationidx", idx);
-        map.put("type", ser.getType(idx));
-        Nation nation = ser.getNationdetail(map);
-        Sendtofront stf = ser.getInfo(map);
-        SimpleDateFormat monthformat = new SimpleDateFormat("MM");
-        Date time = new Date();
-        int month = Integer.parseInt(monthformat.format(time));
-        switch (month) {
-        case 1:
-            result.put("temp", stf.getTem1());
-            result.put("humid", stf.getHum1());
-            break;
-        case 2:
-            result.put("temp", stf.getTem2());
-            result.put("humid", stf.getHum2());
-            break;
-        case 3:
-            result.put("temp", stf.getTem3());
-            result.put("humid", stf.getHum3());
-            break;
-        case 4:
-            result.put("temp", stf.getTem4());
-            result.put("humid", stf.getHum4());
-            break;
-        case 5:
-            result.put("temp", stf.getTem5());
-            result.put("humid", stf.getHum5());
-            break;
-        case 6:
-            result.put("temp", stf.getTem6());
-            result.put("humid", stf.getHum6());
-            break;
-        case 7:
-            result.put("temp", stf.getTem7());
-            result.put("humid", stf.getHum7());
-            break;
-        case 8:
-            result.put("temp", stf.getTem8());
-            result.put("humid", stf.getHum8());
-            break;
-        case 9:
-            result.put("temp", stf.getTem9());
-            result.put("humid", stf.getHum9());
-            break;
-        case 10:
-            result.put("temp", stf.getTem10());
-            result.put("humid", stf.getHum10());
-            break;
-        case 11:
-            result.put("temp", stf.getTem11());
-            result.put("humid", stf.getHum11());
-            break;
-        case 12:
-            result.put("temp", stf.getTem12());
-            result.put("humid", stf.getHum12());
-            break;
-        }
+            int idx = Integer.parseInt(id);
+            result = new HashMap<>();
+            List<Route> routelist = ser.getRoutes(idx);
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            map.put("nationidx", idx);
+            map.put("type", ser.getType(idx));
+            Nation nation = ser.getNationdetail(map);
+            Sendtofront stf = ser.getInfo(map);
+            SimpleDateFormat monthformat = new SimpleDateFormat("MM");
+            Date time = new Date();
+            int month = Integer.parseInt(monthformat.format(time));
+            switch (month) {
+            case 1:
+                result.put("temp", stf.getTem1());
+                result.put("humid", stf.getHum1());
+                break;
+            case 2:
+                result.put("temp", stf.getTem2());
+                result.put("humid", stf.getHum2());
+                break;
+            case 3:
+                result.put("temp", stf.getTem3());
+                result.put("humid", stf.getHum3());
+                break;
+            case 4:
+                result.put("temp", stf.getTem4());
+                result.put("humid", stf.getHum4());
+                break;
+            case 5:
+                result.put("temp", stf.getTem5());
+                result.put("humid", stf.getHum5());
+                break;
+            case 6:
+                result.put("temp", stf.getTem6());
+                result.put("humid", stf.getHum6());
+                break;
+            case 7:
+                result.put("temp", stf.getTem7());
+                result.put("humid", stf.getHum7());
+                break;
+            case 8:
+                result.put("temp", stf.getTem8());
+                result.put("humid", stf.getHum8());
+                break;
+            case 9:
+                result.put("temp", stf.getTem9());
+                result.put("humid", stf.getHum9());
+                break;
+            case 10:
+                result.put("temp", stf.getTem10());
+                result.put("humid", stf.getHum10());
+                break;
+            case 11:
+                result.put("temp", stf.getTem11());
+                result.put("humid", stf.getHum11());
+                break;
+            case 12:
+                result.put("temp", stf.getTem12());
+                result.put("humid", stf.getHum12());
+                break;
+            }
 
-        // send to front
-        result.put("id", nation.getIdx());
-        result.put("name", nation.getName());
-        result.put("dust", nation.getDust());
-        result.put("clickcnt", nation.getClickcnt());
-        result.put("showcnt", nation.getShowcnt());
-        result.put("customer", nation.getCustomer());
-        result.put("weight", nation.getWeight());
-        result.put("speech", nation.getSpeech());
-        result.put("type", nation.getType());
-        result.put("thumbnail", nation.getUrl());
-        result.put("price", nation.getPrice());
-        if (nation.getContinents().equals("1")) {
-            result.put("category", "Europe");
-        } else if (nation.getContinents().equals("2")) {
-            result.put("category", "Africa");
-        } else if (nation.getContinents().equals("3")) {
-            result.put("category", "Asia");
-        } else {
-            result.put("category", "North America");
+            // send to front
+            result.put("id", nation.getIdx());
+            result.put("name", nation.getName());
+            result.put("dust", nation.getDust());
+            result.put("clickcnt", nation.getClickcnt());
+            result.put("showcnt", nation.getShowcnt());
+            result.put("customer", nation.getCustomer());
+            result.put("weight", nation.getWeight());
+            result.put("speech", nation.getSpeech());
+            result.put("type", nation.getType());
+            result.put("thumbnail", nation.getUrl());
+            result.put("price", nation.getPrice());
+            if (nation.getContinents().equals("1")) {
+                result.put("category", "Europe");
+            } else if (nation.getContinents().equals("2")) {
+                result.put("category", "Africa");
+            } else if (nation.getContinents().equals("3")) {
+                result.put("category", "Asia");
+            } else {
+                result.put("category", "North America");
+            }
+            result.put("routes", routelist);
+            re = new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
-        result.put("routes", routelist);
-        re = new ResponseEntity<>(result, HttpStatus.OK);
-    	} catch(Exception e) {
-    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
-    	}
         System.out.println("전달이 완료됐습니다. 안녕히가세요!");
         System.out.println("==============");
         return re;
