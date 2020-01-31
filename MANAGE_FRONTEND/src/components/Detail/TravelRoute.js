@@ -9,6 +9,7 @@ import TitleBar from './TitleBar';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import TravelRouteItem from './TravelRouteItem';
+import palette from '../../lib/styles/palette';
 
 const TravleRouteBlock = styled.div`
   margin: 1rem;
@@ -17,6 +18,11 @@ const TravleRouteBlock = styled.div`
 
 const StyledDay = styled.span`
   font-weight: bold;
+  font-family: 'Nanum Myeongjo', serif;
+`;
+
+const StyledPanel = styled(ExpansionPanel)`
+  background-color: white;
 `;
 
 const TravelRoute = ({ routes }) => {
@@ -41,7 +47,7 @@ const TravelRoute = ({ routes }) => {
         Object.keys(newRoutes).map(day => {
           const dayRoutes = newRoutes[day];
           return (
-            <ExpansionPanel key={day}>
+            <StyledPanel key={day}>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -54,7 +60,7 @@ const TravelRoute = ({ routes }) => {
               <ExpansionPanelDetails>
                 <TravelRouteItem dayRoutes={dayRoutes} />
               </ExpansionPanelDetails>
-            </ExpansionPanel>
+            </StyledPanel>
           );
         })
       ) : (

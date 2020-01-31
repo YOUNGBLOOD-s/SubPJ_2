@@ -8,6 +8,9 @@ const StyledTypography = styled(Typography)`
 
 const TitleBarBlock = styled.div`
   margin-bottom: 1rem;
+  * {
+    font-family: 'Nanum Myeongjo', serif;
+  }
 `;
 
 const TitleBar = ({ text }) => {

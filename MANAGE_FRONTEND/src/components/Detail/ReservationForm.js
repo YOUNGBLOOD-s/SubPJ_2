@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import TitleBar from './TitleBar';
 import component from '../../lib/material/component';
+import MaterialCard from '../common/MaterialCard';
 
 const ReservationFormBlock = styled.div`
   padding: 1rem;
@@ -108,101 +109,102 @@ const ReservationForm = () => {
 
   return (
     <ReservationFormBlock>
-      <TitleBar text="상담 예약" />
-
-      {!isReserved ? (
-        <form onSubmit={onSubmit}>
-          <FieldWrapper>
-            <div>
-              <MuiPickersUtilsProvider utils={DateFnsUtils} locale={koLocale}>
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="date-picker-dialog"
-                  label="예약 날짜 선택"
-                  format="MM/dd/yyyy"
-                  value={form.date}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
+      <MaterialCard>
+        <TitleBar text="상담 예약" />
+        {!isReserved ? (
+          <form onSubmit={onSubmit}>
+            <FieldWrapper>
+              <div>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={koLocale}>
+                  <KeyboardDatePicker
+                    margin="normal"
+                    id="date-picker-dialog"
+                    label="예약 날짜 선택"
+                    format="MM/dd/yyyy"
+                    value={form.date}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </div>
+              <div className="boxes">
+                <StyledTextField
+                  className="name"
+                  id="name"
+                  type="text"
+                  label="성명"
+                  variant="outlined"
+                  name="name"
+                  value={form.name}
+                  onChange={onChange}
+                  error={error.name}
                 />
-              </MuiPickersUtilsProvider>
-            </div>
-            <div className="boxes">
+                <StyledTextField
+                  className="tel"
+                  id="phone"
+                  label="연락처"
+                  variant="outlined"
+                  name="tel"
+                  value={form.tel}
+                  onChange={onChange}
+                  error={error.tel}
+                />
+                {/* TODO: 기본값은 ? */}
+                <StyledTextField
+                  id="age"
+                  label="나이"
+                  variant="outlined"
+                  type="number"
+                  name="age"
+                  value={form.age}
+                  onChange={onChange}
+                  error={error.age}
+                />
+              </div>
               <StyledTextField
-                className="name"
-                id="name"
-                type="text"
-                label="성명"
+                id="email"
+                type="email"
+                label="이메일"
                 variant="outlined"
-                name="name"
-                value={form.name}
+                name="email"
+                value={form.email}
                 onChange={onChange}
-                error={error.name}
+                error={error.email}
               />
-              <StyledTextField
-                className="tel"
-                id="phone"
-                label="연락처"
-                variant="outlined"
-                name="tel"
-                value={form.tel}
-                onChange={onChange}
-                error={error.tel}
-              />
-              {/* TODO: 기본값은 ? */}
-              <StyledTextField
-                id="age"
-                label="나이"
-                variant="outlined"
-                type="number"
-                name="age"
-                value={form.age}
-                onChange={onChange}
-                error={error.age}
-              />
-            </div>
-            <StyledTextField
-              id="email"
-              type="email"
-              label="이메일"
-              variant="outlined"
-              name="email"
-              value={form.email}
-              onChange={onChange}
-              error={error.email}
-            />
 
-            {/* TODO: 텍스트 필드로 변경 (크게) */}
-            <StyledTextField
-              id="text"
-              type="textarea"
-              label="문의 내용"
-              variant="outlined"
-              name="text"
-              value={form.text}
-              onChange={onChange}
-              error={error.text}
-            />
-          </FieldWrapper>
-          <component.Button color="primary" variant="contained" type="submit">
-            상담 예약
-          </component.Button>
-        </form>
-      ) : (
-        <ReservationConfirmBox>
-          <component.Typography variant="h6">
-            상담 예약을 완료하셨습니다!
-          </component.Typography>
-          <component.Button
-            onClick={onReset}
-            color="primary"
-            variant="contained"
-          >
-            다시 상담하기
-          </component.Button>
-        </ReservationConfirmBox>
-      )}
+              {/* TODO: 텍스트 필드로 변경 (크게) */}
+              <StyledTextField
+                id="text"
+                type="textarea"
+                label="문의 내용"
+                variant="outlined"
+                name="text"
+                value={form.text}
+                onChange={onChange}
+                error={error.text}
+              />
+            </FieldWrapper>
+            <component.Button color="primary" variant="contained" type="submit">
+              상담 예약
+            </component.Button>
+          </form>
+        ) : (
+          <ReservationConfirmBox>
+            <component.Typography variant="h6">
+              상담 예약을 완료하셨습니다!
+            </component.Typography>
+            <component.Button
+              onClick={onReset}
+              color="primary"
+              variant="contained"
+            >
+              다시 상담하기
+            </component.Button>
+          </ReservationConfirmBox>
+        )}
+      </MaterialCard>
     </ReservationFormBlock>
   );
 };

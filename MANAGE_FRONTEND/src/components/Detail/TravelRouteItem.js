@@ -6,6 +6,7 @@ import TrainOutlinedIcon from '@material-ui/icons/TrainOutlined';
 import DirectionsCarOutlinedIcon from '@material-ui/icons/DirectionsCarOutlined';
 import DirectionsBoatOutlinedIcon from '@material-ui/icons/DirectionsBoatOutlined';
 import palette from '../../lib/styles/palette';
+import component from '../../lib/material/component';
 
 const TravelIcons = ({ type }) => {
   if (type === '비행기' || type === '경비행기') {
@@ -23,23 +24,26 @@ const TravelIcons = ({ type }) => {
   }
 };
 
-const TravelRouteItemBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const GridContainer = styled(component.Grid)`
+  margin-bottom: 1rem;
 `;
+const GridItem = styled(component.Grid)``;
 
 const RouteImage = styled.img`
   width: 100%;
   border-radius: 5px;
-  margin-bottom: 1rem;
 `;
 
-const ToFromText = styled.h4`
+const ToFromText = styled.div`
   font-family: 'Nanum Myeongjo', serif;
-  margin: 0.5rem 0;
+  /* margin: 0.5rem 0; */
+  font-size: 1rem;
   font-weight: bold;
+  text-align: center;
+`;
+
+const DetailText = styled.div`
+  text-align: cetner;
 `;
 
 const TravelRouteItem = ({ dayRoutes }) => {
@@ -50,24 +54,51 @@ const TravelRouteItem = ({ dayRoutes }) => {
   return (
     <div>
       {dayRoutes.map(({ seq, title, detail, transport, tofrom }) => (
-        <TravelRouteItemBlock key={seq}>
+        <GridContainer container key={seq} spacing={1}>
           {/* NOTICE: title과 detail이 같은 경우는 경유지? 같은느낌 */}
           {title === detail ? (
             <>
-              <TravelIcons type={transport} />
-              <ToFromText>{tofrom}까지</ToFromText>
-              <RouteImage src={image} alt="경로별 이미지" />
+              <GridItem item xs={1}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <TravelIcons type={transport} />
+                </div>
+              </GridItem>
+              <GridItem item xs={11}>
+                <ToFromText>{tofrom}까지</ToFromText>
+              </GridItem>
+              <GridItem item xs={1}>
+                ...
+              </GridItem>
+              <GridItem item xs={11}>
+                <div>
+                  <RouteImage src={image} alt="경로별 이미지" />
+                </div>
+              </GridItem>
             </>
           ) : (
             <>
-              <TravelIcons type={transport} />
-              <ToFromText variant="h4">{tofrom}</ToFromText>
-              <RouteImage src={image} alt="경로별 이미지" />
-              {/* <div>{title}</div> */}
-              <div>{detail}</div>
+              <GridItem item xs={1}>
+                <TravelIcons type={transport} />
+              </GridItem>
+              <GridItem item xs={11}>
+                <ToFromText>{tofrom}까지</ToFromText>
+              </GridItem>
+              <GridItem item xs={1}>
+                ...
+              </GridItem>
+              <GridItem item xs={11}>
+                <component.Grid container>
+                  <component.Grid item xs={12}>
+                    <RouteImage src={image} alt="경로별 이미지" />
+                  </component.Grid>
+                  <component.Grid item xs={12}>
+                    <DetailText>{detail}</DetailText>
+                  </component.Grid>
+                </component.Grid>
+              </GridItem>
             </>
           )}
-        </TravelRouteItemBlock>
+        </GridContainer>
       ))}
     </div>
   );
