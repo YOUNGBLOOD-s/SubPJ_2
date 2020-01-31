@@ -59,8 +59,8 @@ public class MemberController {
 		
 		String key = "";
 		try {
-			//File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
-			File file = new File("/usr/local/key/key.txt"); //AWS
+			File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
+			//File file = new File("/usr/local/key/key.txt"); //AWS
 			FileReader filereader = new FileReader(file);
 			int singleCh = 0;
 			while ((singleCh = filereader.read()) != -1) {
@@ -153,12 +153,14 @@ public class MemberController {
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
         System.out.println("==============");
         System.out.println("로그인 요청이 왔습니다.");
+        System.out.println(login.toString());
 		if(login.getUsername()=="" || login.getPassword()=="") {
 			Map<String, Object> msg = new HashMap<String, Object>();
 			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
 		ResponseEntity<Map<String, Object>> res = null;
 		String realpassword = ser.getPassword(login.getUsername());
+
 		Map<String, Object> msg = new HashMap<String, Object>();
 		if (realpassword.equals(login.getPassword())) {
 			msg.put("username", login.getUsername());

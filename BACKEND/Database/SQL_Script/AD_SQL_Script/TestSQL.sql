@@ -58,3 +58,7 @@ select * from counseltb;
 insert into counseltb(name, age, email, tel, date, text) 
 	values ('이름', 1, 'email', 'tel', 'data', 'text');
 delete from counseltb where idx=4;
+
+select * from membertb;
+select idx from membertb
+where username="admin";

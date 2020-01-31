@@ -18,5 +18,6 @@
     <mapper resource="spring/ad_sql.xml"/>
     <mapper resource="spring/member_sql.xml"/>
     <mapper resource="spring/sensor.xml"/>
+    <mapper resource="spring/management_sql.xml"/>
   </mappers>
 </configuration>
