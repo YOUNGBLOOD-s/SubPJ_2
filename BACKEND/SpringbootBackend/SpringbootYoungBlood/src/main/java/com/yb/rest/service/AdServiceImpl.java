@@ -10,6 +10,7 @@ import com.yb.rest.dao.IAdDao;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.Route;
+import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
@@ -99,5 +100,10 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public Nation getNationdetail(int idx) {
 		return repo.getNationdetail(idx);
+	}
+
+	@Override
+	public void updateCounsel(int age, String name, String email, String tel, String date, String text) {
+		repo.updateCounsel(new Counsel(age, name, email, tel, date, text));
 	}
 }

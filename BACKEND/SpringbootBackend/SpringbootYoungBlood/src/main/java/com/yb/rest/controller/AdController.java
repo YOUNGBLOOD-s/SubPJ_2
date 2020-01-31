@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +30,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
 import com.yb.rest.vo.Route;
 import com.yb.rest.vo.Sendtofront;
+import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
+import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Sensor;
@@ -203,10 +207,7 @@ public class AdController {
         return nation;
     }
 
-	/**
-	 * 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다.
-	 * @throws JsonProcessingException
-	 */
+	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. @throws JsonProcessingException */
     @GetMapping("/sensor/reco")
     public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
 
@@ -324,7 +325,7 @@ public class AdController {
     public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(@PathVariable String id) {
         
         System.out.println("==============");
-        System.out.println("안녕하세요. 고객님이 요청하신 "+id+"번호에 해당하는 나라 상세정보를 조회해드릴게요.");
+        System.out.println("안녕하세요. 고객님이 요청하신 "+id+"번에 해당하는 나라 상세정보를 조회해드릴게요.");
     	ResponseEntity<Map<String, Object>> re = null;
         Map<String, Object> result = null;
         try {
@@ -439,6 +440,7 @@ public class AdController {
     	return re;
     }
     
+    /** 보여지는 나라에 대한 카운트를 하는 메소드 */
     public void updateshowcnt(List<Integer> nation) {
     	for(int i=0; i<nation.size(); i++) {
     		int idx = nation.get(i);
@@ -475,6 +477,22 @@ public class AdController {
     	
     	result.put("AllNationDatas", Countrylist);
     	re = new ResponseEntity<>(result, HttpStatus.OK);
+    	return re;
+    }
+
+    /** 상담 정보를 받아 저장하는 메소드 */
+    @PostMapping("/counsel")
+    public @ResponseBody ResponseEntity<Map<String, Object>> updateCounsel(@RequestBody Counsel counvalue) {
+    	ResponseEntity<Map<String, Object>> re = null;
+    	Map<String, Object> result = new HashMap<String, Object>();
+    	try {
+    		System.out.println(counvalue.toString());
+    		ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(), counvalue.getDate(), counvalue.getText());
+    		re = new ResponseEntity<>(result, HttpStatus.OK);
+    	} catch(Exception e) {
+    		System.out.println("왜 안돼 짜증나게");
+    		re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+    	}
     	return re;
     }
 }

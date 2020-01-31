@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.Route;
+import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Sendtofront;
@@ -99,6 +100,11 @@ public class AdDaoImpl implements IAdDao {
 	@Override
 	public Nation getNationdetail(int idx) {
 		return session.selectOne("sendtofront.selectNationall", idx);
+	}
+
+	@Override
+	public void updateCounsel(Counsel counvalue) {
+		session.insert("sendtofront.insertCounvalue", counvalue);
 	}
 
 	
