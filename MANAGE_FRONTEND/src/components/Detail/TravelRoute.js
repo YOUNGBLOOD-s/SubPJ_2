@@ -5,10 +5,11 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styled from 'styled-components';
-import TitleBar from './TitleBar';
+import TitleBar from './common/TitleBar';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import TravelRouteItem from './TravelRouteItem';
+import CaptionText from './common/CaptionText';
 
 const TravleRouteBlock = styled.div`
   margin: 1rem 0.5rem;
@@ -44,7 +45,8 @@ const TravelRoute = ({ routes }) => {
 
   return (
     <TravleRouteBlock>
-      <TitleBar text="🚵🏾‍♂️ 여행지 한눈에 보기" />
+      <TitleBar>🚵🏾‍♂️ 여행지 한눈에 보기</TitleBar>
+      <CaptionText>여행 일정별 주요 경로를 인포그래픽으로 체크!</CaptionText>
       {newRoutes ? (
         Object.keys(newRoutes).map(day => {
           const dayRoutes = newRoutes[day];

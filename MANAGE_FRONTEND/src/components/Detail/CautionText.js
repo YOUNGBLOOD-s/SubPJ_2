@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
-import TitleBar from './TitleBar';
+import TitleBar from './common/TitleBar';
 import Card from '@material-ui/core/Card';
 
 const CautionTextBlock = styled.div`
