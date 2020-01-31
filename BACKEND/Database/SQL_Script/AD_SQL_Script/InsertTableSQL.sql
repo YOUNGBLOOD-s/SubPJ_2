@@ -2,26 +2,27 @@
 use yb_travel;
 
 -- 나라 table
-create table nationtb (
+CREATE TABLE IF NOT EXISTS `nationtb` (
 	 idx int auto_increment primary key,
-     name varchar(30) UNIQUE,
+     en_name varchar(30) UNIQUE,
+     ko_name varchar(30) UNIQUE,
      dust int, 
      continents int,
      clickcnt int default 0,
      showcnt int default 0,
-     customer varchar(20),
+     customer int,
      weight int,
      speech varchar(100),
      price int,
      type int default 1,
-     foreign key (customer) references membertb(username)
+     foreign key (customer) references membertb(idx)
 );
 desc nationtb;
 select * from nationtb;
 
 
 -- 월평균 table
-create table monthtb(
+CREATE TABLE IF NOT EXISTS `monthtb`(
 	idx int auto_increment primary key,
     nation int UNIQUE,
     tem1 float, tem2 float, tem3 float, tem4 float, tem5 float, tem6 float,
@@ -34,7 +35,7 @@ desc monthtb;
 
 DROP TABLE CONTENTSTB;
 -- 경로 및 상세정보 table
-create table contentstb (
+CREATE TABLE IF NOT EXISTS `contentstb` (
 	idx int auto_increment primary key,
     nation int,
     day int,
@@ -51,7 +52,7 @@ select * from contentstb;
 select * from imagetb;
 
 -- 이미지 테이블
-create table imagetb (
+CREATE TABLE IF NOT EXISTS `imagetb` (
 	idx int auto_increment primary key,
     nation int,
     type int UNIQUE,
@@ -61,7 +62,7 @@ create table imagetb (
 desc imagetb;
 
 -- 전광판 정보
-create table adboardtb (
+CREATE TABLE IF NOT EXISTS `adboardtb` (
 	idx int auto_increment primary key,
     temp float,
     humid float,
@@ -72,7 +73,7 @@ create table adboardtb (
 desc adboardtb;
 
 -- 1:1 상담 테이블
-create table counseltb (
+CREATE TABLE IF NOT EXISTS `counseltb` (
 	idx int auto_increment primary key,
     name varchar(20) NOT NULL,
     age int NOT NULL,
