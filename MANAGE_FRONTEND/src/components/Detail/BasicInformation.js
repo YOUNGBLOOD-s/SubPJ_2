@@ -21,6 +21,13 @@ const TextWrapper = styled.div`
   left: 5%;
 `;
 
+const StyledTitle = styled.h1`
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 1rem;
+`;
+
 const BasicInformation = ({ country }) => {
   console.log(country);
   const { id, name, thumbnail, price, category } = country;
@@ -36,10 +43,10 @@ const BasicInformation = ({ country }) => {
         />
       </ImageWrapper>
       <TextWrapper>
-        <Typography variant="h3">
+        <StyledTitle>
           {name} ({category})
-        </Typography>
-        <h2>{price}원</h2>
+        </StyledTitle>
+        {/* <h2>{price}원</h2> */}
       </TextWrapper>
     </BasicInformationBlock>
   );

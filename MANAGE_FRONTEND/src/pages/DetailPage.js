@@ -22,12 +22,15 @@ const DetailPage = ({ match }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://192.168.100.66:9090/api/detail/${id}`)
+      .get(`/api/detail/${id}`)
       .then(res => {
         const { data } = res;
         setCountry(data); // 나라 설정
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        //TODO: 에러처리 해주세요
+        console.log(err, '에러에러');
+      });
     setLoading(false);
   }, [id]);
 
@@ -38,7 +41,7 @@ const DetailPage = ({ match }) => {
           <BasicInformation country={country} />
           <DetailPageWrapper>
             <TravelRoute routes={country.routes} />
-            <CautionText category={country.category} />
+            {/* <CautionText category={country.category} /> */}
             <ReservationForm />
             <KakaoChat />
           </DetailPageWrapper>

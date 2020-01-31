@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ManagePage from './pages/ManagePage';
 import AdminPage from './pages/AdminPage';
+import DetailPage from './pages/DetailPage';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Route component={RegisterPage} path="/register" />
       <Route component={ManagePage} path="/manage" />
       <Route component={AdminPage} path="/admin" />
+      <Route component={DetailPage} path="/detail/:id" />
     </>
   );
 };
