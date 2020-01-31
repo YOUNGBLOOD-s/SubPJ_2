@@ -453,7 +453,7 @@ public class AdController {
     	Map<String, Object> result = new HashMap<String, Object>();
     	List<Map<String, Object>> Countrylist = new LinkedList<>();
     	
-    	for(int idx=2; idx<=20; idx++) {	
+    	for(int idx=1; idx<=20; idx++) {	
     		Map<String, Object> con = new HashMap<String, Object>();
     		Nation nation = ser.getNationdetail(idx);
     		
@@ -468,6 +468,7 @@ public class AdController {
     		con.put("speech", nation.getSpeech());
     		con.put("price", nation.getPrice());
     		con.put("type", nation.getType());
+    		con.put("image", nation.getUrl());
     		
     		Countrylist.add(con);
     	}
