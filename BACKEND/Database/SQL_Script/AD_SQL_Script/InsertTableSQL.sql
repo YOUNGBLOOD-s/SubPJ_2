@@ -3,7 +3,7 @@ use yb_travel;
 
 -- 나라 table
 CREATE TABLE IF NOT EXISTS `nationtb` (
-	 idx int auto_increment primary key,
+	 idx int auto_increment  primary key,
      en_name varchar(30) UNIQUE,
      ko_name varchar(30) UNIQUE,
      dust int, 
@@ -55,7 +55,7 @@ select * from imagetb;
 CREATE TABLE IF NOT EXISTS `imagetb` (
 	idx int auto_increment primary key,
     nation int,
-    type int UNIQUE,
+    type int,
     url varchar(500),
     foreign key (nation) references nationtb(idx)
 );

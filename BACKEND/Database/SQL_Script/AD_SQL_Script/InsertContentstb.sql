@@ -1,6 +1,8 @@
 # 준비된 Default 데이터는 151개 입니다.
 use yb_travel;
 
+select * from contentstb;
+
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
 	values(18, 1, 1, '솔뱅', '마크풍의 마을 [솔뱅]',  '/usr/local/DATA/america_west/landmark1.png', '인천공항에서 솔뱅', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)

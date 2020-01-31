@@ -2,7 +2,7 @@
 use yb_travel;
 
 -- member table
-create table membertb (
+CREATE TABLE IF NOT EXISTS `membertb` (
 	 idx int auto_increment primary key,
      username varchar(20) unique,
      password varchar(20),

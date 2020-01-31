@@ -2,7 +2,8 @@
 
 use yb_travel;
 select * from imagetb;
-
+# delete from imagetb;
+# ALTER TABLE imagetb AUTO_INCREMENT=1;
 -- 독일
 insert into imagetb(nation, type, url)
 	values(1, 1, '/usr/local/DATA/germany/light_w.PNG');
