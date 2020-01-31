@@ -5,10 +5,22 @@ import OpacityIcon from '@material-ui/icons/Opacity';
 import styled from 'styled-components';
 
 const Content = ({ detail, onClose }) => {
-  const Weather = styled.h2`
+  const WeatherWrapper = styled.div`
     color: white;
+    font-size: 1.2rem;
+    @media only screen and (max-width: 768px) {
+      display: flex;
+      padding: 0;
+      font-size: 1rem;
+    }
   `;
-  console.log(detail); // debug
+  const Weather = styled.h2`
+    padding: 0;
+    @media only screen and (max-width: 768px) {
+      margin-bottom: 10px;
+    }
+  `;
+
   return (
     <div className="content">
       <div className="content__background">
@@ -25,12 +37,14 @@ const Content = ({ detail, onClose }) => {
         <div className="content__area__container">
           <div className="content__title">{detail.name}</div>
           <div className="content__description">
-            <Weather>
-              <WbSunnyIcon /> {detail.temp}&deg;C&nbsp;&nbsp;&nbsp;
-            </Weather>
-            <Weather>
-              <OpacityIcon /> {detail.humid} %
-            </Weather>
+            <WeatherWrapper>
+              <Weather>
+                <WbSunnyIcon /> {detail.temp}&deg;C&nbsp;&nbsp;&nbsp;
+              </Weather>
+              <Weather>
+                <OpacityIcon /> {detail.humid} %
+              </Weather>
+            </WeatherWrapper>
             {detail.content}
           </div>
         </div>

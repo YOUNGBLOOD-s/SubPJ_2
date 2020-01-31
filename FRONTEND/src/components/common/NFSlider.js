@@ -45,14 +45,13 @@ var timer = undefined;
 const NFSlider = ({ details, setOpen }) => {
   const [current, setCurrent] = useState(1);
 
-  const timerTerm = 10000;
+  const timerTerm = 30000;
 
   const setTimer = () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       setOpen(false);
     }, timerTerm);
-    console.log(timer);
   };
 
   useEffect(() => {
@@ -68,9 +67,7 @@ const NFSlider = ({ details, setOpen }) => {
     <div className="app">
       <Slider activeSlide={details[0]} setCurrent={setCurrent}>
         {details.map(detail => (
-          <Slider.Item detail={detail} key={detail.id}>
-            item1
-          </Slider.Item>
+          <Slider.Item detail={detail} key={detail.id}></Slider.Item>
         ))}
       </Slider>
     </div>

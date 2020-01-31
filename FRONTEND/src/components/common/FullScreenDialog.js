@@ -49,6 +49,12 @@ const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
     top: 2%;
     padding: 7px;
     background: rgba(0, 0, 0, 0.5);
+    @media only screen and (max-width: 768px) {
+      top: inherit;
+      width: 15vh;
+      height: 15vh;
+      bottom: 18%;
+    }
   `;
 
   return (
