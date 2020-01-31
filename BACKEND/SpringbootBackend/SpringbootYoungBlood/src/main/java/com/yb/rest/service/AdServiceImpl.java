@@ -85,4 +85,19 @@ public class AdServiceImpl implements IAdService {
 	public int getType(int idx) {
 		return repo.getType(idx);
 	}
+
+	@Override
+	public void updateClickcnt(int idx) {
+		repo.updateClickcnt(idx);
+	}
+
+	@Override
+	public void updateShowcnt(int idx) {
+		repo.updateShowcnt(idx);
+	}
+
+	@Override
+	public Nation getNationdetail(int idx) {
+		return repo.getNationdetail(idx);
+	}
 }

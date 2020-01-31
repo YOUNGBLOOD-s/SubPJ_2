@@ -25,4 +25,7 @@ public interface IAdService {
 	public Sensor selectData(int idx);
 	public void updateType(ForScore forScore);
 	public int getType(int idx);
+	public void updateClickcnt(int idx);
+	public void updateShowcnt(int idx);
+	public Nation getNationdetail(int idx);
 }

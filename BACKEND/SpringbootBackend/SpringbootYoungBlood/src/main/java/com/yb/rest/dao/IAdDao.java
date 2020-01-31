@@ -17,6 +17,7 @@ public interface IAdDao {
 	public Sendtofront getInfo(Map value);
 	public List<Route> getRoutes(int idx);
 	public Nation getNationdetail(Map value);
+	public Nation getNationdetail(int idx);
 	public void updateSensor(Sensor sen);
 	public List<Monthtb> selectall();
 	public void updateScore(ForScore forScore);
@@ -25,4 +26,6 @@ public interface IAdDao {
 	public Sensor selectData(int idx);
 	public void updateType(ForScore forScore);	
 	public int getType(int idx);
+	public void updateClickcnt(int idx);
+	public void updateShowcnt(int idx);
 }
