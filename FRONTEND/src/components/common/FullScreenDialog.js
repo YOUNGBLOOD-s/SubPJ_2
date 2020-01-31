@@ -49,6 +49,12 @@ const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
     top: 2%;
     padding: 7px;
     background: rgba(0, 0, 0, 0.5);
+    @media only screen and (max-width: 768px) {
+      top: inherit;
+      width: 15vh;
+      height: 15vh;
+      bottom: 18%;
+    }
   `;
 
   return (
@@ -83,7 +89,7 @@ const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
           className="qr"
           src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${nextURL}`}
         />
-        <NFSlider data={data} setOpen={setOpen} />
+        <NFSlider details={data.details} setOpen={setOpen} />
       </Dialog>
     </div>
   );

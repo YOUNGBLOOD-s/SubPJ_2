@@ -5,10 +5,12 @@ import ShowDetailsButton from './ShowDetailsButton';
 import Mark from './Mark';
 import './Item.scss';
 
-const Item = ({ movie }) => (
+const Item = ({ detail }) => (
   <SliderContext.Consumer>
     {({ onSelectSlide, currentSlide, elementRef }) => {
-      const isActive = currentSlide && currentSlide.id === movie.id;
+      const isActive = currentSlide && currentSlide.id === detail.id;
+
+      const path = `${process.env.PUBLIC_URL}/static/img/코타키나발루.jpg`;
 
       return (
         <div
@@ -17,8 +19,9 @@ const Item = ({ movie }) => (
             'item--open': isActive,
           })}
         >
-          <img src={movie.image} alt="" />
-          <ShowDetailsButton onClick={() => onSelectSlide(movie)} />
+          <img src={path} alt="" />
+          {/* <img src={detail.img} alt="" /> */}
+          <ShowDetailsButton onClick={() => onSelectSlide(detail)} />
           {isActive && <Mark />}
         </div>
       );

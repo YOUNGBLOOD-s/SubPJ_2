@@ -8,24 +8,30 @@ import Axios from '../../../node_modules/axios/index';
 import LoadingBackdrop from '../common/LoadingBackdrop';
 
 const Title = styled.div`
-  font-size: 2.3em;
+  font-size: 5rem;
+  @media only screen and (max-width: 768px) {
+    font-size: 4rem;
+  }
   font-weight: bold;
-  margin-top: 20px;
   color: #ffffff;
-  padding-left: 20px;
+  text-align: left;
+  padding: 30px;
 `;
 
 const Content = styled.div`
-  margin-top: 10px;
-  color: #ffffff;
-  font-size: 1.3em;
-  padding-left: 20px;
+  font-size: 2rem;
+  @media only screen and (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+  color: #dddddd;
+  text-align: left;
+  padding: 0 50px;
 `;
 
 const MainADBlock = styled.div`
-  * {
-    padding: 0;
-  }
+  /* * {
+    padding: 0px;
+  } */
   .bg {
     width: 100%;
     height: 100vh;
@@ -52,9 +58,13 @@ const MainADBlock = styled.div`
     z-index: 999;
     width: 20vh;
     height: 20vh;
+    @media only screen and (max-width: 768px) {
+      width: 15vh;
+      height: 15vh;
+    }
     position: absolute;
     right: 4%;
-    top: 73%;
+    bottom: 4%;
     padding: 7px;
     background: rgba(0, 0, 0, 0.5);
   }
@@ -94,6 +104,7 @@ const MainAD = () => {
 
   useEffect(() => {
     Axios.get('http://52.78.218.79:8887/api/sensor/reco')
+      // Axios.get('http://192.168.100.66:8887/api/sensor/reco') // test backend
       .then(res => {
         setDatas(res.data.datas);
       })
@@ -129,7 +140,8 @@ const MainAD = () => {
                 </div>
                 <img
                   className="qr"
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
+                  // src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://52.78.218.79:8282/detail/${id}`}
                   alt=""
                 />
               </div>
