@@ -490,7 +490,6 @@ public class AdController {
     		ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(), counvalue.getDate(), counvalue.getText());
     		re = new ResponseEntity<>(result, HttpStatus.OK);
     	} catch(Exception e) {
-    		System.out.println("왜 안돼 짜증나게");
     		re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     	}
     	return re;

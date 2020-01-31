@@ -29,4 +29,32 @@ select idx, name, (select url from imagetb where type=2 and nation=1), price, co
 from nationtb
 where idx=1;
 
+use yb_travel;
+select * from nationtb where idx=8 or idx=14 or idx=9;
+select * from nationtb where idx=1;
 
+select * from contentstb;
+
+update nationtb 
+set showcnt=showcnt+1
+where idx=1;
+
+select idx, name, dust, continents, clickcnt, showcnt, customer, weight, speech, (select url from imagetb where type=3 AND nation=1) as url, price, type
+	from nationtb
+	where idx=1;
+    select url from imagetb where type=3 AND nation=1;
+# 나라와 관련없는 테이블
+select * from adboardtb;
+
+# 나라와 관련 있는 테이블
+select * from contentstb;
+select * from imagetb;
+desc imagetb;
+select * from monthtb;
+select * from nationtb;
+select * from membertb;
+
+select * from counseltb;
+insert into counseltb(name, age, email, tel, date, text) 
+	values ('이름', 1, 'email', 'tel', 'data', 'text');
+delete from counseltb where idx=4;

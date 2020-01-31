@@ -91,18 +91,7 @@ insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9
 -- 이미지 테이블
 desc imagetb;
 select * from imagetb;
-insert into imagetb(nation, type, url) values(1, 1, 'http://www.naver.com/1');
-insert into imagetb(nation, type, url) values(1, 2, 'http://www.naver.com/2');
-insert into imagetb(nation, type, url) values(1, 3, 'http://www.naver.com/3');
-insert into imagetb(nation, type, url) values(1, 4, 'http://www.naver.com/4');
-insert into imagetb(nation, type, url) values(2, 1, 'http://www.naver.com/4');
-insert into imagetb(nation, type, url) values(2, 2, 'http://www.naver.com/4');
-insert into imagetb(nation, type, url) values(2, 3, 'http://www.naver.com/4');
-insert into imagetb(nation, type, url) values(2, 4, 'http://www.naver.com/4');
-insert into imagetb(nation, type, url) values(13, 1, 'http://www.naver.com/4');
-insert into imagetb(nation, type, url) values(13, 2, 'http://www.naver.com/4');
-insert into imagetb(nation, type, url) values(13, 3, 'http://www.naver.com/4');
-insert into imagetb(nation, type, url) values(13, 4, 'http://www.naver.com/4');
+
 -- 전광판 정보
 desc adboardtb;
 select * from adboardtb;
