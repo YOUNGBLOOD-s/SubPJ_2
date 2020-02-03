@@ -81,6 +81,10 @@ const SlideIcon = styled(Fab)`
 
 const BasicInformation = ({ country }) => {
   const { name, thumbnail, category, temp, clickcnt, humid } = country;
+
+  const onSlideClick = () => {
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+  };
   return (
     <BasicInformationBlock>
       <ImageWrapper>
@@ -117,7 +121,7 @@ const BasicInformation = ({ country }) => {
       </TextWrapper>
       {/* TODO: 슬라이딩 이벤트 추가하기 */}
       <SlideMeWrapper>
-        <SlideIcon color="secondary" variant="extended">
+        <SlideIcon color="secondary" variant="extended" onClick={onSlideClick}>
           <i className="fas fa-angle-double-down"></i>
           <span className="text">스크롤</span>
         </SlideIcon>
