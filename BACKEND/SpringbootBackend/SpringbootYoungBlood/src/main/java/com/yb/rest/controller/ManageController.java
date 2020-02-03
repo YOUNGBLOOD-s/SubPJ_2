@@ -101,7 +101,7 @@ public class ManageController {
 	
 	/** 사용자 상품 수정 */
 	@GetMapping("/man/update")
-	public ResponseEntity<Map<String, Object>> deleteUpdate(@RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<Map<String, Object>> updateProduct(@RequestHeader(value="Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
