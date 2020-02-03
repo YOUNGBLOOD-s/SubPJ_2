@@ -50,6 +50,7 @@ const TravelRoute = ({ routes }) => {
       {newRoutes ? (
         Object.keys(newRoutes).map(day => {
           const dayRoutes = newRoutes[day];
+          const lastRoute = dayRoutes[dayRoutes.length - 1];
           return (
             <StyledPanel key={day}>
               <ExpansionPanelSummary
@@ -59,6 +60,10 @@ const TravelRoute = ({ routes }) => {
               >
                 <Typography>
                   <StyledDay>{day} 일차</StyledDay>
+                </Typography>
+                {/* TODO: 모양 이쁘게 하기 */}
+                <Typography>
+                  <StyledDay>~ {lastRoute.title}</StyledDay>
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
