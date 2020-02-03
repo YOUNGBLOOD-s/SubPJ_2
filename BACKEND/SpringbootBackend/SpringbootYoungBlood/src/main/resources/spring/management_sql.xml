@@ -5,9 +5,41 @@
 
 <mapper namespace="management">
 	<select id="selectidx" resultType="int" parameterType="String">
-	select idx
-	from membertb
-	where username=#{username};
+		select idx
+		from membertb
+		where username=#{username};
 	</select>
+
+	<select id="selectNationList" resultType="nation"
+		parameterType="int">
+		select *
+		from nationtb
+		where customer=#{customer};
+	</select>
+
+	<insert id="insertnation" parameterType="nation">
+		insert into
+		nationtb(en_name, ko_name, dust, continents, clickcnt, showcnt,
+		customer, weight, speech, price)
+		values(#{en_name},#{ko_name},#{dust},#{continents},#{clickcnt},#{showcnt},#{customer},#{weight},#{speech},#{price});
+	</insert>
+
+	<delete id="nationdelete" parameterType="int">
+		delete from
+		nationtb
+		where customer=#{customer}
+	</delete>
+
+	<update id="nationupdate" parameterType="nation">
+		update nationtb
+		set en_name=#{en_name}, ko_name=#{ko_name}, dust=#{dust}, continents=#{continents}, clickcnt=#{clickcnt}, showcnt=#{showcnt},
+		customer=#{customer}, weight=#{weight}, speech=#{speech}, price=#{price} where customer=#{customer};
+	</update>
+
+
 </mapper>
+ 
+ 
+ 
+ 
  
