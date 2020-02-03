@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 
 @Repository
@@ -28,9 +29,9 @@ public class ManDaoImpl implements IManDao {
 
 	@Override
 	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String showcnt,
-			String customer, String weight, String speech, String price) {
+			String customer, String weight, String speech, String price, String s_date, String f_date) {
 		// TODO Auto-generated method stub
-		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price);
+		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date);
 		System.out.println(n.getEn_name());
 		int insert = session.insert("management.insertnation", n);
 		System.out.println("@@" + insert);
@@ -54,14 +55,21 @@ public class ManDaoImpl implements IManDao {
 
 	@Override
 	public boolean nationupdate(String en_name, String ko_name, String dust, String continents,
-			String showcnt, String customer, String weight, String speech, String price) {
+			String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date) {
 		// TODO Auto-generated method stub
-		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price);
+		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price,s_date, f_date);
 		int update = session.update("management.nationupdate", n);
 		if (update == 0)
 			return false;
 		else
 			return true;
+	}
+
+	@Override
+	public ArrayList<Monthtb> monthInfo(int customer) {
+		// TODO Auto-generated method stub
+		
+		return (ArrayList) session.selectList("management.monthinfo", customer);
 	}
 
 }

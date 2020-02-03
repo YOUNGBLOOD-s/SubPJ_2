@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.yb.rest.dao.IAdDao;
 import com.yb.rest.dao.IManDao;
+import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Route;
 
@@ -34,9 +35,10 @@ public class ManServiceImpl implements IManService {
 
 	@Override
 	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String showcnt,
-			String customer, String weight, String speech, String price) {
+			String customer, String weight, String speech, String price, String s_date, String f_date) {
 		// TODO Auto-generated method stub
-		boolean res = repo.nationinsert(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price);
+		boolean res = repo.nationinsert(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price,
+				s_date, f_date);
 		return res;
 	}
 
@@ -49,10 +51,18 @@ public class ManServiceImpl implements IManService {
 
 	@Override
 	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt,
-			String customer, String weight, String speech, String price) {
+			String customer, String weight, String speech, String price, String s_date, String f_date) {
 		// TODO Auto-generated method stub
-		boolean res = repo.nationupdate(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price);
+		boolean res = repo.nationupdate(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price,
+				s_date, f_date);
 		return res;
+	}
+
+	@Override
+	public ArrayList<Monthtb> monthInfo(int customer) {
+		// TODO Auto-generated method stub
+		ArrayList<Monthtb> monthInfo = repo.monthInfo(customer);
+		return monthInfo;
 	}
 
 }

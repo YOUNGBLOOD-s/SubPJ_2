@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yb.rest.service.IAdService;
 import com.yb.rest.service.IManService;
 import com.yb.rest.vo.Member;
+import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Route;
 
@@ -114,7 +116,7 @@ public class ManageController {
 			// 상품 등록 하면 됨
 			boolean resProduct = ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getDust(),
 					nat.getContinents(), nat.getShowcnt(), nat.getCustomer() + "", nat.getWeight(), nat.getSpeech(),
-					nat.getPrice());
+					nat.getPrice(), nat.getS_date(), nat.getF_date());
 			msg.put("resmsg", "등록성공");
 			msg.put("resvalue", resProduct);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -170,7 +172,8 @@ public class ManageController {
 
 			// 상품 수정하면 됨
 			boolean resUpdate = ser.nationupdate(nat.getEn_name(), nat.getKo_name(), nat.getDust(), nat.getContinents(),
-					nat.getShowcnt(), nat.getCustomer() + "", nat.getWeight(), nat.getSpeech(), nat.getPrice());
+					nat.getShowcnt(), nat.getCustomer() + "", nat.getWeight(), nat.getSpeech(), nat.getPrice(),
+					nat.getS_date(), nat.getF_date());
 			msg.put("resmsg", "수정성공");
 			msg.put("resvalue", resUpdate);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -189,8 +192,9 @@ public class ManageController {
 	public ResponseEntity<Map<String, Object>> monthInfo(@RequestHeader(value = "Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
+		Monthtb mt = new Monthtb();
 		Map<String, Object> msg = new HashMap<String, Object>();
-		ArrayList<Nation> list = null;
+		ArrayList<Monthtb> list = null;
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -199,7 +203,7 @@ public class ManageController {
 			System.out.println("@@" + customer);
 
 			// 리스트 뽑아오면 됨
-			list = ser.nationList(customer);
+			list = ser.monthInfo(customer);
 			msg.put("resmsg", "조회성공");
 			msg.put("resvalue", list);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
