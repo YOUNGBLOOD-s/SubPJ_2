@@ -6,7 +6,7 @@ public class Sendtofront {
 	private int idx;
 	private float tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12;
 	private float hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12;
-	private String name, url, speech;
+	private String en_name, ko_name, url, speech;
 	private List<String> imgs, modalContents;
 	private int price, continents;
 
@@ -14,7 +14,7 @@ public class Sendtofront {
 	public Sendtofront(int idx, float tem1, float tem2, float tem3, float tem4, float tem5, float tem6, float tem7,
 			float tem8, float tem9, float tem10, float tem11, float tem12, float hum1, float hum2, float hum3,
 			float hum4, float hum5, float hum6, float hum7, float hum8, float hum9, float hum10, float hum11,
-			float hum12, String name, String url, int price, int continents, String speech, List<String> imgs,
+			float hum12, String en_name, String ko_name, String url, int price, int continents, String speech, List<String> imgs,
 			List<String> modalContents) {
 		this.idx = idx;
 		this.tem1 = tem1;
@@ -41,7 +41,8 @@ public class Sendtofront {
 		this.hum10 = hum10;
 		this.hum11 = hum11;
 		this.hum12 = hum12;
-		this.name = name;
+		this.ko_name = ko_name;
+		this.en_name = en_name;
 		this.url = url;
 		this.speech = speech;
 		this.imgs = imgs;
@@ -246,11 +247,18 @@ public class Sendtofront {
 	public void setHum12(float hum12) {
 		this.hum12 = hum12;
 	}
-	public String getName() {
-		return name;
+
+	public String getEn_name() {
+		return en_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setEn_name(String en_name) {
+		this.en_name = en_name;
+	}
+	public String getKo_name() {
+		return ko_name;
+	}
+	public void setKo_name(String ko_name) {
+		this.ko_name = ko_name;
 	}
 	public String getUrl() {
 		return url;
@@ -284,8 +292,8 @@ public class Sendtofront {
 				+ ", tem10=" + tem10 + ", tem11=" + tem11 + ", tem12=" + tem12 + ", hum1=" + hum1 + ", hum2=" + hum2
 				+ ", hum3=" + hum3 + ", hum4=" + hum4 + ", hum5=" + hum5 + ", hum6=" + hum6 + ", hum7=" + hum7
 				+ ", hum8=" + hum8 + ", hum9=" + hum9 + ", hum10=" + hum10 + ", hum11=" + hum11 + ", hum12=" + hum12
-				+ ", name=" + name + ", url=" + url + ", speech=" + speech + ", imgs=" + imgs + ", modalContents="
-				+ modalContents + ", price=" + price + ", continents=" + continents + "]";
+				+ ", en_name=" + en_name + ", ko_name=" + ko_name + ", url=" + url + ", speech=" + speech + ", imgs="
+				+ imgs + ", modalContents=" + modalContents + ", price=" + price + ", continents=" + continents + "]";
 	}
 
 }

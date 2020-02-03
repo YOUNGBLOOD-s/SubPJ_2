@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="selectinfo" resultType="sendtofront" parameterType="map">
-	select nationtb.idx, nationtb.name, nationtb.speech, monthtb.tem1, monthtb.tem2, monthtb.tem3, monthtb.tem4, monthtb.tem5, monthtb.tem6, monthtb.tem7, monthtb.tem8, monthtb.tem9, monthtb.tem10, monthtb.tem11, monthtb.tem12, monthtb.hum1, monthtb.hum2, monthtb.hum3, monthtb.hum4, monthtb.hum5, monthtb.hum6, monthtb.hum7, monthtb.hum8, monthtb.hum9, monthtb.hum10, monthtb.hum11, monthtb.hum12,
+	select nationtb.idx, nationtb.en_name, nationtb.ko_name, nationtb.speech, monthtb.tem1, monthtb.tem2, monthtb.tem3, monthtb.tem4, monthtb.tem5, monthtb.tem6, monthtb.tem7, monthtb.tem8, monthtb.tem9, monthtb.tem10, monthtb.tem11, monthtb.tem12, monthtb.hum1, monthtb.hum2, monthtb.hum3, monthtb.hum4, monthtb.hum5, monthtb.hum6, monthtb.hum7, monthtb.hum8, monthtb.hum9, monthtb.hum10, monthtb.hum11, monthtb.hum12,
 			(select url
     		from imagetb
     		where imagetb.type=#{type} AND nationtb.idx=imagetb.nation) as url,
@@ -31,13 +31,13 @@
 	</select>
 	
 	<select id="selectNationdetail" resultType="nation" parameterType="map">
-	select idx, name, dust, continents, clickcnt, showcnt, customer, weight, speech,(select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, type
+	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech,(select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, type
 	from nationtb
 	where idx=#{nationidx};
 	</select>
 	
 	<select id="selectNationall" resultType="nation" parameterType="int">
-	select idx, name, dust, continents, clickcnt, showcnt, customer, weight, speech, price, type, (select url from imagetb where type=1 AND nation=#{idx}) as url
+	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech, price, type, (select url from imagetb where type=1 AND nation=#{idx}) as url
 	from nationtb
 	where idx=#{idx};
 	</select>

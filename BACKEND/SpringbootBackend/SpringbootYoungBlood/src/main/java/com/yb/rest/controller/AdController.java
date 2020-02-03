@@ -238,7 +238,8 @@ public class AdController {
             Map<String, Object> data = new HashMap<String, Object>();
 
             data.put("id", stf.getIdx());
-            data.put("name", stf.getName());
+            data.put("en_name", stf.getEn_name());
+            data.put("name", stf.getKo_name()); //kor
             data.put("content", stf.getSpeech());
             data.put("thumbnail", stf.getUrl());
 
@@ -251,7 +252,8 @@ public class AdController {
             for (int j = 0; j < imgs.size(); j++) {
                 Map<String, Object> d = new HashMap<String, Object>();
                 d.put("id", j);
-                d.put("name", stf.getName());
+                d.put("en_name", stf.getEn_name());
+                d.put("name", stf.getKo_name());
                 d.put("price", stf.getPrice());
                 d.put("img", imgs.get(j));
                 d.put("content", modalContents.get(j));
@@ -395,7 +397,8 @@ public class AdController {
         
         	// send to front
         	result.put("id", nation.getIdx());
-        	result.put("name", nation.getName());
+        	result.put("en_name", nation.getEn_name());
+        	result.put("name", nation.getKo_name());
         	result.put("dust", nation.getDust());
         	result.put("clickcnt", nation.getClickcnt());
         	result.put("showcnt", nation.getShowcnt());
@@ -460,7 +463,8 @@ public class AdController {
     		Nation nation = ser.getNationdetail(idx);
     		
     		con.put("idx", nation.getIdx());
-    		con.put("name", nation.getName());
+    		con.put("en_name", nation.getEn_name());
+    		con.put("name", nation.getKo_name());
     		con.put("dust", nation.getDust());
     		con.put("continents", nation.getContinents());
     		con.put("clickcnt", nation.getClickcnt());
