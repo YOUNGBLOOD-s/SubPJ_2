@@ -2,6 +2,7 @@ package com.yb.rest.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yb.rest.service.IAdService;
 import com.yb.rest.service.IManService;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 
 import io.jsonwebtoken.Claims;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +34,9 @@ public class ManageController {
 
 	@Autowired
 	private IManService ser;
+	
+	@Autowired
+	private IAdService adser;
 
 	@ExceptionHandler(Exception.class)
 	public void ExceptionMethod(Exception e) {
@@ -204,5 +210,42 @@ public class ManageController {
 
 		return res;
 	}
-
+	
+	/** 콘텐츠 정보 조회하기 */
+	@GetMapping("/man/contents/list/")
+	public ResponseEntity<Map<String, Object>> ContentsList(@RequestHeader(value = "Authorization") String token) {
+		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+		
+		try {
+			Claims de = MemberController.verification(token);
+			msg.put("username", de.get("username"));
+			String username = (String) de.get("username");
+			int customer = ser.getIdx(username);
+			
+			List<Route> routelist = adser.getRoutes(customer);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+			System.out.println(routelist);
+			msg.put("contents", routelist);
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		} catch(Exception e) {
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
+		}
+		return res;
+	}
+	
+	/** 콘텐츠 정보 추가하기 */
+	public ResponseEntity<Map<String, Object>> ContentsInsert(@RequestHeader(value = "Authorization") String token) {
+		return null;
+	}
+	
+	/** 월별정보 정보 수정하기 */
+	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token) {
+		return null;
+	}
+	
+	/** 콘텐츠 정보 삭제하기 */
+	public ResponseEntity<Map<String, Object>> ContentsDelete(@RequestHeader(value = "Authorization") String token) {
+		return null;
+	}
 }

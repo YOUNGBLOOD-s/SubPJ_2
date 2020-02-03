@@ -17,6 +17,7 @@ public interface IAdDao {
 	public List<String> getModalcontents(int id);
 	public Sendtofront getInfo(Map value);
 	public List<Route> getRoutes(int idx);
+	public List<Route> getRoutes(String customer);
 	public Nation getNationdetail(Map value);
 	public Nation getNationdetail(int idx);
 	public void updateSensor(Sensor sen);

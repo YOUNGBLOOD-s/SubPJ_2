@@ -106,4 +106,9 @@ public class AdServiceImpl implements IAdService {
 	public void updateCounsel(int age, String name, String email, String tel, String date, String text) {
 		repo.updateCounsel(new Counsel(age, name, email, tel, date, text));
 	}
+
+	@Override
+	public List<Route> getRoutes(String customer) {
+		return repo.getRoutes(customer);
+	}
 }
