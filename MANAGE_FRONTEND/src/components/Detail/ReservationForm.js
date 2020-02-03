@@ -29,6 +29,14 @@ const FieldWrapper = styled.div`
   flex-direction: column;
 `;
 
+const StyledDatePicker = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: palette.red[200],
+    },
+  },
+})(KeyboardDatePicker);
+
 const StyledTextField = withStyles({
   root: {
     marginBottom: '1rem',
@@ -149,8 +157,9 @@ const ReservationForm = ({ nationId }) => {
         {!isReserved ? (
           <form onSubmit={onSubmit}>
             <FieldWrapper>
+              {/* FIXME: 포커스 시 색상 및 캘린더 색상 변경 */}
               <MuiPickersUtilsProvider utils={DateFnsUtils} locale={koLocale}>
-                <KeyboardDatePicker
+                <StyledDatePicker
                   margin="normal"
                   id="date-picker-dialog"
                   label="예약 날짜 선택"
@@ -218,6 +227,7 @@ const ReservationForm = ({ nationId }) => {
                 label="문의 내용"
                 variant="outlined"
                 name="text"
+                multiline
                 value={form.text}
                 onChange={onChange}
                 error={error.text}
