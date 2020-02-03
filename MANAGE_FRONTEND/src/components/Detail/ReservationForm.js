@@ -14,6 +14,7 @@ import MaterialCard from '../common/MaterialCard';
 import { withStyles } from '@material-ui/core/styles';
 import CaptionText from './common/CaptionText';
 import palette from '../../lib/styles/palette';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const ReservationFormBlock = styled.div`
   padding: 1rem 0.5rem;
@@ -40,7 +41,6 @@ const StyledDatePicker = withStyles({
 const StyledTextField = withStyles({
   root: {
     marginBottom: '1rem',
-    // 포커스시 라벨 색상
     '& label.Mui-focused': {
       color: palette.red[200],
     },
@@ -49,11 +49,6 @@ const StyledTextField = withStyles({
       '& fieldset': {
         borderColor: 'black',
       },
-      // 호버 했을때 색상
-      // '&:hover fieldset': {
-      //   borderColor: 'yellow',
-      // },
-      //  포커스 시 보더 색상
       '&.Mui-focused fieldset': {
         borderColor: palette.red[200],
       },
@@ -67,6 +62,18 @@ const ReservationConfirmBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const CompleteText = styled.div`
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 1rem 0;
+`;
+
+// 이하 컴포넌트
 
 const ReservationForm = ({ nationId }) => {
   const initialState = {
@@ -103,7 +110,7 @@ const ReservationForm = ({ nationId }) => {
     setError(initialState.error);
     e.preventDefault();
 
-    // TODO: 검증 좀더 빡세게 ?
+    // TODO: 검증 및 에러 메세지 추가
     // 나이 제한
     if (parseInt(form.age) < 1 || parseInt(form.age) > 200) {
       setError({ ...error, age: true });
@@ -219,8 +226,6 @@ const ReservationForm = ({ nationId }) => {
                 onChange={onChange}
                 error={error.email}
               />
-
-              {/* TODO: 텍스트 필드로 변경 (크게) */}
               <StyledTextField
                 id="text"
                 type="textarea"
@@ -233,18 +238,23 @@ const ReservationForm = ({ nationId }) => {
                 error={error.text}
               />
             </FieldWrapper>
-            <component.Button color="primary" variant="contained" type="submit">
-              상담 예약
-            </component.Button>
+            <ButtonWrapper>
+              <component.Button
+                color="secondary"
+                variant="contained"
+                type="submit"
+              >
+                상담 예약
+              </component.Button>
+            </ButtonWrapper>
           </form>
         ) : (
           <ReservationConfirmBox>
-            <component.Typography variant="h6">
-              상담 예약을 완료하셨습니다!
-            </component.Typography>
+            <CheckCircleIcon style={{ color: 'green' }} />
+            <CompleteText>상담 예약을 완료하셨습니다!</CompleteText>
             <component.Button
               onClick={onReset}
-              color="primary"
+              color="secondary"
               variant="contained"
             >
               다시 상담하기
