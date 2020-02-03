@@ -1,13 +1,14 @@
 package com.yb.rest.vo;
 
 public class Nation {
-	private String idx, name, dust, continents, clickcnt, showcnt, customer, weight, speech, price, type;
+	private String idx, en_name, ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech, price, type;
 	private String url;
 	public Nation() {}
-	public Nation(String idx, String name, String dust, String continents, String clickcnt, String showcnt,
+	public Nation(String idx, String en_name, String ko_name, String dust, String continents, String clickcnt, String showcnt,
 			String customer, String weight, String speech, String price, String type, String url) {
 		this.idx = idx;
-		this.name = name;
+		this.en_name = en_name;
+		this.ko_name = ko_name;
 		this.dust = dust;
 		this.continents = continents;
 		this.clickcnt = clickcnt;
@@ -25,11 +26,18 @@ public class Nation {
 	public void setIdx(String idx) {
 		this.idx = idx;
 	}
-	public String getName() {
-		return name;
+
+	public String getEn_name() {
+		return en_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setEn_name(String en_name) {
+		this.en_name = en_name;
+	}
+	public String getKo_name() {
+		return ko_name;
+	}
+	public void setKo_name(String ko_name) {
+		this.ko_name = ko_name;
 	}
 	public String getDust() {
 		return dust;
@@ -94,9 +102,10 @@ public class Nation {
 
 	@Override
 	public String toString() {
-		return "Nation [idx=" + idx + ", name=" + name + ", dust=" + dust + ", continents=" + continents + ", clickcnt="
-				+ clickcnt + ", showcnt=" + showcnt + ", customer=" + customer + ", weight=" + weight + ", speech="
-				+ speech + ", price=" + price + ", type=" + type + ", url=" + url + "]";
+		return "Nation [idx=" + idx + ", en_name=" + en_name + ", ko_name=" + ko_name + ", dust=" + dust
+				+ ", continents=" + continents + ", clickcnt=" + clickcnt + ", showcnt=" + showcnt + ", customer="
+				+ customer + ", weight=" + weight + ", speech=" + speech + ", price=" + price + ", type=" + type
+				+ ", url=" + url + "]";
 	};
 	
 }
