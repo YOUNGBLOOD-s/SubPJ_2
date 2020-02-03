@@ -2,33 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import TitleBar from './common/TitleBar';
-import Card from '@material-ui/core/Card';
+import CaptionText from './common/CaptionText';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 
 const CautionTextBlock = styled.div`
-  margin: 1rem;
-`;
-
-const TitleText = styled(Typography)`
-  margin-bottom: 0.5rem;
-`;
-
-const BodyText = styled(Typography)`
   margin: 0.5rem;
 `;
 
+const StyledPanel = styled(ExpansionPanel)`
+  background-color: white;
+`;
+
 const CautionText = ({ category }) => {
-  const cautions = fakeAlert[category];
+  const cautions = fakeAlert['Europe'];
   return (
     <CautionTextBlock>
-      <Card>
-        <TitleBar text="주의사항" />
-        {cautions.map((caution, idx) => (
-          <div key={idx}>
-            <TitleText variant="h6">{caution.title}</TitleText>
-            <BodyText variant="body2">{caution.content}</BodyText>
-          </div>
-        ))}
-      </Card>
+      <TitleBar>🚧 여행시 유의사항</TitleBar>
+      <CaptionText>유의해야할 점들을 알려드립니다.</CaptionText>
+      {cautions.map((caution, idx) => (
+        <StyledPanel key={idx}>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>{caution.title}</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>{caution.content}</ExpansionPanelDetails>
+        </StyledPanel>
+      ))}
     </CautionTextBlock>
   );
 };
@@ -36,6 +41,15 @@ const CautionText = ({ category }) => {
 export default CautionText;
 
 const fakeAlert = {
+  Common: [
+    {
+      title: '●안전사고',
+      content: `
+      - 여행자 본인의 과실에 의한 안전사고의 책임은 전적으로 본인에게 있으며 선택관광의 참여 시 반드시 가이드로부터 안전에 대한 주의사항을 안내 받고 현지 기후, 건강상태, 예상되는 위험을 고려하여 참여 여부를 결정하시기 바랍니다. 가이드의 주의사항을 무시하거나 예상되는 위험을 간과하고 참여한 선택관광으로 인해 발생한 안전사고는 당사에 책임범위가 아님을 알려드립니다.      
+      - 자유일정시 안전사고에 유의하시길 바랍니다.
+    `,
+    },
+  ],
   Europe: [
     {
       title: '여행 시 유의 사항',
@@ -44,13 +58,7 @@ const fakeAlert = {
         - 미주지역(미국/캐나다/중남미 등)은 제공받는 서비스에 따라 그에 응당한 팁을 주는 [팁문화]가 관습입니다. 내가 묵었던 호텔방을 정리해주는 룸메이드에게, 내 짐을 대신 들어주는 포터에게, 식당에서 서빙해주는 서버에게 [서비스에 대한 응담으로 소정의 팁을 제공해 주신다면 더 나은 서비스를 받으실 수 있습니다.]
       `,
     },
-    {
-      title: '●안전사고',
-      content: `
-        - 여행자 본인의 과실에 의한 안전사고의 책임은 전적으로 본인에게 있으며 선택관광의 참여 시 반드시 가이드로부터 안전에 대한 주의사항을 안내 받고 현지 기후, 건강상태, 예상되는 위험을 고려하여 참여 여부를 결정하시기 바랍니다. 가이드의 주의사항을 무시하거나 예상되는 위험을 간과하고 참여한 선택관광으로 인해 발생한 안전사고는 당사에 책임범위가 아님을 알려드립니다.      
-        - 자유일정시 안전사고에 유의하시길 바랍니다.
-      `,
-    },
+
     {
       title: '●입국신고서 및 세관신고서',
       content: `
@@ -84,4 +92,8 @@ const fakeAlert = {
       `,
     },
   ],
+  Asia: [],
+  Africa: [],
+  'North Pacific Ocean': [],
+  'North America': [],
 };

@@ -27,6 +27,7 @@ const DetailPage = ({ match, history }) => {
         setCountry(data); // 나라 설정
       })
       .catch(err => {
+        console.log(err);
         const { status } = err.response;
         if (status === 404) {
           history.push('/');
@@ -42,7 +43,7 @@ const DetailPage = ({ match, history }) => {
           <BasicInformation country={country} />
           <DetailPageWrapper>
             <TravelRoute id="travel" routes={country.routes} />
-            {/* <CautionText category={country.category} /> */}
+            <CautionText category={country.category} />
             <ReservationForm nationId={country.id} />
             <KakaoChat />
           </DetailPageWrapper>
