@@ -41,10 +41,10 @@ const TabContainer = ({ value, setValue }) => {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-          <Tab label="Item Four" {...a11yProps(3)} />
+          <Tab label="Item 1" {...a11yProps(0)} />
+          <Tab label="Item 2" {...a11yProps(1)} />
+          <Tab label="Item 3" {...a11yProps(2)} />
+          <Tab label="Item 4" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
     </div>

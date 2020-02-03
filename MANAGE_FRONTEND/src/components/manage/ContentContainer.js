@@ -47,16 +47,16 @@ const ContentContainer = ({ value }) => {
       // onChangeIndex={handleChangeIndex}
     >
       <TabPanel value={value} index={0} dir={theme.direction}>
-        Item One
+        Item 1
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>
-        Item Two
+        Item 2
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
-        Item Three
+        Item 3
       </TabPanel>
       <TabPanel value={value} index={3} dir={theme.direction}>
-        Item Four
+        Item 4
       </TabPanel>
     </SwipeableViews>
   );
