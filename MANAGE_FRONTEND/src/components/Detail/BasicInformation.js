@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
+import palette from '../../lib/styles/palette';
+import Fab from '@material-ui/core/Fab';
 
 const BasicInformationBlock = styled.div`
   position: relative;
@@ -12,13 +13,30 @@ const StyledImg = styled.img`
   width: 100%;
   height: 100vh;
   object-fit: cover;
-  opacity: 0.5;
 `;
 
 const TextWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  top: 5%;
-  left: 5%;
+  top: 40%;
+  left: 50%;
+  padding: 2rem 1rem;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.7);
+`;
+
+const SlideMeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const StyledTitle = styled.h1`
@@ -26,11 +44,43 @@ const StyledTitle = styled.h1`
   font-weight: 400;
   margin: 0;
   margin-bottom: 1rem;
+  .category {
+    text-align: center;
+    font-size: 2rem;
+    font-style: italic;
+    color: ${palette.grey[500]};
+  }
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: ${palette.theme};
+  }
+`;
+
+const CountryInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const IconTextBox = styled.div`
+  font-size: 1.3rem;
+  margin-right: 1rem;
+  .text {
+    margin-left: 0.5rem;
+  }
+`;
+
+const SlideIcon = styled(Fab)`
+  display: flex;
+  justify-content: cetner;
+  .text {
+    margin-left: 0.5rem;
+  }
 `;
 
 const BasicInformation = ({ country }) => {
-  console.log(country);
-  const { id, name, thumbnail, price, category } = country;
+  const { name, thumbnail, category, temp, clickcnt, humid } = country;
   return (
     <BasicInformationBlock>
       <ImageWrapper>
@@ -44,10 +94,34 @@ const BasicInformation = ({ country }) => {
       </ImageWrapper>
       <TextWrapper>
         <StyledTitle>
-          {name} ({category})
+          <div className="category">{category}</div>
+          <div className="title">{name}</div>
         </StyledTitle>
-        {/* <h2>{price}원</h2> */}
+        <CountryInfoWrapper>
+          <IconTextBox>
+            <i
+              className="fas fa-thermometer-three-quarters"
+              style={{ color: palette.red[300] }}
+            ></i>
+            <span className="text">{temp} ℃</span>
+          </IconTextBox>
+          <IconTextBox>
+            <i className="fas fa-tint" style={{ color: palette.blue[200] }}></i>
+            <span className="text">{humid}%</span>
+          </IconTextBox>
+          <IconTextBox>
+            <i className="fas fa-eye" style={{ color: palette.brown[300] }}></i>
+            <span className="text">{clickcnt}</span>
+          </IconTextBox>
+        </CountryInfoWrapper>
       </TextWrapper>
+      {/* TODO: 슬라이딩 이벤트 추가하기 */}
+      <SlideMeWrapper>
+        <SlideIcon color="secondary" variant="extended">
+          <i className="fas fa-angle-double-down"></i>
+          <span className="text">스크롤</span>
+        </SlideIcon>
+      </SlideMeWrapper>
     </BasicInformationBlock>
   );
 };
