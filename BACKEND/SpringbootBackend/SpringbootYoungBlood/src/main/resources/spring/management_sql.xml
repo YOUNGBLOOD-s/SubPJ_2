@@ -20,8 +20,8 @@
 	<insert id="insertnation" parameterType="nation">
 		insert into
 		nationtb(en_name, ko_name, dust, continents,showcnt,
-		customer, weight, speech, price)
-		values(#{en_name},#{ko_name},#{dust},#{continents},#{showcnt},#{customer},#{weight},#{speech},#{price});
+		customer, weight, speech, price,s_date,f_date)
+		values(#{en_name},#{ko_name},#{dust},#{continents},#{showcnt},#{customer},#{weight},#{speech},#{price},#{s_date},#{f_date});
 	</insert>
 
 	<delete id="nationdelete" parameterType="int">
@@ -36,14 +36,14 @@
 		en_name=#{en_name}, ko_name=#{ko_name}, dust=#{dust},
 		continents=#{continents}, showcnt=#{showcnt},
 		customer=#{customer}, weight=#{weight}, speech=#{speech},
-		price=#{price} where customer=#{customer};
+		price=#{price}, s_date=#{s_date}, f_date=#{f_date} where customer=#{customer};
 	</update>
 
 
 	<select id="monthinfo" resultType="monthtb" parameterType="int">
 		select *
 		from monthtb
-		where nation = (select idx from nationtb where customer=#{customer});
+		where nation in (select idx from nationtb where customer=#{customer});
 	</select>
 
 </mapper>

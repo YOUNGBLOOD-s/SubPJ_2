@@ -1,7 +1,8 @@
 package com.yb.rest.vo;
 
 public class Nation {
-	private String idx, en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, type;
+	private String idx, en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date,
+			type;
 	private String url;
 
 	public Nation() {
@@ -9,52 +10,6 @@ public class Nation {
 
 	public String getIdx() {
 		return idx;
-	}
-
-	public Nation(String en_name, String ko_name, String dust, String continents, String showcnt, String customer,
-			String weight, String speech, String price) {
-		super();
-		this.en_name = en_name;
-		this.ko_name = ko_name;
-		this.dust = dust;
-		this.continents = continents;
-		this.showcnt = showcnt;
-		this.customer = customer;
-		this.weight = weight;
-		this.speech = speech;
-		this.price = price;
-	}
-
-	public Nation(String en_name, String ko_name, String dust, String continents, String clickcnt, String showcnt,
-			String customer, String weight, String speech, String price, String type) {
-		super();
-		this.en_name = en_name;
-		this.ko_name = ko_name;
-		this.dust = dust;
-		this.continents = continents;
-		this.showcnt = showcnt;
-		this.customer = customer;
-		this.weight = weight;
-		this.speech = speech;
-		this.price = price;
-		this.type = type;
-	}
-
-	public Nation(String idx, String en_name, String ko_name, String dust, String continents, String clickcnt,
-			String showcnt, String customer, String weight, String speech, String price, String type, String url) {
-		super();
-		this.idx = idx;
-		this.en_name = en_name;
-		this.ko_name = ko_name;
-		this.dust = dust;
-		this.continents = continents;
-		this.showcnt = showcnt;
-		this.customer = customer;
-		this.weight = weight;
-		this.speech = speech;
-		this.price = price;
-		this.type = type;
-		this.url = url;
 	}
 
 	public void setIdx(String idx) {
@@ -133,6 +88,22 @@ public class Nation {
 		this.price = price;
 	}
 
+	public String getS_date() {
+		return s_date;
+	}
+
+	public void setS_date(String s_date) {
+		this.s_date = s_date;
+	}
+
+	public String getF_date() {
+		return f_date;
+	}
+
+	public void setF_date(String f_date) {
+		this.f_date = f_date;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -149,11 +120,40 @@ public class Nation {
 		this.url = url;
 	}
 
-	@Override
-	public String toString() {
-		return "Nation [idx=" + idx + ", en_name=" + en_name + ", ko_name=" + ko_name + ", dust=" + dust
-				+ ", continents=" + continents + ", showcnt=" + showcnt + ", customer=" + customer + ", weight="
-				+ weight + ", speech=" + speech + ", price=" + price + ", type=" + type + ", url=" + url + "]";
+	public Nation(String en_name, String ko_name, String dust, String continents, String showcnt, String customer,
+			String weight, String speech, String price, String s_date, String f_date) {
+		super();
+		this.en_name = en_name;
+		this.ko_name = ko_name;
+		this.dust = dust;
+		this.continents = continents;
+		this.showcnt = showcnt;
+		this.customer = customer;
+		this.weight = weight;
+		this.speech = speech;
+		this.price = price;
+		this.s_date = s_date;
+		this.f_date = f_date;
+	}
+
+	public Nation(String idx, String en_name, String ko_name, String dust, String continents, String showcnt,
+			String customer, String weight, String speech, String price, String s_date, String f_date, String type,
+			String url) {
+		super();
+		this.idx = idx;
+		this.en_name = en_name;
+		this.ko_name = ko_name;
+		this.dust = dust;
+		this.continents = continents;
+		this.showcnt = showcnt;
+		this.customer = customer;
+		this.weight = weight;
+		this.speech = speech;
+		this.price = price;
+		this.s_date = s_date;
+		this.f_date = f_date;
+		this.type = type;
+		this.url = url;
 	}
 
 }
