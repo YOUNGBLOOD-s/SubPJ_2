@@ -1,6 +1,6 @@
 package com.yb.rest.vo;
 
-public class Route {
+public class Route implements Comparable<Route>{
 	private String nation, day, seq, title, detail, image, tofrom, transport;
 	public Route() {}
 	public Route(String nation, String day, String seq, String title, String detail, String image, String tofrom, String transport) {
@@ -65,6 +65,22 @@ public class Route {
 	public String toString() {
 		return "Route [nation=" + nation + ", day=" + day + ", seq=" + seq + ", title=" + title + ", detail=" + detail
 				+ ", image=" + image + ", tofrom=" + tofrom + ", transport=" + transport + "]";
+	}
+	@Override
+	public int compareTo(Route o) {
+		int res=0;
+		if(Integer.parseInt(this.day)<Integer.parseInt(o.day)) {
+			res=1;
+		}else if(Integer.parseInt(this.day)>Integer.parseInt(o.day)) {
+			res=-1;
+		}else {
+			if(Integer.parseInt(this.seq)<Integer.parseInt(o.seq)) {
+				res=1;
+			}else if(Integer.parseInt(this.seq)>Integer.parseInt(o.seq)) {
+				res=-1;
+			}else res=0;
+		}
+		return res;
 	};
 	
 }
