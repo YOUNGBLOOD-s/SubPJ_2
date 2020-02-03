@@ -1,12 +1,12 @@
 import React from 'react';
 import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
-import ManagePage from './ManagePage';
+import ManageContainer from '../containers/common/ManageContainer';
 
 const MainPage = () => {
   return (
     <>
       <ButtonAppbarContainer />
-      <ManagePage />
+      <ManageContainer />
     </>
   );
 };
