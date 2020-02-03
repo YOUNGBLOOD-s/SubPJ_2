@@ -20,9 +20,25 @@ public class Nation {
 		this.type = type;
 		this.url = url;
 	}
+		
+	public Nation(String en_name, String ko_name, String dust, String continents, String clickcnt, String showcnt,
+			String customer, String weight, String speech, String price) {
+		super();
+		this.en_name = en_name;
+		this.ko_name = ko_name;
+		this.dust = dust;
+		this.continents = continents;
+		this.clickcnt = clickcnt;
+		this.showcnt = showcnt;
+		this.customer = customer;
+		this.weight = weight;
+		this.speech = speech;
+		this.price = price;
+	}
 	public String getIdx() {
 		return idx;
 	}
+	
 	public void setIdx(String idx) {
 		this.idx = idx;
 	}

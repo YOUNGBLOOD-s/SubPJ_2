@@ -30,10 +30,10 @@ CREATE TABLE IF NOT EXISTS `monthtb`(
 	hum1 float, hum2 float, hum3 float, hum4 float, hum5 float, hum6 float,
     hum7 float, hum8 float, hum9 float, hum10 float, hum11 float, hum12 float,
     foreign key (nation) references nationtb(idx)
+	on delete cascade
 );
 desc monthtb;
 
-DROP TABLE CONTENTSTB;
 -- 경로 및 상세정보 table
 CREATE TABLE IF NOT EXISTS `contentstb` (
 	idx int auto_increment primary key,
@@ -46,10 +46,9 @@ CREATE TABLE IF NOT EXISTS `contentstb` (
     tofrom varchar(50),
     transport varchar(20),
     foreign key (nation) references nationtb(idx)
+    on delete cascade
 );
 desc contentstb;
-select * from contentstb;
-select * from imagetb;
 
 -- 이미지 테이블
 CREATE TABLE IF NOT EXISTS `imagetb` (
@@ -58,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `imagetb` (
     type int,
     url varchar(500),
     foreign key (nation) references nationtb(idx)
+    on delete cascade
 );
 desc imagetb;
 
