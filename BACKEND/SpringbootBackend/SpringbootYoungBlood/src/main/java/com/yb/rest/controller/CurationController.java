@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yb.rest.service.IManService;
+import com.yb.rest.service.ICurService;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Nation;
 
@@ -27,10 +27,10 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class ManageController {
+public class CurationController {
 	
 	@Autowired
-	private IManService ser;
+	private ICurService ser;
 	
 	
 
@@ -40,7 +40,7 @@ public class ManageController {
 	}
 		
 	/** 사용자 상품 전체보기 */
-	@GetMapping("/man/list/")
+	@GetMapping("/cur/list/")
 	@ApiOperation(value = "광고주의 등록 상품리스트 보기 서비스.")
 	public ResponseEntity<Map<String, Object>> nationList(@RequestHeader(value="Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
@@ -66,8 +66,8 @@ public class ManageController {
 		
 		return res;
 	}
-	//나중
-	@GetMapping("/man/info/")
+
+	@GetMapping("/cur/info/")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
 	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value="Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
@@ -94,7 +94,7 @@ public class ManageController {
 	}
 	
 	/** 사용자 상품 등록 */
-	@PostMapping("/man/insert")
+	@PostMapping("/cur/insert")
 	@ApiOperation(value = "매니저가 nationtb등록 서비스.")
 	public ResponseEntity<Map<String, Object>> nationInsert(@RequestHeader(value="Authorization") String token,
 			@RequestBody Nation nat) {
@@ -123,7 +123,7 @@ public class ManageController {
 	
 	
 	/** 사용자 상품 삭제 */
-	@GetMapping("/man/del/")
+	@GetMapping("/cur/del/")
 	@ApiOperation(value = "매니저가 nationtb삭제 (cascade).")
 	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value="Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
@@ -149,7 +149,7 @@ public class ManageController {
 	}
 	
 	/** 사용자 상품 수정 */
-	@PutMapping("/man/update")
+	@PutMapping("/cur/update")
 	@ApiOperation(value = "매니저가 nationtb 수정.")
 	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value="Authorization") String token,
 			@RequestBody Nation nat) {

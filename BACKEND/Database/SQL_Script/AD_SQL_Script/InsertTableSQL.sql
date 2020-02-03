@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS `nationtb` (
      ko_name varchar(30) UNIQUE,
      dust int, 
      continents int,
-     clickcnt int default 0,
      showcnt int default 0,
      customer int,
      weight int,

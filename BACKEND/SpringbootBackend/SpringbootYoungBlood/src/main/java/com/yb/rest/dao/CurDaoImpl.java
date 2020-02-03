@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.yb.rest.vo.Nation;
 
 @Repository
-public class ManDaoImpl implements IManDao {
+public class CurDaoImpl implements ICurDao {
 
 	@Autowired
 	SqlSession session;

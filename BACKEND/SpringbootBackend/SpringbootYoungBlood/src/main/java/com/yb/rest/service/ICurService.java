@@ -1,10 +1,10 @@
-package com.yb.rest.dao;
+package com.yb.rest.service;
 
 import java.util.ArrayList;
 
 import com.yb.rest.vo.Nation;
 
-public interface IManDao {
+public interface ICurService {
 	public int getIdx(String username);
 	
 	public ArrayList<Nation> nationList(int customer);

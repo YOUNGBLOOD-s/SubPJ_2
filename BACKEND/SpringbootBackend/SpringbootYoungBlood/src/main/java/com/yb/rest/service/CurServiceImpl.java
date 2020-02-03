@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yb.rest.dao.IManDao;
+import com.yb.rest.dao.ICurDao;
 import com.yb.rest.vo.Nation;
 
 @Service
-public class ManServiceImpl implements IManService {
+public class CurServiceImpl implements ICurService {
 
 	@Autowired
-	IManDao repo;
+	ICurDao repo;
 
 	@Override
 	public int getIdx(String username) {
