@@ -88,7 +88,7 @@ const data = [
     amt: 2500,
   },
   {
-    name: 'Page 7',
+    name: 'Page 77',
     uv: 3490,
     pv: 4300,
     amt: 2100,
