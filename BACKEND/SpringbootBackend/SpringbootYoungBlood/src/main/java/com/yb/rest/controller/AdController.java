@@ -400,7 +400,6 @@ public class AdController {
         	result.put("en_name", nation.getEn_name());
         	result.put("name", nation.getKo_name());
         	result.put("dust", nation.getDust());
-        	result.put("clickcnt", nation.getClickcnt());
         	result.put("showcnt", nation.getShowcnt());
         	result.put("customer", nation.getCustomer());
         	result.put("weight", nation.getWeight());
@@ -467,7 +466,6 @@ public class AdController {
     		con.put("name", nation.getKo_name());
     		con.put("dust", nation.getDust());
     		con.put("continents", nation.getContinents());
-    		con.put("clickcnt", nation.getClickcnt());
     		con.put("showcnt", nation.getShowcnt());
     		con.put("customer", nation.getCustomer());
     		con.put("weight", nation.getWeight());
