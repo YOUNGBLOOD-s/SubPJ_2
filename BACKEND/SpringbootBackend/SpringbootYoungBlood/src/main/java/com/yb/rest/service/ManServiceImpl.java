@@ -27,11 +27,10 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public boolean nationinsert(String en_name, String ko_name, String dust, String continents,
-			String clickcnt, String showcnt, String customer, String weight, String speech, String price) {
+	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String showcnt,
+			String customer, String weight, String speech, String price) {
 		// TODO Auto-generated method stub
-		boolean res = repo.nationinsert(en_name, ko_name, dust, continents, clickcnt, showcnt, customer,
-				weight, speech, price);
+		boolean res = repo.nationinsert(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price);
 		return res;
 	}
 
@@ -43,10 +42,10 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public boolean nationupdate(String en_name, String ko_name, String dust, String continents,
-			String clickcnt, String showcnt, String customer, String weight, String speech, String price) {
+	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt,
+			String customer, String weight, String speech, String price) {
 		// TODO Auto-generated method stub
-		boolean res = repo.nationupdate(en_name, ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech, price);
+		boolean res = repo.nationupdate(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price);
 		return res;
 	}
 

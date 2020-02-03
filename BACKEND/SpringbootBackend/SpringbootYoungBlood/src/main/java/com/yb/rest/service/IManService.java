@@ -9,11 +9,11 @@ public interface IManService {
 	
 	public ArrayList<Nation> nationList(int customer);
 	
-	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String clickcnt, String showcnt,
+	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String showcnt,
 			String customer, String weight, String speech, String price);
 	
 	public boolean nationdelete(int customer);
 	
-	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String clickcnt, String showcnt,
+	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt,
 			String customer, String weight, String speech, String price);
 }
