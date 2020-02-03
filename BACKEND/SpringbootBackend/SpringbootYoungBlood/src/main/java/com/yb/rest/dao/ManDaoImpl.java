@@ -27,10 +27,10 @@ public class ManDaoImpl implements IManDao {
 	}
 
 	@Override
-	public boolean nationinsert(String en_name, String ko_name, String dust, String continents,
-			String clickcnt, String showcnt, String customer, String weight, String speech, String price) {
+	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String showcnt,
+			String customer, String weight, String speech, String price) {
 		// TODO Auto-generated method stub
-		Nation n = new Nation(en_name, ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech, price);
+		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price);
 		System.out.println(n.getEn_name());
 		int insert = session.insert("management.insertnation", n);
 		System.out.println("@@" + insert);
@@ -54,9 +54,9 @@ public class ManDaoImpl implements IManDao {
 
 	@Override
 	public boolean nationupdate(String en_name, String ko_name, String dust, String continents,
-			String clickcnt, String showcnt, String customer, String weight, String speech, String price) {
+			String showcnt, String customer, String weight, String speech, String price) {
 		// TODO Auto-generated method stub
-		Nation n = new Nation(en_name, ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech, price);
+		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price);
 		int update = session.update("management.nationupdate", n);
 		if (update == 0)
 			return false;

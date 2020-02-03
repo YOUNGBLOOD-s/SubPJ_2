@@ -28,21 +28,19 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api")
 public class ManageController {
-	
+
 	@Autowired
 	private IManService ser;
-	
-	
 
 	@ExceptionHandler(Exception.class)
 	public void ExceptionMethod(Exception e) {
 
 	}
-		
+
 	/** 사용자 상품 전체보기 */
-	@GetMapping("/man/list/")
+	@GetMapping("/man/nation/list/")
 	@ApiOperation(value = "광고주의 등록 상품리스트 보기 서비스.")
-	public ResponseEntity<Map<String, Object>> nationList(@RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<Map<String, Object>> nationList(@RequestHeader(value = "Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -52,24 +50,25 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			System.out.println("@@"+customer);
+			System.out.println("@@" + customer);
 
-			//리스트 뽑아오면 됨
+			// 리스트 뽑아오면 됨
 			list = ser.nationList(customer);
-			msg.put("resmsg","조회성공");
+			msg.put("resmsg", "조회성공");
 			msg.put("resvalue", list);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			msg.put("resmsg", "조회실패");
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
-		
+
 		return res;
 	}
-	//나중
-	@GetMapping("/man/info/")
+
+	// 나중
+	@GetMapping("/man/nation/info/")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
-	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -79,24 +78,24 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			System.out.println("@@"+customer);
+			System.out.println("@@" + customer);
 
-			//리스트 뽑아오면 됨
-			msg.put("resmsg","조회성공");
+			// 리스트 뽑아오면 됨
+			msg.put("resmsg", "조회성공");
 			msg.put("resvalue", list);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			msg.put("resmsg", "조회실패");
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
-		
+
 		return res;
 	}
-	
+
 	/** 사용자 상품 등록 */
-	@PostMapping("/man/insert")
+	@PostMapping("/man/nation/insert")
 	@ApiOperation(value = "매니저가 nationtb등록 서비스.")
-	public ResponseEntity<Map<String, Object>> nationInsert(@RequestHeader(value="Authorization") String token,
+	public ResponseEntity<Map<String, Object>> nationInsert(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Nation nat) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
@@ -106,26 +105,26 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			//상품 등록 하면 됨
-			boolean resProduct = ser.nationinsert(nat.getEn_name(),nat.getKo_name(),nat.getDust(),nat.getContinents(),
-					nat.getClickcnt(), nat.getShowcnt(),nat.getCustomer()+"",nat.getWeight(),nat.getSpeech(),nat.getPrice());
+			// 상품 등록 하면 됨
+			boolean resProduct = ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getDust(),
+					nat.getContinents(), nat.getShowcnt(), nat.getCustomer() + "", nat.getWeight(), nat.getSpeech(),
+					nat.getPrice());
 			msg.put("resmsg", "등록성공");
 			msg.put("resvalue", resProduct);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			msg.put("resmsg", "등록실패");
 			System.out.println(e.getMessage());
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
-		
+
 		return res;
 	}
-	
-	
+
 	/** 사용자 상품 삭제 */
-	@GetMapping("/man/del/")
+	@GetMapping("/man/nation/del/")
 	@ApiOperation(value = "매니저가 nationtb삭제 (cascade).")
-	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -135,23 +134,23 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			System.out.println(customer);
-			
-			//상품 삭제하면 됨
+
+			// 상품 삭제하면 됨
 			boolean resDelete = ser.nationdelete(customer);
-			msg.put("resmsg","삭제성공");
+			msg.put("resmsg", "삭제성공");
 			msg.put("resvalue", resDelete);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-		} catch(Exception e) {
-			msg.put("resmsg","삭제실패");
+		} catch (Exception e) {
+			msg.put("resmsg", "삭제실패");
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
 		return res;
 	}
-	
+
 	/** 사용자 상품 수정 */
-	@PutMapping("/man/update")
+	@PutMapping("/man/nation/update")
 	@ApiOperation(value = "매니저가 nationtb 수정.")
-	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value="Authorization") String token,
+	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Nation nat) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
@@ -162,14 +161,14 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			System.out.println(customer);
-			
-			//상품 수정하면 됨
-			boolean resUpdate = ser.nationupdate(nat.getEn_name(),nat.getKo_name(),nat.getDust(),nat.getContinents(),
-					nat.getClickcnt(), nat.getShowcnt(),nat.getCustomer()+"",nat.getWeight(),nat.getSpeech(),nat.getPrice());
+
+			// 상품 수정하면 됨
+			boolean resUpdate = ser.nationupdate(nat.getEn_name(), nat.getKo_name(), nat.getDust(), nat.getContinents(),
+					nat.getShowcnt(), nat.getCustomer() + "", nat.getWeight(), nat.getSpeech(), nat.getPrice());
 			msg.put("resmsg", "수정성공");
 			msg.put("resvalue", resUpdate);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			msg.put("resmsg", "수정실패");
 			System.out.println(e.getMessage());
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -177,4 +176,33 @@ public class ManageController {
 		System.out.println(res);
 		return res;
 	}
+
+	/** 사용자 상품 전체보기 */
+	@GetMapping("/man/month/Info/")
+	@ApiOperation(value = "광고주의 등록 상품리스트 보기 서비스.")
+	public ResponseEntity<Map<String, Object>> monthInfo(@RequestHeader(value = "Authorization") String token) {
+		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+		ArrayList<Nation> list = null;
+		try {
+			Claims de = MemberController.verification(token);
+			msg.put("username", de.get("username"));
+			String username = (String) de.get("username");
+			int customer = ser.getIdx(username);
+			System.out.println("@@" + customer);
+
+			// 리스트 뽑아오면 됨
+			list = ser.nationList(customer);
+			msg.put("resmsg", "조회성공");
+			msg.put("resvalue", list);
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		} catch (Exception e) {
+			msg.put("resmsg", "조회실패");
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		}
+
+		return res;
+	}
+
 }
