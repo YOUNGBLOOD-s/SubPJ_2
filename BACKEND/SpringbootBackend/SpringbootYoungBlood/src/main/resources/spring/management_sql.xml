@@ -45,7 +45,13 @@
 		from monthtb
 		where nation = (select idx from nationtb where customer=#{customer});
 	</select>
-
+	
+	<select id="selectroutelist_cus" resultType="route" parameterType="int">
+	select nation, day, seq, title, detail, image, tofrom, transport 
+	from contentstb
+	where nation = (select idx from nationtb where customer=#{customer});
+	</select>
+	
 </mapper>
  
  

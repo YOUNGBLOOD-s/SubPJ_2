@@ -107,5 +107,10 @@ public class AdDaoImpl implements IAdDao {
 		session.insert("sendtofront.insertCounvalue", counvalue);
 	}
 
+	@Override
+	public List<Route> getRoutes(String customer) {
+		return session.selectList("management.selectroutelist_cus", customer);
+	}
+
 	
 }
