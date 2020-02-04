@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styled from 'styled-components';
 import TitleBar from './common/TitleBar';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import TravelRouteItem from './TravelRouteItem';
 import CaptionText from './common/CaptionText';
 import palette from '../../lib/styles/palette';

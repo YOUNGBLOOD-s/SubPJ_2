@@ -61,14 +61,17 @@ const StyledTitle = styled.h1`
 `;
 
 const CountryInfoWrapper = styled.div`
+  text-align: center;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
 `;
 
 const IconTextBox = styled.div`
   font-size: 1.3rem;
-  margin-right: 1rem;
+  :first-child {
+    margin-right: 1rem;
+  }
   .text {
     margin-left: 0.5rem;
   }
@@ -119,7 +122,6 @@ const BasicInformation = ({ country }) => {
           </IconTextBox>
         </CountryInfoWrapper>
       </TextWrapper>
-      {/* TODO: 슬라이딩 이벤트 추가하기 */}
       <SlideMeWrapper>
         <SlideIcon color="secondary" variant="extended" onClick={onSlideClick}>
           <i className="fas fa-angle-double-down"></i>
