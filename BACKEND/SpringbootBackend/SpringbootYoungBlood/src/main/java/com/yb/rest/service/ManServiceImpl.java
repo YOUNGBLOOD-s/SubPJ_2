@@ -26,6 +26,12 @@ public class ManServiceImpl implements IManService {
 		return repo.getIdx(username);
 	}
 
+	@Override
+	public int searchGrade(int customer) {
+		int searchGrade = repo.searchGrade(customer);
+		return searchGrade;
+	}
+	
 	// customer번호에 해당되는 nationtb 상품 보여주기.
 	@Override
 	public ArrayList<Nation> nationList(int customer) {
@@ -98,5 +104,7 @@ public class ManServiceImpl implements IManService {
 		boolean deleteMonthtb = repo.deleteMonthtb(nation);
 		return deleteMonthtb;
 	}
+
+	
 
 }
