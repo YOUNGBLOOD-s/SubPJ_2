@@ -7,7 +7,7 @@ import com.yb.rest.vo.Nation;
 
 public interface IManDao {
 	public int getIdx(String username);
-
+	public int searchGrade(int customer);
 	public ArrayList<Nation> nationList(int customer);
 	public ArrayList<Nation> nationListAll(int customer);
 

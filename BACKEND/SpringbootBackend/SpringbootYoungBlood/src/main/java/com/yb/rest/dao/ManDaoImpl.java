@@ -20,7 +20,12 @@ public class ManDaoImpl implements IManDao {
 	public int getIdx(String username) {
 		return session.selectOne("management.selectidx", username);
 	}
-
+	@Override
+	public int searchGrade(int customer) {
+		// TODO Auto-generated method stub
+		return session.selectOne("management.selectGrade", customer);
+	}
+	
 	@Override
 	public ArrayList<Nation> nationList(int customer) {
 		// TODO Auto-generated method stub
@@ -113,5 +118,7 @@ public class ManDaoImpl implements IManDao {
 		else
 			return true;
 	}
+
+	
 
 }
