@@ -1,5 +1,5 @@
 import React from 'react';
-import ManageContainer from '../containers/common/ManageContainer';
+import ManageContainer from '../components/manage/ManageContainer';
 import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
 
 const ManagePage = () => {
