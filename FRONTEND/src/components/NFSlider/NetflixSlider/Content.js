@@ -19,10 +19,14 @@ const WeatherWrapper = styled.div`
 const Weather = styled.h2`
   padding: 0;
   @media only screen and (max-width: 768px) {
-    margin-bottom: 10px;
+    margin: 0;
+    margin-bottom: 1rem;
   }
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+`;
 const Title = styled.div`
   @media only screen and (max-width: 768px) {
     font-size: 90%;
@@ -30,6 +34,21 @@ const Title = styled.div`
   @media only screen and (max-width: 600px) {
     font-size: 80%;
   }
+`;
+
+const EnTitle = styled.div`
+  font-size: 2rem;
+  @media only screen and (max-width: 768px) {
+    padding: 0rem 0.8rem;
+    font-size: 90%;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 80%;
+  }
+  font-weight: bold;
+  color: #aaaaaa;
+  text-align: left;
+  padding: 0.8rem 0.8rem;
 `;
 
 const Contents = styled.div`
@@ -44,10 +63,31 @@ const Contents = styled.div`
   }
   @media only screen and (max-width: 768px) {
     width: 100%;
-    font-size: 90%;
+    font-size: 1.5rem;
   }
   @media only screen and (max-width: 600px) {
-    font-size: 80%;
+    font-size: 95%;
+  }
+`;
+
+const Price = styled.div`
+  color: white;
+  padding: 4rem 0 0 0;
+  text-decoration: underline;
+  font-size: 1.8rem;
+  @media only screen and (max-width: 1200px) {
+    font-size: 92%;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    position: fixed;
+    top: 2rem;
+    left: 70%;
+    font-size: 1.5rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 95%;
   }
 `;
 
@@ -67,7 +107,10 @@ const Content = ({ detail }) => {
       <div className="content__area">
         <div className="content__area__container">
           <div className="content__title">
-            <Title>{detail.name}</Title>
+            <TitleWrapper>
+              <Title>{detail.name}</Title>
+              <EnTitle>{detail.en_name}</EnTitle>
+            </TitleWrapper>
           </div>
           <div className="content__description">
             <WeatherWrapper>
@@ -79,6 +122,7 @@ const Content = ({ detail }) => {
               </Weather>
             </WeatherWrapper>
             <Contents>{detail.content}</Contents>
+            <Price>가격 : {detail.price}원</Price>
           </div>
         </div>
         {/* <button className="content__close" onClick={onClose}>

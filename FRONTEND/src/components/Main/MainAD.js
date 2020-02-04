@@ -27,10 +27,12 @@ const Title = styled.div`
 const EnTitle = styled.div`
   font-size: 3.5rem;
   @media only screen and (max-width: 768px) {
-    font-size: 2.7rem;
+    font-size: 3rem;
+    padding: 45px 0;
   }
   @media only screen and (max-width: 600px) {
-    font-size: 1.8rem;
+    padding: 40px 0;
+    font-size: 2rem;
   }
   font-weight: bold;
   color: #aaaaaa;
