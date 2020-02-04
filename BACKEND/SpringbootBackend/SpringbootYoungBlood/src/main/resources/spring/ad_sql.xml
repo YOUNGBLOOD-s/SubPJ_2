@@ -31,13 +31,13 @@
 	</select>
 	
 	<select id="selectNationdetail" resultType="nation" parameterType="map">
-	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech,(select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, type
+	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, showcnt, customer, weight, speech,(select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, type
 	from nationtb
 	where idx=#{nationidx};
 	</select>
 	
 	<select id="selectNationall" resultType="nation" parameterType="int">
-	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech, price, type, (select url from imagetb where type=1 AND nation=#{idx}) as url
+	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, showcnt, customer, weight, speech, price, type, (select url from imagetb where type=1 AND nation=#{idx}) as url
 	from nationtb
 	where idx=#{idx};
 	</select>
