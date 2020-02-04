@@ -32,7 +32,6 @@ import com.yb.rest.vo.Route;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
-import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Sensor;
@@ -428,20 +427,20 @@ public class AdController {
        	return re;
     }
     
-//    /** 클릭 요청 시 카운팅하는 메소드 */
-//    @GetMapping("/click/{id}")
-//    public @ResponseBody ResponseEntity<Map<String, Object>> updateclick(@PathVariable String id) {
-//    	ResponseEntity<Map<String, Object>> re = null;
-//    	Map<String, Object> result = null;
-//    	try {
-//    		int idx = Integer.parseInt(id);
-//    		ser.updateClickcnt(idx);
-//    		re = new ResponseEntity<>(result, HttpStatus.OK);
-//    	} catch(Exception e) {
-//    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
-//    	}
-//    	return re;
-//    }
+    /** 클릭 요청 시 카운팅하는 메소드 */
+    @GetMapping("/click/{id}")
+    public @ResponseBody ResponseEntity<Map<String, Object>> updateclick(@PathVariable String id) {
+    	ResponseEntity<Map<String, Object>> re = null;
+    	Map<String, Object> result = null;
+    	try {
+    		int idx = Integer.parseInt(id);
+    		ser.updateClickcnt(idx);
+    		re = new ResponseEntity<>(result, HttpStatus.OK);
+    	} catch(Exception e) {
+    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
+    	return re;
+    }
     
     /** 보여지는 나라에 대한 카운트를 하는 메소드 */
     public void updateshowcnt(List<Integer> nation) {
