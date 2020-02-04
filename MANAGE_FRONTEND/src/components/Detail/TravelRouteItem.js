@@ -81,7 +81,6 @@ const DottedBar = () => (
 );
 
 const TravelRouteItem = ({ dayRoutes }) => {
-  console.log(dayRoutes);
   // FIXME: 나중에 이미지 넣어지면 경로를 dayRoutes에서 받는걸로 수정할것
   const image =
     'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80';
