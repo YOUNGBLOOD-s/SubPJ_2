@@ -53,6 +53,8 @@ desc imagetb;
 select * from monthtb;
 select * from nationtb;
 select * from membertb;
+select * from counseltb;
+
 
 select * from counseltb;
 insert into counseltb(name, age, email, tel, date, text) 
@@ -62,3 +64,19 @@ delete from counseltb where idx=4;
 select * from membertb;
 select idx from membertb
 where username="admin";
+
+select idx, nationtb.en_name, nationtb.ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech, price, type, (select url from imagetb where type=1 AND nation=1) as url
+from nationtb
+where idx=1;
+
+select * from contentstb;
+insert into
+contentstb(nation, day, seq, title, detail, image, tofrom, transport)
+values(20,100,100,'test', 'test', 'test', 'test', 'test');
+delete from contentstb where idx=154;
+
+delete from contentstb
+where nation=1 and idx=155;
+
+update contentstb set nation=1 where nation=20;
+desc contentstb;

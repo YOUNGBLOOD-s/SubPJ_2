@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS `nationtb` (
      speech varchar(100),
      price int,
      type int default 1,
-     s_date datetime,
-     f_date datetime,
+     s_date date,
+     f_date date,
      foreign key (customer) references membertb(idx)
 );
 desc nationtb;

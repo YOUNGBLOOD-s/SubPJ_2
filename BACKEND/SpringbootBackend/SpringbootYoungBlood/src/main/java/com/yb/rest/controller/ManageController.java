@@ -59,14 +59,11 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			System.out.println("@@" + customer);
 			if (customer == 1) {
 				list = ser.nationListAll(customer);
 			} else {
-				// 리스트 뽑아오면 됨
 				list = ser.nationList(customer);
 			}
-
 			msg.put("resmsg", "조회성공");
 			msg.put("resvalue", list);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -74,11 +71,10 @@ public class ManageController {
 			msg.put("resmsg", "조회실패");
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
-
 		return res;
 	}
 
-	// 나중에 할거왜 애냐면 필요없어
+	// 나중에
 	@GetMapping("/man/nation/info/")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
 	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token) {
@@ -116,25 +112,25 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			// 상품 등록 하면 됨
+
 			boolean resProduct = ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getDust(),
-					nat.getContinents(), nat.getShowcnt(), nat.getCustomer() + "", nat.getWeight(), nat.getSpeech(),
+					nat.getContinents(), nat.getShowcnt(), customer + "", nat.getWeight(), nat.getSpeech(),
 					nat.getPrice(), nat.getS_date(), nat.getF_date());
 			msg.put("resmsg", "등록성공");
 			msg.put("resvalue", resProduct);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+
 		} catch (Exception e) {
 			msg.put("resmsg", "등록실패");
 			System.out.println(e.getMessage());
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
-
 		return res;
 	}
 
 	/** 사용자 상품 삭제 */
 	@DeleteMapping("/man/nation/delete/")
-	@ApiOperation(value = "매니저가 nationtb삭제 (cascade).")
+	@ApiOperation(value = "사용자 상품(nation) 삭제(cascade)")
 	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
@@ -144,16 +140,14 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			System.out.println(customer);
 
-			// 상품 삭제하면 됨
 			boolean resDelete = ser.nationdelete(customer);
 			msg.put("resmsg", "삭제성공");
 			msg.put("resvalue", resDelete);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
 			msg.put("resmsg", "삭제실패");
-			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
 		return res;
 	}
@@ -161,8 +155,7 @@ public class ManageController {
 	/** 사용자 상품 수정 */
 	@PutMapping("/man/nation/update")
 	@ApiOperation(value = "사용자 상품(nation) 수정")
-	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token,
-			@RequestBody Nation nat) {
+	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Nation nat) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -171,9 +164,9 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-
+			
 			boolean resUpdate = ser.nationupdate(nat.getEn_name(), nat.getKo_name(), nat.getDust(), nat.getContinents(),
-					nat.getShowcnt(), nat.getCustomer() + "", nat.getWeight(), nat.getSpeech(), nat.getPrice(),
+					nat.getShowcnt(), customer + "", nat.getWeight(), nat.getSpeech(), nat.getPrice(),
 					nat.getS_date(), nat.getF_date());
 			msg.put("resmsg", "수정성공");
 			msg.put("resvalue", resUpdate);
@@ -185,15 +178,13 @@ public class ManageController {
 		}
 		return res;
 	}
-// ===============================================================================================================
-	// monthtb
-	/** 상품 month별 전체보기 (monthtb) */
+
+	/** 상품 월별정보 전체 리스트  */
 	@GetMapping("/man/monthtb/list/")
-	@ApiOperation(value = "광고주의 등록 상품리스트 보기 서비스.")
+	@ApiOperation(value = "고객 월별 정보 보기")
 	public ResponseEntity<Map<String, Object>> monthInfo(@RequestHeader(value = "Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
-		Monthtb mt = new Monthtb();
 		Map<String, Object> msg = new HashMap<String, Object>();
 		ArrayList<Monthtb> list = null;
 		try {
@@ -201,14 +192,12 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			System.out.println("@@" + customer);
-			// 리스트 뽑아오면 됨
+
 			if (customer == 1) {
 				list = ser.monthListAll(customer);
 			} else {
 				list = ser.monthList(customer);
 			}
-
 			msg.put("resmsg", "조회성공");
 			msg.put("resvalue", list);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -219,7 +208,7 @@ public class ManageController {
 		return res;
 	}
 
-	/** monthtb 등록하기. 12개의온도 12개의 습도. */
+	/** 상품 월별정보 등록 */
 	@PostMapping("/man/monthtb/insert")
 	@ApiOperation(value = "매니저가 nationtb등록 서비스.")
 	public ResponseEntity<Map<String, Object>> monthInsert(@RequestHeader(value = "Authorization") String token,
@@ -232,7 +221,7 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			// 상품 등록 하면 됨
+
 			if (customer == 1) {
 				boolean resMonth = ser.insertMonthtb(montb);
 				msg.put("resmsg", "등록성공");
@@ -247,11 +236,10 @@ public class ManageController {
 			System.out.println(e.getMessage());
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
-
 		return res;
 	}
 
-	/** monthtb 수정하기. 12개의온도 12개의 습도. */
+	/** 상품 월별정보 수정 */
 	@PostMapping("/man/monthtb/update")
 	@ApiOperation(value = "매니저의 monthtb 수정 서비스.")
 	public ResponseEntity<Map<String, Object>> monthUpdate(@RequestHeader(value = "Authorization") String token,
@@ -283,11 +271,10 @@ public class ManageController {
 		return res;
 	}
 
-	/** monthtb 데이터 삭제 */
+	/** 상품 월별정보 삭제 */
 	@DeleteMapping("/man/monthtb/delete/{nation}")
 	@ApiOperation(value = "매니저가 monthtb(nation)삭제 ")
-	public ResponseEntity<Map<String, Object>> monthDelete(@RequestHeader(value = "Authorization") String token,
-			@PathVariable("nation") String nation) {
+	public ResponseEntity<Map<String, Object>> monthDelete(@RequestHeader(value = "Authorization") String token, @PathVariable("nation") String nation) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -296,17 +283,11 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			System.out.println(customer);
 
-			if (customer == 1) {
-				boolean resDelete = ser.deleteMonthtb(Integer.parseInt(nation));
-				msg.put("resmsg", "삭제성공");
-				msg.put("resvalue", resDelete);
-				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-			} else {
-				msg.put("resmsg", "권한없음");
-				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
-			}
+			boolean resDelete = ser.deleteMonthtb(Integer.parseInt(nation));
+			msg.put("resmsg", "삭제성공");
+			msg.put("resvalue", resDelete);
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
 			msg.put("resmsg", "삭제실패");
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -314,8 +295,6 @@ public class ManageController {
 		return res;
 	}
 
-	// ===================================================================================================================
-	// 넘지마셈
 	/** 콘텐츠 정보 조회하기 */
 	@GetMapping("/man/contents/list/")
 	public ResponseEntity<Map<String, Object>> ContentsList(@RequestHeader(value = "Authorization") String token) {
@@ -330,11 +309,11 @@ public class ManageController {
 			int customer = ser.getIdx(username);
 
 			List<Route> routelist = null;
-			if(customer==1) {
+			if (customer == 1) {
 				routelist = adser.getRoutesAll(customer);
 			} else {
 				routelist = adser.getRoutes(customer);
-			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+			}
 			msg.put("contents", routelist);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
@@ -353,22 +332,20 @@ public class ManageController {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			int customer = ser.getIdx(username);	
-			if(customer==1) {
-				adser.insertRoutes(route);
-			} else {
-				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
-			}
+			int customer = ser.getIdx(username);
+			
+			adser.insertRoutes(route);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
 		return res;
 	}
-	
+
 	/** 월별정보 정보 수정하기 */
 	@PutMapping("/man/contents/update/")
-	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Route route) {
+	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token,
+			@RequestBody Route route) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -376,14 +353,11 @@ public class ManageController {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			int customer = ser.getIdx(username);	
-			if(customer==1) {
-				adser.updateRoutes(route);
-			} else {
-				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
-			}
+			int customer = ser.getIdx(username);
+			
+			adser.updateRoutes(route);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
 		return res;
@@ -391,8 +365,7 @@ public class ManageController {
 
 	/** 콘텐츠 정보 삭제하기 */
 	@DeleteMapping("/man/contents/del/{idx}/{nation}")
-	public ResponseEntity<Map<String, Object>> ContentsDelete(@RequestHeader(value = "Authorization") String token, 
-			@PathVariable("idx") int idx,  @PathVariable("nation") int nation) {
+	public ResponseEntity<Map<String, Object>> ContentsDelete(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx, @PathVariable("nation") int nation) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -400,17 +373,14 @@ public class ManageController {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			int customer = ser.getIdx(username);	
-			if(customer==1) {
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("idx", idx);
-				map.put("nation", nation);
-				adser.deleteRoutes(map);
-			} else {
-				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
-			}
+			int customer = ser.getIdx(username);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("idx", idx);
+			map.put("nation", nation);
+			adser.deleteRoutes(map);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
 		return res;

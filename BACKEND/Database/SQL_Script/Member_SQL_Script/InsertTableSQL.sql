@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS `membertb` (
      username varchar(20) unique,
      password varchar(20),
      company varchar(20),
-     grade int default 1
+     grade int default 0
 );
 desc membertb;
