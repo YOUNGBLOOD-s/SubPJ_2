@@ -17,7 +17,7 @@ public class ManServiceImpl implements IManService {
 
 	@Autowired
 	IManDao repo;
-	
+
 	@Autowired
 	IAdDao adrepo;
 
@@ -30,6 +30,12 @@ public class ManServiceImpl implements IManService {
 	@Override
 	public ArrayList<Nation> nationList(int customer) {
 		ArrayList<Nation> list = repo.nationList(customer);
+		return list;
+	}
+
+	@Override
+	public ArrayList<Nation> nationListAll(int customer) {
+		ArrayList<Nation> list = repo.nationListAll(customer);
 		return list;
 	}
 
@@ -59,10 +65,38 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public ArrayList<Monthtb> monthInfo(int customer) {
+	public ArrayList<Monthtb> monthList(int customer) {
 		// TODO Auto-generated method stub
-		ArrayList<Monthtb> monthInfo = repo.monthInfo(customer);
-		return monthInfo;
+		ArrayList<Monthtb> list = repo.monthList(customer);
+		return list;
+	}
+
+	@Override
+	public ArrayList<Monthtb> monthListAll(int customer) {
+		// TODO Auto-generated method stub
+		ArrayList<Monthtb> list = repo.monthListAll(customer);
+		return list;
+	}
+
+	@Override
+	public boolean insertMonthtb(Monthtb montb) {
+		// TODO Auto-generated method stub
+		boolean insertMonthtb = repo.insertMonthtb(montb);
+		return insertMonthtb;
+	}
+
+	@Override
+	public boolean updateMonthtb(Monthtb montb) {
+		// TODO Auto-generated method stub
+		boolean updateMonthtb = repo.updateMonthtb(montb);
+		return updateMonthtb;
+	}
+
+	@Override
+	public boolean deleteMonthtb(int nation) {
+		// TODO Auto-generated method stub
+		boolean deleteMonthtb = repo.deleteMonthtb(nation);
+		return deleteMonthtb;
 	}
 
 }
