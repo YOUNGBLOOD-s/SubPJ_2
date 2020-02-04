@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import TravelRouteItem from './TravelRouteItem';
 import CaptionText from './common/CaptionText';
+import palette from '../../lib/styles/palette';
 
 const TravleRouteBlock = styled.div`
   margin: 1rem 0.5rem;
@@ -22,6 +23,10 @@ const TravleRouteBlock = styled.div`
 const StyledDay = styled.span`
   font-weight: bold;
   font-family: 'Nanum Myeongjo', serif;
+  .sub {
+    color: ${palette.grey[400]};
+    font-style: italic;
+  }
 `;
 
 const StyledPanel = styled(ExpansionPanel)`
@@ -63,13 +68,9 @@ const TravelRoute = ({ routes }) => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography>
-                  <StyledDay>{day} 일차</StyledDay>
-                </Typography>
-                {/* TODO: 모양 이쁘게 하기 */}
-                <Typography>
-                  <StyledDay>~ {lastRoute.title}</StyledDay>
-                </Typography>
+                <StyledDay>
+                  {day} 일차 <span className="sub">~ {lastRoute.title}</span>
+                </StyledDay>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <TravelRouteItem dayRoutes={dayRoutes} />

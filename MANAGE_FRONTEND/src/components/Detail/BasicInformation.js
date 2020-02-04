@@ -40,17 +40,20 @@ const SlideMeWrapper = styled.div`
 `;
 
 const StyledTitle = styled.h1`
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 400;
   margin: 0;
   margin-bottom: 1rem;
-  .category {
+  .title_en {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
     text-align: center;
     font-size: 2rem;
     font-style: italic;
     color: ${palette.grey[500]};
   }
   .title {
+    font-weight: bold;
+    font-family: 'Nanum Myeongjo', serif;
+    text-align: center;
     font-size: 3rem;
     font-weight: 700;
     color: ${palette.theme};
@@ -80,7 +83,8 @@ const SlideIcon = styled(Fab)`
 `;
 
 const BasicInformation = ({ country }) => {
-  const { name, thumbnail, category, temp, clickcnt, humid } = country;
+  console.log(country);
+  const { name, thumbnail, en_name, temp, humid } = country;
 
   const onSlideClick = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
@@ -98,7 +102,7 @@ const BasicInformation = ({ country }) => {
       </ImageWrapper>
       <TextWrapper>
         <StyledTitle>
-          <div className="category">{category}</div>
+          <div className="title_en">{en_name}</div>
           <div className="title">{name}</div>
         </StyledTitle>
         <CountryInfoWrapper>
@@ -112,10 +116,6 @@ const BasicInformation = ({ country }) => {
           <IconTextBox>
             <i className="fas fa-tint" style={{ color: palette.blue[200] }}></i>
             <span className="text">{humid}%</span>
-          </IconTextBox>
-          <IconTextBox>
-            <i className="fas fa-eye" style={{ color: palette.brown[300] }}></i>
-            <span className="text">{clickcnt}</span>
           </IconTextBox>
         </CountryInfoWrapper>
       </TextWrapper>
