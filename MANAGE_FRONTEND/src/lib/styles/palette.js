@@ -5,6 +5,8 @@ import {
   grey,
   blueGrey,
   red,
+  blue,
+  brown,
 } from '@material-ui/core/colors';
 
 const palette = {
@@ -15,6 +17,8 @@ const palette = {
   grey,
   blueGrey,
   red,
+  blue,
+  brown,
 };
 
 export default palette;

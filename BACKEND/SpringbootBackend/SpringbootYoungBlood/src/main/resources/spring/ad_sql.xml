@@ -25,10 +25,16 @@
 	</select>
 	
 	<select id="selectroutelist" resultType="route" parameterType="int">
-	select nation, day, seq, title, detail, image, tofrom, transport
+	select idx, nation, day, seq, title, detail, image, tofrom, transport
 	from contentstb 
 	where nation=#{idx};
 	</select>
+	
+	<select id="selectroutelistAll" resultType="route" parameterType="int">
+	select idx, nation, day, seq, title, detail, image, tofrom, transport
+	from contentstb 
+	</select>
+	
 	
 	<select id="selectNationdetail" resultType="nation" parameterType="map">
 	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, showcnt, customer, weight, speech,(select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, type
@@ -59,6 +65,24 @@
 	counseltb(age, name, email, tel, date, text)
 	values(#{age},#{name},#{email},#{tel}, #{date}, #{text})
 	</insert>
+	
+	<insert id="insertroute" parameterType="route">
+	insert into
+	contentstb(nation, day, seq, title, detail, image, tofrom, transport)
+	values(#{nation},#{day},#{seq},#{title}, #{detail}, #{image}, #{tofrom}, #{transport})
+	</insert>
+	
+	<update id="updateroute" parameterType="route">
+	update contentstb
+	set nation=#{nation}, day=#{day}, seq=#{seq}, title=#{title}, detail=#{detail},
+	image=#{image}, tofrom=#{tofrom}, transport=#{transport}
+	where nation=#{nation} AND idx=#{idx}
+	</update>
+	
+	<delete id="deleteroute" parameterType="int">
+	delete from contentstb
+	where nation=#{nation} and idx=#{idx}
+	</delete>
 	
 
 </mapper>

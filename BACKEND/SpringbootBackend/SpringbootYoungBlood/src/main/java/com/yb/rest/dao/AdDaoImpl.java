@@ -112,5 +112,25 @@ public class AdDaoImpl implements IAdDao {
 		return session.selectList("management.selectroutelist_cus", customer);
 	}
 
+	@Override
+	public List<Route> getRoutesAll(int idx) {
+		return session.selectList("sendtofront.selectroutelistAll", idx);
+	}
+
+	@Override
+	public void insertRoutes(Route route) {
+		session.insert("sendtofront.insertroute", route);
+	}
+
+	@Override
+	public void updateRoutes(Route route) {
+		session.update("sendtofront.updateroute", route);
+	}
+
+	@Override
+	public void deleteRoutes(Map map) {
+		session.delete("sendtofront.deleteroute", map);
+	}
+
 	
 }

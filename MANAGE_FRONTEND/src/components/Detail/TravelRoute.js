@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styled from 'styled-components';
-import TitleBar from './TitleBar';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import TitleBar from './common/TitleBar';
 import TravelRouteItem from './TravelRouteItem';
+import CaptionText from './common/CaptionText';
+import palette from '../../lib/styles/palette';
 
 const TravleRouteBlock = styled.div`
   margin: 1rem 0.5rem;
@@ -21,6 +20,10 @@ const TravleRouteBlock = styled.div`
 const StyledDay = styled.span`
   font-weight: bold;
   font-family: 'Nanum Myeongjo', serif;
+  .sub {
+    color: ${palette.grey[400]};
+    font-style: italic;
+  }
 `;
 
 const StyledPanel = styled(ExpansionPanel)`
@@ -44,10 +47,17 @@ const TravelRoute = ({ routes }) => {
 
   return (
     <TravleRouteBlock>
-      <TitleBar text="🚵🏾‍♂️ 여행지 한눈에 보기" />
+      <TitleBar id="main">
+        <span role="img" aria-label="emoji">
+          🚵🏾‍♂️
+        </span>{' '}
+        여행지 한눈에 보기
+      </TitleBar>
+      <CaptionText>여행 일정별 주요 경로를 인포그래픽으로 체크!</CaptionText>
       {newRoutes ? (
         Object.keys(newRoutes).map(day => {
           const dayRoutes = newRoutes[day];
+          const lastRoute = dayRoutes[dayRoutes.length - 1];
           return (
             <StyledPanel key={day}>
               <ExpansionPanelSummary
@@ -55,9 +65,9 @@ const TravelRoute = ({ routes }) => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography>
-                  <StyledDay>{day} 일차</StyledDay>
-                </Typography>
+                <StyledDay>
+                  {day} 일차 <span className="sub">~ {lastRoute.title}</span>
+                </StyledDay>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <TravelRouteItem dayRoutes={dayRoutes} />

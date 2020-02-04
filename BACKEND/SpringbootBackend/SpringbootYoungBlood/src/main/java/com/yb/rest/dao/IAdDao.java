@@ -18,6 +18,7 @@ public interface IAdDao {
 	public Sendtofront getInfo(Map value);
 	public List<Route> getRoutes(int idx);
 	public List<Route> getRoutes(String customer);
+	public List<Route> getRoutesAll(int idx);
 	public Nation getNationdetail(Map value);
 	public Nation getNationdetail(int idx);
 	public void updateSensor(Sensor sen);
@@ -31,4 +32,7 @@ public interface IAdDao {
 	public void updateClickcnt(int idx);
 	public void updateShowcnt(int idx);
 	public void updateCounsel(Counsel counvalue);
+	public void insertRoutes(Route route);
+	public void updateRoutes(Route route);
+	public void deleteRoutes(Map map);
 }
