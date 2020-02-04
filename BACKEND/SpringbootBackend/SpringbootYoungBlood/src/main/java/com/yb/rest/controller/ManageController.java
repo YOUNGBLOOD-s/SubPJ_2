@@ -180,7 +180,7 @@ public class ManageController {
 		return res;
 	}
 
-	/** 사용자 상품 전체보기 */
+	/** 상품 month별 전체보기 (monthtb) */
 	@GetMapping("/man/month/Info/")
 	@ApiOperation(value = "광고주의 등록 상품리스트 보기 서비스.")
 	public ResponseEntity<Map<String, Object>> monthInfo(@RequestHeader(value = "Authorization") String token) {
@@ -208,5 +208,7 @@ public class ManageController {
 
 		return res;
 	}
+	
+	
 
 }
