@@ -7,15 +7,37 @@ import FullScreenDialog from '../common/FullScreenDialog';
 import Axios from '../../../node_modules/axios/index';
 import LoadingBackdrop from '../common/LoadingBackdrop';
 
+const TitleWrapper = styled.div`
+  display: flex;
+`;
 const Title = styled.div`
   font-size: 5rem;
   @media only screen and (max-width: 768px) {
     font-size: 4rem;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 3rem;
+  }
   font-weight: bold;
   color: #ffffff;
   text-align: left;
-  padding: 30px;
+  padding: 20px 30px 0 30px;
+`;
+
+const EnTitle = styled.div`
+  font-size: 3.5rem;
+  @media only screen and (max-width: 768px) {
+    font-size: 3rem;
+    padding: 45px 0;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 40px 0;
+    font-size: 2rem;
+  }
+  font-weight: bold;
+  color: #aaaaaa;
+  text-align: left;
+  padding: 50px 0 0 0;
 `;
 
 const Content = styled.div`
@@ -23,9 +45,12 @@ const Content = styled.div`
   @media only screen and (max-width: 768px) {
     font-size: 1.8rem;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 1rem;
+  }
   color: #dddddd;
   text-align: left;
-  padding: 0 50px;
+  padding: 10px 70px;
 `;
 
 const MainADBlock = styled.div`
@@ -125,16 +150,19 @@ const MainAD = () => {
             transitionTime={1000}
             interval={5000}
           >
-            {datas.map(({ id, name, content, thumbnail }, index) => (
+            {datas.map(({ id, name, en_name, content, thumbnail }, index) => (
               <div key={id} onDoubleClick={() => onDoubleClick(index)}>
                 <div className="style">
                   <div className="box">
-                    <Title>{name}</Title>
+                    <TitleWrapper>
+                      <Title>{name}</Title> <EnTitle>{en_name}</EnTitle>
+                    </TitleWrapper>
                     <Content>{content}</Content>
                   </div>
                   <img
                     className="bg"
-                    src={publicURL + '/static/img/코타키나발루.jpg'}
+                    // src={publicURL + '/static/img/코타키나발루.jpg'}
+                    src={thumbnail}
                     alt=""
                   />
                 </div>
