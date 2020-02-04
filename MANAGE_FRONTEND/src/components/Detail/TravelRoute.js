@@ -45,7 +45,12 @@ const TravelRoute = ({ routes }) => {
 
   return (
     <TravleRouteBlock>
-      <TitleBar id="main">🚵🏾‍♂️ 여행지 한눈에 보기</TitleBar>
+      <TitleBar id="main">
+        <span role="img" aria-label="emoji">
+          🚵🏾‍♂️
+        </span>{' '}
+        여행지 한눈에 보기
+      </TitleBar>
       <CaptionText>여행 일정별 주요 경로를 인포그래픽으로 체크!</CaptionText>
       {newRoutes ? (
         Object.keys(newRoutes).map(day => {

@@ -25,7 +25,10 @@ const KakaoChat = () => {
   return (
     <KakaoChatBlock>
       <div onClick={chatChannel}>
-        <img src="https://developers.kakao.com/assets/img/about/logos/channel/consult_small_yellow_pc.png" />
+        <img
+          src="https://developers.kakao.com/assets/img/about/logos/channel/consult_small_yellow_pc.png"
+          alt="kakaoChat"
+        />
       </div>
     </KakaoChatBlock>
   );

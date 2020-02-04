@@ -20,7 +20,12 @@ const CautionText = ({ category }) => {
   const cautions = fakeAlert['Europe'];
   return (
     <CautionTextBlock>
-      <TitleBar>🚧 여행시 유의사항</TitleBar>
+      <TitleBar>
+        <span role="img" aria-label="emoji">
+          🚧
+        </span>{' '}
+        여행시 유의사항
+      </TitleBar>
       <CaptionText>유의해야할 점들을 알려드립니다.</CaptionText>
       {cautions.map((caution, idx) => (
         <StyledPanel key={idx}>

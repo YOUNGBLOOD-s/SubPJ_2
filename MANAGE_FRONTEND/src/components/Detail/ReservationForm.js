@@ -158,7 +158,12 @@ const ReservationForm = ({ nationId }) => {
 
   return (
     <ReservationFormBlock>
-      <TitleBar>📅 상담 예약</TitleBar>
+      <TitleBar>
+        <span role="img" aria-label="emoji">
+          📅
+        </span>{' '}
+        상담 예약
+      </TitleBar>
       <CaptionText>상품에 대해 궁금한게 있다면 상담을 예약하세요.</CaptionText>
       <MaterialCard>
         {!isReserved ? (
