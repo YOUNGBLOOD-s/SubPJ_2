@@ -334,10 +334,11 @@ public class AdController {
         	int idx = Integer.parseInt(id);
         	result = new HashMap<>();
         	List<Route> routelist = ser.getRoutes(idx);
+        	
         	Map<String, Integer> map = new HashMap<String, Integer>();
         	map.put("nationidx", idx);
         	map.put("type", ser.getType(idx));
-        
+        	
         	Nation nation = ser.getNationdetail(map);
         	Sendtofront stf = ser.getInfo(map);
         	
@@ -427,20 +428,20 @@ public class AdController {
        	return re;
     }
     
-    /** 클릭 요청 시 카운팅하는 메소드 */
-    @GetMapping("/click/{id}")
-    public @ResponseBody ResponseEntity<Map<String, Object>> updateclick(@PathVariable String id) {
-    	ResponseEntity<Map<String, Object>> re = null;
-    	Map<String, Object> result = null;
-    	try {
-    		int idx = Integer.parseInt(id);
-    		ser.updateClickcnt(idx);
-    		re = new ResponseEntity<>(result, HttpStatus.OK);
-    	} catch(Exception e) {
-    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
-    	}
-    	return re;
-    }
+//    /** 클릭 요청 시 카운팅하는 메소드 */
+//    @GetMapping("/click/{id}")
+//    public @ResponseBody ResponseEntity<Map<String, Object>> updateclick(@PathVariable String id) {
+//    	ResponseEntity<Map<String, Object>> re = null;
+//    	Map<String, Object> result = null;
+//    	try {
+//    		int idx = Integer.parseInt(id);
+//    		ser.updateClickcnt(idx);
+//    		re = new ResponseEntity<>(result, HttpStatus.OK);
+//    	} catch(Exception e) {
+//    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+//    	}
+//    	return re;
+//    }
     
     /** 보여지는 나라에 대한 카운트를 하는 메소드 */
     public void updateshowcnt(List<Integer> nation) {
