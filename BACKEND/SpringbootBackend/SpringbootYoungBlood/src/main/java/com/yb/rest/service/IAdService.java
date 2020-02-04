@@ -18,6 +18,7 @@ public interface IAdService {
 	public Sendtofront getInfo(Map value);
 	public List<Route> getRoutes(int idx);
 	public List<Route> getRoutes(String customer);
+	public List<Route> getRoutesAll(int idx);
 	public Nation getNationdetail(Map value);
 	public void updateSensor(Sensor sen);
 	public List<Monthtb> selectAll();
@@ -31,5 +32,7 @@ public interface IAdService {
 	public void updateShowcnt(int idx);
 	public Nation getNationdetail(int idx);
 	public void updateCounsel(int age, String name, String email, String tel, String date, String text);
-
+	public void insertRoutes(Route route);
+	public void updateRoutes(Route route);
+	public void deleteRoutes(Map map);
 }

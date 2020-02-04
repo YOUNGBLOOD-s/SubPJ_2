@@ -111,4 +111,24 @@ public class AdServiceImpl implements IAdService {
 	public List<Route> getRoutes(String customer) {
 		return repo.getRoutes(customer);
 	}
+
+	@Override
+	public List<Route> getRoutesAll(int idx) {
+		return repo.getRoutesAll(idx);
+	}
+
+	@Override
+	public void insertRoutes(Route route) {
+		repo.insertRoutes(route);
+	}
+
+	@Override
+	public void updateRoutes(Route route) {
+		repo.updateRoutes(route);
+	}
+
+	@Override
+	public void deleteRoutes(Map map) {
+		repo.deleteRoutes(map);
+	}
 }
