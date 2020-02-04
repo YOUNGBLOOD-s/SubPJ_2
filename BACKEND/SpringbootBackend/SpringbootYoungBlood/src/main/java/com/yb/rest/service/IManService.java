@@ -1,9 +1,11 @@
 package com.yb.rest.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 
 public interface IManService {
 	public int getIdx(String username);

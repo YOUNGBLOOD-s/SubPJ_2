@@ -17,6 +17,7 @@ public interface IAdService {
 	public List<String> getModalcontents(int id);
 	public Sendtofront getInfo(Map value);
 	public List<Route> getRoutes(int idx);
+	public List<Route> getRoutes(String customer);
 	public Nation getNationdetail(Map value);
 	public void updateSensor(Sensor sen);
 	public List<Monthtb> selectAll();

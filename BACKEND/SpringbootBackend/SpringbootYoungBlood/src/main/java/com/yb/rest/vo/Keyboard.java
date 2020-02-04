@@ -1,29 +1,36 @@
 package com.yb.rest.vo;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Keyboard {
-	private String type;
-	private String[] buttons;
-	public Keyboard(String[] buttons) {
-		this.type="buttons";
-		this.buttons=buttons;
+	private String version;
+	private Map<String, Object> data;
+	public Keyboard(Map<String, Object> data) {
+		version = "2.0";
+		this.data = data;
 	}
-	public String getType() {
-		return type;
+	
+	public String getVersion() {
+		return version;
 	}
-	public void setType(String type) {
-		this.type = type;
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
-	public String[] getButtons() {
-		return buttons;
+
+	public Map<String, Object> getData() {
+		return data;
 	}
-	public void setButtons(String[] buttons) {
-		this.buttons = buttons;
+	public void setData(Map<String, Object> data) {
+		this.data = data;
 	}
 	@Override
 	public String toString() {
-		return "Keyboard [type=" + type + ", buttons=" + Arrays.toString(buttons) + "]";
+		return "Keyboard [data=" + data + "]";
 	}
+	
+	
 	
 }

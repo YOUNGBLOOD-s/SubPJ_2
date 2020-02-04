@@ -1,19 +1,25 @@
 package com.yb.rest.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yb.rest.dao.IAdDao;
 import com.yb.rest.dao.IManDao;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 
 @Service
 public class ManServiceImpl implements IManService {
 
 	@Autowired
 	IManDao repo;
+	
+	@Autowired
+	IAdDao adrepo;
 
 	@Override
 	public int getIdx(String username) {
