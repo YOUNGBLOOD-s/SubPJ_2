@@ -33,13 +33,27 @@ const ButtonAppBar = ({ user, onLogout }) => {
       <AppBar position="static" color="inherit" className={classes.paper}>
         <Toolbar>
           <component.Typography variant="h6" className={classes.title}>
-            NEARBY AD 관리페이지
+            <Link to="/">NEARBY AD</Link>
           </component.Typography>
           {user ? (
             <>
               <component.Typography className={classes.welcome}>
-                환영합니다. {user.username}님.
+                환영합니다. {user.username}님
               </component.Typography>
+              {user.username === 'admin' ? (
+                <Link to="/admin">
+                  <component.Button className={classes.button} color="inherit">
+                    😎ADMINPAGE
+                  </component.Button>
+                </Link>
+              ) : (
+                <Link to="/manage">
+                  <component.Button className={classes.button} color="inherit">
+                    내 광고관리
+                  </component.Button>
+                </Link>
+              )}
+
               <component.Button
                 className={classes.button}
                 color="inherit"
