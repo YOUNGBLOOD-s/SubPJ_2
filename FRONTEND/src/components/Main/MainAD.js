@@ -15,6 +15,9 @@ const Title = styled.div`
   @media only screen and (max-width: 768px) {
     font-size: 4rem;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 3rem;
+  }
   font-weight: bold;
   color: #ffffff;
   text-align: left;
@@ -26,6 +29,9 @@ const EnTitle = styled.div`
   @media only screen and (max-width: 768px) {
     font-size: 2.7rem;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.8rem;
+  }
   font-weight: bold;
   color: #aaaaaa;
   text-align: left;
@@ -36,6 +42,9 @@ const Content = styled.div`
   font-size: 2rem;
   @media only screen and (max-width: 768px) {
     font-size: 1.8rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1rem;
   }
   color: #dddddd;
   text-align: left;
