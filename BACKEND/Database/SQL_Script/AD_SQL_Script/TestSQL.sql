@@ -1,5 +1,21 @@
 select detail from contentstb where nation=1;
+use yb_travel;
+select * from membertb;
+update membertb
+set grade=1
+where username='admin';
+desc imagetb;
+select * from nationtb;
 
+update nationtb
+set flag=1
+where idx=2;
+
+select * from gradetb;
+
+select showcnt from nationtb where idx=3;
+select * from gradetb;
+select volume from gradetb where idx=2;
 -- join
 select nationtb.idx, nationtb.name, nationtb.speech, 
 monthtb.tem1, monthtb.tem2, monthtb.tem3, monthtb.tem4, monthtb.tem5, monthtb.tem6, monthtb.tem7, monthtb.tem8, monthtb.tem9, monthtb.tem10, monthtb.tem11, monthtb.tem12,

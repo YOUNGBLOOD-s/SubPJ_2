@@ -84,6 +84,18 @@
 	where nation=#{nation} and idx=#{idx}
 	</delete>
 	
+	<select id="selectshowcnt" parameterType="int" resultType="int">
+	select showcnt 
+	from nationtb 
+	where idx=#{idx};
+	</select>
+	
+	<update id="updateflag" parameterType="int">
+	update nationtb
+	set flag=1
+	where idx=#{idx};
+
+	</update>
 
 </mapper>
  

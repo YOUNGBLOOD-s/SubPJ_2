@@ -105,6 +105,9 @@ public class ManServiceImpl implements IManService {
 		return deleteMonthtb;
 	}
 
-	
+	@Override
+	public int getVolume(int grade) {
+		return repo.getVolume(grade);
+	}
 
 }

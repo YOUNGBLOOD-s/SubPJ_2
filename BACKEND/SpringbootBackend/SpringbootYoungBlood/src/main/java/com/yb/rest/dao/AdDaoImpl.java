@@ -132,5 +132,15 @@ public class AdDaoImpl implements IAdDao {
 		session.delete("sendtofront.deleteroute", map);
 	}
 
+	@Override
+	public int selectShowcnt(int idx) {
+		return session.selectOne("sendtofront.selectshowcnt", idx);
+	}
+
+	@Override
+	public void updateFlag(int idx) {
+		session.update("sendtofront.updateflag", idx);
+	}
+
 	
 }
