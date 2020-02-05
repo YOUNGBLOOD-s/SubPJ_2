@@ -1,6 +1,7 @@
 package com.yb.rest.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,10 @@ public class MemServiceImpl implements IMemService{
 	public boolean DeleteMem(String password) {
 		boolean deleteMem = repo.DeleteMem(password);
 		return deleteMem;
+	}
+
+	@Override
+	public void updateGrade(Map map) {
+		repo.updateGrade(map);
 	}
 }

@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
-import com.yb.rest.vo.Route;
+import com.yb.rest.vo.Rosute;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
@@ -448,7 +448,10 @@ public class AdController {
     		int idx = nation.get(i);
     		ser.updateShowcnt(idx);
     	}
+    	//show cnt 검증하는 함수
     }
+    
+    public void 
     
     /** 나라 전체 정보를 보내는 메소드 */
     @GetMapping("/all")

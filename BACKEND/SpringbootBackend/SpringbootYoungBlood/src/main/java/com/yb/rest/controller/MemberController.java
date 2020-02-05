@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -196,78 +197,93 @@ public class MemberController {
 		return res;
 	}
 	
-	/** 멤버 조회 서비스 */
+	/** 멤버 전체 조회 서비스 */
 	@GetMapping("/auth/listmem")
 	@ApiOperation(value = "member 조회 서비스", response = List.class)
 	public @ResponseBody ResponseEntity<Map<String, Object>> listMem() {
 		ArrayList<Member> list = null;
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			list = ser.listMem();
-			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("resmsg", "조회성공");
 			map.put("resvalue", list);
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (RuntimeException e) {
-			Map map = new HashMap();
 			map.put("resmsg", "조회실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
 		return resEntity;
 	}
-
+	
+	/** 멤버 조회 서비스 */
 	@GetMapping("/auth/infomem/{username}")
 	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@PathVariable("username") String username) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		Map<String, Object> map = new HashMap();
 		Member mem = null;
 		try {
 			mem = ser.InfoMem(username);
-			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "조회성공");
 			map.put("resvalue", mem);
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (RuntimeException e) {
-			Map map = new HashMap();
 			map.put("resmsg", "조회실패");
-			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 		return resEntity;
 	}
-
+	
+	/** 멤버 삭제 서비스 */
 	@DeleteMapping("/auth/deletemem/{password}")
 	@ApiOperation(value = "num을 받아 member 삭제 서비스")
 	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMem(@PathVariable("password") String password) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			boolean delete = ser.DeleteMem(password);
-			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "삭제성공");
 			map.put("resvalue", delete);
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (RuntimeException e) {
-			Map map = new HashMap();
 			map.put("resmsg", "삭제실패");
-			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
 		}
 		return resEntity;
 	}
+	
+	/** 멤버 수정 서비스 */
 	@PutMapping("/auth/updatemem")
 	@ApiOperation(value = " Member를 받아서 member 수정 서비스")
 	public @ResponseBody ResponseEntity<Map<String,Object>> updateMem(@RequestBody Member mem){
 		ResponseEntity<Map<String,Object>> resEntity = null;
-		Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			boolean update = ser.UpdateMem(mem.getUsername(), mem.getPassword(), mem.getCompany(), mem.getGrade());
 			map.put("resmsg", "수정성공");
 			map.put("resvalue", update);
 			resEntity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 		}catch (Exception e) {
-			// TODO: handle exception
 			map.put("resmsg", "수정실패");
-			resEntity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+			resEntity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.NOT_FOUND);
 		}
-		
 		return resEntity;
-		
+	}
+
+	/** 멤버 등급 수정 서비스 */
+	@PutMapping("/mem/update/grade")
+	public @ResponseBody ResponseEntity<Map<String,Object>> updateMemGrade(@RequestBody Member mem, @RequestParam(value = "grade") int grade) {
+		ResponseEntity<Map<String,Object>> resEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Map<String, Object> value = new HashMap<String, Object>();
+			value.put("grade", grade);
+			value.put("username", mem.getUsername());
+			ser.updateGrade(value);
+			resEntity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+		} catch(Exception e) {
+			resEntity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.NOT_FOUND);
+		}
+		return resEntity;
 	}
 }

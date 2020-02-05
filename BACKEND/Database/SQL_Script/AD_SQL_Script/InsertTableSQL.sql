@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `nationtb` (
      type int default 1,
      s_date date,
      f_date date,
+     flag int default 0, # 1:false 0:true
      foreign key (customer) references membertb(idx)
 );
 desc nationtb;
