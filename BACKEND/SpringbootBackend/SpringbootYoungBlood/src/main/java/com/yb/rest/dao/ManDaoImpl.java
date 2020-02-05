@@ -38,8 +38,7 @@ public class ManDaoImpl implements IManDao {
 	}
 
 	@Override
-	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String showcnt,
-			String customer, String weight, String speech, String price, String s_date, String f_date) {
+	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date) {
 		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date);
 		int insert = session.insert("management.insertnation", n);
 		if (insert == 0)
@@ -56,12 +55,10 @@ public class ManDaoImpl implements IManDao {
 			return false;
 		else
 			return true;
-
 	}
 
 	@Override
-	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt,
-			String customer, String weight, String speech, String price, String s_date, String f_date) {
+	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date) {
 		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date);
 		int update = session.update("management.nationupdate", n);
 		if (update == 0)
@@ -114,14 +111,11 @@ public class ManDaoImpl implements IManDao {
 
 	@Override
 	public ArrayList<Image> imageListAll(int customer) {
-		// TODO Auto-generated method stub
 		return (ArrayList) session.selectList("management.imagelistAll", customer);
-
 	}
 
 	@Override
 	public ArrayList<Image> imageList(int customer) {
-		// TODO Auto-generated method stub
 		return (ArrayList) session.selectList("management.imagelist", customer);
 	}
 
@@ -136,7 +130,6 @@ public class ManDaoImpl implements IManDao {
 
 	@Override
 	public boolean updateImagetb(Image imgtb) {
-		// TODO Auto-generated method stub
 		int update = session.update("management.imageupdate", imgtb);
 		if (update == 0)
 			return false;
@@ -146,13 +139,10 @@ public class ManDaoImpl implements IManDao {
 
 	@Override
 	public boolean deleteImagetb(int idx) {
-		// TODO Auto-generated method stub
 		int delete = session.delete("management.imagedelete", idx);
 		if (delete == 0)
 			return false;
 		else
 			return true;
 	}
-
-
 }
