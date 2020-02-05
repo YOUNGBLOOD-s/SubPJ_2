@@ -5,8 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.yb.rest.vo.Click" alias="click" />
-		<typeAlias type="com.yb.rest.vo.Sendtofront"
-			alias="sendtofront" />
+		<typeAlias type="com.yb.rest.vo.Sendtofront" alias="sendtofront" />
 		<typeAlias type="com.yb.rest.vo.Sensor" alias="sen" />
 		<typeAlias type="com.yb.rest.vo.Member" alias="member" />
 		<typeAlias type="com.yb.rest.vo.QRcode" alias="qrcode" />

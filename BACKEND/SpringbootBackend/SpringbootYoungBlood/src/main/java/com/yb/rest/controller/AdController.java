@@ -432,30 +432,25 @@ public class AdController {
        	return re;
     }
     
-    /** click & QRcode 갱신하는 메소드 */
+    /** click 갱신하는 메소드 */
     @GetMapping("/click/{id}")
-    public @ResponseBody ResponseEntity<Map<String, Object>> statistics(@PathVariable String id) {
+    public @ResponseBody ResponseEntity<Map<String, Object>> statistics_click(@PathVariable String id) {
     	ResponseEntity<Map<String, Object>> re = null;
     	Map<String, Object> result = null;
     	try {
-    		//오늘날짜
-            SimpleDateFormat monthformat = new SimpleDateFormat("YYYY-MM-dd");
+            SimpleDateFormat monthformat = new SimpleDateFormat("YYYY-MM-dd hh");
             Date date = new Date();
             String today = monthformat.format(date);
-    		
+            
         	Map<String, Object> value = new HashMap<String, Object>();
         	value.put("nation", id);
         	value.put("today", today);
-            
-            //오늘날짜 있으면?
-            if(ser.getDate(value)) {
-            	//+하기
-            } else {
-            	//1로 추가하기
-            }
 
-    		int idx = Integer.parseInt(id);
-    		//ser.updateClickcnt(idx);
+            if(ser.getDate(value)) {
+            	ser.updateClickcnt(value);
+            } else {
+            	ser.insertClick(value);
+            }
     		re = new ResponseEntity<>(result, HttpStatus.OK);
     	} catch(Exception e) {
     		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
@@ -463,6 +458,31 @@ public class AdController {
     	return re;
     }
     
+    /** QRcode click 갱신하는 메소드 */
+    @GetMapping("/clickqr/{id}")
+    public @ResponseBody ResponseEntity<Map<String, Object>> statistics_qr(@PathVariable String id) {
+    	ResponseEntity<Map<String, Object>> re = null;
+    	Map<String, Object> result = null;
+    	try {
+            SimpleDateFormat monthformat = new SimpleDateFormat("YYYY-MM-dd");
+            Date date = new Date();
+            String today = monthformat.format(date);
+            
+        	Map<String, Object> value = new HashMap<String, Object>();
+        	value.put("nation", id);
+        	value.put("today", today);
+
+            if(ser.getDate(value)) {
+            	ser.updateQRcnt(value);
+            } else {
+            	ser.insertQR(value);
+            }
+    		re = new ResponseEntity<>(result, HttpStatus.OK);
+    	} catch(Exception e) {
+    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
+    	return re;
+    }
     
     /** 보여지는 나라에 대한 카운트를 하는 메소드 */
     public void updateshowcnt(List<Integer> nationIdx) {

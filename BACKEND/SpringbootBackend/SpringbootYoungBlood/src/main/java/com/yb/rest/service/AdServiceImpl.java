@@ -88,8 +88,8 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public void updateClickcnt(int idx) {
-		repo.updateClickcnt(idx);
+	public void updateClickcnt(Map map) {
+		repo.updateClickcnt(map);
 	}
 
 	@Override
@@ -140,5 +140,25 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public void updateFlag(int idx) {
 		repo.updateFlag(idx);
+	}
+
+	@Override
+	public boolean getDate(Map map) {
+		return repo.getDate(map);
+	}
+
+	@Override
+	public void insertClick(Map map) {
+		repo.insertClick(map);
+	}
+
+	@Override
+	public void updateQRcnt(Map map) {
+		repo.updateQRcnt(map);
+	}
+
+	@Override
+	public void insertQR(Map map) {
+		repo.insertQR(map);
 	}
 }

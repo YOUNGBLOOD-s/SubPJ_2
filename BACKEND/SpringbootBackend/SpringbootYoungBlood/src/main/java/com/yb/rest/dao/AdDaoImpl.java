@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.Route;
+import com.yb.rest.vo.Click;
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
@@ -79,7 +80,7 @@ public class AdDaoImpl implements IAdDao {
 
 	@Override
 	public void updateType(ForScore forScore) {
-		session.update("sensor.photoType",forScore);
+		session.update("sensor.photoType", forScore);
 	}
 
 	@Override
@@ -88,8 +89,8 @@ public class AdDaoImpl implements IAdDao {
 	}
 
 	@Override
-	public void updateClickcnt(int idx) {
-		session.update("sendtofront.updateClickcnt", idx);
+	public void updateClickcnt(Map map) {
+		session.update("sendtofront.updateClickcnt", map);
 	}
 
 	@Override
@@ -144,10 +145,26 @@ public class AdDaoImpl implements IAdDao {
 
 	@Override
 	public boolean getDate(Map map) {
-		Object selectOne = session.selectOne("sendtofront.selectdate", map);
-		if(selectOne==null) return false;
-		else return true;
+		Click click = session.selectOne("sendtofront.selectdate", map);
+		if (click == null)
+			return false;
+		else
+			return true;
 	}
 
-	
+	@Override
+	public void insertClick(Map map) {
+		session.insert("sendtofront.insertclick", map);
+	}
+
+	@Override
+	public void updateQRcnt(Map map) {
+		session.update("sendtofront.updateQRcnt", map);
+	}
+
+	@Override
+	public void insertQR(Map map) {
+		session.insert("sendtofront.insertqr", map);
+	}
+
 }
