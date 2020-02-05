@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yb.rest.dao.IChatDao;
 import com.yb.rest.service.IAdService;
 import com.yb.rest.service.IChatService;
+import com.yb.rest.vo.Click;
 import com.yb.rest.vo.Keyboard;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Nation;
@@ -28,6 +29,9 @@ public class ChatbotController {
 
 	@Autowired
     private IChatService ser;
+	
+	@Autowired
+	private IAdService nationSer;
 	
 	@PostMapping("/keyboard")
 	public Keyboard keyboard() {
@@ -58,13 +62,14 @@ public class ChatbotController {
 	public Map<String,Object> asia() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Nation> li=ser.findContinent(Integer.toString(4));
-		
-		Map<String,Object> resultMap=new HashMap<String, Object>();
-		List<String> nationNames=new ArrayList<String>();
+		//System.out.println(li.toString()+" 뽑혔니?");
+		StringBuilder sb=new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
-			nationNames.add(li.get(i).getKo_name());
+			sb.append(li.get(i).getKo_name()).append("\n");
+			sb.append("http://52.78.218.79:8282/detail/"+li.get(i).getIdx()).append("\n");
+			
 		}
-		map.put("result", nationNames);
+		map.put("result", sb);
 		return map;
 	}
 	
@@ -73,12 +78,12 @@ public class ChatbotController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Nation> li=ser.findContinent(Integer.toString(1));
 		
-		Map<String,Object> resultMap=new HashMap<String, Object>();
-		List<String> nationNames=new ArrayList<String>();
+		StringBuilder sb=new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
-			nationNames.add(li.get(i).getKo_name());
+			sb.append(li.get(i).getKo_name()).append("\n");
+			sb.append("http://52.78.218.79:8282/detail/"+li.get(i).getIdx()).append("\n");
 		}
-		map.put("result", nationNames);
+		map.put("result", sb);
 		return map;
 	}
 	
@@ -86,27 +91,28 @@ public class ChatbotController {
 	public Map<String,Object> pacificocean() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Nation> li=ser.findContinent(Integer.toString(2));
-		
-		Map<String,Object> resultMap=new HashMap<String, Object>();
-		List<String> nationNames=new ArrayList<String>();
+		System.out.println(li.size()+"사이즈 보기");
+		StringBuilder sb=new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
-			nationNames.add(li.get(i).getKo_name());
+			sb.append(li.get(i).getKo_name()).append("\n");
+			System.out.println(li.get(i).getKo_name());
+			sb.append("http://52.78.218.79:8282/detail/"+li.get(i).getIdx()).append("\n");
 		}
-		map.put("result", nationNames);
+		map.put("result", sb);
 		return map;
 	}
 	
 	@PostMapping("/africa")
 	public Map<String,Object> africa() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Nation> li=ser.findContinent(Integer.toString(4));
+		List<Nation> li=ser.findContinent(Integer.toString(3));
 		
-		Map<String,Object> resultMap=new HashMap<String, Object>();
-		List<String> nationNames=new ArrayList<String>();
+		StringBuilder sb=new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
-			nationNames.add(li.get(i).getKo_name());
+			sb.append(li.get(i).getKo_name()).append("\n");
+			sb.append("http://52.78.218.79:8282/detail/"+li.get(i).getIdx()).append("\n");
 		}
-		map.put("result", nationNames);
+		map.put("result", sb);
 		return map;
 	}
 	
@@ -115,12 +121,28 @@ public class ChatbotController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Nation> li=ser.findContinent(Integer.toString(5));
 		
-		Map<String,Object> resultMap=new HashMap<String, Object>();
-		List<String> nationNames=new ArrayList<String>();
+		StringBuilder sb=new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
-			nationNames.add(li.get(i).getKo_name());
+			sb.append(li.get(i).getKo_name()).append("\n");
+			sb.append("http://52.78.218.79:8282/detail/"+li.get(i).getIdx()).append("\n");
 		}
-		map.put("result", nationNames);
+		map.put("result", sb);
+		return map;
+	}
+	
+	@PostMapping("/favorite")
+	public Map<String,Object> favorite() {
+		System.out.println("들어와?");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Click> li=ser.selectFavorite();
+		
+		StringBuilder sb=new StringBuilder();
+		for (int i = 0; i <li.size(); i++) {
+			Nation tmp=nationSer.getNationdetail(Integer.parseInt(li.get(i).getNation()));
+			sb.append(tmp.getKo_name()).append("\n");
+			sb.append("http://52.78.218.79:8282/detail/"+tmp.getIdx()).append("\n");
+		}
+		map.put("result", sb);
 		return map;
 	}
 }

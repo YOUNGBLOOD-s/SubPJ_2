@@ -28,6 +28,7 @@ public interface IManService {
 	public boolean insertMonthtb(Monthtb montb);
 	public boolean updateMonthtb(Monthtb montb);
 	public boolean deleteMonthtb(int nation);
+
 	
 	public ArrayList<Image> imageListAll(int customer);
 	public ArrayList<Image> imageList(int customer);
@@ -36,4 +37,7 @@ public interface IManService {
 	public boolean updateImagetb(Image imgtb);
 	public boolean deleteImagetb(int idx);
 	
+
+	public int getVolume(int grade);
+
 }

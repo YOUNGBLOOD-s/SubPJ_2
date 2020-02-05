@@ -10,3 +10,11 @@ CREATE TABLE IF NOT EXISTS `membertb` (
      grade int default 0
 );
 desc membertb;
+
+-- grade table
+CREATE TABLE IF NOT EXISTS `gradetb` (
+	 idx int primary key,
+     name varchar(20) unique,
+     volume int default 0
+);
+desc gradetb;

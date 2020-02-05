@@ -102,7 +102,12 @@
 		where nation = (select idx from nationtb where
 		customer=#{customer});
 	</select>
-
+	
+	<select id="selectVolume" parameterType="int" resultType="int">
+	select volume 
+	from gradetb 
+	where idx=#{grade};
+	</select>
 
 
 	<select id="imagelist" resultType="image" parameterType="int">

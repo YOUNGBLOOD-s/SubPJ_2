@@ -139,6 +139,10 @@ public class ManServiceImpl implements IManService {
 		// TODO Auto-generated method stub
 		boolean deleteImagetb = repo.deleteImagetb(idx);
 		return deleteImagetb;
+
+	public int getVolume(int grade) {
+		return repo.getVolume(grade);
+
 	}
 
 }
