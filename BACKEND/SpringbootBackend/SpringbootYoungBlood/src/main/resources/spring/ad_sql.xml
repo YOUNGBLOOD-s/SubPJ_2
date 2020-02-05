@@ -5,6 +5,11 @@
 
 <mapper namespace="sendtofront">
 	
+	<select id="selectnations" resultType="nation">
+	select * from nationtb
+	</select>
+	
+	
 	<select id="selectimglist" resultType="string" parameterType="int">
 	select image from contentstb where nation= #{id}
 	</select>

@@ -149,5 +149,11 @@ public class AdDaoImpl implements IAdDao {
 		else return true;
 	}
 
+	@Override
+	public List<Nation> selectNations() {
+		// TODO Auto-generated method stub
+		return session.selectList("sendtofront.selectnations");
+	}
+
 	
 }

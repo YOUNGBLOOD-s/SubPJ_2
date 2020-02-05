@@ -141,4 +141,10 @@ public class AdServiceImpl implements IAdService {
 	public void updateFlag(int idx) {
 		repo.updateFlag(idx);
 	}
+
+	@Override
+	public List<Nation> selectNations() {
+		// TODO Auto-generated method stub
+		return repo.selectNations();
+	}
 }
