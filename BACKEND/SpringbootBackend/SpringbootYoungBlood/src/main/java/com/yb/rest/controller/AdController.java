@@ -28,12 +28,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
-import com.yb.rest.vo.Route;
+import com.yb.rest.service.IManService;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 import com.yb.rest.vo.Sensor;
 
 @CrossOrigin
@@ -44,6 +45,9 @@ public class AdController {
     @Autowired
     private IAdService ser;
 
+    @Autowired
+    private IManService manser;
+    
     @ExceptionHandler(Exception.class)
     public void ExceptionMethod(Exception e) {
 
@@ -212,6 +216,7 @@ public class AdController {
 
         // 가중치 계산 algorithm
         List<Integer> nation = weightcal();
+        checkshowcnt(nation);
         System.out.println("==============");
         System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
         System.out.println(nation);
@@ -323,7 +328,7 @@ public class AdController {
 	
 	/** 나라 상세정보 조회 */
     @GetMapping("/detail/{id}")
-    public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(@PathVariable String id) {
+    public @ResponseBody ResponseEntity<Map<String, Object>> selectnationdetail(@PathVariable String id) {
         
         System.out.println("==============");
         System.out.println("안녕하세요. 고객님이 요청하신 "+id+"번에 해당하는 나라 상세정보를 조회해드릴게요.");
@@ -427,14 +432,14 @@ public class AdController {
        	return re;
     }
     
-    /** 클릭 요청 시 카운팅하는 메소드 */
+    /** click & QRcode 갱신하는 메소드 */
     @GetMapping("/click/{id}")
-    public @ResponseBody ResponseEntity<Map<String, Object>> updateclick(@PathVariable String id) {
+    public @ResponseBody ResponseEntity<Map<String, Object>> statistics(@PathVariable String id) {
     	ResponseEntity<Map<String, Object>> re = null;
     	Map<String, Object> result = null;
     	try {
     		int idx = Integer.parseInt(id);
-    		ser.updateClickcnt(idx);
+    		//ser.updateClickcnt(idx);
     		re = new ResponseEntity<>(result, HttpStatus.OK);
     	} catch(Exception e) {
     		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
@@ -442,11 +447,28 @@ public class AdController {
     	return re;
     }
     
+    
     /** 보여지는 나라에 대한 카운트를 하는 메소드 */
-    public void updateshowcnt(List<Integer> nation) {
-    	for(int i=0; i<nation.size(); i++) {
-    		int idx = nation.get(i);
+    public void updateshowcnt(List<Integer> nationIdx) {
+    	for(int i=0; i<nationIdx.size(); i++) {
+    		int idx = nationIdx.get(i);
     		ser.updateShowcnt(idx);
+    	}
+    }
+    
+    /** 나라의 showcnt 검증하는 메소드 */
+    public void checkshowcnt(List<Integer> nationIdx) {
+       	System.out.println("==============");
+       	System.out.println("보여드릴 나라 => " + nationIdx + "에 대한 showcnt 증가입니다.");
+       	updateshowcnt(nationIdx);
+       	System.out.println("또한, nation flag를 검사하여 갱신합니다.");
+       	System.out.println("==============");
+    	for(int i=0; i<nationIdx.size(); i++) {
+    		int limit = manser.getVolume(manser.searchGrade(nationIdx.get(i)));
+    		int volume = ser.selectShowcnt(nationIdx.get(i));
+    		if(volume>=limit) {
+    			ser.updateFlag(nationIdx.get(i));
+    		}
     	}
     }
     
@@ -496,4 +518,5 @@ public class AdController {
     	}
     	return re;
     }
+    
 }

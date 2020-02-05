@@ -27,5 +27,5 @@ public interface IManService {
 	public boolean insertMonthtb(Monthtb montb);
 	public boolean updateMonthtb(Monthtb montb);
 	public boolean deleteMonthtb(int nation);
-	
+	public int getVolume(int grade);
 }

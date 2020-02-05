@@ -131,4 +131,14 @@ public class AdServiceImpl implements IAdService {
 	public void deleteRoutes(Map map) {
 		repo.deleteRoutes(map);
 	}
+
+	@Override
+	public int selectShowcnt(int idx) {
+		return repo.selectShowcnt(idx);
+	}
+
+	@Override
+	public void updateFlag(int idx) {
+		repo.updateFlag(idx);
+	}
 }

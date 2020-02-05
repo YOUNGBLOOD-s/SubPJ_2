@@ -2,6 +2,7 @@ package com.yb.rest.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,11 @@ public class MemDaoImpl implements IMemDao {
 			return false;
 		else
 			return true;
+	}
+
+	@Override
+	public void updateGrade(Map map) {
+		session.update("member.updategrade", map);
 	}
 	
 	

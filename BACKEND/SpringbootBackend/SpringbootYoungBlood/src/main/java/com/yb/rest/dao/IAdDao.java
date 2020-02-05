@@ -35,4 +35,6 @@ public interface IAdDao {
 	public void insertRoutes(Route route);
 	public void updateRoutes(Route route);
 	public void deleteRoutes(Map map);
+	public int selectShowcnt(int idx);
+	public void updateFlag(int idx);
 }
