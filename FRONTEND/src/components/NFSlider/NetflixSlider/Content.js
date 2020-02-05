@@ -87,7 +87,7 @@ const Price = styled.div`
     font-size: 1.5rem;
   }
   @media only screen and (max-width: 600px) {
-    font-size: 95%;
+    font-size: 94%;
   }
 `;
 
