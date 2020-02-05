@@ -4,10 +4,10 @@ import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
 
 const ManagePage = () => {
   return (
-    <div>
+    <>
       <ButtonAppbarContainer />
       <ManageContainer />
-    </div>
+    </>
   );
 };
 

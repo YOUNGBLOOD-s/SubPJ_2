@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import GradeCard from './GradeCard';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import GradeInfo from './GradeInfo';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,6 +60,7 @@ const Grade = () => {
           </Grid>
         </Grid>
       </Grid>
+      <GradeInfo />
     </>
   );
 };

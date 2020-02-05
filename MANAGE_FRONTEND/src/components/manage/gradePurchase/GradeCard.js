@@ -13,7 +13,7 @@ const GradeImgWrapper = styled.div`
 
 const GradeTitle = styled.div`
   font-size: 2rem;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
 `;
 
 const GradeContentWrapper = styled.div`
