@@ -13,8 +13,7 @@ const KakaoChat = () => {
 
   useEffect(() => {
     KakaoInstance.current = window.Kakao;
-    KakaoInstance.current.init('3e842b6f12a584d6f13dc99372a30877');
-  });
+  }, [KakaoInstance]);
 
   const chatChannel = () => {
     KakaoInstance.current.Channel.chat({
