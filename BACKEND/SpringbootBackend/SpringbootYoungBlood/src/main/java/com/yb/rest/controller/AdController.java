@@ -432,20 +432,21 @@ public class AdController {
        	return re;
     }
     
-    /** 클릭 요청 시 카운팅하는 메소드 */
+    /** click & QRcode 갱신하는 메소드 */
     @GetMapping("/click/{id}")
-    public @ResponseBody ResponseEntity<Map<String, Object>> updateclick(@PathVariable String id) {
+    public @ResponseBody ResponseEntity<Map<String, Object>> statistics(@PathVariable String id) {
     	ResponseEntity<Map<String, Object>> re = null;
     	Map<String, Object> result = null;
     	try {
     		int idx = Integer.parseInt(id);
-    		ser.updateClickcnt(idx);
+    		//ser.updateClickcnt(idx);
     		re = new ResponseEntity<>(result, HttpStatus.OK);
     	} catch(Exception e) {
     		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
     	}
     	return re;
     }
+    
     
     /** 보여지는 나라에 대한 카운트를 하는 메소드 */
     public void updateshowcnt(List<Integer> nationIdx) {
@@ -459,6 +460,8 @@ public class AdController {
     public void checkshowcnt(List<Integer> nationIdx) {
        	System.out.println("==============");
        	System.out.println("보여드릴 나라 => " + nationIdx + "에 대한 showcnt 증가입니다.");
+       	updateshowcnt(nationIdx);
+       	System.out.println("또한, nation flag를 검사하여 갱신합니다.");
        	System.out.println("==============");
     	for(int i=0; i<nationIdx.size(); i++) {
     		int limit = manser.getVolume(manser.searchGrade(nationIdx.get(i)));
@@ -515,4 +518,5 @@ public class AdController {
     	}
     	return re;
     }
+    
 }
