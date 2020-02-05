@@ -9,6 +9,7 @@ import com.yb.rest.vo.Nation;
 public interface IManDao {
 	public int getIdx(String username);
 	public int searchGrade(int customer);
+	public int getVolume(int grade);
 	
 	/** 나라테이블CRUD */
 	public ArrayList<Nation> nationList(int customer);
@@ -30,7 +31,5 @@ public interface IManDao {
 	public boolean insertImagetb(Image imgtb);
 	public boolean updateImagetb(Image imgtb);
 	public boolean deleteImagetb(int idx);
-
-	public int getVolume(int grade);
 
 }
