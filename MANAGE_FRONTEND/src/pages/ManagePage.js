@@ -6,7 +6,6 @@ const ManagePage = () => {
   return (
     <div>
       <ButtonAppbarContainer />
-      <h1>광고주 직접 관리 페이지</h1>
       <ManageContainer />
     </div>
   );

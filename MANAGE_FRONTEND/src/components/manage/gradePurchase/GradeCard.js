@@ -5,14 +5,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import FolderIcon from '@material-ui/icons/Folder';
 
 const GradeImgWrapper = styled.div`
   text-align: center;
+  min-height: 120px;
 `;
 
 const GradeTitle = styled.div`
@@ -26,11 +22,21 @@ const GradeContentWrapper = styled.div`
 
 const GradeContent = styled.div`
   font-size: 1rem;
+  text-align: left;
+  margin-left: 10%;
+  margin-bottom: 10px;
 `;
 
 const GradePrice = styled.div`
   font-size: 1.5rem;
   font-weight: bolder;
+`;
+
+const GradePriceSub = styled.span`
+  color: #cdcdcd;
+  font-size: 1rem;
+  margin-left: 1rem;
+  font-weight: normal;
 `;
 
 const useStyles = makeStyles({
@@ -41,10 +47,14 @@ const useStyles = makeStyles({
   },
   hr: {
     borderColor: palette.teal[50],
-    margin: '2rem',
+    margin: '1rem',
+  },
+  check: {
+    color: 'green',
   },
 });
-const GradeCard = ({ image, title, url, price, number }) => {
+const GradeCard = ({ title, image, grade, price, option }) => {
+  const spacing = 2;
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -54,15 +64,19 @@ const GradeCard = ({ image, title, url, price, number }) => {
             <img src={image} />
           </GradeImgWrapper>
           <GradeTitle>{title}</GradeTitle>
-          <GradePrice>&#8361; {price}</GradePrice>
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <FolderIcon />
-              </ListItemIcon>
-              <ListItemText primary="Single-line item" />
-            </ListItem>
-          </List>
+          <GradePrice>
+            &#8361; {price}
+            <GradePriceSub>per month</GradePriceSub>
+          </GradePrice>
+          <hr className={classes.hr} />
+          {option.map(item => {
+            return (
+              <GradeContent>
+                <i className={`fas fa-check ${classes.check}`}></i>
+                &nbsp; {item}
+              </GradeContent>
+            );
+          })}
           <GradeContentWrapper></GradeContentWrapper>
         </CardContent>
       </CardActionArea>
