@@ -13,6 +13,7 @@
   	<typeAlias type="com.yb.rest.vo.Monthtb" alias="monthtb"/>
   	<typeAlias type="com.yb.rest.vo.ForScore" alias="score"/>
   	<typeAlias type="com.yb.rest.vo.Counsel" alias="counsel"/>
+  	<typeAlias type="com.yb.rest.vo.Image" alias="image"/>
   </typeAliases>
   <mappers>
     <mapper resource="spring/ad_sql.xml"/>

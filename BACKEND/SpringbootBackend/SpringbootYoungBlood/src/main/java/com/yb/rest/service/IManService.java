@@ -3,6 +3,7 @@ package com.yb.rest.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Route;
@@ -27,5 +28,12 @@ public interface IManService {
 	public boolean insertMonthtb(Monthtb montb);
 	public boolean updateMonthtb(Monthtb montb);
 	public boolean deleteMonthtb(int nation);
+	
+	public ArrayList<Image> imageListAll(int customer);
+	public ArrayList<Image> imageList(int customer);
+	
+	public boolean insertImagetb(Image imgtb);
+	public boolean updateImagetb(Image imgtb);
+	public boolean deleteImagetb(int idx);
 	
 }

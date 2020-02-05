@@ -2,6 +2,7 @@ package com.yb.rest.dao;
 
 import java.util.ArrayList;
 
+import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 
@@ -25,4 +26,13 @@ public interface IManDao {
 	public boolean insertMonthtb(Monthtb montb);
 	public boolean updateMonthtb(Monthtb montb);
 	public boolean deleteMonthtb(int nation);
+	
+	public ArrayList<Image> imageListAll(int customer);
+	public ArrayList<Image> imageList(int customer);
+	
+	public boolean insertImagetb(Image imgtb);
+	public boolean updateImagetb(Image imgtb);
+	public boolean deleteImagetb(int idx);
+	
+	
 }
