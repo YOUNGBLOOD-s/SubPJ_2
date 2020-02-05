@@ -3,24 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
-		<typeAlias type="com.yb.rest.vo.Click" alias="click" />
-		<typeAlias type="com.yb.rest.vo.Sendtofront"
-			alias="sendtofront" />
-		<typeAlias type="com.yb.rest.vo.Sensor" alias="sen" />
-		<typeAlias type="com.yb.rest.vo.Member" alias="member" />
-		<typeAlias type="com.yb.rest.vo.QRcode" alias="qrcode" />
-		<typeAlias type="com.yb.rest.vo.Route" alias="route" />
-		<typeAlias type="com.yb.rest.vo.Nation" alias="nation" />
-		<typeAlias type="com.yb.rest.vo.Monthtb" alias="monthtb" />
-		<typeAlias type="com.yb.rest.vo.ForScore" alias="score" />
-		<typeAlias type="com.yb.rest.vo.Counsel" alias="counsel" />
-	</typeAliases>
-	<mappers>
-		<mapper resource="spring/ad_sql.xml" />
-		<mapper resource="spring/member_sql.xml" />
-		<mapper resource="spring/sensor.xml" />
-		<mapper resource="spring/management_sql.xml" />
-		<mapper resource="spring/chatbot_sql.xml" />
-	</mappers>
+  <typeAliases>
+  	<typeAlias type="com.yb.rest.vo.Sendtofront" alias="sendtofront"/>
+  	<typeAlias type="com.yb.rest.vo.Sensor" alias="sen"/>
+  	<typeAlias type="com.yb.rest.vo.Member" alias="member"/>
+  	<typeAlias type="com.yb.rest.vo.QRcode" alias="qrcode"/>
+  	<typeAlias type="com.yb.rest.vo.Route" alias="route"/>
+  	<typeAlias type="com.yb.rest.vo.Nation" alias="nation"/>
+  	<typeAlias type="com.yb.rest.vo.Monthtb" alias="monthtb"/>
+  	<typeAlias type="com.yb.rest.vo.ForScore" alias="score"/>
+  	<typeAlias type="com.yb.rest.vo.Counsel" alias="counsel"/>
+  	<typeAlias type="com.yb.rest.vo.Image" alias="image"/>
+    <typeAlias type="com.yb.rest.vo.Click" alias="click" />
+  </typeAliases>
+  <mappers>
+    <mapper resource="spring/ad_sql.xml"/>
+    <mapper resource="spring/member_sql.xml"/>
+    <mapper resource="spring/sensor.xml"/>
+    <mapper resource="spring/management_sql.xml"/>
+    <mapper resource="spring/chatbot_sql.xml"/>
+  </mappers>
 </configuration>

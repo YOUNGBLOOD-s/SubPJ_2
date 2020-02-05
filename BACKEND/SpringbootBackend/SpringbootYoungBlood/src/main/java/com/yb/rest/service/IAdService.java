@@ -28,7 +28,8 @@ public interface IAdService {
 	public Sensor selectData(int idx);
 	public void updateType(ForScore forScore);
 	public int getType(int idx);
-	public void updateClickcnt(int idx);
+	public void updateClickcnt(Map map);
+	public void updateQRcnt(Map map);
 	public void updateShowcnt(int idx);
 	public Nation getNationdetail(int idx);
 	public void updateCounsel(int age, String name, String email, String tel, String date, String text);
@@ -38,5 +39,8 @@ public interface IAdService {
 	public int selectShowcnt(int idx);
 	public void updateFlag(int idx);
 	public List<Nation> selectNations();
+	public boolean getDate(Map map);
+	public void insertClick(Map map);
+	public void insertQR(Map map);
 
 }

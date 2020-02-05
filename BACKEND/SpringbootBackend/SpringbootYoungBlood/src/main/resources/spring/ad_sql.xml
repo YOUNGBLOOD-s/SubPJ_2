@@ -53,10 +53,16 @@
 	where idx=#{idx};
 	</select>
 	
-	<update id="updateClickcnt" parameterType="int">
-	update nationtb 
-	set clickcnt=clickcnt+1
-	where idx=#{idx}
+	<update id="updateClickcnt" parameterType="map">
+	update clicktb 
+	set click_cnt=click_cnt+1
+	where nation=#{nation} AND date=#{today};
+	</update>
+	
+	<update id="updateQRcnt" parameterType="map">
+	update clicktb
+	set qr_cnt=qr_cnt+1
+	where nation=#{nation} AND date=#{today};
 	</update>
 	
 	<update id="updateShowcnt" parameterType="int">
@@ -101,11 +107,21 @@
 	where idx=#{idx};
 	</update>
 	
-	<select id="selectdate" parameterType="map" resultType="int">
-	select 1 
+	<select id="selectdate" parameterType="map" resultType="click">
+	select idx, nation, click_cnt, qr_cnt, date 
 	from clicktb
-	where nation=#{nation} and date=#{date};
+	where nation=#{nation} and date=#{today} limit 0,1
 	</select>
+	
+	<insert id="insertclick" parameterType="map">
+	insert into clicktb(nation, click_cnt, qr_cnt, date) 
+	values(#{nation}, 1, 0, #{today});
+	</insert>
+	
+	<insert id="insertqr" parameterType="map">
+	insert into clicktb(nation, click_cnt, qr_cnt, date) 
+	values(#{nation}, 0, 1, #{today});
+	</insert>
 
 </mapper>
  
