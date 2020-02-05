@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `clicktb` (
     nation int not null,
     click_cnt int not null,
     qr_cnt int not null,
-    date datetime not null,
+    date date not null,
 	foreign key (nation) references nationtb(idx)
 );
 # drop table clicktb;

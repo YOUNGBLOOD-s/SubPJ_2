@@ -438,6 +438,22 @@ public class AdController {
     	ResponseEntity<Map<String, Object>> re = null;
     	Map<String, Object> result = null;
     	try {
+    		//오늘날짜
+            SimpleDateFormat monthformat = new SimpleDateFormat("YYYY-MM-dd");
+            Date date = new Date();
+            String today = monthformat.format(date);
+    		
+        	Map<String, Object> value = new HashMap<String, Object>();
+        	value.put("nation", id);
+        	value.put("today", today);
+            
+            //오늘날짜 있으면?
+            if(ser.getDate(value)) {
+            	//+하기
+            } else {
+            	//1로 추가하기
+            }
+
     		int idx = Integer.parseInt(id);
     		//ser.updateClickcnt(idx);
     		re = new ResponseEntity<>(result, HttpStatus.OK);
