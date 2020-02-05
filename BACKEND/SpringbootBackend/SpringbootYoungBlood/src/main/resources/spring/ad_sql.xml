@@ -94,8 +94,13 @@
 	update nationtb
 	set flag=1
 	where idx=#{idx};
-
 	</update>
+	
+	<select id="selectdate" parameterType="map" resultType="int">
+	select 1 
+	from clicktb
+	where nation=#{nation} and date=#{date};
+	</select>
 
 </mapper>
  

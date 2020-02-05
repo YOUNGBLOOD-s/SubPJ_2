@@ -142,5 +142,12 @@ public class AdDaoImpl implements IAdDao {
 		session.update("sendtofront.updateflag", idx);
 	}
 
+	@Override
+	public boolean getDate(Map map) {
+		Object selectOne = session.selectOne("sendtofront.selectdate", map);
+		if(selectOne==null) return false;
+		else return true;
+	}
+
 	
 }

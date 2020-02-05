@@ -37,4 +37,5 @@ public interface IAdDao {
 	public void deleteRoutes(Map map);
 	public int selectShowcnt(int idx);
 	public void updateFlag(int idx);
+	public boolean getDate(Map map);
 }
