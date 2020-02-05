@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 
@@ -20,11 +21,12 @@ public class ManDaoImpl implements IManDao {
 	public int getIdx(String username) {
 		return session.selectOne("management.selectidx", username);
 	}
+
 	@Override
 	public int searchGrade(int customer) {
 		return session.selectOne("management.selectGrade", customer);
 	}
-	
+
 	@Override
 	public ArrayList<Nation> nationList(int customer) {
 		return (ArrayList) session.selectList("management.selectNationList", customer);
@@ -107,6 +109,49 @@ public class ManDaoImpl implements IManDao {
 	@Override
 	public int getVolume(int grade) {
 		return session.selectOne("management.selectVolume", grade);
+	}
+
+
+	@Override
+	public ArrayList<Image> imageListAll(int customer) {
+		// TODO Auto-generated method stub
+		return (ArrayList) session.selectList("management.imagelistAll", customer);
+
+	}
+
+	@Override
+	public ArrayList<Image> imageList(int customer) {
+		// TODO Auto-generated method stub
+		return (ArrayList) session.selectList("management.imagelist", customer);
+	}
+
+	@Override
+	public boolean insertImagetb(Image imgtb) {
+		int insert = session.insert("management.imageinsert", imgtb);
+		if (insert == 0)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public boolean updateImagetb(Image imgtb) {
+		// TODO Auto-generated method stub
+		int update = session.update("management.imageupdate", imgtb);
+		if (update == 0)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public boolean deleteImagetb(int idx) {
+		// TODO Auto-generated method stub
+		int delete = session.delete("management.imagedelete", idx);
+		if (delete == 0)
+			return false;
+		else
+			return true;
 	}
 
 

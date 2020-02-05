@@ -6,7 +6,8 @@
 <mapper namespace="management">
 
 	<select id="selectGrade" resultType="int" parameterType="int">
-		select grade
+		select
+		grade
 		from membertb
 		where idx=#{customer};
 	</select>
@@ -108,6 +109,34 @@
 	where idx=#{grade};
 	</select>
 
+
+	<select id="imagelist" resultType="image" parameterType="int">
+		select *
+		from imagetb
+		where nation in (select idx from nationtb where
+		customer=#{customer});
+	</select>
+
+	<select id="imagelistAll" resultType="image" parameterType="int">
+		select *
+		from imagetb
+	</select>
+
+
+	<insert id="imageinsert" parameterType="image">
+		insert into
+		imagetb(nation, type, url)
+		values(#{nation},#{type},#{url});
+	</insert>
+	
+	<update id="imageupdate" parameterType="image">
+		update imagetb set nation=#{nation}, type=#{type}, url=#{url} where idx=#{idx};
+	</update>
+
+	<delete id="imagedelete" parameterType="int">
+		delete from imagetb
+		where idx=#{idx}
+	</delete>
 
 </mapper>
  

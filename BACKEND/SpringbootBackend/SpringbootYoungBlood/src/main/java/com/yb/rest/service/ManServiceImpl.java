@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.yb.rest.dao.IAdDao;
 import com.yb.rest.dao.IManDao;
+import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Route;
@@ -31,7 +32,7 @@ public class ManServiceImpl implements IManService {
 		int searchGrade = repo.searchGrade(customer);
 		return searchGrade;
 	}
-	
+
 	// customer번호에 해당되는 nationtb 상품 보여주기.
 	@Override
 	public ArrayList<Nation> nationList(int customer) {
@@ -106,8 +107,42 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
+	public ArrayList<Image> imageListAll(int customer) {
+		// TODO Auto-generated method stub
+		ArrayList<Image> list = repo.imageListAll(customer);
+		return list;
+
+	}
+
+	@Override
+	public ArrayList<Image> imageList(int customer) {
+		// TODO Auto-generated method stub
+		return (ArrayList) repo.imageList(customer);
+	}
+
+	@Override
+	public boolean insertImagetb(Image imgtb) {
+		// TODO Auto-generated method stub
+		boolean insertImagetb = repo.insertImagetb(imgtb);
+		return insertImagetb;
+	}
+
+	@Override
+	public boolean updateImagetb(Image imgtb) {
+		// TODO Auto-generated method stub
+		boolean updateImagetb = repo.updateImagetb(imgtb);
+		return updateImagetb;
+	}
+
+	@Override
+	public boolean deleteImagetb(int idx) {
+		// TODO Auto-generated method stub
+		boolean deleteImagetb = repo.deleteImagetb(idx);
+		return deleteImagetb;
+
 	public int getVolume(int grade) {
 		return repo.getVolume(grade);
+
 	}
 
 }
