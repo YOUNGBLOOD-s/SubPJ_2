@@ -5,24 +5,20 @@ import palette from '../../../../lib/styles/palette';
 import { withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { nextStep, prevStep } from '../../../../modules/stepper';
+import axios from 'axios';
 
 const StyledTextField = withStyles({
   root: {
     marginBottom: '1rem',
-    // 포커스시 라벨 색상
     '& label.Mui-focused': {
       color: palette.red[300],
     },
     '& .MuiOutlinedInput-root': {
-      // 기본 필드 보더 색상
       '& fieldset': {
         borderColor: 'black',
       },
-      // 호버 했을때 색상
-      // '&:hover fieldset': {
-      //   borderColor: 'yellow',
-      // },
-      //  포커스 시 보더 색상
       '&.Mui-focused fieldset': {
         borderColor: palette.red[300],
       },
@@ -35,32 +31,9 @@ const StyledForm = styled.form`
   flex-direction: column;
 `;
 
-const continents = [
-  {
-    value: '1',
-    label: '유럽',
-  },
-  {
-    value: '2',
-    label: '북태평양',
-  },
-  {
-    value: '3',
-    label: '아프리카',
-  },
-  {
-    value: '4',
-    label: '아시아',
-  },
-  {
-    value: '5',
-    label: '북미',
-  },
-];
-
-const ProductForm = ({ onSubmit }) => {
+const NationAddForm = ({ classes, steps }) => {
   const [product, setProduct] = useState({
-    continent: 'EUR',
+    continents: '1',
     en_name: '',
     ko_name: '',
     speech: '',
@@ -68,6 +41,29 @@ const ProductForm = ({ onSubmit }) => {
     s_date: '',
     f_date: '',
   });
+
+  const { step } = useSelector(({ stepper }) => ({
+    step: stepper.step,
+  }));
+
+  const dispatch = useDispatch();
+
+  const handleNextAndAdd = () => {
+    const token = sessionStorage.getItem('access_token');
+    axios
+      .post('/api/man/nation/insert', product, {
+        headers: { Authorization: token },
+      })
+      .then(res => {
+        console.log(res);
+        dispatch(nextStep());
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleBack = () => {
+    dispatch(prevStep());
+  };
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -77,20 +73,18 @@ const ProductForm = ({ onSubmit }) => {
     });
   };
 
-  // TODO: 제출시 API요청
-
   return (
-    <StyledForm onSubmit={onSubmit}>
+    <StyledForm>
       <StyledTextField
         variant="outlined"
         select
         label="대륙"
         type="text"
-        name="continent"
-        value={product.continent}
+        name="continents"
+        value={product.continents}
         onChange={handleChange}
       >
-        {continents.map(continent => (
+        {continents_arr.map(continent => (
           <MenuItem key={continent.value} value={continent.value}>
             {continent.label}
           </MenuItem>
@@ -144,8 +138,50 @@ const ProductForm = ({ onSubmit }) => {
         value={product.speech}
         onChange={handleChange}
       />
+      <div className={classes.actionsContainer}>
+        <div>
+          <component.Button
+            disabled={step === 0}
+            onClick={handleBack}
+            className={classes.button}
+          >
+            이전단계로
+          </component.Button>
+          <component.Button
+            variant="contained"
+            color="primary"
+            onClick={handleNextAndAdd}
+            className={classes.button}
+          >
+            {step === steps.length - 1 ? '완료' : '다음'}
+          </component.Button>
+        </div>
+      </div>
     </StyledForm>
   );
 };
 
-export default ProductForm;
+export default NationAddForm;
+
+const continents_arr = [
+  {
+    value: '1',
+    label: '유럽',
+  },
+  {
+    value: '2',
+    label: '북태평양',
+  },
+  {
+    value: '3',
+    label: '아프리카',
+  },
+  {
+    value: '4',
+    label: '아시아',
+  },
+  {
+    value: '5',
+    label: '북미',
+  },
+];

@@ -134,7 +134,11 @@ const ContentAddForms = () => {
 
   return (
     <div>
-      <div>{contentForms.map(contentForm => contentForm)}</div>
+      <div>
+        {contentForms.map((contentForm, idx) => (
+          <div key={idx}>{contentForm}</div>
+        ))}
+      </div>
       <button onClick={addForm}>폼추가하기</button>
     </div>
   );
