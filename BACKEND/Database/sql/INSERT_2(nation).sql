@@ -1,3 +1,5 @@
+use yb_travel;
+
 -- 나라 table
 desc nationtb;
 # ALTER TABLE nationtb AUTO_INCREMENT=1;

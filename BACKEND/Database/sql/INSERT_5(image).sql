@@ -1,5 +1,6 @@
 # 등록된 데이터는 80개 입니다.
 use yb_travel;
+
 select * from imagetb;
 # delete from imagetb;
 # ALTER TABLE imagetb AUTO_INCREMENT=1;

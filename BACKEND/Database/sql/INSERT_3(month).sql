@@ -1,3 +1,4 @@
+use yb_travel;
 
 -- [Europe]
 insert into monthtb(nation, tem1, tem2, tem3, tem4, tem5, tem6, tem7, tem8, tem9, tem10, tem11, tem12, hum1, hum2, hum3, hum4, hum5, hum6, hum7, hum8, hum9, hum10, hum11, hum12) 
