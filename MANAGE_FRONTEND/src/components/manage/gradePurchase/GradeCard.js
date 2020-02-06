@@ -57,30 +57,32 @@ const GradeCard = ({ title, image, grade, price, option }) => {
   const spacing = 2;
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardContent>
-          <GradeImgWrapper>
-            <img src={image} />
-          </GradeImgWrapper>
-          <GradeTitle>{title}</GradeTitle>
-          <GradePrice>
-            &#8361; {price}
-            <GradePriceSub>per month</GradePriceSub>
-          </GradePrice>
-          <hr className={classes.hr} />
-          {option.map(item => {
-            return (
-              <GradeContent>
-                <i className={`fas fa-check ${classes.check}`}></i>
-                &nbsp; {item}
-              </GradeContent>
-            );
-          })}
-          <GradeContentWrapper></GradeContentWrapper>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardContent>
+            <GradeImgWrapper>
+              <img src={image} />
+            </GradeImgWrapper>
+            <GradeTitle>{title}</GradeTitle>
+            <GradePrice>
+              &#8361; {price}
+              <GradePriceSub>per month</GradePriceSub>
+            </GradePrice>
+            <hr className={classes.hr} />
+            {option.map(item => {
+              return (
+                <GradeContent>
+                  <i className={`fas fa-check ${classes.check}`}></i>
+                  &nbsp; {item}
+                </GradeContent>
+              );
+            })}
+            <GradeContentWrapper></GradeContentWrapper>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import GradeCard from './GradeCard';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,6 +7,12 @@ import GradeInfo from './GradeInfo';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+  },
+  bg: {
+    background: 'linear-gradient(to bottom, transparent, black)',
+  },
+  card: {
+    marginTop: '2rem',
   },
 }));
 
@@ -40,10 +45,11 @@ const Grade = () => {
   const spacing = 5;
 
   return (
-    <>
-      <Grid container className={classes.root} spacing={2}>
+    <div className={classes.card}>
+      <h1>1. 상품</h1>
+      <Grid container className={classes.root}>
         <Grid item xs={12}>
-          <Grid container justify="center" spacing={spacing}>
+          <Grid container justify="center">
             {gradeInfo.map(({ title, grade, price, image, option }) => {
               return (
                 <Grid key={grade} item>
@@ -60,8 +66,11 @@ const Grade = () => {
           </Grid>
         </Grid>
       </Grid>
-      <GradeInfo />
-    </>
+      <h1>2. 설명</h1>
+      <div className={classes.bg}>
+        <GradeInfo />
+      </div>
+    </div>
   );
 };
 
