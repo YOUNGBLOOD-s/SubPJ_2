@@ -55,7 +55,9 @@ const NationAddForm = ({ classes, steps }) => {
         headers: { Authorization: token },
       })
       .then(res => {
-        console.log(res);
+        // TODO: 이 인덱스를 리덕스로 글로벌 보관해서 사용해야함
+        const { nationidx } = res.data;
+
         dispatch(nextStep());
       })
       .catch(err => console.log(err));
@@ -106,6 +108,7 @@ const NationAddForm = ({ classes, steps }) => {
         value={product.ko_name}
         onChange={handleChange}
       />
+      {/* TODO: 날짜 선택은 이전에 사용했던 캘린더로 변경 */}
       <StyledTextField
         variant="outlined"
         label="여행 출발 일자(yyyy-mm-dd)"
@@ -140,6 +143,7 @@ const NationAddForm = ({ classes, steps }) => {
       />
       <div className={classes.actionsContainer}>
         <div>
+          {/* TODO: 만약 요청에 실패한다면 에러 메세지를 띄울것 */}
           <component.Button
             disabled={step === 0}
             onClick={handleBack}
