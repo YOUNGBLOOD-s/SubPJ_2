@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Chart from './Chart';
 import Grade from './gradePurchase/Grade';
+import ProductMange from './productManage/ProductMange';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

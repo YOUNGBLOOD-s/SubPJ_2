@@ -10,7 +10,8 @@ const Item = ({ detail }) => (
     {({ onSelectSlide, currentSlide, elementRef }) => {
       const isActive = currentSlide && currentSlide.id === detail.id;
 
-      const path = `${process.env.PUBLIC_URL}/static/img/코타키나발루.jpg`;
+      // const path = `${process.env.PUBLIC_URL}/static/img/코타키나발루.jpg`;
+      const path = detail.img;
 
       return (
         <div

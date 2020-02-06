@@ -6,7 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    marginTop: '2rem',
+  },
+  grid: {
+    padding: '0 4rem 0 4rem',
+    marginBottom: '4rem',
   },
 }));
 
@@ -20,10 +23,18 @@ const MobileImage = styled.img`
   height: 600px;
 `;
 
-const ImageDescription = styled.div`
+const DescriptionWrapper = styled.div`
   text-align: center;
+`;
+
+const DescriptionTitle = styled.div`
+  font-size: 2rem;
   font-weight: bolder;
-  color: white;
+`;
+
+const DescriptionContent = styled.div`
+  font-size: 1.1rem;
+  line-height: 3rem;
 `;
 
 const GradeInfo = () => {
@@ -33,21 +44,66 @@ const GradeInfo = () => {
     <>
       <Grid container className={classes.root}>
         <Grid item xs={12}>
-          <Grid container justify="center" spacing={2}>
-            <Grid item>
+          <Grid container justify="flex-start" className={classes.grid}>
+            <Grid item xs={1} />
+            <Grid item xs={6}>
               <Grid item>
                 <Image src={process.env.PUBLIC_URL + '/img/info1.png'} />
               </Grid>
+            </Grid>
+            <Grid item xs={4}>
               <Grid item>
-                <ImageDescription>[1-1] 광고 메인 페이지</ImageDescription>
+                <DescriptionTitle>메인페이지</DescriptionTitle>
+                <DescriptionContent>
+                  등록한 상품의 국가 및 사진, 소개
+                  <br />
+                  <i
+                    class="fas fa-check-circle"
+                    style={{ color: 'green' }}
+                  />{' '}
+                  QR 코드 스캔 시 상품 상세 정보 확인
+                  <br />
+                  <i
+                    class="fas fa-check-circle"
+                    style={{ color: 'green' }}
+                  />{' '}
+                  두번 터치 시 국가의 대표 여행지 확인
+                </DescriptionContent>
               </Grid>
             </Grid>
-            <Grid item>
+          </Grid>
+          <Grid container justify="flex-end" className={classes.grid}>
+            <Grid item xs={1} />
+            <Grid item xs={4}>
+              <Grid item>
+                <DescriptionTitle>상세페이지 (두번 터치)</DescriptionTitle>
+                <DescriptionContent>
+                  해당 국가의 여행지 정보 확인
+                  <br />
+                  <i
+                    class="fas fa-check-circle"
+                    style={{ color: 'green' }}
+                  />{' '}
+                  QR 코드 스캔 시 상품 상세 정보 확인
+                  <br />
+                  <i
+                    class="fas fa-check-circle"
+                    style={{ color: 'green' }}
+                  />{' '}
+                  해당 국가의 이번 달 평균 온도 및 습도
+                  <br />
+                  <i
+                    class="fas fa-check-circle"
+                    style={{ color: 'green' }}
+                  />{' '}
+                  대표 여행지 사진 및 소개
+                </DescriptionContent>
+              </Grid>
+            </Grid>
+            <Grid item xs={1} />
+            <Grid item xs={6}>
               <Grid item>
                 <Image src={process.env.PUBLIC_URL + '/img/info2.png'} />
-              </Grid>
-              <Grid item>
-                <ImageDescription>[1-2] 광고 상세 페이지</ImageDescription>
               </Grid>
             </Grid>
           </Grid>
@@ -55,36 +111,21 @@ const GradeInfo = () => {
             container
             justify="center"
             style={{ marginTop: '2rem' }}
-            spacing={2}
+            spacing={1}
           >
             <Grid item>
               <Grid item>
                 <MobileImage src={process.env.PUBLIC_URL + '/img/minfo1.png'} />
-              </Grid>
-              <Grid item>
-                <ImageDescription>
-                  [2-1] QR코드 연결 모바일 페이지
-                </ImageDescription>
               </Grid>
             </Grid>
             <Grid item>
               <Grid item>
                 <MobileImage src={process.env.PUBLIC_URL + '/img/minfo2.png'} />
               </Grid>
-              <Grid item>
-                <ImageDescription>
-                  [2-2] QR코드 연결 모바일 페이지
-                </ImageDescription>
-              </Grid>
             </Grid>
             <Grid item>
               <Grid item>
                 <MobileImage src={process.env.PUBLIC_URL + '/img/minfo3.png'} />
-              </Grid>
-              <Grid item>
-                <ImageDescription>
-                  [2-3] QR코드 연결 모바일 페이지
-                </ImageDescription>
               </Grid>
             </Grid>
           </Grid>
