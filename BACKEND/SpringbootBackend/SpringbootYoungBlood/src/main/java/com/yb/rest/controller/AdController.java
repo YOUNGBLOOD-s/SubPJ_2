@@ -76,207 +76,149 @@ public class AdController {
 	}
 
 	public List<Integer> weightcal() {
-		System.out.println("==============");
-		System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
-		System.out.println("==============");
-		Sensor sen = ser.selectData(1);
-		float tmp = sen.getTemp();
-		float hu = sen.getHumid();
-		float dus = sen.getDust();
-		float lig = sen.getRough();
+        System.out.println("==============");
+        System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
+        System.out.println("==============");
+    	Sensor sen = ser.selectData(1);
+        float tmp = sen.getTemp();
+        float hu = sen.getHumid();
+        float dus = sen.getDust();
+        float lig = sen.getRough();
 
-		Calendar calender = new GregorianCalendar(Locale.KOREA);
-		int nMonth = calender.get(Calendar.MONTH) + 1;
-		List<Monthtb> li = ser.selectAll();
-		ArrayList<Sensor> nations = new ArrayList<>();
-		boolean up = true;
-		if (tmp >= 22) {
-			up = false;
-		}
-		for (int i = 0; i < li.size(); i++) {
-			Nation nTemp = ser.getNationdetail(li.get(i).getIdx());
-			switch (nMonth) {
-			case 1:
-				if ((up && li.get(i).getTem1() >= tmp) || (!up && li.get(i).getTem1() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem1(), li.get(i).getHum1()));
-				}
-				break;
-			case 2:
-				if ((up && li.get(i).getTem2() >= tmp) || (!up && li.get(i).getTem2() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem2(), li.get(i).getHum2()));
-				}
-				break;
-			case 3:
-				if ((up && li.get(i).getTem3() >= tmp) || (!up && li.get(i).getTem3() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem3(), li.get(i).getHum3()));
-				}
-				break;
-			case 4:
-				if ((up && li.get(i).getTem4() >= tmp) || (!up && li.get(i).getTem4() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem4(), li.get(i).getHum4()));
-				}
-				break;
-			case 5:
-				if ((up && li.get(i).getTem5() >= tmp) || (!up && li.get(i).getTem5() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem5(), li.get(i).getHum5()));
-				}
-				break;
-			case 6:
-				if ((up && li.get(i).getTem6() >= tmp) || (!up && li.get(i).getTem6() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem6(), li.get(i).getHum6()));
-				}
-				break;
-			case 7:
-				if ((up && li.get(i).getTem7() >= tmp) || (!up && li.get(i).getTem7() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem7(), li.get(i).getHum7()));
-				}
-				break;
-			case 8:
-				if ((up && li.get(i).getTem8() >= tmp) || (!up && li.get(i).getTem8() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem8(), li.get(i).getHum8()));
-				}
-				break;
-			case 9:
-				if ((up && li.get(i).getTem9() >= tmp) || (!up && li.get(i).getTem9() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem9(), li.get(i).getHum9()));
-				}
-				break;
-			case 10:
-				if ((up && li.get(i).getTem10() >= tmp) || (!up && li.get(i).getTem10() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem10(), li.get(i).getHum10()));
-				}
-				break;
-			case 11:
-				if ((up && li.get(i).getTem11() >= tmp) || (!up && li.get(i).getTem11() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem11(), li.get(i).getHum11()));
-				}
-				break;
-			case 12:
-				if ((up && li.get(i).getTem12() >= tmp) || (!up && li.get(i).getTem12() < tmp)) {
-					nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem12(), li.get(i).getHum12()));
-				}
-				break;
-			}
-		}
+        Calendar calender = new GregorianCalendar(Locale.KOREA);
+        int nMonth = calender.get(Calendar.MONTH) + 1;
+        List<Monthtb> li = ser.selectAll();
+        ArrayList<Sensor> nations = new ArrayList<>();
+        boolean up = true;
+        if (tmp >= 22) {
+            up = false;
+        }
+        for (int i = 0; i < li.size(); i++) {
+            switch (nMonth) {
+            case 1:
+                if ((up && li.get(i).getTem1() >= tmp) || (!up && li.get(i).getTem1() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem1(), li.get(i).getHum1()));
+                }
+                break;
+            case 2:
+                if ((up && li.get(i).getTem2() >= tmp) || (!up && li.get(i).getTem2() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem2(), li.get(i).getHum2()));
+                }
+                break;
+            case 3:
+                if ((up && li.get(i).getTem3() >= tmp) || (!up && li.get(i).getTem3() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem3(), li.get(i).getHum3()));
+                }
+                break;
+            case 4:
+                if ((up && li.get(i).getTem4() >= tmp) || (!up && li.get(i).getTem4() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem4(), li.get(i).getHum4()));
+                }
+                break;
+            case 5:
+                if ((up && li.get(i).getTem5() >= tmp) || (!up && li.get(i).getTem5() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem5(), li.get(i).getHum5()));
+                }
+                break;
+            case 6:
+                if ((up && li.get(i).getTem6() >= tmp) || (!up && li.get(i).getTem6() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem6(), li.get(i).getHum6()));
+                }
+                break;
+            case 7:
+                if ((up && li.get(i).getTem7() >= tmp) || (!up && li.get(i).getTem7() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem7(), li.get(i).getHum7()));
+                }
+                break;
+            case 8:
+                if ((up && li.get(i).getTem8() >= tmp) || (!up && li.get(i).getTem8() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem8(), li.get(i).getHum8()));
+                }
+                break;
+            case 9:
+                if ((up && li.get(i).getTem9() >= tmp) || (!up && li.get(i).getTem9() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem9(), li.get(i).getHum9()));
+                }
+                break;
+            case 10:
+                if ((up && li.get(i).getTem10() >= tmp) || (!up && li.get(i).getTem10() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem10(), li.get(i).getHum10()));
+                }
+                break;
+            case 11:
+                if ((up && li.get(i).getTem11() >= tmp) || (!up && li.get(i).getTem11() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem11(), li.get(i).getHum11()));
+                }
+                break;
+            case 12:
+                if ((up && li.get(i).getTem12() >= tmp) || (!up && li.get(i).getTem12() < tmp)) {
+                    nations.add(new Sensor(li.get(i).getNation(), li.get(i).getTem12(), li.get(i).getHum12()));
+                }
+                break;
+            }
+        }
 
-		// INSERT
-		// 온도: 현재 온도와 5도 차이 이하 10점, 5도 이상 10 미만 20점 ...
-		for (int j = 0; j < nations.size(); j++) {
-			int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
-			ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
-		}
-		// 습도: 오름차순으로, 5개 묶음으로 -10,-20... 점수 할당(즉, 습도 높을수록 점수 깎이는거야)
-		Collections.sort(nations, new Comparator<Sensor>() {
-			@Override
-			public int compare(Sensor o1, Sensor o2) {
-				return (int) (o1.getHumid() - o2.getHumid());
-			}
-		});
-		for (int j = 0; j < nations.size(); j++) {
-			int originScore = ser.getScore(nations.get(j).getIdx());
-			int minus = j / 5 == 0 ? 10 : (j / 5) * (10);
-			originScore -= minus;
-			ser.updateScore(new ForScore(nations.get(j).getIdx(), originScore));
-		}
-		// 미세먼지로 점수화
-		for (int j = 0; j < nations.size(); j++) {
-			int score = ser.getScore(nations.get(j).getIdx());
-			int minus = ser.getDust(nations.get(j).getIdx()) * 10;
-			score -= minus;
-			ser.updateScore(new ForScore(nations.get(j).getIdx(), score));
-		}
-		// 최종 나라+점수 뽑기
-		List<ForScore> finallist = new ArrayList<ForScore>();
-		for (int j = 0; j < nations.size(); j++) {
-			finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
-		}
+        // INSERT
+        // 온도: 현재 온도와 5도 차이 이하 10점, 5도 이상 10 미만 20점 ...
+        for (int j = 0; j < nations.size(); j++) {
+            int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
+            ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
+        }
+        // 습도: 오름차순으로, 5개 묶음으로 -10,-20... 점수 할당(즉, 습도 높을수록 점수 깎이는거야)
+        Collections.sort(nations, new Comparator<Sensor>() {
+            @Override
+            public int compare(Sensor o1, Sensor o2) {
+                return (int) (o1.getHumid() - o2.getHumid());
+            }
+        });
+        for (int j = 0; j < nations.size(); j++) {
+            int originScore = ser.getScore(nations.get(j).getIdx());
+            int minus = j / 5 == 0 ? 10 : (j / 5) * (10);
+            originScore -= minus;
+            ser.updateScore(new ForScore(nations.get(j).getIdx(), originScore));
+        }
+        // 미세먼지로 점수화
+        for (int j = 0; j < nations.size(); j++) {
+            int score = ser.getScore(nations.get(j).getIdx());
+            int minus = ser.getDust(nations.get(j).getIdx()) * 10;
+            score -= minus;
+            ser.updateScore(new ForScore(nations.get(j).getIdx(), score));
+        }
+        // 최종 나라+점수 뽑기
+        List<ForScore> finallist = new ArrayList<ForScore>();
+        for (int j = 0; j < nations.size(); j++) {
+            finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
+        }
+        // 우선 나라 3개 보내는 것으로 test
+        Collections.sort(finallist, new Comparator<ForScore>() {
+            @Override
+            public int compare(ForScore o1, ForScore o2) {
+                return o1.getScore() - o2.getScore();
+            }
+        });
 
-		// *************온습도 센서 기반으로 상위 3개 뽑기 위한 부분
-		List<Integer> result = new LinkedList<>();
-		
-		Collections.sort(finallist, new Comparator<ForScore>() {
-			@Override
-			public int compare(ForScore o1, ForScore o2) {
-				return o1.getScore() - o2.getScore();
-			}
-		});
+        // 조도와 온도로 사진 phototype 선택=>type db에 저장하기
+        List<Integer> nation = new LinkedList<>();
+        for (int i = 0; i < 3; i++) {
+            int finalScore = 0;
+            // 조도 임의로 50이상이면 밝다(10). 50미만이면 어둡다로 처리(5)
+            finalScore += lig < 50 ? 5 : 10;
+            // 저온도(1) 고온도(0)
+            finalScore += nations.get(i).getTemp() < 22 ? 1 : 0;
+            finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
+            ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
 
-		// *****seller 기준으로 3개 뽑기
-		// 우선 seller 그룹 2개로 함... 이후 그룹 늘어나면 수정해야함(등급 1이면 인덱스1,,,)
-		ArrayList<Nation>[] sellerGroup=new ArrayList[3];
-		for (int j = 0; j < sellerGroup.length; j++) {
-			sellerGroup[j]=new ArrayList<Nation>();
-		}
-		
-		List<Nation> everyNations=ser.selectNations();
-		for (int i = 0; i < everyNations.size(); i++) {
-			int idx=Integer.parseInt(everyNations.get(i).getIdx());
-			
-			//이미 카운트 다 찼으면 후보군에 넣지도 마
-			if(Integer.parseInt(everyNations.get(i).getFlag())==1) continue;
-			sellerGroup[idx].add(everyNations.get(i));
-		}
-		
-		
-		// 조도와 온도로 사진 phototype 선택=>type db에 저장하기
-		
-		Random rand=new Random();
-		List<Integer> group1=new ArrayList<Integer>();
-		for (int i = 0; i < sellerGroup[1].size(); i++) {
-			group1.add(Integer.parseInt(sellerGroup[1].get(i).getIdx()));
-		}
-		// 등급 1인 셀러의 광고 => 최대 1개 노출
-		for (int i = 0; i < 1; i++) {
-			int randomIdx=rand.nextInt(group1.size());
-			Integer randomElement=group1.get(randomIdx);
-			
-			Nation nTemp=ser.getNationdetail(randomIdx);
-			
-			int finalScore = 0;
-			finalScore += lig < 50 ? 5 : 10;
-			finalScore += nations.get(i).getTemp() < 22 ? 1 : 0;
-			finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
-			///////////type 업데이트 해야해!!!!11
-			ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
-			
-			result.add(randomElement); //결과
-			group1.remove(randomIdx);
-		}
-		
-		List<Integer> group2=new ArrayList<Integer>();
-		for (int i = 0; i < sellerGroup[2].size(); i++) {
-			group1.add(Integer.parseInt(sellerGroup[2].get(i).getIdx()));
-		}
-		// 등급 2인 셀러의 광고 => 최대 2개 노출
-		for (int i = 0; i < 2; i++) {
-			int randomIdx=rand.nextInt(group2.size());
-			Integer randomElement=group2.get(randomIdx);
-			result.add(randomElement); //결과
-			group2.remove(randomIdx);
-		}
-		
-		for (int i = 0; i < 3; i++) {
-			int finalScore = 0;
-			// 조도 임의로 50이상이면 밝다(10). 50미만이면 어둡다로 처리(5)
-			finalScore += lig < 50 ? 5 : 10;
-			// 저온도(1) 고온도(0)
-			finalScore += nations.get(i).getTemp() < 22 ? 1 : 0;
-			finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
-			ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
-
-			result.add(finallist.get(i).getIdx());
-		}
-
-		return result;
-	}
+            nation.add(finallist.get(i).getIdx());
+        }
+        return nation;
+    }
 
 	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. @throws JsonProcessingException */
 	@GetMapping("/sensor/reco")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
-
 		// 가중치 계산 algorithm
 		List<Integer> nation = weightcal();
-		checkshowcnt(nation);
+		//checkshowcnt(nation);
 		System.out.println("==============");
 		System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
 		System.out.println(nation);
@@ -388,8 +330,7 @@ public class AdController {
 
 	/** 나라 상세정보 조회 */
     @GetMapping("/detail/{id}")
-    public @ResponseBody ResponseEntity<Map<String, Object>> selectnationdetail(@PathVariable String id) {
-        
+    public @ResponseBody ResponseEntity<Map<String, Object>> selectnationdetail(@PathVariable String id) {     
         System.out.println("==============");
         System.out.println("안녕하세요. 고객님이 요청하신 "+id+"번에 해당하는 나라 상세정보를 조회해드릴게요.");
     	ResponseEntity<Map<String, Object>> re = null;

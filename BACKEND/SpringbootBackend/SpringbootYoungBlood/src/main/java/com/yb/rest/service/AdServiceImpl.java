@@ -144,8 +144,10 @@ public class AdServiceImpl implements IAdService {
 
 	@Override
 	public List<Nation> selectNations() {
-		// TODO Auto-generated method stub
 		return repo.selectNations();
+	}
+	
+	@Override
 	public boolean getDate(Map map) {
 		return repo.getDate(map);
 	}
