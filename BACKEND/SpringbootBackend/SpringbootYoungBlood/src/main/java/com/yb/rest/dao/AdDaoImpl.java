@@ -167,4 +167,11 @@ public class AdDaoImpl implements IAdDao {
 		session.insert("sendtofront.insertqr", map);
 	}
 
+	@Override
+	public List<Nation> selectNations() {
+		// TODO Auto-generated method stub
+		return session.selectList("sendtofront.selectnations");
+	}
+
+	
 }

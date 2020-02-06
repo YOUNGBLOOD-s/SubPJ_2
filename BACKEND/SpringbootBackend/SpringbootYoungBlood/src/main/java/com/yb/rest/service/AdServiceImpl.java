@@ -143,6 +143,11 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
+	public List<Nation> selectNations() {
+		return repo.selectNations();
+	}
+	
+	@Override
 	public boolean getDate(Map map) {
 		return repo.getDate(map);
 	}

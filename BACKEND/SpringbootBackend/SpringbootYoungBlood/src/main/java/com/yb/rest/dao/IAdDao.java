@@ -47,6 +47,7 @@ public interface IAdDao {
 	public int selectShowcnt(int idx);
 	public void updateFlag(int idx);
 	public boolean getDate(Map map);
+	public List<Nation> selectNations();
 	
 	/** 1:1상담 */
 	public void updateCounsel(Counsel counvalue);

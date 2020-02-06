@@ -10,7 +10,7 @@ import com.yb.rest.vo.Route;
 public interface IManService {
 	public int getIdx(String username);
 	public int searchGrade(int customer);
-	public int getVolume(int grade);
+	public int getVolume(int idx);
 	
 	/**나라 CRUD*/
 	public ArrayList<Nation> nationList(int customer);
@@ -25,6 +25,7 @@ public interface IManService {
 	public boolean insertMonthtb(Monthtb montb);
 	public boolean updateMonthtb(Monthtb montb);
 	public boolean deleteMonthtb(int nation);
+	
 
 	/** 이미지 CRUD */
 	public ArrayList<Image> imageListAll(int customer);

@@ -38,9 +38,9 @@ public interface IAdService {
 	public void deleteRoutes(Map map);
 	public int selectShowcnt(int idx);
 	public void updateFlag(int idx);
+	public List<Nation> selectNations();
 	public boolean getDate(Map map);
 	public void insertClick(Map map);
 	public void insertQR(Map map);
-
 
 }
