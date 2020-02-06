@@ -93,7 +93,7 @@ const ManageContainer = () => {
           <Grade />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          상품 관리
+          <ProductMange />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
           내 정보

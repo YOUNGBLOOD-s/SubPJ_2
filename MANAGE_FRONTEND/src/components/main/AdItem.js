@@ -41,19 +41,3 @@ const AdItem = ({ ad }) => {
 };
 
 export default AdItem;
-
-// <Link to={`/detail/${id}`}>
-//     <AdCard>
-//       <StyledImg
-//         src="https://images.unsplash.com/photo-1506760610100-1af6025cf0c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"
-//         alt="ad-image"
-//       />
-//       <TextWrapper>
-//         <h1>
-//           {name}({en_name})
-//         </h1>
-//         <div>{price}원</div>
-//         <h3>{speech}</h3>
-//       </TextWrapper>
-//     </AdCard>
-// </Link>
