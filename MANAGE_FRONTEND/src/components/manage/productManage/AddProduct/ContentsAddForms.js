@@ -5,6 +5,7 @@ import palette from '../../../../lib/styles/palette';
 import { withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import styled from 'styled-components';
+import MaterialCard from '../../../common/MaterialCard';
 
 const StyledTextField = withStyles({
   root: {
@@ -55,17 +56,8 @@ const ContentsAddForm = () => {
   };
 
   return (
-    <div>
-      <h3>여행 상품에 대한 경로를 추가한다.(여러개가능하게만들자)</h3>
+    <MaterialCard>
       <StyledForm>
-        <StyledTextField
-          variant="outlined"
-          label="여행 일차 - 1일차면 1"
-          type="Number"
-          name="day"
-          value={content.day}
-          onChange={handleChange}
-        />
         <StyledTextField
           variant="outlined"
           label="컨텐츠 설명"
@@ -82,14 +74,29 @@ const ContentsAddForm = () => {
           value={content.title}
           onChange={handleChange}
         />
-        <StyledTextField
-          variant="outlined"
-          label="해당 일차에서 여행 순번"
-          type="Number"
-          name="seq"
-          value={content.seq}
-          onChange={handleChange}
-        />
+        <component.Grid container>
+          <component.Grid item xs={3}>
+            <StyledTextField
+              variant="outlined"
+              label="여행 일차"
+              type="Number"
+              name="day"
+              value={content.day}
+              onChange={handleChange}
+            />
+          </component.Grid>
+          <component.Grid item xs={3}>
+            <StyledTextField
+              variant="outlined"
+              label="해당일차의 여행순번"
+              type="Number"
+              name="seq"
+              value={content.seq}
+              onChange={handleChange}
+            />
+          </component.Grid>
+        </component.Grid>
+
         <StyledTextField
           variant="outlined"
           label="이미지"
@@ -115,8 +122,22 @@ const ContentsAddForm = () => {
           onChange={handleChange}
         />
       </StyledForm>
+    </MaterialCard>
+  );
+};
+
+const ContentAddForms = () => {
+  const [contentForms, setContentForms] = useState([<ContentsAddForm />]);
+  const addForm = () => {
+    setContentForms([...contentForms, <ContentsAddForm />]);
+  };
+
+  return (
+    <div>
+      <div>{contentForms.map(contentForm => contentForm)}</div>
+      <button onClick={addForm}>폼추가하기</button>
     </div>
   );
 };
 
-export default ContentsAddForm;
+export default ContentAddForms;

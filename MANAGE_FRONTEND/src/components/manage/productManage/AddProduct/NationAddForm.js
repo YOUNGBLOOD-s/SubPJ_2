@@ -58,7 +58,7 @@ const continents = [
   },
 ];
 
-const ProductForm = () => {
+const ProductForm = ({ onSubmit }) => {
   const [product, setProduct] = useState({
     continent: 'EUR',
     en_name: '',
@@ -79,10 +79,8 @@ const ProductForm = () => {
 
   // TODO: 제출시 API요청
 
-  console.log(product);
-
   return (
-    <StyledForm>
+    <StyledForm onSubmit={onSubmit}>
       <StyledTextField
         variant="outlined"
         select
@@ -146,9 +144,6 @@ const ProductForm = () => {
         value={product.speech}
         onChange={handleChange}
       />
-      <component.Button color="primary" variant="contained">
-        나라 추가
-      </component.Button>
     </StyledForm>
   );
 };
