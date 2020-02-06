@@ -13,4 +13,8 @@
 	<select id="test" resultType="click">
 		select idx, nation, click_cnt, qr_cnt, date from clicktb order by click_cnt+qr_cnt desc limit 0,5
 	</select>
+	
+	<select id="selectDate" parameterType="String" resultType="String">
+		select s_date from nationtb where idx=#{idx}
+	</select>
 </mapper>

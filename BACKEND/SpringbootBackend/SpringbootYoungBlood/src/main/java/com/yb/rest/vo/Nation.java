@@ -8,6 +8,8 @@ public class Nation {
 	public Nation() {
 	}
 
+	//latest for chatbot VO
+	
 	// 2020-02-05 정희수 flag 값 수정
 	public String getFlag() {
 		return flag;
