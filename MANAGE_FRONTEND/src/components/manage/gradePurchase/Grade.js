@@ -42,7 +42,6 @@ const Grade = () => {
   ];
 
   const classes = useStyles();
-  const spacing = 5;
 
   return (
     <div className={classes.card}>
