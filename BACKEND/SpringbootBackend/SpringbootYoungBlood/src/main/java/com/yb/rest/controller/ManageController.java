@@ -128,6 +128,7 @@ public class ManageController {
 	@ApiOperation(value = "사용자 상품(nation) 등록")
 	public ResponseEntity<Map<String, Object>> nationInsert(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Nation nat) {
+		System.out.println("들어온 토큰 값"+token);
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -136,13 +137,22 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-
+			
+			System.out.println("들어온 값들"+nat.toString());
+			
 			if (grade > 0) {
 				boolean resProduct = ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getDust(),
-						nat.getContinents(), nat.getShowcnt(), customer + "", nat.getWeight(), nat.getSpeech(),
+						nat.getContinents(),customer + "", nat.getWeight(), nat.getSpeech(),
 						nat.getPrice(), nat.getS_date(), nat.getF_date());
+				int last = Integer.MIN_VALUE;
+				List<Nation> list = ser.nationList(customer);
+				for(int i=0; i<list.size(); i++) {
+					last = Math.max(last, Integer.parseInt(list.get(i).getIdx()));
+				}
+				System.out.println(last);
 				msg.put("resmsg", "등록성공");
 				msg.put("resvalue", resProduct);
+				msg.put("nationidx", last);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				msg.put("resmsg", "권한없음.");
