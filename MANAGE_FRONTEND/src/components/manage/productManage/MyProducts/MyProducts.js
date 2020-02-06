@@ -10,7 +10,7 @@ const MyProducts = () => {
   const token = sessionStorage.getItem('access_token');
   useEffect(() => {
     axios
-      .get('/api/man/nation/list', {
+      .get('/api/man/nation/list/', {
         headers: {
           Authorization: token,
         },
