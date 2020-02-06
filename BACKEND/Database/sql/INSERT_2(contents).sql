@@ -4,7 +4,7 @@ use yb_travel;
 select * from contentstb;
 
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(18, 1, 1, '솔뱅', '마크풍의 마을 [솔뱅]',  '/usr/local/DATA/america_west/landmark1.png', '인천공항에서 솔뱅', '버스');
+	values(18, 1, 1, '솔뱅', '마크풍의 마을 [솔뱅]',  'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/america_west/landmark1.png', '인천공항에서 솔뱅', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
 	values(18, 1, 2, '길로이아울렛', '길로이 프리미엄 아울렛 이동 및 자유 쇼핑', '/usr/local/DATA/america_west/landmark2.png', '솔뱅에서 길로이', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
