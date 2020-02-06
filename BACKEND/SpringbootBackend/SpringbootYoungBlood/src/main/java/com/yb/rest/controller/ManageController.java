@@ -53,7 +53,6 @@ public class ManageController {
 	@GetMapping("/man/nation/list/")
 	@ApiOperation(value = "광고주의 등록 상품(nation) 전체 리스트")
 	public ResponseEntity<Map<String, Object>> nationList(@RequestHeader(value = "Authorization") String token) {
-		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		ArrayList<Nation> list = null;
@@ -86,7 +85,6 @@ public class ManageController {
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
 	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token,
 			@PathVariable("idx") int idx) {
-		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		System.out.println(idx);
