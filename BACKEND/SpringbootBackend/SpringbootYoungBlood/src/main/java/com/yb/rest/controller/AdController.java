@@ -75,6 +75,7 @@ public class AdController {
 		ser.updateSensor(sen);
 	}
 
+	@GetMapping("/weightcal")
 	public List<Integer> weightcal() {
         System.out.println("==============");
         System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
@@ -197,20 +198,70 @@ public class AdController {
             }
         });
 
-        // 조도와 온도로 사진 phototype 선택=>type db에 저장하기
-        List<Integer> nation = new LinkedList<>();
-        for (int i = 0; i < 3; i++) {
-            int finalScore = 0;
-            // 조도 임의로 50이상이면 밝다(10). 50미만이면 어둡다로 처리(5)
-            finalScore += lig < 50 ? 5 : 10;
-            // 저온도(1) 고온도(0)
-            finalScore += nations.get(i).getTemp() < 22 ? 1 : 0;
-            finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
-            ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
+     // 조도와 온도로 사진 phototype 선택=>type db에 저장하기
+     		List<Integer> result = new LinkedList<>();
+     		for (int i = 0; i < 3; i++) {
+     			int finalScore = 0;
+     			// 조도 임의로 50이상이면 밝다(10). 50미만이면 어둡다로 처리(5)
+     			finalScore += lig < 50 ? 5 : 10;
+     			// 저온도(1) 고온도(0)
+     			finalScore += nations.get(i).getTemp() < 22 ? 1 : 0;
+     			finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
+     			ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
 
-            nation.add(finallist.get(i).getIdx());
-        }
-        return nation;
+     			result.add(finallist.get(i).getIdx());
+     		}
+
+     		// 셀러 등급으로 랜덤 만들기 우선은 1,2,3등급으로 구별 **나중에 가능 등급 크기로 바꾸기
+     		ArrayList<Integer>[] gradeGroup = new ArrayList[4];
+     		for (int j = 0; j < gradeGroup.length; j++) {
+     			gradeGroup[j] = new ArrayList<Integer>();
+     		}
+
+     		List<Nation> everyNation = ser.selectNations();
+     		for (int i = 0; i < everyNation.size(); i++) {
+     			String idx = everyNation.get(i).getIdx();
+     			if (ser.getFlag(idx) == 1)
+     				continue; // 이미 다 광고했어 flag값 확인
+     			int grade = ser.getGrade(idx);
+     			gradeGroup[grade].add(Integer.parseInt(idx)); // 등급2 광고주가 하는 광고 idx
+     		}
+
+     		Random rand = new Random();
+     		for (int i = 2; i < gradeGroup.length; i++) {
+
+     			List<Integer> randGroup = new ArrayList<Integer>();
+     			for (int j = 0; j < gradeGroup[i].size(); j++) {
+     				randGroup.add(gradeGroup[i].get(j));
+     			}
+     			
+     			//grade2는 1개 뽑고 grade3는 2개 뽑는다
+     			for (int j = 0; j < i-1; j++) {
+     				int randomIdx=rand.nextInt(randGroup.size());
+     				Integer randomElement=randGroup.get(randomIdx);
+     				//온도를 알아서 nationtb의 type을  update해야해
+     				float elementTemp=nMonth==1?li.get(randomElement).getTem1():nMonth==2?li.get(randomElement).getTem2():
+     					nMonth==3?li.get(randomElement).getTem3():nMonth==4?li.get(randomElement).getTem4():
+     						nMonth==5?li.get(randomElement).getTem5():nMonth==6?li.get(randomElement).getTem6():
+     							nMonth==7?li.get(randomElement).getTem7():nMonth==8?li.get(randomElement).getTem8():
+     								nMonth==9?li.get(randomElement).getTem9():nMonth==10?li.get(randomElement).getTem10():
+     									nMonth==11?li.get(randomElement).getTem11():li.get(randomElement).getTem12();
+     				
+     				int finalScore = 0;
+     				finalScore += lig < 50 ? 5 : 10;
+     				finalScore += elementTemp < 22 ? 1 : 0;
+     				finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
+     				System.out.println(elementTemp+"가 선택되어 값이 "+finalScore+"로 갱신된다");
+     				ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
+
+     				result.add(randomElement);
+     				randGroup.remove(randomIdx);
+     			}
+     			randGroup.clear();
+     		}
+     		
+     		
+     		return result;
     }
 
 	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. @throws JsonProcessingException */
