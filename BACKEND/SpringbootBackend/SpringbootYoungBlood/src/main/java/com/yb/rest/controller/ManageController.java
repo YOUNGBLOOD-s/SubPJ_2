@@ -80,21 +80,38 @@ public class ManageController {
 	}
 
 	// 나중에
-	@GetMapping("/man/nation/info/")
+	@GetMapping("/man/nationAll/info/{idx}")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
-	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token) {
+	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token,
+			@PathVariable("idx") int idx) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		ArrayList<Nation> list = null;
+		System.out.println(idx);
+		Nation nat = new Nation();
+		Monthtb mon = new Monthtb();
+		ArrayList<Route> contentsList = null;
+		ArrayList<Image> imageList = null;
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
+			// idx로 nationtb에서 selectOne
+			nat = ser.nationInfo(idx);
+
+			// monthtb에 nation=#{idx}로 selectOne
+			mon = ser.monthInfo(idx);
+
+			// img랑 contents는 selectList로 받아와야하고.
+			contentsList = ser.contentsInfo(idx);
+			imageList = ser.imagesInfo(idx);
 
 			msg.put("resmsg", "조회성공");
-			msg.put("resvalue", list);
+			msg.put("natValue", nat);
+			msg.put("monValue", mon);
+			msg.put("conValue", contentsList);
+			msg.put("imgValue", imageList);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
 			msg.put("resmsg", "조회실패");
@@ -492,7 +509,7 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-			
+
 			if (grade > 0) {
 				boolean resImage = ser.insertImagetb(img);
 				msg.put("resmsg", "등록성공");

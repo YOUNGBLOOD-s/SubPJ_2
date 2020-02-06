@@ -102,11 +102,12 @@
 		where nation = (select idx from nationtb where
 		customer=#{customer});
 	</select>
-	
+
 	<select id="selectVolume" parameterType="int" resultType="int">
-	select volume 
-	from gradetb 
-	where idx=#{grade};
+		select
+		volume
+		from gradetb
+		where idx=#{grade};
 	</select>
 
 
@@ -128,15 +129,40 @@
 		imagetb(nation, type, url)
 		values(#{nation},#{type},#{url});
 	</insert>
-	
+
 	<update id="imageupdate" parameterType="image">
-		update imagetb set nation=#{nation}, type=#{type}, url=#{url} where idx=#{idx};
+		update imagetb set
+		nation=#{nation}, type=#{type}, url=#{url} where idx=#{idx};
 	</update>
 
 	<delete id="imagedelete" parameterType="int">
 		delete from imagetb
-		where idx=#{idx}
+		where
+		idx=#{idx}
 	</delete>
+
+
+
+	<select id="nationInfo" parameterType="int" resultType="nation">
+		select *
+		from nationtb where idx=#{idx}
+	</select>
+	
+	<select id="monthInfo" parameterType="int" resultType="monthtb">
+		select *
+		from monthtb where nation=#{idx};
+	</select>
+	
+	<select id="contentsInfo" parameterType="int" resultType="route">
+		select *
+		from contentstb where nation=#{idx};
+	</select>
+	
+	<select id="imageInfo" parameterType="int" resultType="image">
+		select *
+		from imagetb
+		where nation=#{idx};
+	</select>
 
 </mapper>
  

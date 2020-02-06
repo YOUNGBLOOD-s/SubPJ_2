@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 
 @Repository
 public class ManDaoImpl implements IManDao {
@@ -144,5 +145,30 @@ public class ManDaoImpl implements IManDao {
 			return false;
 		else
 			return true;
+	}
+
+	@Override
+	public Nation nationInfo(int idx) {
+		// TODO Auto-generated method stub
+		Nation nat = session.selectOne("management.nationInfo", idx);
+		return nat;
+	}
+
+	@Override
+	public Monthtb monthInfo(int idx) {
+		// TODO Auto-generated method stub
+		Monthtb month = session.selectOne("management.monthInfo", idx);
+		return month;
+	}
+
+	@Override
+	public ArrayList<Route> contentsInfo(int idx) {
+		// TODO Auto-generated method stub
+		return (ArrayList) session.selectList("management.contentsInfo", idx);
+	}
+
+	@Override
+	public ArrayList<Image> imagesInfo(int idx) {
+		return (ArrayList) session.selectList("management.imageInfo", idx);
 	}
 }
