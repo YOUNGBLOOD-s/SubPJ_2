@@ -1,0 +1,22 @@
+use yb_travel;
+
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(1,10,20,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(2,20,6,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(3,30,8,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(4,5,20,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(5,12,10,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(6,5,24,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(7,8,6,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(8,10,8,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(9,15,2,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(10,6,3,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(11,10,9,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(12,11,12,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(13,13,45,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(14,23,2,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(15,12,3,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(16,10,9,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(17,11,12,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(18,13,45,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(19,23,2,"2020-02-05");
+insert into clicktb(nation,click_cnt,qr_cnt,date) values(20,12,3,"2020-02-05");
