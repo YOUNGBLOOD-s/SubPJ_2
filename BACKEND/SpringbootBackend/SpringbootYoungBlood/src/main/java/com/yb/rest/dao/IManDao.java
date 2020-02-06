@@ -9,7 +9,7 @@ import com.yb.rest.vo.Nation;
 public interface IManDao {
 	public int getIdx(String username);
 	public int searchGrade(int customer);
-	public int getVolume(int grade);
+	public int getVolume(int idx);
 	
 	/** 나라테이블CRUD */
 	public ArrayList<Nation> nationList(int customer);

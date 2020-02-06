@@ -218,7 +218,7 @@ public class AdController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
 		// 가중치 계산 algorithm
 		List<Integer> nation = weightcal();
-		//checkshowcnt(nation);
+		checkshowcnt(nation);
 		System.out.println("==============");
 		System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
 		System.out.println(nation);
@@ -501,7 +501,7 @@ public class AdController {
        	System.out.println("또한, nation flag를 검사하여 갱신합니다.");
        	System.out.println("==============");
     	for(int i=0; i<nationIdx.size(); i++) {
-    		int limit = manser.getVolume(manser.searchGrade(nationIdx.get(i)));
+    		int limit = manser.getVolume(nationIdx.get(i));
     		int volume = ser.selectShowcnt(nationIdx.get(i));
     		if(volume>=limit) {
     			ser.updateFlag(nationIdx.get(i));

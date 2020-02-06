@@ -27,8 +27,7 @@ public class ManServiceImpl implements IManService {
 
 	@Override
 	public int searchGrade(int customer) {
-		int searchGrade = repo.searchGrade(customer);
-		return searchGrade;
+		return repo.searchGrade(customer);
 	}
 
 	@Override
@@ -119,8 +118,8 @@ public class ManServiceImpl implements IManService {
 	}
 	
 	@Override
-	public int getVolume(int grade) {
-		return repo.getVolume(grade);
+	public int getVolume(int idx) {
+		return repo.getVolume(idx);
 	}
 
 }
