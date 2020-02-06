@@ -9,32 +9,32 @@ const TEMP_SET_USER = 'user/TEMP_SET_USER'; // 새로고침 이후 임시 로그
 const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] = createRequestActionTypes(
   'user/CHECK',
 );
-const LOGOUT = 'user/LOGOUT'
+const LOGOUT = 'user/LOGOUT';
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user);
 export const check = createAction(CHECK);
-export const logout = createAction(LOGOUT)
+export const logout = createAction(LOGOUT);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
 function checkFailureSaga() {
   try {
-    localStorage.removeItem('user')
+    localStorage.removeItem('user');
   } catch (e) {
-    console.log('로컬 스토리지가 정상 동작하지 않습니다.')
+    console.log('로컬 스토리지가 정상 동작하지 않습니다.');
   }
 }
 function logoutSaga() {
   try {
-    localStorage.removeItem('user')
-    sessionStorage.removeItem('access_token')
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('access_token');
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
 export function* userSaga() {
   yield takeLatest(CHECK, checkSaga);
-  yield takeLatest(CHECK_FAILURE, checkFailureSaga)
-  yield takeLatest(LOGOUT, logoutSaga)
+  yield takeLatest(CHECK_FAILURE, checkFailureSaga);
+  yield takeLatest(LOGOUT, logoutSaga);
 }
 
 const initialState = {
@@ -57,8 +57,8 @@ export default handleActions(
     }),
     [LOGOUT]: state => ({
       ...state,
-      user: null
-    })
+      user: null,
+    }),
   },
   initialState,
 );

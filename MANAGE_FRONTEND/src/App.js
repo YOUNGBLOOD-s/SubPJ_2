@@ -5,15 +5,19 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AdminPage from './pages/AdminPage';
 import DetailPage from './pages/DetailPage';
+import ManagePage from './pages/ManagePage';
 
 const App = () => {
   return (
     <>
       <Route component={MainPage} path="/" exact />
+      <Route component={DetailPage} path="/detail/:id" />
       <Route component={LoginPage} path="/login" />
       <Route component={RegisterPage} path="/register" />
+      {/* 어드민 */}
       <Route component={AdminPage} path="/admin" />
-      <Route component={DetailPage} path="/detail/:id" />
+      {/* 광고주 관리 */}
+      <Route component={ManagePage} path="/manage" />
     </>
   );
 };

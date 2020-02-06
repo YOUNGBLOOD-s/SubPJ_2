@@ -42,6 +42,7 @@ const DetailPage = ({ match, history }) => {
         <div>
           <BasicInformation country={country} />
           <DetailPageWrapper>
+            {/* TODO:가격 안썼어.. */}
             <TravelRoute id="travel" routes={country.routes} />
             <CautionText category={country.category} />
             <ReservationForm nationId={country.id} />

@@ -1,14 +1,14 @@
 import React from 'react';
+import ManageContainer from '../components/manage/ManageContainer';
 import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
-import AdItems from '../components/main/AdItems';
 
-const MainPage = () => {
+const ManagePage = () => {
   return (
     <>
       <ButtonAppbarContainer />
-      <AdItems />
+      <ManageContainer />
     </>
   );
 };
 
-export default MainPage;
+export default ManagePage;

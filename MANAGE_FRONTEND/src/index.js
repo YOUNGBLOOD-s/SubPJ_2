@@ -11,6 +11,8 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from './modules';
 import { rootSaga } from './modules/index';
 import { tempSetUser, check } from './modules/user';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -18,21 +20,27 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
 
+// 초기에 유저를 가져오는 함수
 function loadUser() {
   try {
     const user = localStorage.getItem('user');
     if (!user) return;
-    store.dispatch(tempSetUser(user))
-    const token = sessionStorage.getItem('access_token')
-    store.dispatch(check(token))
+    store.dispatch(tempSetUser(JSON.parse(user)));
+    const token = sessionStorage.getItem('access_token');
+    store.dispatch(check(token));
   } catch (e) {
-    console.log('로컬스토리지가 정상 동작하지 않습니다.')
+    console.log('로컬스토리지가 정상 동작하지 않습니다.');
   }
 }
 
+// 카카오 인스턴스 초기화 함수
+function initKakao() {
+  window.Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
+}
 
 sagaMiddleware.run(rootSaga);
-loadUser()
+loadUser();
+initKakao();
 
 ReactDOM.render(
   <Provider store={store}>
