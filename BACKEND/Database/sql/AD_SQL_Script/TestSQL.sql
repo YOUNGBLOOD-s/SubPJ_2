@@ -1,5 +1,31 @@
 select detail from contentstb where nation=1;
+use yb_travel;
+select * from membertb;
+update membertb
+set grade=1
+where username='admin';
+desc imagetb;
+select * from nationtb;
 
+select volume from gradetb
+where idx = (select customer from nationtb where idx=1);
+
+update nationtb 
+set customer=2
+where idx=1;
+
+select * from clicktb;
+select * from counseltb;
+update nationtb
+set flag=1
+where idx=2;
+select * from imagetb;
+select * from nationtb;
+select * from gradetb;
+
+select showcnt from nationtb where idx=3;
+select * from gradetb;
+select volume from gradetb where idx=2;
 -- join
 select nationtb.idx, nationtb.name, nationtb.speech, 
 monthtb.tem1, monthtb.tem2, monthtb.tem3, monthtb.tem4, monthtb.tem5, monthtb.tem6, monthtb.tem7, monthtb.tem8, monthtb.tem9, monthtb.tem10, monthtb.tem11, monthtb.tem12,
@@ -53,6 +79,8 @@ desc imagetb;
 select * from monthtb;
 select * from nationtb;
 select * from membertb;
+select * from counseltb;
+
 
 select * from counseltb;
 insert into counseltb(name, age, email, tel, date, text) 
@@ -62,3 +90,19 @@ delete from counseltb where idx=4;
 select * from membertb;
 select idx from membertb
 where username="admin";
+
+select idx, nationtb.en_name, nationtb.ko_name, dust, continents, clickcnt, showcnt, customer, weight, speech, price, type, (select url from imagetb where type=1 AND nation=1) as url
+from nationtb
+where idx=1;
+
+select * from contentstb;
+insert into
+contentstb(nation, day, seq, title, detail, image, tofrom, transport)
+values(20,100,100,'test', 'test', 'test', 'test', 'test');
+delete from contentstb where idx=154;
+
+delete from contentstb
+where nation=1 and idx=155;
+
+update contentstb set nation=1 where nation=20;
+desc contentstb;

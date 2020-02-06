@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.Route;
+import com.yb.rest.vo.Click;
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
 import com.yb.rest.vo.Monthtb;
@@ -79,7 +80,7 @@ public class AdDaoImpl implements IAdDao {
 
 	@Override
 	public void updateType(ForScore forScore) {
-		session.update("sensor.photoType",forScore);
+		session.update("sensor.photoType", forScore);
 	}
 
 	@Override
@@ -88,8 +89,8 @@ public class AdDaoImpl implements IAdDao {
 	}
 
 	@Override
-	public void updateClickcnt(int idx) {
-		session.update("sendtofront.updateClickcnt", idx);
+	public void updateClickcnt(Map map) {
+		session.update("sendtofront.updateClickcnt", map);
 	}
 
 	@Override
@@ -110,6 +111,66 @@ public class AdDaoImpl implements IAdDao {
 	@Override
 	public List<Route> getRoutes(String customer) {
 		return session.selectList("management.selectroutelist_cus", customer);
+	}
+
+	@Override
+	public List<Route> getRoutesAll(int idx) {
+		return session.selectList("sendtofront.selectroutelistAll", idx);
+	}
+
+	@Override
+	public void insertRoutes(Route route) {
+		session.insert("sendtofront.insertroute", route);
+	}
+
+	@Override
+	public void updateRoutes(Route route) {
+		session.update("sendtofront.updateroute", route);
+	}
+
+	@Override
+	public void deleteRoutes(Map map) {
+		session.delete("sendtofront.deleteroute", map);
+	}
+
+	@Override
+	public int selectShowcnt(int idx) {
+		return session.selectOne("sendtofront.selectshowcnt", idx);
+	}
+
+	@Override
+	public void updateFlag(int idx) {
+		session.update("sendtofront.updateflag", idx);
+	}
+
+	@Override
+	public boolean getDate(Map map) {
+		Click click = session.selectOne("sendtofront.selectdate", map);
+		if (click == null)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public void insertClick(Map map) {
+		session.insert("sendtofront.insertclick", map);
+	}
+
+	@Override
+	public void updateQRcnt(Map map) {
+		session.update("sendtofront.updateQRcnt", map);
+	}
+
+	@Override
+	public void insertQR(Map map) {
+		session.insert("sendtofront.insertqr", map);
+	}
+
+	@Override
+	public List<Nation> selectNations() {
+		// TODO Auto-generated method stub
+		return session.selectList("sendtofront.selectnations");
 	}
 
 	

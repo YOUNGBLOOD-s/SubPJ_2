@@ -88,8 +88,8 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public void updateClickcnt(int idx) {
-		repo.updateClickcnt(idx);
+	public void updateClickcnt(Map map) {
+		repo.updateClickcnt(map);
 	}
 
 	@Override
@@ -110,5 +110,60 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public List<Route> getRoutes(String customer) {
 		return repo.getRoutes(customer);
+	}
+
+	@Override
+	public List<Route> getRoutesAll(int idx) {
+		return repo.getRoutesAll(idx);
+	}
+
+	@Override
+	public void insertRoutes(Route route) {
+		repo.insertRoutes(route);
+	}
+
+	@Override
+	public void updateRoutes(Route route) {
+		repo.updateRoutes(route);
+	}
+
+	@Override
+	public void deleteRoutes(Map map) {
+		repo.deleteRoutes(map);
+	}
+
+	@Override
+	public int selectShowcnt(int idx) {
+		return repo.selectShowcnt(idx);
+	}
+
+	@Override
+	public void updateFlag(int idx) {
+		repo.updateFlag(idx);
+	}
+
+	@Override
+	public List<Nation> selectNations() {
+		return repo.selectNations();
+	}
+	
+	@Override
+	public boolean getDate(Map map) {
+		return repo.getDate(map);
+	}
+
+	@Override
+	public void insertClick(Map map) {
+		repo.insertClick(map);
+	}
+
+	@Override
+	public void updateQRcnt(Map map) {
+		repo.updateQRcnt(map);
+	}
+
+	@Override
+	public void insertQR(Map map) {
+		repo.insertQR(map);
 	}
 }

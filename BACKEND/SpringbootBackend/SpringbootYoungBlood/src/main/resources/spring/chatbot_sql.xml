@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chatbot">
+	<select id="continent" parameterType="String"
+		resultType="nation">
+		select *
+		from nationtb
+		where continents=#{num}
+	</select>
+	<select id="test" resultType="click">
+		select idx, nation, click_cnt, qr_cnt, date from clicktb order by click_cnt+qr_cnt desc limit 0,5
+	</select>
+</mapper>

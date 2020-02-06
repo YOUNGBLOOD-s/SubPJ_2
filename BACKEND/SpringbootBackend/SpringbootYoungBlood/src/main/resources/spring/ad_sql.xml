@@ -5,6 +5,11 @@
 
 <mapper namespace="sendtofront">
 	
+	<select id="selectnations" resultType="nation">
+	select * from nationtb
+	</select>
+	
+	
 	<select id="selectimglist" resultType="string" parameterType="int">
 	select image from contentstb where nation= #{id}
 	</select>
@@ -25,10 +30,16 @@
 	</select>
 	
 	<select id="selectroutelist" resultType="route" parameterType="int">
-	select nation, day, seq, title, detail, image, tofrom, transport
+	select idx, nation, day, seq, title, detail, image, tofrom, transport
 	from contentstb 
 	where nation=#{idx};
 	</select>
+	
+	<select id="selectroutelistAll" resultType="route" parameterType="int">
+	select idx, nation, day, seq, title, detail, image, tofrom, transport
+	from contentstb 
+	</select>
+	
 	
 	<select id="selectNationdetail" resultType="nation" parameterType="map">
 	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, showcnt, customer, weight, speech,(select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, type
@@ -42,10 +53,16 @@
 	where idx=#{idx};
 	</select>
 	
-	<update id="updateClickcnt" parameterType="int">
-	update nationtb 
-	set clickcnt=clickcnt+1
-	where idx=#{idx}
+	<update id="updateClickcnt" parameterType="map">
+	update clicktb 
+	set click_cnt=click_cnt+1
+	where nation=#{nation} AND date=#{today};
+	</update>
+	
+	<update id="updateQRcnt" parameterType="map">
+	update clicktb
+	set qr_cnt=qr_cnt+1
+	where nation=#{nation} AND date=#{today};
 	</update>
 	
 	<update id="updateShowcnt" parameterType="int">
@@ -60,6 +77,51 @@
 	values(#{age},#{name},#{email},#{tel}, #{date}, #{text})
 	</insert>
 	
+	<insert id="insertroute" parameterType="route">
+	insert into
+	contentstb(nation, day, seq, title, detail, image, tofrom, transport)
+	values(#{nation},#{day},#{seq},#{title}, #{detail}, #{image}, #{tofrom}, #{transport})
+	</insert>
+	
+	<update id="updateroute" parameterType="route">
+	update contentstb
+	set nation=#{nation}, day=#{day}, seq=#{seq}, title=#{title}, detail=#{detail},
+	image=#{image}, tofrom=#{tofrom}, transport=#{transport}
+	where nation=#{nation} AND idx=#{idx}
+	</update>
+	
+	<delete id="deleteroute" parameterType="int">
+	delete from contentstb
+	where nation=#{nation} and idx=#{idx}
+	</delete>
+	
+	<select id="selectshowcnt" parameterType="int" resultType="int">
+	select showcnt 
+	from nationtb 
+	where idx=#{idx};
+	</select>
+	
+	<update id="updateflag" parameterType="int">
+	update nationtb
+	set flag=1
+	where idx=#{idx};
+	</update>
+	
+	<select id="selectdate" parameterType="map" resultType="click">
+	select idx, nation, click_cnt, qr_cnt, date 
+	from clicktb
+	where nation=#{nation} and date=#{today} limit 0,1
+	</select>
+	
+	<insert id="insertclick" parameterType="map">
+	insert into clicktb(nation, click_cnt, qr_cnt, date) 
+	values(#{nation}, 1, 0, #{today});
+	</insert>
+	
+	<insert id="insertqr" parameterType="map">
+	insert into clicktb(nation, click_cnt, qr_cnt, date) 
+	values(#{nation}, 0, 1, #{today});
+	</insert>
 
 </mapper>
  

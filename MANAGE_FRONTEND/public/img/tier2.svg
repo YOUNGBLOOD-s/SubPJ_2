@@ -1,0 +1,19 @@
+<svg width="77" height="82" viewBox="0 0 77 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M35.1531 5.11353C36.7322 2.70094 40.2678 2.70093 41.8468 5.11353L73.5215 53.508C75.4097 56.3929 74.4838 60.2719 71.4961 61.9929L42.4932 78.6998C40.0214 80.1236 36.9785 80.1236 34.5068 78.6998L5.50381 61.9929C2.51616 60.2719 1.59021 56.3929 3.47841 53.508L35.1531 5.11353Z" transform="translate(0 0.522461)" fill="url(#paint0_linear)"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="3" width="73" height="78">
+<path d="M35.1531 5.11353C36.7322 2.70094 40.2678 2.70093 41.8468 5.11353L73.5215 53.508C75.4097 56.3929 74.4838 60.2719 71.4961 61.9929L42.4932 78.6998C40.0214 80.1236 36.9785 80.1236 34.5068 78.6998L5.50381 61.9929C2.51616 60.2719 1.59021 56.3929 3.47841 53.508L35.1531 5.11353Z" transform="translate(0 0.522461)" fill="url(#paint1_linear)"/>
+</mask>
+<g mask="url(#mask0)">
+<path d="M0 0L38.5 58.8225L0 81V0Z" transform="translate(38.5 0.522461)" fill="#7D96A2"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(76.9999) scale(76.9999 81) rotate(90)">
+<stop stop-color="#CCD9DF"/>
+<stop offset="1" stop-color="#8FA6B2"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(76.9999) scale(76.9999 81) rotate(90)">
+<stop stop-color="#F0F0F0"/>
+<stop offset="1" stop-color="#DBDBDB"/>
+</linearGradient>
+</defs>
+</svg>

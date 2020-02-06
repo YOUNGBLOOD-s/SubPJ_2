@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,13 +29,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
-import com.yb.rest.vo.Route;
+import com.yb.rest.service.IManService;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
-import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 import com.yb.rest.vo.Sensor;
 
 @CrossOrigin
@@ -42,34 +43,39 @@ import com.yb.rest.vo.Sensor;
 @RequestMapping("/api")
 public class AdController {
 
-    @Autowired
-    private IAdService ser;
+	@Autowired
+	private IAdService ser;
 
-    @ExceptionHandler(Exception.class)
-    public void ExceptionMethod(Exception e) {
+	@Autowired
+	private IManService manser;
 
-    }
+	@ExceptionHandler(Exception.class)
+	public void ExceptionMethod(Exception e) {
 
-    /**
-     * 센서값을 받는다.
-     * @throws JsonProcessingException
-     */
-    @GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
-    public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light, @PathVariable String dust) throws JsonProcessingException {
-    	float tmp = Float.parseFloat(temp);
-        float hu = Float.parseFloat(hum);
-        float dus = Float.parseFloat(dust);
-        float lig = Float.parseFloat(light);
-        System.out.println("온도: "+tmp+"습도: "+hum+"미세먼지: "+dus);
-        Sensor sen = new Sensor(tmp, hu, dus, lig);
-        System.out.println("==============");
-        System.out.println("안녕하세요. 센서값을 전광판으로부터 받았습니다. 받은 정보는 다음과 같습니다.");
-        System.out.println(sen.toString());
-        System.out.println("==============");
-        ser.updateSensor(sen);
-    }
+	}
 
-    public List<Integer> weightcal() {
+	/**
+	 * 센서값을 받는다.
+	 * 
+	 * @throws JsonProcessingException
+	 */
+	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
+	public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light,
+			@PathVariable String dust) throws JsonProcessingException {
+		float tmp = Float.parseFloat(temp);
+		float hu = Float.parseFloat(hum);
+		float dus = Float.parseFloat(dust);
+		float lig = Float.parseFloat(light);
+		System.out.println("온도: " + tmp + "습도: " + hum + "미세먼지: " + dus);
+		Sensor sen = new Sensor(tmp, hu, dus, lig);
+		System.out.println("==============");
+		System.out.println("안녕하세요. 센서값을 전광판으로부터 받았습니다. 받은 정보는 다음과 같습니다.");
+		System.out.println(sen.toString());
+		System.out.println("==============");
+		ser.updateSensor(sen);
+	}
+
+	public List<Integer> weightcal() {
         System.out.println("==============");
         System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
         System.out.println("==============");
@@ -208,124 +214,123 @@ public class AdController {
     }
 
 	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. @throws JsonProcessingException */
-    @GetMapping("/sensor/reco")
-    public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
+	@GetMapping("/sensor/reco")
+	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
+		// 가중치 계산 algorithm
+		List<Integer> nation = weightcal();
+		checkshowcnt(nation);
+		System.out.println("==============");
+		System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
+		System.out.println(nation);
 
-        // 가중치 계산 algorithm
-        List<Integer> nation = weightcal();
-        System.out.println("==============");
-        System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
-        System.out.println(nation);
+		ResponseEntity<Map<String, Object>> re = null;
+		Map<String, Object> result = new HashMap<>();
+		List<Map<String, Object>> Countrylist = new LinkedList<>();
 
-        ResponseEntity<Map<String, Object>> re = null;
-        Map<String, Object> result = new HashMap<>();
-        List<Map<String, Object>> Countrylist = new LinkedList<>();
+		for (int idx = 0; idx < nation.size(); idx++) {
+			int nationId = nation.get(idx);
+			int type = ser.getType(nationId);
+			List<String> imgs = ser.getImgs(nationId);
+			List<String> modalContents = ser.getModalcontents(nationId);
 
-        for (int idx = 0; idx < nation.size(); idx++) {
-            int nationId = nation.get(idx);
-            int type = ser.getType(nationId);
-            List<String> imgs = ser.getImgs(nationId);
-            List<String> modalContents = ser.getModalcontents(nationId);
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("nationidx", nationId);
+			map.put("type", type);
 
-            Map<String, Integer> map = new HashMap<String, Integer>();
-            map.put("nationidx", nationId);
-            map.put("type", type);
+			Sendtofront stf = ser.getInfo(map);
+			stf.setImgs(imgs);
+			stf.setModalContents(modalContents);
 
-            Sendtofront stf = ser.getInfo(map);
-            stf.setImgs(imgs);
-            stf.setModalContents(modalContents);
+			Map<String, Object> data = new HashMap<String, Object>();
 
-            Map<String, Object> data = new HashMap<String, Object>();
+			data.put("id", stf.getIdx());
+			data.put("en_name", stf.getEn_name());
+			data.put("name", stf.getKo_name()); // kor
+			data.put("content", stf.getSpeech());
+			data.put("thumbnail", stf.getUrl());
 
-            data.put("id", stf.getIdx());
-            data.put("en_name", stf.getEn_name());
-            data.put("name", stf.getKo_name()); //kor
-            data.put("content", stf.getSpeech());
-            data.put("thumbnail", stf.getUrl());
+			SimpleDateFormat monthformat = new SimpleDateFormat("MM");
+			Date time = new Date();
+			int month = Integer.parseInt(monthformat.format(time));
 
-            SimpleDateFormat monthformat = new SimpleDateFormat("MM");
-            Date time = new Date();
-            int month = Integer.parseInt(monthformat.format(time));
+			List<Map<String, Object>> detail = new LinkedList<>();
 
-            List<Map<String, Object>> detail = new LinkedList<>();
+			for (int j = 0; j < imgs.size(); j++) {
+				Map<String, Object> d = new HashMap<String, Object>();
+				d.put("id", j);
+				d.put("en_name", stf.getEn_name());
+				d.put("name", stf.getKo_name());
+				d.put("price", stf.getPrice());
+				d.put("img", imgs.get(j));
+				d.put("content", modalContents.get(j));
+				switch (month) {
+				case 1:
+					d.put("temp", stf.getTem1());
+					d.put("humid", stf.getHum1());
+					break;
+				case 2:
+					d.put("temp", stf.getTem2());
+					d.put("humid", stf.getHum2());
+					break;
+				case 3:
+					d.put("temp", stf.getTem3());
+					d.put("humid", stf.getHum3());
+					break;
+				case 4:
+					d.put("temp", stf.getTem4());
+					d.put("humid", stf.getHum4());
+					break;
+				case 5:
+					d.put("temp", stf.getTem5());
+					d.put("humid", stf.getHum5());
+					break;
+				case 6:
+					d.put("temp", stf.getTem6());
+					d.put("humid", stf.getHum6());
+					break;
+				case 7:
+					d.put("temp", stf.getTem7());
+					d.put("humid", stf.getHum7());
+					break;
+				case 8:
+					d.put("temp", stf.getTem8());
+					d.put("humid", stf.getHum8());
+					break;
+				case 9:
+					d.put("temp", stf.getTem9());
+					d.put("humid", stf.getHum9());
+					break;
+				case 10:
+					d.put("temp", stf.getTem10());
+					d.put("humid", stf.getHum10());
+					break;
+				case 11:
+					d.put("temp", stf.getTem11());
+					d.put("humid", stf.getHum11());
+					break;
+				case 12:
+					d.put("temp", stf.getTem12());
+					d.put("humid", stf.getHum12());
+					break;
+				}
+				detail.add(d);
+			}
 
-            for (int j = 0; j < imgs.size(); j++) {
-                Map<String, Object> d = new HashMap<String, Object>();
-                d.put("id", j);
-                d.put("en_name", stf.getEn_name());
-                d.put("name", stf.getKo_name());
-                d.put("price", stf.getPrice());
-                d.put("img", imgs.get(j));
-                d.put("content", modalContents.get(j));
-                switch (month) {
-                case 1:
-                    d.put("temp", stf.getTem1());
-                    d.put("humid", stf.getHum1());
-                    break;
-                case 2:
-                    d.put("temp", stf.getTem2());
-                    d.put("humid", stf.getHum2());
-                    break;
-                case 3:
-                    d.put("temp", stf.getTem3());
-                    d.put("humid", stf.getHum3());
-                    break;
-                case 4:
-                    d.put("temp", stf.getTem4());
-                    d.put("humid", stf.getHum4());
-                    break;
-                case 5:
-                    d.put("temp", stf.getTem5());
-                    d.put("humid", stf.getHum5());
-                    break;
-                case 6:
-                    d.put("temp", stf.getTem6());
-                    d.put("humid", stf.getHum6());
-                    break;
-                case 7:
-                    d.put("temp", stf.getTem7());
-                    d.put("humid", stf.getHum7());
-                    break;
-                case 8:
-                    d.put("temp", stf.getTem8());
-                    d.put("humid", stf.getHum8());
-                    break;
-                case 9:
-                    d.put("temp", stf.getTem9());
-                    d.put("humid", stf.getHum9());
-                    break;
-                case 10:
-                    d.put("temp", stf.getTem10());
-                    d.put("humid", stf.getHum10());
-                    break;
-                case 11:
-                    d.put("temp", stf.getTem11());
-                    d.put("humid", stf.getHum11());
-                    break;
-                case 12:
-                    d.put("temp", stf.getTem12());
-                    d.put("humid", stf.getHum12());
-                    break;
-                }
-                detail.add(d);
-            }
+			data.put("details", detail);
+			Countrylist.add(data);
+		}
 
-            data.put("details", detail);
-            Countrylist.add(data);
-        }
+		result.put("datas", Countrylist);
+		System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
+		System.out.println(Countrylist);
+		System.out.println("==============");
+		re = new ResponseEntity<>(result, HttpStatus.OK);
+		return re;
+	}
 
-        result.put("datas", Countrylist);
-        System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
-        System.out.println(Countrylist);
-        System.out.println("==============");
-        re = new ResponseEntity<>(result, HttpStatus.OK);
-        return re;
-    }
-	
 	/** 나라 상세정보 조회 */
     @GetMapping("/detail/{id}")
-    public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(@PathVariable String id) {
-        
+    public @ResponseBody ResponseEntity<Map<String, Object>> selectnationdetail(@PathVariable String id) {     
         System.out.println("==============");
         System.out.println("안녕하세요. 고객님이 요청하신 "+id+"번에 해당하는 나라 상세정보를 조회해드릴게요.");
     	ResponseEntity<Map<String, Object>> re = null;
@@ -428,26 +433,79 @@ public class AdController {
        	return re;
     }
     
-//    /** 클릭 요청 시 카운팅하는 메소드 */
-//    @GetMapping("/click/{id}")
-//    public @ResponseBody ResponseEntity<Map<String, Object>> updateclick(@PathVariable String id) {
-//    	ResponseEntity<Map<String, Object>> re = null;
-//    	Map<String, Object> result = null;
-//    	try {
-//    		int idx = Integer.parseInt(id);
-//    		ser.updateClickcnt(idx);
-//    		re = new ResponseEntity<>(result, HttpStatus.OK);
-//    	} catch(Exception e) {
-//    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
-//    	}
-//    	return re;
-//    }
+    /** click 갱신하는 메소드 */
+    @GetMapping("/click/{id}")
+    public @ResponseBody ResponseEntity<Map<String, Object>> statistics_click(@PathVariable String id) {
+    	ResponseEntity<Map<String, Object>> re = null;
+    	Map<String, Object> result = null;
+    	try {
+            SimpleDateFormat monthformat = new SimpleDateFormat("YYYY-MM-dd hh");
+            Date date = new Date();
+            String today = monthformat.format(date);
+            
+        	Map<String, Object> value = new HashMap<String, Object>();
+        	value.put("nation", id);
+        	value.put("today", today);
+
+            if(ser.getDate(value)) {
+            	ser.updateClickcnt(value);
+            } else {
+            	ser.insertClick(value);
+            }
+    		re = new ResponseEntity<>(result, HttpStatus.OK);
+    	} catch(Exception e) {
+    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
+    	return re;
+    }
+    
+    /** QRcode click 갱신하는 메소드 */
+    @GetMapping("/clickqr/{id}")
+    public @ResponseBody ResponseEntity<Map<String, Object>> statistics_qr(@PathVariable String id) {
+    	ResponseEntity<Map<String, Object>> re = null;
+    	Map<String, Object> result = null;
+    	try {
+            SimpleDateFormat monthformat = new SimpleDateFormat("YYYY-MM-dd");
+            Date date = new Date();
+            String today = monthformat.format(date);
+            
+        	Map<String, Object> value = new HashMap<String, Object>();
+        	value.put("nation", id);
+        	value.put("today", today);
+
+            if(ser.getDate(value)) {
+            	ser.updateQRcnt(value);
+            } else {
+            	ser.insertQR(value);
+            }
+    		re = new ResponseEntity<>(result, HttpStatus.OK);
+    	} catch(Exception e) {
+    		re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+    	}
+    	return re;
+    }
     
     /** 보여지는 나라에 대한 카운트를 하는 메소드 */
-    public void updateshowcnt(List<Integer> nation) {
-    	for(int i=0; i<nation.size(); i++) {
-    		int idx = nation.get(i);
+    public void updateshowcnt(List<Integer> nationIdx) {
+    	for(int i=0; i<nationIdx.size(); i++) {
+    		int idx = nationIdx.get(i);
     		ser.updateShowcnt(idx);
+    	}
+    }
+    
+    /** 나라의 showcnt 검증하는 메소드 */
+    public void checkshowcnt(List<Integer> nationIdx) {
+       	System.out.println("==============");
+       	System.out.println("보여드릴 나라 => " + nationIdx + "에 대한 showcnt 증가입니다.");
+       	updateshowcnt(nationIdx);
+       	System.out.println("또한, nation flag를 검사하여 갱신합니다.");
+       	System.out.println("==============");
+    	for(int i=0; i<nationIdx.size(); i++) {
+    		int limit = manser.getVolume(nationIdx.get(i));
+    		int volume = ser.selectShowcnt(nationIdx.get(i));
+    		if(volume>=limit) {
+    			ser.updateFlag(nationIdx.get(i));
+    		}
     	}
     }
     
@@ -497,4 +555,5 @@ public class AdController {
     	}
     	return re;
     }
+    
 }

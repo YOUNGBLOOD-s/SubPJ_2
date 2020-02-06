@@ -1,6 +1,24 @@
 -- create database yb_travel;
 use yb_travel;
 
+-- member table
+CREATE TABLE IF NOT EXISTS `membertb` (
+	 idx int auto_increment primary key,
+     username varchar(20) unique,
+     password varchar(20),
+     company varchar(20),
+     grade int default 0
+);
+desc membertb;
+
+-- grade table
+CREATE TABLE IF NOT EXISTS `gradetb` (
+	 idx int primary key,
+     name varchar(20) unique,
+     volume int default 0
+);
+desc gradetb;
+
 -- 나라 table
 CREATE TABLE IF NOT EXISTS `nationtb` (
 	 idx int auto_increment  primary key,
@@ -9,13 +27,14 @@ CREATE TABLE IF NOT EXISTS `nationtb` (
      dust int, 
      continents int,
      showcnt int default 0,
-     customer int,
+     customer int default 0,
      weight int,
      speech varchar(100),
      price int,
      type int default 1,
-     s_date datetime,
-     f_date datetime,
+     s_date date,
+     f_date date,
+     flag int default 0, # 1:false 0:true
      foreign key (customer) references membertb(idx)
 );
 desc nationtb;
@@ -85,3 +104,13 @@ CREATE TABLE IF NOT EXISTS `counseltb` (
     text varchar(1000)
 );
 desc counseltb;
+
+CREATE TABLE IF NOT EXISTS `clicktb` (
+	idx int auto_increment  primary key,
+    nation int not null,
+    click_cnt int not null,
+    qr_cnt int not null,
+    date datetime not null,
+	foreign key (nation) references nationtb(idx)
+);
+desc clicktb;
