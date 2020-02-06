@@ -33,16 +33,6 @@ public class ChatbotController {
 	@Autowired
 	private IAdService nationSer;
 	
-	@PostMapping("/keyboard")
-	public Keyboard keyboard() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("message", "change test");
-		map.put("name", "희수");
-		map.put("position", "챗봇");
-		Keyboard keyboard=new Keyboard(map);
-		return keyboard;
-	}
-	
 	@PostMapping("/numbering")
 	public Keyboard numbering(@RequestBody Map<String,Object> userRequest) {
 		System.out.println(userRequest.get("action"));
