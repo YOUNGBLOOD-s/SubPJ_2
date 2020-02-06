@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 
 public interface IManService {
 	public int getIdx(String username);
@@ -32,4 +33,12 @@ public interface IManService {
 	public boolean insertImagetb(Image imgtb);
 	public boolean updateImagetb(Image imgtb);
 	public boolean deleteImagetb(int idx);
+
+	/** nation관련 INFO */
+	public Nation nationInfo(int idx);
+	public Monthtb monthInfo(int idx);
+	public ArrayList<Route> contentsInfo(int idx);
+	public ArrayList<Image> imagesInfo(int idx);
+	
+	
 }

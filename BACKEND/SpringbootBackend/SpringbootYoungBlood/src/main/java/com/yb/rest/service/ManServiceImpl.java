@@ -10,6 +10,7 @@ import com.yb.rest.dao.IManDao;
 import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 
 @Service
 public class ManServiceImpl implements IManService {
@@ -120,6 +121,34 @@ public class ManServiceImpl implements IManService {
 	@Override
 	public int getVolume(int idx) {
 		return repo.getVolume(idx);
+	}
+
+	@Override
+	public Nation nationInfo(int idx) {
+		// TODO Auto-generated method stub
+		Nation nat = repo.nationInfo(idx);
+		return nat;
+	}
+
+	@Override
+	public Monthtb monthInfo(int idx) {
+		// TODO Auto-generated method stub
+		Monthtb mon = repo.monthInfo(idx);
+		return mon;
+	}
+
+	@Override
+	public ArrayList<Route> contentsInfo(int idx) {
+		// TODO Auto-generated method stub
+		ArrayList<Route> contents = repo.contentsInfo(idx);
+		return contents;
+	}
+
+	@Override
+	public ArrayList<Image> imagesInfo(int idx) {
+		// TODO Auto-generated method stub
+		ArrayList<Image> images = repo.imagesInfo(idx);
+		return images;
 	}
 
 }
