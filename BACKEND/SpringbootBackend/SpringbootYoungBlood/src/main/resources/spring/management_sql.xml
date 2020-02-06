@@ -104,9 +104,8 @@
 	</select>
 	
 	<select id="selectVolume" parameterType="int" resultType="int">
-	select volume 
-	from gradetb 
-	where idx=#{grade};
+	select volume from gradetb
+	where idx = (select customer from nationtb where idx=#{idx});
 	</select>
 
 

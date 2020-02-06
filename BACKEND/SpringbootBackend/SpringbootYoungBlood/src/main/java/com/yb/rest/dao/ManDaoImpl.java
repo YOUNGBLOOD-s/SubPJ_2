@@ -104,8 +104,8 @@ public class ManDaoImpl implements IManDao {
 			return true;
 	}
 	@Override
-	public int getVolume(int grade) {
-		return session.selectOne("management.selectVolume", grade);
+	public int getVolume(int idx) {
+		return session.selectOne("management.selectVolume", idx);
 	}
 
 
