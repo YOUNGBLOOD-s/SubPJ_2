@@ -49,6 +49,7 @@ const NationAddForm = ({ classes, steps }) => {
   const dispatch = useDispatch();
 
   const handleNextAndAdd = () => {
+    // TODO: 인풋 필드 검증필요
     const token = sessionStorage.getItem('access_token');
     axios
       .post('/api/man/nation/insert', product, {
