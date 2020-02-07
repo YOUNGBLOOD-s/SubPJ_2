@@ -153,8 +153,7 @@ public class ManageController {
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			}
 		} catch (Exception e) {
-			msg.put("resmsg", "등록실패");
-			System.out.println(e.getMessage());
+			msg.put("resmsg", e.getMessage());
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
 
