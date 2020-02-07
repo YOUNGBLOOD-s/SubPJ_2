@@ -13,7 +13,6 @@ const useStyles = makeStyles(theme => ({
   },
   mobileinfo: {
     color: 'white',
-    paddingLeft: '1rem',
   },
 }));
 
@@ -25,12 +24,21 @@ const Image = styled.img`
 const MobileImage = styled.img`
   border-radius: 10px;
   height: 600px;
-  @media only screen and (max-width: 1260px) {
+  padding-left: 1rem;
+  @media only screen and (max-width: 1430px) {
     height: 500px;
     width: auto;
   }
-  @media only screen and (max-width: 1055px) {
+  @media only screen and (max-width: 1300px) {
     height: 450px;
+    width: auto;
+  }
+  @media only screen and (max-width: 1175px) {
+    height: 400px;
+    width: auto;
+  }
+  @media only screen and (max-width: 1060px) {
+    height: 350px;
     width: auto;
   }
   @media only screen and (max-width: 960px) {
@@ -47,6 +55,11 @@ const DescriptionWrapper = styled.div`
   }
 `;
 
+const MobileImgWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const DescriptionTitle = styled.div`
   font-size: 2rem;
   font-weight: bolder;
@@ -60,19 +73,28 @@ const DescriptionContent = styled.div`
 const MobileDescriptionContent = styled.div`
   line-height: 6rem;
   font-size: 1.1rem;
-  @media only screen and (max-width: 1260px) {
+  @media only screen and (max-width: 1430px) {
     line-height: 4rem;
     font-size: 90%;
   }
-  @media only screen and (max-width: 995px) {
-    line-height: 4rem;
+  @media only screen and (max-width: 1300px) {
+    line-height: 3rem;
     font-size: 87%;
+  }
+  @media only screen and (max-width: 1060px) {
+    line-height: 2rem;
+    font-size: 85%;
+  }
+  @media only screen and (max-width: 960px) {
+    font-size: 1.1rem;
+    line-height: 3rem;
   }
 `;
 
 const GradeInfo = () => {
   const classes = useStyles();
   // const spacing = 2;
+  console.log(process.env.PUBLIC_URL);
   return (
     <>
       <Grid container className={classes.root}>
@@ -84,7 +106,7 @@ const GradeInfo = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Grid item style={{ marginLeft: '2rem' }}>
+              <Grid item style={{ marginLeft: '1rem' }}>
                 <DescriptionWrapper>
                   <div>
                     <DescriptionTitle>메인페이지</DescriptionTitle>
@@ -120,7 +142,7 @@ const GradeInfo = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Grid item>
+              <Grid item style={{ marginLeft: '1rem' }}>
                 <DescriptionWrapper>
                   <div>
                     <DescriptionTitle>상세페이지 (두번 터치)</DescriptionTitle>
@@ -150,12 +172,20 @@ const GradeInfo = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container justify="flex-start">
-            <Grid item xs={12} md={8} spacing={1}>
+          <Grid container justify="flex-start" className={classes.grid}>
+            <Grid item xs={12} md={8}>
               <Grid item>
-                <MobileImage src={process.env.PUBLIC_URL + '/img/minfo1.png'} />
-                <MobileImage src={process.env.PUBLIC_URL + '/img/minfo2.png'} />
-                <MobileImage src={process.env.PUBLIC_URL + '/img/minfo3.png'} />
+                <MobileImgWrapper>
+                  <MobileImage
+                    src={process.env.PUBLIC_URL + '/img/minfo1.png'}
+                  />
+                  <MobileImage
+                    src={process.env.PUBLIC_URL + '/img/minfo2.png'}
+                  />
+                  <MobileImage
+                    src={process.env.PUBLIC_URL + '/img/minfo3.png'}
+                  />
+                </MobileImgWrapper>
               </Grid>
             </Grid>
             <Grid item xs={12} md={4}>
