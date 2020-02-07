@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -10,8 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import NationAddForm from './NationAddForm';
 import ContentAddForms from './ContentsAddForms';
 import ImageAddForm from './ImageAddForm';
-import { useDispatch, useSelector } from 'react-redux';
-import { nextStep, prevStep } from '../../../../modules/stepper';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,7 +37,7 @@ const getStepContent = (step, classes, steps) => {
     case 2:
       return <ImageAddForm />;
     default:
-      return 'Unknown step';
+      return '알수없는 단계';
   }
 };
 
@@ -54,7 +53,7 @@ const ProductStepper = () => {
   ];
 
   const handleReset = () => {
-    // 0으로 만드는 액션 생성하여 디스패치
+    // TODO: 0으로 만드는 액션 생성하여 디스패치
   };
 
   return (

@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import MyProduct from './MyProduct';
 
 const MyProductsWrapper = styled.div`
   border: 1px solid black;
 `;
 
 const MyProducts = () => {
+  const [myAds, setMyAds] = useState([]);
   const token = sessionStorage.getItem('access_token');
   useEffect(() => {
     axios
@@ -17,6 +19,8 @@ const MyProducts = () => {
       })
       .then(res => {
         console.log(res);
+        const { resvalue } = res.data;
+        setMyAds(resvalue);
       })
       // TODO: 에러처리
       .catch(err => console.log(err));
@@ -25,8 +29,9 @@ const MyProducts = () => {
   return (
     <MyProductsWrapper>
       <h1>내 광고들</h1>
-      <h3>/api/man/nation/list 로 날리는중..</h3>
-      <p>가져온 광고들에 대해 각각 수정, 삭제 액션 달것</p>
+      {myAds.map(ad => (
+        <MyProduct ad={ad} key={ad.idx} />
+      ))}
     </MyProductsWrapper>
   );
 };
