@@ -88,20 +88,14 @@ const SlideIcon = styled(Fab)`
 const BasicInformation = ({ country }) => {
   console.log(country);
   const { name, thumbnail, en_name, temp, humid } = country;
-
   const onSlideClick = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
   return (
     <BasicInformationBlock>
       <ImageWrapper>
-        {/* FIXME: 썸네일 제대로 받아지면 이미지 변경 */}
-        <StyledImg
-          src={
-            'https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80'
-          }
-          alt="썸네일"
-        />
+        {/* FIXME: 썸네일 경로 변경되면 toLowerCase() 제거 */}
+        <StyledImg src={thumbnail.toLowerCase()} alt="썸네일" />
       </ImageWrapper>
       <TextWrapper>
         <StyledTitle>
