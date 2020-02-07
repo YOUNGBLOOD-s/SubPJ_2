@@ -16,7 +16,7 @@ public interface IManService {
 	public ArrayList<Nation> nationList(int customer);
 	public ArrayList<Nation> nationListAll(int customer);
 	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date);
-	public boolean nationdelete(int customer);
+	public boolean nationdelete(String idx, String customer);
 	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date);
 	
 	/** 월별 CRUD */

@@ -50,8 +50,11 @@ public class ManDaoImpl implements IManDao {
 	}
 
 	@Override
-	public boolean nationdelete(int nation) {
-		int delete = session.delete("management.nationdelete", nation);
+	public boolean nationdelete(String idx, String customer) {
+		Nation nat = new Nation();
+		nat.setIdx(idx);
+		nat.setCustomer(customer);
+		int delete = session.delete("management.nationdelete", nat);
 		if (delete == 0)
 			return false;
 		else

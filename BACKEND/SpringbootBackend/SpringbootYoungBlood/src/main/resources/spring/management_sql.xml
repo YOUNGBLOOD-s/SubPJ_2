@@ -41,10 +41,10 @@
 		values(#{en_name},#{ko_name},#{dust},#{continents},#{customer},#{weight},#{speech},#{price},#{s_date},#{f_date});
 	</insert>
 
-	<delete id="nationdelete" parameterType="int">
+	<delete id="nationdelete" parameterType="nation">
 		delete from
 		nationtb
-		where idx=#{nation}
+		where idx=#{idx} and customer=#{customer}
 	</delete>
 
 	<update id="nationupdate" parameterType="nation">
