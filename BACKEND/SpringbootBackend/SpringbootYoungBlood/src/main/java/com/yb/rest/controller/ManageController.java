@@ -81,11 +81,12 @@ public class ManageController {
 
 	// 나중에
 	@GetMapping("/man/nationAll/info/{idx}")
-	@ApiOperation(value = "사용자 상품정보 조회")
+	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
 	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token,
 			@PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
+		System.out.println(idx);
 		Nation nat = new Nation();
 		Monthtb mon = new Monthtb();
 		ArrayList<Route> contentsList = null;
@@ -95,15 +96,26 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			// idx로 nationtb에서 selectOne
-			nat = ser.nationInfo(idx);
+			int grade = ser.searchGrade(customer);
+			if (grade == 1) {
+				// 관리자는 다 볼 수 있고...
 
-			// monthtb에 nation=#{idx}로 selectOne
-			mon = ser.monthInfo(idx);
+			} else if (grade >= 2) {
+				
+				// 광고주 본인이 가지고 있는 광고만 자세히보기를 할 수 있다.
+				
+				// 본인것이 아니라면 401
+				
+				// idx로 nationtb에서 selectOne
+				nat = ser.nationInfo(idx);
 
-			// img랑 contents는 selectList로 받아와야하고.
-			contentsList = ser.contentsInfo(idx);
-			imageList = ser.imagesInfo(idx);
+				// monthtb에 nation=#{idx}로 selectOne
+				mon = ser.monthInfo(idx);
+
+				// img랑 contents는 selectList로 받아와야하고.
+				contentsList = ser.contentsInfo(idx);
+				imageList = ser.imagesInfo(idx);
+			}
 
 			msg.put("resmsg", "조회성공");
 			msg.put("natValue", nat);
