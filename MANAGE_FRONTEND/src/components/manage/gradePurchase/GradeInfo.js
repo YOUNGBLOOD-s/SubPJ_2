@@ -93,8 +93,8 @@ const MobileDescriptionContent = styled.div`
 
 const GradeInfo = () => {
   const classes = useStyles();
-  // const spacing = 2;
-  console.log(process.env.PUBLIC_URL);
+  const static_url =
+    'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/manage';
   return (
     <>
       <Grid container className={classes.root}>
@@ -102,7 +102,7 @@ const GradeInfo = () => {
           <Grid container justify="flex-start" className={classes.grid}>
             <Grid item xs={12} md={6}>
               <Grid item>
-                <Image src={process.env.PUBLIC_URL + '/img/info1.png'} />
+                <Image src={static_url + '/info1.png'} />
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -138,7 +138,7 @@ const GradeInfo = () => {
           >
             <Grid item xs={12} md={6}>
               <Grid item>
-                <Image src={process.env.PUBLIC_URL + '/img/info2.png'} />
+                <Image src={static_url + '/info2.png'} />
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -176,15 +176,9 @@ const GradeInfo = () => {
             <Grid item xs={12} md={8}>
               <Grid item>
                 <MobileImgWrapper>
-                  <MobileImage
-                    src={process.env.PUBLIC_URL + '/img/minfo1.png'}
-                  />
-                  <MobileImage
-                    src={process.env.PUBLIC_URL + '/img/minfo2.png'}
-                  />
-                  <MobileImage
-                    src={process.env.PUBLIC_URL + '/img/minfo3.png'}
-                  />
+                  <MobileImage src={static_url + '/minfo1.png'} />
+                  <MobileImage src={static_url + '/minfo2.png'} />
+                  <MobileImage src={static_url + '/minfo3.png'} />
                 </MobileImgWrapper>
               </Grid>
             </Grid>
