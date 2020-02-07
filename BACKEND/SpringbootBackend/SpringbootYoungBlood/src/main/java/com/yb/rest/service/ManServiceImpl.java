@@ -50,8 +50,8 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public boolean nationdelete(int nation) {
-		return repo.nationdelete(nation);
+	public boolean nationdelete(String idx, String customer) {
+		return repo.nationdelete(idx, customer);
 	}
 
 	@Override

@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `nationtb` (
      f_date date,
      flag int default 0, # 1:false 0:true
      foreign key (customer) references membertb(idx)
+     on delete cascade
 );
 desc nationtb;
 
@@ -109,5 +110,6 @@ CREATE TABLE IF NOT EXISTS `clicktb` (
     qr_cnt int not null,
     date datetime not null,
 	foreign key (nation) references nationtb(idx)
+    on delete cascade
 );
 desc clicktb;

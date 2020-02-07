@@ -167,7 +167,8 @@ public class ManageController {
 	/** 사용자 상품 삭제 */
 	@DeleteMapping("/man/nation/delete/")
 	@ApiOperation(value = "사용자 상품정보 삭제 (cascade).")
-	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token) {
+	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token,
+			@PathVariable("idx") String idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -178,7 +179,7 @@ public class ManageController {
 			int grade = ser.searchGrade(customer);
 
 			if (grade == 1) {
-				boolean resDelete = ser.nationdelete(customer);
+				boolean resDelete = ser.nationdelete(idx ,customer);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
