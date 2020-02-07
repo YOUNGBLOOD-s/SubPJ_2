@@ -51,5 +51,8 @@ public interface IAdDao {
 	
 	/** 1:1상담 */
 	public void updateCounsel(Counsel counvalue);
+	//2020-02-06 정희수
+	public int getGrade(String idx);
+	public int getFlag(String idx);
 
 }

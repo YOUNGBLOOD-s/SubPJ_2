@@ -37,10 +37,8 @@
 
 	<insert id="insertnation" parameterType="nation">
 		insert into
-		nationtb(en_name, ko_name, dust, continents,showcnt,
-		customer, weight,
-		speech, price,s_date,f_date)
-		values(#{en_name},#{ko_name},#{dust},#{continents},#{showcnt},#{customer},#{weight},#{speech},#{price},#{s_date},#{f_date});
+		nationtb(en_name, ko_name, dust, continents, customer, weight, speech, price,s_date,f_date)
+		values(#{en_name},#{ko_name},#{dust},#{continents},#{customer},#{weight},#{speech},#{price},#{s_date},#{f_date});
 	</insert>
 
 	<delete id="nationdelete" parameterType="int">

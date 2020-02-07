@@ -42,5 +42,7 @@ public interface IAdService {
 	public boolean getDate(Map map);
 	public void insertClick(Map map);
 	public void insertQR(Map map);
+	public int getGrade(String idx);
+	public int getFlag(String idx);
 
 }
