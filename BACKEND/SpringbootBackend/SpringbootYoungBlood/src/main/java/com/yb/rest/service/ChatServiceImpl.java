@@ -30,4 +30,10 @@ public class ChatServiceImpl implements IChatService {
 		return repo.selectFavorite();
 	}
 
+	@Override
+	public String selectSDate(String idx) {
+		// TODO Auto-generated method stub
+		return repo.selectSDate(idx);
+	}
+
 }

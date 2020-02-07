@@ -12,4 +12,6 @@ public interface IChatDao {
 
 	List<Click> selectFavorite();
 
+	String selectSDate(String idx);
+
 }

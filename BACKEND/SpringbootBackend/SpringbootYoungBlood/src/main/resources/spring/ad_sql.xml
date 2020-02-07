@@ -5,6 +5,16 @@
 
 <mapper namespace="sendtofront">
 	
+	<select id="selectFlag" parameterType="string" resultType="int">
+	select flag from nationtb 
+	where idx=#{idx}
+	</select>
+	
+	<select id="selectGrade" parameterType="string" resultType="int">
+	select grade from membertb 
+	where idx= (select customer from nationtb where nationtb.idx=#{idx})
+	</select>
+	
 	<select id="selectnations" resultType="nation">
 	select * from nationtb
 	</select>

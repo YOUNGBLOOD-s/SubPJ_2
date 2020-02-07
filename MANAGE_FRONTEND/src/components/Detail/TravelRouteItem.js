@@ -33,6 +33,8 @@ const GridItem = styled(component.Grid)``;
 
 const RouteImage = styled.img`
   width: 100%;
+  max-height: 250px;
+  object-fit: cover;
   border-radius: 5px;
 `;
 
@@ -81,12 +83,9 @@ const DottedBar = () => (
 );
 
 const TravelRouteItem = ({ dayRoutes }) => {
-  // FIXME: 나중에 이미지 넣어지면 경로를 dayRoutes에서 받는걸로 수정할것
-  const image =
-    'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80';
   return (
     <div>
-      {dayRoutes.map(({ seq, title, detail, transport, tofrom }) => (
+      {dayRoutes.map(({ seq, title, detail, transport, tofrom, image }) => (
         <GridContainer container key={seq} spacing={1}>
           <GridItem item xs={1}>
             <IconWrapper>
@@ -103,7 +102,8 @@ const TravelRouteItem = ({ dayRoutes }) => {
           </component.Grid>
           <GridItem item xs={11}>
             <component.Grid item xs={12}>
-              <RouteImage src={image} alt="경로별 이미지" />
+              {/* TODO: image 수정되면 toLowerCase()삭제 */}
+              <RouteImage src={image.toLowerCase()} alt="경로별 이미지" />
             </component.Grid>
             {/* NOTICE: title과 detail이 같은 경우는 경유지? 같은느낌. 디테일 생략 */}
             {title === detail ? null : (
