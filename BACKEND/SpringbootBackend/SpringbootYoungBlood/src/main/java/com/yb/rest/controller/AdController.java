@@ -2,6 +2,7 @@ package com.yb.rest.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -219,14 +220,26 @@ public class AdController {
      		}
 
      		List<Nation> everyNation = ser.selectNations();
+     		
      		for (int i = 0; i < everyNation.size(); i++) {
      			String idx = everyNation.get(i).getIdx();
+     			Nation temp=ser.getNationdetail(Integer.parseInt(idx));
+     			System.out.println(temp.getCustomer());
+     			System.out.println("시바? "+ser.getGrade(idx));
      			if (ser.getFlag(idx) == 1)
      				continue; // 이미 다 광고했어 flag값 확인
      			int grade = ser.getGrade(idx);
+     			System.out.println("gradeGroup["+grade+"]애"+Integer.parseInt(idx)+"을 추가합니다.");
      			gradeGroup[grade].add(Integer.parseInt(idx)); // 등급2 광고주가 하는 광고 idx
      		}
-
+     		
+     		for(int i=0; i<gradeGroup.length; i++) {
+     			System.out.println("사이이이ㅏ이니즈즈즈즈즈ㅡ "+gradeGroup[i].size());
+     			for (int j = 0; j < gradeGroup[i].size(); j++) {
+					System.out.println("["+i+"]리스트에 들어있습니다: "+gradeGroup[i].get(j));
+				}
+     		}
+     		
      		Random rand = new Random();
      		for (int i = 2; i < gradeGroup.length; i++) {
 
@@ -234,7 +247,7 @@ public class AdController {
      			for (int j = 0; j < gradeGroup[i].size(); j++) {
      				randGroup.add(gradeGroup[i].get(j));
      			}
-     			
+     					
      			//grade2는 1개 뽑고 grade3는 2개 뽑는다
      			for (int j = 0; j < i-1; j++) {
      				int randomIdx=rand.nextInt(randGroup.size());
@@ -259,8 +272,6 @@ public class AdController {
      			}
      			randGroup.clear();
      		}
-     		
-     		
      		return result;
     }
 
@@ -269,11 +280,16 @@ public class AdController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {
 		// 가중치 계산 algorithm
 		List<Integer> nation = weightcal();
-		checkshowcnt(nation);
+		/*
+		 * List<Integer> nation = new LinkedList<>(); for(int i=1; i<3; i++) {
+		 * nation.add(i); }
+		 */
 		System.out.println("==============");
 		System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
 		System.out.println(nation);
-
+		checkshowcnt(nation);
+		System.out.println("나라에 대한 객체의 show cnt를 갱신했습니다.");
+		
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
 		List<Map<String, Object>> Countrylist = new LinkedList<>();
