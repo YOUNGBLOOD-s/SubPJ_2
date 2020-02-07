@@ -149,6 +149,7 @@ const MainAD = () => {
             showThumbs={false}
             transitionTime={1000}
             interval={5000}
+            stopOnHover={false}
           >
             {datas.map(({ id, name, en_name, content, thumbnail }, index) => (
               <div key={id} onDoubleClick={() => onDoubleClick(index)}>
