@@ -185,5 +185,10 @@ public class AdDaoImpl implements IAdDao {
 		return session.selectOne("sendtofront.selectFlag", idx);
 	}
 
+	@Override
+	public void updateshowandflag(int customer) {
+		session.update("sendtofront.updateshowflag", customer);
+	}
+
 	
 }

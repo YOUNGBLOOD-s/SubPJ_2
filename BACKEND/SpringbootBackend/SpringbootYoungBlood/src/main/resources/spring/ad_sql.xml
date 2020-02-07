@@ -132,6 +132,12 @@
 	insert into clicktb(nation, click_cnt, qr_cnt, date) 
 	values(#{nation}, 0, 1, #{today});
 	</insert>
+	
+	<update id="updateshowflag" parameterType="int">
+	update nationtb
+	set flag=0, showcnt=0
+	where customer=#{customer};
+	</update>
 
 </mapper>
  

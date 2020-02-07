@@ -16,6 +16,7 @@ public interface IAdDao {
 	public List<String> getImgs(int id);
 	public List<String> getModalcontents(int id);
 	public Sendtofront getInfo(Map value);
+	public void updateshowandflag(int customer);
 	
 	/** detail */
 	public List<Route> getRoutes(int idx);
