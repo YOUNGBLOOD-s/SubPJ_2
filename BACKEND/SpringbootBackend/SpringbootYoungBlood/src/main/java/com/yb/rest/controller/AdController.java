@@ -213,43 +213,38 @@ public class AdController {
      			result.add(finallist.get(i).getIdx());
      		}
 
-     		// 셀러 등급으로 랜덤 만들기 우선은 1,2,3등급으로 구별 **나중에 가능 등급 크기로 바꾸기
-     		ArrayList<Integer>[] gradeGroup = new ArrayList[4];
-     		for (int j = 0; j < gradeGroup.length; j++) {
-     			gradeGroup[j] = new ArrayList<Integer>();
-     		}
-
-     		List<Nation> everyNation = ser.selectNations();
-     		
-     		for (int i = 0; i < everyNation.size(); i++) {
-     			String idx = everyNation.get(i).getIdx();
-     			Nation temp=ser.getNationdetail(Integer.parseInt(idx));
-     			System.out.println(temp.getCustomer());
-     			System.out.println("시바? "+ser.getGrade(idx));
-     			if (ser.getFlag(idx) == 1)
-     				continue; // 이미 다 광고했어 flag값 확인
-     			int grade = ser.getGrade(idx);
-     			System.out.println("gradeGroup["+grade+"]애"+Integer.parseInt(idx)+"을 추가합니다.");
-     			gradeGroup[grade].add(Integer.parseInt(idx)); // 등급2 광고주가 하는 광고 idx
-     		}
-     		
-     		for(int i=0; i<gradeGroup.length; i++) {
-     			System.out.println("사이이이ㅏ이니즈즈즈즈즈ㅡ "+gradeGroup[i].size());
-     			for (int j = 0; j < gradeGroup[i].size(); j++) {
-					System.out.println("["+i+"]리스트에 들어있습니다: "+gradeGroup[i].get(j));
-				}
+     		ArrayList<Integer>[] gradeGroup = haeun();     		
+     		if(gradeGroup[2].size()==0 && gradeGroup[3].size()==0) {
+     			//showcnt와 flag값 갱신
+     			ser.updateshowandflag(2);
+     			ser.updateshowandflag(3);
+     			gradeGroup = haeun();
      		}
      		
      		Random rand = new Random();
-     		for (int i = 2; i < gradeGroup.length; i++) {
+     		boolean flag = false;
+     		int total=3;
+     		for (int i = 2; i < gradeGroup.length; i++) { //grade 2와 3을 검색함
 
      			List<Integer> randGroup = new ArrayList<Integer>();
      			for (int j = 0; j < gradeGroup[i].size(); j++) {
      				randGroup.add(gradeGroup[i].get(j));
      			}
-     					
+
      			//grade2는 1개 뽑고 grade3는 2개 뽑는다
-     			for (int j = 0; j < i-1; j++) {
+     			for (int j = 0; j < total-1; j++) {
+     				
+     				
+     				if(gradeGroup[i].size()==0) {
+     					System.out.println(i+"grade 에 내용이 없어요");
+     					flag = true;
+     					continue;
+     				} else {
+     					total--;
+     				}
+     				
+     				
+     				//[3].size==0 전체 flag,showcnt update
      				int randomIdx=rand.nextInt(randGroup.size());
      				Integer randomElement=randGroup.get(randomIdx);
      				//온도를 알아서 nationtb의 type을  update해야해
@@ -275,6 +270,31 @@ public class AdController {
      		return result;
     }
 
+	// 셀러 등급으로 랜덤 만들기 우선은 1,2,3등급으로 구별 **나중에 가능 등급 크기로 바꾸기
+	public ArrayList<Integer>[] haeun() {
+ 		ArrayList<Integer>[] gradeGroup = new ArrayList[4];
+ 		for (int j = 0; j < gradeGroup.length; j++) {
+ 			gradeGroup[j] = new ArrayList<Integer>();
+ 		}
+
+ 		List<Nation> everyNation = ser.selectNations();
+ 		
+ 		for (int i = 0; i < everyNation.size(); i++) {
+ 			String idx = everyNation.get(i).getIdx();
+ 			Nation temp=ser.getNationdetail(Integer.parseInt(idx));
+ 			System.out.println(temp.getCustomer());
+ 			System.out.println("시바? "+ser.getGrade(idx));
+ 			if (ser.getFlag(idx) == 1)
+ 				continue; // 이미 다 광고했어 flag값 확인
+ 			int grade = ser.getGrade(idx);
+ 			System.out.println("gradeGroup["+grade+"]애"+Integer.parseInt(idx)+"을 추가합니다.");
+ 			gradeGroup[grade].add(Integer.parseInt(idx)); // 등급2 광고주가 하는 광고 idx
+ 		}
+ 		return gradeGroup;
+	}
+	
+	
+	
 	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. @throws JsonProcessingException */
 	@GetMapping("/sensor/reco")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation() throws JsonProcessingException {

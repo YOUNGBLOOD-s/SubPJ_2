@@ -26,6 +26,7 @@ public interface IAdService {
 	public int getScore(int idx);
 	public int getDust(int idx);
 	public Sensor selectData(int idx);
+	public void updateshowandflag(int customer);
 	public void updateType(ForScore forScore);
 	public int getType(int idx);
 	public void updateClickcnt(Map map);

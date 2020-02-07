@@ -179,4 +179,9 @@ public class AdServiceImpl implements IAdService {
 		// TODO Auto-generated method stub
 		return repo.getFlag(idx);
 	}
+
+	@Override
+	public void updateshowandflag(int customer) {
+		repo.updateshowandflag(customer);
+	}
 }
