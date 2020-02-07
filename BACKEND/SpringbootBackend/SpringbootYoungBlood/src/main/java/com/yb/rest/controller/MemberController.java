@@ -233,22 +233,21 @@ public class MemberController {
 
 	/** 멤버 조회 서비스 */
 	@PostMapping("/auth/infomem")
-	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestParam String str) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestParam String password) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		ArrayList<Member> list = new ArrayList<>();
-		
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			int customer = manser.getIdx(username);
-			int grade = manser.searchGrade(customer);
-
-			if (grade == 1) {
-				list = ser.listMem();
+			String realpw = ser.getPassword(username);
+			if(realpw.equals(password)) {
+				Member mem = ser.InfoMem(username);
+				msg.put("meminfo", mem);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-			} else {
+			}
+			else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			}
 		} catch (Exception e) {
@@ -257,21 +256,6 @@ public class MemberController {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
 		return res;
-		
-	
-//		ResponseEntity<Map<String, Object>> resEntity = null;
-//		Map<String, Object> map = new HashMap();
-//		Member mem = null;
-//		try {
-//			mem = ser.InfoMem(username);
-//			map.put("resmsg", "조회성공");
-//			map.put("resvalue", mem);
-//			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-//		} catch (RuntimeException e) {
-//			map.put("resmsg", "조회실패");
-//			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
-//		}
-//		return resEntity;
 	}
 	
 	/** 멤버 삭제 서비스 */
