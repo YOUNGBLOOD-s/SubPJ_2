@@ -48,7 +48,7 @@ public class ManageController {
 	}
 
 	/** 사용자 상품 전체보기 */
-	@GetMapping("/man/nation/list/")
+	@GetMapping("/man/nation/list")
 	@ApiOperation(value = "광고주의 등록 상품(nation) 전체 리스트")
 	public ResponseEntity<Map<String, Object>> nationList(@RequestHeader(value = "Authorization") String token) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
@@ -61,7 +61,7 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-
+			
 			if (grade == 1) {
 				list = ser.nationListAll(customer);
 			} else if (grade >= 2) {
@@ -97,15 +97,21 @@ public class ManageController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			// idx로 nationtb에서 selectOne
-			nat = ser.nationInfo(idx);
-
-			// monthtb에 nation=#{idx}로 selectOne
-			mon = ser.monthInfo(idx);
-
-			// img랑 contents는 selectList로 받아와야하고.
-			contentsList = ser.contentsInfo(idx);
-			imageList = ser.imagesInfo(idx);
+			int grade = ser.searchGrade(customer);
+			if (grade == 1) {
+				//관리자는 다 볼 수 있고...
+				
+			} else if (grade >= 2) {
+				// idx로 nationtb에서 selectOne
+				nat = ser.nationInfo(idx);
+				
+				// monthtb에 nation=#{idx}로 selectOne
+				mon = ser.monthInfo(idx);
+				
+				// img랑 contents는 selectList로 받아와야하고.
+				contentsList = ser.contentsInfo(idx);
+				imageList = ser.imagesInfo(idx);				
+			} 
 
 			msg.put("resmsg", "조회성공");
 			msg.put("natValue", nat);
@@ -135,7 +141,6 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-
 			if (grade > 0) {
 				boolean resProduct = ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getDust(),
 						nat.getContinents(), nat.getShowcnt(), customer + "", nat.getWeight(), nat.getSpeech(),
@@ -157,9 +162,10 @@ public class ManageController {
 	}
 
 	/** 사용자 상품 삭제 */
-	@DeleteMapping("/man/nation/delete/")
+	@DeleteMapping("/man/nation/delete/{nation}")
 	@ApiOperation(value = "매니저가 nationtb삭제 (cascade).")
-	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token) {
+	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token,
+			@PathVariable("nation") int nation) {
 		token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -171,7 +177,7 @@ public class ManageController {
 			int grade = ser.searchGrade(customer);
 
 			if (grade == 1) {
-				boolean resDelete = ser.nationdelete(customer);
+				boolean resDelete = ser.nationdelete(nation);
 				msg.put("resmsg", "삭제성공");
 				msg.put("resvalue", resDelete);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);

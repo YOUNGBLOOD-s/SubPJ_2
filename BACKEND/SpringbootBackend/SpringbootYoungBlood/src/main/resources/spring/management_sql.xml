@@ -46,7 +46,7 @@
 	<delete id="nationdelete" parameterType="int">
 		delete from
 		nationtb
-		where customer=#{customer}
+		where idx=#{nation}
 	</delete>
 
 	<update id="nationupdate" parameterType="nation">
@@ -104,8 +104,8 @@
 	</select>
 
 	<select id="selectVolume" parameterType="int" resultType="int">
-	select volume from gradetb
-	where idx = (select customer from nationtb where idx=#{idx});
+		select volume from gradetb
+		where idx = (select customer from nationtb where idx=#{idx});
 	</select>
 
 
@@ -145,17 +145,18 @@
 		select *
 		from nationtb where idx=#{idx}
 	</select>
-	
+
 	<select id="monthInfo" parameterType="int" resultType="monthtb">
 		select *
 		from monthtb where nation=#{idx};
 	</select>
-	
+
 	<select id="contentsInfo" parameterType="int" resultType="route">
-		select *
+		select
+		*
 		from contentstb where nation=#{idx};
 	</select>
-	
+
 	<select id="imageInfo" parameterType="int" resultType="image">
 		select *
 		from imagetb
