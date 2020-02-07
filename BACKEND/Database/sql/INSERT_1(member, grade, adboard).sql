@@ -5,6 +5,8 @@ insert into membertb(username, password, company, grade) values("admin", "admin"
 insert into membertb(username, password, company, grade) values("heesu", "heesu", "HEESU", 2);
 insert into membertb(username, password, company, grade) values("kidong", "kidong", "KIDONG", 3);
 insert into membertb(username, password, company, grade) values("haeun", "haeun", "HAEUN", 0);
+insert into membertb(username, password, company, grade) values('choiys', 'choiys', 'CHOIYS', 4);
+insert into membertb(username, password, company, grade) values('mandarin', 'mandarin', 'MANDARIN', 2);
 SELECT * FROM MEMBERTB;
 
 desc gradetb;
@@ -12,6 +14,7 @@ insert into gradetb(idx, name, volume) values(0, 'grade0', 0);
 insert into gradetb(idx, name, volume) values(1, 'admin', 10000);
 insert into gradetb(idx, name, volume) values(2, 'grade1', 5);
 insert into gradetb(idx, name, volume) values(3, 'grade2', 10);
+insert into gradetb(idx, name, volume) values(4, 'grade3', 20);
 select * from gradetb;
 
 -- 월평균 table
