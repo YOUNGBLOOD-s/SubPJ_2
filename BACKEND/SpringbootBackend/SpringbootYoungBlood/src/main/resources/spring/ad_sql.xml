@@ -5,6 +5,16 @@
 
 <mapper namespace="sendtofront">
 	
+	<select id="selectFlag" parameterType="string" resultType="int">
+	select flag from nationtb 
+	where idx=#{idx}
+	</select>
+	
+	<select id="selectGrade" parameterType="string" resultType="int">
+	select grade from membertb 
+	where idx= (select customer from nationtb where nationtb.idx=#{idx})
+	</select>
+	
 	<select id="selectnations" resultType="nation">
 	select * from nationtb
 	</select>
@@ -122,6 +132,12 @@
 	insert into clicktb(nation, click_cnt, qr_cnt, date) 
 	values(#{nation}, 0, 1, #{today});
 	</insert>
+	
+	<update id="updateshowflag" parameterType="int">
+	update nationtb
+	set flag=0, showcnt=0
+	where customer=#{customer};
+	</update>
 
 </mapper>
  

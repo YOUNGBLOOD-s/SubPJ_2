@@ -173,5 +173,22 @@ public class AdDaoImpl implements IAdDao {
 		return session.selectList("sendtofront.selectnations");
 	}
 
+	@Override
+	public int getGrade(String idx) {
+		// TODO Auto-generated method stub
+		return session.selectOne("sendtofront.selectGrade", idx);
+	}
+
+	@Override
+	public int getFlag(String idx) {
+		// TODO Auto-generated method stub
+		return session.selectOne("sendtofront.selectFlag", idx);
+	}
+
+	@Override
+	public void updateshowandflag(int customer) {
+		session.update("sendtofront.updateshowflag", customer);
+	}
+
 	
 }

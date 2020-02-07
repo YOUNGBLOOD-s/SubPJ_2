@@ -10,5 +10,6 @@ public interface IChatService {
 
 	List<Nation> findContinent(String string);
 	List<Click> selectFavorite();
+	String selectSDate(String idx);
 
 }

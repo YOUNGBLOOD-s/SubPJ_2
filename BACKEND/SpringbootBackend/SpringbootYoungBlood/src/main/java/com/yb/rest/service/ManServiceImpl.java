@@ -44,14 +44,14 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date) {
-		boolean res = repo.nationinsert(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date);
+	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
+		boolean res = repo.nationinsert(en_name, ko_name, dust, continents,  customer, weight, speech, price, s_date, f_date);
 		return res;
 	}
 
 	@Override
-	public boolean nationdelete(int customer) {
-		return repo.nationdelete(customer);
+	public boolean nationdelete(int nation) {
+		return repo.nationdelete(nation);
 	}
 
 	@Override

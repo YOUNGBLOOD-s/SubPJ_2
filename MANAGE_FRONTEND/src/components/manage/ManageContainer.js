@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Chart from './Chart';
 import Grade from './gradePurchase/Grade';
 import ProductManage from './productManage/ProductManage';
+import MyPage from './MyPage/MyPage';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -97,7 +98,7 @@ const ManageContainer = () => {
           <ProductManage />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          내 정보
+          <MyPage />
         </TabPanel>
       </SwipeableViews>
     </div>

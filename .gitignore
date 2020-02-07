@@ -232,6 +232,8 @@ sketch
 
 /BACKEND/SpringbootBackend/.metadata
 /BACKEND/SpringbootBackend/Servers
+*.properties
+/DATA
 
 .vscode/
 sftp.json

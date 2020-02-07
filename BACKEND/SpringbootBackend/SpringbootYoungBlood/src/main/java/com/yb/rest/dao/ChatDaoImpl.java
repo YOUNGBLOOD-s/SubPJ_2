@@ -25,8 +25,13 @@ public class ChatDaoImpl implements IChatDao {
 	@Override
 	public List<Click> selectFavorite() {
 		// TODO Auto-generated method stub
-		System.out.println(session.selectList("chatbot.test"));
 		return session.selectList("chatbot.test");
+	}
+
+	@Override
+	public String selectSDate(String idx) {
+		// TODO Auto-generated method stub
+		return session.selectOne("chatbot.selectDate", idx);
 	}
 
 }
