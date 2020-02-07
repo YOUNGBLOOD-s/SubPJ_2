@@ -82,8 +82,7 @@ public class ManageController {
 	// 나중에
 	@GetMapping("/man/nationAll/info/{idx}")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
-	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token,
-			@PathVariable("idx") int idx) {
+	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		System.out.println(idx);
@@ -134,8 +133,7 @@ public class ManageController {
 	/** 사용자 상품 등록 */
 	@PostMapping("/man/nation/insert")
 	@ApiOperation(value = "사용자 상품정보  등록")
-	public ResponseEntity<Map<String, Object>> nationInsert(@RequestHeader(value = "Authorization") String token,
-			@RequestBody Nation nat) {
+	public ResponseEntity<Map<String, Object>> nationInsert(@RequestHeader(value = "Authorization") String token, @RequestBody Nation nat) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {

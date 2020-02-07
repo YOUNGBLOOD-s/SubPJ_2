@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yb.rest.service.IManService;
 import com.yb.rest.service.IMemService;
 import com.yb.rest.vo.Member;
 
@@ -47,6 +48,9 @@ public class MemberController {
 	@Autowired
 	private IMemService ser;
 
+	@Autowired
+	private IManService manser;
+	
 	@ExceptionHandler(Exception.class)
 	public void ExceptionMethod(Exception e) {
 
@@ -200,38 +204,74 @@ public class MemberController {
 	/** 멤버 전체 조회 서비스 */
 	@GetMapping("/auth/listmem")
 	@ApiOperation(value = "member 조회 서비스", response = List.class)
-	public @ResponseBody ResponseEntity<Map<String, Object>> listMem() {
-		ArrayList<Member> list = null;
-		ResponseEntity<Map<String, Object>> resEntity = null;
-		Map<String, Object> map = new HashMap<String, Object>();
+	public @ResponseBody ResponseEntity<Map<String, Object>> listMem(@RequestHeader(value = "Authorization") String token) {
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+		ArrayList<Member> list = new ArrayList<>();
+		
 		try {
-			list = ser.listMem();
-			map.put("resmsg", "조회성공");
-			map.put("resvalue", list);
-			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		} catch (RuntimeException e) {
-			map.put("resmsg", "조회실패");
-			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			Claims de = MemberController.verification(token);
+			msg.put("username", de.get("username"));
+			String username = (String) de.get("username");
+			int customer = manser.getIdx(username);
+			int grade = manser.searchGrade(customer);
+
+			if (grade == 1) {
+				list = ser.listMem();
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			}
+		} catch (Exception e) {
+			msg.put("resmsg", e.getMessage());
+			System.out.println(e.getMessage());
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
-		return resEntity;
+		return res;
 	}
-	
+
+
 	/** 멤버 조회 서비스 */
-	@GetMapping("/auth/infomem/{username}")
-	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@PathVariable("username") String username) {
-		ResponseEntity<Map<String, Object>> resEntity = null;
-		Map<String, Object> map = new HashMap();
-		Member mem = null;
+	@PostMapping("/auth/infomem")
+	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestParam String str) {
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+		ArrayList<Member> list = new ArrayList<>();
+		
 		try {
-			mem = ser.InfoMem(username);
-			map.put("resmsg", "조회성공");
-			map.put("resvalue", mem);
-			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		} catch (RuntimeException e) {
-			map.put("resmsg", "조회실패");
-			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+			Claims de = MemberController.verification(token);
+			msg.put("username", de.get("username"));
+			String username = (String) de.get("username");
+			int customer = manser.getIdx(username);
+			int grade = manser.searchGrade(customer);
+
+			if (grade == 1) {
+				list = ser.listMem();
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			}
+		} catch (Exception e) {
+			msg.put("resmsg", e.getMessage());
+			System.out.println(e.getMessage());
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
-		return resEntity;
+		return res;
+		
+	
+//		ResponseEntity<Map<String, Object>> resEntity = null;
+//		Map<String, Object> map = new HashMap();
+//		Member mem = null;
+//		try {
+//			mem = ser.InfoMem(username);
+//			map.put("resmsg", "조회성공");
+//			map.put("resvalue", mem);
+//			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+//		} catch (RuntimeException e) {
+//			map.put("resmsg", "조회실패");
+//			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.NOT_FOUND);
+//		}
+//		return resEntity;
 	}
 	
 	/** 멤버 삭제 서비스 */
