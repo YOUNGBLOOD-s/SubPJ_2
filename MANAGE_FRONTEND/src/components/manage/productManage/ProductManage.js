@@ -8,7 +8,7 @@ const ProductManageWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const ProductMange = () => {
+const ProductManage = () => {
   return (
     <div>
       <h1>제품 관리</h1>
@@ -22,4 +22,4 @@ const ProductMange = () => {
   );
 };
 
-export default ProductMange;
+export default ProductManage;
