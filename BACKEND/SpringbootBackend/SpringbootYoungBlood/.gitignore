@@ -32,3 +32,6 @@ build/
 
 ### Spring bin ###
 bin/
+
+### properties ##
+.properties
