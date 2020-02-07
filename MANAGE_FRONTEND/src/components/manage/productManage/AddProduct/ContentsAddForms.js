@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import styled from 'styled-components';
 import MaterialCard from '../../../common/MaterialCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { addRoute, removeRoute } from '../../../../modules/product';
 
 const StyledTextField = withStyles({
   root: {
@@ -36,20 +38,27 @@ const StyledForm = styled.form`
   flex-direction: column;
 `;
 
-const ContentsAddForm = () => {
+const CenteredBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ContentsAddForm = ({ nationId }) => {
   const initialState = {
-    day: '', // 컨텐츠의 일자
+    day: '1', // 컨텐츠의 일자
+    seq: '1', // 순서
     detail: '', // 컨텐츠 설명
     image: '', // 컨텐츠 이미지
-    seq: '', // 순서
     title: '', // 여행지명
     tofrom: '', // ~~에서 ~~ 까지
     transport: '차량', // 이동수단
-    nation: '1', // 컨텐츠가 포함되는 국가 id
+    nation: nationId, // 컨텐츠가 포함되는 국가 id
   };
 
   const [disabled, setDisabled] = useState(false);
   const [content, setContent] = useState(initialState);
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -60,116 +69,163 @@ const ContentsAddForm = () => {
     e.preventDefault();
   };
 
+  const onLocking = () => {
+    // 잠금
+    setDisabled(!disabled);
+    // 컨텐츠 리덕스 스토어에 추가
+    dispatch(addRoute(content));
+  };
+
+  const onUnLocking = () => {
+    // 잠금 풀고
+    setDisabled(!disabled);
+    // 기존경로 리덕스 스토어에서 삭제
+    dispatch(removeRoute(content));
+  };
   return (
     <MaterialCard>
-      <StyledForm onSubmit={onSubmit}>
-        <component.Grid container>
+      {disabled ? (
+        <component.Grid container spacing={1}>
           <component.Grid item xs={8}>
-            <StyledTextField
-              variant="outlined"
-              label="컨텐츠 이름"
-              type="text"
-              name="title"
-              disabled={disabled}
-              value={content.title}
-              onChange={handleChange}
-            />
+            <CenteredBox>
+              <div>
+                {content.day}일차 - {content.seq}번째 경로
+              </div>
+              <div>이동수단 : [{content.transport}]</div>
+              <div>
+                {content.title} - {content.detail}
+              </div>
+            </CenteredBox>
           </component.Grid>
           <component.Grid item xs={4}>
-            <StyledTextField
-              variant="outlined"
-              label="이동수단"
-              select
-              name="transport"
-              disabled={disabled}
-              value={content.transport}
-              onChange={handleChange}
-            >
-              {transport_arr.map(transport => (
-                <MenuItem key={transport.value} value={transport.value}>
-                  {transport.label}
-                </MenuItem>
-              ))}
-            </StyledTextField>
+            <CenteredBox>
+              <component.Button
+                color="primary"
+                variant="contained"
+                fullWidth
+                onClick={onUnLocking}
+              >
+                <span role="img" aria-label="emoji">
+                  🔒
+                </span>{' '}
+                잠금해제 및 수정
+              </component.Button>
+            </CenteredBox>
           </component.Grid>
-          <component.Grid item>
-            <StyledTextField
-              variant="outlined"
-              label="컨텐츠 설명"
-              type="text"
-              name="detail"
-              disabled={disabled}
-              value={content.detail}
-              onChange={handleChange}
-            />
-          </component.Grid>
-          <component.Grid item xs={3}>
-            <StyledTextField
-              variant="outlined"
-              label="여행 일차"
-              type="Number"
-              name="day"
-              disabled={disabled}
-              value={content.day}
-              onChange={handleChange}
-            />
-          </component.Grid>
-          <component.Grid item xs={3}>
-            <StyledTextField
-              variant="outlined"
-              label="해당일차의 여행순번"
-              type="Number"
-              name="seq"
-              disabled={disabled}
-              value={content.seq}
-              onChange={handleChange}
-            />
-          </component.Grid>
-
-          <StyledTextField
-            variant="outlined"
-            label="이미지"
-            type="text"
-            name="image"
-            disabled={disabled}
-            value={content.image}
-            onChange={handleChange}
-          />
-          <StyledTextField
-            variant="outlined"
-            label="~에서 ~까지"
-            type="text"
-            name="tofrom"
-            disabled={disabled}
-            value={content.tofrom}
-            onChange={handleChange}
-          />
-          <button onClick={() => setDisabled(true)}>다썼다</button>
         </component.Grid>
-      </StyledForm>
+      ) : (
+        <StyledForm onSubmit={onSubmit}>
+          <component.Grid container spacing={2}>
+            <component.Grid item xs={8}>
+              <StyledTextField
+                variant="outlined"
+                label="🗼 여행지명"
+                type="text"
+                name="title"
+                fullWidth
+                disabled={disabled}
+                value={content.title}
+                onChange={handleChange}
+              />
+            </component.Grid>
+            <component.Grid item xs={4}>
+              <StyledTextField
+                variant="outlined"
+                label="🚋 이동수단"
+                select
+                fullWidth
+                name="transport"
+                disabled={disabled}
+                value={content.transport}
+                onChange={handleChange}
+              >
+                {transport_arr.map(transport => (
+                  <MenuItem key={transport.value} value={transport.value}>
+                    {transport.label}
+                  </MenuItem>
+                ))}
+              </StyledTextField>
+            </component.Grid>
+            <component.Grid item xs={12}>
+              <StyledTextField
+                variant="outlined"
+                label="📃여행지 설명"
+                type="text"
+                name="detail"
+                multiline
+                fullWidth
+                disabled={disabled}
+                value={content.detail}
+                onChange={handleChange}
+              />
+            </component.Grid>
+            <component.Grid item xs={4}>
+              <StyledTextField
+                variant="outlined"
+                label="N일차"
+                type="Number"
+                name="day"
+                fullWidth
+                disabled={disabled}
+                value={content.day}
+                onChange={handleChange}
+              />
+            </component.Grid>
+            <component.Grid item xs={4}>
+              <StyledTextField
+                variant="outlined"
+                label="N일차의 순번"
+                type="Number"
+                name="seq"
+                fullWidth
+                disabled={disabled}
+                value={content.seq}
+                onChange={handleChange}
+              />
+            </component.Grid>
+            <component.Grid item xs={4}>
+              <StyledTextField
+                variant="outlined"
+                label="A에서 B까지"
+                type="text"
+                name="tofrom"
+                fullWidth
+                disabled={disabled}
+                value={content.tofrom}
+                onChange={handleChange}
+              />
+            </component.Grid>
+            <component.Grid item xs={12}>
+              <StyledTextField
+                variant="outlined"
+                label="이미지"
+                type="text"
+                name="image"
+                fullWidth
+                disabled={disabled}
+                value={content.image}
+                onChange={handleChange}
+              />
+            </component.Grid>
+            <component.Grid item xs={12}>
+              <component.Button
+                color="secondary"
+                variant="contained"
+                onClick={onLocking}
+                fullWidth
+              >
+                <span role="img" aria-label="emoji">
+                  🔒
+                </span>{' '}
+                경로 저장 및 잠금
+              </component.Button>
+            </component.Grid>
+          </component.Grid>
+        </StyledForm>
+      )}
     </MaterialCard>
   );
 };
-
-const ContentAddForms = () => {
-  const [contentForms, setContentForms] = useState([<ContentsAddForm />]);
-  const addForm = () => {
-    setContentForms([...contentForms, <ContentsAddForm />]);
-  };
-
-  return (
-    <div>
-      <div>
-        {contentForms.map((contentForm, idx) => (
-          <div key={idx}>{contentForm}</div>
-        ))}
-      </div>
-      <button onClick={addForm}>폼추가하기</button>
-    </div>
-  );
-};
-
-export default ContentAddForms;
 
 const transport_arr = [
   {
@@ -201,3 +257,48 @@ const transport_arr = [
     label: '배',
   },
 ];
+
+const ContentAddForms = () => {
+  const { routes, nationId } = useSelector(({ product }) => ({
+    routes: product.routes,
+    nationId: product.nationId,
+  }));
+
+  const [contentForms, setContentForms] = useState([
+    <ContentsAddForm nationId={nationId} />,
+  ]);
+
+  const token = sessionStorage.getItem('access_token');
+  const addForm = () => {
+    setContentForms([...contentForms, <ContentsAddForm nationId={nationId} />]);
+  };
+
+  // TODO : 요청은 마지막에 하는걸로 합시다
+  // const onComplete = () => {
+  //   axios
+  //     .post('/api/man/contents/add', routes, {
+  //       headers: {
+  //         Authorization: token,
+  //       },
+  //     })
+  //     .then(() => {
+
+  //     })
+  //     .catch(err => console.log(err));
+  // };
+
+  return (
+    <div>
+      <div>
+        {contentForms.map((contentForm, idx) => (
+          <div key={idx}>{contentForm}</div>
+        ))}
+      </div>
+      <component.Button color="secondary" variant="contained" onClick={addForm}>
+        경로 추가하기
+      </component.Button>
+    </div>
+  );
+};
+
+export default ContentAddForms;

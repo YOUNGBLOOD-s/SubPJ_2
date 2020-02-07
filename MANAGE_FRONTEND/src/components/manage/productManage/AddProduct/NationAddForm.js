@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { nextStep, prevStep } from '../../../../modules/stepper';
 import axios from 'axios';
+import { selectNation } from '../../../../modules/product';
 
 const StyledTextField = withStyles({
   root: {
@@ -58,7 +59,7 @@ const NationAddForm = ({ classes, steps }) => {
       .then(res => {
         // TODO: 이 인덱스를 리덕스로 글로벌 보관해서 사용해야함
         const { nationidx } = res.data;
-
+        dispatch(selectNation(nationidx));
         dispatch(nextStep());
       })
       .catch(err => console.log(err));
@@ -78,72 +79,94 @@ const NationAddForm = ({ classes, steps }) => {
 
   return (
     <StyledForm>
-      <StyledTextField
-        variant="outlined"
-        select
-        label="대륙"
-        type="text"
-        name="continents"
-        value={product.continents}
-        onChange={handleChange}
-      >
-        {continents_arr.map(continent => (
-          <MenuItem key={continent.value} value={continent.value}>
-            {continent.label}
-          </MenuItem>
-        ))}
-      </StyledTextField>
-      <StyledTextField
-        variant="outlined"
-        label="국가 영문 이름"
-        type="text"
-        name="en_name"
-        value={product.en_name}
-        onChange={handleChange}
-      />
-      <StyledTextField
-        variant="outlined"
-        label="국가 한글 이름"
-        type="text"
-        name="ko_name"
-        value={product.ko_name}
-        onChange={handleChange}
-      />
-      {/* TODO: 날짜 선택은 이전에 사용했던 캘린더로 변경 */}
-      <StyledTextField
-        variant="outlined"
-        label="여행 출발 일자(yyyy-mm-dd)"
-        type="text"
-        name="s_date"
-        value={product.s_date}
-        onChange={handleChange}
-      />
-      <StyledTextField
-        variant="outlined"
-        label="여행 도착 일자(yyyy-mm-dd)"
-        type="text"
-        name="f_date"
-        value={product.f_date}
-        onChange={handleChange}
-      />
-      <StyledTextField
-        variant="outlined"
-        label="가격"
-        type="text"
-        name="price"
-        value={product.price}
-        onChange={handleChange}
-      />
-      <StyledTextField
-        variant="outlined"
-        label="스피치"
-        type="text"
-        name="speech"
-        value={product.speech}
-        onChange={handleChange}
-      />
-      <div className={classes.actionsContainer}>
-        <div>
+      <component.Grid container spacing={1}>
+        <component.Grid item xs={12}>
+          <StyledTextField
+            variant="outlined"
+            select
+            fullWidth
+            label="대륙"
+            type="text"
+            name="continents"
+            value={product.continents}
+            onChange={handleChange}
+          >
+            {continents_arr.map(continent => (
+              <MenuItem key={continent.value} value={continent.value}>
+                {continent.label}
+              </MenuItem>
+            ))}
+          </StyledTextField>
+        </component.Grid>
+        <component.Grid item xs={6}>
+          <StyledTextField
+            variant="outlined"
+            label="한글 국가이름"
+            type="text"
+            name="ko_name"
+            fullWidth
+            value={product.ko_name}
+            onChange={handleChange}
+          />
+        </component.Grid>
+        <component.Grid item xs={6}>
+          <StyledTextField
+            variant="outlined"
+            label="영문(EN) 국가이름"
+            type="text"
+            name="en_name"
+            fullWidth
+            value={product.en_name}
+            onChange={handleChange}
+          />
+        </component.Grid>
+        {/* TODO: 날짜 선택은 이전에 사용했던 캘린더로 변경 */}
+        <component.Grid item xs={6}>
+          <StyledTextField
+            variant="outlined"
+            label="🛫 여행 출발 일자(yyyy-mm-dd)"
+            type="text"
+            name="s_date"
+            fullWidth
+            value={product.s_date}
+            onChange={handleChange}
+          />
+        </component.Grid>
+        <component.Grid item xs={6}>
+          <StyledTextField
+            variant="outlined"
+            label="🛬 여행 도착 일자(yyyy-mm-dd)"
+            type="text"
+            name="f_date"
+            fullWidth
+            value={product.f_date}
+            onChange={handleChange}
+          />
+        </component.Grid>
+        <component.Grid item xs={12}>
+          <StyledTextField
+            variant="outlined"
+            label="💵 패키지 가격(원)"
+            type="text"
+            name="price"
+            fullWidth
+            value={product.price}
+            onChange={handleChange}
+          />
+        </component.Grid>
+        <component.Grid item xs={12}>
+          <StyledTextField
+            variant="outlined"
+            label="🎤 스피치 문장"
+            type="text"
+            name="speech"
+            multiline
+            fullWidth
+            value={product.speech}
+            onChange={handleChange}
+          />
+        </component.Grid>
+        <component.Grid item xs={12}>
           {/* TODO: 만약 요청에 실패한다면 에러 메세지를 띄울것 */}
           <component.Button
             disabled={step === 0}
@@ -160,8 +183,8 @@ const NationAddForm = ({ classes, steps }) => {
           >
             {step === steps.length - 1 ? '완료' : '다음'}
           </component.Button>
-        </div>
-      </div>
+        </component.Grid>
+      </component.Grid>
     </StyledForm>
   );
 };
