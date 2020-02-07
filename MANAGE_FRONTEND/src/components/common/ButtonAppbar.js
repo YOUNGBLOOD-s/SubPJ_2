@@ -43,7 +43,10 @@ const ButtonAppBar = ({ user, onLogout }) => {
               {user.username === 'admin' ? (
                 <Link to="/admin">
                   <component.Button className={classes.button} color="inherit">
-                    😎ADMINPAGE
+                    <span role="img" aria-label="img">
+                      😎
+                    </span>
+                    ADMINPAGE
                   </component.Button>
                 </Link>
               ) : (

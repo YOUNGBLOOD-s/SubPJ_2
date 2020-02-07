@@ -52,7 +52,6 @@ const HeaderText = styled.h1`
 
 const Grade = () => {
   const classes = useStyles();
-  const spacing = 5;
 
   return (
     <div className={(classes.card, classes.bgtop)}>

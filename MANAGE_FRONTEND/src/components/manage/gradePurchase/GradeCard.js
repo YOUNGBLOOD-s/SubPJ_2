@@ -54,7 +54,6 @@ const useStyles = makeStyles({
   },
 });
 const GradeCard = ({ title, image, grade, price, option }) => {
-  const spacing = 2;
   const classes = useStyles();
   return (
     <>
@@ -62,7 +61,7 @@ const GradeCard = ({ title, image, grade, price, option }) => {
         <CardActionArea>
           <CardContent>
             <GradeImgWrapper>
-              <img src={image} />
+              <img src={image} alt="" />
             </GradeImgWrapper>
             <GradeTitle>{title}</GradeTitle>
             <GradePrice>
@@ -70,9 +69,9 @@ const GradeCard = ({ title, image, grade, price, option }) => {
               <GradePriceSub>per month</GradePriceSub>
             </GradePrice>
             <hr className={classes.hr} />
-            {option.map(item => {
+            {option.map((item, idx) => {
               return (
-                <GradeContent>
+                <GradeContent key={idx}>
                   <i className={`fas fa-check ${classes.check}`}></i>
                   &nbsp; {item}
                 </GradeContent>

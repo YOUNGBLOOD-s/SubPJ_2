@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import NationAddForm from './NationAddForm';
 import ContentAddForms from './ContentsAddForms';
 import ImageAddForm from './ImageAddForm';
-import { createContext } from 'react';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,142 +28,45 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const getStepContent = (
-  step,
-  handleBack,
-  classes,
-  activeStep,
-  steps,
-  handleNext,
-) => {
-  const onAddNationSubmit = e => {
-    e.preventDefault();
-    console.log('국가 생성하기 요청');
-  };
-
+const getStepContent = (step, classes, steps) => {
   switch (step) {
     case 0:
-      return (
-        <>
-          <NationAddForm onSubmit={onAddNationSubmit} />
-          <div className={classes.actionsContainer}>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.button}
-              >
-                이전단계로
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-                type="submit"
-              >
-                {activeStep === steps.length - 1 ? '완료' : '다음'}
-              </Button>
-            </div>
-          </div>
-        </>
-      );
+      return <NationAddForm classes={classes} steps={steps} />;
     case 1:
-      return (
-        <>
-          <ContentAddForms />
-          <div className={classes.actionsContainer}>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.button}
-              >
-                이전단계로
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? '완료' : '다음'}
-              </Button>
-            </div>
-          </div>
-        </>
-      );
+      return <ContentAddForms />;
     case 2:
-      return (
-        <>
-          <ImageAddForm />
-          <div className={classes.actionsContainer}>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.button}
-              >
-                이전단계로
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? '완료' : '다음'}
-              </Button>
-            </div>
-          </div>
-        </>
-      );
+      return <ImageAddForm />;
     default:
-      return 'Unknown step';
+      return '알수없는 단계';
   }
 };
 
 const ProductStepper = () => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const { step } = useSelector(({ stepper }) => ({
+    step: stepper.step,
+  }));
   const steps = [
     '상품에 해당하는 국가를 설정하세요',
     '상품의 일차별 경로를 설정하세요',
     '이미지를 등록하세요',
   ];
 
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
-
   const handleReset = () => {
-    setActiveStep(0);
+    // TODO: 0으로 만드는 액션 생성하여 디스패치
   };
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
+      <Stepper activeStep={step} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
-            <StepContent>
-              {getStepContent(
-                index,
-                handleBack,
-                classes,
-                activeStep,
-                steps,
-                handleNext,
-              )}
-            </StepContent>
+            <StepContent>{getStepContent(index, classes, steps)}</StepContent>
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length && (
+      {step === steps.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
           <Typography>광고 등록의 모든 단계가 완료되었습니다!</Typography>
           <Button onClick={handleReset} className={classes.button}>
