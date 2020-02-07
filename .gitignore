@@ -232,6 +232,9 @@ sketch
 
 /BACKEND/SpringbootBackend/.metadata
 /BACKEND/SpringbootBackend/Servers
+/BACKEND/SpringbootBackend/SpringbootYoungBlood/src/main/resources/application.properties
+/DATA
+
 
 .vscode/
 sftp.json
