@@ -232,7 +232,7 @@ sketch
 
 /BACKEND/SpringbootBackend/.metadata
 /BACKEND/SpringbootBackend/Servers
-/BACKEND/SpringbootBackend/SpringbootYoungBlood/src/main/resources/application.properties
+*.properties
 /DATA
 
 .vscode/
