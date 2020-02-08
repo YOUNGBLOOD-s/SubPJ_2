@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import AWS from 'aws-sdk';
 
-const ImageUploader = ({ setImageUrl }) => {
+const ImageUploader = ({ imageUrl, setImageUrl }) => {
   const [file, setFile] = useState(null);
   const UploadInput = useRef(null);
   const albumBucketName = process.env.REACT_APP_AWS_BUCKET_NAME;
@@ -32,6 +32,7 @@ const ImageUploader = ({ setImageUrl }) => {
       .then(data => {
         const { Location, key, Bucket } = data;
         console.log(Location);
+        setImageUrl(Location);
         // setImageUrl(Location) //위에서 set받아서 수행
       })
       .catch(err => console.log(err));
@@ -43,6 +44,7 @@ const ImageUploader = ({ setImageUrl }) => {
 
   return (
     <div>
+      <h5>현재 image: {imageUrl}</h5>
       <input
         ref={UploadInput}
         type="file"

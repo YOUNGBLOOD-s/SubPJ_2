@@ -8,24 +8,18 @@ import styled from 'styled-components';
 import MaterialCard from '../../../common/MaterialCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRoute, removeRoute } from '../../../../modules/product';
+import ImageUploader from '../../../common/ImageUploader';
 
 const StyledTextField = withStyles({
   root: {
     marginBottom: '1rem',
-    // 포커스시 라벨 색상
     '& label.Mui-focused': {
       color: palette.red[300],
     },
     '& .MuiOutlinedInput-root': {
-      // 기본 필드 보더 색상
       '& fieldset': {
         borderColor: 'black',
       },
-      // 호버 했을때 색상
-      // '&:hover fieldset': {
-      //   borderColor: 'yellow',
-      // },
-      //  포커스 시 보더 색상
       '&.Mui-focused fieldset': {
         borderColor: palette.red[300],
       },
@@ -63,6 +57,10 @@ const ContentsAddForm = ({ nationId }) => {
   const handleChange = e => {
     const { name, value } = e.target;
     setContent({ ...content, [name]: value });
+  };
+
+  const setImageUrl = url => {
+    setContent({ ...content, image: url });
   };
 
   const onSubmit = e => {
@@ -196,7 +194,7 @@ const ContentsAddForm = ({ nationId }) => {
               />
             </component.Grid>
             <component.Grid item xs={12}>
-              <StyledTextField
+              {/* <StyledTextField
                 variant="outlined"
                 label="이미지"
                 type="text"
@@ -205,6 +203,10 @@ const ContentsAddForm = ({ nationId }) => {
                 disabled={disabled}
                 value={content.image}
                 onChange={handleChange}
+              /> */}
+              <ImageUploader
+                imageUrl={content.image}
+                setImageUrl={setImageUrl}
               />
             </component.Grid>
             <component.Grid item xs={12}>
