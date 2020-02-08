@@ -261,8 +261,7 @@ const transport_arr = [
 ];
 
 const ContentAddForms = () => {
-  const { routes, nationId } = useSelector(({ product }) => ({
-    routes: product.routes,
+  const { nationId } = useSelector(({ product }) => ({
     nationId: product.nationId,
   }));
 
@@ -270,24 +269,9 @@ const ContentAddForms = () => {
     <ContentsAddForm nationId={nationId} />,
   ]);
 
-  const token = sessionStorage.getItem('access_token');
   const addForm = () => {
     setContentForms([...contentForms, <ContentsAddForm nationId={nationId} />]);
   };
-
-  // TODO : 요청은 마지막에 하는걸로 합시다
-  // const onComplete = () => {
-  //   axios
-  //     .post('/api/man/contents/add', routes, {
-  //       headers: {
-  //         Authorization: token,
-  //       },
-  //     })
-  //     .then(() => {
-
-  //     })
-  //     .catch(err => console.log(err));
-  // };
 
   return (
     <div>

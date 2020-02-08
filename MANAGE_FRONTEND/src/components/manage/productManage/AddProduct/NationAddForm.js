@@ -5,7 +5,7 @@ import palette from '../../../../lib/styles/palette';
 import { withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { nextStep, prevStep } from '../../../../modules/stepper';
 import axios from 'axios';
 import { selectNation } from '../../../../modules/product';
@@ -32,7 +32,7 @@ const StyledForm = styled.form`
   flex-direction: column;
 `;
 
-const NationAddForm = ({ classes, steps }) => {
+const NationAddForm = ({ classes, steps, step }) => {
   const [product, setProduct] = useState({
     continents: '1',
     en_name: '',
@@ -42,10 +42,6 @@ const NationAddForm = ({ classes, steps }) => {
     s_date: '',
     f_date: '',
   });
-
-  const { step } = useSelector(({ stepper }) => ({
-    step: stepper.step,
-  }));
 
   const dispatch = useDispatch();
 

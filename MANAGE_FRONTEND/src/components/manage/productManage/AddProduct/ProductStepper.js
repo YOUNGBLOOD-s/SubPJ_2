@@ -11,6 +11,7 @@ import NationAddForm from './NationAddForm';
 import ContentAddForms from './ContentsAddForms';
 import ImageAddForm from './ImageAddForm';
 import { useSelector } from 'react-redux';
+import Complete from './Complete';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,11 +32,13 @@ const useStyles = makeStyles(theme => ({
 const getStepContent = (step, classes, steps) => {
   switch (step) {
     case 0:
-      return <NationAddForm classes={classes} steps={steps} />;
+      return <NationAddForm classes={classes} steps={steps} step={step} />;
     case 1:
       return <ImageAddForm />;
     case 2:
       return <ContentAddForms />;
+    case 3:
+      return <Complete classes={classes} steps={steps} step={step} />;
     default:
       return '알수없는 단계';
   }
@@ -50,6 +53,7 @@ const ProductStepper = () => {
     '상품에 해당하는 국가를 설정하세요',
     '날씨별 대표 이미지를 등록하세요',
     '상품의 일차별 경로 세부사항을 설정하세요',
+    '등록을 완료하세요',
   ];
 
   const handleReset = () => {
