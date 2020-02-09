@@ -28,7 +28,7 @@ const MyProducts = () => {
 
   return (
     <MyProductsWrapper>
-      <h1>내 광고들</h1>
+      <h1>내가 올린 광고</h1>
       {myAds.map(ad => (
         <MyProduct ad={ad} key={ad.idx} />
       ))}
