@@ -1,14 +1,46 @@
 import React, { useState, useRef } from 'react';
 import AWS from 'aws-sdk';
+import component from '../../lib/material/component';
+import styled from 'styled-components';
+import LinearLoader from './LinearLoader';
+
+const ImageWrapper = styled.div`
+  width: 100%;
+`;
+
+const StyledImg = styled.img`
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 0.5rem;
+  align-items: center;
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  display: none;
+`;
 
 const ImageUploader = ({ imageUrl, setImageUrl }) => {
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const UploadInput = useRef(null);
   const albumBucketName = process.env.REACT_APP_AWS_BUCKET_NAME;
   const bucketRegion = process.env.REACT_APP_AWS_REGION;
   const IdentityPoolId = process.env.REACT_APP_AWS_POOLID;
 
   const upload = () => {
+    if (!file) {
+      alert('업로드할 파일이 없습니다!');
+      return;
+    }
+    setLoading(true);
     AWS.config.update({
       region: bucketRegion,
       credentials: new AWS.CognitoIdentityCredentials({
@@ -30,12 +62,14 @@ const ImageUploader = ({ imageUrl, setImageUrl }) => {
     const promise = uploaded.promise();
     promise
       .then(data => {
-        const { Location, key, Bucket } = data;
-        console.log(Location);
+        const { Location } = data;
         setImageUrl(Location);
-        // setImageUrl(Location) //위에서 set받아서 수행
+        setLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
   };
 
   const handleFileUpload = () => {
@@ -43,19 +77,51 @@ const ImageUploader = ({ imageUrl, setImageUrl }) => {
   };
 
   return (
-    <div>
-      <h5>현재 image: {imageUrl}</h5>
-      <input
-        ref={UploadInput}
-        type="file"
-        onChange={handleFileUpload}
-        accept=".jpg,.jpeg,.png,.gif"
-      />
-      <label className="custom-file-label" htmlFor="inputGroupFile04">
-        {file ? file.name : '이미지를 선택해주세요'}
-      </label>
-      <button onClick={upload}>업로드</button>
-    </div>
+    <component.Grid container spacing={1}>
+      <component.Grid item xs={12}>
+        <InputWrapper>
+          <component.Grid item xs={8}>
+            <label htmlFor="file-upload" className="custom-file-upload">
+              <i className="fa fa-cloud-upload"></i>{' '}
+              {file ? file.name : '클릭해서 이미지를 선택해주세요'}
+            </label>
+            <StyledInput
+              id="file-upload"
+              ref={UploadInput}
+              type="file"
+              onChange={handleFileUpload}
+              accept=".jpg,.jpeg,.png,.gif"
+            />
+          </component.Grid>
+          <component.Grid item xs={4}>
+            <component.Button
+              onClick={upload}
+              color="primary"
+              variant="contained"
+              fullWidth
+            >
+              업로드
+            </component.Button>
+          </component.Grid>
+        </InputWrapper>
+      </component.Grid>
+      <component.Grid item xs={12}>
+        <ImageWrapper>
+          {loading ? (
+            <LinearLoader />
+          ) : (
+            <StyledImg
+              src={
+                imageUrl
+                  ? imageUrl
+                  : 'https://crestaproject.com/demo/lontano-pro/wp-content/themes/lontano-pro/images/no-image-slide.png'
+              }
+              alt="날씨별 이미지"
+            />
+          )}
+        </ImageWrapper>
+      </component.Grid>
+    </component.Grid>
   );
 };
 

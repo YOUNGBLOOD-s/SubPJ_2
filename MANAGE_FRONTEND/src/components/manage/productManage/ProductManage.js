@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import MyProducts from './MyProducts/MyProducts';
 import AddProduct from './AddProduct/AddProduct';
-import ImageUploader from '../../common/ImageUploader';
 
 const ProductManageWrapper = styled.div`
   max-width: 1000px;

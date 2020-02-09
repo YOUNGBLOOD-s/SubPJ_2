@@ -23,7 +23,7 @@ export const selectImageUrl = createAction(
 );
 
 const initialState = {
-  nationId: 35,
+  nationId: null,
   routes: [],
   images: [
     { nation: '', type: 1, url: '' },

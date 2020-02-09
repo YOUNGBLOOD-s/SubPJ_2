@@ -10,8 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import NationAddForm from './NationAddForm';
 import ContentAddForms from './ContentsAddForms';
 import ImageAddForm from './ImageAddForm';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Complete from './Complete';
+import { initializeProduct } from '../../../../modules/product';
+import { initializeStep } from '../../../../modules/stepper';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,9 +36,9 @@ const getStepContent = (step, classes, steps) => {
     case 0:
       return <NationAddForm classes={classes} steps={steps} step={step} />;
     case 1:
-      return <ImageAddForm />;
+      return <ImageAddForm classes={classes} steps={steps} step={step} />;
     case 2:
-      return <ContentAddForms />;
+      return <ContentAddForms classes={classes} steps={steps} step={step} />;
     case 3:
       return <Complete classes={classes} steps={steps} step={step} />;
     default:
@@ -56,8 +58,11 @@ const ProductStepper = () => {
     '등록을 완료하세요',
   ];
 
+  const dispatch = useDispatch();
   const handleReset = () => {
     // TODO: 0으로 만드는 액션 생성하여 디스패치
+    dispatch(initializeProduct());
+    dispatch(initializeStep());
   };
 
   return (
