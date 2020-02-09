@@ -5,7 +5,7 @@ const NEXT_STEP = 'stepper/NEXT_STEP';
 const PREV_STEP = 'stepper/PREV_STEP';
 const RESET_STEP = 'stepper/RESET_STEP';
 
-export const initializeStep = createAction(INITIALIZE_STEP, step => step);
+export const initializeStep = createAction(INITIALIZE_STEP);
 export const nextStep = createAction(NEXT_STEP, step => step);
 export const prevStep = createAction(PREV_STEP, step => step);
 export const resetStep = createAction(RESET_STEP, step => step);
@@ -16,9 +16,7 @@ const initialState = {
 
 const stepper = handleActions(
   {
-    [INITIALIZE_STEP]: () => ({
-      step: 0,
-    }),
+    [INITIALIZE_STEP]: () => initialState,
     [NEXT_STEP]: state => ({
       step: state.step + 1,
     }),

@@ -8,24 +8,19 @@ import styled from 'styled-components';
 import MaterialCard from '../../../common/MaterialCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRoute, removeRoute } from '../../../../modules/product';
+import ImageUploader from '../../../common/ImageUploader';
+import { prevStep, nextStep } from '../../../../modules/stepper';
 
 const StyledTextField = withStyles({
   root: {
     marginBottom: '1rem',
-    // 포커스시 라벨 색상
     '& label.Mui-focused': {
       color: palette.red[300],
     },
     '& .MuiOutlinedInput-root': {
-      // 기본 필드 보더 색상
       '& fieldset': {
         borderColor: 'black',
       },
-      // 호버 했을때 색상
-      // '&:hover fieldset': {
-      //   borderColor: 'yellow',
-      // },
-      //  포커스 시 보더 색상
       '&.Mui-focused fieldset': {
         borderColor: palette.red[300],
       },
@@ -63,6 +58,10 @@ const ContentsAddForm = ({ nationId }) => {
   const handleChange = e => {
     const { name, value } = e.target;
     setContent({ ...content, [name]: value });
+  };
+
+  const setImageUrl = url => {
+    setContent({ ...content, image: url });
   };
 
   const onSubmit = e => {
@@ -196,20 +195,14 @@ const ContentsAddForm = ({ nationId }) => {
               />
             </component.Grid>
             <component.Grid item xs={12}>
-              <StyledTextField
-                variant="outlined"
-                label="이미지"
-                type="text"
-                name="image"
-                fullWidth
-                disabled={disabled}
-                value={content.image}
-                onChange={handleChange}
+              <ImageUploader
+                imageUrl={content.image}
+                setImageUrl={setImageUrl}
               />
             </component.Grid>
             <component.Grid item xs={12}>
               <component.Button
-                color="secondary"
+                color="primary"
                 variant="contained"
                 onClick={onLocking}
                 fullWidth
@@ -258,9 +251,8 @@ const transport_arr = [
   },
 ];
 
-const ContentAddForms = () => {
-  const { routes, nationId } = useSelector(({ product }) => ({
-    routes: product.routes,
+const ContentAddForms = ({ classes, steps, step }) => {
+  const { nationId } = useSelector(({ product }) => ({
     nationId: product.nationId,
   }));
 
@@ -268,35 +260,57 @@ const ContentAddForms = () => {
     <ContentsAddForm nationId={nationId} />,
   ]);
 
-  const token = sessionStorage.getItem('access_token');
   const addForm = () => {
     setContentForms([...contentForms, <ContentsAddForm nationId={nationId} />]);
   };
 
-  // TODO : 요청은 마지막에 하는걸로 합시다
-  // const onComplete = () => {
-  //   axios
-  //     .post('/api/man/contents/add', routes, {
-  //       headers: {
-  //         Authorization: token,
-  //       },
-  //     })
-  //     .then(() => {
-
-  //     })
-  //     .catch(err => console.log(err));
-  // };
+  const dispatch = useDispatch();
+  const handleBack = () => {
+    dispatch(prevStep());
+  };
+  const handleNext = () => {
+    // FIXME: 모든 경로를 저장(잠금)했는지 확인한다면 좋을텐데..
+    dispatch(nextStep());
+  };
 
   return (
     <div>
-      <div>
-        {contentForms.map((contentForm, idx) => (
-          <div key={idx}>{contentForm}</div>
-        ))}
-      </div>
-      <component.Button color="secondary" variant="contained" onClick={addForm}>
-        경로 추가하기
-      </component.Button>
+      <component.Grid container>
+        <component.Grid item xs={12}>
+          {contentForms.map((contentForm, idx) => (
+            <div key={idx}>{contentForm}</div>
+          ))}
+        </component.Grid>
+        <component.Grid item xs={10}>
+          {/* TODO: 만약 요청에 실패한다면 에러 메세지를 띄울것 */}
+          <component.Button
+            disabled={step === 0}
+            onClick={handleBack}
+            className={classes.button}
+          >
+            이전단계로
+          </component.Button>
+          <component.Button
+            variant="contained"
+            color="primary"
+            onClick={handleNext}
+            className={classes.button}
+          >
+            {step === steps.length - 1 ? '완료' : '다음'}
+          </component.Button>
+        </component.Grid>
+        <component.Grid item xs={2}>
+          <component.Button
+            color="secondary"
+            variant="contained"
+            fullWidth
+            onClick={addForm}
+            className={classes.button}
+          >
+            + 경로 추가하기
+          </component.Button>
+        </component.Grid>
+      </component.Grid>
     </div>
   );
 };

@@ -10,7 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import NationAddForm from './NationAddForm';
 import ContentAddForms from './ContentsAddForms';
 import ImageAddForm from './ImageAddForm';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import Complete from './Complete';
+import { initializeProduct } from '../../../../modules/product';
+import { initializeStep } from '../../../../modules/stepper';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,11 +34,13 @@ const useStyles = makeStyles(theme => ({
 const getStepContent = (step, classes, steps) => {
   switch (step) {
     case 0:
-      return <NationAddForm classes={classes} steps={steps} />;
+      return <NationAddForm classes={classes} steps={steps} step={step} />;
     case 1:
-      return <ContentAddForms />;
+      return <ImageAddForm classes={classes} steps={steps} step={step} />;
     case 2:
-      return <ImageAddForm />;
+      return <ContentAddForms classes={classes} steps={steps} step={step} />;
+    case 3:
+      return <Complete classes={classes} steps={steps} step={step} />;
     default:
       return '알수없는 단계';
   }
@@ -48,12 +53,16 @@ const ProductStepper = () => {
   }));
   const steps = [
     '상품에 해당하는 국가를 설정하세요',
-    '상품의 일차별 경로를 설정하세요',
-    '이미지를 등록하세요',
+    '날씨별 대표 이미지를 등록하세요',
+    '상품의 일차별 경로 세부사항을 설정하세요',
+    '등록을 완료하세요',
   ];
 
+  const dispatch = useDispatch();
   const handleReset = () => {
     // TODO: 0으로 만드는 액션 생성하여 디스패치
+    dispatch(initializeProduct());
+    dispatch(initializeStep());
   };
 
   return (
