@@ -79,13 +79,11 @@ public class ManageController {
 		return res;
 	}
 
-	// 나중에
 	@GetMapping("/man/nationAll/info/{idx}")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
 	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		System.out.println(idx);
 		Nation nat = new Nation();
 		Monthtb mon = new Monthtb();
 		ArrayList<Route> contentsList = null;
@@ -94,33 +92,38 @@ public class ManageController {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
+			
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
+			
 			if (grade == 1) {
 				// 관리자는 다 볼 수 있고...
-
-			} else if (grade >= 2) {
-				
-				// 광고주 본인이 가지고 있는 광고만 자세히보기를 할 수 있다.
-				
-				// 본인것이 아니라면 401
-				
-				// idx로 nationtb에서 selectOne
 				nat = ser.nationInfo(idx);
-
-				// monthtb에 nation=#{idx}로 selectOne
 				mon = ser.monthInfo(idx);
-
-				// img랑 contents는 selectList로 받아와야하고.
 				contentsList = ser.contentsInfo(idx);
 				imageList = ser.imagesInfo(idx);
-			}
+			} else if (grade >= 2) {
+				Nation natCus = ser.selectNationCustomer(customer);
+				int cusIdx = Integer.parseInt(natCus.getCustomer());
+				if (cusIdx == customer) {
+					natCus = ser.nationInfo(idx);
+					// monthtb에 nation=#{idx}로 selectOne
+					nat = ser.nationInfo(idx);
+					mon = ser.monthInfo(idx);
 
-			msg.put("resmsg", "조회성공");
-			msg.put("natValue", nat);
-			msg.put("monValue", mon);
-			msg.put("conValue", contentsList);
-			msg.put("imgValue", imageList);
+					// img랑 contents는 selectList로 받아와야하고.
+					contentsList = ser.contentsInfo(idx);
+					imageList = ser.imagesInfo(idx);
+					
+					msg.put("resmsg", "조회성공");
+					msg.put("natValue", nat);
+					msg.put("monValue", mon);
+					msg.put("conValue", contentsList);
+					msg.put("imgValue", imageList);
+				}else {
+					msg.put("resmsg", "권한없음");
+				}
+			}
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
 			msg.put("resmsg", "조회실패");

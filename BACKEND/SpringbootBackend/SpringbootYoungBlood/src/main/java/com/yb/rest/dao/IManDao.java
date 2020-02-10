@@ -11,6 +11,7 @@ public interface IManDao {
 	public int getIdx(String username);
 	public int searchGrade(int customer);
 	public int getVolume(int idx);
+	public Nation selectNationCustomer(int customer);
 	
 	/** 나라테이블CRUD */
 	public ArrayList<Nation> nationList(int customer);

@@ -5,6 +5,13 @@
 
 <mapper namespace="management">
 
+	<select id="selectnationcustomer" resultType="nation" parameterType="int">
+		select *
+		from nationtb
+		where customer=#{customer} limit 0,1
+	</select>
+
+
 	<select id="selectGrade" resultType="int" parameterType="int">
 		select
 		grade
