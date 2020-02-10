@@ -165,7 +165,7 @@ public class ManageController {
 	}
 
 	/** 사용자 상품 삭제 */
-	@DeleteMapping("/man/nation/delete/")
+	@DeleteMapping("/man/nation/delete/{idx}")
 	@ApiOperation(value = "사용자 상품정보 삭제 (cascade).")
 	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token,
 			@PathVariable("idx") String idx) {
@@ -177,9 +177,10 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-
+			System.out.println(customer);
 			if (grade == 1) {
-				boolean resDelete = ser.nationdelete(idx ,customer);
+				boolean resDelete = ser.nationdelete(idx ,customer+"");
+				msg.put("resvalue", resDelete);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
