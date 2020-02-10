@@ -332,6 +332,7 @@ public class MemberController {
 	@PutMapping("/auth/updatemem")
 	@ApiOperation(value = "멤버 정보 수정(관리자/사용자)")
 	public @ResponseBody ResponseEntity<Map<String,Object>> updateMem(@RequestHeader(value = "Authorization") String token, @RequestBody Member mem){
+		System.out.println(mem.toString());
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
