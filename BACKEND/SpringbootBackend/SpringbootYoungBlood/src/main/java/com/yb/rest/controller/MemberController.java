@@ -10,10 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -132,12 +128,11 @@ public class MemberController {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
-			boolean result = ser.registerMem(reg.getUsername(), reg.getPassword(), reg.getCompany(), reg.getGrade());
+			ser.registerMem(reg.getUsername(), reg.getPassword(), reg.getCompany());
 			msg.put("resmsg", "회원등록");
 			msg.put("username", reg.getUsername()); // 혁준오빠한테 {test: 0} 으로 전송됨
 			msg.put("company", reg.getCompany());
 			msg.put("token", createToken(reg.getUsername()));
-			msg.put("resvalue", result);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
 			if(e.getMessage().contains("Duplicate")) {
@@ -233,7 +228,7 @@ public class MemberController {
 
 	/** 멤버 조회 서비스 */
 	@PostMapping("/auth/infomem")
-	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestParam String password) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestBody String password) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		ArrayList<Member> list = new ArrayList<>();

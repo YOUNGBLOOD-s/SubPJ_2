@@ -23,13 +23,13 @@ public class MemDaoImpl implements IMemDao {
 	}
 
 	@Override
-	public boolean registerMem(String username, String password, String company, int grade) {
-		Member m = new Member(username, password, company, grade);
-		int insert = session.insert("member.insertMember", m);
-		if (insert == 0)
-			return false;
-		else
-			return true;
+	public void registerMem(String username, String password, String company) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("password", password);
+		map.put("company", company);
+		session.insert("member.insertMember", map);
+		
 	}
 
 	@Override

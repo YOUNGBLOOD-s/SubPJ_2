@@ -7,7 +7,7 @@ import com.yb.rest.vo.Member;
 
 public interface IMemDao {
 	public String getPassword(String username);
-	public boolean registerMem(String username, String password, String company, int grade);
+	public void registerMem(String username, String password, String company);
 	
 	/** member CRUD */
 	public ArrayList<Member> listMem();

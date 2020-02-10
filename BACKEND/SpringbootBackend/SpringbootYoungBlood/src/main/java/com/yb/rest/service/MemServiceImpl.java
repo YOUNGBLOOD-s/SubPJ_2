@@ -20,9 +20,8 @@ public class MemServiceImpl implements IMemService{
 	}
 	
 	@Override
-	public boolean registerMem(String username, String password, String company, int grade) {
-		boolean res = repo.registerMem(username, password, company, grade);
-		return res;
+	public void registerMem(String username, String password, String company) {
+		repo.registerMem(username, password, company);
 	}
 
 	@Override
