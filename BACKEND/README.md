@@ -1,13 +1,14 @@
-* ﻿# NEARBYAD-BACKEND
+# NEARBYAD-BACKEND
 
-  백앤드 개발 버전관리
+## :dart: API
+### AD
+### Chatbot
+### Management
+### Member
 
-  
+## :dart: DataBase
 
-
-  ## :dart: DataBase
-
-  ### membertb
+### membertb
 
 | Field    | Type         | Null | Key        | Default | Extra          |
 | -------- | ------------ | ---- | ---------- | ------- | -------------- |
