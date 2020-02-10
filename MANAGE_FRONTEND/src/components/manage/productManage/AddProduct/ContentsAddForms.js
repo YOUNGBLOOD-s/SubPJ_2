@@ -198,6 +198,7 @@ const ContentsAddForm = ({ nationId }) => {
               <ImageUploader
                 imageUrl={content.image}
                 setImageUrl={setImageUrl}
+                inputId={`content-image-${content.day}-${content.seq}`}
               />
             </component.Grid>
             <component.Grid item xs={12}>

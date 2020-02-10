@@ -17,7 +17,13 @@ const ImageForm = ({ type }) => {
     dispatch(selectImageUrl({ type, url }));
   };
 
-  return <ImageUploader imageUrl={imageUrl} setImageUrl={setImageUrl} />;
+  return (
+    <ImageUploader
+      imageUrl={imageUrl}
+      setImageUrl={setImageUrl}
+      inputId={`image-add-${type}`}
+    />
+  );
 };
 
 const FormWrapper = styled.div``;
