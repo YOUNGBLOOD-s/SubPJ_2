@@ -1,6 +1,7 @@
 package com.yb.rest.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.yb.rest.vo.Member;
@@ -10,7 +11,7 @@ public interface IMemService {
 	public void registerMem(String username, String password, String company);
 	
 	/** member CRUD */
-	public ArrayList<Member> listMem();
+	public List<Member> listMem();
 	public Member InfoMem(String username);
 	public void UpdateMem(String username, String password, String company, int grade);
 	public void UpdateMem(String username, String password, String company);

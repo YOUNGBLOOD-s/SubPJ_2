@@ -98,7 +98,8 @@ public class MemberController {
 				.setHeader(headers)
 				.setClaims(payloads)
 				.signWith(SignatureAlgorithm.HS256, key.getBytes()).compact();
-        System.out.println("토큰 생성 완료!");
+        System.out.println(jwt);
+		System.out.println("토큰 생성 완료!");
 		System.out.println("==============");
 		return jwt;
 	}
@@ -160,9 +161,11 @@ public class MemberController {
 		}
 		ResponseEntity<Map<String, Object>> res = null;
 		String realpassword = ser.getPassword(login.getUsername());
-
+		System.out.println("리얼 패스워듴ㅋ"+realpassword);
+		
 		Map<String, Object> msg = new HashMap<String, Object>();
 		if (realpassword.equals(login.getPassword())) {
+			System.out.println("들어왔을까?");
 			msg.put("username", login.getUsername());
 			msg.put("token", createToken(login.getUsername()));
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
@@ -212,7 +215,7 @@ public class MemberController {
 			int grade = manser.searchGrade(customer);
 
 			if (grade == 1) {
-				list = ser.listMem();
+				//list = ser.listMem();
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -228,7 +231,8 @@ public class MemberController {
 
 	/** 멤버 조회 서비스 */
 	@PostMapping("/auth/infomem")
-	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestBody String password) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestBody Map<String, Object> password) {
+		String pwd = (String) password.get("password");
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		ArrayList<Member> list = new ArrayList<>();
@@ -238,9 +242,11 @@ public class MemberController {
 			String username = (String) de.get("username");
 			String realpw = ser.getPassword(username);
 			if(username.equals("admin")) {
-				//전체 리스트 보여주기
+				List<Member> mems = ser.listMem();
+				msg.put("memlist", mems);
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
-				if(realpw.equals(password)) {
+				if(realpw.equals(pwd)) {
 					Member mem = ser.InfoMem(username);
 					msg.put("meminfo", mem);
 					res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);

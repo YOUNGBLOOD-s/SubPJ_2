@@ -1,6 +1,7 @@
 package com.yb.rest.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,8 @@ public class MemServiceImpl implements IMemService{
 	}
 
 	@Override
-	public ArrayList<Member> listMem() {
-		ArrayList<Member> listMem = repo.listMem();
-		return listMem;
+	public List<Member> listMem() {
+		return repo.listMem();
 	}
 
 	@Override

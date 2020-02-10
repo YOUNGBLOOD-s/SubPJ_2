@@ -33,8 +33,8 @@ public class MemDaoImpl implements IMemDao {
 	}
 
 	@Override
-	public ArrayList<Member> listMem() {
-		return (ArrayList) session.selectList("member.selectmemList");
+	public List<Member> listMem() {
+		return session.selectList("member.selectmemList");
 	}
 
 	@Override

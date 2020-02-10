@@ -1,7 +1,6 @@
 package com.yb.rest.dao;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 import com.yb.rest.vo.Member;
 
@@ -10,7 +9,7 @@ public interface IMemDao {
 	public void registerMem(String username, String password, String company);
 	
 	/** member CRUD */
-	public ArrayList<Member> listMem();
+	public List<Member> listMem();
 	public Member InfoMem(String username);
 	public void UpdateMem(String username, String password, String company, int grade);
 	public void UpdateMem(String username, String password, String company);
