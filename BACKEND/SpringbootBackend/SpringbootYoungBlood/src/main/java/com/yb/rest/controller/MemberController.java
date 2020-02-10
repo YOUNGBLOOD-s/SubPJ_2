@@ -350,9 +350,10 @@ public class MemberController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			if(username.equals("admin")) {
-				//ser.updateGrade(value);
+				ser.updateGrade(username, grade);
+				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
-				
+				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 			}
 		} catch (Exception e) {
 			msg.put("resmsg", e.getMessage());

@@ -54,8 +54,8 @@ public class MemServiceImpl implements IMemService{
 	}
 
 	@Override
-	public void updateGrade(Map map) {
-		repo.updateGrade(map);
+	public void updateGrade(String username, int grade) {
+		repo.updateGrade(username, grade);
 	}
 
 	@Override

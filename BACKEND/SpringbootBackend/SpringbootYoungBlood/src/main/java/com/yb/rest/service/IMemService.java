@@ -16,5 +16,5 @@ public interface IMemService {
 	public void UpdateMem(String username, String password, String company);
 	public void DeleteMem(String username);
 	public void DeleteMem(int idx);
-	public void updateGrade(Map map);
+	public void updateGrade(String username, int grade);
 }

@@ -48,7 +48,10 @@ public class MemDaoImpl implements IMemDao {
 	}
 
 	@Override
-	public void updateGrade(Map map) {
+	public void updateGrade(String username, int grade) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("grade", grade);
 		session.update("member.updategrade", map);
 	}
 
