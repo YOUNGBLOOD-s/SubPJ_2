@@ -44,7 +44,7 @@
 	<delete id="nationdelete" parameterType="nation">
 		delete from
 		nationtb
-		where idx=#{idx} and customer=#{customer}
+		where idx=#{idx}
 	</delete>
 
 	<update id="nationupdate" parameterType="nation">
