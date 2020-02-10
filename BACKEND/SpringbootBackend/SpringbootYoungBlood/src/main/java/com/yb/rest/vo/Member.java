@@ -1,7 +1,7 @@
 package com.yb.rest.vo;
 
 public class Member {
-	private String username, password, company;
+	private String idx, username, password, company;
 	private int grade;
 
 	public Member() {
@@ -18,6 +18,23 @@ public class Member {
 		this.password = password;
 		this.company = company;
 		this.grade = grade;
+	}
+
+	public Member(String idx, String username, String password, String company, int grade) {
+		super();
+		this.idx = idx;
+		this.username = username;
+		this.password = password;
+		this.company = company;
+		this.grade = grade;
+	}
+
+	public String getIdx() {
+		return idx;
+	}
+
+	public void setIdx(String idx) {
+		this.idx = idx;
 	}
 
 	public String getUsername() {
