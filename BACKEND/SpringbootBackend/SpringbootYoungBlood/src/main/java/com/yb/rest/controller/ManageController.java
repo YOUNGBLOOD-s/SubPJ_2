@@ -132,7 +132,7 @@ public class ManageController {
 
 	/** 사용자 상품 등록 */
 	@PostMapping("/man/nation/insert")
-	@ApiOperation(value = "사용자 상품정보  등록")
+	@ApiOperation(value = "사용자 상품정보(nation)  등록")
 	public ResponseEntity<Map<String, Object>> nationInsert(@RequestHeader(value = "Authorization") String token, @RequestBody Nation nat) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -166,7 +166,7 @@ public class ManageController {
 
 	/** 사용자 상품 삭제 */
 	@DeleteMapping("/man/nation/delete/{idx}")
-	@ApiOperation(value = "사용자 상품정보 삭제 (cascade).")
+	@ApiOperation(value = "사용자 상품정보(nation) 삭제 (cascade).")
 	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token,
 			@PathVariable("idx") String idx) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -195,7 +195,7 @@ public class ManageController {
 
 	/** 사용자 상품 수정 */
 	@PutMapping("/man/nation/update")
-	@ApiOperation(value = "사용자 상품정보 수정")
+	@ApiOperation(value = "사용자 상품정보(nation) 수정")
 	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Nation nat) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -222,7 +222,7 @@ public class ManageController {
 
 	/** 상품 월별정보 리스트 */
 	@GetMapping("/man/monthtb/list")
-	@ApiOperation(value = "상품 월별정보 리스트")
+	@ApiOperation(value = "상품 월별정보(month) 리스트")
 	public ResponseEntity<Map<String, Object>> monthInfo(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Monthtb mt = new Monthtb();
@@ -255,7 +255,7 @@ public class ManageController {
 
 	/** 상품 월별정보 등록 */
 	@PostMapping("/man/monthtb/insert")
-	@ApiOperation(value = "상품 월별정보 등록")
+	@ApiOperation(value = "상품 월별정보(month) 등록")
 	public ResponseEntity<Map<String, Object>> monthInsert(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Monthtb montb) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -282,7 +282,7 @@ public class ManageController {
 
 	/** 상품 월별정보 수정 */
 	@PostMapping("/man/monthtb/update")
-	@ApiOperation(value = "상품 월별정보 수정")
+	@ApiOperation(value = "상품 월별정보(month) 수정")
 	public ResponseEntity<Map<String, Object>> monthUpdate(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Monthtb montb) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -311,7 +311,7 @@ public class ManageController {
 
 	/** 상품 월별정보 삭제 */
 	@DeleteMapping("/man/monthtb/delete/{nation}")
-	@ApiOperation(value = "상품 월별정보 삭제")
+	@ApiOperation(value = "상품 월별정보(month) 삭제")
 	public ResponseEntity<Map<String, Object>> monthDelete(@RequestHeader(value = "Authorization") String token, @PathVariable("nation") String nation) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -338,7 +338,7 @@ public class ManageController {
 
 	/** 콘텐츠 정보 조회하기 */
 	@GetMapping("/man/contents/list")
-	@ApiOperation(value = "상품 콘텐츠 정보 리스트 조회")
+	@ApiOperation(value = "상품 콘텐츠 정보(contents) 리스트 조회")
 	public ResponseEntity<Map<String, Object>> ContentsList(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -372,7 +372,7 @@ public class ManageController {
 
 	/** 콘텐츠 정보 추가하기 */
 	@PostMapping("/man/contents/add")
-	@ApiOperation(value = "상품 콘텐츠 정보 추가")
+	@ApiOperation(value = "상품 콘텐츠 정보(contents) 추가")
 	public ResponseEntity<Map<String, Object>> ContentsInsert(@RequestHeader(value = "Authorization") String token, @RequestBody List<Route> route) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -400,7 +400,7 @@ public class ManageController {
 
 	/** 콘텐츠 정보 수정하기 */
 	@PutMapping("/man/contents/update")
-	@ApiOperation(value = "상품 콘텐츠 정보 수정")
+	@ApiOperation(value = "상품 콘텐츠 정보(contents) 수정")
 	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Route route) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -428,7 +428,7 @@ public class ManageController {
 
 	/** 콘텐츠 정보 삭제하기 */
 	@DeleteMapping("/man/contents/del/{idx}/{nation}")
-	@ApiOperation(value = "상품 콘텐츠 정보 삭제")
+	@ApiOperation(value = "상품 콘텐츠 정보(contents) 삭제")
 	public ResponseEntity<Map<String, Object>> ContentsDelete(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx, @PathVariable("nation") int nation) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -458,7 +458,7 @@ public class ManageController {
 	
 	/** 이미지 정보 조회하기 */
 	@GetMapping("man/image/list")
-	@ApiOperation(value = "상품 이미지정보 리스트 조회")
+	@ApiOperation(value = "상품 이미지정보(image) 리스트 조회")
 	public ResponseEntity<Map<String, Object>> imageList(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -489,7 +489,7 @@ public class ManageController {
 	
 	/** 이미지 정보 추가 */
 	@PostMapping("/man/image/insert")
-	@ApiOperation(value = "상품 이미지정보 추가")
+	@ApiOperation(value = "상품 이미지정보(image) 추가")
 	public ResponseEntity<Map<String, Object>> imageInsert(@RequestHeader(value = "Authorization") String token, @RequestBody List<Image> imgs) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -521,7 +521,7 @@ public class ManageController {
 
 	/** 이미지 정보 수정 */
 	@PostMapping("/man/image/update")
-	@ApiOperation(value = "이미지 정보 수정")
+	@ApiOperation(value = "이미지 정보(image) 수정")
 	public ResponseEntity<Map<String, Object>> imageUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Image img) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -548,7 +548,7 @@ public class ManageController {
 
 	/** 이미지 정보 삭제 */
 	@DeleteMapping("/man/image/delete/{idx}")
-	@ApiOperation(value = "상품 이미지 정보 삭제 ")
+	@ApiOperation(value = "상품 이미지 정보(image) 삭제 ")
 	public ResponseEntity<Map<String, Object>> imageDelete(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") String idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();

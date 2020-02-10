@@ -60,8 +60,8 @@ public class MemberController {
 		
 		String key = "";
 		try {
-			File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
-			//File file = new File("/home/ubuntu/key/key.txt"); //AWS
+			//File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
+			File file = new File("/home/ubuntu/key/key.txt"); //AWS
 			FileReader filereader = new FileReader(file);
 			int singleCh = 0;
 			while ((singleCh = filereader.read()) != -1) {
@@ -112,7 +112,6 @@ public class MemberController {
 				.setSigningKey(getKey().getBytes())
 				.parseClaimsJws(token)
 				.getBody();
-		//String data = c.get("username")+"";
 		System.out.println("검증 객체를 보내드립니다.");
         System.out.println("==============");
 
@@ -121,6 +120,7 @@ public class MemberController {
 	
 	/** 회원가입 */
 	@PostMapping("/auth/register")
+	@ApiOperation(value = "회원가입 ")
 	public ResponseEntity<Map<String, Object>> meminsert(@RequestBody Member reg) {
         
 		System.out.println("==============");
@@ -151,6 +151,7 @@ public class MemberController {
 
 	/** 로그인 */
 	@PostMapping("/auth/login")
+	@ApiOperation(value = "로그인 ")
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
         System.out.println("==============");
         System.out.println("로그인 요청이 왔습니다.");
@@ -179,6 +180,7 @@ public class MemberController {
 
 	/** 로그인 상태 확인 */
 	@GetMapping("/auth/check")
+	@ApiOperation(value = "로그인 상태 확인")
 	public ResponseEntity<Map<String, Object>> memloginfo(@RequestHeader(value="Authorization") String token) {
         System.out.println("==============");
 		System.out.println("로그인 상태를 확인합니다.");
@@ -196,9 +198,9 @@ public class MemberController {
 		return res;
 	}
 	
-	/** 멤버 전체 조회 서비스 */
+	/** 멤버 전체 조회(관리자) 서비스 */
 	@GetMapping("/auth/listmem")
-	@ApiOperation(value = "member 조회 서비스", response = List.class)
+	@ApiOperation(value = "멤버 정보 전체 조회(관리자)", response = List.class)
 	public @ResponseBody ResponseEntity<Map<String, Object>> listMem(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -209,7 +211,8 @@ public class MemberController {
 			int customer = manser.getIdx(username);
 			int grade = manser.searchGrade(customer);
 			if (grade == 1) {
-				//list = ser.listMem();
+				List<Member> list = ser.listMem();
+				msg.put("members", list);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -222,13 +225,13 @@ public class MemberController {
 		return res;
 	}
 
-	/** 멤버 조회 서비스 */
+	/** 멤버 조회(관리자/사용자) 서비스 */
 	@PostMapping("/auth/infomem")
+	@ApiOperation(value = "멤버 정보 조회(관리자/사용자)")
 	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestBody Map<String, Object> password) {
 		String inputpassword_256 = ser.getSHA256((String) password.get("password"));
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		ArrayList<Member> list = new ArrayList<>();
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -307,10 +310,9 @@ public class MemberController {
 		return res;
 	}
 	
-	
 	/** 멤버 수정 서비스 */
 	@PutMapping("/auth/updatemem")
-	@ApiOperation(value = " Member를 받아서 member 수정 서비스")
+	@ApiOperation(value = "멤버 정보 수정(관리자/사용자)")
 	public @ResponseBody ResponseEntity<Map<String,Object>> updateMem(@RequestHeader(value = "Authorization") String token, @RequestBody Member mem){
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -332,12 +334,11 @@ public class MemberController {
 		return res;
 	}
 
-	/** 멤버 등급 수정 서비스 */
+	/** 멤버 등급 수정(관리자) 서비스 */
 	@PutMapping("/mem/update/{grade}")
 	public @ResponseBody ResponseEntity<Map<String,Object>> updateMemGrade(@RequestHeader(value = "Authorization") String token, @RequestParam(value = "grade") int grade) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		ArrayList<Member> list = new ArrayList<>();
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));

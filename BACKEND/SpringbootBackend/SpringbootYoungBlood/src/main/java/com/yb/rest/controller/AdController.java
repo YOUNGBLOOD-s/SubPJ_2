@@ -562,6 +562,7 @@ public class AdController {
 
 	/** 나라 전체 정보를 보내는 메소드 */
 	@GetMapping("/all")
+	@ApiOperation(value = "나라 전체 정보 조회")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectAllnationdetail() {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -594,6 +595,7 @@ public class AdController {
 
 	/** 상담 정보를 받아 저장하는 메소드 */
 	@PostMapping("/counsel")
+	@ApiOperation(value = "상담 정보 저장")
 	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounsel(@RequestBody Counsel counvalue) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
