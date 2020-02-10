@@ -39,7 +39,7 @@ const Complete = ({ classes, step, steps }) => {
       },
     });
     axios
-      .post('/api/man/image/add', routes, {
+      .post('/api/man/image/insert', images, {
         headers: {
           Authorization: token,
         },
@@ -119,6 +119,8 @@ const Complete = ({ classes, step, steps }) => {
     <div>
       <h4>등록될 상품을 마지막으로 확인하고 마무리하세요</h4>
       <h5>로딩 상태 및 현재 상태들 확인..</h5>
+      <button onClick={contentsAdding}>경로 요청</button>
+      <button onClick={imagesAdding}>이미지 요청</button>
       <div>
         <component.Button
           disabled={step === 0}
