@@ -12,7 +12,9 @@ public interface IMemDao {
 	/** member CRUD */
 	public ArrayList<Member> listMem();
 	public Member InfoMem(String username);
-	public boolean UpdateMem(String username, String password, String company, int grade);
-	public boolean DeleteMem(String password);
+	public void UpdateMem(String username, String password, String company, int grade);
+	public void UpdateMem(String username, String password, String company);
+	public void DeleteMem(String username);
+	public void DeleteMem(int idx);
 	public void updateGrade(Map map);
 }

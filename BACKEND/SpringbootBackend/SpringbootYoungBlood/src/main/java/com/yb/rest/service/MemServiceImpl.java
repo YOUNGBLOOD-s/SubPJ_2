@@ -38,19 +38,29 @@ public class MemServiceImpl implements IMemService{
 	}
 
 	@Override
-	public boolean UpdateMem(String username, String password, String company, int grade) {
-		boolean updateMem = repo.UpdateMem(username, password, company, grade);
-		return updateMem;
+	public void UpdateMem(String username, String password, String company, int grade) {
+		repo.UpdateMem(username, password, company, grade);
 	}
+	
+	@Override
+	public void UpdateMem(String username, String password, String company) {
+		repo.UpdateMem(username, password, company);
+	}
+	
 
 	@Override
-	public boolean DeleteMem(String password) {
-		boolean deleteMem = repo.DeleteMem(password);
-		return deleteMem;
+	public void DeleteMem(String username) {
+		repo.DeleteMem(username);
 	}
 
 	@Override
 	public void updateGrade(Map map) {
 		repo.updateGrade(map);
 	}
+
+	@Override
+	public void DeleteMem(int idx) {
+		repo.DeleteMem(idx);
+	}
+
 }
