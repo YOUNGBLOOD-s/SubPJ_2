@@ -54,6 +54,8 @@ public class ManDaoImpl implements IManDao {
 		Nation nat = new Nation();
 		nat.setIdx(idx);
 		nat.setCustomer(customer);
+		System.out.println(idx+""+customer);
+		System.out.println(nat.getCustomer());
 		int delete = session.delete("management.nationdelete", nat);
 		if (delete == 0)
 			return false;
