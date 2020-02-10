@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const MyFormBlcok = styled.div`
   margin: 0 auto;
@@ -58,10 +59,15 @@ const MyPageForm = ({ userInfo, setUserInfo }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [passwordState, setPasswordState] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { data } = userInfo;
   const username = data.get('username');
   const company = data.get('company');
   const grade = data.get('grade');
+
+  const { loggedInUser } = useSelector(({ user }) => ({
+    loggedInUser: user.user.username,
+  }));
 
   const onChangePassword = e => {
     const { name, value } = e.target;
@@ -114,6 +120,10 @@ const MyPageForm = ({ userInfo, setUserInfo }) => {
       .then(err => console.log(err));
   };
 
+  if (isAdmin !== true && loggedInUser === 'admin') {
+    setIsAdmin(true);
+  }
+
   return (
     <MyFormBlcok>
       <MyFormWrapper onSubmit={onSubmit} ref={form}>
@@ -133,7 +143,7 @@ const MyPageForm = ({ userInfo, setUserInfo }) => {
           name="grade"
           type="text"
           autoComplete="grade"
-          disabled={true}
+          disabled={!isAdmin}
         />
         <StyledTextField
           label="변경할 비밀번호"
