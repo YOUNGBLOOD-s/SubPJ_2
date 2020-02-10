@@ -3,8 +3,8 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
-import { Snackbar } from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
+import { Map } from 'immutable';
+
 import axios from 'axios';
 
 const MyFormBlcok = styled.div`
@@ -44,15 +44,6 @@ const StyledButton = withStyles({
   },
 })(component.Button);
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
-
 const MyFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
@@ -67,22 +58,11 @@ const Footer = styled.div`
   }
 `;
 
-const MyPagePrev = ({ setAuth, token }) => {
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-
+const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
   const form = useRef(null);
 
   const handleClick = () => {
     setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
   };
 
   const onSubmit = e => {
@@ -99,22 +79,17 @@ const MyPagePrev = ({ setAuth, token }) => {
         },
       )
       .then(res => {
+        setUserInfo({ data: Map(res.data.meminfo) });
         setAuth(true);
       })
       .catch(err => {
+        console.log(err);
         handleClick();
       });
   };
 
   return (
     <>
-      <div className={classes.root}>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error">
-            This is an error alert — check it out!
-          </Alert>
-        </Snackbar>
-      </div>
       <MyFormBlcok>
         <MyFormWrapper onSubmit={onSubmit}>
           <StyledTextField

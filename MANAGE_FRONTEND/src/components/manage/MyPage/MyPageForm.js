@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
+import { Map } from 'immutable';
 
 const MyFormBlcok = styled.div`
   margin: 0 auto;
@@ -63,11 +64,13 @@ const onSubmit = () => {
   console.log('submit');
 };
 
-const MyPageForm = () => {
+const MyPageForm = userInfo => {
   const form = useRef(null);
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
+  const [password, setPassword] = useState('');
+  const onChangePassword = e => {};
+
+  console.log(userInfo.data);
+
   return (
     <MyFormBlcok>
       <MyFormWrapper onSubmit={onSubmit} ref={form}>
@@ -75,12 +78,12 @@ const MyPageForm = () => {
           label="아이디"
           variant="outlined"
           onChange={onChange}
-          value={form.username}
+          value={userInfo.username}
           name="username"
           autoComplete="username"
         />
         <StyledTextField
-          label="비밀번호"
+          label="변경할 비밀번호"
           variant="outlined"
           onChange={onChange}
           value={form.password}
@@ -105,6 +108,15 @@ const MyPageForm = () => {
           name="company"
           type="text"
           autoComplete="company"
+        />
+        <StyledTextField
+          label="등급"
+          variant="outlined"
+          value={form.company}
+          name="grade"
+          type="text"
+          autoComplete="grade"
+          disabled={true}
         />
         <StyledButton variant="contained" type="submit">
           수정
