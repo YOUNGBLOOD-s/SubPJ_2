@@ -1,29 +1,22 @@
 import React, { useEffect } from 'react';
 import MyPageForm from './MyPageForm';
 import axios from 'axios';
+import { useState } from 'react';
+import MyPagePrev from './MyPagePrev';
 
 const MyPage = () => {
   const token = sessionStorage.getItem('access_token');
-  const user = sessionStorage.getItem('user');
-  useEffect(() => {
-    axios
-      .get('http://52.78.218.79:8887/api/auth/infomem/' + user, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+  const [userInfo, setUserInfo] = useState(null);
+  const [auth, setAuth] = useState(false);
 
   return (
-    <div>
-      <MyPageForm />
-    </div>
+    <>
+      {auth ? (
+        <MyPageForm userInfo={userInfo} setUserInfo={setUserInfo} />
+      ) : (
+        <MyPagePrev setAuth={setAuth} token={token} />
+      )}
+    </>
   );
 };
 
