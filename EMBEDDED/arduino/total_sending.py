@@ -107,7 +107,7 @@ class sensor:
             self.total_interrupt_count = 0
             self.wrong_level_count = 0
 
-
+a = 1
 class roughness:
     I2C_CH = 1
     BH1750_DEV_ADDR = 0x23
@@ -117,34 +117,27 @@ class roughness:
     ONETIME_H_RES_MODE = 0x20
     ONETIME_H_RES_MODE2 = 0x21
     ONETIME_L_RES_MODE = 0x23
+    #collect roughness data
+    def readIlluminance(self):
+        i2c = smbus.SMBus(roughness.I2C_CH)
+        luxBytes = i2c.read_i2c_block_data(roughness.BH1750_DEV_ADDR, roughness.CONT_H_RES_MODE, 2)
+        lux = int.from_bytes(luxBytes, byteorder='big')
+        i2c.close()
+        return lux
 
+    #return collected data
+    def readIlluminanceThread(self):
+        global a
+        print("enter right?")
+        tmp=0
+        for i in range(10):
+            print('{0} lux'.format(roughness.readIlluminance(self)))
+            tmp+=roughness.readIlluminance(self)
+            time.sleep(1)
+        a=tmp/10
 
-'''
- 조도값 읽는 함수
-'''
-
-
-def readIlluminance():
-    i2c = smbus.SMBus(I2C_CH)
-    luxBytes = i2c.read_i2c_block_data(BH1750_DEV_ADDR, CONT_H_RES_MODE, 2)
-    lux = int.from_bytes(luxBytes, byteorder='big')
-    i2c.close()
-    return lux
-
-
-'''
- 1초에 한번씩 돌면서 조도값 출력
-'''
-
-
-def readIlluminanceThread():
-    for i in range(1, 11):
-        print('{0} lux'.format(readIlluminance()))
-        time.sleep(1)
-
-
-class temp_hum:
-    def encoding(data):
+class wideUse:
+    def encoding(self,data):
         temp = binascii.hexlify(str.encode(str(data))).decode('utf-8')
         list = []
         for i in range(0, len(temp), 2):
@@ -153,9 +146,12 @@ class temp_hum:
         temp = '%' + '%'.join(list)
         return temp
 
+
+class temp_hum:
     def dht11(self):
         sensor = Adafruit_DHT.DHT11
         pin = 17
+        resT,resH=0,0
         try:
             tmpT, tmpH = 0, 0
             cnt = 0
@@ -173,15 +169,15 @@ class temp_hum:
                 else:
                     print('Read error')
                 time.sleep(1)
-
-            resT = temp_hum.encoding(round(tmpT / 6, 2))
-            resH = temp_hum.encoding(round(tmpH / 6, 2))
-
+            enco=wideUse()
+            resT = enco.encoding(round(tmpT / 6, 2))
+            resH = enco.encoding(round(tmpH / 6, 2))
             print(resT, resH)
+
         except KeyboardInterrupt:
             print("Terminated by Keyboard")
         finally:
-            print("End of Program")
+            print("temp_humid success")
 
         return resT, resH
 
@@ -191,18 +187,19 @@ if __name__ == "__main__":
     from datetime import datetime
     import total_sending  # import this script
 
+    enco = wideUse()
+
     # store roughness data
     print('starting BH1750')
     print('Press Enter key to exit')
     # 쓰레드 생성
-    thd = threading.Thread(target=readIlluminanceThread)
+    rough=roughness()
+    thd = threading.Thread(target=rough.readIlluminanceThread)
     # 쓰레드를 데몬으로 설정
-    thd.daemon = True
+    #thd.daemon = True
     # 쓰레드 시작
     thd.start()
-    # 키 입력 대기, 엔터 키가 입력이 되면 다음으로 넘어가서 'done'을 출력하고 프로그램 종료
-    input()
-    print('done')
+
 
     # store temperature and humid data
     print("tem_humid sensor")
@@ -229,11 +226,14 @@ if __name__ == "__main__":
     print("PM1.0 time: {}, Interval: {}, Ratio: {:.3f}, Count: {}, Total Interrupt: {}, Wrong Interrupt: {}".
           format(timestamp, int(interval10), r10, int(PM10count), total_interrupt_count10, wrong_level_count10))
 
-    resD = temp_hum.encoding(r10)
+
+    print(f'junn {a}')
+    resR=enco.encoding(a)
+    resD = enco.encoding(r10)
 
     # send data to backend
-    urlStr = f"http://52.78.218.79:8877/api/sensor/{resT}/{resH}/{resD}/10"
-    print(f"final result check {resT} {resH} {resD}")
+    urlStr = f"http://52.78.218.79:8877/api/sensor/{resT}/{resH}/{resR}/{resD}/"
+    #print(f"final result check {resT}, {resH}, {resD}, {resR} ")
     res = requests.get(urlStr)
     print("sending success")
     pi.stop()
