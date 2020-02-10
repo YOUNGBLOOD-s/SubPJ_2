@@ -81,24 +81,30 @@ public class MemberController {
 	public static String createToken(String username) {
         System.out.println("==============");
         System.out.println("토큰을 생성할게요.");
-		String key = getKey();
-		Map<String, Object> headers = new HashMap<>();
-		headers.put("typ", "JWT");
-		headers.put("alg", "HS256");
+        String jwt = "";
+        try {
+			String key = getKey();
+			Map<String, Object> headers = new HashMap<>();
+			headers.put("typ", "JWT");
+			headers.put("alg", "HS256");
 
-		Map<String, Object> payloads = new HashMap<>();
-		Date now = new Date();
+			Map<String, Object> payloads = new HashMap<>();
+			Date now = new Date();
 		
-		now.setTime(now.getTime());
+			now.setTime(now.getTime());
 
-		payloads.put("exp", now);
-		payloads.put("username", username);
+			payloads.put("exp", now);
+			payloads.put("username", username);
 
-		String jwt = Jwts.builder()
-				.setHeader(headers)
-				.setClaims(payloads)
-				.signWith(SignatureAlgorithm.HS256, key.getBytes()).compact();
-        System.out.println(jwt);
+			jwt = Jwts.builder()
+					.setHeader(headers)
+					.setClaims(payloads)
+					.signWith(SignatureAlgorithm.HS256, key.getBytes()).compact();
+		} catch(Exception e) {
+			System.out.println("너 !!!! 또!!!!!!!!!! 키 확인 안 했지????????");
+			System.out.println(e.getMessage());
+		}
+		System.out.println(jwt);
 		System.out.println("토큰 생성 완료!");
 		System.out.println("==============");
 		return jwt;
@@ -108,11 +114,17 @@ public class MemberController {
 	public static Claims verification(String token) {
         System.out.println("==============");
         System.out.println("토큰을 검증할게요");
-		Claims c = Jwts.parser()
-				.setSigningKey(getKey().getBytes())
-				.parseClaimsJws(token)
-				.getBody();
-		System.out.println("검증 객체를 보내드립니다.");
+        Claims c = null;
+        try {
+			c = Jwts.parser()
+					.setSigningKey(getKey().getBytes())
+					.parseClaimsJws(token)
+					.getBody();
+		} catch(Exception e) {
+			System.out.println("너 !!!! 또!!!!!!!!!! 키 확인 안 했지????????");
+			System.out.println(e.getMessage());
+		}
+        System.out.println("검증 객체를 보내드립니다.");
         System.out.println("==============");
 
 		return c;
@@ -161,18 +173,24 @@ public class MemberController {
 			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
 		ResponseEntity<Map<String, Object>> res = null;
-		String realpassword_256 = ser.getPassword(login.getUsername());
-		String inputpassword_256 = ser.getSHA256(login.getPassword());
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (realpassword_256.equals(inputpassword_256)) {
-			msg.put("username", login.getUsername());
-			msg.put("token", createToken(login.getUsername()));
-			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
-			System.out.println("로그인 성공!");
-		} else {
-			msg.put("username", login.getUsername());
-			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); // wrong
-			System.out.println("로그인 실패-_-!");
+		try {
+			String realpassword_256 = ser.getPassword(login.getUsername());
+			String inputpassword_256 = ser.getSHA256(login.getPassword());
+			if (realpassword_256.equals(inputpassword_256)) {
+				msg.put("username", login.getUsername());
+				msg.put("token", createToken(login.getUsername()));
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
+				System.out.println("로그인 성공!");
+			} else {
+				msg.put("username", login.getUsername());
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); // wrong
+				System.out.println("로그인 실패-_-!");
+			}
+		} catch(Exception e) {
+			msg.put("resmsg", e.getMessage());
+			System.out.println(e.getMessage());
+			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
         System.out.println("==============");
 		return res;
