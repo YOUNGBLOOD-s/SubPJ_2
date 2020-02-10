@@ -3,6 +3,7 @@ package com.yb.rest.service;
 import java.util.ArrayList;
 
 import com.yb.rest.vo.Image;
+import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Route;
@@ -12,7 +13,7 @@ public interface IManService {
 	public int searchGrade(int customer);
 	public int getVolume(int idx);
 	public Nation selectNationCustomer(int customer);
-	
+	public Member selectMemberInfo(int customer);
 	/**나라 CRUD*/
 	public ArrayList<Nation> nationList(int customer);
 	public ArrayList<Nation> nationListAll(int customer);

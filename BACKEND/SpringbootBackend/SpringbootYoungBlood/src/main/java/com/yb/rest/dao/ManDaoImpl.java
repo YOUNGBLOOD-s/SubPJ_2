@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yb.rest.vo.Image;
+import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Route;
@@ -182,5 +183,12 @@ public class ManDaoImpl implements IManDao {
 		// TODO Auto-generated method stub
 		Nation nat = session.selectOne("management.selectnationcustomer", customer);
 		return nat;
+	}
+
+	@Override
+	public Member selectMemberInfo(int customer) {
+		// TODO Auto-generated method stub
+		Member mem = session.selectOne("management.selectMemberInfo", customer);	
+		return mem;
 	}
 }

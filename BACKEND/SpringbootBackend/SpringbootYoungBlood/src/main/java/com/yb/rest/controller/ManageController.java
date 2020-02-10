@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yb.rest.service.IAdService;
 import com.yb.rest.service.IManService;
 import com.yb.rest.vo.Image;
+import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Owner;
 import com.yb.rest.vo.Route;
 
 import io.jsonwebtoken.Claims;
@@ -55,21 +57,26 @@ public class ManageController {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		ArrayList<Nation> list = null;
+		Member member = new Member();
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
+			member = ser.selectMemberInfo(customer);
+			Owner owner = new Owner(member.getUsername(), member.getCompany(), member.getGrade());
 			int grade = ser.searchGrade(customer);
 
 			if (grade == 1) {
 				list = ser.nationListAll(customer);
+				
 			} else if (grade >= 2) {
 				list = ser.nationList(customer);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			}
 			msg.put("resvalue", list);
+			
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
 			msg.put("resmsg", e.getMessage());
@@ -88,20 +95,28 @@ public class ManageController {
 		Monthtb mon = new Monthtb();
 		ArrayList<Route> contentsList = null;
 		ArrayList<Image> imageList = null;
+		Member member = new Member();
 		try {
 			Claims de = MemberController.verification(token);
-			msg.put("username", de.get("username"));
+//			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			
 			int customer = ser.getIdx(username);
+			member = ser.selectMemberInfo(customer);
+			Owner owner = new Owner(member.getUsername(), member.getCompany(), member.getGrade());
 			int grade = ser.searchGrade(customer);
-			
+			//유저객체추가.
 			if (grade == 1) {
 				// 관리자는 다 볼 수 있고...
 				nat = ser.nationInfo(idx);
 				mon = ser.monthInfo(idx);
 				contentsList = ser.contentsInfo(idx);
 				imageList = ser.imagesInfo(idx);
+				msg.put("resmsg", "조회성공");
+				msg.put("nation", nat);
+				msg.put("month", mon);
+				msg.put("contents", contentsList);
+				msg.put("images", imageList);
+				msg.put("owner", owner);
 			} else if (grade >= 2) {
 				Nation natCus = ser.selectNationCustomer(customer);
 				int cusIdx = Integer.parseInt(natCus.getCustomer());
@@ -116,10 +131,11 @@ public class ManageController {
 					imageList = ser.imagesInfo(idx);
 					
 					msg.put("resmsg", "조회성공");
-					msg.put("natValue", nat);
-					msg.put("monValue", mon);
-					msg.put("conValue", contentsList);
-					msg.put("imgValue", imageList);
+					msg.put("nation", nat);
+					msg.put("month", mon);
+					msg.put("contents", contentsList);
+					msg.put("images", imageList);
+					msg.put("owner", owner);
 				}else {
 					msg.put("resmsg", "권한없음");
 				}

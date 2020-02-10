@@ -5,6 +5,10 @@
 
 <mapper namespace="management">
 
+	<select id="selectMemberInfo" resultType="member" parameterType="int">
+		select * from membertb where idx=#{customer}
+	</select>
+
 	<select id="selectnationcustomer" resultType="nation" parameterType="int">
 		select *
 		from nationtb
