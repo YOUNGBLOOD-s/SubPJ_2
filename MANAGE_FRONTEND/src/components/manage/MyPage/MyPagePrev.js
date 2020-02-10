@@ -3,7 +3,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 
 import axios from 'axios';
 
@@ -58,7 +58,7 @@ const Footer = styled.div`
   }
 `;
 
-const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
+const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo, loggedInUser }) => {
   const form = useRef(null);
 
   const handleClick = () => {
@@ -79,7 +79,9 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
         },
       )
       .then(res => {
-        setUserInfo({ data: Map(res.data.meminfo) });
+        loggedInUser === 'admin'
+          ? setUserInfo({ data: List(res.data.memlist) })
+          : setUserInfo({ data: Map(res.data.meminfo) });
         setAuth(true);
       })
       .catch(err => {
