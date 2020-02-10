@@ -33,8 +33,8 @@ public class MemDaoImpl implements IMemDao {
 	}
 
 	@Override
-	public ArrayList<Member> listMem() {
-		return (ArrayList) session.selectList("member.selectmemList");
+	public List<Member> listMem() {
+		return session.selectList("member.selectmemList");
 	}
 
 	@Override
@@ -77,6 +77,11 @@ public class MemDaoImpl implements IMemDao {
 		map.put("password", password);
 		map.put("company", company);
 		session.update("member.updateMember", map);
+	}
+
+	@Override
+	public String getSHA256(String plain) {
+		return session.selectOne("member.select256", plain);
 	}
 	
 	

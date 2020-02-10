@@ -1,12 +1,12 @@
 use yb_travel;
 
 desc membertb;
-insert into membertb(username, password, company, grade) values("admin", "admin", "SAMSUNG", 1);
-insert into membertb(username, password, company, grade) values("heesu", "heesu", "HEESU", 2);
-insert into membertb(username, password, company, grade) values("kidong", "kidong", "KIDONG", 3);
-insert into membertb(username, password, company, grade) values("haeun", "haeun", "HAEUN", 0);
-insert into membertb(username, password, company, grade) values('choiys', 'choiys', 'CHOIYS', 4);
-insert into membertb(username, password, company, grade) values('mandarin', 'mandarin', 'MANDARIN', 2);
+insert into membertb(username, password, company, grade) values("admin", SHA2('admin', 256), "SAMSUNG", 1);
+insert into membertb(username, password, company, grade) values("heesu", SHA2('heesu', 256), "HEESU", 2);
+insert into membertb(username, password, company, grade) values("kidong", SHA2('kidong', 256), "KIDONG", 3);
+insert into membertb(username, password, company, grade) values("haeun", SHA2('haeun', 256), "HAEUN", 0);
+insert into membertb(username, password, company, grade) values('choiys', SHA2('choiys', 256), 'CHOIYS', 4);
+insert into membertb(username, password, company, grade) values('mandarin', SHA2('mandarin', 256), 'MANDARIN', 2);
 SELECT * FROM MEMBERTB;
 
 desc gradetb;
