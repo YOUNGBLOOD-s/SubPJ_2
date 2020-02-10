@@ -5,6 +5,7 @@ import { all } from 'redux-saga/effects';
 import user, { userSaga } from './user';
 import stepper from './stepper';
 import product from './product';
+import ads, { adsSaga } from './ads';
 
 const rootReducer = combineReducers({
   auth,
@@ -12,10 +13,11 @@ const rootReducer = combineReducers({
   user,
   stepper,
   product,
+  ads,
 });
 
 export function* rootSaga() {
-  yield all([authSaga(), userSaga()]);
+  yield all([authSaga(), userSaga(), adsSaga()]);
 }
 
 export default rootReducer;

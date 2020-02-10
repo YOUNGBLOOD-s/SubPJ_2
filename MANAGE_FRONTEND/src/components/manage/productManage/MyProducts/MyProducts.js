@@ -1,37 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import MyProduct from './MyProduct';
+import { useDispatch, useSelector } from 'react-redux';
+import { listAds } from '../../../../modules/ads';
 
-const MyProductsWrapper = styled.div`
-  border: 1px solid black;
-`;
+const MyProductsWrapper = styled.div``;
 
 const MyProducts = () => {
-  const [myAds, setMyAds] = useState([]);
-  const token = sessionStorage.getItem('access_token');
+  const dispatch = useDispatch();
+  const { ads, loading, error } = useSelector(({ ads, loading }) => ({
+    ads: ads.ads,
+    error: ads.error,
+    loading: loading['ads/LIST_ADS'],
+  }));
+
   useEffect(() => {
-    axios
-      .get('/api/man/nation/list', {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then(res => {
-        console.log(res);
-        const { resvalue } = res.data;
-        setMyAds(resvalue);
-      })
-      // TODO: 에러처리
-      .catch(err => console.log(err));
-  }, [token]);
+    const token = sessionStorage.getItem('access_token');
+    dispatch(listAds(token));
+  }, [dispatch]);
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
   return (
     <MyProductsWrapper>
-      <h1>내가 올린 광고</h1>
-      {myAds.map(ad => (
-        <MyProduct ad={ad} key={ad.idx} />
-      ))}
+      <h1>AD LIST</h1>
+      {!loading && ads && (
+        <>
+          {ads.map(ad => (
+            <MyProduct ad={ad} key={ad.idx} />
+          ))}
+        </>
+      )}
     </MyProductsWrapper>
   );
 };
