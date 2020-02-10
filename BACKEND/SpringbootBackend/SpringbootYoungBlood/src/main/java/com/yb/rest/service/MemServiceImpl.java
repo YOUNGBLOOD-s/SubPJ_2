@@ -62,4 +62,9 @@ public class MemServiceImpl implements IMemService{
 		repo.DeleteMem(idx);
 	}
 
+	@Override
+	public String getSHA256(String plain) {
+		return repo.getSHA256(plain);
+	}
+
 }

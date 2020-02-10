@@ -10,13 +10,13 @@
 
 	<update id="updateMemberAdmin" parameterType="map">
 	update membertb
-	set password=#{password},company=#{company},grade=#{grade}
+	set password=SHA2(#{password}, 256), company=#{company},grade=#{grade}
 	where username=#{username}
 	</update>
 	
 	<update id="updateMember" parameterType="map">
 	update membertb
-	set password=#{password},company=#{company}
+	set password=SHA2(#{password}, 256), company=#{company}
 	where username=#{username}
 	</update>
 
@@ -33,7 +33,7 @@
 	<insert id="insertMember" parameterType="map">
 	insert into
 	membertb(username, password, company)
-	values(#{username},#{password},#{company})
+	values(#{username},SHA2(#{password}, 256),#{company})
 	</insert>
 
 	<select id="selectmemList" resultType="member">
@@ -51,5 +51,9 @@
 	set grade=#{grade}
 	where username=#{username};
 	</update>
+	
+	<select id="select256" parameterType="String" resultType="String">
+	select SHA2(#{plain}, 256);
+	</select>
 </mapper>
  

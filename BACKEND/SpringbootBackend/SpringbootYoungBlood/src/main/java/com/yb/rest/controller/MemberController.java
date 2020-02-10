@@ -60,8 +60,8 @@ public class MemberController {
 		
 		String key = "";
 		try {
-			//File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
-			File file = new File("/home/ubuntu/key/key.txt"); //AWS
+			File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
+			//File file = new File("/home/ubuntu/key/key.txt"); //AWS
 			FileReader filereader = new FileReader(file);
 			int singleCh = 0;
 			while ((singleCh = filereader.read()) != -1) {
@@ -131,7 +131,7 @@ public class MemberController {
 		try {
 			ser.registerMem(reg.getUsername(), reg.getPassword(), reg.getCompany());
 			msg.put("resmsg", "회원등록");
-			msg.put("username", reg.getUsername()); // 혁준오빠한테 {test: 0} 으로 전송됨
+			msg.put("username", reg.getUsername());
 			msg.put("company", reg.getCompany());
 			msg.put("token", createToken(reg.getUsername()));
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -160,12 +160,10 @@ public class MemberController {
 			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		}
 		ResponseEntity<Map<String, Object>> res = null;
-		String realpassword = ser.getPassword(login.getUsername());
-		System.out.println("리얼 패스워듴ㅋ"+realpassword);
-		
+		String realpassword_256 = ser.getPassword(login.getUsername());
+		String inputpassword_256 = ser.getSHA256(login.getPassword());
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (realpassword.equals(login.getPassword())) {
-			System.out.println("들어왔을까?");
+		if (realpassword_256.equals(inputpassword_256)) {
 			msg.put("username", login.getUsername());
 			msg.put("token", createToken(login.getUsername()));
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
@@ -175,7 +173,6 @@ public class MemberController {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); // wrong
 			System.out.println("로그인 실패-_-!");
 		}
-		
         System.out.println("==============");
 		return res;
 	}
@@ -205,15 +202,12 @@ public class MemberController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> listMem(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		ArrayList<Member> list = new ArrayList<>();
-		
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = manser.getIdx(username);
 			int grade = manser.searchGrade(customer);
-
 			if (grade == 1) {
 				//list = ser.listMem();
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -228,11 +222,10 @@ public class MemberController {
 		return res;
 	}
 
-
 	/** 멤버 조회 서비스 */
 	@PostMapping("/auth/infomem")
 	public @ResponseBody ResponseEntity<Map<String, Object>> infoMem(@RequestHeader(value = "Authorization") String token, @RequestBody Map<String, Object> password) {
-		String pwd = (String) password.get("password");
+		String inputpassword_256 = ser.getSHA256((String) password.get("password"));
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		ArrayList<Member> list = new ArrayList<>();
@@ -240,13 +233,13 @@ public class MemberController {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			String realpw = ser.getPassword(username);
+			String realpassword_256 = ser.getPassword(username);
 			if(username.equals("admin")) {
 				List<Member> mems = ser.listMem();
 				msg.put("memlist", mems);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
-				if(realpw.equals(pwd)) {
+				if(inputpassword_256.equals(realpassword_256)) {
 					Member mem = ser.InfoMem(username);
 					msg.put("meminfo", mem);
 					res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -267,15 +260,15 @@ public class MemberController {
 	@DeleteMapping("/auth/deletemem/{password}")
 	@ApiOperation(value = "멤버 삭제(회원탈퇴) 서비스")
 	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMem(@RequestHeader(value = "Authorization") String token, @PathVariable("password") String password) {
+		String inputpassword_256 = ser.getSHA256(password);
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		ArrayList<Member> list = new ArrayList<>();
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			String realpw = ser.getPassword(username);
-			if(realpw.equals(password)) {
+			String realpassword_256 = ser.getPassword(username);
+			if(inputpassword_256.equals(realpassword_256)) {
 				ser.DeleteMem(username);
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			}
@@ -296,7 +289,6 @@ public class MemberController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMemAdmin(@RequestHeader(value = "Authorization") String token, String idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		ArrayList<Member> list = new ArrayList<>();
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -362,7 +354,5 @@ public class MemberController {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
 		}
 		return res;
-		
-
 	}
 }

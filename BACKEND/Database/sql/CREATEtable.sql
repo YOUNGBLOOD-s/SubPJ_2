@@ -5,7 +5,7 @@ use yb_travel;
 CREATE TABLE IF NOT EXISTS `membertb` (
 	 idx int auto_increment primary key,
      username varchar(20) unique,
-     password varchar(20),
+     password varchar(100),
      company varchar(20),
      grade int default 0
 );
