@@ -176,4 +176,11 @@ public class ManDaoImpl implements IManDao {
 	public ArrayList<Image> imagesInfo(int idx) {
 		return (ArrayList) session.selectList("management.imageInfo", idx);
 	}
+
+	@Override
+	public Nation selectNationCustomer(int customer) {
+		// TODO Auto-generated method stub
+		Nation nat = session.selectOne("management.selectnationcustomer", customer);
+		return nat;
+	}
 }

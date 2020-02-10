@@ -151,4 +151,11 @@ public class ManServiceImpl implements IManService {
 		return images;
 	}
 
+	@Override
+	public Nation selectNationCustomer(int customer) {
+		// TODO Auto-generated method stub
+		Nation nat = repo.selectNationCustomer(customer);
+		return nat;
+	}
+
 }
