@@ -42,3 +42,4 @@ thd.start()
 input()
 print('done')
 # 이때 쓰레드도 함께 종료 됨.
+
