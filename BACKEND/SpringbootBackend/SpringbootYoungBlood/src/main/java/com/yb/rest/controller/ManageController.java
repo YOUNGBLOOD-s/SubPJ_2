@@ -49,7 +49,7 @@ public class ManageController {
 	//token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 
 	/** 사용자 상품 전체보기 */
-	@GetMapping("/man/nation/list/")
+	@GetMapping("/man/nation/list")
 	@ApiOperation(value = "사용자 상품정보 리스트 조회")
 	public ResponseEntity<Map<String, Object>> nationList(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -221,7 +221,7 @@ public class ManageController {
 	}
 
 	/** 상품 월별정보 리스트 */
-	@GetMapping("/man/monthtb/list/")
+	@GetMapping("/man/monthtb/list")
 	@ApiOperation(value = "상품 월별정보 리스트")
 	public ResponseEntity<Map<String, Object>> monthInfo(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -337,7 +337,7 @@ public class ManageController {
 	}
 
 	/** 콘텐츠 정보 조회하기 */
-	@GetMapping("/man/contents/list/")
+	@GetMapping("/man/contents/list")
 	@ApiOperation(value = "상품 콘텐츠 정보 리스트 조회")
 	public ResponseEntity<Map<String, Object>> ContentsList(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -399,7 +399,7 @@ public class ManageController {
 	}
 
 	/** 콘텐츠 정보 수정하기 */
-	@PutMapping("/man/contents/update/")
+	@PutMapping("/man/contents/update")
 	@ApiOperation(value = "상품 콘텐츠 정보 수정")
 	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Route route) {
@@ -457,7 +457,7 @@ public class ManageController {
 	}
 	
 	/** 이미지 정보 조회하기 */
-	@GetMapping("man/image/list/")
+	@GetMapping("man/image/list")
 	@ApiOperation(value = "상품 이미지정보 리스트 조회")
 	public ResponseEntity<Map<String, Object>> imageList(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -488,20 +488,25 @@ public class ManageController {
 	}
 	
 	/** 이미지 정보 추가 */
-	@PostMapping("/man/image/insert/")
+	@PostMapping("/man/image/insert")
 	@ApiOperation(value = "상품 이미지정보 추가")
-	public ResponseEntity<Map<String, Object>> imageInsert(@RequestHeader(value = "Authorization") String token, @RequestBody Image img) {
+	public ResponseEntity<Map<String, Object>> imageInsert(@RequestHeader(value = "Authorization") String token, @RequestBody List<Image> imgs) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
+			System.out.println("상품 이미지 정보 추가! user => "+ username);
+			System.out.println(imgs);
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-
+			
+			
 			if (grade > 0) {
-				boolean resImage = ser.insertImagetb(img);
+				for(int i=0; i<imgs.size(); i++) {
+					ser.insertImagetb(imgs.get(i));
+				}
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);

@@ -1,6 +1,7 @@
 package com.yb.rest.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,13 +23,13 @@ public class MemDaoImpl implements IMemDao {
 	}
 
 	@Override
-	public boolean registerMem(String username, String password, String company, int grade) {
-		Member m = new Member(username, password, company, grade);
-		int insert = session.insert("member.insertMember", m);
-		if (insert == 0)
-			return false;
-		else
-			return true;
+	public void registerMem(String username, String password, String company) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("password", password);
+		map.put("company", company);
+		session.insert("member.insertMember", map);
+		
 	}
 
 	@Override
@@ -42,27 +43,40 @@ public class MemDaoImpl implements IMemDao {
 	}
 
 	@Override
-	public boolean UpdateMem(String username, String password, String company, int grade) {
-		Member m = new Member(username, password, company, grade);
-		int update = session.update("member.updateMember", m);
-		if (update == 0)
-			return false;
-		else
-			return true;
+	public void DeleteMem(String username) {
+		session.delete("member.deleteMember", username);
 	}
 
 	@Override
-	public boolean DeleteMem(String password) {
-		int delete = session.delete("member.deleteMember", password);
-		if (delete == 0)
-			return false;
-		else
-			return true;
-	}
-
-	@Override
-	public void updateGrade(Map map) {
+	public void updateGrade(String username, int grade) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("grade", grade);
 		session.update("member.updategrade", map);
+	}
+
+	@Override
+	public void DeleteMem(int idx) {
+		session.delete("member.deleteMemberIdx", idx);
+	}
+
+	@Override
+	public void UpdateMem(String username, String password, String company, int grade) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("password", password);
+		map.put("company", company);
+		map.put("grade", grade);
+		session.update("member.updateMemberAdmin", map);
+	}
+
+	@Override
+	public void UpdateMem(String username, String password, String company) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("password", password);
+		map.put("company", company);
+		session.update("member.updateMember", map);
 	}
 	
 	

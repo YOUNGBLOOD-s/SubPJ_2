@@ -8,22 +8,32 @@
 	select password from membertb where username=#{username}
 	</select>
 
-	<update id="updateMember" parameterType="member">
+	<update id="updateMemberAdmin" parameterType="map">
 	update membertb
-	set username=#{username},password=#{password},company=#{company},grade=#{grade}
-	where password=#{password}
+	set password=#{password},company=#{company},grade=#{grade}
+	where username=#{username}
+	</update>
+	
+	<update id="updateMember" parameterType="map">
+	update membertb
+	set password=#{password},company=#{company}
+	where username=#{username}
 	</update>
 
 	<delete id="deleteMember" parameterType="string">
 	delete from membertb
-	where password=#{password}
+	where username=#{username}
 	</delete>
 
-
-	<insert id="insertMember" parameterType="member">
+	<delete id="deleteMemberIdx" parameterType="int">
+	delete from membertb
+	where idx=#{idx}
+	</delete>
+	
+	<insert id="insertMember" parameterType="map">
 	insert into
-	membertb(username, password, company, grade)
-	values(#{username},#{password},#{company},#{grade})
+	membertb(username, password, company)
+	values(#{username},#{password},#{company})
 	</insert>
 
 	<select id="selectmemList" resultType="member">
