@@ -12,6 +12,13 @@ public class Member {
 		this.password = password;
 	}
 
+	public Member(String username, String company, int grade) {
+		super();
+		this.username = username;
+		this.company = company;
+		this.grade = grade;
+	}
+
 	public Member(String username, String password, String company, int grade) {
 		super();
 		this.username = username;

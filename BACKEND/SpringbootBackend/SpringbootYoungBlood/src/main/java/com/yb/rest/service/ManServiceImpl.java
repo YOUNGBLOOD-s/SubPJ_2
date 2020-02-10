@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yb.rest.dao.IAdDao;
 import com.yb.rest.dao.IManDao;
 import com.yb.rest.vo.Image;
+import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Route;
@@ -156,6 +157,13 @@ public class ManServiceImpl implements IManService {
 		// TODO Auto-generated method stub
 		Nation nat = repo.selectNationCustomer(customer);
 		return nat;
+	}
+
+	@Override
+	public Member selectMemberInfo(int customer) {
+		// TODO Auto-generated method stub
+		Member mem = repo.selectMemberInfo(customer);
+		return mem;
 	}
 
 }

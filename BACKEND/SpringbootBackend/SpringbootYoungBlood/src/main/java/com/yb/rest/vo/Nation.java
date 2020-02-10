@@ -3,9 +3,11 @@ package com.yb.rest.vo;
 public class Nation {
 	private String idx, en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date,
 			type,flag;
+	//Member customer
 	private String url;
 
 	public Nation() {
+	
 	}
 
 	//latest for chatbot VO
