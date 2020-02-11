@@ -14,6 +14,7 @@ public interface IManDao {
 	public int getVolume(int idx);
 	public Nation selectNationCustomer(int customer);
 	public Member selectMemberInfo(int customer);
+	
 	/** 나라테이블CRUD */
 	public ArrayList<Nation> nationList(int customer);
 	public ArrayList<Nation> nationListAll(int customer);

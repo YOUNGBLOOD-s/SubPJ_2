@@ -54,8 +54,6 @@ public class MemberController {
 
 	/** 비밀키 읽기 */
 	public static String getKey() {
-        
-		System.out.println("==============");
 		System.out.println("안녕하세요. 키를 가져갈게요!");
 		
 		String key = "";
@@ -79,7 +77,6 @@ public class MemberController {
 
 	/** 토큰 생성 */
 	public static String createToken(String username) {
-        System.out.println("==============");
         System.out.println("토큰을 생성할게요.");
         String jwt = "";
         try {
@@ -112,7 +109,6 @@ public class MemberController {
 	
 	/** 토큰 검증 */
 	public static Claims verification(String token) {
-        System.out.println("==============");
         System.out.println("토큰을 검증할게요");
         Claims c = null;
         try {
@@ -134,8 +130,6 @@ public class MemberController {
 	@PostMapping("/auth/register")
 	@ApiOperation(value = "회원가입 ")
 	public ResponseEntity<Map<String, Object>> meminsert(@RequestBody Member reg) {
-        
-		System.out.println("==============");
         System.out.println("회원가입 요청이 왔습니다.");
         
 		ResponseEntity<Map<String, Object>> res = null;
@@ -165,7 +159,6 @@ public class MemberController {
 	@PostMapping("/auth/login")
 	@ApiOperation(value = "로그인 ")
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
-        System.out.println("==============");
         System.out.println("로그인 요청이 왔습니다.");
         System.out.println(login.toString());
 		if(login.getUsername()=="" || login.getPassword()=="") {
@@ -200,7 +193,6 @@ public class MemberController {
 	@GetMapping("/auth/check")
 	@ApiOperation(value = "로그인 상태 확인")
 	public ResponseEntity<Map<String, Object>> memloginfo(@RequestHeader(value="Authorization") String token) {
-        System.out.println("==============");
 		System.out.println("로그인 상태를 확인합니다.");
 		ResponseEntity<Map<String, Object>> res = null;	
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -256,7 +248,7 @@ public class MemberController {
 			String username = (String) de.get("username");
 			String realpassword_256 = ser.getPassword(username);
 			if(username.equals("admin")) {
-				List<Member> mems = ser.listMem(); //idx 추가해서 던져줘야 함!!!
+				List<Member> mems = ser.listMem();
 				msg.put("memlist", mems);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
@@ -305,9 +297,9 @@ public class MemberController {
 	}
 	
 	/** 멤버 삭제(관리자) 서비스 */
-	@DeleteMapping("/auth/deletemem/{idx}")
+	@DeleteMapping("/auth/deleteadmin/{idx}")
 	@ApiOperation(value = "멤버 삭제(관리자) 서비스")
-	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMemAdmin(@RequestHeader(value = "Authorization") String token, String idx) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMemAdmin(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -315,7 +307,7 @@ public class MemberController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			if(username.equals("admin")) {
-				ser.DeleteMem(Integer.parseInt(idx));
+				ser.DeleteMem(idx);
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -332,9 +324,7 @@ public class MemberController {
 	@PutMapping("/auth/updatemem")
 	@ApiOperation(value = "멤버 정보 수정(관리자/사용자)")
 	public @ResponseBody ResponseEntity<Map<String,Object>> updateMem(@RequestHeader(value = "Authorization") String token, @RequestBody Member mem){
-		//패스워드 null or "" 이면 패스워드는 안 바꾸는 걸로 하기 admin이랑 사용자 둘다.
-		
-		System.out.println(mem.toString());
+		System.out.println("[멤버 정보 수정] "+mem.toString());
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -342,9 +332,17 @@ public class MemberController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			if(username.equals("admin")) {
-				ser.UpdateMem(mem.getUsername(), mem.getPassword(), mem.getCompany(), mem.getGrade());
+				if(mem.getPassword()=="" || mem.getPassword()==null) {
+					ser.UpdateMem(mem.getUsername(), mem.getCompany(), mem.getGrade());
+				} else {
+					ser.UpdateMem(mem.getUsername(), mem.getPassword(), mem.getCompany(), mem.getGrade());
+				}
 			} else {
-				ser.UpdateMem(username, mem.getPassword(), mem.getCompany());
+				if(mem.getPassword()=="" || mem.getPassword()==null) {
+					ser.UpdateMem(mem.getUsername(), mem.getCompany());
+				} else {
+					ser.UpdateMem(username, mem.getPassword(), mem.getCompany());
+				}
 			}
 			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {

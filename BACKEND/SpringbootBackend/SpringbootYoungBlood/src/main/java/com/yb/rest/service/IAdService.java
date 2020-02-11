@@ -16,34 +16,45 @@ public interface IAdService {
 	public List<String> getImgs(int id);
 	public List<String> getModalcontents(int id);
 	public Sendtofront getInfo(Map value);
+	public int getGrade(String idx);
+	public int getFlag(String idx);
+	
+	/** detail */
+	public List<Integer> selectIdxs();
 	public List<Route> getRoutes(int idx);
 	public List<Route> getRoutes(String customer);
 	public List<Route> getRoutesAll(int idx);
+	public void insertRoutes(Route route);
+	public void updateRoutes(Route route);
+	public void deleteRoutes(Map map);
+	
 	public Nation getNationdetail(Map value);
-	public void updateSensor(Sensor sen);
+	public Nation getNationdetail(int idx);
 	public List<Monthtb> selectAll();
+
+	/** select nation */
+	public void updateSensor(Sensor sen);
 	public void updateScore(ForScore forScore);
 	public int getScore(int idx);
 	public int getDust(int idx);
 	public Sensor selectData(int idx);
-	public void updateshowandflag(int customer);
 	public void updateType(ForScore forScore);
 	public int getType(int idx);
+	public List<Nation> selectNations();
+	public void updateFlag(int idx);
+
+	
+	/** click & QRcode */
+	public void updateshowandflag(int customer);
 	public void updateClickcnt(Map map);
 	public void updateQRcnt(Map map);
 	public void updateShowcnt(int idx);
-	public Nation getNationdetail(int idx);
-	public void updateCounsel(int age, String name, String email, String tel, String date, String text);
-	public void insertRoutes(Route route);
-	public void updateRoutes(Route route);
-	public void deleteRoutes(Map map);
 	public int selectShowcnt(int idx);
-	public void updateFlag(int idx);
-	public List<Nation> selectNations();
 	public boolean getDate(Map map);
 	public void insertClick(Map map);
 	public void insertQR(Map map);
-	public int getGrade(String idx);
-	public int getFlag(String idx);
+	
+	/** 1:1상담 */
+	public void updateCounsel(int age, String name, String email, String tel, String date, String text);
 
 }

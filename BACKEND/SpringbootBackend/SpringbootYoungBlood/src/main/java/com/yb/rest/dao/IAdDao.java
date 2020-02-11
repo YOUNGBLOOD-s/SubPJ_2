@@ -17,8 +17,11 @@ public interface IAdDao {
 	public List<String> getModalcontents(int id);
 	public Sendtofront getInfo(Map value);
 	public void updateshowandflag(int customer);
+	public int getGrade(String idx);
+	public int getFlag(String idx);
 	
 	/** detail */
+	public List<Integer> selectIdxs();
 	public List<Route> getRoutes(int idx);
 	public List<Route> getRoutes(String customer);
 	public List<Route> getRoutesAll(int idx);
@@ -38,6 +41,7 @@ public interface IAdDao {
 	public Sensor selectData(int idx);
 	public void updateType(ForScore forScore);	
 	public int getType(int idx);
+	public void updateFlag(int idx);
 	
 	/** click & QRcode */
 	public void updateClickcnt(Map map);
@@ -46,14 +50,10 @@ public interface IAdDao {
 	public void insertClick(Map map);
 	public void insertQR(Map map);
 	public int selectShowcnt(int idx);
-	public void updateFlag(int idx);
 	public boolean getDate(Map map);
 	public List<Nation> selectNations();
 	
 	/** 1:1상담 */
 	public void updateCounsel(Counsel counvalue);
-	//2020-02-06 정희수
-	public int getGrade(String idx);
-	public int getFlag(String idx);
 
 }

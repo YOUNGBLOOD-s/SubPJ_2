@@ -52,6 +52,18 @@
 	where username=#{username};
 	</update>
 	
+	<update id="updatecomgrade" parameterType="map">
+	update membertb
+	set company=#{company}, grade=#{grade}
+	where username=#{username};
+	</update>
+	
+	<update id="updatecom" parameterType="map">
+	update membertb
+	set company=#{company}
+	where username=#{username};
+	</update>
+	
 	<select id="select256" parameterType="String" resultType="String">
 	select SHA2(#{plain}, 256);
 	</select>
