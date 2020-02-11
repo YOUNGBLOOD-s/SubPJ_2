@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import FullScreenDialog from '../common/FullScreenDialog';
 import Axios from '../../../node_modules/axios/index';
 import LoadingBackdrop from '../common/LoadingBackdrop';
+import { LazyImageProvider } from '../common/LazyImage/LazyImageContext';
+import LazyImage from '../common/LazyImage/LazyImage';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -140,42 +142,52 @@ const MainAD = () => {
     <MainADBlock>
       {datas ? (
         <>
-          <Carousel
-            infiniteLoop
-            autoPlay
-            emulateTouch
-            showStatus={false}
-            showArrows={false}
-            showThumbs={false}
-            transitionTime={1000}
-            interval={5000}
-            stopOnHover={false}
-          >
-            {datas.map(({ id, name, en_name, content, thumbnail }, index) => (
-              <div key={id} onDoubleClick={() => onDoubleClick(index)}>
-                <div className="style">
-                  <div className="box">
-                    <TitleWrapper>
-                      <Title>{name}</Title> <EnTitle>{en_name}</EnTitle>
-                    </TitleWrapper>
-                    <Content>{content}</Content>
+          <LazyImageProvider>
+            <Carousel
+              infiniteLoop
+              autoPlay
+              emulateTouch
+              showStatus={false}
+              showArrows={false}
+              showThumbs={false}
+              transitionTime={1000}
+              interval={5000}
+              stopOnHover={false}
+            >
+              {datas.map(({ id, name, en_name, content, thumbnail }, index) => (
+                <div key={id} onDoubleClick={() => onDoubleClick(index)}>
+                  <div className="style">
+                    <div className="box">
+                      <TitleWrapper>
+                        <Title>{name}</Title> <EnTitle>{en_name}</EnTitle>
+                      </TitleWrapper>
+                      <Content>{content}</Content>
+                    </div>
+                    {/* <img
+                      className="bg"
+                      // src={publicURL + '/static/img/코타키나발루.jpg'}
+                      src={thumbnail}
+                      alt=""
+                    /> */}
+                    <LazyImage
+                      className="bg"
+                      style={{ zIndex: '9999' }}
+                      aspectRatio={[10, 7]}
+                      src={thumbnail}
+                      alt=""
+                    />
                   </div>
                   <img
-                    className="bg"
-                    // src={publicURL + '/static/img/코타키나발루.jpg'}
-                    src={thumbnail}
+                    className="qr"
+                    // src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://52.78.218.79:8282/detail/${id}`}
                     alt=""
+                    onerror={`this.src=asdf`}
                   />
                 </div>
-                <img
-                  className="qr"
-                  // src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://52.78.218.79:8282/detail/${id}`}
-                  alt=""
-                />
-              </div>
-            ))}
-          </Carousel>
+              ))}
+            </Carousel>
+          </LazyImageProvider>
           <FullScreenDialog data={datas[pid]} setOpen={setOpen} open={open} />
         </>
       ) : (
