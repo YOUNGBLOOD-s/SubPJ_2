@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import MaterialTable from 'material-table';
+import axios from 'axios';
 
 const MyPageAdmin = ({ userInfo, setUserInfo }) => {
+  const token = sessionStorage.getItem('access_token');
   const { data } = userInfo;
-  console.log(data.toJS());
   const [state, setState] = useState({
     columns: [
       { title: '아이디', field: 'username' },
       { title: '등급', field: 'grade', type: 'numeric' },
+      { title: '비밀번호', field: 'password' },
       { title: '회사명', field: 'company' },
     ],
     data: data.toJS(),
@@ -35,6 +37,8 @@ const MyPageAdmin = ({ userInfo, setUserInfo }) => {
             setTimeout(() => {
               resolve();
               if (oldData) {
+                oldData.password = '';
+                console.log(oldData);
                 setState(prevState => {
                   const data = [...prevState.data];
                   data[data.indexOf(oldData)] = newData;
@@ -47,11 +51,26 @@ const MyPageAdmin = ({ userInfo, setUserInfo }) => {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              setState(prevState => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                return { ...prevState, data };
-              });
+              // setState(prevState => {
+              //   const data = [...prevState.data];
+              //   data.splice(data.indexOf(oldData), 1);
+              //   return { ...prevState, data };
+              // });
+              const idx = oldData.idx;
+              axios
+                .delete('/api/auth/deleteadmin/' + idx, {
+                  headers: {
+                    Authorization: token,
+                  },
+                })
+                .then(res => {
+                  setState(prevState => {
+                    const data = [...prevState.data];
+                    data.splice(data.indexOf(oldData), 1);
+                    return { ...prevState, data };
+                  });
+                })
+                .catch(err => console.log(err));
             }, 600);
           }),
       }}
