@@ -7,7 +7,7 @@ insert into membertb(username, password, company, grade) values("kidong", SHA2('
 insert into membertb(username, password, company, grade) values("haeun", SHA2('haeun', 256), "HAEUN", 0);
 insert into membertb(username, password, company, grade) values('choiys', SHA2('choiys', 256), 'CHOIYS', 4);
 insert into membertb(username, password, company, grade) values('mandarin', SHA2('mandarin', 256), 'MANDARIN', 2);
-SELECT * FROM MEMBERTB;
+SELECT * FROM membertb;
 
 desc gradetb;
 insert into gradetb(idx, name, volume) values(0, 'grade0', 0);
