@@ -67,4 +67,14 @@ public class MemServiceImpl implements IMemService{
 		return repo.getSHA256(plain);
 	}
 
+	@Override
+	public void UpdateMem(String username, String company, int grade) {
+		repo.UpdateMem(username, company, grade);
+	}
+
+	@Override
+	public void UpdateMem(String username, String company) {
+		repo.UpdateMem(username, company);
+	}
+
 }

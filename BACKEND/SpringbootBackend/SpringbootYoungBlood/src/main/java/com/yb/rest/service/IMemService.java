@@ -16,6 +16,8 @@ public interface IMemService {
 	public Member InfoMem(String username);
 	public void UpdateMem(String username, String password, String company, int grade);
 	public void UpdateMem(String username, String password, String company);
+	public void UpdateMem(String username, String company, int grade);
+	public void UpdateMem(String username, String company);
 	public void DeleteMem(String username);
 	public void DeleteMem(int idx);
 	public void updateGrade(String username, int grade);

@@ -83,6 +83,23 @@ public class MemDaoImpl implements IMemDao {
 	public String getSHA256(String plain) {
 		return session.selectOne("member.select256", plain);
 	}
+
+	@Override
+	public void UpdateMem(String username, String company, int grade) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("company", company);
+		map.put("grade", grade);
+		session.update("member.updatecomgrade", map);
+	}
+
+	@Override
+	public void UpdateMem(String username, String company) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("company", company);
+		map.put("username", username);
+		session.update("member.updatecom", map);
+	}
 	
 	
 }

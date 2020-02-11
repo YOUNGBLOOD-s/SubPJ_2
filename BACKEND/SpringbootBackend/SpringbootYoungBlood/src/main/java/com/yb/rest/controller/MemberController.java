@@ -256,7 +256,7 @@ public class MemberController {
 			String username = (String) de.get("username");
 			String realpassword_256 = ser.getPassword(username);
 			if(username.equals("admin")) {
-				List<Member> mems = ser.listMem(); //idx 추가해서 던져줘야 함!!!
+				List<Member> mems = ser.listMem();
 				msg.put("memlist", mems);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
@@ -332,9 +332,7 @@ public class MemberController {
 	@PutMapping("/auth/updatemem")
 	@ApiOperation(value = "멤버 정보 수정(관리자/사용자)")
 	public @ResponseBody ResponseEntity<Map<String,Object>> updateMem(@RequestHeader(value = "Authorization") String token, @RequestBody Member mem){
-		//패스워드 null or "" 이면 패스워드는 안 바꾸는 걸로 하기 admin이랑 사용자 둘다.
-		
-		System.out.println(mem.toString());
+		System.out.println("[멤버 정보 수정] "+mem.toString());
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -342,9 +340,18 @@ public class MemberController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			if(username.equals("admin")) {
-				ser.UpdateMem(mem.getUsername(), mem.getPassword(), mem.getCompany(), mem.getGrade());
+				if(mem.getPassword()=="" || mem.getPassword()==null) {
+					ser.UpdateMem(mem.getUsername(), mem.getCompany(), mem.getGrade());
+				} else {
+					ser.UpdateMem(mem.getUsername(), mem.getPassword(), mem.getCompany(), mem.getGrade());
+				}
+			
 			} else {
-				ser.UpdateMem(username, mem.getPassword(), mem.getCompany());
+				if(mem.getPassword()=="" || mem.getPassword()==null) {
+					ser.UpdateMem(mem.getUsername(), mem.getCompany());
+				} else {
+					ser.UpdateMem(username, mem.getPassword(), mem.getCompany());
+				}
 			}
 			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (Exception e) {
