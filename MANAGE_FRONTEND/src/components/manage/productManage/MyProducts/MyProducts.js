@@ -43,13 +43,14 @@ const MyProducts = () => {
           <component.Grid container spacing={1}>
             {ads.map(ad => (
               <Link
+                key={ad.idx}
                 to={
                   user.username === 'admin'
                     ? `admin/product/${ad.idx}`
                     : `manage/product/${ad.idx}`
                 }
               >
-                <component.Grid item xs={6} md={4} key={ad.idx}>
+                <component.Grid item xs={6} md={4}>
                   <MyProduct ad={ad} />
                 </component.Grid>
               </Link>
