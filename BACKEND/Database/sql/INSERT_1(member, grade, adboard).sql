@@ -10,11 +10,11 @@ insert into membertb(username, password, company, grade) values('mandarin', SHA2
 SELECT * FROM membertb;
 
 desc gradetb;
-insert into gradetb(idx, name, volume) values(0, 'grade0', 0);
+insert into gradetb(idx, name, volume) values(0, 'Basic', 0);
 insert into gradetb(idx, name, volume) values(1, 'admin', 10000);
-insert into gradetb(idx, name, volume) values(2, 'grade1', 5);
-insert into gradetb(idx, name, volume) values(3, 'grade2', 10);
-insert into gradetb(idx, name, volume) values(4, 'grade3', 20);
+insert into gradetb(idx, name, volume) values(2, 'Silver', 5);
+insert into gradetb(idx, name, volume) values(3, 'Gold', 10);
+insert into gradetb(idx, name, volume) values(4, 'Platinum', 20);
 select * from gradetb;
 
 -- 월평균 table
