@@ -166,4 +166,25 @@ public class ManServiceImpl implements IManService {
 		return mem;
 	}
 
+	@Override
+	public String selectNation_image(int idx) {
+		// TODO Auto-generated method stub
+		String url = repo.selectNation_image(idx);
+		return url;
+	}
+
+	@Override
+	public ArrayList<Nation> nationList_page(int customer,int pageIdx) {
+		// TODO Auto-generated method stub
+		ArrayList<Nation> list = repo.nationList_page(customer,pageIdx);
+		return list;
+	}
+
+	@Override
+	public ArrayList<Nation> nationListAll_page(int customer,int pageIdx) {
+		// TODO Auto-generated method stub
+		ArrayList<Nation> list = repo.nationListAll_page(customer,pageIdx);
+		return list;
+	}
+
 }
