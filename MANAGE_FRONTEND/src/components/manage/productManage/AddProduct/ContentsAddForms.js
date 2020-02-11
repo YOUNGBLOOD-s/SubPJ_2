@@ -7,7 +7,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import MaterialCard from '../../../common/MaterialCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { addRoute, removeRoute } from '../../../../modules/product';
+import { addRoute, removeRoute } from '../../../../modules/form';
 import ImageUploader from '../../../common/ImageUploader';
 import { prevStep, nextStep } from '../../../../modules/stepper';
 
@@ -198,6 +198,7 @@ const ContentsAddForm = ({ nationId }) => {
               <ImageUploader
                 imageUrl={content.image}
                 setImageUrl={setImageUrl}
+                inputId={`content-image-${content.day}-${content.seq}`}
               />
             </component.Grid>
             <component.Grid item xs={12}>
@@ -252,8 +253,8 @@ const transport_arr = [
 ];
 
 const ContentAddForms = ({ classes, steps, step }) => {
-  const { nationId } = useSelector(({ product }) => ({
-    nationId: product.nationId,
+  const { nationId } = useSelector(({ form }) => ({
+    nationId: form.nationId,
   }));
 
   const [contentForms, setContentForms] = useState([

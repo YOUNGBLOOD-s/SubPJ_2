@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
-// import { useSelector } from 'react-redux';
-// import { useEffect } from 'react';
+import MyProducts from '../components/manage/productManage/MyProducts/MyProducts';
+import { useSelector } from 'react-redux';
+import AddProduct from '../components/manage/productManage/AddProduct/AddProduct';
+import { Route, Link } from 'react-router-dom';
+import ProductDetail from '../components/product/ProductDetail';
 
-const AdminPage = () => {
-  // const { user } = useSelector(({ user }) => ({
-  //   user: user.user,
-  // }));
+const AdminPage = ({ history }) => {
+  const { user } = useSelector(({ user }) => ({
+    user: user.user,
+  }));
 
-  // FIXME: admin이 아니면 들어올수 없게 만들어야합니다.
-  // useEffect(() => {
-  //   if (user.username !== 'admin') {
-  //     history.push('/');
-  //   }
-  // }, [user, history]);
+  // ADMIN이 아니면 못들어옵니다.
+  useEffect(() => {
+    if (!user || user.username !== 'admin') {
+      history.push('/');
+    }
+  }, [user, history]);
 
   return (
     <div>
       <ButtonAppbarContainer />
-      <h1>우리들의 ! 어드민 페이지</h1>
+      <div>
+        <Link to="/admin">광고목록</Link>
+        <Link to="/admin/users">유저목록</Link>
+        <Link to="/admin/add">상품추가</Link>
+        <Link to="/admin/update">상품수정</Link>
+      </div>
+      <Route component={MyProducts} path="/admin" exact />
+      <Route component={AddProduct} path="/admin/add" />
+      <Route component={ProductDetail} path="/admin/product/:id" />
     </div>
   );
 };

@@ -27,7 +27,7 @@ const StyledInput = styled.input`
   display: none;
 `;
 
-const ImageUploader = ({ imageUrl, setImageUrl }) => {
+const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const UploadInput = useRef(null);
@@ -81,12 +81,15 @@ const ImageUploader = ({ imageUrl, setImageUrl }) => {
       <component.Grid item xs={12}>
         <InputWrapper>
           <component.Grid item xs={8}>
-            <label htmlFor="file-upload" className="custom-file-upload">
+            <label
+              htmlFor={`file-upload${inputId}`}
+              className="custom-file-upload"
+            >
               <i className="fa fa-cloud-upload"></i>{' '}
               {file ? file.name : '클릭해서 이미지를 선택해주세요'}
             </label>
             <StyledInput
-              id="file-upload"
+              id={`file-upload${inputId}`}
               ref={UploadInput}
               type="file"
               onChange={handleFileUpload}

@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { nextStep, prevStep } from '../../../../modules/stepper';
 import axios from 'axios';
-import { selectNation } from '../../../../modules/product';
+import { selectNation } from '../../../../modules/form';
 
 const StyledTextField = withStyles({
   root: {

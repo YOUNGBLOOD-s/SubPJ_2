@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import ImageUploader from '../../../common/ImageUploader';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectImageUrl, selectImageNation } from '../../../../modules/product';
+import { selectImageUrl, selectImageNation } from '../../../../modules/form';
 import styled from 'styled-components';
 import MaterialCard from '../../../common/MaterialCard';
 import component from '../../../../lib/material/component';
 import { prevStep, nextStep } from '../../../../modules/stepper';
 
 const ImageForm = ({ type }) => {
-  const { imageUrl } = useSelector(({ product }) => ({
-    imageUrl: product.images[type - 1].url,
+  const { imageUrl } = useSelector(({ form }) => ({
+    imageUrl: form.images[type - 1].url,
   }));
   const dispatch = useDispatch();
 
@@ -17,7 +17,13 @@ const ImageForm = ({ type }) => {
     dispatch(selectImageUrl({ type, url }));
   };
 
-  return <ImageUploader imageUrl={imageUrl} setImageUrl={setImageUrl} />;
+  return (
+    <ImageUploader
+      imageUrl={imageUrl}
+      setImageUrl={setImageUrl}
+      inputId={`image-add-${type}`}
+    />
+  );
 };
 
 const FormWrapper = styled.div``;
@@ -28,9 +34,9 @@ const Dsecription = styled.div`
 `;
 
 const ImageAddForm = ({ classes, steps, step }) => {
-  const { nationId } = useSelector(({ product }) => ({
-    nationId: product.nationId,
-    images: product.images,
+  const { nationId } = useSelector(({ form }) => ({
+    nationId: form.nationId,
+    images: form.images,
   }));
   // 마운트시 각 이미지의 nationId 설정
   const dispatch = useDispatch();

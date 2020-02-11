@@ -19,6 +19,7 @@ const AdItems = () => {
     axios
       .get('/api/all')
       .then(res => {
+        console.log(res);
         const { AllNationDatas } = res.data;
         setAds(AllNationDatas);
       })
@@ -29,9 +30,23 @@ const AdItems = () => {
     <ItemsWrapper>
       <TitleBar>모든 광고</TitleBar>
       <CaptionText>모든 광고를 보여드립니당 ㅎㅎ</CaptionText>
-      {ads.map(ad => (
-        <AdItem key={ad.idx} ad={ad} />
-      ))}
+      <div>
+        <div>카테고리별</div>
+        <select>
+          <option value="1">유럽</option>
+          <option value="2">북태평양</option>
+          <option value="3">아프리카</option>
+          <option value="4">아시아</option>
+          <option value="5">북미</option>
+        </select>
+        <div>조회수순/인기순</div>
+        <button>초기화</button>
+      </div>
+      {ads ? (
+        ads.map(ad => <AdItem key={ad.idx} ad={ad} />)
+      ) : (
+        <h5>광고가 없네요...ㅠ</h5>
+      )}
     </ItemsWrapper>
   );
 };

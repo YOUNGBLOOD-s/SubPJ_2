@@ -1,37 +1,74 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import MyProduct from './MyProduct';
+import { useDispatch, useSelector } from 'react-redux';
+import { listAds } from '../../../../modules/ads';
+import component from '../../../../lib/material/component';
+import TitleBar from '../../../Detail/common/TitleBar';
+import { Link } from 'react-router-dom';
 
 const MyProductsWrapper = styled.div`
-  border: 1px solid black;
+  padding: 1rem;
+`;
+
+const AdListWraaper = styled.div`
+  margin: 1rem 0;
 `;
 
 const MyProducts = () => {
-  const [myAds, setMyAds] = useState([]);
-  const token = sessionStorage.getItem('access_token');
+  const dispatch = useDispatch();
+  const { ads, loading, error, user } = useSelector(
+    ({ ads, loading, user }) => ({
+      ads: ads.ads,
+      error: ads.error,
+      loading: loading['ads/LIST_ADS'],
+      user: user.user,
+    }),
+  );
+
   useEffect(() => {
-    axios
-      .get('/api/man/nation/list/', {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then(res => {
-        console.log(res);
-        const { resvalue } = res.data;
-        setMyAds(resvalue);
-      })
-      // TODO: 에러처리
-      .catch(err => console.log(err));
-  }, [token]);
+    const token = sessionStorage.getItem('access_token');
+    dispatch(listAds(token));
+  }, [dispatch]);
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
   return (
     <MyProductsWrapper>
-      <h1>내 광고들</h1>
-      {myAds.map(ad => (
-        <MyProduct ad={ad} key={ad.idx} />
-      ))}
+      <TitleBar>광고 목록</TitleBar>
+      {!loading && ads && (
+        <AdListWraaper>
+          <component.Grid container spacing={1}>
+            {ads.map(ad => (
+              <Link
+                to={
+                  user.username === 'admin'
+                    ? `admin/product/${ad.idx}`
+                    : `manage/product/${ad.idx}`
+                }
+              >
+                <component.Grid item xs={6} md={4} key={ad.idx}>
+                  <MyProduct ad={ad} />
+                </component.Grid>
+              </Link>
+            ))}
+          </component.Grid>
+        </AdListWraaper>
+      )}
+      <component.Grid container>
+        <component.Grid item xs={6}>
+          <component.Button fullWidth color="primary">
+            이전 페이지
+          </component.Button>
+        </component.Grid>
+        <component.Grid item xs={6}>
+          <component.Button fullWidth color="primary">
+            다음 페이지
+          </component.Button>
+        </component.Grid>
+      </component.Grid>
     </MyProductsWrapper>
   );
 };
