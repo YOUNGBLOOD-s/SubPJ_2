@@ -54,7 +54,7 @@ const Grade = () => {
   const classes = useStyles();
 
   return (
-    <div className={(classes.card, classes.bgtop)}>
+    <div className={classes.bgtop}>
       <HeaderText>상품</HeaderText>
       <Grid container className={classes.root}>
         <Grid item xs={12}>
@@ -68,7 +68,7 @@ const Grade = () => {
                     grade={grade}
                     price={price}
                     option={option}
-                  ></GradeCard>
+                  />
                 </Grid>
               );
             })}

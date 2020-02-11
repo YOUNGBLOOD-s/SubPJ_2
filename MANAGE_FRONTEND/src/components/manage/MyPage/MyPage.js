@@ -1,29 +1,46 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MyPageForm from './MyPageForm';
-import axios from 'axios';
+import { useState } from 'react';
+import MyPagePrev from './MyPagePrev';
+import ToastMessage from './ToastMessage';
+import { useSelector } from 'react-redux';
+import MyPageAdmin from './MyPageAdmin';
 
 const MyPage = () => {
   const token = sessionStorage.getItem('access_token');
-  const user = sessionStorage.getItem('user');
-  useEffect(() => {
-    axios
-      .get('http://52.78.218.79:8887/api/auth/infomem/' + user, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+  const [userInfo, setUserInfo] = useState(null);
+  const [auth, setAuth] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const { loggedInUser } = useSelector(({ user }) => ({
+    loggedInUser: user.user.username,
+  }));
 
   return (
-    <div>
-      <MyPageForm />
-    </div>
+    <>
+      {auth ? (
+        loggedInUser === 'admin' ? (
+          <MyPageAdmin userInfo={userInfo} setUserInfo={setUserInfo} />
+        ) : (
+          <MyPageForm
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+            loggedInUser={loggedInUser}
+          />
+        )
+      ) : (
+        <>
+          <ToastMessage open={open} setOpen={setOpen} />
+          <MyPagePrev
+            setAuth={setAuth}
+            token={token}
+            setOpen={setOpen}
+            setUserInfo={setUserInfo}
+            loggedInUser={loggedInUser}
+          />
+        </>
+      )}
+    </>
   );
 };
 

@@ -3,6 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const MyFormBlcok = styled.div`
   margin: 0 auto;
@@ -26,10 +28,6 @@ const StyledTextField = withStyles({
       // '&:hover fieldset': {
       //   borderColor: 'yellow',
       // },
-      //  포커스 시 보더 색상
-      '&.Mui-focused fieldset': {
-        borderColor: palette.teal[600],
-      },
     },
   },
 })(component.TextField);
@@ -55,19 +53,73 @@ const Footer = styled.div`
   }
 `;
 
-const onChange = e => {
-  console.log(e.target);
-};
-
-const onSubmit = () => {
-  console.log('submit');
-};
-
-const MyPageForm = () => {
+const MyPageForm = ({ userInfo, setUserInfo, loggedInUser }) => {
+  const token = sessionStorage.getItem('access_token');
   const form = useRef(null);
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [passwordState, setPasswordState] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const { data } = userInfo;
+  const username = data.get('username');
+  const company = data.get('company');
+  const grade = data.get('grade');
+
+  const onChangePassword = e => {
+    const { name, value } = e.target;
+    if (name === 'password') {
+      setPassword(value);
+      setUserInfo({
+        data: data.set(name, value),
+      });
+    } else {
+      setPasswordConfirm(value);
+    }
+  };
+  const isSame = () => {
+    if (password === passwordConfirm) {
+      setPasswordState(false);
+    } else {
+      setPasswordState(true);
+    }
+  };
   useEffect(() => {
-    console.log(form);
-  }, [form]);
+    isSame();
+  }, [password]);
+
+  useEffect(() => {
+    isSame();
+  }, [passwordConfirm]);
+
+  const onChange = e => {
+    const { value, name } = e.target;
+    const { data } = userInfo;
+    setUserInfo({
+      data: data.set(name, value),
+    });
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+    console.log(data.toJS());
+    if (password !== passwordConfirm) {
+      alert('비밀번호 확인이 일치하지 않습니다!');
+      return;
+    }
+    axios
+      .put('/api/auth/updatemem', data.toJS(), {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then(res => console.log(res))
+      .then(err => console.log(err));
+  };
+
+  if (isAdmin !== true && loggedInUser === 'admin') {
+    setIsAdmin(true);
+  }
+
   return (
     <MyFormBlcok>
       <MyFormWrapper onSubmit={onSubmit} ref={form}>
@@ -75,15 +127,25 @@ const MyPageForm = () => {
           label="아이디"
           variant="outlined"
           onChange={onChange}
-          value={form.username}
+          value={username}
           name="username"
           autoComplete="username"
+          disabled={true}
         />
         <StyledTextField
-          label="비밀번호"
+          label="등급"
           variant="outlined"
-          onChange={onChange}
-          value={form.password}
+          value={grade}
+          name="grade"
+          type="text"
+          autoComplete="grade"
+          disabled={!isAdmin}
+        />
+        <StyledTextField
+          label="변경할 비밀번호"
+          variant="outlined"
+          onChange={onChangePassword}
+          value={password}
           name="password"
           type="password"
           autoComplete="new-password"
@@ -91,21 +153,23 @@ const MyPageForm = () => {
         <StyledTextField
           label="비밀번호 확인"
           variant="outlined"
-          onChange={onChange}
-          value={form.passwordConfirm}
+          onChange={onChangePassword}
+          value={passwordConfirm}
           name="passwordConfirm"
           type="password"
+          error={passwordState}
           autoComplete="new-password"
         />
         <StyledTextField
           label="회사명"
           variant="outlined"
           onChange={onChange}
-          value={form.company}
+          value={company}
           name="company"
           type="text"
           autoComplete="company"
         />
+
         <StyledButton variant="contained" type="submit">
           수정
         </StyledButton>

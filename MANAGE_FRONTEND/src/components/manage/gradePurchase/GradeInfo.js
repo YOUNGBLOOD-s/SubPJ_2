@@ -114,13 +114,13 @@ const GradeInfo = () => {
                       등록한 상품의 국가 및 사진, 소개
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
                       QR 코드 스캔 시 상품 상세 정보 확인
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
                       두번 터치 시 국가의 대표 여행지 확인
@@ -150,19 +150,19 @@ const GradeInfo = () => {
                       해당 국가의 여행지 정보 확인
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
                       QR 코드 스캔 시 상품 상세 정보 확인
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
                       해당 국가의 이번 달 평균 온도 및 습도
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
                       대표 여행지 사진 및 소개
@@ -193,31 +193,31 @@ const GradeInfo = () => {
                       광고판에서 QR코드 스캔 시 상품 상세 정보 확인
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'white' }}
                       />{' '}
                       해당 나라의 대표 이미지, 온도, 습도 확인
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'white' }}
                       />{' '}
                       일차별 여행 경로, 교통편 확인
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'white' }}
                       />{' '}
                       여행 약관 및 참고사항 확인
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'white' }}
                       />{' '}
                       간편 상담 예약 가능
                       <br />
                       <i
-                        class="fas fa-check-circle"
+                        className="fas fa-check-circle"
                         style={{ color: 'white' }}
                       />{' '}
                       카카오톡 챗봇을 통한 간편 정보 확인
