@@ -307,7 +307,7 @@ public class MemberController {
 	/** 멤버 삭제(관리자) 서비스 */
 	@DeleteMapping("/auth/deletemem/{idx}")
 	@ApiOperation(value = "멤버 삭제(관리자) 서비스")
-	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMemAdmin(@RequestHeader(value = "Authorization") String token, String idx) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMemAdmin(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") String idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
