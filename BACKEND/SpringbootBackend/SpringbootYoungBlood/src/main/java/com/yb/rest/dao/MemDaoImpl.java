@@ -1,6 +1,5 @@
 package com.yb.rest.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,6 @@ public class MemDaoImpl implements IMemDao {
 		map.put("password", password);
 		map.put("company", company);
 		session.insert("member.insertMember", map);
-		
 	}
 
 	@Override

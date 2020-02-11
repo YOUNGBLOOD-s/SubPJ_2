@@ -54,8 +54,6 @@ public class MemberController {
 
 	/** 비밀키 읽기 */
 	public static String getKey() {
-        
-		System.out.println("==============");
 		System.out.println("안녕하세요. 키를 가져갈게요!");
 		
 		String key = "";
@@ -79,7 +77,6 @@ public class MemberController {
 
 	/** 토큰 생성 */
 	public static String createToken(String username) {
-        System.out.println("==============");
         System.out.println("토큰을 생성할게요.");
         String jwt = "";
         try {
@@ -112,7 +109,6 @@ public class MemberController {
 	
 	/** 토큰 검증 */
 	public static Claims verification(String token) {
-        System.out.println("==============");
         System.out.println("토큰을 검증할게요");
         Claims c = null;
         try {
@@ -134,8 +130,6 @@ public class MemberController {
 	@PostMapping("/auth/register")
 	@ApiOperation(value = "회원가입 ")
 	public ResponseEntity<Map<String, Object>> meminsert(@RequestBody Member reg) {
-        
-		System.out.println("==============");
         System.out.println("회원가입 요청이 왔습니다.");
         
 		ResponseEntity<Map<String, Object>> res = null;
@@ -165,7 +159,6 @@ public class MemberController {
 	@PostMapping("/auth/login")
 	@ApiOperation(value = "로그인 ")
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
-        System.out.println("==============");
         System.out.println("로그인 요청이 왔습니다.");
         System.out.println(login.toString());
 		if(login.getUsername()=="" || login.getPassword()=="") {
@@ -200,7 +193,6 @@ public class MemberController {
 	@GetMapping("/auth/check")
 	@ApiOperation(value = "로그인 상태 확인")
 	public ResponseEntity<Map<String, Object>> memloginfo(@RequestHeader(value="Authorization") String token) {
-        System.out.println("==============");
 		System.out.println("로그인 상태를 확인합니다.");
 		ResponseEntity<Map<String, Object>> res = null;	
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -345,7 +337,6 @@ public class MemberController {
 				} else {
 					ser.UpdateMem(mem.getUsername(), mem.getPassword(), mem.getCompany(), mem.getGrade());
 				}
-			
 			} else {
 				if(mem.getPassword()=="" || mem.getPassword()==null) {
 					ser.UpdateMem(mem.getUsername(), mem.getCompany());

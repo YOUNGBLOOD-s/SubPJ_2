@@ -567,8 +567,11 @@ public class AdController {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map<String, Object>> Countrylist = new LinkedList<>();
-
-		for (int idx = 1; idx <= 20; idx++) {
+		
+		List<Integer> list = ser.selectIdxs();
+		for(int i=0; i<list.size(); i++) {
+			int idx = list.get(i);
+			
 			Map<String, Object> con = new HashMap<String, Object>();
 			Nation nation = ser.getNationdetail(idx);
 

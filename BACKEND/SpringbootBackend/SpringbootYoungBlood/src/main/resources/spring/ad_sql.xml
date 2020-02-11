@@ -138,6 +138,10 @@
 	set flag=0, showcnt=0
 	where customer=#{customer};
 	</update>
+	
+	<select id="selectidxs" resultType="int">
+	select idx from nationtb;
+	</select>
 
 </mapper>
  

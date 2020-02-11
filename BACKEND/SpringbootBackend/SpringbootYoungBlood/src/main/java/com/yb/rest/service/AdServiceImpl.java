@@ -69,7 +69,7 @@ public class AdServiceImpl implements IAdService {
 
 	@Override
 	public List<Monthtb> selectAll() {
-		return repo.selectall(); //monthtb
+		return repo.selectall();
 	}
 
 	@Override
@@ -143,7 +143,6 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	//모든 나라들
 	public List<Nation> selectNations() {
 		return repo.selectNations();
 	}
@@ -170,18 +169,21 @@ public class AdServiceImpl implements IAdService {
 
 	@Override
 	public int getGrade(String idx) {
-		// TODO Auto-generated method stub
 		return repo.getGrade(idx);
 	}
 
 	@Override
 	public int getFlag(String idx) {
-		// TODO Auto-generated method stub
 		return repo.getFlag(idx);
 	}
 
 	@Override
 	public void updateshowandflag(int customer) {
 		repo.updateshowandflag(customer);
+	}
+
+	@Override
+	public List<Integer> selectIdxs() {
+		return repo.selectIdxs();
 	}
 }
