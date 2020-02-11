@@ -53,7 +53,7 @@ const Footer = styled.div`
   }
 `;
 
-const MyPageForm = ({ userInfo, setUserInfo }) => {
+const MyPageForm = ({ userInfo, setUserInfo, loggedInUser }) => {
   const token = sessionStorage.getItem('access_token');
   const form = useRef(null);
   const [password, setPassword] = useState('');
@@ -64,10 +64,6 @@ const MyPageForm = ({ userInfo, setUserInfo }) => {
   const username = data.get('username');
   const company = data.get('company');
   const grade = data.get('grade');
-
-  const { loggedInUser } = useSelector(({ user }) => ({
-    loggedInUser: user.user.username,
-  }));
 
   const onChangePassword = e => {
     const { name, value } = e.target;

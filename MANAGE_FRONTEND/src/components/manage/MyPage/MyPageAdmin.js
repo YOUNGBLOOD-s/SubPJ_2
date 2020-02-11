@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import axios from 'axios';
 
@@ -7,7 +7,7 @@ const MyPageAdmin = ({ userInfo, setUserInfo }) => {
   const { data } = userInfo;
   const [state, setState] = useState({
     columns: [
-      { title: '아이디', field: 'username' },
+      { title: '아이디', field: 'username', editable: 'never' },
       { title: '등급', field: 'grade', type: 'numeric' },
       { title: '비밀번호', field: 'password' },
       { title: '회사명', field: 'company' },
@@ -15,12 +15,24 @@ const MyPageAdmin = ({ userInfo, setUserInfo }) => {
     data: data.toJS(),
   });
 
+  useEffect(() => {
+    setState(prevState => {
+      const data = [...prevState.data];
+      data.map((item, index) => {
+        data[index].password = '';
+      });
+      return { ...prevState, data };
+    });
+  }, []);
+
   return (
     <MaterialTable
       title="회원 목록"
       columns={state.columns}
       data={state.data}
       editable={{
+        isEditable: rowData => rowData.username !== 'admin',
+        isDeletable: rowData => rowData.username !== 'admin',
         onRowAdd: newData =>
           new Promise(resolve => {
             setTimeout(() => {
@@ -37,13 +49,20 @@ const MyPageAdmin = ({ userInfo, setUserInfo }) => {
             setTimeout(() => {
               resolve();
               if (oldData) {
-                oldData.password = '';
-                console.log(oldData);
-                setState(prevState => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
-                });
+                axios
+                  .put('/api/auth/updatemem', newData, {
+                    headers: {
+                      Authorization: token,
+                    },
+                  })
+                  .then(res => {
+                    setState(prevState => {
+                      const data = [...prevState.data];
+                      data[data.indexOf(oldData)] = newData;
+                      return { ...prevState, data };
+                    });
+                  })
+                  .catch(err => console.log(err));
               }
             }, 600);
           }),
