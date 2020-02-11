@@ -1,7 +1,9 @@
 package com.yb.rest.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,22 @@ public class ManDaoImpl implements IManDao {
 	@Override
 	public ArrayList<Nation> nationListAll(int customer) {
 		return (ArrayList) session.selectList("management.selectNationListAll", customer);
+	}
+	//paging  처리/
+	@Override
+	public ArrayList<Nation> nationList_page(int customer,int pageIdx) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("customer", customer);
+		map.put("pageIdx", pageIdx);
+		return (ArrayList) session.selectList("management.selectNationList_page", map);
+	}
+
+	@Override
+	public ArrayList<Nation> nationListAll_page(int customer,int pageIdx) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("customer", customer);
+		map.put("pageIdx", pageIdx);
+		return (ArrayList) session.selectList("management.selectNationListAll_page", map);
 	}
 
 	@Override
@@ -191,4 +209,13 @@ public class ManDaoImpl implements IManDao {
 		Member mem = session.selectOne("management.selectMemberInfo", customer);	
 		return mem;
 	}
+
+	@Override
+	public String selectNation_image(int idx) {
+		// TODO Auto-generated method stub
+		String url = (String) session.selectOne("management.selectNation_image", idx);
+		return url;
+	}
+
+	
 }

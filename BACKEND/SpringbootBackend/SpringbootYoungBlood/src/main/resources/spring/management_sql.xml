@@ -4,15 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="management">
+	<select id="selectNation_image" resultType="string"
+		parameterType="int">
+		select url
+		from imagetb
+		where nation=#{idx} limit 0,1;
+	</select>
 
-	<select id="selectMemberInfo" resultType="member" parameterType="int">
+	<select id="selectMemberInfo" resultType="member"
+		parameterType="int">
 		select * from membertb where idx=#{customer}
 	</select>
 
-	<select id="selectnationcustomer" resultType="nation" parameterType="int">
+	<select id="selectnationcustomer" resultType="nation"
+		parameterType="int">
 		select *
 		from nationtb
-		where customer=#{customer} limit 0,1
+		where customer=#{customer} limit
+		0,1
 	</select>
 
 
@@ -30,7 +39,20 @@
 		where username=#{username};
 	</select>
 
+	<select id="selectNationList_page" resultType="nation"
+		parameterType="map">
+		select *
+		from nationtb
+		where customer=#{customer} limit 10
+		offset #{pageIdx}
+	</select>
 
+
+	<select id="selectNationListAll_page" resultType="nation"
+		parameterType="map">
+		select *
+		from nationtb limit 10 offset #{pageIdx}
+	</select>
 
 	<select id="selectNationList" resultType="nation"
 		parameterType="int">
@@ -43,12 +65,13 @@
 	<select id="selectNationListAll" resultType="nation"
 		parameterType="int">
 		select *
-		from nationtb;
+		from nationtb
 	</select>
 
 	<insert id="insertnation" parameterType="nation">
 		insert into
-		nationtb(en_name, ko_name, dust, continents, customer, weight, speech, price,s_date,f_date)
+		nationtb(en_name, ko_name, dust, continents, customer, weight, speech,
+		price,s_date,f_date)
 		values(#{en_name},#{ko_name},#{dust},#{continents},#{customer},#{weight},#{speech},#{price},#{s_date},#{f_date});
 	</insert>
 
@@ -113,8 +136,10 @@
 	</select>
 
 	<select id="selectVolume" parameterType="int" resultType="int">
-		select volume from gradetb
-		where idx = (select customer from nationtb where idx=#{idx});
+		select
+		volume from gradetb
+		where idx = (select customer from nationtb where
+		idx=#{idx});
 	</select>
 
 

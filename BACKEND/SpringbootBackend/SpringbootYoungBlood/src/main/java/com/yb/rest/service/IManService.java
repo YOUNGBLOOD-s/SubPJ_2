@@ -17,9 +17,13 @@ public interface IManService {
 	/**나라 CRUD*/
 	public ArrayList<Nation> nationList(int customer);
 	public ArrayList<Nation> nationListAll(int customer);
+	public ArrayList<Nation> nationList_page(int customer,int pageIdx);
+	public ArrayList<Nation> nationListAll_page(int customer, int pageIdx);
 	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date);
 	public boolean nationdelete(String idx, String customer);
 	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date);
+	public String selectNation_image(int idx);
+	
 	
 	/** 월별 CRUD */
 	public ArrayList<Monthtb> monthList(int customer);
@@ -41,6 +45,7 @@ public interface IManService {
 	public Monthtb monthInfo(int idx);
 	public ArrayList<Route> contentsInfo(int idx);
 	public ArrayList<Image> imagesInfo(int idx);
+	
 	
 	
 }
