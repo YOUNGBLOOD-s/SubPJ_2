@@ -217,7 +217,7 @@ public class Nation {
 
 	public Nation(String idx, String en_name, String ko_name, String dust, String continents, String showcnt,
 			String customer, String weight, String speech, String price, String s_date, String f_date, String type,
-			String flag, Member owner, String url) {
+			String flag, Owner owner, String url) {
 		super();
 		this.idx = idx;
 		this.en_name = en_name;
