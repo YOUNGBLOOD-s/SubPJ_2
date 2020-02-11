@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listAds } from '../../../../modules/ads';
 import component from '../../../../lib/material/component';
 import TitleBar from '../../../Detail/common/TitleBar';
+import { Link } from 'react-router-dom';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
@@ -16,11 +17,14 @@ const AdListWraaper = styled.div`
 
 const MyProducts = () => {
   const dispatch = useDispatch();
-  const { ads, loading, error } = useSelector(({ ads, loading }) => ({
-    ads: ads.ads,
-    error: ads.error,
-    loading: loading['ads/LIST_ADS'],
-  }));
+  const { ads, loading, error, user } = useSelector(
+    ({ ads, loading, user }) => ({
+      ads: ads.ads,
+      error: ads.error,
+      loading: loading['ads/LIST_ADS'],
+      user: user.user,
+    }),
+  );
 
   useEffect(() => {
     const token = sessionStorage.getItem('access_token');
@@ -38,9 +42,17 @@ const MyProducts = () => {
         <AdListWraaper>
           <component.Grid container spacing={1}>
             {ads.map(ad => (
-              <component.Grid item xs={6} md={4} key={ad.idx}>
-                <MyProduct ad={ad} />
-              </component.Grid>
+              <Link
+                to={
+                  user.username === 'admin'
+                    ? `admin/product/${ad.idx}`
+                    : `manage/product/${ad.idx}`
+                }
+              >
+                <component.Grid item xs={6} md={4} key={ad.idx}>
+                  <MyProduct ad={ad} />
+                </component.Grid>
+              </Link>
             ))}
           </component.Grid>
         </AdListWraaper>
