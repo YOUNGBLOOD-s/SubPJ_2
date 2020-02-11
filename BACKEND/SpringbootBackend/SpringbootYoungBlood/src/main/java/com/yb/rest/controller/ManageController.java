@@ -27,7 +27,6 @@ import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
-import com.yb.rest.vo.NationDTO;
 import com.yb.rest.vo.Owner;
 import com.yb.rest.vo.Route;
 
@@ -89,13 +88,22 @@ public class ManageController {
 					list.get(i).setOwner(owner);
 				}
 				// 페이지짜르기. 1이면 1~10
+				msg.put("resvalue", list);
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else if (grade >= 2) {
 				list = ser.nationList_page(customer, pageIdx);
+				for (int i = 0; i < list.size(); i++) {
+					int idx = Integer.parseInt(list.get(i).getIdx());
+					String url = ser.selectNation_image(idx);
+					list.get(i).setUrl(url);
+					list.get(i).setOwner(owner);
+				}
+				msg.put("resvalue", list);
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			}
-			msg.put("resvalue", list);
-			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+			
 		} catch (Exception e) {
 			msg.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());
