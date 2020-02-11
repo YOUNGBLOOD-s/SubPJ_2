@@ -4,15 +4,15 @@ import loading from './loading';
 import { all } from 'redux-saga/effects';
 import user, { userSaga } from './user';
 import stepper from './stepper';
-import product from './product';
 import ads, { adsSaga } from './ads';
+import form from './form';
 
 const rootReducer = combineReducers({
   auth,
   loading,
   user,
   stepper,
-  product,
+  form,
   ads,
 });
 

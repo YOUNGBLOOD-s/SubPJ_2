@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 
-const INITIALIZE_PRODUCT = 'product/INITIALIZE_PRODUCT';
+const INITIALIZE_FORM = 'product/INITIALIZE_FORM';
 const SELECT_NATION = 'product/SELECT_NATION';
 const RESET_NATION = 'product/RESET_NATION';
 const ADD_ROUTE = 'product/ADD_ROUTE';
@@ -8,7 +8,7 @@ const REMOVE_ROUTE = 'product/REMOVE_ROUTE';
 const SELECT_IMAGE_NATION = 'product/SELECT_IMAGE_NATION';
 const SELECT_IMAGE_URL = 'product/SELECT_IMAGE_URL';
 
-export const initializeProduct = createAction(INITIALIZE_PRODUCT);
+export const initializeForm = createAction(INITIALIZE_FORM);
 export const selectNation = createAction(SELECT_NATION, nationId => nationId);
 export const resetNation = createAction(RESET_NATION, nationId => nationId);
 export const addRoute = createAction(ADD_ROUTE, route => route);
@@ -33,9 +33,9 @@ const initialState = {
   ],
 };
 
-const product = handleActions(
+const form = handleActions(
   {
-    [INITIALIZE_PRODUCT]: () => initialState,
+    [INITIALIZE_FORM]: () => initialState,
     [SELECT_NATION]: (state, { payload: id }) => ({
       ...state,
       nationId: id,
@@ -83,4 +83,4 @@ const product = handleActions(
   initialState,
 );
 
-export default product;
+export default form;

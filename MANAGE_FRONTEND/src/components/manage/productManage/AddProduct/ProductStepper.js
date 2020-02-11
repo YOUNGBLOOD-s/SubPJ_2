@@ -12,7 +12,7 @@ import ContentAddForms from './ContentsAddForms';
 import ImageAddForm from './ImageAddForm';
 import { useSelector, useDispatch } from 'react-redux';
 import Complete from './Complete';
-import { initializeProduct } from '../../../../modules/product';
+import { initializeForm } from '../../../../modules/form';
 import { initializeStep } from '../../../../modules/stepper';
 
 const useStyles = makeStyles(theme => ({
@@ -61,7 +61,7 @@ const ProductStepper = () => {
   const dispatch = useDispatch();
   const handleReset = () => {
     // TODO: 0으로 만드는 액션 생성하여 디스패치
-    dispatch(initializeProduct());
+    dispatch(initializeForm());
     dispatch(initializeStep());
   };
 

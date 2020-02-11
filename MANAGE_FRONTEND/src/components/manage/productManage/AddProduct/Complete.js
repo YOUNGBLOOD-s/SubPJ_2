@@ -17,9 +17,9 @@ const Complete = ({ classes, step, steps }) => {
   });
 
   const dispatch = useDispatch();
-  const { routes, images } = useSelector(({ product }) => ({
-    routes: product.routes,
-    images: product.images,
+  const { routes, images } = useSelector(({ form }) => ({
+    routes: form.routes,
+    images: form.images,
   }));
 
   const token = sessionStorage.getItem('access_token');

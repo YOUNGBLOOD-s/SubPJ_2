@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ProductStepper from './ProductStepper';
 import { useDispatch } from 'react-redux';
 import { initializeStep } from '../../../../modules/stepper';
-import { initializeProduct } from '../../../../modules/product';
+import { initializeForm } from '../../../../modules/form';
 import styled from 'styled-components';
 
 const AddProductContainer = styled.div``;
@@ -17,7 +17,7 @@ const AddProduct = () => {
   // TODO: 모든 단계가 완료되었다면 컴포넌트 시작시 초기화.. 에러 안나는지 확인
   useEffect(() => {
     dispatch(initializeStep());
-    dispatch(initializeProduct());
+    dispatch(initializeForm());
   }, [dispatch]);
 
   return (
