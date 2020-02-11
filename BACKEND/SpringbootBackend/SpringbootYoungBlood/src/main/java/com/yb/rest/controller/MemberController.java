@@ -305,9 +305,9 @@ public class MemberController {
 	}
 	
 	/** 멤버 삭제(관리자) 서비스 */
-	@DeleteMapping("/auth/deletemem/{idx}")
+	@DeleteMapping("/auth/deleteadmin/{idx}")
 	@ApiOperation(value = "멤버 삭제(관리자) 서비스")
-	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMemAdmin(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") String idx) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMemAdmin(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -315,7 +315,7 @@ public class MemberController {
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			if(username.equals("admin")) {
-				ser.DeleteMem(Integer.parseInt(idx));
+				ser.DeleteMem(idx);
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
