@@ -108,43 +108,14 @@ if __name__ == "__main__":
     import sys
 
     pi = pigpio.pi('localhost')
-    s10 = ds_test1.sensor(pi, 4)  # GPIO 4 - Seosor Pin 4 (PM10)
-    s25 = ds_test1.sensor(pi, 2)  # GPIO 2 - Seosor Pin 2 (PM25)
+    s10 = ds_test1.sensor(pi, 22)  # GPIO 4 - Seosor Pin 4 (PM10)
+    s25 = ds_test1.sensor(pi, 27)  # GPIO 2 - Seosor Pin 2 (PM25)
 
     while True:
-        # measure at the same time ---------------------------------------------
-        '''s10.measureStart()
-        s25.measureStart()
-        time.sleep(30)
-        s10.measureStop()
-        s25.measureStop()
-
-        timestamp = datetime.now()
-        g10, interval10, r10, PM10count, total_interrupt_count10, wrong_level_count10 = s10.read()
-        g25, interval25, r25, PM25count, total_interrupt_count25, wrong_level_count25 = s25.read()
-
-        # If PM10count is less than Zero (Negative Value) set PM10 Count to Zero
-        # If PM10count gets error value set to zero.
-        if PM10count < 0 or PM10count == 1114000.62:
-            PM10count = 0
-
-        # If PM25count is less than Zero (Negative Value) set PM25 Count to Zero
-        # If PM25count gets error value set to zero
-        if PM25count < 0 or PM25count == 1114000.62:
-            PM25count = 0
-
-        print("Measure at the same time --")
-        print("PM1.0 time: {}, Interval: {}, Ratio: {:.3f}, Count: {}, Total Interrupt: {}, Wrong Interrupt: {}".
-              format(timestamp, int(interval10), r10, int(PM10count), total_interrupt_count10, wrong_level_count10))
-
-        print("PM2.5 time: {}, Interval: {}, Ratio: {:.3f}, Count: {}, Total Interrupt: {}, Wrong Interrupt: {}".
-              format(timestamp, int(interval25), r25, int(PM25count), total_interrupt_count25, wrong_level_count25))
-
-        print() '''
         # measure PM1.0 first, then PM2.5 ---------------------------------------------
         # measure PM1.0
         s10.measureStart()
-        time.sleep(60)
+        time.sleep(30)
         s10.measureStop()
 
         timestamp = datetime.now()
@@ -157,19 +128,5 @@ if __name__ == "__main__":
         print("PM1.0 time: {}, Interval: {}, Ratio: {:.3f}, Count: {}, Total Interrupt: {}, Wrong Interrupt: {}".
               format(timestamp, int(interval10), r10, int(PM10count), total_interrupt_count10, wrong_level_count10))
 
-        '''# measure PM2.5
-        s25.measureStart()
-        time.sleep(30)
-        s25.measureStop()
-
-        timestamp = datetime.now()
-        g25, interval25, r25, PM25count, total_interrupt_count25, wrong_level_count25 = s25.read()
-
-        if PM25count < 0 or PM25count == 1114000.62:
-            PM25count = 0
-
-        print("PM2.5 time: {}, Interval: {}, Ratio: {:.3f}, Count: {}, Total Interrupt: {}, Wrong Interrupt: {}".
-              format(timestamp, int(interval25), r25, int(PM25count), total_interrupt_count25, wrong_level_count25))
-        print("--")'''
 
     pi.stop()  # Disconnect from Pi.
