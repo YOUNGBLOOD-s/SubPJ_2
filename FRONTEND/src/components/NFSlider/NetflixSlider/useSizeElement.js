@@ -5,7 +5,7 @@ const useSizeElement = () => {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    setWidth(elementRef.current.clientWidth);
+    if (elementRef.current != null) setWidth(elementRef.current.clientWidth);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementRef.current]);
 

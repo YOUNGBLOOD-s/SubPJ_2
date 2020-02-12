@@ -92,7 +92,7 @@ const MainAD = () => {
 
   const itemNum = 8;
   const carouselTerm = 3000;
-  const reqTerm = carouselTerm * itemNum;
+  const reqTerm = carouselTerm * itemNum + 2000;
 
   const getItems = () => {
     Axios.get('http://52.78.218.79:8887/api/sensor/reco')
