@@ -98,9 +98,7 @@ const Content = ({ detail }) => {
         <div className="content__background__shadow" />
         <div
           className="content__background__image"
-          // style={{ backgroundImage: `url(${detail.img})` }}
           style={{
-            // backgroundImage: `url(${process.env.PUBLIC_URL}/static/img/코타키나발루.jpg)`,
             backgroundImage: `url(${detail.img})`,
           }}
         />

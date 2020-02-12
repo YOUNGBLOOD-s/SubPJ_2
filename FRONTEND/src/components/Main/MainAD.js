@@ -93,7 +93,7 @@ const MainAD = () => {
 
   const itemNum = 8;
   const carouselTerm = 3000;
-  const reqTerm = carouselTerm * itemNum + 2000;
+  const reqTerm = carouselTerm * (itemNum + 1);
 
   const getItems = () => {
     Axios.get('http://52.78.218.79:8887/api/sensor/reco')
@@ -107,7 +107,8 @@ const MainAD = () => {
   useEffect(() => {
     getItems();
     setInterval(() => {
-      getItems();
+      // FIXME: 더블클릭 시 내용물 안바뀌게 해주세요
+      if (open === false) getItems();
     }, reqTerm);
   }, []);
 

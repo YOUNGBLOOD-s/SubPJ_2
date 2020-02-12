@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Slider from '../NFSlider/NetflixSlider';
+import { List } from 'immutable';
 
-var timer = undefined;
-
-const NFSlider = ({ details, setOpen }) => {
+let timer = undefined;
+let datas = null;
+const NFSlider = ({ details, setOpen, open }) => {
   const [current, setCurrent] = useState(1);
+
+  if (datas === null) datas = details;
 
   // debug
   // const timerTerm = 30000;
-  const timerTerm = 300000;
+  const timerTerm = 15000;
 
   const setTimer = () => {
     clearTimeout(timer);
@@ -19,17 +22,25 @@ const NFSlider = ({ details, setOpen }) => {
 
   useEffect(() => {
     setTimer();
-  });
+  }, []);
 
   useEffect(() => {
     setTimer();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);
 
+  useEffect(() => {
+    if (open === true && datas === null) {
+      datas = List(details).toJS();
+    } else if (open === false) {
+      datas = null;
+    }
+  }, [open]);
+
   return (
     <div className="app">
-      <Slider activeSlide={details[0]} setCurrent={setCurrent}>
-        {details.map(detail => (
+      <Slider activeSlide={datas[0]} setCurrent={setCurrent}>
+        {datas.map(detail => (
           <Slider.Item detail={detail} key={detail.id}></Slider.Item>
         ))}
       </Slider>
