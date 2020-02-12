@@ -79,10 +79,11 @@ public class Sensor {
 	public void setInfo(String info) {
 		this.info = info;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Sensor [idx=" + idx + ", temp=" + temp + ", humid=" + humid + "]";
+		return "Sensor [idx=" + idx + ", temp=" + temp + ", humid=" + humid + ", dust=" + dust + ", rough=" + rough
+				+ ", info=" + info + "]";
 	}
 	
 	
