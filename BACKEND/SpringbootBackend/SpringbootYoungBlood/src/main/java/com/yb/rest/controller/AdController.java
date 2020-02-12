@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -620,7 +621,7 @@ public class AdController {
 		return re;
 	}
 	
-	//상담 idx로 요청보내면 flag값 왔다갔다 변경
+	/** 상담 완료/미완료 flag 값 swap */
 	@PutMapping("/counsel/completed/{nationidx}")
 	@ApiOperation(value="상담 완료 변수 swap")
 	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@RequestParam(value = "nationidx") int nationidx) {
@@ -628,6 +629,20 @@ public class AdController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			ser.updateCompleted(nationidx);
+			re = new ResponseEntity<>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+		}
+		return re;
+	}
+	
+	@DeleteMapping("/counsel/delete/{idx}")
+	@ApiOperation(value="상담정보 삭제")
+	public @ResponseBody ResponseEntity<Map<String, Object>> deleteCounsel(@RequestParam(value = "nationidx") int idx) {
+		ResponseEntity<Map<String, Object>> re = null;
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			ser.deleteCounsel(idx);
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);

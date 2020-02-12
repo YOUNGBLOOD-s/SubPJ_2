@@ -58,5 +58,5 @@ public interface IAdDao {
 	/** 1:1상담 */
 	public void updateCounsel(Counsel counvalue);
 	public void updateCompleted(int idx);
-
+	public void deleteCounsel(int idx);
 }

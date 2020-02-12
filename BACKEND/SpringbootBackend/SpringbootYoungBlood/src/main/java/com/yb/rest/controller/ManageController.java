@@ -2,6 +2,7 @@ package com.yb.rest.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yb.rest.service.IAdService;
 import com.yb.rest.service.IManService;
+import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
@@ -99,7 +101,7 @@ public class ManageController {
 					list.get(i).setUrl(url);
 					list.get(i).setOwner(owner);
 				}
-				msg.put("resvalue", list);
+				msg.put("resvalue", list);				
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -157,6 +159,9 @@ public class ManageController {
 					// img랑 contents는 selectList로 받아와야하고.
 					contentsList = ser.contentsInfo(idx);
 					imageList = ser.imagesInfo(idx);
+					
+					//counsel List
+					List<Counsel> counlist = ser.selectCounsellist(idx);
 
 					msg.put("resmsg", "조회성공");
 					msg.put("nation", nat);
@@ -164,6 +169,7 @@ public class ManageController {
 					msg.put("contents", contentsList);
 					msg.put("images", imageList);
 					msg.put("owner", owner);
+					msg.put("counselList", counlist);
 				} else {
 					msg.put("resmsg", "권한없음");
 				}

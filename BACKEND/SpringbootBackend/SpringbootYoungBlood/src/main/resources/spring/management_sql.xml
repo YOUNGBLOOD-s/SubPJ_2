@@ -196,6 +196,12 @@
 		from imagetb
 		where nation=#{idx};
 	</select>
+	
+	<select id="selectCounsellist" parameterType="int" resultType="counsel">
+	select *
+	from counseltb
+	where nation=#{idx};
+	</select>
 
 </mapper>
  

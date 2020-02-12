@@ -202,4 +202,9 @@ public class AdServiceImpl implements IAdService {
 	public void updateCompleted(int idx) {
 		repo.updateCompleted(idx);
 	}
+
+	@Override
+	public void deleteCounsel(int idx) {
+		repo.deleteCounsel(idx);
+	}
 }

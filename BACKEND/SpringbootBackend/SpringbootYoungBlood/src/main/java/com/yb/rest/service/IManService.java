@@ -1,7 +1,9 @@
 package com.yb.rest.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
@@ -47,6 +49,6 @@ public interface IManService {
 	public ArrayList<Route> contentsInfo(int idx);
 	public ArrayList<Image> imagesInfo(int idx);
 	
-	
-	
+	/** 상담정보 */
+	public List<Counsel> selectCounsellist(int idx);
 }

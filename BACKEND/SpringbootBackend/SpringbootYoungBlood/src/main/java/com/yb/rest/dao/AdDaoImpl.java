@@ -208,5 +208,10 @@ public class AdDaoImpl implements IAdDao {
 		session.update("sendtofront.updateCompleted", idx);
 	}
 
+	@Override
+	public void deleteCounsel(int idx) {
+		session.delete("sendtofront.deleteCounsel", idx);
+	}
+	
 	
 }

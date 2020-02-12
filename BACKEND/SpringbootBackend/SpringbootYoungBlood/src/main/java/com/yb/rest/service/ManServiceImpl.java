@@ -1,12 +1,14 @@
 package com.yb.rest.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yb.rest.dao.IAdDao;
 import com.yb.rest.dao.IManDao;
+import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
@@ -186,6 +188,11 @@ public class ManServiceImpl implements IManService {
 		// TODO Auto-generated method stub
 		ArrayList<NationDTO> list = repo.nationListAll_page(customer,pageIdx);
 		return list;
+	}
+
+	@Override
+	public List<Counsel> selectCounsellist(int idx) {
+		return repo.selectCounsellist(idx);
 	}
 
 }
