@@ -1,4 +1,4 @@
-# NEARBYAD-BACKEND
+﻿# NEARBYAD-BACKEND
 
 ## :dart: API
 ### AD
@@ -26,7 +26,7 @@
 
   * company : user company info
 
-  * grade : 등급 (0-일반회원, 1-관리자, 2-일반광고주 3-수퍼 4-다이아몬드)
+  * grade : 등급 (0-Basic, 1-admin, 2-Silver, 3-Gold, 4-Platinum)
 
 
 
@@ -38,6 +38,9 @@
 | name | varchar(20) | | **UNIQUE**|||
 | volume | int | | | 0||
 
+* idx : 일련번호
+* name : 등급이름 (Basic - 일반회원, admin - 관리자, Silver - 일반광고주, Gold - 중간광고주, Platinum- 고오급광고주)
+* volume : 광고가능 횟수 (Basic:0, admin:1000, silver:5, gold:10, platinum:20)
 
   ### nationtb
 
