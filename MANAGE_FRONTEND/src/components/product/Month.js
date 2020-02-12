@@ -1,5 +1,5 @@
 import React from 'react';
-import MonthTable from './MontTable';
+import MonthTable from './MonthTable';
 
 const Month = ({ month }) => {
   return (
