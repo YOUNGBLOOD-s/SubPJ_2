@@ -1,10 +1,5 @@
 package com.yb.rest.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yb.rest.key.GetKEY;
 import com.yb.rest.service.IManService;
 import com.yb.rest.service.IMemService;
 import com.yb.rest.vo.Member;
@@ -52,35 +48,12 @@ public class MemberController {
 
 	}
 
-	/** 비밀키 읽기 */
-	public static String getKey() {
-		System.out.println("안녕하세요. 키를 가져갈게요!");
-		
-		String key = "";
-		try {
-			//File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
-			File file = new File("/home/ubuntu/key/key.txt"); //AWS
-			FileReader filereader = new FileReader(file);
-			int singleCh = 0;
-			while ((singleCh = filereader.read()) != -1) {
-				key += ((char) singleCh);
-			}
-			filereader.close();
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-		System.out.println("키 잘 가져갑니다요. ^^7");
-        System.out.println("==============");
-		return key;
-	}
-
 	/** 토큰 생성 */
 	public static String createToken(String username) {
         System.out.println("토큰을 생성할게요.");
         String jwt = "";
         try {
-			String key = getKey();
+			String key = GetKEY.getKey();
 			Map<String, Object> headers = new HashMap<>();
 			headers.put("typ", "JWT");
 			headers.put("alg", "HS256");
@@ -113,7 +86,7 @@ public class MemberController {
         Claims c = null;
         try {
 			c = Jwts.parser()
-					.setSigningKey(getKey().getBytes())
+					.setSigningKey(GetKEY.getKey().getBytes())
 					.parseClaimsJws(token)
 					.getBody();
 		} catch(Exception e) {

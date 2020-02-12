@@ -234,6 +234,7 @@ sketch
 /BACKEND/SpringbootBackend/Servers
 *.properties
 /DATA
+/BACKEND/SpringbootBackend/SpringbootYoungBlood/src/main/java/com/yb/rest/key
 
 .vscode/
 sftp.json
