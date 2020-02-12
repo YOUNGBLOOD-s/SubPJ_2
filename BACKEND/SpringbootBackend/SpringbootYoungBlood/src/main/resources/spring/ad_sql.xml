@@ -147,6 +147,12 @@
 	from monthtb
 	where idx=#{idx};
 	</select>
+	
+	<select id="selectTemps" resultType="monthtb" parameterType="int">
+	select *
+	from monthtb 
+	where nation=(select idx from nationtb where idx=#{idx});
+	</select>
 
 </mapper>
  

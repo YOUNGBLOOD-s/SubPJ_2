@@ -1,10 +1,10 @@
 package com.yb.rest.dao;
 
+import java.time.Month;
 import java.util.List;
 import java.util.Map;
 
 import com.yb.rest.vo.Nation;
-import com.yb.rest.vo.QRcode;
 import com.yb.rest.vo.Route;
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
@@ -20,6 +20,7 @@ public interface IAdDao {
 	public int getGrade(String idx);
 	public int getFlag(String idx);
 	public int selectNation(int idx);
+	public Monthtb selectTemps(int idx);
 	
 	/** detail */
 	public List<Integer> selectIdxs();

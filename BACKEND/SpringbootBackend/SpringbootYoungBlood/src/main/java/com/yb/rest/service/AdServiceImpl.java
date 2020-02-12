@@ -1,5 +1,6 @@
 package com.yb.rest.service;
 
+import java.time.Month;
 import java.util.List;
 import java.util.Map;
 
@@ -190,5 +191,10 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public int selectNation(int idx) {
 		return repo.selectNation(idx);
+	}
+
+	@Override
+	public Monthtb selectTemps(int idx) {
+		return repo.selectTemps(idx);
 	}
 }

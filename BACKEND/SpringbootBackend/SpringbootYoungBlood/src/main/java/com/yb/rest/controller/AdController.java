@@ -1,8 +1,8 @@
 package com.yb.rest.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -160,7 +160,6 @@ public class AdController {
 					break;
 				}
 			}
-			System.out.println("ser.updateScore 될까나?? ");
 			for (int j = 0; j < nations.size(); j++) {
 				int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
 				ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
@@ -172,21 +171,18 @@ public class AdController {
 					return (int) (o1.getHumid() - o2.getHumid());
 				}
 			});
-			System.out.println("ser.getScore, ser.updateScore 될까나?? ");
 			for (int j = 0; j < nations.size(); j++) {
 				int originScore = ser.getScore(nations.get(j).getIdx());
 				int minus = j / 5 == 0 ? 10 : (j / 5) * (10);
 				originScore -= minus;
 				ser.updateScore(new ForScore(nations.get(j).getIdx(), originScore));
 			}
-			System.out.println("ser.getScore, ser.getDust 될까나?? ser.updateScore ");
 			for (int j = 0; j < nations.size(); j++) {
 				int score = ser.getScore(nations.get(j).getIdx());
 				int minus = ser.getDust(nations.get(j).getIdx()) * 10;
 				score -= minus;
 				ser.updateScore(new ForScore(nations.get(j).getIdx(), score));
 			}
-			System.out.println("ser.getScore이 될까나???");
 			List<ForScore> finallist = new ArrayList<ForScore>();
 			for (int j = 0; j < nations.size(); j++) {
 				finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
@@ -198,7 +194,6 @@ public class AdController {
 					return o1.getScore() - o2.getScore();
 				}
 			});
-			System.out.println("ser.updateType이 될까나??");
 			result = new LinkedList<>();
 			for (int i = 0; i < 4; i++) {
 				int finalScore = 0;
@@ -208,47 +203,28 @@ public class AdController {
 				ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
 				result.add(finallist.get(i).getIdx());
 			}
-			System.out.println("updateshowandflag 될까나???");
 			ArrayList<Integer> gradeGroup = haeun();
 			if (gradeGroup.size() < 4) {
 				ser.updateshowandflag();
 				gradeGroup = haeun();
 			}
-			System.out.println("updateType 될까나???");
 			Random rand = new Random();
 			for (int h = 0; h <4 ; h++) {
 				int randomIdx = rand.nextInt(gradeGroup.size());
-				Integer randomElement = gradeGroup.get(randomIdx)-1;
-				System.out.println("1 : " + randomIdx);
-				System.out.println("1-1 : " + gradeGroup.size());
-				// debug
-				// 이거 고쳐야해
-				// randomElement는 nationIdx이고
-				// li에서 randomElement번째 요소를 가져오는게 아니라
-				// monthtb의 nation이 randomElement인 놈을 가져와야함
-				
-				System.out.println("2");
-				int nation = ser.selectNation(randomElement);
-
-				float elementTemp = nMonth == 1 ? li.get(randomElement).getTem1(): nMonth == 2 ? li.get(randomElement).getTem2()
-								: nMonth == 3 ? li.get(randomElement).getTem3(): nMonth == 4 ? li.get(randomElement).getTem4(): nMonth == 5 ? li.get(randomElement).getTem5()
-								: nMonth == 6 ? li.get(randomElement).getTem6(): nMonth == 7 ? li.get(randomElement).getTem7(): nMonth == 8 ? li.get(randomElement).getTem8()
-								: nMonth == 9 ? li.get(randomElement).getTem9(): nMonth == 10? li.get(randomElement).getTem10(): nMonth == 11 ? li.get(randomElement).getTem11()
-								: li.get(randomElement).getTem12();
-				
+				int randomElement = gradeGroup.get(randomIdx)-1;
+				Monthtb m = ser.selectTemps(randomElement);
+				float elementTemp = nMonth == 1 ? m.getTem1(): nMonth == 2 ? m.getTem2()
+								: nMonth == 3 ? m.getTem3(): nMonth == 4 ? m.getTem4(): nMonth == 5 ? m.getTem5()
+								: nMonth == 6 ? m.getTem6(): nMonth == 7 ? m.getTem7(): nMonth == 8 ? m.getTem8()
+								: nMonth == 9 ? m.getTem9(): nMonth == 10? m.getTem10(): nMonth == 11 ? m.getTem11()
+								: m.getTem12();
 								
 				int finalScore = 0;
-				System.out.println("3");
 				finalScore += lig < 50 ? 5 : 10;
-				System.out.println("4");
 				finalScore += elementTemp < 22 ? 1 : 0;
-				System.out.println("5");
 				finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
-				System.out.println("6");
 				ser.updateType(new ForScore(randomElement, finalScore));
-				System.out.println("7");
 				result.add(randomElement);
-				System.out.println("8");
 				gradeGroup.remove(randomIdx);
 			}
 			System.out.println("길고 긴 weight()의 끝");

@@ -58,8 +58,8 @@ public class MemberController {
 		
 		String key = "";
 		try {
-			File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
-			//File file = new File("/home/ubuntu/key/key.txt"); //AWS
+			//File file = new File("C:\\Users\\multicampus\\Desktop\\key\\key.txt");
+			File file = new File("/home/ubuntu/key/key.txt"); //AWS
 			FileReader filereader = new FileReader(file);
 			int singleCh = 0;
 			while ((singleCh = filereader.read()) != -1) {
@@ -67,7 +67,9 @@ public class MemberController {
 			}
 			filereader.close();
 		} catch (FileNotFoundException e) {
+			key="죄송해요 저희 아이가 키를 잘못가져왔네요..";
 		} catch (IOException e) {
+			key="죄송해요 저희 아이가 키를 잘못가져왔네요..";
 			System.out.println(e);
 		}
 		System.out.println("키 잘 가져갑니다요. ^^7");
@@ -100,6 +102,7 @@ public class MemberController {
 		} catch(Exception e) {
 			System.out.println("너 !!!! 또!!!!!!!!!! 키 확인 안 했지????????");
 			System.out.println(e.getMessage());
+			return "죄송해요 저희 아이가 키를 잘못가져갔네요ㅠㅠ...";
 		}
 		System.out.println(jwt);
 		System.out.println("토큰 생성 완료!");
