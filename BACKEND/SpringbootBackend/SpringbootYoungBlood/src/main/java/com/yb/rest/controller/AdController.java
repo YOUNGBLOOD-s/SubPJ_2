@@ -371,8 +371,8 @@ public class AdController {
 				Countrylist.add(data);
 			}
 			result.put("datas", Countrylist);
-			System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
-			System.out.println(Countrylist);
+			//System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
+			//System.out.println(Countrylist);
 			System.out.println("==============");
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
