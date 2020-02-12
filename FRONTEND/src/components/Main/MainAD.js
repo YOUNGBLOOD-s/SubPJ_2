@@ -81,20 +81,6 @@ const MainADBlock = styled.div`
     width: 100%;
     height: 50%;
   }
-  img.qr {
-    z-index: 999;
-    width: 20vh;
-    height: 20vh;
-    @media only screen and (max-width: 768px) {
-      width: 15vh;
-      height: 15vh;
-    }
-    position: absolute;
-    right: 4%;
-    bottom: 4%;
-    padding: 7px;
-    background: rgba(0, 0, 0, 0.5);
-  }
 `;
 
 // const datas = [
@@ -163,26 +149,13 @@ const MainAD = () => {
                       </TitleWrapper>
                       <Content>{content}</Content>
                     </div>
-                    {/* <img
-                      className="bg"
-                      // src={publicURL + '/static/img/코타키나발루.jpg'}
-                      src={thumbnail}
-                      alt=""
-                    /> */}
-                    <LazyImage
-                      className="bg"
-                      style={{ zIndex: '9999' }}
-                      aspectRatio={[10, 7]}
-                      src={thumbnail}
-                      alt=""
-                    />
+                    <LazyImage isQR={false} src={thumbnail} alt="" />
                   </div>
-                  <img
-                    className="qr"
+                  <LazyImage
+                    isQR={true}
                     // src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
                     src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://52.78.218.79:8282/detail/${id}`}
                     alt=""
-                    onerror={`this.src=asdf`}
                   />
                 </div>
               ))}
