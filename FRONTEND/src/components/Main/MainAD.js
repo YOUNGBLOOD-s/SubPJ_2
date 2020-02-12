@@ -8,6 +8,7 @@ import Axios from '../../../node_modules/axios/index';
 import LoadingBackdrop from '../common/LoadingBackdrop';
 import { LazyImageProvider } from '../common/LazyImage/LazyImageContext';
 import LazyImage from '../common/LazyImage/LazyImage';
+import ClickNotice from '../common/ClickNotice';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -144,11 +145,13 @@ const MainAD = () => {
                       src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://52.78.218.79:8282/detail/${id}`}
                       alt=""
                     />
+                    <ClickNotice />
                   </div>
                 );
               })}
             </Carousel>
           </LazyImageProvider>
+
           <FullScreenDialog data={datas[pid]} setOpen={setOpen} open={open} />
         </>
       ) : (
