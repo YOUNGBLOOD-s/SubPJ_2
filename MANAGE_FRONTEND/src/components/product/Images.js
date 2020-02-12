@@ -9,6 +9,7 @@ const ImageWrapper = styled.div`
   background-color: ${palette.grey[200]};
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+
   .image-text {
     text-align: center;
     font-weight: bold;
@@ -33,8 +34,8 @@ const Images = ({ images }) => {
   return (
     <component.Grid container spacing={1}>
       {images.map(({ idx, nation, type, url }) => (
-        <component.Grid item xs={12} sm={6}>
-          <ImageWrapper key={idx}>
+        <component.Grid item xs={12} sm={6} key={idx}>
+          <ImageWrapper>
             <div className="image-text">{typeName[type]}</div>
             <img className="image" src={url} alt={typeName[type]} />
           </ImageWrapper>
