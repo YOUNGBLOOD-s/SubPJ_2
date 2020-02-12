@@ -1,5 +1,6 @@
 package com.yb.rest.dao;
 
+import java.time.Month;
 import java.util.List;
 import java.util.Map;
 
@@ -195,6 +196,11 @@ public class AdDaoImpl implements IAdDao {
 	@Override
 	public int selectNation(int idx) {
 		return session.selectOne("sendtofront.selectNation", idx);
+	}
+
+	@Override
+	public Monthtb selectTemps(int idx) {
+		return session.selectOne("sendtofront.selectTemps", idx);
 	}
 
 	

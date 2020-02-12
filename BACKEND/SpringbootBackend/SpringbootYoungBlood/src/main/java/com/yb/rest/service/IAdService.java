@@ -1,5 +1,6 @@
 package com.yb.rest.service;
 
+import java.time.Month;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ public interface IAdService {
 	public int getGrade(String idx);
 	public int getFlag(String idx);
 	public int selectNation(int idx);
+	public Monthtb selectTemps(int idx);
 	
 	/** detail */
 	public List<Integer> selectIdxs();
