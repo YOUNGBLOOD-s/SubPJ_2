@@ -39,7 +39,7 @@
 		where username=#{username};
 	</select>
 
-	<select id="selectNationList_page" resultType="nation"
+	<select id="selectNationList_page" resultType="nationdto"
 		parameterType="map">
 		select *
 		from nationtb
@@ -48,7 +48,7 @@
 	</select>
 
 
-	<select id="selectNationListAll_page" resultType="nation"
+	<select id="selectNationListAll_page" resultType="nationdto"
 		parameterType="map">
 		select *
 		from nationtb limit 10 offset #{pageIdx}

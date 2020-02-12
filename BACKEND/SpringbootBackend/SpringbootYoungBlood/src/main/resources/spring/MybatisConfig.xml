@@ -15,6 +15,7 @@
   	<typeAlias type="com.yb.rest.vo.Counsel" alias="counsel"/>
   	<typeAlias type="com.yb.rest.vo.Image" alias="image"/>
     <typeAlias type="com.yb.rest.vo.Click" alias="click" />
+    <typeAlias type="com.yb.rest.vo.NationDTO" alias="nationdto" />
   </typeAliases>
   <mappers>
     <mapper resource="spring/ad_sql.xml"/>

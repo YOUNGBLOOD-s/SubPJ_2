@@ -11,6 +11,7 @@ import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.NationDTO;
 import com.yb.rest.vo.Route;
 
 @Service
@@ -174,16 +175,16 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public ArrayList<Nation> nationList_page(int customer,int pageIdx) {
+	public ArrayList<NationDTO> nationList_page(int customer,int pageIdx) {
 		// TODO Auto-generated method stub
-		ArrayList<Nation> list = repo.nationList_page(customer,pageIdx);
+		ArrayList<NationDTO> list = repo.nationList_page(customer,pageIdx);
 		return list;
 	}
 
 	@Override
-	public ArrayList<Nation> nationListAll_page(int customer,int pageIdx) {
+	public ArrayList<NationDTO> nationListAll_page(int customer,int pageIdx) {
 		// TODO Auto-generated method stub
-		ArrayList<Nation> list = repo.nationListAll_page(customer,pageIdx);
+		ArrayList<NationDTO> list = repo.nationListAll_page(customer,pageIdx);
 		return list;
 	}
 
