@@ -22,11 +22,7 @@ const AdItem = ({ ad }) => {
     <Card className={classes.root}>
       <Link to={`/detail/${id}`}>
         <CardActionArea>
-          <CardMedia
-            component="img"
-            height="300"
-            image="https://images.unsplash.com/photo-1506760610100-1af6025cf0c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"
-          />
+          <CardMedia component="img" height="300" image={image} />
           <CardContent>
             <div>
               {name} {en_name}
