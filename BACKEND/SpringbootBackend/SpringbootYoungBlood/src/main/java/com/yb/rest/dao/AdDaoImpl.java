@@ -203,5 +203,10 @@ public class AdDaoImpl implements IAdDao {
 		return session.selectOne("sendtofront.selectTemps", idx);
 	}
 
+	@Override
+	public void updateCompleted(int idx) {
+		session.update("sendtofront.updateCompleted", idx);
+	}
+
 	
 }

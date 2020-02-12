@@ -99,7 +99,11 @@ CREATE TABLE IF NOT EXISTS `counseltb` (
     email varchar(100) NOT NULL,
     tel varchar(100) NOT NULL,
     date varchar(100) NOT NULL,
-    text varchar(1000)
+    text varchar(1000),
+    nation int,
+    completed boolean default false,
+    foreign key (nation) references nationtb(idx)
+    on delete cascade
 );
 desc counseltb;
 

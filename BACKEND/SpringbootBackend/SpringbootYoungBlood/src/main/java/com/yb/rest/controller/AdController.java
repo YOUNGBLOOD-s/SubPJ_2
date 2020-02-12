@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -610,13 +612,26 @@ public class AdController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			System.out.println(counvalue.toString());
-			ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(),
-					counvalue.getDate(), counvalue.getText());
+			ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(), counvalue.getDate(), counvalue.getText(), counvalue.getNation());
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 		return re;
 	}
-
+	
+	//상담 idx로 요청보내면 flag값 왔다갔다 변경
+	@PutMapping("/counsel/completed/{nationidx}")
+	@ApiOperation(value="상담 완료 변수 swap")
+	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@RequestParam(value = "nationidx") int nationidx) {
+		ResponseEntity<Map<String, Object>> re = null;
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			ser.updateCompleted(nationidx);
+			re = new ResponseEntity<>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+		}
+		return re;
+	}
 }
