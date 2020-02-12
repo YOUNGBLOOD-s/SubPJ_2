@@ -12,6 +12,10 @@ import MaterialCard from '../common/MaterialCard';
 import TitleBar from '../Detail/common/TitleBar';
 import CaptionText from '../Detail/common/CaptionText';
 import LoadingBackdrop from '../common/LoadingBackdrop';
+import { remove_list } from '../../lib/api/ad';
+import { removeAd } from '../../modules/ads';
+import component from '../../lib/material/component';
+import DeleteAlertDialog from '../common/DeleteAlertDialog';
 
 const DetailContainer = styled.div`
   padding: 1rem;
@@ -25,14 +29,28 @@ const ProductDetail = ({ match }) => {
   const { id } = match.params;
   const token = sessionStorage.getItem('access_token');
   const dispatch = useDispatch();
-  const { product, loading } = useSelector(({ product, loading }) => ({
-    product: product.product,
-    loading: loading['product/GET_PRODUCT'],
-  }));
+  const { product, loading, user } = useSelector(
+    ({ product, loading, user }) => ({
+      product: product.product,
+      loading: loading['product/GET_PRODUCT'],
+      user: user.user,
+    }),
+  );
 
   useEffect(() => {
     dispatch(getProduct({ id, token }));
   }, [id, token, dispatch]);
+
+  const onRemoveAd = async () => {
+    try {
+      const token = sessionStorage.getItem('access_token');
+      await remove_list({ token, id });
+      dispatch(removeAd(id));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <DetailContainer>
       {!loading && product ? (
@@ -75,6 +93,16 @@ const ProductDetail = ({ match }) => {
           <MaterialCard>
             <Month month={product.month} />
           </MaterialCard>
+
+          {/* DELETE */}
+          {user && user.username === 'admin' && (
+            <DeleteAlertDialog>
+              {/* children으로 삭제 버튼 넣어줌 */}
+              <component.Button onClick={onRemoveAd} color="secondary">
+                삭제
+              </component.Button>
+            </DeleteAlertDialog>
+          )}
         </DetailWrapper>
       ) : (
         <LoadingBackdrop loading={loading === undefined ? true : loading} />

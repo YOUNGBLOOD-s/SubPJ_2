@@ -19,7 +19,12 @@ const DeleteAlertDialog = ({ children }) => {
 
   return (
     <div>
-      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+      <Button
+        fullWidth
+        variant="outlined"
+        color="secondary"
+        onClick={handleClickOpen}
+      >
         삭제
       </Button>
       <Dialog
