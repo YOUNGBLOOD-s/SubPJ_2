@@ -16,9 +16,10 @@ public interface IAdDao {
 	public List<String> getImgs(int id);
 	public List<String> getModalcontents(int id);
 	public Sendtofront getInfo(Map value);
-	public void updateshowandflag(int customer);
+	public void updateshowandflag();
 	public int getGrade(String idx);
 	public int getFlag(String idx);
+	public int selectNation(int idx);
 	
 	/** detail */
 	public List<Integer> selectIdxs();

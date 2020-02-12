@@ -133,14 +133,19 @@
 	values(#{nation}, 0, 1, #{today});
 	</insert>
 	
-	<update id="updateshowflag" parameterType="int">
+	<update id="updateshowflag">
 	update nationtb
 	set flag=0, showcnt=0
-	where customer=#{customer};
 	</update>
 	
 	<select id="selectidxs" resultType="int">
 	select idx from nationtb;
+	</select>
+	
+	<select id="selectNation" resultType="int" parameterType="int">
+	select nation
+	from monthtb
+	where idx=#{idx};
 	</select>
 
 </mapper>

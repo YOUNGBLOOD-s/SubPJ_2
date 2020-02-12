@@ -178,12 +178,17 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public void updateshowandflag(int customer) {
-		repo.updateshowandflag(customer);
+	public void updateshowandflag() {
+		repo.updateshowandflag();
 	}
 
 	@Override
 	public List<Integer> selectIdxs() {
 		return repo.selectIdxs();
+	}
+
+	@Override
+	public int selectNation(int idx) {
+		return repo.selectNation(idx);
 	}
 }

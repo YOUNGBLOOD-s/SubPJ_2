@@ -183,13 +183,18 @@ public class AdDaoImpl implements IAdDao {
 	}
 
 	@Override
-	public void updateshowandflag(int customer) {
-		session.update("sendtofront.updateshowflag", customer);
+	public void updateshowandflag() {
+		session.update("sendtofront.updateshowflag");
 	}
 
 	@Override
 	public List<Integer> selectIdxs() {
 		return session.selectList("sendtofront.selectidxs");
+	}
+
+	@Override
+	public int selectNation(int idx) {
+		return session.selectOne("sendtofront.selectNation", idx);
 	}
 
 	
