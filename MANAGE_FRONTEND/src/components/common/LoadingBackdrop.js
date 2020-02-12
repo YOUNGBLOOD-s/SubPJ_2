@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SimpleBackdrop = ({ loading }) => {
+const LoadingBackdrop = ({ loading }) => {
   const classes = useStyles();
   return (
     <Backdrop className={classes.backdrop} open={loading}>
@@ -19,4 +19,4 @@ const SimpleBackdrop = ({ loading }) => {
   );
 };
 
-export default SimpleBackdrop;
+export default LoadingBackdrop;

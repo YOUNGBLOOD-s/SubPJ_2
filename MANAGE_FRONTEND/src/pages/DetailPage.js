@@ -5,7 +5,7 @@ import TravelRoute from '../components/Detail/TravelRoute';
 import CautionText from '../components/Detail/CautionText';
 import ReservationForm from '../components/Detail/ReservationForm';
 import KakaoChat from '../components/Detail/KakaoChat';
-import SimpleBackdrop from '../components/common/LoadingBackdrop';
+import LoadingBackdrop from '../components/common/LoadingBackdrop';
 import axios from '../../node_modules/axios/index';
 
 const DetailPageWrapper = styled.div`
@@ -50,7 +50,7 @@ const DetailPage = ({ match, history }) => {
           </DetailPageWrapper>
         </div>
       ) : (
-        <SimpleBackdrop loading={loading} />
+        <LoadingBackdrop loading={loading} />
       )}
     </>
   );

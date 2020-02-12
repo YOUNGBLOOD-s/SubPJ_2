@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import MaterialCard from '../common/MaterialCard';
 import TitleBar from '../Detail/common/TitleBar';
 import CaptionText from '../Detail/common/CaptionText';
+import LoadingBackdrop from '../common/LoadingBackdrop';
 
 const DetailContainer = styled.div`
   padding: 1rem;
@@ -71,7 +72,9 @@ const ProductDetail = ({ match }) => {
             <Month month={product.month} />
           </MaterialCard>
         </DetailWrapper>
-      ) : null}
+      ) : (
+        <LoadingBackdrop loading={loading === undefined ? true : loading} />
+      )}
     </DetailContainer>
   );
 };
