@@ -129,7 +129,7 @@ const ReservationForm = ({ nationId }) => {
     // 상담 예약 요청
     axios
       .post('/api/counsel', {
-        idx: nationId, // 현재 보고있는 상품 아이디
+        nation: nationId, // 현재 보고있는 상품 아이디
         name: form.name,
         email: form.email,
         tel: form.tel,
