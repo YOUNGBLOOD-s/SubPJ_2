@@ -1,31 +1,14 @@
 import React from 'react';
 import component from '../../../../lib/material/component';
 import MenuItem from '@material-ui/core/MenuItem';
-import palette from '../../../../lib/styles/palette';
-import { withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { nextStep, prevStep } from '../../../../modules/stepper';
 import axios from 'axios';
 import { selectNation } from '../../../../modules/form';
-
-const StyledTextField = withStyles({
-  root: {
-    marginBottom: '1rem',
-    '& label.Mui-focused': {
-      color: palette.red[300],
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'black',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: palette.red[300],
-      },
-    },
-  },
-})(component.TextField);
+import continentsArray from '../../../../lib/data/continentsArray';
+import StyledTextField from '../../../common/StyledTextField';
 
 const StyledForm = styled.form`
   display: flex;
@@ -87,7 +70,7 @@ const NationAddForm = ({ classes, steps, step }) => {
             value={product.continents}
             onChange={handleChange}
           >
-            {continents_arr.map(continent => (
+            {continentsArray.map(continent => (
               <MenuItem key={continent.value} value={continent.value}>
                 {continent.label}
               </MenuItem>
@@ -186,26 +169,3 @@ const NationAddForm = ({ classes, steps, step }) => {
 };
 
 export default NationAddForm;
-
-const continents_arr = [
-  {
-    value: '1',
-    label: '유럽',
-  },
-  {
-    value: '2',
-    label: '북태평양',
-  },
-  {
-    value: '3',
-    label: '아프리카',
-  },
-  {
-    value: '4',
-    label: '아시아',
-  },
-  {
-    value: '5',
-    label: '북미',
-  },
-];
