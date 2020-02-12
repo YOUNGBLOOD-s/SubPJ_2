@@ -18,6 +18,7 @@ public interface IAdService {
 	public Sendtofront getInfo(Map value);
 	public int getGrade(String idx);
 	public int getFlag(String idx);
+	public int selectNation(int idx);
 	
 	/** detail */
 	public List<Integer> selectIdxs();
@@ -45,7 +46,7 @@ public interface IAdService {
 
 	
 	/** click & QRcode */
-	public void updateshowandflag(int customer);
+	public void updateshowandflag();
 	public void updateClickcnt(Map map);
 	public void updateQRcnt(Map map);
 	public void updateShowcnt(int idx);
