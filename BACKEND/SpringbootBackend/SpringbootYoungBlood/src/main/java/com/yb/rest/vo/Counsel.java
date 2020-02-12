@@ -1,10 +1,11 @@
 package com.yb.rest.vo;
 
 public class Counsel {
-	private int age;
+	private int age, nation;
 	private String name, email, tel, date, text;
 	public Counsel() {}
-	public Counsel(int age, String name, String email, String tel, String date, String text) {
+	public Counsel(int nation, int age, String name, String email, String tel, String date, String text) {
+		this.nation = nation;
 		this.age = age;
 		this.name = name;
 		this.email = email;
@@ -13,6 +14,12 @@ public class Counsel {
 		this.text = text;
 	}
 
+	public int getNation() {
+		return nation;
+	}
+	public void setNation(int nation) {
+		this.nation = nation;
+	}
 	public int getAge() {
 		return age;
 	}
@@ -51,7 +58,7 @@ public class Counsel {
 	}
 	@Override
 	public String toString() {
-		return "Counsel [age=" + age + ", name=" + name + ", email=" + email + ", tel=" + tel + ", date=" + date
-				+ ", text=" + text + "]";
+		return "Counsel [age=" + age + ", nation=" + nation + ", name=" + name + ", email=" + email + ", tel=" + tel
+				+ ", date=" + date + ", text=" + text + "]";
 	}
 }

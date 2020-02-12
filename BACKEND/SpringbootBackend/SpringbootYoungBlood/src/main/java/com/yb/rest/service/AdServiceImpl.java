@@ -104,8 +104,8 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public void updateCounsel(int age, String name, String email, String tel, String date, String text) {
-		repo.updateCounsel(new Counsel(age, name, email, tel, date, text));
+	public void updateCounsel(int age, String name, String email, String tel, String date, String text, int nation) {
+		repo.updateCounsel(new Counsel(nation, age, name, email, tel, date, text));
 	}
 
 	@Override
@@ -196,5 +196,10 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public Monthtb selectTemps(int idx) {
 		return repo.selectTemps(idx);
+	}
+
+	@Override
+	public void updateCompleted(int idx) {
+		repo.updateCompleted(idx);
 	}
 }

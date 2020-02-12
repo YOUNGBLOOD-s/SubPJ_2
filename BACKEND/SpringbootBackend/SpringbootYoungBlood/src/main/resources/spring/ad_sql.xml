@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sendtofront">
-	
+
 	<select id="selectFlag" parameterType="string" resultType="int">
 	select flag from nationtb 
 	where idx=#{idx}
@@ -81,10 +81,16 @@
 	where idx=#{idx}
 	</update>
 	
+	<update id="updateCompleted" parameterType="int">
+	update counseltb
+	set completed = completed xor 1
+	where idx=#{idx};
+	</update>
+	
 	<insert id="insertCounvalue" parameterType="counsel">
 	insert into
-	counseltb(age, name, email, tel, date, text)
-	values(#{age},#{name},#{email},#{tel}, #{date}, #{text})
+	counseltb(nation, age, name, email, tel, date, text)
+	values(#{nation} ,#{age},#{name},#{email},#{tel}, #{date}, #{text})
 	</insert>
 	
 	<insert id="insertroute" parameterType="route">
@@ -153,6 +159,8 @@
 	from monthtb 
 	where nation=(select idx from nationtb where idx=#{idx});
 	</select>
-
+	
+	
+	
 </mapper>
  
