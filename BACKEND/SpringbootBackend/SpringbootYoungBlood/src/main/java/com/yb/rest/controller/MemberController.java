@@ -134,7 +134,6 @@ public class MemberController {
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
         System.out.println("로그인 요청이 왔습니다.");
         System.out.println(login.toString());
-		System.out.println("뭐야???");
         if(login.getUsername()=="" || login.getPassword()=="") {
 			Map<String, Object> msg = new HashMap<String, Object>();
 			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.BAD_REQUEST);
@@ -142,12 +141,8 @@ public class MemberController {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
-			System.out.println("zz");
 			String realpassword_256 = ser.getPassword(login.getUsername());
-			System.out.println("zzzz");
 			String inputpassword_256 = ser.getSHA256(login.getPassword());
-			System.out.println(realpassword_256);
-			System.out.println(inputpassword_256);
 			if (realpassword_256.equals(inputpassword_256)) {
 				msg.put("username", login.getUsername());
 				msg.put("token", createToken(login.getUsername()));
