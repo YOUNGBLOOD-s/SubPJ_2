@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
 `;
 
 const AdListWraaper = styled.div`
