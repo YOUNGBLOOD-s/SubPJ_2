@@ -1,0 +1,20 @@
+.lazyImage {
+  position: relative;
+}
+
+.lazyImage__img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.lazyImage__qr {
+  z-index: 999;
+  width: 20vh !important;
+  height: 20vh;
+  position: absolute;
+  right: 2rem !important;
+  bottom: 2rem !important;
+  padding: 7px;
+  background: rgba(0, 0, 0, 0.5);
+}

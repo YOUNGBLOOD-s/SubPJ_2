@@ -26,19 +26,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
+const FullScreenDialog = ({ data, open, setOpen }) => {
   const classes = useStyles();
-  //   const [open, setOpen] = React.useState(false);
-
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
 
   const handleClose = () => {
     setOpen(false);
   };
-
-  // var timer = undefined;
 
   const QrImage = styled.img`
     z-index: 999;
@@ -59,9 +52,6 @@ const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
 
   return (
     <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open full-screen dialog
-      </Button> */}
       <Dialog
         fullScreen
         open={open}
@@ -78,10 +68,6 @@ const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
             >
               <CloseIcon />
             </IconButton>
-            {/* <Typography variant="h6" className={classes.title}> */}
-            {/* {data['title']} */}
-            {/* </Typography> */}
-            {/* <Button autoFocus color="inherit" onClick={handleClose}> */}
           </Toolbar>
         </AppBar>
 
@@ -89,7 +75,7 @@ const FullScreenDialog = ({ data, open, setOpen, nextURL }) => {
           className="qr"
           src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://52.78.218.79:8282/detail/${data.id}`}
         />
-        <NFSlider details={data.details} setOpen={setOpen} />
+        <NFSlider details={data.details} setOpen={setOpen} open={open} />
       </Dialog>
     </div>
   );
