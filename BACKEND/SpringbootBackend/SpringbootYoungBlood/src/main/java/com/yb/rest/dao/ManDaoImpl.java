@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
@@ -216,6 +217,11 @@ public class ManDaoImpl implements IManDao {
 		// TODO Auto-generated method stub
 		String url = (String) session.selectOne("management.selectNation_image", idx);
 		return url;
+	}
+
+	@Override
+	public List<Counsel> selectCounsellist(int idx) {
+		return session.selectList("management.selectCounsellist", idx);
 	}
 
 	

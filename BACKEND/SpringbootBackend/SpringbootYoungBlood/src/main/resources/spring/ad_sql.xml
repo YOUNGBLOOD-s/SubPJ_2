@@ -160,6 +160,10 @@
 	where nation=(select idx from nationtb where idx=#{idx});
 	</select>
 	
+	<delete id="deleteCounsel" parameterType="int">
+	delete from counseltb 
+	where idx=#{idx};
+	</delete>
 	
 	
 </mapper>

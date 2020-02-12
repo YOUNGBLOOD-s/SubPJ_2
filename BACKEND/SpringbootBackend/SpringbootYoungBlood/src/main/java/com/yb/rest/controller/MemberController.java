@@ -67,9 +67,7 @@ public class MemberController {
 			}
 			filereader.close();
 		} catch (FileNotFoundException e) {
-			key="죄송해요 저희 아이가 키를 잘못가져왔네요..";
 		} catch (IOException e) {
-			key="죄송해요 저희 아이가 키를 잘못가져왔네요..";
 			System.out.println(e);
 		}
 		System.out.println("키 잘 가져갑니다요. ^^7");
@@ -102,7 +100,6 @@ public class MemberController {
 		} catch(Exception e) {
 			System.out.println("너 !!!! 또!!!!!!!!!! 키 확인 안 했지????????");
 			System.out.println(e.getMessage());
-			return "죄송해요 저희 아이가 키를 잘못가져갔네요ㅠㅠ...";
 		}
 		System.out.println(jwt);
 		System.out.println("토큰 생성 완료!");
@@ -164,15 +161,20 @@ public class MemberController {
 	public ResponseEntity<Map<String, Object>> memlogin(@RequestBody Member login) {
         System.out.println("로그인 요청이 왔습니다.");
         System.out.println(login.toString());
-		if(login.getUsername()=="" || login.getPassword()=="") {
+		System.out.println("뭐야???");
+        if(login.getUsername()=="" || login.getPassword()=="") {
 			Map<String, Object> msg = new HashMap<String, Object>();
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.BAD_REQUEST);
 		}
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
+			System.out.println("zz");
 			String realpassword_256 = ser.getPassword(login.getUsername());
+			System.out.println("zzzz");
 			String inputpassword_256 = ser.getSHA256(login.getPassword());
+			System.out.println(realpassword_256);
+			System.out.println(inputpassword_256);
 			if (realpassword_256.equals(inputpassword_256)) {
 				msg.put("username", login.getUsername());
 				msg.put("token", createToken(login.getUsername()));
