@@ -37,18 +37,20 @@ const ProductDetail = ({ match }) => {
     <DetailContainer>
       {!loading && product ? (
         <DetailWrapper>
-          {/* NATION */}
-          <TitleBar>나라 기본 설정</TitleBar>
-          <CaptionText>광고중인 나라의 기본설정입니다.</CaptionText>
-          <MaterialCard>
-            <Nation nation={product.nation} />
-          </MaterialCard>
           {/* OWNER */}
           <TitleBar>광고 소유자</TitleBar>
           <CaptionText>광고를 소유하고 있는 소유자의 정보입니다.</CaptionText>
           <MaterialCard>
             <Owner owner={product.owner} />
           </MaterialCard>
+
+          {/* NATION */}
+          <TitleBar>나라 기본 설정</TitleBar>
+          <CaptionText>광고중인 나라의 기본설정입니다.</CaptionText>
+          <MaterialCard>
+            <Nation nation={product.nation} />
+          </MaterialCard>
+
           {/* IMAGES */}
           <TitleBar>온도별 나라 대표이미지</TitleBar>
           <CaptionText>
@@ -57,12 +59,14 @@ const ProductDetail = ({ match }) => {
           <MaterialCard>
             <Images images={product.images} />
           </MaterialCard>
+
           {/* ROUTES/CONTENTS */}
           <TitleBar>나라의 일자별 경로</TitleBar>
           <CaptionText>광고중인 나라의 N일차 M번째 경로입니다.</CaptionText>
           <MaterialCard>
             <Contents contents={product.contents} />
           </MaterialCard>
+
           {/* MONTH */}
           <TitleBar>나라의 온/습도 테이블</TitleBar>
           <CaptionText>
