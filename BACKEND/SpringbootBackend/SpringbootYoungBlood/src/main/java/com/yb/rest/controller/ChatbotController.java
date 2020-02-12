@@ -1,8 +1,11 @@
 package com.yb.rest.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,41 +140,107 @@ public class ChatbotController {
 		return map;
 	}
 
-	class date{
+	class date {
 		private String idx;
-		private String  s_date;
+		private String Ko_name;
+		private String s_date;
 		private String f_date;
 		private String url;
-		public date(String idx, String s_date, String f_date, String url) {
+
+		public date(String idx, String Ko_name,String s_date, String f_date, String url) {
 			super();
 			this.idx = idx;
+			this.Ko_name=Ko_name;
 			this.s_date = s_date;
 			this.f_date = f_date;
 			this.url = url;
 		}
+
+		public String getKo_name() {
+			return Ko_name;
+		}
+
+		public void setKo_name(String ko_name) {
+			Ko_name = ko_name;
+		}
+
+		public String getIdx() {
+			return idx;
+		}
+
+		public void setIdx(String idx) {
+			this.idx = idx;
+		}
+
+		public String getS_date() {
+			return s_date;
+		}
+
+		public void setS_date(String s_date) {
+			this.s_date = s_date;
+		}
+
+		public String getF_date() {
+			return f_date;
+		}
+
+		public void setF_date(String f_date) {
+			this.f_date = f_date;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+		
+		
 	}
-	
+
 	@PostMapping("/latest")
 	public Map<String, Object> latest() {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		List<Nation> li = nationSer.selectNations();
-		List<date> s_dateLi=new ArrayList<date>();
-		System.out.println();
+		List<date> s_dateLi = new ArrayList<date>();
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar time = Calendar.getInstance();
+		String today = format.format(time.getTime());
+		System.out.println(today);
+		int nmonth = Integer.parseInt(today.substring(5, 7));
+		int nday = Integer.parseInt(today.substring(8, 10));
+
 		for (int i = 0; i < li.size(); i++) {
-			s_dateLi.add(new date(li.get(i).getIdx(),li.get(i).getS_date(),li.get(i).getF_date(),li.get(i).getUrl()));
+			String comStr = li.get(i).getS_date();
+			int cmonth = Integer.parseInt(comStr.substring(5, 7));
+			int cday = Integer.parseInt(comStr.substring(8, 10));
+			if (nmonth <= cmonth && nday <= cday) {
+				System.out.println("cmonth: "+cmonth+"cday: "+cday+"인데 들어와");
+				
+				s_dateLi.add(
+						new date(li.get(i).getIdx(), li.get(i).getKo_name(),li.get(i).getS_date(), li.get(i).getF_date(), li.get(i).getUrl()));
+			}
 		}
-		
-		Collections.sort(s_dateLi,new Comparator<date>() {
+
+		Collections.sort(s_dateLi, new Comparator<date>() {
 
 			@Override
 			public int compare(date o1, date o2) {
 				// TODO Auto-generated method stub
-				return 0;
+				return o1.s_date.compareTo(o2.s_date);
 			}
 		});
 		
+		
 		StringBuilder sb = new StringBuilder();
+		sb.append(s_dateLi.get(0).getKo_name()).append("\n\n");
+		sb.append("출발 일자: "+s_dateLi.get(0).getS_date()).append("\n");
+		sb.append("도착 일자: "+s_dateLi.get(0).getF_date()).append("\n\n");
+		
+		sb.append("http://52.78.218.79:8282/detail/"+s_dateLi.get(0).getIdx()).append("\n");
 		map.put("result", sb);
 		return map;
 	}
