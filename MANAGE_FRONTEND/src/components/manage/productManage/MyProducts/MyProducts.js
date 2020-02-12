@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
 `;
 
 const AdListWraaper = styled.div`
@@ -42,17 +44,17 @@ const MyProducts = () => {
         <AdListWraaper>
           <component.Grid container spacing={1}>
             {ads.map(ad => (
-              <Link
-                to={
-                  user.username === 'admin'
-                    ? `admin/product/${ad.idx}`
-                    : `manage/product/${ad.idx}`
-                }
-              >
-                <component.Grid item xs={6} md={4} key={ad.idx}>
+              <component.Grid item xs={6} md={4} key={ad.idx}>
+                <Link
+                  to={
+                    user.username === 'admin'
+                      ? `admin/product/${ad.idx}`
+                      : `manage/product/${ad.idx}`
+                  }
+                >
                   <MyProduct ad={ad} />
-                </component.Grid>
-              </Link>
+                </Link>
+              </component.Grid>
             ))}
           </component.Grid>
         </AdListWraaper>

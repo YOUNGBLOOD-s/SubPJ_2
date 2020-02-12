@@ -2,19 +2,14 @@ import 'date-fns';
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import koLocale from 'date-fns/locale/ko';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 import TitleBar from './common/TitleBar';
 import component from '../../lib/material/component';
 import MaterialCard from '../common/MaterialCard';
-import { withStyles } from '@material-ui/core/styles';
 import CaptionText from './common/CaptionText';
-import palette from '../../lib/styles/palette';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import reformDate from '../../lib/utill/reformDate';
+import DatePicker from '../common/DatePicker';
+import StyledTextField from '../common/StyledTextField';
 
 const ReservationFormBlock = styled.div`
   padding: 1rem 0.5rem;
@@ -29,32 +24,6 @@ const FieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const StyledDatePicker = withStyles({
-  root: {
-    '& label.Mui-focused': {
-      color: palette.red[200],
-    },
-  },
-})(KeyboardDatePicker);
-
-const StyledTextField = withStyles({
-  root: {
-    marginBottom: '1rem',
-    '& label.Mui-focused': {
-      color: palette.red[200],
-    },
-    '& .MuiOutlinedInput-root': {
-      // 기본 필드 보더 색상
-      '& fieldset': {
-        borderColor: 'black',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: palette.red[200],
-      },
-    },
-  },
-})(component.TextField);
 
 const ReservationConfirmBox = styled.div`
   display: flex;
@@ -122,14 +91,11 @@ const ReservationForm = ({ nationId }) => {
       return;
     }
 
-    const now = new Date(form.date);
-    const reform_date = `${now.getFullYear()}-${now.getMonth() +
-      1}-${now.getDate()}`;
-
+    const reform_date = reformDate(new Date(form.date));
     // 상담 예약 요청
     axios
       .post('/api/counsel', {
-        idx: nationId, // 현재 보고있는 상품 아이디
+        nation: nationId, // 현재 보고있는 상품 아이디
         name: form.name,
         email: form.email,
         tel: form.tel,
@@ -170,20 +136,9 @@ const ReservationForm = ({ nationId }) => {
           <form onSubmit={onSubmit}>
             <FieldWrapper>
               {/* FIXME: 포커스 시 색상 및 캘린더 색상 변경 */}
-              <MuiPickersUtilsProvider utils={DateFnsUtils} locale={koLocale}>
-                <StyledDatePicker
-                  margin="normal"
-                  id="date-picker-dialog"
-                  label="예약 날짜 선택"
-                  format="yyyy년 MM월 dd일"
-                  value={form.date}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              </MuiPickersUtilsProvider>
-              <component.Grid container>
+              <DatePicker onChange={handleDateChange} value={form.date} />
+
+              <component.Grid container spacing={1}>
                 <component.Grid item xs={8}>
                   <StyledTextField
                     className="name"
@@ -192,6 +147,7 @@ const ReservationForm = ({ nationId }) => {
                     label="성명"
                     variant="outlined"
                     name="name"
+                    fullWidth
                     value={form.name}
                     onChange={onChange}
                     error={error.name}
@@ -205,6 +161,7 @@ const ReservationForm = ({ nationId }) => {
                     variant="outlined"
                     type="number"
                     name="age"
+                    fullWidth
                     value={form.age}
                     onChange={onChange}
                     error={error.age}
