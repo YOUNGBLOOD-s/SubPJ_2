@@ -13,6 +13,7 @@ import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.NationDTO;
 import com.yb.rest.vo.Route;
 
 @Repository
@@ -42,7 +43,7 @@ public class ManDaoImpl implements IManDao {
 	}
 	//paging  처리/
 	@Override
-	public ArrayList<Nation> nationList_page(int customer,int pageIdx) {
+	public ArrayList<NationDTO> nationList_page(int customer,int pageIdx) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("customer", customer);
 		map.put("pageIdx", pageIdx);
@@ -50,7 +51,7 @@ public class ManDaoImpl implements IManDao {
 	}
 
 	@Override
-	public ArrayList<Nation> nationListAll_page(int customer,int pageIdx) {
+	public ArrayList<NationDTO> nationListAll_page(int customer,int pageIdx) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("customer", customer);
 		map.put("pageIdx", pageIdx);

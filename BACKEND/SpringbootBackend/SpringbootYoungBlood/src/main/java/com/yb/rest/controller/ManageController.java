@@ -27,6 +27,7 @@ import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.NationDTO;
 import com.yb.rest.vo.Owner;
 import com.yb.rest.vo.Route;
 
@@ -59,7 +60,7 @@ public class ManageController {
 			@RequestParam("page") String page) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		ArrayList<Nation> list = null;
+		ArrayList<NationDTO> list = null;
 		Member member = new Member();
 		int pageIdx = 0;
 		if (page == null)

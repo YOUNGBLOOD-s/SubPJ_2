@@ -6,6 +6,7 @@ import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Member;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.NationDTO;
 import com.yb.rest.vo.Route;
 
 public interface IManDao {
@@ -18,8 +19,8 @@ public interface IManDao {
 	/** 나라테이블CRUD */
 	public ArrayList<Nation> nationList(int customer);
 	public ArrayList<Nation> nationListAll(int customer);
-	public ArrayList<Nation> nationList_page(int customer,int pageIdx);
-	public ArrayList<Nation> nationListAll_page(int customer,int pageIdx);
+	public ArrayList<NationDTO> nationList_page(int customer,int pageIdx);
+	public ArrayList<NationDTO> nationListAll_page(int customer,int pageIdx);
 	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date);
 	public boolean nationdelete(String idx, String customer);
 	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date);
