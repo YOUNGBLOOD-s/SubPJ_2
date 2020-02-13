@@ -88,7 +88,7 @@ const GradeCard = ({ title, image, grade, price, option }) => {
 
     originalGrade = getGrade();
 
-    if (originalGrade === grade) {
+    if (originalGrade === parseInt(grade)) {
       alert(gradeAlert[-1]);
       return;
     } else if (originalGrade === 1) {

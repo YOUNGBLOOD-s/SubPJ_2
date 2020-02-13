@@ -188,7 +188,7 @@ const GradeInfo = () => {
                     <DescriptionTitle>
                       QR 코드 스캔을 통해 보이는
                       <br />
-                      예쁘고 알찬 모바일 페이지!
+                      예쁘고 알찬 모바일 페이지
                     </DescriptionTitle>
                     <br />
                     <i
@@ -221,9 +221,20 @@ const GradeInfo = () => {
             <Grid item xs={12} md={6}>
               <Grid item style={{ marginLeft: '1rem' }}>
                 <DescriptionWrapper>
-                  <DescriptionTitle>
-                    광고판에서 QR코드 스캔 시 상품 상세 정보 확인
-                  </DescriptionTitle>
+                  <DescriptionContent>
+                    <DescriptionTitle>
+                      일차별 여행지 정보와
+                      <br />
+                      예쁜 사진을 한 눈에
+                    </DescriptionTitle>
+                    <br />
+                    <i
+                      className="fas fa-check-circle"
+                      style={{ color: 'green' }}
+                    />{' '}
+                    여행지 간 이동 경로와 교통편을 확인해보세요
+                    <br />
+                  </DescriptionContent>
                 </DescriptionWrapper>
               </Grid>
             </Grid>
@@ -246,9 +257,32 @@ const GradeInfo = () => {
             <Grid item xs={12} md={6}>
               <Grid item>
                 <DescriptionWrapper>
-                  <DescriptionTitle>
-                    광고판에서 QR코드 스캔 시 상품 상세 정보 확인
-                  </DescriptionTitle>
+                  <DescriptionContent>
+                    <DescriptionTitle>
+                      여행 관련 약관과 참고사항
+                      <br />
+                      그리고 상담 예약 + 톡상담
+                    </DescriptionTitle>
+                    <br />
+                    <i
+                      className="fas fa-check-circle"
+                      style={{ color: 'green' }}
+                    />{' '}
+                    여행에 대한 약관과 참고, 주의사항을 확인해보세요
+                    <br />
+                    <i
+                      className="fas fa-check-circle"
+                      style={{ color: 'green' }}
+                    />{' '}
+                    원하는 날짜를 선택해 상담을 예약해보세요
+                    <br />
+                    <i
+                      className="fas fa-check-circle"
+                      style={{ color: 'green' }}
+                    />{' '}
+                    카카오톡 챗봇을 통한 상담도 가능하답니다
+                    <br />
+                  </DescriptionContent>
                 </DescriptionWrapper>
               </Grid>
             </Grid>
