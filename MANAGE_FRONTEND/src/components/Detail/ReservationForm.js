@@ -135,10 +135,15 @@ const ReservationForm = ({ nationId }) => {
         {!isReserved ? (
           <form onSubmit={onSubmit}>
             <FieldWrapper>
-              {/* FIXME: 포커스 시 색상 및 캘린더 색상 변경 */}
-              <DatePicker onChange={handleDateChange} value={form.date} />
-
               <component.Grid container spacing={1}>
+                {/* FIXME: 포커스 시 색상 및 캘린더 색상 변경 */}
+                <component.Grid item xs={12}>
+                  <DatePicker
+                    onChange={handleDateChange}
+                    value={form.date}
+                    label={'상담 날짜 설정'}
+                  />
+                </component.Grid>
                 <component.Grid item xs={8}>
                   <StyledTextField
                     className="name"

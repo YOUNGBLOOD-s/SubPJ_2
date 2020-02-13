@@ -4,20 +4,28 @@ import MenuItem from '@material-ui/core/MenuItem';
 import StyledTextField from '../common/StyledTextField';
 import continentsArray from '../../lib/data/continentsArray';
 import DatePicker from '../common/DatePicker';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProductNation } from '../../modules/product';
+import reformDate from '../../lib/utill/reformDate';
+import LoadingBackdrop from '../common/LoadingBackdrop';
+import { useEffect } from 'react';
 
-const NationUpdateForm = ({ nation }) => {
+const NationUpdateForm = ({ nation, setUpdating }) => {
   const [form, setForm] = useState({
-    en_name: nation.en_name,
-    ko_name: nation.ko_name,
     continents: nation.continents,
-    speech: nation.speech,
+    dust: nation.dust,
+    en_name: nation.en_name,
+    f_date: nation.f_date,
+    ko_name: nation.ko_name,
     price: nation.price,
     s_date: nation.s_date,
-    f_date: nation.f_date,
-    dust: nation.dust,
-    weight: nation.weight,
-    showcnt: nation.showcnt,
+    speech: nation.speech,
   });
+
+  const { loading, error } = useSelector(({ product, loading }) => ({
+    loading: loading['product/UPDATE_PRODUCT_NATION'],
+    error: product.updateErrors['nation'],
+  }));
 
   const onChange = e => {
     const { name, value } = e.target;
@@ -30,25 +38,45 @@ const NationUpdateForm = ({ nation }) => {
   const handleSdateChange = date => {
     setForm({
       ...form,
-      s_date: date,
+      s_date: reformDate(date),
     });
   };
 
   const handleFdateChange = date => {
     setForm({
       ...form,
-      f_date: date,
+      f_date: reformDate(date),
     });
+  };
+
+  const token = sessionStorage.getItem('access_token');
+  const dispatch = useDispatch();
+
+  const onUpdate = () => {
+    dispatch(updateProductNation({ id: nation.idx, form, token }));
+    if (error) return;
+    setUpdating(false);
   };
 
   return (
     <form>
+      {/* 로딩시 백드랍 로딩 */}
+      {loading && <LoadingBackdrop loading={loading} />}
+
       <component.Grid container spacing={1}>
         <component.Grid item xs={6}>
-          <DatePicker value={form.s_date} onChange={handleSdateChange} />
+          <DatePicker
+            value={form.s_date}
+            onChange={handleSdateChange}
+            label={'출발 날짜 설정'}
+          />
         </component.Grid>
         <component.Grid item xs={6}>
-          <DatePicker value={form.f_date} onChange={handleFdateChange} />
+          <DatePicker
+            value={form.f_date}
+            onChange={handleFdateChange}
+            label={'도착 날짜 설정'}
+          />
         </component.Grid>
         <component.Grid item xs={4}>
           <StyledTextField
@@ -102,7 +130,7 @@ const NationUpdateForm = ({ nation }) => {
             multiline
           />
         </component.Grid>
-        <component.Grid item xs={12}>
+        <component.Grid item xs={8}>
           <StyledTextField
             label="가격"
             variant="outlined"
@@ -124,27 +152,32 @@ const NationUpdateForm = ({ nation }) => {
             fullWidth
           />
         </component.Grid>
-        <component.Grid item xs={4}>
-          <StyledTextField
-            label="가중치"
+
+        {/* 에러시 경고창 */}
+        {error && (
+          <component.Grid item xs={12}>
+            {error}
+          </component.Grid>
+        )}
+        <component.Grid item xs={6}>
+          <component.Button
             variant="outlined"
-            onChange={onChange}
-            value={form.weight}
-            name="weight"
-            autoComplete="weight"
+            color="primary"
+            onClick={onUpdate}
             fullWidth
-          />
+          >
+            업데이트
+          </component.Button>
         </component.Grid>
-        <component.Grid item xs={4}>
-          <StyledTextField
-            label="광고노출횟수"
+        <component.Grid item xs={6}>
+          <component.Button
             variant="outlined"
-            onChange={onChange}
-            value={form.showcnt}
-            name="showcnt"
-            autoComplete="showcnt"
+            color="secondary"
+            onClick={() => setUpdating(false)}
             fullWidth
-          />
+          >
+            취소
+          </component.Button>
         </component.Grid>
       </component.Grid>
     </form>

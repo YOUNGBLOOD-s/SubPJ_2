@@ -16,16 +16,17 @@ const StyledDatePicker = withStyles({
   },
 })(KeyboardDatePicker);
 
-const DatePicker = ({ value, onChange }) => {
+const DatePicker = ({ value, onChange, label }) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={koLocale}>
       <StyledDatePicker
         margin="normal"
         id="date-picker-dialog"
-        label="예약 날짜 선택"
+        label={label}
         format="yyyy년 MM월 dd일"
         value={value}
         onChange={onChange}
+        fullWidth
         KeyboardButtonProps={{
           'aria-label': 'change date',
         }}
