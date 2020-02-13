@@ -2,18 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
+import palette from '../../../lib/styles/palette';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
   grid: {
-    padding: '0 4rem 0 4rem',
-    marginBottom: '4rem',
-  },
-  mobileinfo: {
-    color: 'white',
+    padding: '10rem 4rem 10rem 4rem',
   },
 }));
 
@@ -25,34 +21,16 @@ const Image = styled.img`
 const MobileImage = styled.img`
   border-radius: 10px;
   height: 600px;
-  padding-left: 1rem;
-  @media only screen and (max-width: 1430px) {
-    height: 500px;
-    width: auto;
-  }
-  @media only screen and (max-width: 1300px) {
-    height: 450px;
-    width: auto;
-  }
-  @media only screen and (max-width: 1175px) {
-    height: 400px;
-    width: auto;
-  }
-  @media only screen and (max-width: 1060px) {
-    height: 350px;
-    width: auto;
-  }
-  @media only screen and (max-width: 960px) {
-    height: 600px;
-    width: auto;
-  }
+  text-align: center;
 `;
 
 const DescriptionWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   @media only screen and (max-width: 960px) {
     display: block;
+    padding-top: 3rem;
   }
 `;
 
@@ -62,13 +40,16 @@ const MobileImgWrapper = styled.div`
 `;
 
 const DescriptionTitle = styled.div`
-  font-size: 2rem;
-  font-weight: bolder;
+  font-size: 2.5rem;
+  line-height: 4rem;
+  @media only screen and (max-width: 1430px) {
+    font-size: 2.3rem;
+  }
 `;
 
 const DescriptionContent = styled.div`
   font-size: 1.1rem;
-  line-height: 3rem;
+  line-height: 2.5rem;
 `;
 
 const MobileDescriptionContent = styled.div`
@@ -100,31 +81,39 @@ const GradeInfo = () => {
     <>
       <Grid container className={classes.root}>
         <Grid item xs={12}>
-          <Grid container justify="flex-start" className={classes.grid}>
+          <Grid
+            container
+            justify="flex-start"
+            alignItems="center"
+            className={classes.grid}
+            style={{ backgroundColor: '#fafafa' }}
+          >
             <Grid item xs={12} md={6}>
               <Grid item>
-                <Image src={static_url + '/info1.png'} />
+                <Image src={static_url + '/info1.PNG'} />
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
               <Grid item style={{ marginLeft: '1rem' }}>
                 <DescriptionWrapper>
                   <div>
-                    <DescriptionTitle>메인페이지</DescriptionTitle>
-                    <DescriptionContent style={{ lineHeight: '5rem' }}>
-                      등록한 상품의 국가 및 사진, 소개
+                    <DescriptionContent>
+                      <DescriptionTitle>
+                        광고주가 등록한 상품의 <br />
+                        설명과 사진을 아름답게
+                      </DescriptionTitle>
                       <br />
                       <i
                         className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
-                      QR 코드 스캔 시 상품 상세 정보 확인
+                      QR 코드 스캔으로 더욱 자세한 정보를 알아보세요
                       <br />
                       <i
                         className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
-                      두번 터치 시 국가의 대표 여행지 확인
+                      두번의 터치로 예쁜 여행지를 한 눈에 볼 수 있어요
                     </DescriptionContent>
                   </div>
                 </DescriptionWrapper>
@@ -135,96 +124,131 @@ const GradeInfo = () => {
           <Grid
             container
             justify="flex-start"
+            alignItems="center"
             className={classes.grid}
             direction="row-reverse"
+            style={{ backgroundColor: palette.teal[50] }}
           >
             <Grid item xs={12} md={6}>
               <Grid item>
-                <Image src={static_url + '/info2.png'} />
+                <Image src={static_url + '/info2.PNG'} />
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
               <Grid item style={{ marginLeft: '1rem' }}>
                 <DescriptionWrapper>
                   <div>
-                    <DescriptionTitle>상세페이지 (두번 터치)</DescriptionTitle>
-                    <DescriptionContent style={{ lineHeight: '4rem' }}>
-                      해당 국가의 여행지 정보 확인
+                    <DescriptionContent>
+                      <DescriptionTitle>
+                        단지 두번의 터치로 만나는
+                        <br />전 세계의 아름다운 여행지
+                      </DescriptionTitle>
                       <br />
                       <i
                         className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
-                      QR 코드 스캔 시 상품 상세 정보 확인
+                      QR 코드 스캔으로 더욱 자세한 정보를 알아보세요
                       <br />
                       <i
                         className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
-                      해당 국가의 이번 달 평균 온도 및 습도
+                      여행지의 이번 달 평균 온도와 습도를 확인해보세요
                       <br />
                       <i
                         className="fas fa-check-circle"
                         style={{ color: 'green' }}
                       />{' '}
-                      대표 여행지 사진 및 소개
+                      아름다운 여행지를 한 눈에 담아둘 수 있어요
                     </DescriptionContent>
                   </div>
                 </DescriptionWrapper>
               </Grid>
             </Grid>
           </Grid>
-          <Grid container justify="flex-start" className={classes.grid}>
-            <Grid item xs={12} md={8}>
+
+          <Grid
+            container
+            justify="flex-start"
+            alignItems="center"
+            className={classes.grid}
+          >
+            <Grid item xs={12} md={6}>
               <Grid item>
                 <MobileImgWrapper>
-                  <MobileImage src={static_url + '/minfo1.png'} />
-                  <MobileImage src={static_url + '/minfo2.png'} />
-                  <MobileImage src={static_url + '/minfo3.png'} />
+                  <MobileImage src={static_url + '/minfo1.PNG'} />
                 </MobileImgWrapper>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Grid item className={classes.mobileinfo}>
+            <Grid item xs={12} md={6}>
+              <Grid item>
                 <DescriptionWrapper>
-                  <div>
+                  <DescriptionContent>
                     <DescriptionTitle>
-                      모바일 상세페이지 (QR코드)
+                      QR 코드 스캔을 통해 보이는
+                      <br />
+                      예쁘고 알찬 모바일 페이지!
                     </DescriptionTitle>
-                    <MobileDescriptionContent>
-                      광고판에서 QR코드 스캔 시 상품 상세 정보 확인
-                      <br />
-                      <i
-                        className="fas fa-check-circle"
-                        style={{ color: 'white' }}
-                      />{' '}
-                      해당 나라의 대표 이미지, 온도, 습도 확인
-                      <br />
-                      <i
-                        className="fas fa-check-circle"
-                        style={{ color: 'white' }}
-                      />{' '}
-                      일차별 여행 경로, 교통편 확인
-                      <br />
-                      <i
-                        className="fas fa-check-circle"
-                        style={{ color: 'white' }}
-                      />{' '}
-                      여행 약관 및 참고사항 확인
-                      <br />
-                      <i
-                        className="fas fa-check-circle"
-                        style={{ color: 'white' }}
-                      />{' '}
-                      간편 상담 예약 가능
-                      <br />
-                      <i
-                        className="fas fa-check-circle"
-                        style={{ color: 'white' }}
-                      />{' '}
-                      카카오톡 챗봇을 통한 간편 정보 확인
-                    </MobileDescriptionContent>
-                  </div>
+                    <br />
+                    <i
+                      className="fas fa-check-circle"
+                      style={{ color: 'green' }}
+                    />{' '}
+                    여행지의 이번 달 평균 온도와 습도를 확인해보세요
+                    <br />
+                  </DescriptionContent>
+                </DescriptionWrapper>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            justify="flex-start"
+            alignItems="center"
+            className={classes.grid}
+            direction="row-reverse"
+            style={{ backgroundColor: '#fafafa' }}
+          >
+            <Grid item xs={12} md={6}>
+              <Grid item>
+                <MobileImgWrapper>
+                  <MobileImage src={static_url + '/minfo2.PNG'} />
+                </MobileImgWrapper>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Grid item style={{ marginLeft: '1rem' }}>
+                <DescriptionWrapper>
+                  <DescriptionTitle>
+                    광고판에서 QR코드 스캔 시 상품 상세 정보 확인
+                  </DescriptionTitle>
+                </DescriptionWrapper>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            justify="flex-start"
+            alignItems="center"
+            className={classes.grid}
+            style={{ backgroundColor: palette.teal[50] }}
+          >
+            <Grid item xs={12} md={6}>
+              <Grid item>
+                <MobileImgWrapper>
+                  <MobileImage src={static_url + '/minfo3.PNG'} />
+                </MobileImgWrapper>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Grid item>
+                <DescriptionWrapper>
+                  <DescriptionTitle>
+                    광고판에서 QR코드 스캔 시 상품 상세 정보 확인
+                  </DescriptionTitle>
                 </DescriptionWrapper>
               </Grid>
             </Grid>

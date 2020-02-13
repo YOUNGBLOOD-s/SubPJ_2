@@ -84,15 +84,16 @@ const GradeCard = ({ title, image, grade, price, option }) => {
   };
 
   const updateGrade = () => {
-    let result = 0;
     let originalGrade = -1;
 
     originalGrade = getGrade();
 
-    if (originalGrade === grade) return -1;
-    else if (originalGrade === 1) {
+    if (originalGrade === grade) {
+      alert(gradeAlert[-1]);
+      return;
+    } else if (originalGrade === 1) {
       alert('관리자는 등급 구매가 불가능합니다.');
-      return 0;
+      return;
     }
     axios
       .put(
@@ -105,18 +106,16 @@ const GradeCard = ({ title, image, grade, price, option }) => {
         },
       )
       .then(res => {
-        result = 1;
+        alert(gradeAlert[1]);
       })
-      .catch(err => (result = 0));
-
-    return result;
+      .catch(err => {
+        alert(gradeAlert[0]);
+      });
   };
 
   const onClick = () => {
     window.confirm(title + ' 등급을 구매하시겠습니까?')
       ? updateGrade()
-        ? alert(title + '님, 환영합니다!')
-        : alert('등급 구매에 실패하였습니다.')
       : window.alert('등급 구매를 취소하였습니다.');
   };
 

@@ -34,11 +34,11 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   bg: {
-    background: 'linear-gradient(to bottom, transparent, #bdbdbd, black)',
+    // background: 'linear-gradient(to bottom, transparent, #bdbdbd, black)',
   },
   bgtop: {
     // background: '#f0f0f0',
-    background: 'linear-gradient(to bottom, white, #eaeaea)',
+    // background: 'linear-gradient(to bottom, white, #eaeaea)',
   },
 }));
 
@@ -55,7 +55,7 @@ const Grade = () => {
 
   return (
     <div className={classes.bgtop}>
-      <HeaderText>상품</HeaderText>
+      <HeaderText />
       <Grid container className={classes.root}>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={3}>
@@ -77,7 +77,7 @@ const Grade = () => {
       </Grid>
 
       <div className={classes.bg}>
-        <HeaderText>설명</HeaderText>
+        <HeaderText />
         <GradeInfo />
       </div>
     </div>
