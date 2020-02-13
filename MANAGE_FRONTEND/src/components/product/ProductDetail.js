@@ -15,6 +15,7 @@ import LoadingBackdrop from '../common/LoadingBackdrop';
 import { removeList } from '../../lib/api/ad';
 import component from '../../lib/material/component';
 import DeleteAlertDialog from '../common/DeleteAlertDialog';
+import MonthForm from './MonthForm';
 
 const DetailContainer = styled.div`
   padding: 1rem;
@@ -24,6 +25,10 @@ const DetailWrapper = styled.div`
   max-width: 1000px;
   margin: 0 auto;
 `;
+
+const NoData = ({ children }) => {
+  return <div>{children ? <div>{children}</div> : <div>NO-DATA</div>}</div>;
+};
 
 const ProductDetail = ({ match, history }) => {
   const { id } = match.params;
@@ -56,72 +61,66 @@ const ProductDetail = ({ match, history }) => {
       {!loading && product ? (
         <DetailWrapper>
           {/* OWNER */}
-          {product.owner && (
-            <>
-              <TitleBar>광고 소유자</TitleBar>
-              <CaptionText>
-                광고를 소유하고 있는 소유자의 정보입니다.
-              </CaptionText>
-              <MaterialCard>
-                <Owner owner={product.owner} />
-              </MaterialCard>
-            </>
-          )}
+          <TitleBar>광고 소유자</TitleBar>
+          <CaptionText>광고 소유자의 정보입니다.</CaptionText>
+          <MaterialCard>
+            {product.owner ? <Owner owner={product.owner} /> : <NoData />}
+          </MaterialCard>
 
           {/* NATION */}
-          {product.nation && (
-            <>
-              <TitleBar>나라 기본 설정</TitleBar>
-              <CaptionText>광고중인 나라의 기본설정입니다.</CaptionText>
-              <MaterialCard>
-                <Nation nation={product.nation} user={user} />
-              </MaterialCard>
-            </>
-          )}
+          <TitleBar>광고 기본 설정</TitleBar>
+          <CaptionText>광고의 기본설정입니다.</CaptionText>
+          <MaterialCard>
+            {product.nation ? (
+              <Nation nation={product.nation} user={user} />
+            ) : (
+              <NoData />
+            )}
+          </MaterialCard>
 
           {/* IMAGES */}
-          {product.images && (
-            <>
-              <TitleBar>온도별 나라 대표이미지</TitleBar>
-              <CaptionText>
-                춥고, 더울때 보여줄 나라의 대표 이미지입니다.
-              </CaptionText>
-              <MaterialCard>
-                <Images images={product.images} user={user} />
-              </MaterialCard>
-            </>
-          )}
+          <TitleBar>온도별 광고 대표이미지</TitleBar>
+          <CaptionText>
+            춥고, 더울때 보여줄 광고의 대표 이미지입니다.
+          </CaptionText>
+          <MaterialCard>
+            {product.images ? (
+              <Images images={product.images} user={user} />
+            ) : (
+              <NoData />
+            )}
+          </MaterialCard>
 
           {/* ROUTES/CONTENTS */}
-          {product.contents && (
-            <>
-              <TitleBar>나라의 일자별 경로</TitleBar>
-              <CaptionText>광고중인 나라의 N일차 M번째 경로입니다.</CaptionText>
-              <MaterialCard>
-                <Contents contents={product.contents} user={user} />
-              </MaterialCard>
-            </>
-          )}
+          <TitleBar>광고의 일자별 경로</TitleBar>
+          <CaptionText>광고의 N일차 M번째 경로입니다.</CaptionText>
+          <MaterialCard>
+            {product.contents ? (
+              <Contents contents={product.contents} user={user} />
+            ) : (
+              <NoData />
+            )}
+          </MaterialCard>
 
           {/* MONTH */}
-          {product.month && (
-            <>
-              <TitleBar>나라의 온/습도 테이블</TitleBar>
-              <CaptionText>
-                광고중인 나라의 기본 참고 온/습도 테이블입니다.
-              </CaptionText>
-              <MaterialCard>
-                <Month month={product.month} user={user} />
-              </MaterialCard>
-            </>
-          )}
+          <TitleBar>광고의 온/습도 테이블</TitleBar>
+          <CaptionText>광고의 기본 참고 온/습도 테이블입니다.</CaptionText>
+          <MaterialCard>
+            {product.month ? (
+              <Month month={product.month} user={user} />
+            ) : (
+              <NoData>
+                <MonthForm nationId={id} />
+              </NoData>
+            )}
+          </MaterialCard>
 
           {/* DELETE */}
           {user && user.username === 'admin' && (
             <DeleteAlertDialog>
               {/* children으로 삭제 버튼 넣어줌 */}
               <component.Button onClick={onRemoveAd} color="secondary">
-                삭제
+                전체삭제
               </component.Button>
             </DeleteAlertDialog>
           )}

@@ -19,3 +19,13 @@ export const updateContent = ({ id, form, token }) =>
   client.put(`/api/man/contents/update/${id}`, form, {
     headers: { Authorization: token },
   });
+
+export const addMonthtable = ({ form, token }) =>
+  client.post('/api/man/monthtb/insert', form, {
+    headers: { Authorization: token },
+  });
+
+export const updateMonthtable = ({ id, form, token }) =>
+  client.put(`/api/man/monthtb/update/${id}`, form, {
+    headers: { Authorization: token },
+  });

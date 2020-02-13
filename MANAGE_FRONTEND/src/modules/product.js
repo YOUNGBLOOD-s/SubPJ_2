@@ -12,6 +12,12 @@ const [
 ] = createRequestActionTypes('product/GET_PRODUCT');
 
 const [
+  ADD_PRODUCT_MONTHTABLE,
+  ADD_PRODUCT_MONTHTABLE_SUCCESS,
+  ADD_PRODUCT_MONTHTABLE_FAILURE,
+] = createRequestActionTypes('product/ADD_PRODUCT_MONTHTABLE');
+
+const [
   UPDATE_PRODUCT_NATION,
   UPDATE_PRODUCT_NATION_SUCCESS,
   UPDATE_PRODUCT_NATION_FAILURE,
@@ -29,10 +35,24 @@ const [
   UPDATE_PRODUCT_CONTENT_FAILURE,
 ] = createRequestActionTypes('product/UPDATE_PRODUCT_CONTENT');
 
+const [
+  UPDATE_PRODUCT_MONTHTABLE,
+  UPDATE_PRODUCT_MONTHTABLE_SUCCESS,
+  UPDATE_PRODUCT_MONTHTABLE_FAILURE,
+] = createRequestActionTypes('product/UPDATE_PRODUCT_MONTHTABLE');
+
 export const getProduct = createAction(GET_PRODUCT, ({ id, token }) => ({
   id,
   token,
 }));
+export const addMonthtable = createAction(
+  ADD_PRODUCT_MONTHTABLE,
+  ({ token, form }) => ({
+    token,
+    form,
+  }),
+);
+
 export const updateProductNation = createAction(
   UPDATE_PRODUCT_NATION,
   ({ id, form, token }) => ({ id, form, token }),
@@ -45,8 +65,16 @@ export const updateProductContent = createAction(
   UPDATE_PRODUCT_CONTENT,
   ({ id, form, token }) => ({ id, form, token }),
 );
+export const updateProductMonthtable = createAction(
+  UPDATE_PRODUCT_MONTHTABLE,
+  ({ id, form, token }) => ({ id, form, token }),
+);
 
 const getProductSaga = createRequestSaga(GET_PRODUCT, productAPI.productInfo);
+const addProductMonthtableSaga = createRequestSaga(
+  ADD_PRODUCT_MONTHTABLE,
+  productAPI.addMonthtable,
+);
 const updateProductNationSaga = createRequestSaga(
   UPDATE_PRODUCT_NATION,
   productAPI.updateNation,
@@ -59,11 +87,17 @@ const updateProductContentSaga = createRequestSaga(
   UPDATE_PRODUCT_CONTENT,
   productAPI.updateContent,
 );
+const updateProductMonthtableSage = createRequestSaga(
+  UPDATE_PRODUCT_MONTHTABLE,
+  productAPI.updateMonthtable,
+);
 export function* productSaga() {
   yield takeLatest(GET_PRODUCT, getProductSaga);
+  yield takeLatest(ADD_PRODUCT_MONTHTABLE, addProductMonthtableSaga);
   yield takeLatest(UPDATE_PRODUCT_NATION, updateProductNationSaga);
   yield takeLatest(UPDATE_PRODUCT_IMAGE, updateProductImageSaga);
   yield takeLatest(UPDATE_PRODUCT_CONTENT, updateProductContentSaga);
+  yield takeLatest(UPDATE_PRODUCT_MONTHTABLE, updateProductMonthtableSage);
 }
 
 const initialState = {
@@ -73,6 +107,9 @@ const initialState = {
     nation: null,
     image: null,
     contents: null,
+    month: null,
+  },
+  addErrors: {
     month: null,
   },
 };
@@ -88,6 +125,22 @@ const product = handleActions(
       ...state,
       product: null,
       error,
+    }),
+    [ADD_PRODUCT_MONTHTABLE_SUCCESS]: (state, { payload: monthtable }) => ({
+      ...state,
+      product: {
+        ...state.product,
+        month: monthtable,
+      },
+      addErrors: {
+        month: null,
+      },
+    }),
+    [ADD_PRODUCT_MONTHTABLE_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      addErrors: {
+        month: error,
+      },
     }),
     [UPDATE_PRODUCT_NATION_SUCCESS]: (
       state,
@@ -159,6 +212,27 @@ const product = handleActions(
       updateErrors: {
         ...state.updateErrors,
         contents: error,
+      },
+    }),
+    [UPDATE_PRODUCT_MONTHTABLE_SUCCESS]: (
+      state,
+      { payload: { updateMonth } },
+    ) => ({
+      ...state,
+      product: {
+        ...state.product,
+        month: updateMonth,
+      },
+      updateErrors: {
+        ...state.updateErrors,
+        month: null,
+      },
+    }),
+    [UPDATE_PRODUCT_MONTHTABLE_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      updateErrors: {
+        ...state.updateErrors,
+        month: error,
       },
     }),
   },
