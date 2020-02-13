@@ -169,4 +169,9 @@ public class ManServiceImpl implements IManService {
 		repo.updateMonthtb(montb);
 	}
 
+	@Override
+	public int selectCustomer(int idx) {
+		return repo.selectCustomer(idx);
+	}
+
 }

@@ -89,7 +89,6 @@ public class ManageController {
 					list.get(i).setUrl(url);
 					list.get(i).setOwner(owner);
 				}
-				// 페이지짜르기. 1이면 1~10
 				msg.put("resvalue", list);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else if (grade >= 2) {
@@ -117,8 +116,7 @@ public class ManageController {
 	/** 사용자 상품 보기 서비스 */
 	@GetMapping("/man/nation/{idx}")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
-	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token,
-			@PathVariable("idx") int idx) {
+	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		Nation nat = new Nation();
@@ -130,9 +128,12 @@ public class ManageController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
-			member = ser.selectMemberInfo(customer);
+			int own = ser.selectCustomer(idx);
+			member = ser.selectMemberInfo(own);
+			//System.out.println(member.toString());
 			
 			Owner owner = new Owner(member.getUsername(), member.getCompany(), member.getGrade());
+			
 			int grade = ser.searchGrade(customer);
 			if (grade == 1) {
 				nat = ser.nationInfo(idx);
@@ -160,8 +161,8 @@ public class ManageController {
 					msg.put("month", mon);
 					msg.put("contents", contentsList);
 					msg.put("images", imageList);
-					msg.put("owner", owner);
 					msg.put("counselList", counlist);
+					msg.put("owner", owner);
 					res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 				} else {
 					res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);

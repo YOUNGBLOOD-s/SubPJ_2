@@ -172,5 +172,10 @@ public class ManDaoImpl implements IManDao {
 		session.update("management.nationupdate", map);
 	}
 
+	@Override
+	public int selectCustomer(int idx) {
+		return session.selectOne("management.selectCustomer", idx);
+	}
+
 	
 }
