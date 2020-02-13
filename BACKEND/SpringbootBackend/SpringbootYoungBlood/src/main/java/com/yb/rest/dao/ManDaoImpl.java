@@ -1,6 +1,5 @@
 package com.yb.rest.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,101 +33,68 @@ public class ManDaoImpl implements IManDao {
 	}
 
 	@Override
-	public ArrayList<Nation> nationList(int customer) {
-		return (ArrayList) session.selectList("management.selectNationList", customer);
+	public List<Nation> nationList(int customer) {
+		return session.selectList("management.selectNationList", customer);
 	}
 
 	@Override
-	public ArrayList<Nation> nationListAll(int customer) {
-		return (ArrayList) session.selectList("management.selectNationListAll", customer);
+	public List<Nation> nationListAll(int customer) {
+		return session.selectList("management.selectNationListAll", customer);
 	}
-	//paging  처리/
+
 	@Override
-	public ArrayList<NationDTO> nationList_page(int customer,int pageIdx) {
+	public List<NationDTO> nationList_page(int customer,int pageIdx) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("customer", customer);
 		map.put("pageIdx", pageIdx);
-		return (ArrayList) session.selectList("management.selectNationList_page", map);
+		return session.selectList("management.selectNationList_page", map);
 	}
 
 	@Override
-	public ArrayList<NationDTO> nationListAll_page(int customer,int pageIdx) {
+	public List<NationDTO> nationListAll_page(int customer,int pageIdx) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("customer", customer);
 		map.put("pageIdx", pageIdx);
-		return (ArrayList) session.selectList("management.selectNationListAll_page", map);
+		return session.selectList("management.selectNationListAll_page", map);
 	}
 
 	@Override
-	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
+	public void nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
 		Nation n = new Nation(en_name, ko_name, dust, continents, customer, weight, speech, price, s_date, f_date);
-		int insert = session.insert("management.insertnation", n);
-		if (insert == 0)
-			return false;
-		else
-			return true;
-
+		session.insert("management.insertnation", n);
 	}
 
 	@Override
-	public boolean nationdelete(String idx, String customer) {
+	public void nationdelete(String idx, String customer) {
 		Nation nat = new Nation();
 		nat.setIdx(idx);
 		nat.setCustomer(customer);
-		System.out.println(idx+""+customer);
-		System.out.println(nat.getCustomer());
-		int delete = session.delete("management.nationdelete", nat);
-		if (delete == 0)
-			return false;
-		else
-			return true;
+		session.delete("management.nationdelete", nat);
 	}
 
 	@Override
-	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date) {
-		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date);
-		int update = session.update("management.nationupdate", n);
-		if (update == 0)
-			return false;
-		else
-			return true;
+	public List<Monthtb> monthList(int customer) {
+		return session.selectList("management.monthlist", customer);
 	}
 
 	@Override
-	public ArrayList<Monthtb> monthList(int customer) {
-		return (ArrayList) session.selectList("management.monthlist", customer);
+	public List<Monthtb> monthListAll(int customer) {
+		return session.selectList("management.monthlistAll", customer);
 	}
 
 	@Override
-	public ArrayList<Monthtb> monthListAll(int customer) {
-		return (ArrayList) session.selectList("management.monthlistAll", customer);
+	public void insertMonthtb(Monthtb montb) {
+		session.insert("management.insertMonthtb", montb);
 	}
 
 	@Override
-	public boolean insertMonthtb(Monthtb montb) {
-		int insert = session.insert("management.insertMonthtb", montb);
-		if (insert == 0)
-			return false;
-		else
-			return true;
+	public void updateMonthtb(Monthtb montb) {
+		session.update("management.updateMonthtb", montb);		
 	}
 
 	@Override
-	public boolean updateMonthtb(Monthtb montb) {
-		int update = session.update("management.updateMonthtb", montb);
-		if (update == 0)
-			return false;
-		else
-			return true;
-	}
-
-	@Override
-	public boolean deleteMonthtb(int nation) {
-		int delete = session.delete("management.deleteMonthtb", nation);
-		if (delete == 0)
-			return false;
-		else
-			return true;
+	public void deleteMonthtb(int nation) {
+		session.delete("management.deleteMonthtb", nation);
 	}
 	@Override
 	public int getVolume(int idx) {
@@ -137,91 +103,73 @@ public class ManDaoImpl implements IManDao {
 
 
 	@Override
-	public ArrayList<Image> imageListAll(int customer) {
-		return (ArrayList) session.selectList("management.imagelistAll", customer);
+	public List<Image> imageListAll(int customer) {
+		return session.selectList("management.imagelistAll", customer);
 	}
 
 	@Override
-	public ArrayList<Image> imageList(int customer) {
-		return (ArrayList) session.selectList("management.imagelist", customer);
+	public List<Image> imageList(int customer) {
+		return session.selectList("management.imagelist", customer);
 	}
 
 	@Override
-	public boolean insertImagetb(Image imgtb) {
-		int insert = session.insert("management.imageinsert", imgtb);
-		if (insert == 0)
-			return false;
-		else
-			return true;
+	public void insertImagetb(Image imgtb) {
+		session.insert("management.imageinsert", imgtb);
 	}
 
 	@Override
-	public boolean updateImagetb(Image imgtb) {
-		int update = session.update("management.imageupdate", imgtb);
-		if (update == 0)
-			return false;
-		else
-			return true;
+	public void updateImagetb(Image imgtb) {
+		session.update("management.imageupdate", imgtb);
 	}
 
 	@Override
-	public boolean deleteImagetb(int idx) {
-		int delete = session.delete("management.imagedelete", idx);
-		if (delete == 0)
-			return false;
-		else
-			return true;
+	public void deleteImagetb(int idx) {
+		session.delete("management.imagedelete", idx);
 	}
 
 	@Override
 	public Nation nationInfo(int idx) {
-		// TODO Auto-generated method stub
-		Nation nat = session.selectOne("management.nationInfo", idx);
-		return nat;
+		return session.selectOne("management.nationInfo", idx);
 	}
 
 	@Override
 	public Monthtb monthInfo(int idx) {
-		// TODO Auto-generated method stub
-		Monthtb month = session.selectOne("management.monthInfo", idx);
-		return month;
+		return session.selectOne("management.monthInfo", idx);
 	}
 
 	@Override
-	public ArrayList<Route> contentsInfo(int idx) {
-		// TODO Auto-generated method stub
-		return (ArrayList) session.selectList("management.contentsInfo", idx);
+	public List<Route> contentsInfo(int idx) {
+		return session.selectList("management.contentsInfo", idx);
 	}
 
 	@Override
-	public ArrayList<Image> imagesInfo(int idx) {
-		return (ArrayList) session.selectList("management.imageInfo", idx);
+	public List<Image> imagesInfo(int idx) {
+		return session.selectList("management.imageInfo", idx);
 	}
 
 	@Override
 	public Nation selectNationCustomer(int customer) {
-		// TODO Auto-generated method stub
-		Nation nat = session.selectOne("management.selectnationcustomer", customer);
-		return nat;
+		return session.selectOne("management.selectnationcustomer", customer);
 	}
 
 	@Override
 	public Member selectMemberInfo(int customer) {
-		// TODO Auto-generated method stub
-		Member mem = session.selectOne("management.selectMemberInfo", customer);	
-		return mem;
+		return session.selectOne("management.selectMemberInfo", customer);
 	}
 
 	@Override
 	public String selectNation_image(int idx) {
-		// TODO Auto-generated method stub
-		String url = (String) session.selectOne("management.selectNation_image", idx);
-		return url;
+		return (String) session.selectOne("management.selectNation_image", idx);
 	}
 
 	@Override
 	public List<Counsel> selectCounsellist(int idx) {
 		return session.selectList("management.selectCounsellist", idx);
+	}
+	
+	@Override
+	public void nationupdate(Map map) {
+		session.update("management.nationupdate", map);
 	}
 
 	

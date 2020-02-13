@@ -77,4 +77,9 @@ public class MemServiceImpl implements IMemService{
 		repo.UpdateMem(username, company);
 	}
 
+	@Override
+	public int selectGrade(String username) {
+		return repo.selectGrade(username);
+	}
+
 }
