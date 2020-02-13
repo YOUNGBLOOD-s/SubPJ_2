@@ -31,7 +31,6 @@ const MyPageAdmin = ({ userInfo, setUserInfo }) => {
       columns={state.columns}
       data={state.data}
       editable={{
-        isEditable: rowData => rowData.username !== 'admin',
         isDeletable: rowData => rowData.username !== 'admin',
         onRowAdd: newData =>
           new Promise(resolve => {
