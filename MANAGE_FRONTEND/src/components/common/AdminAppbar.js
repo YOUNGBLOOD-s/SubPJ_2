@@ -5,10 +5,10 @@ import palette from '../../lib/styles/palette';
 
 const AppBarWrapper = styled.div`
   background-color: ${palette.grey[200]};
-  padding: 1rem 0;
+  padding: 1rem;
+
 `;
 
-// FIXME: 화면 줄어들면 딱 달라 붙는거 수정좀
 const LinkWrapper = styled.div`
   max-width: 1000px;
   margin: 0 auto;
