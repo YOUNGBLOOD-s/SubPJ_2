@@ -4,33 +4,13 @@ import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import StyledTextField from '../../common/StyledTextField';
 
 const MyFormBlcok = styled.div`
   margin: 0 auto;
   margin-top: 4rem;
   max-width: 500px;
 `;
-
-const StyledTextField = withStyles({
-  root: {
-    marginBottom: '1rem',
-    // 포커스시 라벨 색상
-    '& label.Mui-focused': {
-      color: palette.teal[500],
-    },
-    '& .MuiOutlinedInput-root': {
-      // 기본 필드 보더 색상
-      '& fieldset': {
-        borderColor: palette.teal[50],
-      },
-      // 호버 했을때 색상
-      // '&:hover fieldset': {
-      //   borderColor: 'yellow',
-      // },
-    },
-  },
-})(component.TextField);
 
 const StyledButton = withStyles({
   root: {
@@ -76,6 +56,8 @@ const MyPageForm = ({ userInfo, setUserInfo, loggedInUser }) => {
       setPasswordConfirm(value);
     }
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const isSame = () => {
     if (password === passwordConfirm) {
       setPasswordState(false);
@@ -83,12 +65,15 @@ const MyPageForm = ({ userInfo, setUserInfo, loggedInUser }) => {
       setPasswordState(true);
     }
   };
+
   useEffect(() => {
     isSame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [password]);
 
   useEffect(() => {
     isSame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [passwordConfirm]);
 
   const onChange = e => {

@@ -48,8 +48,8 @@ const MyProducts = () => {
                 <Link
                   to={
                     user.username === 'admin'
-                      ? `admin/product/${ad.idx}`
-                      : `manage/product/${ad.idx}`
+                      ? `/admin/product/${ad.idx}`
+                      : `/manage/product/${ad.idx}`
                   }
                 >
                   <MyProduct ad={ad} />

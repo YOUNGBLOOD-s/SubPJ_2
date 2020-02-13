@@ -51,7 +51,7 @@ const MonthForm = ({ nationId, update, data, setUpdating }) => {
       setForm(data);
       setAdding(true);
     }
-  }, []);
+  }, [update, data]);
 
   const dispatch = useDispatch();
   const token = sessionStorage.getItem('access_token');

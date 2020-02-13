@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import koLocale from 'date-fns/locale/ko';
 import palette from '../../lib/styles/palette';
 import {
