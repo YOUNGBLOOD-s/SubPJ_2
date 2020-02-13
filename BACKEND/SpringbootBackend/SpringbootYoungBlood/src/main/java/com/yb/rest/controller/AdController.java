@@ -1,7 +1,6 @@
 package com.yb.rest.controller;
 
 import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -37,6 +36,7 @@ import com.yb.rest.service.IManService;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.ForScore;
+import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
 import com.yb.rest.vo.Route;
@@ -577,10 +577,15 @@ public class AdController {
 		
 		for(int i=0; i<list.size(); i++) {
 			int idx = list.get(i);
-			
 			Map<String, Object> con = new HashMap<String, Object>();
 			Nation nation = ser.getNationdetail(idx);
-			System.out.println(nation.toString());
+			
+			Monthtb mon = manser.monthInfo(idx);
+			List<Image> img =  manser.imagesInfo(idx);
+			List<Route> rou = manser.contentsInfo(idx);
+			
+			if(mon==null || img==null || rou==null) continue;
+			
 			con.put("idx", nation.getIdx());
 			con.put("en_name", nation.getEn_name());
 			con.put("name", nation.getKo_name());

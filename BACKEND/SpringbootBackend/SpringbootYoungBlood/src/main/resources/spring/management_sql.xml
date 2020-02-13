@@ -196,7 +196,11 @@
 	from counseltb
 	where nation=#{idx};
 	</select>
-
+	
+	<select id="selectCustomer" parameterType="int" resultType="int">
+	select customer from nationtb where idx=#{idx};
+	</select>
+	
 </mapper>
  
  

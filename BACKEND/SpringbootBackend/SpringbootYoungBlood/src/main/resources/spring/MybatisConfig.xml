@@ -23,5 +23,6 @@
     <mapper resource="spring/sensor.xml"/>
     <mapper resource="spring/management_sql.xml"/>
     <mapper resource="spring/chatbot_sql.xml"/>
+    <mapper resource="spring/sta_sql.xml"/>
   </mappers>
 </configuration>
