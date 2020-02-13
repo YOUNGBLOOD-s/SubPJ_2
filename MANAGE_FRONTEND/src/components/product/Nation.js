@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NationUpdateForm from './NationUpdateForm';
 import component from '../../lib/material/component';
 
-const Nation = ({ nation }) => {
+const Nation = ({ nation, user }) => {
   const [updating, setUpdating] = useState(false);
   // 수정가능한 필드
   const {
@@ -47,16 +47,18 @@ const Nation = ({ nation }) => {
                 <div>현재 FLAG : {flag}</div>
               </div>
             </component.Grid>
-            <component.Grid item xs={12}>
-              <component.Button
-                variant="outlined"
-                color="primary"
-                onClick={() => setUpdating(true)}
-                fullWidth
-              >
-                수정
-              </component.Button>
-            </component.Grid>
+            {user && user.username === 'admin' && (
+              <component.Grid item xs={12}>
+                <component.Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => setUpdating(true)}
+                  fullWidth
+                >
+                  수정
+                </component.Button>
+              </component.Grid>
+            )}
           </component.Grid>
         )}
       </div>

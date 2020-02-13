@@ -74,7 +74,7 @@ const ProductDetail = ({ match, history }) => {
               <TitleBar>나라 기본 설정</TitleBar>
               <CaptionText>광고중인 나라의 기본설정입니다.</CaptionText>
               <MaterialCard>
-                <Nation nation={product.nation} />
+                <Nation nation={product.nation} user={user} />
               </MaterialCard>
             </>
           )}
@@ -87,7 +87,7 @@ const ProductDetail = ({ match, history }) => {
                 춥고, 더울때 보여줄 나라의 대표 이미지입니다.
               </CaptionText>
               <MaterialCard>
-                <Images images={product.images} />
+                <Images images={product.images} user={user} />
               </MaterialCard>
             </>
           )}
@@ -98,7 +98,7 @@ const ProductDetail = ({ match, history }) => {
               <TitleBar>나라의 일자별 경로</TitleBar>
               <CaptionText>광고중인 나라의 N일차 M번째 경로입니다.</CaptionText>
               <MaterialCard>
-                <Contents contents={product.contents} />
+                <Contents contents={product.contents} user={user} />
               </MaterialCard>
             </>
           )}
@@ -111,7 +111,7 @@ const ProductDetail = ({ match, history }) => {
                 광고중인 나라의 기본 참고 온/습도 테이블입니다.
               </CaptionText>
               <MaterialCard>
-                <Month month={product.month} />
+                <Month month={product.month} user={user} />
               </MaterialCard>
             </>
           )}

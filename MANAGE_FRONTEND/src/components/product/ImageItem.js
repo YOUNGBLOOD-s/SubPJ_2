@@ -33,7 +33,7 @@ const typeName = {
   4: '🌚 어두운 이미지',
 };
 
-const ImageItem = ({ image }) => {
+const ImageItem = ({ image, user }) => {
   const [updating, setUpdating] = useState(false);
 
   const { type, url } = image;
@@ -48,16 +48,18 @@ const ImageItem = ({ image }) => {
           <component.Grid item xs={12}>
             <img className="image" src={url} alt={typeName[type]} />
           </component.Grid>
-          <component.Grid item xs={12}>
-            <component.Button
-              variant="outlined"
-              color="primary"
-              onClick={() => setUpdating(true)}
-              fullWidth
-            >
-              수정
-            </component.Button>
-          </component.Grid>
+          {user && user.username === 'admin' && (
+            <component.Grid item xs={12}>
+              <component.Button
+                variant="outlined"
+                color="primary"
+                onClick={() => setUpdating(true)}
+                fullWidth
+              >
+                수정
+              </component.Button>
+            </component.Grid>
+          )}
         </component.Grid>
       )}
     </ImageWrapper>
