@@ -174,21 +174,17 @@ public class AdController {
 					return (int) (o1.getHumid() - o2.getHumid());
 				}
 			});
-			for (int j = 0; j < nations.size(); j++) {
-				int originScore = ser.getScore(nations.get(j).getIdx());
-				int minus = j / 5 == 0 ? 10 : (j / 5) * (10);
-				originScore -= minus;
-				ser.updateScore(new ForScore(nations.get(j).getIdx(), originScore));
-			}
-			for (int j = 0; j < nations.size(); j++) {
-				int score = ser.getScore(nations.get(j).getIdx());
-				int minus = ser.getDust(nations.get(j).getIdx()) * 10;
-				score -= minus;
-				ser.updateScore(new ForScore(nations.get(j).getIdx(), score));
-			}
+			//습도 계산할때 미세먼지 값 까지 함께 처리하도록 합치기
 			List<ForScore> finallist = new ArrayList<ForScore>();
 			for (int j = 0; j < nations.size(); j++) {
-				finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
+				int idx=nations.get(j).getIdx();
+				int originScore = ser.getScore(idx);
+				int minus = j / 5 == 0 ? 10 : (j / 5) * (10); //습도 마이너스 값
+				minus+=ser.getDust(idx) * 10; //미세먼지 마이너스 값
+				originScore -= minus;
+				ser.updateScore(new ForScore(idx, originScore));
+				//최종 idx,점수 리스트에 바로 담기
+				finallist.add(new ForScore(idx,ser.getScore(idx)));
 			}
 
 			Collections.sort(finallist, new Comparator<ForScore>() {
@@ -197,6 +193,7 @@ public class AdController {
 					return o1.getScore() - o2.getScore();
 				}
 			});
+			
 			result = new LinkedList<>();
 			for (int i = 0; i < 4; i++) {
 				int finalScore = 0;
@@ -258,7 +255,7 @@ public class AdController {
 		List<Nation> everyNation = ser.selectNations();
 		for (int i = 0; i < everyNation.size(); i++) {
 			String idx = everyNation.get(i).getIdx();
-			if (ser.getFlag(idx) == 1)
+			if (ser.getFlag(idx) == 1) //flag==1 이미 다 횟수 사용함
 				continue;
 			gradeGroup.add(Integer.parseInt(idx));
 		}
