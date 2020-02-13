@@ -23,7 +23,7 @@ const StyledImg = styled.img`
 `;
 
 const ContentItem = ({ content }) => {
-  const { idx, day, seq, title, detail, image, tofrom, transport } = content;
+  const { day, seq, title, detail, image, tofrom, transport } = content;
   const [updating, setUpdating] = useState(false);
   return (
     <ContentsWrapper>
