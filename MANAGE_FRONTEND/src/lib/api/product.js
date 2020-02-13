@@ -9,3 +9,8 @@ export const updateNation = ({ id, form, token }) =>
   client.put(`/api/man/nation/update/${id}`, form, {
     headers: { Authorization: token },
   });
+
+export const updateImage = ({ id, form, token }) =>
+  client.put(`/api/man/image/update/${id}`, form, {
+    headers: { Authorization: token },
+  });

@@ -17,6 +17,12 @@ const [
   UPDATE_PRODUCT_NATION_FAILURE,
 ] = createRequestActionTypes('product/UPDATE_PRODUCT_NATION');
 
+const [
+  UPDATE_PRODUCT_IMAGE,
+  UPDATE_PRODUCT_IMAGE_SUCCESS,
+  UPDATE_PRODUCT_IMAGE_FAILURE,
+] = createRequestActionTypes('product/UPDATE_PRODUCT_IMAGE');
+
 export const getProduct = createAction(GET_PRODUCT, ({ id, token }) => ({
   id,
   token,
@@ -25,15 +31,24 @@ export const updateProductNation = createAction(
   UPDATE_PRODUCT_NATION,
   ({ id, form, token }) => ({ id, form, token }),
 );
+export const updateProductImage = createAction(
+  UPDATE_PRODUCT_IMAGE,
+  ({ id, form, token }) => ({ id, form, token }),
+);
 
 const getProductSaga = createRequestSaga(GET_PRODUCT, productAPI.productInfo);
 const updateProductNationSaga = createRequestSaga(
   UPDATE_PRODUCT_NATION,
   productAPI.updateNation,
 );
+const updateProductImageSaga = createRequestSaga(
+  UPDATE_PRODUCT_IMAGE,
+  productAPI.updateImage,
+);
 export function* productSaga() {
   yield takeLatest(GET_PRODUCT, getProductSaga);
   yield takeLatest(UPDATE_PRODUCT_NATION, updateProductNationSaga);
+  yield takeLatest(UPDATE_PRODUCT_IMAGE, updateProductImageSaga);
 }
 
 const initialState = {
@@ -41,7 +56,7 @@ const initialState = {
   error: null,
   updateErrors: {
     nation: null,
-    images: null,
+    image: null,
     contents: null,
     month: null,
   },
@@ -76,15 +91,35 @@ const product = handleActions(
         nation: null,
       },
     }),
-    [UPDATE_PRODUCT_NATION_FAILURE]: (state, { payload: error }) => {
-      return {
-        ...state,
-        updateErrors: {
-          ...state.updateErrors,
-          nation: error,
-        },
-      };
-    },
+    [UPDATE_PRODUCT_NATION_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      updateErrors: {
+        ...state.updateErrors,
+        nation: error,
+      },
+    }),
+    [UPDATE_PRODUCT_IMAGE_SUCCESS]: (state, { payload: { update } }) => ({
+      ...state,
+      product: {
+        ...state.product,
+        images: state.product.images.map(image => {
+          if (image.idx === update.idx) {
+            return { ...image, ...update };
+          }
+          return image;
+        }),
+      },
+      updateErrors: {
+        ...state.updateErrors,
+        image: null,
+      },
+    }),
+    [UPDATE_PRODUCT_IMAGE_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      updateErrors: {
+        image: error,
+      },
+    }),
   },
   initialState,
 );
