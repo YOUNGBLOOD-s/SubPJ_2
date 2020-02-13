@@ -6,7 +6,6 @@ import palette from '../../lib/styles/palette';
 const AppBarWrapper = styled.div`
   background-color: ${palette.grey[200]};
   padding: 1rem;
-
 `;
 
 const LinkWrapper = styled.div`
@@ -25,8 +24,7 @@ const AdminAppbar = () => {
       <LinkWrapper>
         <StyledLink to="/admin">광고목록</StyledLink>
         <StyledLink to="/admin/users">유저목록</StyledLink>
-        <StyledLink to="/admin/add">상품추가</StyledLink>
-        <StyledLink to="/admin/update">상품수정</StyledLink>
+        <StyledLink to="/admin/add">광고추가</StyledLink>
       </LinkWrapper>
     </AppBarWrapper>
   );
