@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateProductNation } from '../../modules/product';
 import reformDate from '../../lib/utill/reformDate';
 import LoadingBackdrop from '../common/LoadingBackdrop';
-import { useEffect } from 'react';
 
 const NationUpdateForm = ({ nation, setUpdating }) => {
   const [form, setForm] = useState({
