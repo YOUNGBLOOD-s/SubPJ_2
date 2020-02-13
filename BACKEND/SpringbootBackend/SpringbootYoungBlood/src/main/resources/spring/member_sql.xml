@@ -67,5 +67,9 @@
 	<select id="select256" parameterType="String" resultType="String">
 	select SHA2(#{plain}, 256);
 	</select>
+	
+	<select id="selectGrade" parameterType="String" resultType="int">
+	select grade from membertb where username=#{username};
+	</select>
 </mapper>
  

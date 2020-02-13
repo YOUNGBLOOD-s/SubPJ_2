@@ -84,15 +84,7 @@ public class ManDaoImpl implements IManDao {
 			return true;
 	}
 
-	@Override
-	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date) {
-		Nation n = new Nation(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date);
-		int update = session.update("management.nationupdate", n);
-		if (update == 0)
-			return false;
-		else
-			return true;
-	}
+	
 
 	@Override
 	public ArrayList<Monthtb> monthList(int customer) {
@@ -222,6 +214,11 @@ public class ManDaoImpl implements IManDao {
 	@Override
 	public List<Counsel> selectCounsellist(int idx) {
 		return session.selectList("management.selectCounsellist", idx);
+	}
+	
+	@Override
+	public void nationupdate(Map map) {
+		session.update("management.nationupdate", map);
 	}
 
 	

@@ -98,6 +98,11 @@ public class MemDaoImpl implements IMemDao {
 		map.put("username", username);
 		session.update("member.updatecom", map);
 	}
+
+	@Override
+	public int selectGrade(String username) {
+		return session.selectOne("member.selectGrade", username);
+	}
 	
 	
 }

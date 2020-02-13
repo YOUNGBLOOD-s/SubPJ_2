@@ -81,17 +81,11 @@
 		where idx=#{idx}
 	</delete>
 
-	<update id="nationupdate" parameterType="nation">
-		update nationtb
-		set
-		en_name=#{en_name}, ko_name=#{ko_name}, dust=#{dust},
-		continents=#{continents}, showcnt=#{showcnt},
-		customer=#{customer},
-		weight=#{weight}, speech=#{speech},
-		price=#{price}, s_date=#{s_date},
-		f_date=#{f_date} where customer=#{customer};
+	<update id="nationupdate" parameterType="map">
+		update nationtb set
+		en_name=#{en_name}, ko_name=#{ko_name}, dust=#{dust}, continents=#{continents}, speech=#{speech}, price=#{price}, s_date=#{s_date}, f_date=#{f_date}
+		where idx=#{idx};
 	</update>
-
 
 	<select id="monthlistAll" resultType="monthtb"
 		parameterType="int">

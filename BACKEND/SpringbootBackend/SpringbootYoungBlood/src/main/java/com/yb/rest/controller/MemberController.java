@@ -169,6 +169,7 @@ public class MemberController {
 		System.out.println("로그인 상태를 확인합니다.");
 		ResponseEntity<Map<String, Object>> res = null;	
 		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = verification(token);
 			msg.put("username", de.get("username"));
@@ -187,6 +188,7 @@ public class MemberController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> listMem(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -215,6 +217,7 @@ public class MemberController {
 		String inputpassword_256 = ser.getSHA256((String) password.get("password"));
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -249,6 +252,7 @@ public class MemberController {
 		String inputpassword_256 = ser.getSHA256(password);
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -275,6 +279,7 @@ public class MemberController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> deleteMemAdmin(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -300,6 +305,7 @@ public class MemberController {
 		System.out.println("[멤버 정보 수정] "+mem.toString());
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -328,19 +334,39 @@ public class MemberController {
 
 	/** 멤버 등급 수정(관리자) 서비스 */
 	@PutMapping("/mem/update/{grade}")
-	public @ResponseBody ResponseEntity<Map<String,Object>> updateMemGrade(@RequestHeader(value = "Authorization") String token, @RequestParam(value = "grade") int grade) {
+	@ApiOperation(value = "멤버 등급 수정(관리자/사용자)")
+	public @ResponseBody ResponseEntity<Map<String,Object>> updateMemGrade(@RequestHeader(value = "Authorization") String token, @PathVariable("grade") int grade) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			if(username.equals("admin")) {
-				ser.updateGrade(username, grade);
-				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
-			}
+			ser.updateGrade(username, grade);
+			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); 
+		} catch (Exception e) {
+			msg.put("resmsg", e.getMessage());
+			System.out.println(e.getMessage());
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
+		}
+		return res;
+	}
+	
+	/** username 등급 찾아드립니다. */
+	@GetMapping("/mem/grade")
+	@ApiOperation(value = "멤버 등급 수정(관리자/사용자)")
+	public @ResponseBody ResponseEntity<Map<String,Object>> findGrade(@RequestHeader(value = "Authorization") String token) {
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
+		try {
+			Claims de = MemberController.verification(token);
+			msg.put("username", de.get("username"));
+			String username = (String) de.get("username");
+			int grade = ser.selectGrade(username);
+			msg.put("grade", grade);
+			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); 
 		} catch (Exception e) {
 			msg.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());

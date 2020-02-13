@@ -2,6 +2,7 @@ package com.yb.rest.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,8 +60,8 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date) {
-		return repo.nationupdate(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date);
+	public void nationupdate(Map map) {
+		repo.nationupdate(map);
 	}
 
 	@Override

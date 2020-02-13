@@ -8,6 +8,7 @@ public interface IMemDao {
 	public String getPassword(String username);
 	public void registerMem(String username, String password, String company);
 	public String getSHA256(String plain);
+	public int selectGrade(String username);
 	
 	/** member CRUD */
 	public List<Member> listMem();

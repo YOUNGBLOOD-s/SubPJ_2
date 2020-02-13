@@ -2,6 +2,7 @@ package com.yb.rest.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.yb.rest.vo.Counsel;
 import com.yb.rest.vo.Image;
@@ -24,7 +25,7 @@ public interface IManService {
 	public ArrayList<NationDTO> nationListAll_page(int customer, int pageIdx);
 	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date);
 	public boolean nationdelete(String idx, String customer);
-	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date);
+	public void nationupdate(Map map);
 	public String selectNation_image(int idx);
 	
 	

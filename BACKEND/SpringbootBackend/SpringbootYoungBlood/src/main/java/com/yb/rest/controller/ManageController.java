@@ -250,23 +250,32 @@ public class ManageController {
 	}
 
 	/** 사용자 상품 수정 */
-	@PutMapping("/man/nation/update")
+	@PutMapping("/man/nation/update/{idx}")
 	@ApiOperation(value = "사용자 상품정보(nation) 수정")
-	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token,
-			@RequestBody Nation nat) {
+	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Nation nat, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
 			Claims de = MemberController.verification(token);
-			msg.put("username", de.get("username"));
+			//msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
 
 			if (grade == 1) {
-				boolean resUpdate = ser.nationupdate(nat.getEn_name(), nat.getKo_name(), nat.getDust(),
-						nat.getContinents(), nat.getShowcnt(), customer + "", nat.getWeight(), nat.getSpeech(),
-						nat.getPrice(), nat.getS_date(), nat.getF_date());
+				Map<String, Object> map = new HashMap<>();
+				map.put("idx", idx);
+				map.put("en_name", nat.getEn_name());
+				map.put("ko_name", nat.getKo_name());
+				map.put("dust", nat.getDust());
+				map.put("continents", nat.getContinents());
+				map.put("speech", nat.getSpeech());
+				map.put("price", nat.getPrice());
+				map.put("s_date", nat.getS_date());
+				map.put("f_date", nat.getF_date());
+				ser.nationupdate(map);
+				
+				msg.put("updateNation", map);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -340,10 +349,9 @@ public class ManageController {
 	}
 
 	/** 상품 월별정보 수정 */
-	@PostMapping("/man/monthtb/update")
+	@PutMapping("/man/monthtb/update")
 	@ApiOperation(value = "상품 월별정보(month) 수정")
-	public ResponseEntity<Map<String, Object>> monthUpdate(@RequestHeader(value = "Authorization") String token,
-			@RequestBody Monthtb montb) {
+	public ResponseEntity<Map<String, Object>> monthUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Monthtb montb) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
@@ -582,7 +590,7 @@ public class ManageController {
 	}
 
 	/** 이미지 정보 수정 */
-	@PostMapping("/man/image/update")
+	@PutMapping("/man/image/update")
 	@ApiOperation(value = "이미지 정보(image) 수정")
 	public ResponseEntity<Map<String, Object>> imageUpdate(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Image img) {
