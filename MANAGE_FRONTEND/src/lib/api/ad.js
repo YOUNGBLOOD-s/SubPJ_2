@@ -2,7 +2,7 @@ import client from './client';
 
 // 광고 목록 가져오기
 export const adlist = token =>
-  client.get('/api/man/nation/list?page=1', {
+  client.get('/api/man/nation/list?page=3', {
     headers: { Authorization: token },
   });
 

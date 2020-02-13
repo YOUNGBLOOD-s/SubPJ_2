@@ -4,6 +4,8 @@ import ImageUploader from '../common/ImageUploader';
 import StyledTextField from '../common/StyledTextField';
 import transportArr from '../../lib/data/transportArr';
 import MenuItem from '@material-ui/core/MenuItem';
+import { useDispatch } from 'react-redux';
+import { updateProductContent } from '../../modules/product';
 
 const ContentUpdateForm = ({ content, setUpdating }) => {
   const [form, setForm] = useState({
@@ -20,7 +22,7 @@ const ContentUpdateForm = ({ content, setUpdating }) => {
   const setImageUrl = url => {
     setForm({
       ...form,
-      url,
+      image: url,
     });
   };
 
@@ -32,15 +34,18 @@ const ContentUpdateForm = ({ content, setUpdating }) => {
     });
   };
 
+  const dispatch = useDispatch();
+  const token = sessionStorage.getItem('access_token');
   const onUpdate = () => {
-    console.log('업데이트 적용');
+    dispatch(updateProductContent({ id: content.idx, form, token }));
+    setUpdating(false);
   };
 
   return (
     <component.Grid container spacing={1}>
       <component.Grid item xs={12} sm={6}>
         <ImageUploader
-          imageUrl={content.image}
+          imageUrl={form.image}
           inputId={`content-${content.day}-${content.seq}`}
           setImageUrl={setImageUrl}
         />

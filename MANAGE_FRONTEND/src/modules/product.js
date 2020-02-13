@@ -23,6 +23,12 @@ const [
   UPDATE_PRODUCT_IMAGE_FAILURE,
 ] = createRequestActionTypes('product/UPDATE_PRODUCT_IMAGE');
 
+const [
+  UPDATE_PRODUCT_CONTENT,
+  UPDATE_PRODUCT_CONTENT_SUCCESS,
+  UPDATE_PRODUCT_CONTENT_FAILURE,
+] = createRequestActionTypes('product/UPDATE_PRODUCT_CONTENT');
+
 export const getProduct = createAction(GET_PRODUCT, ({ id, token }) => ({
   id,
   token,
@@ -35,6 +41,10 @@ export const updateProductImage = createAction(
   UPDATE_PRODUCT_IMAGE,
   ({ id, form, token }) => ({ id, form, token }),
 );
+export const updateProductContent = createAction(
+  UPDATE_PRODUCT_CONTENT,
+  ({ id, form, token }) => ({ id, form, token }),
+);
 
 const getProductSaga = createRequestSaga(GET_PRODUCT, productAPI.productInfo);
 const updateProductNationSaga = createRequestSaga(
@@ -45,10 +55,15 @@ const updateProductImageSaga = createRequestSaga(
   UPDATE_PRODUCT_IMAGE,
   productAPI.updateImage,
 );
+const updateProductContentSaga = createRequestSaga(
+  UPDATE_PRODUCT_CONTENT,
+  productAPI.updateContent,
+);
 export function* productSaga() {
   yield takeLatest(GET_PRODUCT, getProductSaga);
   yield takeLatest(UPDATE_PRODUCT_NATION, updateProductNationSaga);
   yield takeLatest(UPDATE_PRODUCT_IMAGE, updateProductImageSaga);
+  yield takeLatest(UPDATE_PRODUCT_CONTENT, updateProductContentSaga);
 }
 
 const initialState = {
@@ -118,6 +133,32 @@ const product = handleActions(
       ...state,
       updateErrors: {
         image: error,
+      },
+    }),
+    [UPDATE_PRODUCT_CONTENT_SUCCESS]: (
+      state,
+      { payload: { inputContents } },
+    ) => ({
+      ...state,
+      product: {
+        ...state.product,
+        contents: state.product.contents.map(content => {
+          if (content.idx === inputContents.idx) {
+            return inputContents;
+          }
+          return content;
+        }),
+      },
+      updateErrors: {
+        ...state.updateErrors,
+        contents: null,
+      },
+    }),
+    [UPDATE_PRODUCT_CONTENT_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      updateErrors: {
+        ...state.updateErrors,
+        contents: error,
       },
     }),
   },
