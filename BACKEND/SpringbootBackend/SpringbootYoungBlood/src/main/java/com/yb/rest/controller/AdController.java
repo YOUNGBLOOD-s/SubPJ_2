@@ -576,14 +576,14 @@ public class AdController {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map<String, Object>> Countrylist = new LinkedList<>();
-		
 		List<Integer> list = ser.selectIdxs();
+		
 		for(int i=0; i<list.size(); i++) {
 			int idx = list.get(i);
 			
 			Map<String, Object> con = new HashMap<String, Object>();
 			Nation nation = ser.getNationdetail(idx);
-
+			System.out.println(nation.toString());
 			con.put("idx", nation.getIdx());
 			con.put("en_name", nation.getEn_name());
 			con.put("name", nation.getKo_name());

@@ -20,35 +20,34 @@ public interface IManDao {
 	public Member selectMemberInfo(int customer);
 	
 	/** 나라테이블CRUD */
-	public ArrayList<Nation> nationList(int customer);
-	public ArrayList<Nation> nationListAll(int customer);
-	public ArrayList<NationDTO> nationList_page(int customer,int pageIdx);
-	public ArrayList<NationDTO> nationListAll_page(int customer,int pageIdx);
-	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date);
-	public boolean nationdelete(String idx, String customer);
+	public List<Nation> nationList(int customer);
+	public List<Nation> nationListAll(int customer);
+	public List<NationDTO> nationList_page(int customer,int pageIdx);
+	public List<NationDTO> nationListAll_page(int customer,int pageIdx);
+	public void nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date);
+	public void nationdelete(String idx, String customer);
 	public void nationupdate(Map map);
 	public String selectNation_image(int idx);
 	
-	
 	/** 월별테이블CRUD */
-	public ArrayList<Monthtb> monthList(int customer);
-	public ArrayList<Monthtb> monthListAll(int customer);
-	public boolean insertMonthtb(Monthtb montb);
-	public boolean updateMonthtb(Monthtb montb);
-	public boolean deleteMonthtb(int nation);
+	public List<Monthtb> monthList(int customer);
+	public List<Monthtb> monthListAll(int customer);
+	public void insertMonthtb(Monthtb montb);
+	public void updateMonthtb(Monthtb montb);
+	public void deleteMonthtb(int nation);
 
 	/** 이미지테이블CRUD */
-	public ArrayList<Image> imageListAll(int customer);
-	public ArrayList<Image> imageList(int customer);
-	public boolean insertImagetb(Image imgtb);
-	public boolean updateImagetb(Image imgtb);
-	public boolean deleteImagetb(int idx);
+	public List<Image> imageListAll(int customer);
+	public List<Image> imageList(int customer);
+	public void insertImagetb(Image imgtb);
+	public void updateImagetb(Image imgtb);
+	public void deleteImagetb(int idx);
 
 	/** nation관련 INFO */
 	public Nation nationInfo(int idx);
 	public Monthtb monthInfo(int idx);
-	public ArrayList<Route> contentsInfo(int idx);
-	public ArrayList<Image> imagesInfo(int idx);
+	public List<Route> contentsInfo(int idx);
+	public List<Image> imagesInfo(int idx);
 	
 	/** 상담정보 */
 	public List<Counsel> selectCounsellist(int idx);

@@ -5,9 +5,7 @@ public class Image {
 	private int type;
 	private String url;
 
-	public Image() {
-		// TODO Auto-generated constructor stub
-	}
+	public Image() {}
 
 	public Image(String nation, int type) {
 		super();
