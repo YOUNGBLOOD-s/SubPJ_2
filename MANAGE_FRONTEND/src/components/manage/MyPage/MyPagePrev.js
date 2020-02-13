@@ -1,41 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import React, { useRef } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
 import { Map, List } from 'immutable';
-
 import axios from 'axios';
+import StyledTextField from '../../common/StyledTextField';
 
 const MyFormBlcok = styled.div`
   margin: 0 auto;
   margin-top: 4rem;
   max-width: 500px;
+  height: 100%;
 `;
-
-const StyledTextField = withStyles({
-  root: {
-    marginBottom: '1rem',
-    // 포커스시 라벨 색상
-    '& label.Mui-focused': {
-      color: palette.teal[500],
-    },
-    '& .MuiOutlinedInput-root': {
-      // 기본 필드 보더 색상
-      '& fieldset': {
-        borderColor: palette.teal[50],
-      },
-      // 호버 했을때 색상
-      // '&:hover fieldset': {
-      //   borderColor: 'yellow',
-      // },
-      //  포커스 시 보더 색상
-      '&.Mui-focused fieldset': {
-        borderColor: palette.teal[600],
-      },
-    },
-  },
-})(component.TextField);
 
 const StyledButton = withStyles({
   root: {
@@ -47,6 +24,7 @@ const StyledButton = withStyles({
 const MyFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 const Footer = styled.div`
@@ -91,25 +69,22 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo, loggedInUser }) => {
   };
 
   return (
-    <>
-      <MyFormBlcok>
-        <MyFormWrapper onSubmit={onSubmit}>
-          <StyledTextField
-            label="비밀번호"
-            variant="outlined"
-            //   onChange={onChange}
-            value={form.password}
-            name="password"
-            type="password"
-            autoComplete="new-password"
-          />
-          <StyledButton variant="contained" type="submit">
-            확인
-          </StyledButton>
-          <Footer></Footer>
-        </MyFormWrapper>
-      </MyFormBlcok>
-    </>
+    <MyFormBlcok>
+      <MyFormWrapper onSubmit={onSubmit}>
+        <StyledTextField
+          label="비밀번호"
+          variant="outlined"
+          value={form.password}
+          name="password"
+          type="password"
+          autoComplete="new-password"
+        />
+        <StyledButton variant="contained" type="submit">
+          확인
+        </StyledButton>
+        <Footer></Footer>
+      </MyFormWrapper>
+    </MyFormBlcok>
   );
 };
 

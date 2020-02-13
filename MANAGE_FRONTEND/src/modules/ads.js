@@ -10,10 +10,7 @@ const [LIST_ADS, LIST_ADS_SUCCESS, LIST_ADS_FAILURE] = createRequestActionTypes(
   token => token,
 );
 
-const REMOVE_AD = 'ads/REMOVE_AD';
-
 export const listAds = createAction(LIST_ADS);
-export const removeAd = createAction(REMOVE_AD, idx => idx);
 
 const listAdsSaga = createRequestSaga(LIST_ADS, adsAPI.adlist);
 export function* adsSaga() {
@@ -34,10 +31,6 @@ const ads = handleActions(
     [LIST_ADS_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
-    }),
-    [REMOVE_AD]: (state, { payload: idx }) => ({
-      ...state,
-      ads: state.ads.filter(ad => ad.idx !== idx),
     }),
   },
   initialState,

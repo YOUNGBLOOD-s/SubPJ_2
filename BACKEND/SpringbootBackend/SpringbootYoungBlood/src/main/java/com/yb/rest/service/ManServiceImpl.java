@@ -1,7 +1,7 @@
 package com.yb.rest.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,90 +36,77 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public ArrayList<Nation> nationList(int customer) {
-		ArrayList<Nation> list = repo.nationList(customer);
-		return list;
+	public List<Nation> nationList(int customer) {
+		return repo.nationList(customer);
 	}
 
 	@Override
-	public ArrayList<Nation> nationListAll(int customer) {
-		ArrayList<Nation> list = repo.nationListAll(customer);
-		return list;
+	public List<Nation> nationListAll(int customer) {
+		return repo.nationListAll(customer);
 	}
 
 	@Override
-	public boolean nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
-		boolean res = repo.nationinsert(en_name, ko_name, dust, continents,  customer, weight, speech, price, s_date, f_date);
-		return res;
+	public void nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
+		repo.nationinsert(en_name, ko_name, dust, continents,  customer, weight, speech, price, s_date, f_date);
 	}
 
 	@Override
-	public boolean nationdelete(String idx, String customer) {
-		return repo.nationdelete(idx, customer);
+	public void nationdelete(String idx, String customer) {
+		repo.nationdelete(idx, customer);
 	}
 
 	@Override
-	public boolean nationupdate(String en_name, String ko_name, String dust, String continents, String showcnt, String customer, String weight, String speech, String price, String s_date, String f_date) {
-		return repo.nationupdate(en_name, ko_name, dust, continents, showcnt, customer, weight, speech, price, s_date, f_date);
+	public void nationupdate(Map map) {
+		repo.nationupdate(map);
 	}
 
 	@Override
-	public ArrayList<Monthtb> monthList(int customer) {
-		ArrayList<Monthtb> list = repo.monthList(customer);
-		return list;
+	public List<Monthtb> monthList(int customer) {
+		return repo.monthList(customer);
 	}
 
 	@Override
-	public ArrayList<Monthtb> monthListAll(int customer) {
-		ArrayList<Monthtb> list = repo.monthListAll(customer);
-		return list;
+	public List<Monthtb> monthListAll(int customer) {
+		return repo.monthListAll(customer);
 	}
 
 	@Override
-	public boolean insertMonthtb(Monthtb montb) {
-		boolean insertMonthtb = repo.insertMonthtb(montb);
-		return insertMonthtb;
+	public void insertMonthtb(Monthtb montb) {
+		repo.insertMonthtb(montb);
+	}
+
+	public void pdateMonthtb(Monthtb montb) {
+		repo.updateMonthtb(montb);
 	}
 
 	@Override
-	public boolean updateMonthtb(Monthtb montb) {
-		boolean updateMonthtb = repo.updateMonthtb(montb);
-		return updateMonthtb;
+	public void deleteMonthtb(int nation) {
+		repo.deleteMonthtb(nation);
 	}
 
 	@Override
-	public boolean deleteMonthtb(int nation) {
-		boolean deleteMonthtb = repo.deleteMonthtb(nation);
-		return deleteMonthtb;
+	public List<Image> imageListAll(int customer) {
+		return repo.imageListAll(customer);
 	}
 
 	@Override
-	public ArrayList<Image> imageListAll(int customer) {
-		ArrayList<Image> list = repo.imageListAll(customer);
-		return list;
+	public List<Image> imageList(int customer) {
+		return repo.imageList(customer);
 	}
 
 	@Override
-	public ArrayList<Image> imageList(int customer) {
-		return (ArrayList) repo.imageList(customer);
+	public void insertImagetb(Image imgtb) {
+		repo.insertImagetb(imgtb);
 	}
 
 	@Override
-	public boolean insertImagetb(Image imgtb) {
-		boolean insertImagetb = repo.insertImagetb(imgtb);
-		return insertImagetb;
+	public void updateImagetb(Image imgtb) {
+		repo.updateImagetb(imgtb);
 	}
 
 	@Override
-	public boolean updateImagetb(Image imgtb) {
-		boolean updateImagetb = repo.updateImagetb(imgtb);
-		return updateImagetb;
-	}
-
-	@Override
-	public boolean deleteImagetb(int idx) {
-		boolean deleteImagetb = repo.deleteImagetb(idx);
-		return deleteImagetb;
+	public void deleteImagetb(int idx) {
+		repo.deleteImagetb(idx);
 	}
 	
 	@Override
@@ -129,70 +116,62 @@ public class ManServiceImpl implements IManService {
 
 	@Override
 	public Nation nationInfo(int idx) {
-		// TODO Auto-generated method stub
-		Nation nat = repo.nationInfo(idx);
-		return nat;
+		return repo.nationInfo(idx);
 	}
 
 	@Override
 	public Monthtb monthInfo(int idx) {
-		// TODO Auto-generated method stub
-		Monthtb mon = repo.monthInfo(idx);
-		return mon;
+		return repo.monthInfo(idx);
 	}
 
 	@Override
-	public ArrayList<Route> contentsInfo(int idx) {
-		// TODO Auto-generated method stub
-		ArrayList<Route> contents = repo.contentsInfo(idx);
-		return contents;
+	public List<Route> contentsInfo(int idx) {
+		return repo.contentsInfo(idx);
 	}
 
 	@Override
-	public ArrayList<Image> imagesInfo(int idx) {
-		// TODO Auto-generated method stub
-		ArrayList<Image> images = repo.imagesInfo(idx);
-		return images;
+	public List<Image> imagesInfo(int idx) {
+		return repo.imagesInfo(idx);
 	}
 
 	@Override
 	public Nation selectNationCustomer(int customer) {
-		// TODO Auto-generated method stub
-		Nation nat = repo.selectNationCustomer(customer);
-		return nat;
+		return repo.selectNationCustomer(customer);
 	}
 
 	@Override
 	public Member selectMemberInfo(int customer) {
-		// TODO Auto-generated method stub
-		Member mem = repo.selectMemberInfo(customer);
-		return mem;
+		return repo.selectMemberInfo(customer);
 	}
 
 	@Override
 	public String selectNation_image(int idx) {
-		// TODO Auto-generated method stub
-		String url = repo.selectNation_image(idx);
-		return url;
+		return repo.selectNation_image(idx);
 	}
 
 	@Override
-	public ArrayList<NationDTO> nationList_page(int customer,int pageIdx) {
-		// TODO Auto-generated method stub
-		ArrayList<NationDTO> list = repo.nationList_page(customer,pageIdx);
-		return list;
+	public List<NationDTO> nationList_page(int customer,int pageIdx) {
+		return repo.nationList_page(customer,pageIdx);
 	}
 
 	@Override
-	public ArrayList<NationDTO> nationListAll_page(int customer,int pageIdx) {
-		// TODO Auto-generated method stub
-		ArrayList<NationDTO> list = repo.nationListAll_page(customer,pageIdx);
-		return list;
+	public List<NationDTO> nationListAll_page(int customer,int pageIdx) {
+		return repo.nationListAll_page(customer,pageIdx);
 	}
 
 	@Override
 	public List<Counsel> selectCounsellist(int idx) {
 		return repo.selectCounsellist(idx);
+	}
+
+	@Override
+	public void updateMonthtb(Monthtb montb) {
+		repo.updateMonthtb(montb);
+	}
+
+	@Override
+	public int selectCustomer(int idx) {
+		return repo.selectCustomer(idx);
 	}
 
 }

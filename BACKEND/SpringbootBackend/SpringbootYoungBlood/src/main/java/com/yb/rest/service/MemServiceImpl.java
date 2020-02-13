@@ -1,8 +1,6 @@
 package com.yb.rest.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +73,11 @@ public class MemServiceImpl implements IMemService{
 	@Override
 	public void UpdateMem(String username, String company) {
 		repo.UpdateMem(username, company);
+	}
+
+	@Override
+	public int selectGrade(String username) {
+		return repo.selectGrade(username);
 	}
 
 }
