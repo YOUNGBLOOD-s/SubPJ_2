@@ -86,7 +86,7 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
               className="custom-file-upload"
             >
               <i className="fa fa-cloud-upload"></i>{' '}
-              {file ? file.name : '클릭해서 이미지를 선택해주세요'}
+              {file ? file.name : '클릭해서 이미지 선택'}
             </label>
             <StyledInput
               id={`file-upload${inputId}`}

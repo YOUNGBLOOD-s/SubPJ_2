@@ -4,3 +4,28 @@ export const productInfo = ({ id, token }) =>
   client.get(`/api/man/nation/${id}`, {
     headers: { Authorization: token },
   });
+
+export const updateNation = ({ id, form, token }) =>
+  client.put(`/api/man/nation/update/${id}`, form, {
+    headers: { Authorization: token },
+  });
+
+export const updateImage = ({ id, form, token }) =>
+  client.put(`/api/man/image/update/${id}`, form, {
+    headers: { Authorization: token },
+  });
+
+export const updateContent = ({ id, form, token }) =>
+  client.put(`/api/man/contents/update/${id}`, form, {
+    headers: { Authorization: token },
+  });
+
+export const addMonthtable = ({ form, token }) =>
+  client.post('/api/man/monthtb/insert', form, {
+    headers: { Authorization: token },
+  });
+
+export const updateMonthtable = ({ id, form, token }) =>
+  client.put(`/api/man/monthtb/update/${id}`, form, {
+    headers: { Authorization: token },
+  });
