@@ -126,11 +126,14 @@ const product = handleActions(
       product: null,
       error,
     }),
-    [ADD_PRODUCT_MONTHTABLE_SUCCESS]: (state, { payload: monthtable }) => ({
+    [ADD_PRODUCT_MONTHTABLE_SUCCESS]: (
+      state,
+      { payload: { insertMonth } },
+    ) => ({
       ...state,
       product: {
         ...state.product,
-        month: monthtable,
+        month: insertMonth,
       },
       addErrors: {
         month: null,

@@ -39,13 +39,16 @@ const Nation = ({ nation, user }) => {
               <div>출발일 : {s_date}</div>
               <div>도착일 : {f_date}</div>
               <div>대륙 : {continents}</div>
-              <div>
-                <h4>산출 정보</h4>
-                <div>전광판에 보여진 광고 노출 횟수: {showcnt}</div>
-                <div>가중치 : {weight}</div>
-                <div>현재 TYPE : {type}</div>
-                <div>현재 FLAG : {flag}</div>
-              </div>
+              {/* 어드민만 보이는 부분 */}
+              {user && user.username === 'admin' && (
+                <div>
+                  <h4>산출 정보</h4>
+                  <div>전광판에 보여진 광고 노출 횟수: {showcnt}</div>
+                  <div>가중치 : {weight}</div>
+                  <div>현재 TYPE : {type}</div>
+                  <div>현재 FLAG : {flag}</div>
+                </div>
+              )}
             </component.Grid>
             {user && user.username === 'admin' && (
               <component.Grid item xs={12}>

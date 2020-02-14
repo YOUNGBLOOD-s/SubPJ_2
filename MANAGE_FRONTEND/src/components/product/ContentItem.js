@@ -22,7 +22,7 @@ const StyledImg = styled.img`
   border-radius: 3px;
 `;
 
-const ContentItem = ({ content }) => {
+const ContentItem = ({ content, user }) => {
   const { day, seq, title, detail, image, tofrom, transport } = content;
   const [updating, setUpdating] = useState(false);
   return (
@@ -31,21 +31,23 @@ const ContentItem = ({ content }) => {
         <ContentUpdateForm content={content} setUpdating={setUpdating} />
       ) : (
         <component.Grid container>
-          <component.Grid item xs={9}>
+          <component.Grid item xs={user && user.username === 'admin' ? 9 : 12}>
             <component.Typography variant="h6">
               {day}일차 {seq}번째 [{title}]
             </component.Typography>
           </component.Grid>
-          <component.Grid item xs={3}>
-            <component.Button
-              variant="outlined"
-              color="primary"
-              fullWidth
-              onClick={() => setUpdating(true)}
-            >
-              수정
-            </component.Button>
-          </component.Grid>
+          {user && user.username === 'admin' && (
+            <component.Grid item xs={3}>
+              <component.Button
+                variant="outlined"
+                color="primary"
+                fullWidth
+                onClick={() => setUpdating(true)}
+              >
+                수정
+              </component.Button>
+            </component.Grid>
+          )}
           <component.Grid item xs={12}>
             <ImageWrapper>
               <StyledImg src={image} />
