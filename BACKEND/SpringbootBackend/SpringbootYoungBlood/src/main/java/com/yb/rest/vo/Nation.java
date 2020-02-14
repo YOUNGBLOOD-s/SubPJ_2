@@ -5,10 +5,24 @@ public class Nation {
 			type, flag;
 	private String url;
 
-
+//en_name, ko_name, continents, customer, weight, speech, price, s_date, f_date);
 	public Nation() {
 
 	}
+
+	public Nation(String en_name, String ko_name, String continents, String customer, String weight, String speech,
+		String price, String s_date, String f_date) {
+	super();
+	this.en_name = en_name;
+	this.ko_name = ko_name;
+	this.continents = continents;
+	this.customer = customer;
+	this.weight = weight;
+	this.speech = speech;
+	this.price = price;
+	this.s_date = s_date;
+	this.f_date = f_date;
+}
 
 	// latest for chatbot VO
 

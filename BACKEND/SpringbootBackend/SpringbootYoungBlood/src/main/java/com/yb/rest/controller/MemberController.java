@@ -343,8 +343,18 @@ public class MemberController {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			ser.updateGrade(username, grade);
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); 
+			int origrade = ser.selectGrade(username);
+			
+			if(username.equals("admin")) {
+				msg.put("value", -1);
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			} else if(grade==origrade) {
+				msg.put("value", 0);
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+			} else {
+				ser.updateGrade(username, grade);
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); 
+			}		
 		} catch (Exception e) {
 			msg.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());

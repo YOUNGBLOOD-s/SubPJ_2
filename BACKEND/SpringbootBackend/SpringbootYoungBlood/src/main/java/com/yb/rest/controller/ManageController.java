@@ -136,6 +136,7 @@ public class ManageController {
 			
 			int grade = ser.searchGrade(customer);
 			if (grade == 1) {
+				List<Counsel> counlist = ser.selectCounsellist(idx);
 				nat = ser.nationInfo(idx);
 				mon = ser.monthInfo(idx);
 				contentsList = ser.contentsInfo(idx);
@@ -144,6 +145,7 @@ public class ManageController {
 				msg.put("month", mon);
 				msg.put("contents", contentsList);
 				msg.put("images", imageList);
+				msg.put("counselList", counlist);
 				msg.put("owner", owner);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else if (grade >= 2) {
@@ -191,8 +193,7 @@ public class ManageController {
 			int grade = ser.searchGrade(customer);
 
 			if (grade > 0) {
-				ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getDust(),
-						nat.getContinents(), customer + "", nat.getWeight(), nat.getSpeech(), nat.getPrice(),
+				ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getContinents(), customer + "", nat.getWeight(), nat.getSpeech(), nat.getPrice(),
 						nat.getS_date(), nat.getF_date());
 				int last = Integer.MIN_VALUE;
 				List<Nation> list = ser.nationList(customer);
@@ -327,6 +328,7 @@ public class ManageController {
 
 			if (grade > 0) {
 				ser.insertMonthtb(montb);
+				msg.put("insertMonth", montb);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
