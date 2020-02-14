@@ -588,7 +588,6 @@ public class AdController {
 		if(checkSize.size()%12>0)
 			maxpage++;
 		List<Integer> list = ser.selectIdxs_page(pageIdx);
-		
 		System.out.println(list.size());
 		if(list.size()>0) {
 			for(int i=0; i<list.size(); i++) {
@@ -599,7 +598,30 @@ public class AdController {
 				List<Image> img =  manser.imagesInfo(idx);
 				List<Route> rou = manser.contentsInfo(idx);
 				if(mon==null || img==null || rou==null) continue;
-				if(nation.getContinents().equals(continents)) {
+				if(continents.equals("1")||continents.equals("2")||continents.equals("3")||continents.equals("4")||continents.equals("5")) {
+					if(nation.getContinents().equals(continents)) {
+						con.put("idx", nation.getIdx());
+						con.put("en_name", nation.getEn_name());
+						con.put("name", nation.getKo_name());
+						con.put("dust", nation.getDust());
+						con.put("continents", nation.getContinents());
+						con.put("showcnt", nation.getShowcnt());
+						con.put("customer", nation.getCustomer());
+						con.put("weight", nation.getWeight());
+						con.put("speech", nation.getSpeech());
+						con.put("price", nation.getPrice());
+						con.put("type", nation.getType());
+						con.put("image", nation.getUrl());
+						con.put("s_date", nation.getS_date());
+						con.put("f_date", nation.getF_date());
+						if(list.size()==12) {
+							result.put("lastpage", false);
+						}else {//라스트페이지일 경우 true
+							result.put("lastpage", true);
+						}
+						Countrylist.add(con);
+						}
+				}else {
 					con.put("idx", nation.getIdx());
 					con.put("en_name", nation.getEn_name());
 					con.put("name", nation.getKo_name());
@@ -620,13 +642,13 @@ public class AdController {
 						result.put("lastpage", true);
 					}
 					Countrylist.add(con);
-					}
+						
+				}
 			}
 		}else if(list.size()==0) {
 			result.put("lastpage", true);
 		}
 		result.put("lastpageidx", maxpage);
-		System.out.println(Countrylist);
 		result.put("AllNationDatas", Countrylist);
 		re = new ResponseEntity<>(result, HttpStatus.OK);
 		return re;
