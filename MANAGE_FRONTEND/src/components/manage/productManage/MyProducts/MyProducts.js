@@ -62,50 +62,52 @@ const MyProducts = () => {
     <MyProductsWrapper>
       <TitleBar>광고 목록</TitleBar>
       {!loading && ads ? (
-        <AdListWraaper>
+        <>
+          <AdListWraaper>
+            <component.Grid container spacing={1}>
+              {ads.map(ad => (
+                <component.Grid item xs={6} md={4} key={ad.idx}>
+                  <Link
+                    to={
+                      user.username === 'admin'
+                        ? `/admin/product/${ad.idx}`
+                        : `/manage/product/${ad.idx}`
+                    }
+                  >
+                    <MyProduct ad={ad} />
+                  </Link>
+                </component.Grid>
+              ))}
+            </component.Grid>
+          </AdListWraaper>
           <component.Grid container spacing={1}>
-            {ads.map(ad => (
-              <component.Grid item xs={6} md={4} key={ad.idx}>
-                <Link
-                  to={
-                    user.username === 'admin'
-                      ? `/admin/product/${ad.idx}`
-                      : `/manage/product/${ad.idx}`
-                  }
-                >
-                  <MyProduct ad={ad} />
-                </Link>
-              </component.Grid>
-            ))}
+            <component.Grid item xs={6}>
+              <component.Button
+                onClick={decreasePage}
+                disabled={page === 1}
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                이전 페이지
+              </component.Button>
+            </component.Grid>
+            <component.Grid item xs={6}>
+              <component.Button
+                onClick={increasePage}
+                disabled={page === lastPage}
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                다음 페이지
+              </component.Button>
+            </component.Grid>
           </component.Grid>
-        </AdListWraaper>
+        </>
       ) : (
         <LoadingBackdrop loading={loading} />
       )}
-      <component.Grid container spacing={1}>
-        <component.Grid item xs={6}>
-          <component.Button
-            onClick={decreasePage}
-            disabled={page === 1}
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
-            이전 페이지
-          </component.Button>
-        </component.Grid>
-        <component.Grid item xs={6}>
-          <component.Button
-            onClick={increasePage}
-            disabled={page === lastPage}
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
-            다음 페이지
-          </component.Button>
-        </component.Grid>
-      </component.Grid>
     </MyProductsWrapper>
   );
 };
