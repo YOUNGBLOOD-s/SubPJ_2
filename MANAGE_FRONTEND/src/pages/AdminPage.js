@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import ProductDetail from '../components/product/ProductDetail';
 import AdminAppbar from '../components/common/AdminAppbar';
 import MyPageAdmin from '../components/manage/MyPage/MyPageAdmin';
+import AuthUser from '../components/auth/AuthUser';
 
 const AdminPage = ({ history }) => {
   const { user } = useSelector(({ user }) => ({
