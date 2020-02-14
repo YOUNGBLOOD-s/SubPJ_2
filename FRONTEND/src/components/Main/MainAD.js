@@ -107,7 +107,6 @@ const MainAD = () => {
   useEffect(() => {
     getItems();
     setInterval(() => {
-      // FIXME: 더블클릭 시 내용물 안바뀌게 해주세요
       if (open === false) getItems();
     }, reqTerm);
   }, []);
