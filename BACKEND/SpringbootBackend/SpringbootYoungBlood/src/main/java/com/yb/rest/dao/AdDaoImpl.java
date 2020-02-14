@@ -192,7 +192,11 @@ public class AdDaoImpl implements IAdDao {
 	public List<Integer> selectIdxs() {
 		return session.selectList("sendtofront.selectidxs");
 	}
-
+	
+	@Override
+	public List<Integer> selectIdxs_page(int pageidx) {
+		return session.selectList("sendtofront.selectidxs_page", pageidx);
+	}
 	@Override
 	public int selectNation(int idx) {
 		return session.selectOne("sendtofront.selectNation", idx);
@@ -212,6 +216,8 @@ public class AdDaoImpl implements IAdDao {
 	public void deleteCounsel(int idx) {
 		session.delete("sendtofront.deleteCounsel", idx);
 	}
+
+	
 	
 	
 }

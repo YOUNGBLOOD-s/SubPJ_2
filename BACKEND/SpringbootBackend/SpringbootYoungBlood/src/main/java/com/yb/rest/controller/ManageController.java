@@ -53,7 +53,7 @@ public class ManageController {
 	// token =
 	// "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 
-	/** 사용자 상품 전체보기 */
+		/** 사용자 상품 전체보기 */
 	@GetMapping("/man/nation/list")
 	@ApiOperation(value = "사용자 상품정보 리스트 조회")
 	public ResponseEntity<Map<String, Object>> nationList(@RequestHeader(value = "Authorization") String token,
@@ -62,6 +62,7 @@ public class ManageController {
 		Map<String, Object> msg = new HashMap<String, Object>();
 		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		List<NationDTO> list = null;
+		List<Nation> sizelist = null;
 		Member member = new Member();
 		int pageIdx = 0;
 		if (page == null)
@@ -69,7 +70,7 @@ public class ManageController {
 		else{
 			pageIdx = Integer.parseInt(page);
 		}
-		pageIdx = (pageIdx-1) * 10;
+		pageIdx = (pageIdx-1) * 12;
 		
 		try {
 			Claims de = MemberController.verification(token);
@@ -82,6 +83,10 @@ public class ManageController {
 
 			if (grade == 1) {
 				list = ser.nationListAll_page(customer, pageIdx);
+				sizelist= ser.nationListAll(customer);
+				int maxpage = sizelist.size()/12;
+				if(sizelist.size()%12>0)
+					maxpage++;
 				// 해당 nation에 이미지를 불러오고...
 				for (int i = 0; i < list.size(); i++) {
 					int idx = Integer.parseInt(list.get(i).getIdx());
@@ -89,16 +94,22 @@ public class ManageController {
 					list.get(i).setUrl(url);
 					list.get(i).setOwner(owner);
 				}
+				msg.put("lastpageidx", maxpage);
 				msg.put("resvalue", list);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else if (grade >= 2) {
 				list = ser.nationList_page(customer, pageIdx);
+				sizelist = ser.nationList(customer);
+				int maxpage = sizelist.size()/12;
+				if(sizelist.size()%12>0)
+					maxpage++;
 				for (int i = 0; i < list.size(); i++) {
 					int idx = Integer.parseInt(list.get(i).getIdx());
 					String url = ser.selectNation_image(idx);
 					list.get(i).setUrl(url);
 					list.get(i).setOwner(owner);
 				}
+				msg.put("lastpageidx", maxpage);
 				msg.put("resvalue", list);				
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
