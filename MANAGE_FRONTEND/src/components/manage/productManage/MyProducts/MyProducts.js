@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MyProduct from './MyProduct';
 import { useDispatch, useSelector } from 'react-redux';
-import { listAds } from '../../../../modules/ads';
+import { userAdList } from '../../../../modules/ads';
 import component from '../../../../lib/material/component';
 import TitleBar from '../../../Detail/common/TitleBar';
 import { Link } from 'react-router-dom';
@@ -33,7 +33,7 @@ const MyProducts = () => {
 
   useEffect(() => {
     const token = sessionStorage.getItem('access_token');
-    dispatch(listAds({ page, token }));
+    dispatch(userAdList({ page, token }));
   }, [dispatch, page]);
 
   const increasePage = () => {

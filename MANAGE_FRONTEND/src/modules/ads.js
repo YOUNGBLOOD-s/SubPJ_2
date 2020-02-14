@@ -6,19 +6,31 @@ import createRequestSaga, {
 import * as adsAPI from '../lib/api/ad';
 
 const [
-  LIST_ADS,
-  LIST_ADS_SUCCESS,
-  LIST_ADS_FAILURE,
-] = createRequestActionTypes('ads/LIST_ADS', ({ token, page }) => ({
+  USER_AD_LIST,
+  USER_AD_LIST_SUCCESS,
+  USER_AD_LIST_FAILURE,
+] = createRequestActionTypes('ads/USER_AD_LIST', ({ token, page }) => ({
   token,
   page,
 }));
 
-export const listAds = createAction(LIST_ADS);
+const [
+  ALL_AD_LIST,
+  ALL_AD_LIST_SUCCESS,
+  ALL_AD_LIST_FAILURE,
+] = createRequestActionTypes('ads/ALL_AD_LIST', ({ page, filter }) => ({
+  page,
+  filter,
+}));
 
-const listAdsSaga = createRequestSaga(LIST_ADS, adsAPI.adlist);
+export const userAdList = createAction(USER_AD_LIST);
+export const allAdList = createAction(ALL_AD_LIST);
+
+const userAdListSaga = createRequestSaga(USER_AD_LIST, adsAPI.userAdList);
+const allAdListSaga = createRequestSaga(ALL_AD_LIST, adsAPI.allAdList);
 export function* adsSaga() {
-  yield takeLatest(LIST_ADS, listAdsSaga);
+  yield takeLatest(USER_AD_LIST, userAdListSaga);
+  yield takeLatest(ALL_AD_LIST, allAdListSaga);
 }
 
 const initialState = {
@@ -28,11 +40,20 @@ const initialState = {
 
 const ads = handleActions(
   {
-    [LIST_ADS_SUCCESS]: (state, { payload: ads }) => ({
+    [USER_AD_LIST_SUCCESS]: (state, { payload: ads }) => ({
       ...state,
       ads: ads.resvalue,
     }),
-    [LIST_ADS_FAILURE]: (state, { payload: error }) => ({
+    [USER_AD_LIST_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
+    }),
+    [ALL_AD_LIST_SUCCESS]: (state, { payload: { AllNationDatas } }) => ({
+      ...state,
+      ads: AllNationDatas,
+      error: null,
+    }),
+    [ALL_AD_LIST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
     }),

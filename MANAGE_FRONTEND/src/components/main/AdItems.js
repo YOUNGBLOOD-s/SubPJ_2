@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../../node_modules/axios/index';
 import AdItem from './AdItem';
 import styled from 'styled-components';
 import TitleBar from '../Detail/common/TitleBar';
 import CaptionText from '../Detail/common/CaptionText';
+import { useSelector, useDispatch } from 'react-redux';
+import { allAdList } from '../../modules/ads';
 
 const ItemsWrapper = styled.div`
   max-width: 1000px;
@@ -12,19 +13,16 @@ const ItemsWrapper = styled.div`
 `;
 
 const AdItems = () => {
-  const [ads, setAds] = useState([]);
+  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState('');
+  const { ads } = useSelector(({ ads }) => ({
+    ads: ads.ads,
+  }));
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // TODO: filter ? pagination?
-    axios
-      .get('/api/all')
-      .then(res => {
-        console.log(res);
-        const { AllNationDatas } = res.data;
-        setAds(AllNationDatas);
-      })
-      .catch(err => console.log(err));
-  }, []);
+    dispatch(allAdList({ page, filter }));
+  }, [dispatch, page, filter]);
 
   return (
     <ItemsWrapper>
