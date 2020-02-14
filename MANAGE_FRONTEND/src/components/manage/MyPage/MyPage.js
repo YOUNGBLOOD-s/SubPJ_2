@@ -4,7 +4,6 @@ import { useState } from 'react';
 import MyPagePrev from './MyPagePrev';
 import ToastMessage from './ToastMessage';
 import { useSelector } from 'react-redux';
-import MyPageAdmin from './MyPageAdmin';
 
 const MyPage = () => {
   const token = sessionStorage.getItem('access_token');
@@ -19,15 +18,11 @@ const MyPage = () => {
   return (
     <>
       {auth ? (
-        loggedInUser === 'admin' ? (
-          <MyPageAdmin userInfo={userInfo} setUserInfo={setUserInfo} />
-        ) : (
-          <MyPageForm
-            userInfo={userInfo}
-            setUserInfo={setUserInfo}
-            loggedInUser={loggedInUser}
-          />
-        )
+        <MyPageForm
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
+          loggedInUser={loggedInUser}
+        />
       ) : (
         <>
           <ToastMessage open={open} setOpen={setOpen} />
