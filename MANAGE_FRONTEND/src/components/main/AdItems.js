@@ -9,7 +9,7 @@ import palette from '../../lib/styles/palette';
 import Pagination from '../common/Pagination';
 
 const ItemsWrapper = styled.div`
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
 `;
@@ -30,7 +30,7 @@ const AdItems = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(allAdList({ page, continent: 1, sort: 1 }));
+    dispatch(allAdList({ page, continent: 0, sort: 1 }));
   }, [dispatch, page, filter]);
 
   useEffect(() => {
@@ -40,9 +40,39 @@ const AdItems = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const gridSize = {
+    0: 12,
+    1: 6,
+    2: 6,
+    3: 5,
+    4: 7,
+    5: 7,
+    6: 5,
+    7: 12,
+    8: 5,
+    9: 7,
+    10: 6,
+    11: 6,
+  };
   return (
     <ItemsWrapper>
       <TitleBar>진행중인 광고</TitleBar>
+      <component.Grid container spacing={1}>
+        {ads ? (
+          <>
+            {ads.map((ad, idx) => (
+              <component.Grid item xs={12} md={gridSize[idx]}>
+                <AdItem key={ad.idx} ad={ad} />
+              </component.Grid>
+            ))}
+            <component.Grid item xs={12}>
+              <Pagination />
+            </component.Grid>
+          </>
+        ) : (
+          <h5>광고가 없네요...ㅠ</h5>
+        )}
+      </component.Grid>
       <FilterWrapper>
         <component.Grid container>
           <component.Grid item xs={12}>
@@ -61,22 +91,6 @@ const AdItems = () => {
           </component.Grid>
         </component.Grid>
       </FilterWrapper>
-      <component.Grid container spacing={1}>
-        {ads ? (
-          <>
-            {ads.map(ad => (
-              <component.Grid item xs={12} sm={6} md={4}>
-                <AdItem key={ad.idx} ad={ad} />
-              </component.Grid>
-            ))}
-            <component.Grid item xs={12}>
-              <Pagination />
-            </component.Grid>
-          </>
-        ) : (
-          <h5>광고가 없네요...ㅠ</h5>
-        )}
-      </component.Grid>
     </ItemsWrapper>
   );
 };
