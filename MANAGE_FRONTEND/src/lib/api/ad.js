@@ -11,5 +11,5 @@ export const removeList = ({ token, id }) =>
     headers: { Authorization: token },
   });
 
-export const allAdList = ({ page, filter }) =>
-  client.get(`/api/all?page=${page}&filter=${filter}`);
+export const allAdList = ({ page, continent, sort }) =>
+  client.get(`/api/all?page=${page}&continents=${continent}&sort=${sort}`);
