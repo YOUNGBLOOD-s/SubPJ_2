@@ -33,13 +33,12 @@ const Footer = styled.div`
   }
 `;
 
-const MyPageForm = ({ userInfo, setUserInfo, loggedInUser }) => {
+const MyPageForm = ({ userInfo, setUserInfo }) => {
   const token = sessionStorage.getItem('access_token');
   const form = useRef(null);
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [passwordState, setPasswordState] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
   const { data } = userInfo;
   const username = data.get('username');
   const company = data.get('company');
@@ -97,13 +96,9 @@ const MyPageForm = ({ userInfo, setUserInfo, loggedInUser }) => {
           Authorization: token,
         },
       })
-      .then(res => console.log(res))
-      .then(err => console.log(err));
+      .then(res => alert('정보가 변경되었습니다.'))
+      .catch(err => alert('정보 변경에 실패했습니다.'));
   };
-
-  if (isAdmin !== true && loggedInUser === 'admin') {
-    setIsAdmin(true);
-  }
 
   return (
     <MyFormBlcok>
@@ -124,7 +119,6 @@ const MyPageForm = ({ userInfo, setUserInfo, loggedInUser }) => {
           name="grade"
           type="text"
           autoComplete="grade"
-          disabled={!isAdmin}
         />
         <StyledTextField
           label="변경할 비밀번호"

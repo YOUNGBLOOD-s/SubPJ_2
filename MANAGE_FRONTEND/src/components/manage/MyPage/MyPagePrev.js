@@ -36,7 +36,7 @@ const Footer = styled.div`
   }
 `;
 
-const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo, loggedInUser }) => {
+const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
   const form = useRef(null);
 
   const handleClick = () => {
@@ -57,9 +57,7 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo, loggedInUser }) => {
         },
       )
       .then(res => {
-        loggedInUser === 'admin'
-          ? setUserInfo({ data: List(res.data.memlist) })
-          : setUserInfo({ data: Map(res.data.meminfo) });
+        setUserInfo({ data: Map(res.data.meminfo) });
         setAuth(true);
       })
       .catch(err => {

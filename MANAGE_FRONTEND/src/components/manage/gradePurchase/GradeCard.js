@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -66,35 +66,7 @@ const GradeCard = ({ title, image, grade, price, option }) => {
     '1': `${title}님, 환영합니다!`,
   };
 
-  const getGrade = () => {
-    let result = -1;
-
-    axios
-      .get('http://52.78.218.79:8887/api/mem/grade', {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then(res => {
-        result = res.data.grade;
-      })
-      .catch(err => console.log(err));
-
-    return result;
-  };
-
   const updateGrade = () => {
-    let originalGrade = -1;
-
-    originalGrade = getGrade();
-
-    if (originalGrade === parseInt(grade)) {
-      alert(gradeAlert[-1]);
-      return;
-    } else if (originalGrade === 1) {
-      alert('관리자는 등급 구매가 불가능합니다.');
-      return;
-    }
     axios
       .put(
         'http://52.78.218.79:8887/api/mem/update/' + grade,
