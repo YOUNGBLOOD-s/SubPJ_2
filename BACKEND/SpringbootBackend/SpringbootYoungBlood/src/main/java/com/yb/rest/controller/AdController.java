@@ -60,6 +60,24 @@ public class AdController {
 
 	}
 
+	/**
+	 * 센서값을 받는다.
+	 * @throws JsonProcessingException
+	 */
+	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
+	@ApiOperation(value = "임베디드 센서로부터 센서 값을 읽어옴")
+	public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light, @PathVariable String dust) throws JsonProcessingException {
+		float tmp = Float.parseFloat(temp);
+		float hu = Float.parseFloat(hum);
+		float dus = Float.parseFloat(dust);
+		float lig = Float.parseFloat(light);
+		Sensor sen = new Sensor(tmp, hu, dus, lig);
+		System.out.println("안녕하세요. 센서값을 전광판으로부터 받았습니다. 받은 정보는 다음과 같습니다.");
+		System.out.println(sen.toString());
+		ser.updateSensor(sen);
+		System.out.println("==============");
+	}
+	
 	/** 가중치를 계산하는 메소드 */
 	@SuppressWarnings("finally")
 	@GetMapping("/weightcal")
@@ -156,21 +174,17 @@ public class AdController {
 					return (int) (o1.getHumid() - o2.getHumid());
 				}
 			});
-			for (int j = 0; j < nations.size(); j++) {
-				int originScore = ser.getScore(nations.get(j).getIdx());
-				int minus = j / 5 == 0 ? 10 : (j / 5) * (10);
-				originScore -= minus;
-				ser.updateScore(new ForScore(nations.get(j).getIdx(), originScore));
-			}
-			for (int j = 0; j < nations.size(); j++) {
-				int score = ser.getScore(nations.get(j).getIdx());
-				int minus = ser.getDust(nations.get(j).getIdx()) * 10;
-				score -= minus;
-				ser.updateScore(new ForScore(nations.get(j).getIdx(), score));
-			}
+			//습도 계산할때 미세먼지 값 까지 함께 처리하도록 합치기
 			List<ForScore> finallist = new ArrayList<ForScore>();
 			for (int j = 0; j < nations.size(); j++) {
-				finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
+				int idx=nations.get(j).getIdx();
+				int originScore = ser.getScore(idx);
+				int minus = j / 5 == 0 ? 10 : (j / 5) * (10); //습도 마이너스 값
+				minus+=ser.getDust(idx) * 10; //미세먼지 마이너스 값
+				originScore -= minus;
+				ser.updateScore(new ForScore(idx, originScore));
+				//최종 idx,점수 리스트에 바로 담기
+				finallist.add(new ForScore(idx,ser.getScore(idx)));
 			}
 
 			Collections.sort(finallist, new Comparator<ForScore>() {
@@ -179,6 +193,7 @@ public class AdController {
 					return o1.getScore() - o2.getScore();
 				}
 			});
+			
 			result = new LinkedList<>();
 			for (int i = 0; i < 4; i++) {
 				int finalScore = 0;
@@ -240,7 +255,7 @@ public class AdController {
 		List<Nation> everyNation = ser.selectNations();
 		for (int i = 0; i < everyNation.size(); i++) {
 			String idx = everyNation.get(i).getIdx();
-			if (ser.getFlag(idx) == 1)
+			if (ser.getFlag(idx) == 1) //flag==1 이미 다 횟수 사용함
 				continue;
 			gradeGroup.add(Integer.parseInt(idx));
 		}
@@ -555,12 +570,12 @@ public class AdController {
 	@GetMapping("/all")
 	@ApiOperation(value = "나라 전체 정보 조회")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectAllnationdetail(@RequestParam("page") String page,
-			@RequestParam("continents") int continents, @RequestParam("sort") String sort) {
+			@RequestParam("continents") String continents, @RequestParam("sort") String sort) {
 		//유럽1 북태평양2 아프리카3 아시아4 북아메리카5
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map<String, Object>> Countrylist = new LinkedList<>();
-		Map<String, Object> con = new HashMap<String, Object>();
+		
 		int pageIdx = 0;
 		if (page == null)
 			pageIdx = 1;
@@ -573,47 +588,63 @@ public class AdController {
 		if(checkSize.size()%12>0)
 			maxpage++;
 		List<Integer> list = ser.selectIdxs_page(pageIdx);
-		if(continents==1||continents==2||continents==3||continents==4||continents==5) {
-			for (int i = 0; i < list.size(); i++) {
-				
-			}
-		}
+		
 		System.out.println(list.size());
 		if(list.size()>0) {
 			for(int i=0; i<list.size(); i++) {
+				Map<String, Object> con = new HashMap<String, Object>();
 				int idx = list.get(i);
 				Nation nation = ser.getNationdetail(idx);
 				Monthtb mon = manser.monthInfo(idx);
 				List<Image> img =  manser.imagesInfo(idx);
 				List<Route> rou = manser.contentsInfo(idx);
-				
 				if(mon==null || img==null || rou==null) continue;
-				
-				con.put("idx", nation.getIdx());
-				con.put("en_name", nation.getEn_name());
-				con.put("name", nation.getKo_name());
-				con.put("dust", nation.getDust());
-				con.put("continents", nation.getContinents());
-				con.put("showcnt", nation.getShowcnt());
-				con.put("customer", nation.getCustomer());
-				con.put("weight", nation.getWeight());
-				con.put("speech", nation.getSpeech());
-				con.put("price", nation.getPrice());
-				con.put("type", nation.getType());
-				con.put("image", nation.getUrl());
-				if(list.size()==12) {
-					result.put("lastpage", false);
-				}else {//라스트페이지일 경우 true
-					result.put("lastpage", true);
-				}
-				Countrylist.add(con);
+				if(nation.getContinents().equals(continents)) {
+					con.put("idx", nation.getIdx());
+					con.put("en_name", nation.getEn_name());
+					con.put("name", nation.getKo_name());
+					con.put("dust", nation.getDust());
+					con.put("continents", nation.getContinents());
+					con.put("showcnt", nation.getShowcnt());
+					con.put("customer", nation.getCustomer());
+					con.put("weight", nation.getWeight());
+					con.put("speech", nation.getSpeech());
+					con.put("price", nation.getPrice());
+					con.put("type", nation.getType());
+					con.put("image", nation.getUrl());
+					con.put("s_date", nation.getS_date());
+					con.put("f_date", nation.getF_date());
+					if(list.size()==12) {
+						result.put("lastpage", false);
+					}else {//라스트페이지일 경우 true
+						result.put("lastpage", true);
+					}
+					Countrylist.add(con);
+					}
 			}
 		}else if(list.size()==0) {
 			result.put("lastpage", true);
 		}
 		result.put("lastpageidx", maxpage);
+		System.out.println(Countrylist);
 		result.put("AllNationDatas", Countrylist);
 		re = new ResponseEntity<>(result, HttpStatus.OK);
+		return re;
+	}
+
+	/** 상담 정보를 받아 저장하는 메소드 */
+	@PostMapping("/counsel")
+	@ApiOperation(value = "상담 정보 저장")
+	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounsel(@RequestBody Counsel counvalue) {
+		ResponseEntity<Map<String, Object>> re = null;
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			System.out.println(counvalue.toString());
+			ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(), counvalue.getDate(), counvalue.getText(), counvalue.getNation());
+			re = new ResponseEntity<>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+		}
 		return re;
 	}
 	
