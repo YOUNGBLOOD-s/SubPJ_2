@@ -12,4 +12,4 @@ export const removeList = ({ token, id }) =>
   });
 
 export const allAdList = ({ page, filter }) =>
-  client.get(`/api/all?page=${page}?filter=${filter}`);
+  client.get(`/api/all?page=${page}&filter=${filter}`);

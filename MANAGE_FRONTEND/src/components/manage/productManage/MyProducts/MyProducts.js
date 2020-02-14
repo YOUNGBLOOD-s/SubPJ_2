@@ -66,7 +66,7 @@ const MyProducts = () => {
           <AdListWraaper>
             <component.Grid container spacing={1}>
               {ads.map(ad => (
-                <component.Grid item xs={6} md={4} key={ad.idx}>
+                <component.Grid item xs={12} sm={6} md={4} key={ad.idx}>
                   <Link
                     to={
                       user.username === 'admin'
@@ -74,7 +74,7 @@ const MyProducts = () => {
                         : `/manage/product/${ad.idx}`
                     }
                   >
-                    <MyProduct ad={ad} />
+                    <MyProduct ad={ad} isAdmin={user.username === 'admin'} />
                   </Link>
                 </component.Grid>
               ))}
