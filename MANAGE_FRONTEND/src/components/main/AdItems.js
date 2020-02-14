@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TitleBar from '../Detail/common/TitleBar';
 import CaptionText from '../Detail/common/CaptionText';
 import { useSelector, useDispatch } from 'react-redux';
-import { allAdList } from '../../modules/ads';
+import { allAdList, initilizeAds } from '../../modules/ads';
 
 const ItemsWrapper = styled.div`
   max-width: 1000px;
@@ -16,13 +16,20 @@ const AdItems = () => {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState('');
   const { ads } = useSelector(({ ads }) => ({
-    ads: ads.ads,
+    ads: ads.all_ads,
   }));
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(allAdList({ page, filter }));
   }, [dispatch, page, filter]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(initilizeAds());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ItemsWrapper>

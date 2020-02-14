@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MyProduct from './MyProduct';
 import { useDispatch, useSelector } from 'react-redux';
-import { userAdList } from '../../../../modules/ads';
+import { userAdList, initilizeAds } from '../../../../modules/ads';
 import component from '../../../../lib/material/component';
 import TitleBar from '../../../Detail/common/TitleBar';
 import { Link } from 'react-router-dom';
@@ -24,17 +24,23 @@ const MyProducts = () => {
   const dispatch = useDispatch();
   const { ads, loading, error, user } = useSelector(
     ({ ads, loading, user }) => ({
-      ads: ads.ads,
+      ads: ads.user_ads,
       error: ads.error,
-      loading: loading['ads/LIST_ADS'],
+      loading: loading['ads/USER_AD_LIST'],
       user: user.user,
     }),
   );
+  const token = sessionStorage.getItem('access_token');
+  useEffect(() => {
+    dispatch(userAdList({ page, token }));
+  }, [dispatch, page, token]);
 
   useEffect(() => {
-    const token = sessionStorage.getItem('access_token');
-    dispatch(userAdList({ page, token }));
-  }, [dispatch, page]);
+    return () => {
+      dispatch(initilizeAds());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const increasePage = () => {
     if (page !== lastPage) {
@@ -76,12 +82,13 @@ const MyProducts = () => {
       ) : (
         <LoadingBackdrop loading={loading} />
       )}
-      <component.Grid container>
+      <component.Grid container spacing={1}>
         <component.Grid item xs={6}>
           <component.Button
             onClick={decreasePage}
             disabled={page === 1}
             fullWidth
+            variant="contained"
             color="primary"
           >
             이전 페이지
@@ -92,6 +99,7 @@ const MyProducts = () => {
             onClick={increasePage}
             disabled={page === lastPage}
             fullWidth
+            variant="contained"
             color="primary"
           >
             다음 페이지
