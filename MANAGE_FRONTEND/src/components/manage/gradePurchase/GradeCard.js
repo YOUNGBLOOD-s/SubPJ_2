@@ -5,6 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
+import axios from 'axios';
 
 const GradeImgWrapper = styled.div`
   text-align: center;
@@ -53,11 +54,74 @@ const useStyles = makeStyles({
     color: 'green',
   },
 });
+
 const GradeCard = ({ title, image, grade, price, option }) => {
   const classes = useStyles();
+
+  const token = sessionStorage.getItem('access_token');
+
+  const gradeAlert = {
+    '-1': '현재 등급과 동일하여 구매가 취소되었습니다.',
+    '0': '등급 구매에 실패하였습니다.',
+    '1': `${title}님, 환영합니다!`,
+  };
+
+  const getGrade = () => {
+    let result = -1;
+
+    axios
+      .get('http://52.78.218.79:8887/api/mem/grade', {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then(res => {
+        result = res.data.grade;
+      })
+      .catch(err => console.log(err));
+
+    return result;
+  };
+
+  const updateGrade = () => {
+    let originalGrade = -1;
+
+    originalGrade = getGrade();
+
+    if (originalGrade === parseInt(grade)) {
+      alert(gradeAlert[-1]);
+      return;
+    } else if (originalGrade === 1) {
+      alert('관리자는 등급 구매가 불가능합니다.');
+      return;
+    }
+    axios
+      .put(
+        'http://52.78.218.79:8887/api/mem/update/' + grade,
+        {},
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
+      .then(res => {
+        alert(gradeAlert[1]);
+      })
+      .catch(err => {
+        alert(gradeAlert[0]);
+      });
+  };
+
+  const onClick = () => {
+    window.confirm(title + ' 등급을 구매하시겠습니까?')
+      ? updateGrade()
+      : window.alert('등급 구매를 취소하였습니다.');
+  };
+
   return (
     <>
-      <Card className={classes.root}>
+      <Card className={classes.root} onClick={onClick}>
         <CardActionArea>
           <CardContent>
             <GradeImgWrapper>

@@ -3,8 +3,10 @@ import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
 import MyProducts from '../components/manage/productManage/MyProducts/MyProducts';
 import { useSelector } from 'react-redux';
 import AddProduct from '../components/manage/productManage/AddProduct/AddProduct';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import ProductDetail from '../components/product/ProductDetail';
+import AdminAppbar from '../components/common/AdminAppbar';
+import MyPageAdmin from '../components/manage/MyPage/MyPageAdmin';
 
 const AdminPage = ({ history }) => {
   const { user } = useSelector(({ user }) => ({
@@ -21,15 +23,11 @@ const AdminPage = ({ history }) => {
   return (
     <div>
       <ButtonAppbarContainer />
-      <div>
-        <Link to="/admin">광고목록</Link>
-        <Link to="/admin/users">유저목록</Link>
-        <Link to="/admin/add">상품추가</Link>
-        <Link to="/admin/update">상품수정</Link>
-      </div>
+      <AdminAppbar />
       <Route component={MyProducts} path="/admin" exact />
       <Route component={AddProduct} path="/admin/add" />
       <Route component={ProductDetail} path="/admin/product/:id" />
+      <Route component={MyPageAdmin} path="/admin/users" />
     </div>
   );
 };

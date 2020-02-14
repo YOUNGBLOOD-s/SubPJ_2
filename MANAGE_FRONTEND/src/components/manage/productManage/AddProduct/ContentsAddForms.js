@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addRoute, removeRoute } from '../../../../modules/form';
 import ImageUploader from '../../../common/ImageUploader';
 import { prevStep, nextStep } from '../../../../modules/stepper';
+import transportArr from '../../../../lib/data/transportArr';
 
 const StyledTextField = withStyles({
   root: {
@@ -138,7 +139,7 @@ const ContentsAddForm = ({ nationId }) => {
                 value={content.transport}
                 onChange={handleChange}
               >
-                {transport_arr.map(transport => (
+                {transportArr.map(transport => (
                   <MenuItem key={transport.value} value={transport.value}>
                     {transport.label}
                   </MenuItem>
@@ -220,37 +221,6 @@ const ContentsAddForm = ({ nationId }) => {
     </MaterialCard>
   );
 };
-
-const transport_arr = [
-  {
-    value: '비행기',
-    label: '비행기',
-  },
-  {
-    value: '경비행기',
-    label: '경비행기',
-  },
-  {
-    value: '버스',
-    label: '버스',
-  },
-  {
-    value: '기차',
-    label: '기차',
-  },
-  {
-    value: '차량',
-    label: '차량',
-  },
-  {
-    value: '유람선',
-    label: '유람선',
-  },
-  {
-    value: '배',
-    label: '배',
-  },
-];
 
 const ContentAddForms = ({ classes, steps, step }) => {
   const { nationId } = useSelector(({ form }) => ({

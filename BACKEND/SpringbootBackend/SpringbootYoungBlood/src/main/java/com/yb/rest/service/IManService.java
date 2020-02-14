@@ -54,3 +54,4 @@ public interface IManService {
 	/** 상담정보 */
 	public List<Counsel> selectCounsellist(int idx);
 }
+

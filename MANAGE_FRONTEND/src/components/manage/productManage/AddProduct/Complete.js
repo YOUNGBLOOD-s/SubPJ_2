@@ -104,8 +104,8 @@ const Complete = ({ classes, step, steps }) => {
   };
 
   const handleNextAndComplete = () => {
-    contentsAdding();
-    imagesAdding();
+    // contentsAdding();
+    // imagesAdding();
     // 정상적으로 완료되었다면
     if (loading.imageState.complete && loading.routeState.complete) {
       dispatch(nextStep());
