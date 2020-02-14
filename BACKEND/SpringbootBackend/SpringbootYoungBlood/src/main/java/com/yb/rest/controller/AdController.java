@@ -569,39 +569,64 @@ public class AdController {
 	/** 나라 전체 정보를 보내는 메소드 */
 	@GetMapping("/all")
 	@ApiOperation(value = "나라 전체 정보 조회")
-	public @ResponseBody ResponseEntity<Map<String, Object>> selectAllnationdetail() {
+	public @ResponseBody ResponseEntity<Map<String, Object>> selectAllnationdetail(@RequestParam("page") String page,
+			@RequestParam("continents") int continents, @RequestParam("sort") String sort) {
+		//유럽1 북태평양2 아프리카3 아시아4 북아메리카5
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map<String, Object>> Countrylist = new LinkedList<>();
-		List<Integer> list = ser.selectIdxs();
-		
-		for(int i=0; i<list.size(); i++) {
-			int idx = list.get(i);
-			Map<String, Object> con = new HashMap<String, Object>();
-			Nation nation = ser.getNationdetail(idx);
-			
-			Monthtb mon = manser.monthInfo(idx);
-			List<Image> img =  manser.imagesInfo(idx);
-			List<Route> rou = manser.contentsInfo(idx);
-			
-			if(mon==null || img==null || rou==null) continue;
-			
-			con.put("idx", nation.getIdx());
-			con.put("en_name", nation.getEn_name());
-			con.put("name", nation.getKo_name());
-			con.put("dust", nation.getDust());
-			con.put("continents", nation.getContinents());
-			con.put("showcnt", nation.getShowcnt());
-			con.put("customer", nation.getCustomer());
-			con.put("weight", nation.getWeight());
-			con.put("speech", nation.getSpeech());
-			con.put("price", nation.getPrice());
-			con.put("type", nation.getType());
-			con.put("image", nation.getUrl());
-
-			Countrylist.add(con);
+		Map<String, Object> con = new HashMap<String, Object>();
+		int pageIdx = 0;
+		if (page == null)
+			pageIdx = 1;
+		else{
+			pageIdx = Integer.parseInt(page);
 		}
-
+		pageIdx = (pageIdx-1) * 12;
+		List<Integer> checkSize = ser.selectIdxs();
+		int maxpage = checkSize.size()/12;
+		if(checkSize.size()%12>0)
+			maxpage++;
+		List<Integer> list = ser.selectIdxs_page(pageIdx);
+		if(continents==1||continents==2||continents==3||continents==4||continents==5) {
+			for (int i = 0; i < list.size(); i++) {
+				
+			}
+		}
+		System.out.println(list.size());
+		if(list.size()>0) {
+			for(int i=0; i<list.size(); i++) {
+				int idx = list.get(i);
+				Nation nation = ser.getNationdetail(idx);
+				Monthtb mon = manser.monthInfo(idx);
+				List<Image> img =  manser.imagesInfo(idx);
+				List<Route> rou = manser.contentsInfo(idx);
+				
+				if(mon==null || img==null || rou==null) continue;
+				
+				con.put("idx", nation.getIdx());
+				con.put("en_name", nation.getEn_name());
+				con.put("name", nation.getKo_name());
+				con.put("dust", nation.getDust());
+				con.put("continents", nation.getContinents());
+				con.put("showcnt", nation.getShowcnt());
+				con.put("customer", nation.getCustomer());
+				con.put("weight", nation.getWeight());
+				con.put("speech", nation.getSpeech());
+				con.put("price", nation.getPrice());
+				con.put("type", nation.getType());
+				con.put("image", nation.getUrl());
+				if(list.size()==12) {
+					result.put("lastpage", false);
+				}else {//라스트페이지일 경우 true
+					result.put("lastpage", true);
+				}
+				Countrylist.add(con);
+			}
+		}else if(list.size()==0) {
+			result.put("lastpage", true);
+		}
+		result.put("lastpageidx", maxpage);
 		result.put("AllNationDatas", Countrylist);
 		re = new ResponseEntity<>(result, HttpStatus.OK);
 		return re;

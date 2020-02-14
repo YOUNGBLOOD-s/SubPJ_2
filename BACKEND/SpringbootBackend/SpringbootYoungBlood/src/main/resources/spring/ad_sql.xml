@@ -148,6 +148,10 @@
 	select idx from nationtb;
 	</select>
 	
+	<select id="selectidxs_page" parameterType="int" resultType="int">
+	select idx from nationtb limit 12 offset #{pageidx};
+	</select>
+	
 	<select id="selectNation" resultType="int" parameterType="int">
 	select nation
 	from monthtb
