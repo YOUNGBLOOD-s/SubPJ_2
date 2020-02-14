@@ -24,6 +24,7 @@ public interface IAdService {
 	
 	/** detail */
 	public List<Integer> selectIdxs();
+	public List<Integer> selectIdxs_page(int pageidx);
 	public List<Route> getRoutes(int idx);
 	public List<Route> getRoutes(String customer);
 	public List<Route> getRoutesAll(int idx);

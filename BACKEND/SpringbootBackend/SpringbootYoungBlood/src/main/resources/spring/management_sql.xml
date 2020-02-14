@@ -43,7 +43,7 @@
 		parameterType="map">
 		select *
 		from nationtb
-		where customer=#{customer} limit 10
+		where customer=#{customer} limit 12
 		offset #{pageIdx}
 	</select>
 
@@ -51,7 +51,7 @@
 	<select id="selectNationListAll_page" resultType="nationdto"
 		parameterType="map">
 		select *
-		from nationtb limit 10 offset #{pageIdx}
+		from nationtb limit 12 offset #{pageIdx}
 	</select>
 
 	<select id="selectNationList" resultType="nation"
@@ -70,9 +70,9 @@
 
 	<insert id="insertnation" parameterType="nation">
 		insert into
-		nationtb(en_name, ko_name, dust, continents, customer, weight, speech,
+		nationtb(en_name, ko_name, continents, customer, weight, speech,
 		price,s_date,f_date)
-		values(#{en_name},#{ko_name},#{dust},#{continents},#{customer},#{weight},#{speech},#{price},#{s_date},#{f_date});
+		values(#{en_name},#{ko_name}, #{continents},#{customer},#{weight},#{speech},#{price},#{s_date},#{f_date});
 	</insert>
 
 	<delete id="nationdelete" parameterType="nation">
@@ -202,8 +202,4 @@
 	</select>
 	
 </mapper>
- 
- 
- 
- 
  

@@ -187,6 +187,11 @@ public class AdServiceImpl implements IAdService {
 	public List<Integer> selectIdxs() {
 		return repo.selectIdxs();
 	}
+	
+	@Override
+	public List<Integer> selectIdxs_page(int pageidx) {
+		return repo.selectIdxs_page(pageidx);
+	}
 
 	@Override
 	public int selectNation(int idx) {
@@ -207,4 +212,6 @@ public class AdServiceImpl implements IAdService {
 	public void deleteCounsel(int idx) {
 		repo.deleteCounsel(idx);
 	}
+
+	
 }

@@ -46,8 +46,8 @@ public class ManServiceImpl implements IManService {
 	}
 
 	@Override
-	public void nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
-		repo.nationinsert(en_name, ko_name, dust, continents,  customer, weight, speech, price, s_date, f_date);
+	public void nationinsert(String en_name, String ko_name, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
+		repo.nationinsert(en_name, ko_name, continents,  customer, weight, speech, price, s_date, f_date);
 	}
 
 	@Override
