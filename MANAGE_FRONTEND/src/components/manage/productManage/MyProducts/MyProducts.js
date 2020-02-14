@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MyProduct from './MyProduct';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import { listAds } from '../../../../modules/ads';
 import component from '../../../../lib/material/component';
 import TitleBar from '../../../Detail/common/TitleBar';
 import { Link } from 'react-router-dom';
+import LoadingBackdrop from '../../../common/LoadingBackdrop';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
@@ -18,6 +19,8 @@ const AdListWraaper = styled.div`
 `;
 
 const MyProducts = () => {
+  const [page, setPage] = useState(1);
+  const lastPage = 3;
   const dispatch = useDispatch();
   const { ads, loading, error, user } = useSelector(
     ({ ads, loading, user }) => ({
@@ -30,8 +33,20 @@ const MyProducts = () => {
 
   useEffect(() => {
     const token = sessionStorage.getItem('access_token');
-    dispatch(listAds(token));
-  }, [dispatch]);
+    dispatch(listAds({ page, token }));
+  }, [dispatch, page]);
+
+  const increasePage = () => {
+    if (page !== lastPage) {
+      setPage(page + 1);
+    }
+  };
+
+  const decreasePage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
 
   if (error) {
     return <div>{error.message}</div>;
@@ -40,7 +55,7 @@ const MyProducts = () => {
   return (
     <MyProductsWrapper>
       <TitleBar>광고 목록</TitleBar>
-      {!loading && ads && (
+      {!loading && ads ? (
         <AdListWraaper>
           <component.Grid container spacing={1}>
             {ads.map(ad => (
@@ -58,15 +73,27 @@ const MyProducts = () => {
             ))}
           </component.Grid>
         </AdListWraaper>
+      ) : (
+        <LoadingBackdrop loading={loading} />
       )}
       <component.Grid container>
         <component.Grid item xs={6}>
-          <component.Button fullWidth color="primary">
+          <component.Button
+            onClick={decreasePage}
+            disabled={page === 1}
+            fullWidth
+            color="primary"
+          >
             이전 페이지
           </component.Button>
         </component.Grid>
         <component.Grid item xs={6}>
-          <component.Button fullWidth color="primary">
+          <component.Button
+            onClick={increasePage}
+            disabled={page === lastPage}
+            fullWidth
+            color="primary"
+          >
             다음 페이지
           </component.Button>
         </component.Grid>

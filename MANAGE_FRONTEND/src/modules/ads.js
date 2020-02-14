@@ -5,10 +5,14 @@ import createRequestSaga, {
 } from '../lib/createRequestSaga';
 import * as adsAPI from '../lib/api/ad';
 
-const [LIST_ADS, LIST_ADS_SUCCESS, LIST_ADS_FAILURE] = createRequestActionTypes(
-  'ads/LIST_ADS',
-  token => token,
-);
+const [
+  LIST_ADS,
+  LIST_ADS_SUCCESS,
+  LIST_ADS_FAILURE,
+] = createRequestActionTypes('ads/LIST_ADS', ({ token, page }) => ({
+  token,
+  page,
+}));
 
 export const listAds = createAction(LIST_ADS);
 
