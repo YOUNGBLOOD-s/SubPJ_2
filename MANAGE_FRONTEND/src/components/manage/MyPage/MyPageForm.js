@@ -91,7 +91,7 @@ const MyPageForm = ({ userInfo, setUserInfo }) => {
       return;
     }
     axios
-      .put('/api/auth/updatemem', data.toJS(), {
+      .put('http://i02c110.p.ssafy.io:8887/api/auth/updatemem', data.toJS(), {
         headers: {
           Authorization: token,
         },

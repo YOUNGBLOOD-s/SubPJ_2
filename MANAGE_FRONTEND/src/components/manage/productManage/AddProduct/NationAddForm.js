@@ -32,7 +32,7 @@ const NationAddForm = ({ classes, steps, step }) => {
     // TODO: 인풋 필드 검증필요
     const token = sessionStorage.getItem('access_token');
     axios
-      .post('/api/man/nation/insert', product, {
+      .post('http://i02c110.p.ssafy.io:8887/api/man/nation/insert', product, {
         headers: { Authorization: token },
       })
       .then(res => {

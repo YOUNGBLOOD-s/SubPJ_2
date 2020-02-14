@@ -69,7 +69,7 @@ const GradeCard = ({ title, image, grade, price, option }) => {
   const updateGrade = () => {
     axios
       .put(
-        'http://52.78.218.79:8887/api/mem/update/' + grade,
+        'http://i02c110.p.ssafy.io:8887/api/mem/update/' + grade,
         {},
         {
           headers: {

@@ -12,8 +12,7 @@ const MyPageAdmin = () => {
   useEffect(() => {
     axios
       .post(
-        '/api/auth/infomem',
-        // 'http://192.168.100.66:8887/api/auth/infomem',
+        'http://i02c110.p.ssafy.io:8887/api/auth/infomem',
         { password: 'admin' },
         {
           headers: {
@@ -78,11 +77,15 @@ const MyPageAdmin = () => {
                   if (oldData) {
                     if (newData.username === 'admin') newData.grade = 1;
                     axios
-                      .put('/api/auth/updatemem', newData, {
-                        headers: {
-                          Authorization: token,
+                      .put(
+                        'http://i02c110.p.ssafy.io:8887/api/auth/updatemem',
+                        newData,
+                        {
+                          headers: {
+                            Authorization: token,
+                          },
                         },
-                      })
+                      )
                       .then(res => {
                         setState(prevState => {
                           const data = [...prevState.data];
@@ -105,11 +108,15 @@ const MyPageAdmin = () => {
                   // });
                   const idx = oldData.idx;
                   axios
-                    .delete('/api/auth/deleteadmin/' + idx, {
-                      headers: {
-                        Authorization: token,
+                    .delete(
+                      'http://i02c110.p.ssafy.io:8887/api/auth/deleteadmin/' +
+                        idx,
+                      {
+                        headers: {
+                          Authorization: token,
+                        },
                       },
-                    })
+                    )
                     .then(res => {
                       setState(prevState => {
                         const data = [...prevState.data];

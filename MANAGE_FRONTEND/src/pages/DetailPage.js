@@ -21,7 +21,7 @@ const DetailPage = ({ match, history }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`/api/detail/${id}`)
+      .get(`http://i02c110.p.ssafy.io:8887/api/detail/${id}`)
       .then(res => {
         const { data } = res;
         setCountry(data); // 나라 설정
