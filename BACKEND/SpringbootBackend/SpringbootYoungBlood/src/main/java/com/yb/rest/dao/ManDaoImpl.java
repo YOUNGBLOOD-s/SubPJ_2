@@ -59,8 +59,8 @@ public class ManDaoImpl implements IManDao {
 	}
 
 	@Override
-	public void nationinsert(String en_name, String ko_name, String dust, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
-		Nation n = new Nation(en_name, ko_name, dust, continents, customer, weight, speech, price, s_date, f_date);
+	public void nationinsert(String en_name, String ko_name, String continents, String customer, String weight, String speech, String price, String s_date, String f_date) {
+		Nation n = new Nation(en_name, ko_name, continents, customer, weight, speech, price, s_date, f_date);
 		session.insert("management.insertnation", n);
 	}
 

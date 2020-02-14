@@ -60,24 +60,6 @@ public class AdController {
 
 	}
 
-	/**
-	 * 센서값을 받는다.
-	 * @throws JsonProcessingException
-	 */
-	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
-	@ApiOperation(value = "임베디드 센서로부터 센서 값을 읽어옴")
-	public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light, @PathVariable String dust) throws JsonProcessingException {
-		float tmp = Float.parseFloat(temp);
-		float hu = Float.parseFloat(hum);
-		float dus = Float.parseFloat(dust);
-		float lig = Float.parseFloat(light);
-		Sensor sen = new Sensor(tmp, hu, dus, lig);
-		System.out.println("안녕하세요. 센서값을 전광판으로부터 받았습니다. 받은 정보는 다음과 같습니다.");
-		System.out.println(sen.toString());
-		ser.updateSensor(sen);
-		System.out.println("==============");
-	}
-	
 	/** 가중치를 계산하는 메소드 */
 	@SuppressWarnings("finally")
 	@GetMapping("/weightcal")
@@ -174,17 +156,21 @@ public class AdController {
 					return (int) (o1.getHumid() - o2.getHumid());
 				}
 			});
-			//습도 계산할때 미세먼지 값 까지 함께 처리하도록 합치기
+			for (int j = 0; j < nations.size(); j++) {
+				int originScore = ser.getScore(nations.get(j).getIdx());
+				int minus = j / 5 == 0 ? 10 : (j / 5) * (10);
+				originScore -= minus;
+				ser.updateScore(new ForScore(nations.get(j).getIdx(), originScore));
+			}
+			for (int j = 0; j < nations.size(); j++) {
+				int score = ser.getScore(nations.get(j).getIdx());
+				int minus = ser.getDust(nations.get(j).getIdx()) * 10;
+				score -= minus;
+				ser.updateScore(new ForScore(nations.get(j).getIdx(), score));
+			}
 			List<ForScore> finallist = new ArrayList<ForScore>();
 			for (int j = 0; j < nations.size(); j++) {
-				int idx=nations.get(j).getIdx();
-				int originScore = ser.getScore(idx);
-				int minus = j / 5 == 0 ? 10 : (j / 5) * (10); //습도 마이너스 값
-				minus+=ser.getDust(idx) * 10; //미세먼지 마이너스 값
-				originScore -= minus;
-				ser.updateScore(new ForScore(idx, originScore));
-				//최종 idx,점수 리스트에 바로 담기
-				finallist.add(new ForScore(idx,ser.getScore(idx)));
+				finallist.add(new ForScore(nations.get(j).getIdx(), ser.getScore(nations.get(j).getIdx())));
 			}
 
 			Collections.sort(finallist, new Comparator<ForScore>() {
@@ -193,7 +179,6 @@ public class AdController {
 					return o1.getScore() - o2.getScore();
 				}
 			});
-			
 			result = new LinkedList<>();
 			for (int i = 0; i < 4; i++) {
 				int finalScore = 0;
@@ -255,7 +240,7 @@ public class AdController {
 		List<Nation> everyNation = ser.selectNations();
 		for (int i = 0; i < everyNation.size(); i++) {
 			String idx = everyNation.get(i).getIdx();
-			if (ser.getFlag(idx) == 1) //flag==1 이미 다 횟수 사용함
+			if (ser.getFlag(idx) == 1)
 				continue;
 			gradeGroup.add(Integer.parseInt(idx));
 		}
@@ -629,22 +614,6 @@ public class AdController {
 		result.put("lastpageidx", maxpage);
 		result.put("AllNationDatas", Countrylist);
 		re = new ResponseEntity<>(result, HttpStatus.OK);
-		return re;
-	}
-
-	/** 상담 정보를 받아 저장하는 메소드 */
-	@PostMapping("/counsel")
-	@ApiOperation(value = "상담 정보 저장")
-	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounsel(@RequestBody Counsel counvalue) {
-		ResponseEntity<Map<String, Object>> re = null;
-		Map<String, Object> result = new HashMap<String, Object>();
-		try {
-			System.out.println(counvalue.toString());
-			ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(), counvalue.getDate(), counvalue.getText(), counvalue.getNation());
-			re = new ResponseEntity<>(result, HttpStatus.OK);
-		} catch (Exception e) {
-			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-		}
 		return re;
 	}
 	
