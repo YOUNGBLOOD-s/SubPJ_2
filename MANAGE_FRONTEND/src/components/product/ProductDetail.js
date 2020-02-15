@@ -16,6 +16,7 @@ import { removeList } from '../../lib/api/ad';
 import component from '../../lib/material/component';
 import DeleteAlertDialog from '../common/DeleteAlertDialog';
 import MonthForm from './MonthForm';
+import Counsels from './Counsels';
 
 const DetailContainer = styled.div`
   padding: 1rem;
@@ -112,6 +113,17 @@ const ProductDetail = ({ match, history }) => {
               <NoData>
                 <MonthForm nationId={id} />
               </NoData>
+            )}
+          </MaterialCard>
+
+          {/* COUNSEL */}
+          <TitleBar>광고 상담예약 리스트</TitleBar>
+          <CaptionText>해당 광고의 상담 리스트 입니다.</CaptionText>
+          <MaterialCard>
+            {product.counselList ? (
+              <Counsels counsels={product.counselList} user={user} />
+            ) : (
+              <NoData>상담예약이 없습니다.</NoData>
             )}
           </MaterialCard>
 

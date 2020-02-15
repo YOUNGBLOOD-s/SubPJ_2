@@ -7,6 +7,7 @@ import { allAdList, initilizeAds } from '../../modules/ads';
 import component from '../../lib/material/component';
 import palette from '../../lib/styles/palette';
 import Pagination from '../common/Pagination';
+import LoadingBackdrop from '../common/LoadingBackdrop';
 
 const ItemsWrapper = styled.div`
   max-width: 1200px;
@@ -24,8 +25,9 @@ const FilterWrapper = styled.div`
 const AdItems = () => {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState('');
-  const { ads } = useSelector(({ ads }) => ({
+  const { ads, loading } = useSelector(({ ads, loading }) => ({
     ads: ads.all_ads,
+    loading: loading['ads/ALL_AD_LIST'],
   }));
   const dispatch = useDispatch();
 
@@ -58,10 +60,10 @@ const AdItems = () => {
     <ItemsWrapper>
       <TitleBar>진행중인 광고</TitleBar>
       <component.Grid container spacing={1}>
-        {ads ? (
+        {!loading && ads ? (
           <>
             {ads.map((ad, idx) => (
-              <component.Grid item xs={12} md={gridSize[idx]}>
+              <component.Grid item xs={12} md={gridSize[idx] || 1}>
                 <AdItem key={ad.idx} ad={ad} />
               </component.Grid>
             ))}
@@ -70,7 +72,7 @@ const AdItems = () => {
             </component.Grid>
           </>
         ) : (
-          <h5>광고가 없네요...ㅠ</h5>
+          <LoadingBackdrop loading={loading} />
         )}
       </component.Grid>
       <FilterWrapper>

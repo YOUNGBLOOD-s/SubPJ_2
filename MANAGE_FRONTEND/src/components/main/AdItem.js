@@ -22,7 +22,7 @@ const ContentWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   padding: 1rem;
-  bottom: 0%;
+  bottom: 0.5%;
   .ko-name {
     font-size: 1.5rem;
     font-weight: bold;
