@@ -87,6 +87,9 @@ const MainAD = () => {
   const [datas, setDatas] = useState(null);
 
   const onDoubleClick = index => {
+    Axios.get('http://i02c110.p.ssafy.io:8887/api/click/' + index)
+      .then(res => console.log(res))
+      .catch(err => console.log('Click Count 요청 실패!'));
     setPid(index);
     setOpen(true);
   };
@@ -96,7 +99,7 @@ const MainAD = () => {
   const reqTerm = carouselTerm * (itemNum + 1);
 
   const getItems = () => {
-    Axios.get('http://52.78.218.79:8887/api/sensor/reco')
+    Axios.get('http://i02c110.p.ssafy.io:8887/api/sensor/reco')
       // Axios.get('http://192.168.100.66:8887/api/sensor/reco') // test backend
       .then(res => {
         setDatas(res.data.datas);
