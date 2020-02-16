@@ -45,3 +45,6 @@ export const updateMonthtable = ({ id, form, token }) =>
       headers: { Authorization: token },
     },
   );
+
+export const toggleCounsel = ({ id, form, token }) =>
+  client.put(`http://i02c110.p.ssafy.io:8887/api/counsel/completed/${id}`);

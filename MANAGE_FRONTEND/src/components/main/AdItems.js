@@ -63,8 +63,8 @@ const AdItems = () => {
         {!loading && ads ? (
           <>
             {ads.map((ad, idx) => (
-              <component.Grid item xs={12} md={gridSize[idx] || 1}>
-                <AdItem key={ad.idx} ad={ad} />
+              <component.Grid item xs={12} md={gridSize[idx] || 1} key={ad.idx}>
+                <AdItem ad={ad} />
               </component.Grid>
             ))}
             <component.Grid item xs={12}>

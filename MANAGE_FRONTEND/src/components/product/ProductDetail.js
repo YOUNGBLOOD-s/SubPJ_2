@@ -67,6 +67,12 @@ const ProductDetail = ({ match, history }) => {
           <MaterialCard>
             {product.owner ? <Owner owner={product.owner} /> : <NoData />}
           </MaterialCard>
+          {/* COUNSEL */}
+          {product.counselList ? (
+            <Counsels counsels={product.counselList} user={user} />
+          ) : (
+            <NoData>상담예약이 없습니다.</NoData>
+          )}
 
           {/* NATION */}
           <TitleBar>광고 기본 설정</TitleBar>
@@ -116,17 +122,6 @@ const ProductDetail = ({ match, history }) => {
             )}
           </MaterialCard>
 
-          {/* COUNSEL */}
-          <TitleBar>광고 상담예약 리스트</TitleBar>
-          <CaptionText>해당 광고의 상담 리스트 입니다.</CaptionText>
-          <MaterialCard>
-            {product.counselList ? (
-              <Counsels counsels={product.counselList} user={user} />
-            ) : (
-              <NoData>상담예약이 없습니다.</NoData>
-            )}
-          </MaterialCard>
-
           {/* DELETE */}
           {user && user.username === 'admin' && (
             <DeleteAlertDialog>
@@ -138,7 +133,7 @@ const ProductDetail = ({ match, history }) => {
           )}
         </DetailWrapper>
       ) : (
-        <LoadingBackdrop loading={loading === undefined ? true : loading} />
+        <LoadingBackdrop loading={loading} />
       )}
     </DetailContainer>
   );
