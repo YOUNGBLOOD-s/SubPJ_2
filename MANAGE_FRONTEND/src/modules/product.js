@@ -255,17 +255,13 @@ const product = handleActions(
         month: error,
       },
     }),
-    [TOGGLE_PRODUCT_COUNSEL_SUCCESS]: (state, { payload: data }) => {
-      console.log(data);
-      // FIXME: 무슨 데이터가 오는지, 그리고 카운슬의 아이디 확인하기.
+    [TOGGLE_PRODUCT_COUNSEL_SUCCESS]: (state, { payload: { updateValue } }) => {
       return {
         ...state,
         product: {
           ...state.product,
           counselList: state.product.counselList.map(counsel => {
-            if (counsel.id === data.id) {
-              return { ...counsel, completed: !counsel.completed };
-            }
+            if (counsel.idx === updateValue.idx) return updateValue;
             return counsel;
           }),
         },

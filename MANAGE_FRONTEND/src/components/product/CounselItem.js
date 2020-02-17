@@ -17,21 +17,18 @@ const CounselItemWrapper = styled.div`
 `;
 
 const CounselItem = ({ counsel }) => {
-  const { age, name, email, tel, date, text, completed } = counsel;
+  const { idx, age, name, email, tel, date, text, completed } = counsel;
   const reformDate = new Date(date);
   const day = reformDate.getDate();
   const month = reformDate.getMonth() + 1;
   const year = reformDate.getFullYear();
 
   const dispatch = useDispatch();
-  const token = sessionStorage.getItem('access_token');
   const onToggle = () => {
+    console.log(counsel, !completed);
     dispatch(
       toggleProductCounsel({
-        // FIXME: 인덱스오면 고치세용
-        id: 1,
-        form: { ...counsel, completed: !completed },
-        token,
+        id: idx,
       }),
     );
   };
