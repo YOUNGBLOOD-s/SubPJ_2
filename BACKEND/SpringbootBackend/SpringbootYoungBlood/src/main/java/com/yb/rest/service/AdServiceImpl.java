@@ -147,7 +147,7 @@ public class AdServiceImpl implements IAdService {
 	public List<Nation> selectNations() {
 		return repo.selectNations();
 	}
-	
+
 	@Override
 	public boolean getDate(Map map) {
 		return repo.getDate(map);
@@ -187,7 +187,7 @@ public class AdServiceImpl implements IAdService {
 	public List<Integer> selectIdxs() {
 		return repo.selectIdxs();
 	}
-	
+
 	@Override
 	public List<Integer> selectIdxs_page(int pageidx) {
 		return repo.selectIdxs_page(pageidx);
@@ -214,15 +214,17 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public List<Nation> selectFilterIdxs(String continents,String page) {
-		return repo.selectFilterIdxs(continents,page);
+	public List<Nation> selectFilterIdxs(String continents, String page) {
+		return repo.selectFilterIdxs(continents, page);
 	}
 
 	@Override
 	public List<Integer> selectFilterIdxs(String continents) {
 		return repo.selectFilterIdxs(continents);
-    
-    	public int selectlastIdx() {
+	}
+
+	@Override
+	public int selectlastIdx() {
 		return repo.selectlastIdx();
 	}
 
@@ -232,5 +234,4 @@ public class AdServiceImpl implements IAdService {
 
 	}
 
-	
 }
