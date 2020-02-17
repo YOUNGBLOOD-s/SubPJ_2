@@ -213,5 +213,15 @@ public class AdServiceImpl implements IAdService {
 		repo.deleteCounsel(idx);
 	}
 
+	@Override
+	public List<Nation> selectFilterIdxs(String continents,String page) {
+		return repo.selectFilterIdxs(continents,page);
+	}
+
+	@Override
+	public List<Integer> selectFilterIdxs(String continents) {
+		return repo.selectFilterIdxs(continents);
+	}
+
 	
 }

@@ -1,6 +1,7 @@
 package com.yb.rest.dao;
 
 import java.time.Month;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -217,7 +218,21 @@ public class AdDaoImpl implements IAdDao {
 		session.delete("sendtofront.deleteCounsel", idx);
 	}
 
-	
+	@Override
+	public List<Nation> selectFilterIdxs(String continents,String page) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("customer", continents);
+		map.put("pageIdx", page);
+		List<Nation> list = session.selectList("sendtofront.selectContinentFilterList", map);
+		return list;
+	}
+
+	@Override
+	public List<Integer> selectFilterIdxs(String continents) {
+		List<Integer> list = session.selectList("sendtofront.selectfilteridxs", continents);
+		return list;
+	}
+
 	
 	
 }

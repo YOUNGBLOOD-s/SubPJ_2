@@ -50,6 +50,9 @@
 	from contentstb 
 	</select>
 	
+	<select id="selectContinentFilterList" resultType="nation" parameterType="map">
+	select * from nationtb where continents=#{continents} limit 12 offset #{page};
+	</select>
 	
 	<select id="selectNationdetail" resultType="nation" parameterType="map">
 	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, showcnt, customer, weight, speech,(select url from imagetb where type=#{type} AND nation=#{nationidx}) as url, price, type
@@ -58,7 +61,7 @@
 	</select>
 	
 	<select id="selectNationall" resultType="nation" parameterType="int">
-	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, showcnt, customer, weight, speech, price, type, (select url from imagetb where type=1 AND nation=#{idx}) as url
+	select idx, nationtb.en_name, nationtb.ko_name, dust, continents, showcnt, customer, weight, speech, price, type, s_date, f_date, (select url from imagetb where type=1 AND nation=#{idx}) as url
 	from nationtb
 	where idx=#{idx};
 	</select>
@@ -146,6 +149,10 @@
 	
 	<select id="selectidxs" resultType="int">
 	select idx from nationtb;
+	</select>
+	
+	<select id="selectfilteridxs" resultType="int" parameterType="string">
+	select idx from nationtb where continents=#{continents};
 	</select>
 	
 	<select id="selectidxs_page" parameterType="int" resultType="int">

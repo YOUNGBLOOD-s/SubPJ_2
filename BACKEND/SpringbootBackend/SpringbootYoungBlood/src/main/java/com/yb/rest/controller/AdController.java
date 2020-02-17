@@ -62,11 +62,13 @@ public class AdController {
 
 	/**
 	 * 센서값을 받는다.
+	 * 
 	 * @throws JsonProcessingException
 	 */
 	@GetMapping("/sensor/{temp}/{hum}/{light}/{dust}")
 	@ApiOperation(value = "임베디드 센서로부터 센서 값을 읽어옴")
-	public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light, @PathVariable String dust) throws JsonProcessingException {
+	public void sensor(@PathVariable String temp, @PathVariable String hum, @PathVariable String light,
+			@PathVariable String dust) throws JsonProcessingException {
 		float tmp = Float.parseFloat(temp);
 		float hu = Float.parseFloat(hum);
 		float dus = Float.parseFloat(dust);
@@ -77,7 +79,7 @@ public class AdController {
 		ser.updateSensor(sen);
 		System.out.println("==============");
 	}
-	
+
 	/** 가중치를 계산하는 메소드 */
 	@SuppressWarnings("finally")
 	@GetMapping("/weightcal")
@@ -167,24 +169,24 @@ public class AdController {
 				int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
 				ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
 			}
-			
+
 			Collections.sort(nations, new Comparator<Sensor>() {
 				@Override
 				public int compare(Sensor o1, Sensor o2) {
 					return (int) (o1.getHumid() - o2.getHumid());
 				}
 			});
-			//습도 계산할때 미세먼지 값 까지 함께 처리하도록 합치기
+			// 습도 계산할때 미세먼지 값 까지 함께 처리하도록 합치기
 			List<ForScore> finallist = new ArrayList<ForScore>();
 			for (int j = 0; j < nations.size(); j++) {
-				int idx=nations.get(j).getIdx();
+				int idx = nations.get(j).getIdx();
 				int originScore = ser.getScore(idx);
-				int minus = j / 5 == 0 ? 10 : (j / 5) * (10); //습도 마이너스 값
-				minus+=ser.getDust(idx) * 10; //미세먼지 마이너스 값
+				int minus = j / 5 == 0 ? 10 : (j / 5) * (10); // 습도 마이너스 값
+				minus += ser.getDust(idx) * 10; // 미세먼지 마이너스 값
 				originScore -= minus;
 				ser.updateScore(new ForScore(idx, originScore));
-				//최종 idx,점수 리스트에 바로 담기
-				finallist.add(new ForScore(idx,ser.getScore(idx)));
+				// 최종 idx,점수 리스트에 바로 담기
+				finallist.add(new ForScore(idx, ser.getScore(idx)));
 			}
 
 			Collections.sort(finallist, new Comparator<ForScore>() {
@@ -193,7 +195,7 @@ public class AdController {
 					return o1.getScore() - o2.getScore();
 				}
 			});
-			
+
 			result = new LinkedList<>();
 			for (int i = 0; i < 4; i++) {
 				int finalScore = 0;
@@ -209,16 +211,24 @@ public class AdController {
 				gradeGroup = haeun();
 			}
 			Random rand = new Random();
-			for (int h = 0; h <4 ; h++) {
+			for (int h = 0; h < 4; h++) {
 				int randomIdx = rand.nextInt(gradeGroup.size());
-				int randomElement = gradeGroup.get(randomIdx)-1;
+				int randomElement = gradeGroup.get(randomIdx) - 1;
 				Monthtb m = ser.selectTemps(randomElement);
-				float elementTemp = nMonth == 1 ? m.getTem1(): nMonth == 2 ? m.getTem2()
-								: nMonth == 3 ? m.getTem3(): nMonth == 4 ? m.getTem4(): nMonth == 5 ? m.getTem5()
-								: nMonth == 6 ? m.getTem6(): nMonth == 7 ? m.getTem7(): nMonth == 8 ? m.getTem8()
-								: nMonth == 9 ? m.getTem9(): nMonth == 10? m.getTem10(): nMonth == 11 ? m.getTem11()
-								: m.getTem12();
-								
+				float elementTemp = nMonth == 1 ? m.getTem1()
+						: nMonth == 2 ? m.getTem2()
+								: nMonth == 3 ? m.getTem3()
+										: nMonth == 4 ? m.getTem4()
+												: nMonth == 5 ? m.getTem5()
+														: nMonth == 6 ? m.getTem6()
+																: nMonth == 7 ? m.getTem7()
+																		: nMonth == 8 ? m.getTem8()
+																				: nMonth == 9 ? m.getTem9()
+																						: nMonth == 10 ? m.getTem10()
+																								: nMonth == 11
+																										? m.getTem11()
+																										: m.getTem12();
+
 				int finalScore = 0;
 				finalScore += lig < 50 ? 5 : 10;
 				finalScore += elementTemp < 22 ? 1 : 0;
@@ -234,12 +244,12 @@ public class AdController {
 			System.out.println(e);
 			List<Integer> list = ser.selectIdxs();
 			List<Integer> send = new LinkedList<>();
-			if(list.size()<8) {
-				for(int i=0; i<list.size(); i++) {
+			if (list.size() < 8) {
+				for (int i = 0; i < list.size(); i++) {
 					send.add(list.get(i));
 				}
 			} else {
-				for(int i=0; i<8; i++) {
+				for (int i = 0; i < 8; i++) {
 					send.add(list.get(i));
 				}
 			}
@@ -248,14 +258,14 @@ public class AdController {
 			return result;
 		}
 	}
-	
+
 	/** random()에 넣을 모든 나라상품 값 */
 	public ArrayList<Integer> haeun() {
 		ArrayList<Integer> gradeGroup = new ArrayList<>();
 		List<Nation> everyNation = ser.selectNations();
 		for (int i = 0; i < everyNation.size(); i++) {
 			String idx = everyNation.get(i).getIdx();
-			if (ser.getFlag(idx) == 1) //flag==1 이미 다 횟수 사용함
+			if (ser.getFlag(idx) == 1) // flag==1 이미 다 횟수 사용함
 				continue;
 			gradeGroup.add(Integer.parseInt(idx));
 		}
@@ -368,8 +378,8 @@ public class AdController {
 				Countrylist.add(data);
 			}
 			result.put("datas", Countrylist);
-			//System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
-			//System.out.println(Countrylist);
+			// System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
+			// System.out.println(Countrylist);
 			System.out.println("==============");
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
@@ -571,35 +581,84 @@ public class AdController {
 	@ApiOperation(value = "나라 전체 정보 조회")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectAllnationdetail(@RequestParam("page") String page,
 			@RequestParam("continents") String continents, @RequestParam("sort") String sort) {
-		//유럽1 북태평양2 아프리카3 아시아4 북아메리카5
+		// 유럽1 북태평양2 아프리카3 아시아4 북아메리카5
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map<String, Object>> Countrylist = new LinkedList<>();
-		
+		ArrayList<Nation> tmplist = new ArrayList<Nation>();
 		int pageIdx = 0;
 		if (page == null)
 			pageIdx = 1;
-		else{
+		else {
 			pageIdx = Integer.parseInt(page);
 		}
-		pageIdx = (pageIdx-1) * 12;
-		List<Integer> checkSize = ser.selectIdxs();
-		int maxpage = checkSize.size()/12;
-		if(checkSize.size()%12>0)
+		pageIdx = (pageIdx - 1) * 12;
+		int pageIdxfin = pageIdx+12;
+		List<Integer> checksize = ser.selectIdxs();
+		int maxpage = checksize.size()/12;
+		if (checksize.size() % 12 > 0)
 			maxpage++;
-		List<Integer> list = ser.selectIdxs_page(pageIdx);
-		System.out.println(list.size());
-		if(list.size()>0) {
-			for(int i=0; i<list.size(); i++) {
-				Map<String, Object> con = new HashMap<String, Object>();
-				int idx = list.get(i);
-				Nation nation = ser.getNationdetail(idx);
-				Monthtb mon = manser.monthInfo(idx);
-				List<Image> img =  manser.imagesInfo(idx);
-				List<Route> rou = manser.contentsInfo(idx);
-				if(mon==null || img==null || rou==null) continue;
-				if(continents.equals("1")||continents.equals("2")||continents.equals("3")||continents.equals("4")||continents.equals("5")) {
-					if(nation.getContinents().equals(continents)) {
+		List<Integer> list = ser.selectIdxs();
+		List<Integer> filterlist = ser.selectFilterIdxs(continents);
+		System.out.println(filterlist.size());
+		if (list.size() > 0) {
+			//필터가 적용 되었다면??
+			if (continents.equals("1") || continents.equals("2") || continents.equals("3") || continents.equals("4")|| continents.equals("5")) {
+					for (int i = 0; i < filterlist.size(); i++) {
+						Map<String, Object> con = new HashMap<String, Object>();
+						int idx = filterlist.get(i);	
+						Nation nation = ser.getNationdetail(idx);
+	//					List<Nation> confilterlist = ser.selectFilterIdxs(continents, pageIdx+"");
+							Monthtb mon = manser.monthInfo(idx);
+							List<Image> img = manser.imagesInfo(idx);
+							List<Route> rou = manser.contentsInfo(idx);
+							if (mon == null || img == null || rou == null) continue;			
+							con.put("idx", nation.getIdx());
+							con.put("en_name", nation.getEn_name());
+							con.put("name", nation.getKo_name());
+							con.put("dust", nation.getDust());
+							con.put("continents", nation.getContinents());
+							con.put("showcnt", nation.getShowcnt());
+							con.put("customer", nation.getCustomer());
+							con.put("weight", nation.getWeight());
+							con.put("speech", nation.getSpeech());
+							con.put("price", nation.getPrice());
+							con.put("type", nation.getType());
+							con.put("image", nation.getUrl());
+							con.put("s_date", nation.getS_date());
+							con.put("f_date", nation.getF_date());		
+						if (list.size() == 12) {
+							result.put("lastpage", false);
+						} else {// 라스트페이지일 경우 true
+							result.put("lastpage", true);
+						}
+						Countrylist.add(con);
+					}
+					if(Countrylist.size()>12) {
+						for(int i=pageIdx; i<pageIdx+12; i++) {
+							if(Countrylist.size() <= i)
+								break;
+							
+						}
+						
+					}else {
+						//그냥 출력하면 될듯..
+					}
+					maxpage = filterlist.size()/12;
+					if (filterlist.size() % 12 > 0)
+						maxpage++;
+				} else {
+					list.clear();
+					list = ser.selectIdxs_page(pageIdx);
+					System.out.println(maxpage);
+					for (int i = 0; i < list.size(); i++) {		
+						Map<String, Object> con = new HashMap<String, Object>();
+						int idx = list.get(i);
+						Nation nation = ser.getNationdetail(idx);
+						Monthtb mon = manser.monthInfo(idx);
+						List<Image> img = manser.imagesInfo(idx);
+						List<Route> rou = manser.contentsInfo(idx);
+						if (mon == null || img == null || rou == null) continue;
 						con.put("idx", nation.getIdx());
 						con.put("en_name", nation.getEn_name());
 						con.put("name", nation.getKo_name());
@@ -614,45 +673,23 @@ public class AdController {
 						con.put("image", nation.getUrl());
 						con.put("s_date", nation.getS_date());
 						con.put("f_date", nation.getF_date());
-						if(list.size()==12) {
+						if (list.size() == 12) {
 							result.put("lastpage", false);
-						}else {//라스트페이지일 경우 true
+						} else {// 라스트페이지일 경우 true
 							result.put("lastpage", true);
 						}
 						Countrylist.add(con);
-						}
-				}else {
-					con.put("idx", nation.getIdx());
-					con.put("en_name", nation.getEn_name());
-					con.put("name", nation.getKo_name());
-					con.put("dust", nation.getDust());
-					con.put("continents", nation.getContinents());
-					con.put("showcnt", nation.getShowcnt());
-					con.put("customer", nation.getCustomer());
-					con.put("weight", nation.getWeight());
-					con.put("speech", nation.getSpeech());
-					con.put("price", nation.getPrice());
-					con.put("type", nation.getType());
-					con.put("image", nation.getUrl());
-					con.put("s_date", nation.getS_date());
-					con.put("f_date", nation.getF_date());
-					if(list.size()==12) {
-						result.put("lastpage", false);
-					}else {//라스트페이지일 경우 true
-						result.put("lastpage", true);
 					}
-					Countrylist.add(con);
-						
 				}
+			
+			} else if (list.size() == 0){
+				result.put("lastpage", true);
 			}
-		}else if(list.size()==0) {
-			result.put("lastpage", true);
+			result.put("lastpageidx", maxpage);
+			result.put("AllNationDatas", Countrylist);
+			re = new ResponseEntity<>(result, HttpStatus.OK);
+			return re;
 		}
-		result.put("lastpageidx", maxpage);
-		result.put("AllNationDatas", Countrylist);
-		re = new ResponseEntity<>(result, HttpStatus.OK);
-		return re;
-	}
 
 	/** 상담 정보를 받아 저장하는 메소드 */
 	@PostMapping("/counsel")
@@ -662,18 +699,20 @@ public class AdController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			System.out.println(counvalue.toString());
-			ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(), counvalue.getDate(), counvalue.getText(), counvalue.getNation());
+			ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(),
+					counvalue.getDate(), counvalue.getText(), counvalue.getNation());
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 		return re;
 	}
-	
+
 	/** 상담 완료/미완료 flag 값 swap */
 	@PutMapping("/counsel/completed/{nationidx}")
-	@ApiOperation(value="상담 완료 변수 swap")
-	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@RequestParam(value = "nationidx") int nationidx) {
+	@ApiOperation(value = "상담 완료 변수 swap")
+	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(
+			@RequestParam(value = "nationidx") int nationidx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
@@ -684,9 +723,9 @@ public class AdController {
 		}
 		return re;
 	}
-	
+
 	@DeleteMapping("/counsel/delete/{idx}")
-	@ApiOperation(value="상담정보 삭제")
+	@ApiOperation(value = "상담정보 삭제")
 	public @ResponseBody ResponseEntity<Map<String, Object>> deleteCounsel(@RequestParam(value = "nationidx") int idx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
