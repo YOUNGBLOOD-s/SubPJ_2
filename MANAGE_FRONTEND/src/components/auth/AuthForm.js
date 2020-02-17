@@ -81,7 +81,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
             />
           </>
         )}
-        <p>{error ? error : ''}</p>
+        <p>{error ? error.message : ''}</p>
         <StyledButton variant="contained" type="submit">
           {text}
         </StyledButton>

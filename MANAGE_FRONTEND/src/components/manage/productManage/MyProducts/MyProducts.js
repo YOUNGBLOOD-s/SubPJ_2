@@ -7,6 +7,8 @@ import component from '../../../../lib/material/component';
 import TitleBar from '../../../Detail/common/TitleBar';
 import { Link } from 'react-router-dom';
 import LoadingBackdrop from '../../../common/LoadingBackdrop';
+import AddProductLink from '../../../common/AddProductLink';
+import palette from '../../../../lib/styles/palette';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
@@ -16,6 +18,20 @@ const MyProductsWrapper = styled.div`
 
 const AdListWraaper = styled.div`
   margin: 1rem 0;
+`;
+
+const NoAdContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid ${palette.grey[200]};
+  border-radius: 3px;
+  padding: 2rem;
+  margin-top: 1rem;
+  .text {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const MyProducts = () => {
@@ -60,50 +76,69 @@ const MyProducts = () => {
 
   return (
     <MyProductsWrapper>
-      <TitleBar>광고 목록</TitleBar>
+      <component.Grid container>
+        <component.Grid item xs={10}>
+          <TitleBar>광고 목록</TitleBar>
+        </component.Grid>
+        <component.Grid item xs={2}>
+          <AddProductLink>광고 추가</AddProductLink>
+        </component.Grid>
+      </component.Grid>
       {!loading && ads ? (
         <>
-          <AdListWraaper>
-            <component.Grid container spacing={1}>
-              {ads.map(ad => (
-                <component.Grid item xs={12} sm={6} md={4} key={ad.idx}>
-                  <Link
-                    to={
-                      user.username === 'admin'
-                        ? `/admin/product/${ad.idx}`
-                        : `/manage/product/${ad.idx}`
-                    }
-                  >
-                    <MyProduct ad={ad} isAdmin={user.username === 'admin'} />
-                  </Link>
+          {ads.length > 0 ? (
+            <>
+              <AdListWraaper>
+                <component.Grid container spacing={1}>
+                  {ads.map(ad => (
+                    <component.Grid item xs={12} sm={6} md={4} key={ad.idx}>
+                      <Link
+                        to={
+                          user.username === 'admin'
+                            ? `/admin/product/${ad.idx}`
+                            : `/manage/product/${ad.idx}`
+                        }
+                      >
+                        <MyProduct
+                          ad={ad}
+                          isAdmin={user.username === 'admin'}
+                        />
+                      </Link>
+                    </component.Grid>
+                  ))}
                 </component.Grid>
-              ))}
-            </component.Grid>
-          </AdListWraaper>
-          <component.Grid container spacing={1}>
-            <component.Grid item xs={6}>
-              <component.Button
-                onClick={decreasePage}
-                disabled={page === 1}
-                fullWidth
-                variant="contained"
-                color="primary"
-              >
-                이전 페이지
-              </component.Button>
-            </component.Grid>
-            <component.Grid item xs={6}>
-              <component.Button
-                onClick={increasePage}
-                disabled={page === lastPage}
-                fullWidth
-                variant="contained"
-                color="primary"
-              >
-                다음 페이지
-              </component.Button>
-            </component.Grid>
-          </component.Grid>
+              </AdListWraaper>
+              <component.Grid container spacing={1}>
+                <component.Grid item xs={6}>
+                  <component.Button
+                    onClick={decreasePage}
+                    disabled={page === 1}
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                  >
+                    이전 페이지
+                  </component.Button>
+                </component.Grid>
+                <component.Grid item xs={6}>
+                  <component.Button
+                    onClick={increasePage}
+                    disabled={page === lastPage}
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                  >
+                    다음 페이지
+                  </component.Button>
+                </component.Grid>
+              </component.Grid>
+            </>
+          ) : (
+            <NoAdContent>
+              <div className="text">현재 게재하신 광고가 없습니다!</div>
+              <AddProductLink>광고 게재하러가기</AddProductLink>
+            </NoAdContent>
+          )}
         </>
       ) : (
         <LoadingBackdrop loading={loading} />
