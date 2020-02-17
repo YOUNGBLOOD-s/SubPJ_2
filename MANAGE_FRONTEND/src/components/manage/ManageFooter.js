@@ -10,7 +10,7 @@ import palette from '../../lib/styles/palette';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: palette.teal[200],
+    backgroundColor: palette.theme[200],
     minHeight: '100px',
     color: 'white',
   },

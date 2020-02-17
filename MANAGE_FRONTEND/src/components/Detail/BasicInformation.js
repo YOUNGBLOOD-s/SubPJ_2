@@ -56,7 +56,7 @@ const StyledTitle = styled.h1`
     text-align: center;
     font-size: 3rem;
     font-weight: 700;
-    color: ${palette.theme};
+    color: ${palette.theme[300]};
   }
 `;
 

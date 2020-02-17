@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     textAlign: 'center',
   },
   hr: {
-    borderColor: palette.teal[50],
+    borderColor: palette.theme[50],
     margin: '1rem',
   },
   check: {

@@ -127,7 +127,7 @@ const GradeInfo = () => {
             alignItems="center"
             className={classes.grid}
             direction="row-reverse"
-            style={{ backgroundColor: palette.teal[50] }}
+            style={{ backgroundColor: palette.theme[50] }}
           >
             <Grid item xs={12} md={6}>
               <Grid item>
@@ -245,7 +245,7 @@ const GradeInfo = () => {
             justify="flex-start"
             alignItems="center"
             className={classes.grid}
-            style={{ backgroundColor: palette.teal[50] }}
+            style={{ backgroundColor: palette.theme[50] }}
           >
             <Grid item xs={12} md={6}>
               <Grid item>

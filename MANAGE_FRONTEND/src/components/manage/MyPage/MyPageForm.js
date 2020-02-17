@@ -14,7 +14,7 @@ const MyFormBlcok = styled.div`
 
 const StyledButton = withStyles({
   root: {
-    backgroundColor: palette.teal[400],
+    backgroundColor: palette.theme[400],
     color: 'white',
   },
 })(component.Button);

@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core/colors';
 
 const palette = {
-  theme: red[400],
+  theme: red,
   teal,
   deepPurple,
   cyan,

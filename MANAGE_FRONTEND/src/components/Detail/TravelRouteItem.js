@@ -9,7 +9,7 @@ import palette from '../../lib/styles/palette';
 import component from '../../lib/material/component';
 
 const TravelIcons = ({ type }) => {
-  const IconStyle = { color: palette.theme };
+  const IconStyle = { color: palette.theme[300] };
 
   if (type === '비행기' || type === '경비행기') {
     return <FlightTakeoffOutlinedIcon style={IconStyle} />;

@@ -29,7 +29,7 @@ const ContentWrapper = styled.div`
     color: white;
     .en-name {
       font-size: 1rem;
-      color: ${palette.teal[300]};
+      color: ${palette.theme[300]};
       font-weight: 500;
     }
   }

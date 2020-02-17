@@ -4,39 +4,16 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import component from '../../lib/material/component';
+import StyledTextField from '../common/StyledTextField';
 
 const AuthFormBlcok = styled.div`
   margin: 0 auto;
   max-width: 500px;
 `;
 
-const StyledTextField = withStyles({
-  root: {
-    marginBottom: '1rem',
-    // 포커스시 라벨 색상
-    '& label.Mui-focused': {
-      color: palette.teal[500],
-    },
-    '& .MuiOutlinedInput-root': {
-      // 기본 필드 보더 색상
-      '& fieldset': {
-        borderColor: 'black',
-      },
-      // 호버 했을때 색상
-      // '&:hover fieldset': {
-      //   borderColor: 'yellow',
-      // },
-      //  포커스 시 보더 색상
-      '&.Mui-focused fieldset': {
-        borderColor: palette.teal[600],
-      },
-    },
-  },
-})(component.TextField);
-
 const StyledButton = withStyles({
   root: {
-    backgroundColor: palette.teal[400],
+    backgroundColor: palette.theme[300],
     color: 'white',
   },
 })(component.Button);

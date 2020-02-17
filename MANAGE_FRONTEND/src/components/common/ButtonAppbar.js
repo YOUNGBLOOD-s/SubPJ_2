@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   paper: {
-    backgroundColor: palette.teal[300],
+    backgroundColor: palette.theme[300],
     color: 'white',
   },
   title: {
