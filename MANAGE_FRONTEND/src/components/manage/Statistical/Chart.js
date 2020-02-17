@@ -146,7 +146,7 @@ export default class Example extends PureComponent {
       <div>
         <h4>Show Count</h4>
         <AreaChart
-          width={data.length * 100}
+          width={data.length * 50}
           height={200}
           data={data}
           syncId="anyId"
