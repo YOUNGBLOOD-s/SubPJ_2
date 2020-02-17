@@ -11,7 +11,7 @@ const LoginForm = ({ history }) => {
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user
+    user: user.user,
   }));
 
   const onChange = e => {
@@ -22,7 +22,11 @@ const LoginForm = ({ history }) => {
   const onSubmit = e => {
     e.preventDefault();
     const { username, password } = form;
-    // TODO: 에러잡기
+
+    if (!username || !password) {
+      return;
+    }
+
     dispatch(login({ username, password }));
   };
 
@@ -40,7 +44,7 @@ const LoginForm = ({ history }) => {
     if (auth) {
       console.log('로그인 성공');
       console.log(auth);
-      dispatch(check(auth.token))
+      dispatch(check(auth.token));
       sessionStorage.setItem('access_token', auth.token);
     }
   }, [auth, authError, dispatch]);
@@ -51,10 +55,10 @@ const LoginForm = ({ history }) => {
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
-        console.log('로컬 스토리지가 정상 동작하지 않습니다.')
+        console.log('로컬 스토리지가 정상 동작하지 않습니다.');
       }
     }
-  }, [user, history])
+  }, [user, history]);
 
   return (
     <AuthForm
@@ -62,6 +66,7 @@ const LoginForm = ({ history }) => {
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}
+      error={authError}
     />
   );
 };

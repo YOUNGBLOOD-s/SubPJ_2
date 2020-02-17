@@ -9,6 +9,7 @@ import LoadingBackdrop from '../components/common/LoadingBackdrop';
 import qs from 'qs';
 import { useSelector, useDispatch } from 'react-redux';
 import { getQrDetail, increaseQrView } from '../modules/qr';
+import Price from '../components/Detail/Price';
 
 const DetailPageWrapper = styled.div`
   max-width: 1000px;
@@ -48,7 +49,7 @@ const DetailPage = ({ match, history, location }) => {
         <div>
           <BasicInformation country={nation} />
           <DetailPageWrapper>
-            {/* TODO:가격 안썼어.. */}
+            <Price price={nation.price} />
             <TravelRoute id="travel" routes={nation.routes} />
             <CautionText category={nation.category} />
             <ReservationForm nationId={nation.id} />

@@ -47,7 +47,7 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
     e.preventDefault();
     axios
       .post(
-        'http://i02c110.p.ssafy.io:8887/api/auth/infomem',
+        'https://i02c110.p.ssafy.io:8887/api/auth/infomem',
         { password: e.target.password.value },
         {
           headers: {

@@ -94,7 +94,7 @@ const ReservationForm = ({ nationId }) => {
     const reform_date = reformDate(new Date(form.date));
     // 상담 예약 요청
     axios
-      .post('http://i02c110.p.ssafy.io:8887/api/counsel', {
+      .post('https://i02c110.p.ssafy.io:8887/api/counsel', {
         nation: nationId, // 현재 보고있는 상품 아이디
         name: form.name,
         email: form.email,

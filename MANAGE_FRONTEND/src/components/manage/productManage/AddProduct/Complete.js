@@ -39,7 +39,7 @@ const Complete = ({ classes, step, steps }) => {
       },
     });
     axios
-      .post('http://i02c110.p.ssafy.io:8887/api/man/image/insert', images, {
+      .post('https://i02c110.p.ssafy.io:8887/api/man/image/insert', images, {
         headers: {
           Authorization: token,
         },
@@ -77,7 +77,7 @@ const Complete = ({ classes, step, steps }) => {
     });
 
     axios
-      .post('http://i02c110.p.ssafy.io:8887/api/man/contents/add', routes, {
+      .post('https://i02c110.p.ssafy.io:8887/api/man/contents/add', routes, {
         headers: {
           Authorization: token,
         },

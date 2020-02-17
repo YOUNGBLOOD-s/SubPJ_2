@@ -37,7 +37,7 @@ const Footer = styled.div`
   }
 `;
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
   return (
     <AuthFormBlcok>
@@ -81,6 +81,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             />
           </>
         )}
+        <p>{error ? error : ''}</p>
         <StyledButton variant="contained" type="submit">
           {text}
         </StyledButton>

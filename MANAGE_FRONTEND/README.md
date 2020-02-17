@@ -7,4 +7,4 @@
 "proxy": "http://192.168.100.66:8887" // LOCAL
 ```
 
-요청 URL : `http://i02c110.p.ssafy.io:8887`
+요청 URL : `https://i02c110.p.ssafy.io:8887`

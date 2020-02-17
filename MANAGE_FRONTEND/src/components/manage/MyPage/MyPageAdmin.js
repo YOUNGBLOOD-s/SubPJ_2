@@ -19,7 +19,7 @@ const MyPageAdmin = () => {
   useEffect(() => {
     axios
       .post(
-        'http://i02c110.p.ssafy.io:8887/api/auth/infomem',
+        'https://i02c110.p.ssafy.io:8887/api/auth/infomem',
         { password: 'admin' },
         {
           headers: {
@@ -84,7 +84,7 @@ const MyPageAdmin = () => {
                     if (newData.username === 'admin') newData.grade = 1;
                     axios
                       .put(
-                        'http://i02c110.p.ssafy.io:8887/api/auth/updatemem',
+                        'https://i02c110.p.ssafy.io:8887/api/auth/updatemem',
                         newData,
                         {
                           headers: {
@@ -110,7 +110,7 @@ const MyPageAdmin = () => {
                   const idx = oldData.idx;
                   axios
                     .delete(
-                      'http://i02c110.p.ssafy.io:8887/api/auth/deleteadmin/' +
+                      'https://i02c110.p.ssafy.io:8887/api/auth/deleteadmin/' +
                         idx,
                       {
                         headers: {
