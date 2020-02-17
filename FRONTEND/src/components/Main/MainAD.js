@@ -86,8 +86,8 @@ const MainAD = () => {
   const [open, setOpen] = useState(false);
   const [datas, setDatas] = useState(null);
 
-  const onDoubleClick = index => {
-    Axios.get('http://i02c110.p.ssafy.io:8887/api/click/' + index)
+  const onDoubleClick = (id, index) => {
+    Axios.get('http://i02c110.p.ssafy.io:8887/api/click/' + id)
       .then(res => console.log(res))
       .catch(err => console.log('Click Count 요청 실패!'));
     setPid(index);
@@ -132,7 +132,7 @@ const MainAD = () => {
             >
               {datas.map(({ id, name, en_name, content, thumbnail }, index) => {
                 return (
-                  <div key={id} onDoubleClick={() => onDoubleClick(index)}>
+                  <div key={id} onDoubleClick={() => onDoubleClick(id, index)}>
                     <div className="style">
                       <div className="box">
                         <TitleWrapper>
