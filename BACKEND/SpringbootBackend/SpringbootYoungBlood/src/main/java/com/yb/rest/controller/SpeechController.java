@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.yb.rest.key.GetKEY;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -33,8 +34,8 @@ import io.swagger.annotations.ApiOperation;
 public class SpeechController {
 
 	private static final String BUCKET_NAME = "nearbyad";
-	private static final String ACCESS_KEY = "AKIAZ442F2KILUXK2HUU";
-	private static final String SECRET_KEY = "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";
+	private static final String ACCESS_KEY = GetKEY.getAccesskey();
+	private static final String SECRET_KEY = GetKEY.getSecretkey();
 
 	private static AmazonS3 amazonS3; // 인스턴스를 초기화한다.
 	private static SpeechController aws = new SpeechController();
