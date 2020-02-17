@@ -7,6 +7,7 @@ import stepper from './stepper';
 import ads, { adsSaga } from './ads';
 import form from './form';
 import product, { productSaga } from './product';
+import qr, { qrSaga } from './qr';
 
 const rootReducer = combineReducers({
   auth,
@@ -16,10 +17,11 @@ const rootReducer = combineReducers({
   form,
   ads,
   product,
+  qr,
 });
 
 export function* rootSaga() {
-  yield all([authSaga(), userSaga(), adsSaga(), productSaga()]);
+  yield all([authSaga(), userSaga(), adsSaga(), productSaga(), qrSaga()]);
 }
 
 export default rootReducer;

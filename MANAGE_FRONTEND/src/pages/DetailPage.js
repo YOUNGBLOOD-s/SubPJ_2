@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import BasicInformation from '../components/Detail/BasicInformation';
 import TravelRoute from '../components/Detail/TravelRoute';
@@ -6,46 +6,52 @@ import CautionText from '../components/Detail/CautionText';
 import ReservationForm from '../components/Detail/ReservationForm';
 import KakaoChat from '../components/Detail/KakaoChat';
 import LoadingBackdrop from '../components/common/LoadingBackdrop';
-import axios from '../../node_modules/axios/index';
+import qs from 'qs';
+import { useSelector, useDispatch } from 'react-redux';
+import { getQrDetail, increaseQrView } from '../modules/qr';
 
 const DetailPageWrapper = styled.div`
   max-width: 1000px;
   margin: 0 auto;
 `;
 
-const DetailPage = ({ match, history }) => {
+const DetailPage = ({ match, history, location }) => {
+  const query = qs.parse(location.search, { ignoreQueryPrefix: true });
   const { id } = match.params;
-  const [country, setCountry] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { nation, loading, error } = useSelector(({ qr, loading }) => ({
+    nation: qr.nation,
+    loading: loading['qr/GET_QR_DETAIL'],
+    error: qr.error,
+  }));
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getQrDetail({ id }));
+  }, [id, dispatch]);
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`http://i02c110.p.ssafy.io:8887/api/detail/${id}`)
-      .then(res => {
-        const { data } = res;
-        setCountry(data); // 나라 설정
-      })
-      .catch(err => {
-        console.log(err);
-        const { status } = err.response;
-        if (status === 404) {
-          history.push('/');
-        }
-      });
-    setLoading(false);
-  }, [id, history]);
+    if (query && query.qr === 'true') {
+      dispatch(increaseQrView({ id }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (error) {
+      history.push('/');
+    }
+  }, [history, error]);
 
   return (
     <>
-      {!loading && country ? (
+      {!loading && nation ? (
         <div>
-          <BasicInformation country={country} />
+          <BasicInformation country={nation} />
           <DetailPageWrapper>
             {/* TODO:가격 안썼어.. */}
-            <TravelRoute id="travel" routes={country.routes} />
-            <CautionText category={country.category} />
-            <ReservationForm nationId={country.id} />
+            <TravelRoute id="travel" routes={nation.routes} />
+            <CautionText category={nation.category} />
+            <ReservationForm nationId={nation.id} />
             <KakaoChat />
           </DetailPageWrapper>
         </div>
