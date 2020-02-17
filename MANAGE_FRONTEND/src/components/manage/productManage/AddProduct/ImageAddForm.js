@@ -8,6 +8,7 @@ import component from '../../../../lib/material/component';
 import { prevStep, nextStep } from '../../../../modules/stepper';
 import palette from '../../../../lib/styles/palette';
 import AlertDialog from '../../../common/AlertDialog';
+import CancelButton from './CancelButton';
 
 const ImageForm = ({ type }) => {
   const { imageUrl } = useSelector(({ form }) => ({
@@ -108,23 +109,27 @@ const ImageAddForm = ({ classes, steps, step }) => {
             </MaterialCard>
           </component.Grid>
         ))}
+        <component.Grid item xs={6}>
+          <component.Button
+            disabled={step === 0}
+            onClick={handleBack}
+            className={classes.button}
+          >
+            이전단계로
+          </component.Button>
+          <component.Button
+            variant="contained"
+            color="primary"
+            onClick={handleNext}
+            className={classes.button}
+          >
+            {step === steps.length - 1 ? '완료' : '다음'}
+          </component.Button>
+        </component.Grid>
+        <component.Grid item xs={6}>
+          <CancelButton />
+        </component.Grid>
       </component.Grid>
-
-      <component.Button
-        disabled={step === 0}
-        onClick={handleBack}
-        className={classes.button}
-      >
-        이전단계로
-      </component.Button>
-      <component.Button
-        variant="contained"
-        color="primary"
-        onClick={handleNext}
-        className={classes.button}
-      >
-        {step === steps.length - 1 ? '완료' : '다음'}
-      </component.Button>
     </FormWrapper>
   );
 };

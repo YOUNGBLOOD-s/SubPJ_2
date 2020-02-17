@@ -14,6 +14,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Complete from './Complete';
 import { initializeForm } from '../../../../modules/form';
 import { initializeStep } from '../../../../modules/stepper';
+import CancelButton from './CancelButton';
+import component from '../../../../lib/material/component';
+import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,7 +50,17 @@ const getStepContent = (step, classes, steps) => {
   }
 };
 
-const ProductStepper = () => {
+const TextWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .btn {
+    margin-top: 1rem;
+  }
+`;
+
+const ProductStepper = ({ history }) => {
   const classes = useStyles();
   const { step } = useSelector(({ stepper }) => ({
     step: stepper.step,
@@ -59,10 +73,10 @@ const ProductStepper = () => {
   ];
 
   const dispatch = useDispatch();
-  const handleReset = () => {
-    // TODO: 0으로 만드는 액션 생성하여 디스패치
+  const onClick = () => {
     dispatch(initializeForm());
     dispatch(initializeStep());
+    history.push('/');
   };
 
   return (
@@ -76,15 +90,23 @@ const ProductStepper = () => {
         ))}
       </Stepper>
       {step === steps.length && (
-        <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>광고 등록의 모든 단계가 완료되었습니다!</Typography>
-          <Button onClick={handleReset} className={classes.button}>
-            Reset
-          </Button>
-        </Paper>
+        <TextWrapper>
+          <component.Typography variant="h5">등록완료</component.Typography>
+          <component.Typography variant="body1">
+            광고등록의 모든 단계가 완료되었습니다!
+          </component.Typography>
+          <component.Button
+            className="btn"
+            onClick={onClick}
+            color="primary"
+            variant="outlined"
+          >
+            메인페이지로 가기
+          </component.Button>
+        </TextWrapper>
       )}
     </div>
   );
 };
 
-export default ProductStepper;
+export default withRouter(ProductStepper);

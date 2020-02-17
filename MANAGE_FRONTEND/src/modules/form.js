@@ -1,12 +1,29 @@
 import { createAction, handleActions } from 'redux-actions';
+import createRequestSaga, {
+  createRequestActionTypes,
+} from '../lib/createRequestSaga';
+import * as formAPI from '../lib/api/form';
+import { takeLatest } from 'redux-saga/effects';
 
-const INITIALIZE_FORM = 'product/INITIALIZE_FORM';
-const SELECT_NATION = 'product/SELECT_NATION';
-const RESET_NATION = 'product/RESET_NATION';
-const ADD_ROUTE = 'product/ADD_ROUTE';
-const REMOVE_ROUTE = 'product/REMOVE_ROUTE';
-const SELECT_IMAGE_NATION = 'product/SELECT_IMAGE_NATION';
-const SELECT_IMAGE_URL = 'product/SELECT_IMAGE_URL';
+const INITIALIZE_FORM = 'form/INITIALIZE_FORM';
+const SELECT_NATION = 'form/SELECT_NATION';
+const RESET_NATION = 'form/RESET_NATION';
+const ADD_ROUTE = 'form/ADD_ROUTE';
+const REMOVE_ROUTE = 'form/REMOVE_ROUTE';
+const SELECT_IMAGE_NATION = 'form/SELECT_IMAGE_NATION';
+const SELECT_IMAGE_URL = 'form/SELECT_IMAGE_URL';
+
+const [
+  ADD_ROUTE_LIST,
+  ADD_ROUTE_LIST_SUCCESS,
+  ADD_ROUTE_LIST_FAILURE,
+] = createRequestActionTypes('form/ADD_ROUTE_LIST');
+
+const [
+  ADD_IMAGES_LIST,
+  ADD_IMAGES_LIST_SUCCESS,
+  ADD_IMAGES_LIST_FAILURE,
+] = createRequestActionTypes('form/ADD_IMAGES_LIST');
 
 export const initializeForm = createAction(INITIALIZE_FORM);
 export const selectNation = createAction(SELECT_NATION, nationId => nationId);
@@ -22,6 +39,23 @@ export const selectImageUrl = createAction(
   ({ type, url }) => ({ type, url }),
 );
 
+export const addRouteList = createAction(
+  ADD_ROUTE_LIST,
+  ({ token, routes }) => ({ token, routes }),
+);
+
+export const addImagesList = createAction(
+  ADD_IMAGES_LIST,
+  ({ token, images }) => ({ token, images }),
+);
+
+const addRouteListSaga = createRequestSaga(ADD_ROUTE_LIST, formAPI.addRoutes);
+const addImagesListSaga = createRequestSaga(ADD_IMAGES_LIST, formAPI.addImages);
+export function* formSaga() {
+  yield takeLatest(ADD_ROUTE_LIST, addRouteListSaga);
+  yield takeLatest(ADD_IMAGES_LIST, addImagesListSaga);
+}
+
 const initialState = {
   nationId: null,
   routes: [],
@@ -31,6 +65,14 @@ const initialState = {
     { nation: '', type: 3, url: '' },
     { nation: '', type: 4, url: '' },
   ],
+  errors: {
+    routes: null,
+    images: null,
+  },
+  completed: {
+    routes: false,
+    images: false,
+  },
 };
 
 const form = handleActions(
@@ -78,6 +120,42 @@ const form = handleActions(
       images: state.images.map(image =>
         image.type === type ? { ...image, url } : image,
       ),
+    }),
+    [ADD_ROUTE_LIST_SUCCESS]: state => ({
+      ...state,
+      completed: {
+        ...state.completed,
+        routes: true,
+      },
+      errors: {
+        ...state.errors,
+        routes: null,
+      },
+    }),
+    [ADD_ROUTE_LIST_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      errors: {
+        ...state.errors,
+        images: error,
+      },
+    }),
+    [ADD_IMAGES_LIST_SUCCESS]: state => ({
+      ...state,
+      completed: {
+        ...state.completed,
+        images: true,
+      },
+      errors: {
+        ...state.errors,
+        images: null,
+      },
+    }),
+    [ADD_IMAGES_LIST_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      errors: {
+        ...state.errors,
+        images: error,
+      },
     }),
   },
   initialState,

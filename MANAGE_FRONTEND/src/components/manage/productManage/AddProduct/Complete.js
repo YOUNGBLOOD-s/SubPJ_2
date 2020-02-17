@@ -1,143 +1,130 @@
-import React, { useState } from 'react';
+import React from 'react';
 import component from '../../../../lib/material/component';
 import { useDispatch, useSelector } from 'react-redux';
 import { prevStep, nextStep } from '../../../../modules/stepper';
-import axios from 'axios';
+import { addRouteList, addImagesList } from '../../../../modules/form';
+import styled from 'styled-components';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import palette from '../../../../lib/styles/palette';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import CancelButton from './CancelButton';
+
+const CompleteWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const RequestWrapper = styled.div`
+  display: flex;
+  .status-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+`;
 
 const Complete = ({ classes, step, steps }) => {
-  const [loading, setLoading] = useState({
-    routeState: {
-      loading: false,
-      complete: false,
-    },
-    imageState: {
-      loading: false,
-      complete: false,
-    },
-  });
-
   const dispatch = useDispatch();
-  const { routes, images } = useSelector(({ form }) => ({
+  const {
+    routes,
+    images,
+    routesLoading,
+    imagesLoading,
+    errors,
+    completed,
+  } = useSelector(({ form, loading }) => ({
     routes: form.routes,
     images: form.images,
+    routesLoading: loading['form/ADD_ROUTE_LIST'],
+    imagesLoading: loading['form/ADD_IMAGES_LIST'],
+    errors: form.errors,
+    completed: form.completed,
   }));
 
-  const token = sessionStorage.getItem('access_token');
   const handleBack = () => {
     dispatch(prevStep());
   };
 
-  // 이미지들 저장
-  const imagesAdding = () => {
-    // 이미지들 로딩 시작
-    // TODO: 배열로 받는걸로 변경하도록 백이랑 얘기하기
-    setLoading({
-      ...loading,
-      imageState: {
-        ...loading.routeState,
-        loading: true,
-      },
-    });
-    axios
-      .post('https://i02c110.p.ssafy.io:8887/api/man/image/insert', images, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then(() => {
-        setLoading({
-          ...loading,
-          imageState: {
-            complete: true,
-            loading: false,
-          },
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        setLoading({
-          ...loading,
-          imageState: {
-            complete: false,
-            loading: false,
-          },
-        });
-      });
-  };
-
-  // 경로들 저장
-  const contentsAdding = () => {
-    // 로딩 시작
-    setLoading({
-      ...loading,
-      routeState: {
-        ...loading.routeState,
-        loading: true,
-      },
-    });
-
-    axios
-      .post('https://i02c110.p.ssafy.io:8887/api/man/contents/add', routes, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then(() => {
-        setLoading({
-          ...loading,
-          routeState: {
-            complete: true,
-            loading: false,
-          },
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        setLoading({
-          ...loading,
-          routeState: {
-            complete: false,
-            loading: false,
-          },
-        });
-      });
-  };
+  const token = sessionStorage.getItem('access_token');
 
   const handleNextAndComplete = () => {
-    // contentsAdding();
-    // imagesAdding();
-    // 정상적으로 완료되었다면
-    if (loading.imageState.complete && loading.routeState.complete) {
+    if (!completed.routes) {
+      dispatch(addRouteList({ token, routes }));
+    }
+
+    if (!completed.images) {
+      dispatch(addImagesList({ token, images }));
+    }
+
+    if (completed.routes && completed.images) {
       dispatch(nextStep());
-    } else {
-      // 오류 문구 띄우기
     }
   };
-
-  console.log(routes, images);
   return (
     <div>
-      <h4>등록될 상품을 마지막으로 확인하고 마무리하세요</h4>
-      <h5>로딩 상태 및 현재 상태들 확인..</h5>
-      <button onClick={contentsAdding}>경로 요청</button>
-      <button onClick={imagesAdding}>이미지 요청</button>
+      <CompleteWrapper>
+        <component.Typography variant="h6">
+          정말 이대로 등록합니까?
+        </component.Typography>
+
+        <component.Typography variant="body2">
+          광고 등록 신청 이후에는 관리자가 직접 확인 후 마무리 작업을
+          진행합니다.
+        </component.Typography>
+
+        <RequestWrapper>
+          <div className="status-box">
+            {completed.routes ? (
+              <CheckBoxIcon style={{ color: palette.green[500] }} />
+            ) : (
+              <CheckBoxOutlineBlankIcon
+                style={{ color: errors.routes ? palette.red[500] : '' }}
+              />
+            )}
+            <div>경로 등록</div>
+          </div>
+          <div className="status-box">
+            {completed.images ? (
+              <CheckBoxIcon style={{ color: palette.green[500] }} />
+            ) : (
+              <CheckBoxOutlineBlankIcon
+                style={{ color: errors.images ? palette.red[500] : '' }}
+              />
+            )}
+            <div>이미지 등록</div>
+          </div>
+        </RequestWrapper>
+      </CompleteWrapper>
       <div>
-        <component.Button
-          disabled={step === 0}
-          onClick={handleBack}
-          className={classes.button}
-        >
-          이전단계로
-        </component.Button>
-        <component.Button
-          variant="contained"
-          color="primary"
-          onClick={handleNextAndComplete}
-          className={classes.button}
-        >
-          {step === steps.length - 1 ? '완료' : '다음'}
-        </component.Button>
+        {(routesLoading || imagesLoading) && (
+          <LinearProgress color="secondary" />
+        )}
       </div>
+      <component.Grid container justify="flex-end">
+        <component.Grid item xs={6}>
+          <component.Button
+            disabled={step === 0}
+            onClick={handleBack}
+            className={classes.button}
+          >
+            이전단계로
+          </component.Button>
+          <component.Button
+            variant="contained"
+            color="primary"
+            onClick={handleNextAndComplete}
+            className={classes.button}
+          >
+            {step === steps.length - 1 ? '완료' : '다음'}
+          </component.Button>
+        </component.Grid>
+        <component.Grid item xs={6}>
+          <CancelButton />
+        </component.Grid>
+      </component.Grid>
     </div>
   );
 };
