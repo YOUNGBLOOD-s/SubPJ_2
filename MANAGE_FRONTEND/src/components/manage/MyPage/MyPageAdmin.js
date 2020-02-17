@@ -71,7 +71,7 @@ const MyPageAdmin = () => {
                   resolve();
                   axios
                     .post(
-                      'http://i02c110.p.ssafy.io:8887/api/auth/register',
+                      'https://i02c110.p.ssafy.io:8887/api/auth/register',
                       newData,
                     )
                     .then(res => {

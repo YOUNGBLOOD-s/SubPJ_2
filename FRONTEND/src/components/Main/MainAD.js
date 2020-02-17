@@ -87,7 +87,7 @@ const MainAD = () => {
   const [datas, setDatas] = useState(null);
 
   const onDoubleClick = (id, index) => {
-    Axios.get('http://i02c110.p.ssafy.io:8887/api/click/' + id)
+    Axios.get('https://i02c110.p.ssafy.io:8887/api/click/' + id)
       .then(res => console.log(res))
       .catch(err => console.log('Click Count 요청 실패!'));
     setPid(index);
@@ -99,7 +99,7 @@ const MainAD = () => {
   const reqTerm = carouselTerm * (itemNum + 1);
 
   const getItems = () => {
-    Axios.get('http://i02c110.p.ssafy.io:8887/api/sensor/reco')
+    Axios.get('https://i02c110.p.ssafy.io:8887/api/sensor/reco')
       // Axios.get('http://192.168.100.66:8887/api/sensor/reco') // test backend
       .then(res => {
         setDatas(res.data.datas);
@@ -145,7 +145,7 @@ const MainAD = () => {
                     <LazyImage
                       isQR={true}
                       // src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://i02c110.p.ssafy.io:8282/detail/${id}?qr=true`}
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://i02c110.p.ssafy.io:8282/detail/${id}?qr=true`}
                       alt=""
                     />
                     <ClickNotice />

@@ -232,7 +232,7 @@ if __name__ == "__main__":
     resD = enco.encoding(r10)
 
     # send data to backend
-    urlStr = f"http://i02c110.p.ssafy.io:8877/api/sensor/{resT}/{resH}/{resR}/{resD}/"
+    urlStr = f"https://i02c110.p.ssafy.io:8877/api/sensor/{resT}/{resH}/{resR}/{resD}/"
     #print(f"final result check {resT}, {resH}, {resD}, {resR} ")
     res = requests.get(urlStr)
     print("sending success")
