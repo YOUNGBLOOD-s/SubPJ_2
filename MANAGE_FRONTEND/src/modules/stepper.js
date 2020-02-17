@@ -11,7 +11,7 @@ export const prevStep = createAction(PREV_STEP, step => step);
 export const resetStep = createAction(RESET_STEP, step => step);
 
 const initialState = {
-  step: 1,
+  step: 2,
 };
 
 const stepper = handleActions(

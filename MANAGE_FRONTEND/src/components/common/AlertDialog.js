@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const AlertDialog = ({ open, setOpen }) => {
+const AlertDialog = ({ open, setOpen, title, text }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -19,10 +19,10 @@ const AlertDialog = ({ open, setOpen }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">이미지 업로드</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            모든 이미지를 업로드 해주세요!
+            {text}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

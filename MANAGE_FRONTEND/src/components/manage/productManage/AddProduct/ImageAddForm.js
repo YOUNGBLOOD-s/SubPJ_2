@@ -94,7 +94,12 @@ const ImageAddForm = ({ classes, steps, step }) => {
   return (
     <FormWrapper>
       <component.Grid container spacing={1}>
-        <AlertDialog open={error} setOpen={setError} />
+        <AlertDialog
+          open={error}
+          setOpen={setError}
+          title={'이미지 업로드'}
+          text={'모든 이미지를 업로드해주세요'}
+        />
         {types.map(type => (
           <component.Grid item xs={12} sm={6} key={type.type}>
             <MaterialCard>
