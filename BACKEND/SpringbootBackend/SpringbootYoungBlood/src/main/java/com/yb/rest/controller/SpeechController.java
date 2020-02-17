@@ -42,7 +42,6 @@ public class SpeechController {
 		// 인증 객체를 생성한다.
 		AWSCredentials awsCredentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
 		// https://s3.console.aws.amazon.com/s3/buckets/static.preeplus.com/?region=ap-northeast-2&tab=overview
-		System.out.println(awsCredentials.getAWSAccessKeyId()+" "+awsCredentials.getAWSSecretKey());
 		amazonS3 = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_NORTHEAST_2)
 				.withCredentials(new AWSStaticCredentialsProvider(awsCredentials)).build();
 	}
@@ -81,8 +80,6 @@ public class SpeechController {
 				while ((read = is.read(bytes)) != -1) {
 					outputStream.write(bytes, 0, read);
 				}
-				System.out.println("성공?");
-
 				// s3에 업로드하기
 				
 				System.out.println(f.getName());
@@ -104,10 +101,8 @@ public class SpeechController {
 	}
 
 	public static void s3FileUpload(File file, String idx) {
-		System.out.println("들어왔쮸1");
 		if (amazonS3 != null) {
 			try {
-				System.out.println("들어왔쮸");
 				PutObjectRequest putObjectRequest = new PutObjectRequest(BUCKET_NAME + "/speech", idx+".mp3", file);
 				putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 				amazonS3.putObject(putObjectRequest);

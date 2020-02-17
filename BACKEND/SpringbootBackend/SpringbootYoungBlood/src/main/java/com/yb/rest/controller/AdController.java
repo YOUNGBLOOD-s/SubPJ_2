@@ -602,11 +602,9 @@ public class AdController {
 			maxpage++;
 		List<Integer> list = ser.selectIdxs();
 		List<Integer> filterlist = ser.selectFilterIdxs(continents);
-		System.out.println(filterlist.size());
 		if (list.size() > 0) {
 			//필터가 적용 되었다면??
 			if (continents.equals("1") || continents.equals("2") || continents.equals("3") || continents.equals("4")|| continents.equals("5")) {
-				System.out.println(continents+" "+sort);
 					for (int i = 0; i < filterlist.size(); i++) {
 						Map<String, Object> con = new HashMap<String, Object>();
 						int idx = filterlist.get(i);	
@@ -637,9 +635,7 @@ public class AdController {
 						}
 						Countrylist.add(con);
 					}
-					System.out.println(Countrylist.size());
 					if(Countrylist.size()>12) {
-						System.out.println(pageIdx);
 						for(int i=pageIdx; i<pageIdx+12; i++) {
 							if(Countrylist.size() <= i)
 								break;
@@ -665,7 +661,6 @@ public class AdController {
 								}
 							});
 						}
-						System.out.println(tmplist);
 						result.put("AllNationDatas", tmplist);
 					}else {
 						//그냥 출력하면 될듯..
@@ -695,7 +690,6 @@ public class AdController {
 				} else {
 					list.clear();
 					list = ser.selectIdxs_page(pageIdx);
-					System.out.println(maxpage);
 					for (int i = 0; i < list.size(); i++) {		
 						Map<String, Object> con = new HashMap<String, Object>();
 						int idx = list.get(i);
