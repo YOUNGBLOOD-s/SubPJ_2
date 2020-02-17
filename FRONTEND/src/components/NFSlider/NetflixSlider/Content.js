@@ -73,8 +73,8 @@ const Contents = styled.div`
 const Price = styled.div`
   color: white;
   padding: 4rem 0 0 0;
-  text-decoration: underline;
   font-size: 1.8rem;
+  text-decoration: underline;
   @media only screen and (max-width: 1200px) {
     font-size: 92%;
   }
@@ -121,7 +121,7 @@ const Content = ({ detail }) => {
               </Weather>
             </WeatherWrapper>
             <Contents>{detail.content}</Contents>
-            <Price>가격 : {detail.price}원</Price>
+            <Price>금액 : {detail.price.toLocaleString()}원</Price>
           </div>
         </div>
         {/* <button className="content__close" onClick={onClose}>

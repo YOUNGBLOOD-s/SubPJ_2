@@ -13,14 +13,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const Image = styled.img`
   width: 100%;
+  height: 600px;
+  width: auto;
   border-radius: 10px;
 `;
 
 const MobileImage = styled.img`
   border-radius: 10px;
   height: 600px;
+  width: auto;
   text-align: center;
 `;
 
@@ -29,7 +37,7 @@ const DescriptionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   @media only screen and (max-width: 960px) {
-    display: block;
+    /* display: block; */
     padding-top: 3rem;
   }
 `;
@@ -90,7 +98,9 @@ const GradeInfo = () => {
           >
             <Grid item xs={12} md={6}>
               <Grid item>
-                <Image src={static_url + '/info1.PNG'} />
+                <ImageWrapper>
+                  <Image src={static_url + '/info1.PNG'} />
+                </ImageWrapper>
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -131,7 +141,9 @@ const GradeInfo = () => {
           >
             <Grid item xs={12} md={6}>
               <Grid item>
-                <Image src={static_url + '/info2.PNG'} />
+                <ImageWrapper>
+                  <Image src={static_url + '/info2.PNG'} />
+                </ImageWrapper>
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>

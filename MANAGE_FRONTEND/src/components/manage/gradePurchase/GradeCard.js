@@ -61,8 +61,8 @@ const GradeCard = ({ title, image, grade, price, option }) => {
   const token = sessionStorage.getItem('access_token');
 
   const gradeAlert = {
-    '-1': '현재 등급과 동일하여 구매가 취소되었습니다.',
-    '0': '등급 구매에 실패하였습니다.',
+    '-1': '등급 구매에 실패하였습니다.',
+    '0': '현재 등급과 동일하여 구매가 취소되었습니다.',
     '1': `${title}님, 환영합니다!`,
   };
 
@@ -78,10 +78,10 @@ const GradeCard = ({ title, image, grade, price, option }) => {
         },
       )
       .then(res => {
-        alert(gradeAlert[1]);
+        res.data.value === 0 ? alert(gradeAlert[0]) : alert(gradeAlert[1]);
       })
       .catch(err => {
-        alert(gradeAlert[0]);
+        alert(gradeAlert[-1]);
       });
   };
 

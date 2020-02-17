@@ -73,7 +73,7 @@ const FullScreenDialog = ({ data, open, setOpen }) => {
 
         <QrImage
           className="qr"
-          src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://52.78.218.79:8282/detail/${data.id}`}
+          src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://i02c110.p.ssafy.io:8282/detail/${data.id}?qr=true`}
         />
         <NFSlider details={data.details} setOpen={setOpen} open={open} />
       </Dialog>

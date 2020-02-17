@@ -56,6 +56,7 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
         },
       )
       .then(res => {
+        res.data.meminfo.password = '';
         setUserInfo({ data: Map(res.data.meminfo) });
         setAuth(true);
       })
