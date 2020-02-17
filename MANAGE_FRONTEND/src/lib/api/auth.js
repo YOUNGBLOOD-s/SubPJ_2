@@ -20,3 +20,9 @@ export const check = token =>
   client.get('http://i02c110.p.ssafy.io:8887/api/auth/check', {
     headers: { Authorization: token },
   });
+
+// 로그인중인 유저의 상태 가져오기
+export const getCurrentUser = token =>
+  client.get('http://i02c110.p.ssafy.io:8887/api/mem/grade', {
+    headers: { Authorization: token },
+  });

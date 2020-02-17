@@ -35,13 +35,20 @@ const ProductDetail = ({ match, history }) => {
   const { id } = match.params;
   const token = sessionStorage.getItem('access_token');
   const dispatch = useDispatch();
-  const { product, loading, user } = useSelector(
+  const { product, loading, user, member } = useSelector(
     ({ product, loading, user }) => ({
       product: product.product,
       loading: loading['product/GET_PRODUCT'],
       user: user.user,
+      member: user.member,
     }),
   );
+
+  useEffect(() => {
+    if (member && member.grade === 0) {
+      history.push('/manage/grade');
+    }
+  }, [member, history]);
 
   useEffect(() => {
     dispatch(getProduct({ id, token }));
