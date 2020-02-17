@@ -145,7 +145,7 @@ const MainAD = () => {
                     <LazyImage
                       isQR={true}
                       // src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://i02c110.p.ssafy.io:8282/detail/${id}`}
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://i02c110.p.ssafy.io:8282/detail/${id}?qr=true`}
                       alt=""
                     />
                     <ClickNotice />
