@@ -58,7 +58,6 @@ const AdItems = () => {
   };
   return (
     <ItemsWrapper>
-      <TitleBar>진행중인 광고</TitleBar>
       <component.Grid container spacing={1}>
         {!loading && ads ? (
           <>
