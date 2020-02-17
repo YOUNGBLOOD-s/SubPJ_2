@@ -219,7 +219,21 @@ public class AdDaoImpl implements IAdDao {
 	}
 
 	@Override
-	public int selectlastIdx() {
+	public List<Nation> selectFilterIdxs(String continents,String page) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("customer", continents);
+		map.put("pageIdx", page);
+		List<Nation> list = session.selectList("sendtofront.selectContinentFilterList", map);
+		return list;
+	}
+
+	@Override
+	public List<Integer> selectFilterIdxs(String continents) {
+		List<Integer> list = session.selectList("sendtofront.selectfilteridxs", continents);
+		return list;
+	}
+
+public int selectlastIdx() {
 		return session.selectOne("sendtofront.selectlastIdx");
 	}
 
@@ -227,8 +241,6 @@ public class AdDaoImpl implements IAdDao {
 	public Counsel selectCounsel(int idx) {
 		return session.selectOne("sendtofront.selectCounsel", idx);
 	}
-
-	
 	
 	
 }

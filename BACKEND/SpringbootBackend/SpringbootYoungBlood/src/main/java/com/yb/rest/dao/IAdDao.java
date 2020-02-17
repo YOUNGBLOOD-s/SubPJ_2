@@ -24,6 +24,8 @@ public interface IAdDao {
 	
 	/** detail */
 	public List<Integer> selectIdxs();
+	public List<Nation> selectFilterIdxs(String continents,String page);
+	public List<Integer> selectFilterIdxs(String continents);
 	public List<Integer> selectIdxs_page(int pageidx);
 	public List<Route> getRoutes(int idx);
 	public List<Route> getRoutes(String customer);

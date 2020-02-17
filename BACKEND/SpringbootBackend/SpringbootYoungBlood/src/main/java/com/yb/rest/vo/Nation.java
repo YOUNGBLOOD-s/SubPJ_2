@@ -16,6 +16,7 @@ public class Nation {
 	public Nation() {
 
 	}
+	
 	public Nation(String en_name, String ko_name, String continents, String customer, String weight, String speech,
 			String price, String s_date, String f_date) {
 		super();
