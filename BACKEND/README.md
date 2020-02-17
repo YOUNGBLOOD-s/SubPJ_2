@@ -1,10 +1,14 @@
-﻿# NEARBYAD-BACKEND
+# NEARBYAD-BACKEND
 
 ## :dart: API
-### AD
-### Chatbot
-### Management
-### Member
+| resource    | description         |
+| -------- | ------------ |
+| `/sensor` | sensor 기반 |
+| `/ad` | 광고판 |
+| `/man` | 회원 상품 정보  |
+| `/mem` | 회원 정보 |
+| `/tts` | Upload Text-to-Speech(Clova API) to AWS | 
+| `/statistics` | 통계 |
 
 ## :dart: DataBase
 
