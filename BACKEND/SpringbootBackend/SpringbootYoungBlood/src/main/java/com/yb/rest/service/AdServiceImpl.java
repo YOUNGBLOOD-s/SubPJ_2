@@ -221,6 +221,15 @@ public class AdServiceImpl implements IAdService {
 	@Override
 	public List<Integer> selectFilterIdxs(String continents) {
 		return repo.selectFilterIdxs(continents);
+    
+    	public int selectlastIdx() {
+		return repo.selectlastIdx();
+	}
+
+	@Override
+	public Counsel selectCounsel(int idx) {
+		return repo.selectCounsel(idx);
+
 	}
 
 	

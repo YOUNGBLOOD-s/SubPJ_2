@@ -64,4 +64,6 @@ public interface IAdService {
 	public void updateCounsel(int age, String name, String email, String tel, String date, String text, int nation);
 	public void updateCompleted(int idx);
 	public void deleteCounsel(int idx);
+	public int selectlastIdx();
+	public Counsel selectCounsel(int idx);
 }

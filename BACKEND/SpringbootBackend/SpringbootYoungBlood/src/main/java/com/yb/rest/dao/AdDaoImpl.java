@@ -233,6 +233,14 @@ public class AdDaoImpl implements IAdDao {
 		return list;
 	}
 
+public int selectlastIdx() {
+		return session.selectOne("sendtofront.selectlastIdx");
+	}
+
+	@Override
+	public Counsel selectCounsel(int idx) {
+		return session.selectOne("sendtofront.selectCounsel", idx);
+	}
 	
 	
 }

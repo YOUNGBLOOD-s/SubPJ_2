@@ -176,6 +176,13 @@
 	where idx=#{idx};
 	</delete>
 	
+	<select id="selectlastIdx" resultType="int">
+	select max(idx) from counseltb;
+	</select>
+	
+	<select id="selectCounsel" parameterType="int" resultType="counsel">
+	select * from counseltb where idx=#{idx}
+	</select>
 	
 </mapper>
  
