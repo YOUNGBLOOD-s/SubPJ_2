@@ -32,7 +32,7 @@ const MyPageAdmin = () => {
     if (userInfo && userInfo.data) {
       setState({
         columns: [
-          { title: '아이디', field: 'username', editable: 'never' },
+          { title: '아이디', field: 'username', editable: 'onAdd' },
           { title: '등급', field: 'grade', type: 'numeric' },
           { title: '비밀번호', field: 'password' },
           { title: '회사명', field: 'company' },
@@ -63,11 +63,20 @@ const MyPageAdmin = () => {
               new Promise(resolve => {
                 setTimeout(() => {
                   resolve();
-                  setState(prevState => {
-                    const data = [...prevState.data];
-                    data.push(newData);
-                    return { ...prevState, data };
-                  });
+                  axios
+                    .post(
+                      'http://i02c110.p.ssafy.io:8887/api/auth/register',
+                      newData,
+                    )
+                    .then(res => {
+                      console.log(res);
+                      setState(prevState => {
+                        const data = [...prevState.data];
+                        data.push(newData);
+                        return { ...prevState, data };
+                      });
+                    })
+                    .catch(err => console.log(err));
                 }, 600);
               }),
             onRowUpdate: (newData, oldData) =>
@@ -87,6 +96,7 @@ const MyPageAdmin = () => {
                         },
                       )
                       .then(res => {
+                        console.log(res);
                         setState(prevState => {
                           const data = [...prevState.data];
                           data[data.indexOf(oldData)] = newData;
@@ -118,6 +128,7 @@ const MyPageAdmin = () => {
                       },
                     )
                     .then(res => {
+                      console.log(res);
                       setState(prevState => {
                         const data = [...prevState.data];
                         data.splice(data.indexOf(oldData), 1);
