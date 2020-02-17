@@ -365,7 +365,7 @@ public class MemberController {
 	
 	/** username 등급 찾아드립니다. */
 	@GetMapping("/mem/grade")
-	@ApiOperation(value = "멤버 등급 수정(관리자/사용자)")
+	@ApiOperation(value = "멤버 등급 검색")
 	public @ResponseBody ResponseEntity<Map<String,Object>> findGrade(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
@@ -384,4 +384,6 @@ public class MemberController {
 		}
 		return res;
 	}
+	
+	
 }

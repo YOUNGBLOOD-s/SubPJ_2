@@ -60,4 +60,6 @@ public interface IAdDao {
 	public void updateCounsel(Counsel counvalue);
 	public void updateCompleted(int idx);
 	public void deleteCounsel(int idx);
+	public int selectlastIdx();
+	public Counsel selectCounsel(int idx);
 }

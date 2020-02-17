@@ -1,10 +1,34 @@
 package com.yb.rest.vo;
 
 public class Counsel {
-	private int age, nation;
+	private int age, nation, idx;
 	private String name, email, tel, date, text;
 	private boolean completed;
 	public Counsel() {}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+
+	public Counsel(int age, int nation, int idx, String name, String email, String tel, String date, String text,
+			boolean completed) {
+		super();
+		this.age = age;
+		this.nation = nation;
+		this.idx = idx;
+		this.name = name;
+		this.email = email;
+		this.tel = tel;
+		this.date = date;
+		this.text = text;
+		this.completed = completed;
+	}
+
+
 	public Counsel(int nation, int age, String name, String email, String tel, String date, String text) {
 		this.nation = nation;
 		this.age = age;
@@ -77,7 +101,7 @@ public class Counsel {
 	}
 	@Override
 	public String toString() {
-		return "Counsel [age=" + age + ", nation=" + nation + ", name=" + name + ", email=" + email + ", tel=" + tel
-				+ ", date=" + date + ", text=" + text + ", completed=" + completed + "]";
+		return "Counsel [age=" + age + ", nation=" + nation + ", idx=" + idx + ", name=" + name + ", email=" + email
+				+ ", tel=" + tel + ", date=" + date + ", text=" + text + ", completed=" + completed + "]";
 	}
 }

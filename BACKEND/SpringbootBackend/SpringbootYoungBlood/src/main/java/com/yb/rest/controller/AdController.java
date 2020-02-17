@@ -501,6 +501,7 @@ public class AdController {
 			value.put("today", today);
 
 			if (ser.getDate(value)) {
+				System.out.println("있음!");
 				ser.updateClickcnt(value);
 			} else {
 				ser.insertClick(value);
@@ -663,6 +664,9 @@ public class AdController {
 		try {
 			System.out.println(counvalue.toString());
 			ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(), counvalue.getDate(), counvalue.getText(), counvalue.getNation());
+			int lastIdx = ser.selectlastIdx();
+			counvalue.setIdx(lastIdx);
+			result.put("inputValue", counvalue);
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
@@ -671,13 +675,15 @@ public class AdController {
 	}
 	
 	/** 상담 완료/미완료 flag 값 swap */
-	@PutMapping("/counsel/completed/{nationidx}")
+	@PutMapping("/counsel/completed/{idx}")
 	@ApiOperation(value="상담 완료 변수 swap")
-	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@RequestParam(value = "nationidx") int nationidx) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@RequestParam(value = "idx") int idx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			ser.updateCompleted(nationidx);
+			ser.updateCompleted(idx);
+			Counsel counval = ser.selectCounsel(idx);
+			result.put("updateValue", counval);
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
@@ -687,7 +693,7 @@ public class AdController {
 	
 	@DeleteMapping("/counsel/delete/{idx}")
 	@ApiOperation(value="상담정보 삭제")
-	public @ResponseBody ResponseEntity<Map<String, Object>> deleteCounsel(@RequestParam(value = "nationidx") int idx) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> deleteCounsel(@RequestParam(value = "idx") int idx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {

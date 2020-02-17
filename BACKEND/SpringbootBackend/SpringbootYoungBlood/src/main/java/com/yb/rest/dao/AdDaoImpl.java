@@ -1,6 +1,7 @@
 package com.yb.rest.dao;
 
 import java.time.Month;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -215,6 +216,16 @@ public class AdDaoImpl implements IAdDao {
 	@Override
 	public void deleteCounsel(int idx) {
 		session.delete("sendtofront.deleteCounsel", idx);
+	}
+
+	@Override
+	public int selectlastIdx() {
+		return session.selectOne("sendtofront.selectlastIdx");
+	}
+
+	@Override
+	public Counsel selectCounsel(int idx) {
+		return session.selectOne("sendtofront.selectCounsel", idx);
 	}
 
 	

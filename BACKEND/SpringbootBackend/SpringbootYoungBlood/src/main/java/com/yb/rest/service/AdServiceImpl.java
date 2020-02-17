@@ -213,5 +213,15 @@ public class AdServiceImpl implements IAdService {
 		repo.deleteCounsel(idx);
 	}
 
+	@Override
+	public int selectlastIdx() {
+		return repo.selectlastIdx();
+	}
+
+	@Override
+	public Counsel selectCounsel(int idx) {
+		return repo.selectCounsel(idx);
+	}
+
 	
 }
