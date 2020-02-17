@@ -109,7 +109,7 @@ const ImageAddForm = ({ classes, steps, step }) => {
             </MaterialCard>
           </component.Grid>
         ))}
-        <component.Grid item xs={6}>
+        <component.Grid item xs={12}>
           <component.Button
             disabled={step === 0}
             onClick={handleBack}
@@ -125,9 +125,6 @@ const ImageAddForm = ({ classes, steps, step }) => {
           >
             {step === steps.length - 1 ? '완료' : '다음'}
           </component.Button>
-        </component.Grid>
-        <component.Grid item xs={6}>
-          <CancelButton />
         </component.Grid>
       </component.Grid>
     </FormWrapper>

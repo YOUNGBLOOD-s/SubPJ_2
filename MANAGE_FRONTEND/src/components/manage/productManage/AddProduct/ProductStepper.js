@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Complete from './Complete';
 import { initializeForm } from '../../../../modules/form';
 import { initializeStep } from '../../../../modules/stepper';
-import CancelButton from './CancelButton';
 import component from '../../../../lib/material/component';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';

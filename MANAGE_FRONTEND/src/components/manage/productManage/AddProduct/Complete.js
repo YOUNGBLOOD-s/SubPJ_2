@@ -8,7 +8,6 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import palette from '../../../../lib/styles/palette';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import CancelButton from './CancelButton';
 
 const CompleteWrapper = styled.div`
   display: flex;
@@ -104,7 +103,7 @@ const Complete = ({ classes, step, steps }) => {
         )}
       </div>
       <component.Grid container justify="flex-end">
-        <component.Grid item xs={6}>
+        <component.Grid item xs={12}>
           <component.Button
             disabled={step === 0}
             onClick={handleBack}
@@ -120,9 +119,6 @@ const Complete = ({ classes, step, steps }) => {
           >
             {step === steps.length - 1 ? '완료' : '다음'}
           </component.Button>
-        </component.Grid>
-        <component.Grid item xs={6}>
-          <CancelButton />
         </component.Grid>
       </component.Grid>
     </div>

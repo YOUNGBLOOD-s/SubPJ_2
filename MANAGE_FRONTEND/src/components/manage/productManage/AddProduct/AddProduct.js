@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initializeStep } from '../../../../modules/stepper';
 import { initializeForm } from '../../../../modules/form';
 import styled from 'styled-components';
-import component from '../../../../lib/material/component';
+import AddProductBar from './AddProductBar';
 
 const AddProductContainer = styled.div``;
 
@@ -38,6 +38,7 @@ const AddProduct = ({ history }) => {
   return (
     <AddProductContainer>
       <AddProductWrapper>
+        <AddProductBar />
         <ProductStepper />
       </AddProductWrapper>
     </AddProductContainer>
