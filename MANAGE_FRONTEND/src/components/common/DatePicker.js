@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 const StyledDatePicker = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: palette.red[200],
+      color: palette.theme[200],
     },
   },
 })(KeyboardDatePicker);

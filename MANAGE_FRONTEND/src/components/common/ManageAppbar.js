@@ -26,14 +26,14 @@ const ManageAppbar = () => {
   return (
     <AppBarWrapper>
       <LinkWrapper>
-        <StyledLink to="/manage/grade">등급구매</StyledLink>
-        <StyledLink to="/manage/mypage">마이페이지</StyledLink>
         {member && member.grade !== 0 && (
           <>
-            <StyledLink to="/manage/product">나의광고</StyledLink>
             <StyledLink to="/manage">광고통계</StyledLink>
+            <StyledLink to="/manage/product">나의광고</StyledLink>
           </>
         )}
+        <StyledLink to="/manage/mypage">마이페이지</StyledLink>
+        <StyledLink to="/manage/grade">등급구매</StyledLink>
       </LinkWrapper>
     </AppBarWrapper>
   );
