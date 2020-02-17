@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ImageUploader from '../../../common/ImageUploader';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectImageUrl, selectImageNation } from '../../../../modules/form';
@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import MaterialCard from '../../../common/MaterialCard';
 import component from '../../../../lib/material/component';
 import { prevStep, nextStep } from '../../../../modules/stepper';
+import palette from '../../../../lib/styles/palette';
 
 const ImageForm = ({ type }) => {
   const { imageUrl } = useSelector(({ form }) => ({
@@ -28,16 +29,28 @@ const ImageForm = ({ type }) => {
 
 const FormWrapper = styled.div``;
 const Dsecription = styled.div`
-  font-size: 1.3rem;
+  text-align: center;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 1rem;
 `;
 
+const ErrorMessage = styled.div`
+  border: 1px solid ${palette.red[300]};
+  padding: 1rem;
+  border-radius: 3px;
+  text-align: center;
+  color: ${palette.red[600]};
+`;
+
 const ImageAddForm = ({ classes, steps, step }) => {
-  const { nationId } = useSelector(({ form }) => ({
+  const { nationId, images } = useSelector(({ form }) => ({
     nationId: form.nationId,
     images: form.images,
   }));
+
+  const [error, setError] = useState(false);
+
   // 마운트시 각 이미지의 nationId 설정
   const dispatch = useDispatch();
   useEffect(() => {
@@ -68,21 +81,34 @@ const ImageAddForm = ({ classes, steps, step }) => {
     dispatch(prevStep());
   };
   const handleNext = () => {
+    for (let image of images) {
+      if (image.url === '') {
+        setError(true);
+        return;
+      }
+    }
+    setError(false);
     dispatch(nextStep());
   };
   return (
     <FormWrapper>
-      <div>
-        {types.map((type, idx) => (
-          <MaterialCard key={type.type}>
-            <Dsecription>
-              {idx + 1}. {type.description}
-            </Dsecription>
-            <ImageForm type={type.type} />
-          </MaterialCard>
+      <component.Grid container spacing={1}>
+        {types.map(type => (
+          <component.Grid item xs={12} sm={6} key={type.type}>
+            <MaterialCard>
+              <Dsecription>{type.description}</Dsecription>
+              <ImageForm type={type.type} />
+            </MaterialCard>
+          </component.Grid>
         ))}
-      </div>
-      {/* TODO: 만약 요청에 실패한다면 에러 메세지를 띄울것 */}
+      </component.Grid>
+
+      {error ? (
+        <component.Grid item xs={12}>
+          <ErrorMessage>모든 이미지를 업로드 해주세요.</ErrorMessage>
+        </component.Grid>
+      ) : null}
+
       <component.Button
         disabled={step === 0}
         onClick={handleBack}
