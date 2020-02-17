@@ -7,6 +7,7 @@ import MaterialCard from '../../../common/MaterialCard';
 import component from '../../../../lib/material/component';
 import { prevStep, nextStep } from '../../../../modules/stepper';
 import palette from '../../../../lib/styles/palette';
+import AlertDialog from '../../../common/AlertDialog';
 
 const ImageForm = ({ type }) => {
   const { imageUrl } = useSelector(({ form }) => ({
@@ -93,6 +94,7 @@ const ImageAddForm = ({ classes, steps, step }) => {
   return (
     <FormWrapper>
       <component.Grid container spacing={1}>
+        <AlertDialog open={error} setOpen={setError} />
         {types.map(type => (
           <component.Grid item xs={12} sm={6} key={type.type}>
             <MaterialCard>
@@ -102,12 +104,6 @@ const ImageAddForm = ({ classes, steps, step }) => {
           </component.Grid>
         ))}
       </component.Grid>
-
-      {error ? (
-        <component.Grid item xs={12}>
-          <ErrorMessage>모든 이미지를 업로드 해주세요.</ErrorMessage>
-        </component.Grid>
-      ) : null}
 
       <component.Button
         disabled={step === 0}
