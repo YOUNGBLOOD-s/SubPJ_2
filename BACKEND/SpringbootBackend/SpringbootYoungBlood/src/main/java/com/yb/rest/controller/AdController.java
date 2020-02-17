@@ -582,6 +582,7 @@ public class AdController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectAllnationdetail(@RequestParam("page") String page,
 			@RequestParam("continents") String continents, @RequestParam("sort") String sort) {
 		// 유럽1 북태평양2 아프리카3 아시아4 북아메리카5
+		//sort는 Default : ASC이고 DESC일때 처리.로 올때 날짜순으로 정렬.
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map<String, Object>> Countrylist = new LinkedList<>();
@@ -604,11 +605,12 @@ public class AdController {
 		if (list.size() > 0) {
 			//필터가 적용 되었다면??
 			if (continents.equals("1") || continents.equals("2") || continents.equals("3") || continents.equals("4")|| continents.equals("5")) {
+				System.out.println(continents+" "+sort);
 					for (int i = 0; i < filterlist.size(); i++) {
 						Map<String, Object> con = new HashMap<String, Object>();
 						int idx = filterlist.get(i);	
 						Nation nation = ser.getNationdetail(idx);
-	//					List<Nation> confilterlist = ser.selectFilterIdxs(continents, pageIdx+"");
+//						List<Nation> confilterlist = ser.selectFilterIdxs(continents, pageIdx+"");
 							Monthtb mon = manser.monthInfo(idx);
 							List<Image> img = manser.imagesInfo(idx);
 							List<Route> rou = manser.contentsInfo(idx);
@@ -634,19 +636,61 @@ public class AdController {
 						}
 						Countrylist.add(con);
 					}
+					System.out.println(Countrylist.size());
 					if(Countrylist.size()>12) {
+						System.out.println(pageIdx);
 						for(int i=pageIdx; i<pageIdx+12; i++) {
 							if(Countrylist.size() <= i)
 								break;
-							
+							tmplist.add(new Nation(Countrylist.get(i).get("idx")+"",Countrylist.get(i).get("en_name")+"",Countrylist.get(i).get("name")+"",
+									Countrylist.get(i).get("dust")+"",Countrylist.get(i).get("continents")+"",Countrylist.get(i).get("showcnt")+"",
+									Countrylist.get(i).get("customer")+"",Countrylist.get(i).get("weight")+"",Countrylist.get(i).get("speech")+"",
+									Countrylist.get(i).get("price")+"",Countrylist.get(i).get("s_date")+"",Countrylist.get(i).get("f_date")+"",
+									Countrylist.get(i).get("type")+"",Countrylist.get(i).get("image")+""));
 						}
-						
+						if(sort.equals("ASC")||sort.equals("asc")) {
+						Collections.sort(tmplist, new Comparator<Nation>() {
+							@Override
+							public int compare(Nation o1, Nation o2) {
+								// TODO Auto-generated method stub
+								return o1.getS_date().compareTo(o2.getS_date());
+							}
+						});}else if(sort.equals("DESC")||sort.equals("desc")){
+							Collections.sort(tmplist, new Comparator<Nation>() {
+								@Override
+								public int compare(Nation o1, Nation o2) {
+									// TODO Auto-generated method stub
+									return o2.getS_date().compareTo(o1.getS_date());
+								}
+							});
+						}
+						System.out.println(tmplist);
+						result.put("AllNationDatas", tmplist);
 					}else {
 						//그냥 출력하면 될듯..
+						if(sort.equals("ASC")||sort.equals("asc")) {
+							Collections.sort(Countrylist, new Comparator<Map<String, Object>>() {
+								@Override
+								public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+									// TODO Auto-generated method stub
+									return o1.get("s_date").toString().compareTo(o2.get("s_date").toString());
+								}					
+							});
+						}else if(sort.equals("DESC")||sort.equals("desc")){
+							Collections.sort(Countrylist, new Comparator<Map<String, Object>>() {
+								@Override
+								public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+									// TODO Auto-generated method stub
+									return o2.get("s_date").toString().compareTo(o1.get("s_date").toString());
+								}					
+							});
+						}
+						result.put("AllNationDatas", Countrylist);
 					}
 					maxpage = filterlist.size()/12;
 					if (filterlist.size() % 12 > 0)
 						maxpage++;
+					
 				} else {
 					list.clear();
 					list = ser.selectIdxs_page(pageIdx);
@@ -680,13 +724,31 @@ public class AdController {
 						}
 						Countrylist.add(con);
 					}
+					if(sort.equals("ASC")||sort.equals("asc")) {
+						Collections.sort(Countrylist, new Comparator<Map<String, Object>>() {
+							@Override
+							public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+								// TODO Auto-generated method stub
+								return o1.get("s_date").toString().compareTo(o2.get("s_date").toString());
+							}					
+						});
+					}else if(sort.equals("DESC")||sort.equals("desc")){
+						Collections.sort(Countrylist, new Comparator<Map<String, Object>>() {
+							@Override
+							public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+								// TODO Auto-generated method stub
+								return o2.get("s_date").toString().compareTo(o1.get("s_date").toString());
+							}					
+						});
+					}
+					result.put("AllNationDatas", Countrylist);
 				}
 			
 			} else if (list.size() == 0){
 				result.put("lastpage", true);
 			}
 			result.put("lastpageidx", maxpage);
-			result.put("AllNationDatas", Countrylist);
+//			result.put("AllNationDatas", Countrylist);
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 			return re;
 		}
