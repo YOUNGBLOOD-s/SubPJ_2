@@ -221,9 +221,9 @@ public class StaController {
 						qrCnt+=qr[j];
 					}
 				}
-				value.put("start_hour", startHour);
-				startHour=startHour==2?24:startHour==1?23:startHour-2;
 				value.put("end_hour", startHour);
+				startHour=startHour==2?24:startHour==1?23:startHour-2;
+				value.put("atart_hour", startHour);
 				value.put("click", clickCnt);
 				value.put("qr", qrCnt);
 				list.add(value);
