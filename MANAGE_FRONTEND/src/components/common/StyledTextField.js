@@ -7,7 +7,7 @@ const StyledTextField = withStyles({
     marginBottom: '1rem',
     // 포커스시 라벨 색상
     '& label.Mui-focused': {
-      color: palette.theme[500],
+      // color: palette.cyan[500],
     },
     '& .MuiOutlinedInput-root': {
       // 기본 필드 보더 색상
@@ -15,7 +15,7 @@ const StyledTextField = withStyles({
         borderColor: 'black',
       },
       '&.Mui-focused fieldset': {
-        borderColor: palette.theme[600],
+        // borderColor: palette.deepPurple[300],
       },
     },
   },
