@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     textAlign: 'center',
   },
   hr: {
-    borderColor: palette.teal[50],
+    borderColor: palette.theme[50],
     margin: '1rem',
   },
   check: {
@@ -69,7 +69,7 @@ const GradeCard = ({ title, image, grade, price, option }) => {
   const updateGrade = () => {
     axios
       .put(
-        'http://i02c110.p.ssafy.io:8887/api/mem/update/' + grade,
+        'https://i02c110.p.ssafy.io:8887/api/mem/update/' + grade,
         {},
         {
           headers: {

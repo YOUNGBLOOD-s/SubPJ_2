@@ -16,7 +16,7 @@ const MyFormBlcok = styled.div`
 
 const StyledButton = withStyles({
   root: {
-    backgroundColor: palette.teal[400],
+    backgroundColor: palette.theme[400],
     color: 'white',
   },
 })(component.Button);
@@ -47,7 +47,7 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
     e.preventDefault();
     axios
       .post(
-        'http://i02c110.p.ssafy.io:8887/api/auth/infomem',
+        'https://i02c110.p.ssafy.io:8887/api/auth/infomem',
         { password: e.target.password.value },
         {
           headers: {

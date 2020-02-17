@@ -41,6 +41,12 @@ const [
   UPDATE_PRODUCT_MONTHTABLE_FAILURE,
 ] = createRequestActionTypes('product/UPDATE_PRODUCT_MONTHTABLE');
 
+const [
+  TOGGLE_PRODUCT_COUNSEL,
+  TOGGLE_PRODUCT_COUNSEL_SUCCESS,
+  TOGGLE_PRODUCT_COUNSEL_FAILURE,
+] = createRequestActionTypes('product/TOGGLE_PRODUCT_COUNSEL');
+
 export const getProduct = createAction(GET_PRODUCT, ({ id, token }) => ({
   id,
   token,
@@ -69,6 +75,10 @@ export const updateProductMonthtable = createAction(
   UPDATE_PRODUCT_MONTHTABLE,
   ({ id, form, token }) => ({ id, form, token }),
 );
+export const toggleProductCounsel = createAction(
+  TOGGLE_PRODUCT_COUNSEL,
+  ({ id, form, token }) => ({ id, form, token }),
+);
 
 const getProductSaga = createRequestSaga(GET_PRODUCT, productAPI.productInfo);
 const addProductMonthtableSaga = createRequestSaga(
@@ -91,6 +101,11 @@ const updateProductMonthtableSage = createRequestSaga(
   UPDATE_PRODUCT_MONTHTABLE,
   productAPI.updateMonthtable,
 );
+
+const toggleProductCounselSaga = createRequestSaga(
+  TOGGLE_PRODUCT_COUNSEL,
+  productAPI.toggleCounsel,
+);
 export function* productSaga() {
   yield takeLatest(GET_PRODUCT, getProductSaga);
   yield takeLatest(ADD_PRODUCT_MONTHTABLE, addProductMonthtableSaga);
@@ -98,6 +113,7 @@ export function* productSaga() {
   yield takeLatest(UPDATE_PRODUCT_IMAGE, updateProductImageSaga);
   yield takeLatest(UPDATE_PRODUCT_CONTENT, updateProductContentSaga);
   yield takeLatest(UPDATE_PRODUCT_MONTHTABLE, updateProductMonthtableSage);
+  yield takeLatest(TOGGLE_PRODUCT_COUNSEL, toggleProductCounselSaga);
 }
 
 const initialState = {
@@ -112,6 +128,7 @@ const initialState = {
   addErrors: {
     month: null,
   },
+  toggleError: null,
 };
 
 const product = handleActions(
@@ -237,6 +254,26 @@ const product = handleActions(
         ...state.updateErrors,
         month: error,
       },
+    }),
+    [TOGGLE_PRODUCT_COUNSEL_SUCCESS]: (state, { payload: data }) => {
+      console.log(data);
+      // FIXME: 무슨 데이터가 오는지, 그리고 카운슬의 아이디 확인하기.
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          counselList: state.product.counselList.map(counsel => {
+            if (counsel.id === data.id) {
+              return { ...counsel, completed: !counsel.completed };
+            }
+            return counsel;
+          }),
+        },
+      };
+    },
+    [TOGGLE_PRODUCT_COUNSEL_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      toggleError: error,
     }),
   },
   initialState,

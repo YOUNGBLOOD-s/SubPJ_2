@@ -14,7 +14,7 @@ const MyFormBlcok = styled.div`
 
 const StyledButton = withStyles({
   root: {
-    backgroundColor: palette.teal[400],
+    backgroundColor: palette.theme[400],
     color: 'white',
   },
 })(component.Button);
@@ -91,7 +91,7 @@ const MyPageForm = ({ userInfo, setUserInfo }) => {
       return;
     }
     axios
-      .put('http://i02c110.p.ssafy.io:8887/api/auth/updatemem', data.toJS(), {
+      .put('https://i02c110.p.ssafy.io:8887/api/auth/updatemem', data.toJS(), {
         headers: {
           Authorization: token,
         },

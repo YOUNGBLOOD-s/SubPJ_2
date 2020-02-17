@@ -11,7 +11,7 @@ const RegisterForm = ({ history }) => {
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user
+    user: user.user,
   }));
 
   const onChange = e => {
@@ -44,7 +44,7 @@ const RegisterForm = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(check(auth.token))
+      dispatch(check(auth.token));
       sessionStorage.setItem('access_token', auth.token);
     }
   }, [auth, authError, dispatch]);
@@ -55,10 +55,10 @@ const RegisterForm = ({ history }) => {
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
-        console.log('로컬 스토리지가 정상 동작하지 않습니다.')
+        console.log('로컬 스토리지가 정상 동작하지 않습니다.');
       }
     }
-  }, [history, user])
+  }, [history, user]);
 
   return (
     <AuthForm
@@ -66,6 +66,7 @@ const RegisterForm = ({ history }) => {
       onChange={onChange}
       onSubmit={onSubmit}
       form={form}
+      error={authError}
     />
   );
 };

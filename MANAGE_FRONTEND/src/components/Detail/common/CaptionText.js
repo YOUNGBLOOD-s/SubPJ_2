@@ -4,7 +4,7 @@ import palette from '../../../lib/styles/palette';
 
 const StyledText = styled.div`
   font-size: 1rem;
-  color: ${palette.red[200]};
+  color: ${palette.theme[200]};
   font-family: 'Noto Sans KR', sans-serif;
   margin-bottom: 1rem;
 `;

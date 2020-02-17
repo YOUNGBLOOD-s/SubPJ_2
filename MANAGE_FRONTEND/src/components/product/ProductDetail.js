@@ -16,6 +16,7 @@ import { removeList } from '../../lib/api/ad';
 import component from '../../lib/material/component';
 import DeleteAlertDialog from '../common/DeleteAlertDialog';
 import MonthForm from './MonthForm';
+import Counsels from './Counsels';
 
 const DetailContainer = styled.div`
   padding: 1rem;
@@ -34,13 +35,20 @@ const ProductDetail = ({ match, history }) => {
   const { id } = match.params;
   const token = sessionStorage.getItem('access_token');
   const dispatch = useDispatch();
-  const { product, loading, user } = useSelector(
+  const { product, loading, user, member } = useSelector(
     ({ product, loading, user }) => ({
       product: product.product,
       loading: loading['product/GET_PRODUCT'],
       user: user.user,
+      member: user.member,
     }),
   );
+
+  useEffect(() => {
+    if (member && member.grade === 0) {
+      history.push('/manage/grade');
+    }
+  }, [member, history]);
 
   useEffect(() => {
     dispatch(getProduct({ id, token }));
@@ -66,6 +74,12 @@ const ProductDetail = ({ match, history }) => {
           <MaterialCard>
             {product.owner ? <Owner owner={product.owner} /> : <NoData />}
           </MaterialCard>
+          {/* COUNSEL */}
+          {product.counselList ? (
+            <Counsels counsels={product.counselList} user={user} />
+          ) : (
+            <NoData>상담예약이 없습니다.</NoData>
+          )}
 
           {/* NATION */}
           <TitleBar>광고 기본 설정</TitleBar>
@@ -126,7 +140,7 @@ const ProductDetail = ({ match, history }) => {
           )}
         </DetailWrapper>
       ) : (
-        <LoadingBackdrop loading={loading === undefined ? true : loading} />
+        <LoadingBackdrop loading={loading} />
       )}
     </DetailContainer>
   );

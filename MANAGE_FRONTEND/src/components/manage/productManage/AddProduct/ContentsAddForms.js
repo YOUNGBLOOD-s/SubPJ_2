@@ -16,14 +16,14 @@ const StyledTextField = withStyles({
   root: {
     marginBottom: '1rem',
     '& label.Mui-focused': {
-      color: palette.red[300],
+      color: palette.theme[300],
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: 'black',
       },
       '&.Mui-focused fieldset': {
-        borderColor: palette.red[300],
+        borderColor: palette.theme[300],
       },
     },
   },

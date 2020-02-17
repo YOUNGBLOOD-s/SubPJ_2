@@ -3,6 +3,13 @@ import MaterialTable from 'material-table';
 import axios from 'axios';
 import LoadingBackdrop from '../../common/LoadingBackdrop';
 import { List } from 'immutable';
+import styled from 'styled-components';
+
+const MyPageAdminWrapper = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+`;
 
 const MyPageAdmin = () => {
   const token = sessionStorage.getItem('access_token');
@@ -12,7 +19,7 @@ const MyPageAdmin = () => {
   useEffect(() => {
     axios
       .post(
-        'http://i02c110.p.ssafy.io:8887/api/auth/infomem',
+        'https://i02c110.p.ssafy.io:8887/api/auth/infomem',
         { password: 'admin' },
         {
           headers: {
@@ -34,7 +41,6 @@ const MyPageAdmin = () => {
         columns: [
           { title: '아이디', field: 'username', editable: 'never' },
           { title: '등급', field: 'grade', type: 'numeric' },
-          { title: '비밀번호', field: 'password' },
           { title: '회사명', field: 'company' },
         ],
         data: userInfo.data.toJS(),
@@ -51,7 +57,7 @@ const MyPageAdmin = () => {
   }, [userInfo]);
 
   return (
-    <div>
+    <MyPageAdminWrapper>
       {userInfo && state ? (
         <MaterialTable
           title="회원 목록"
@@ -78,7 +84,7 @@ const MyPageAdmin = () => {
                     if (newData.username === 'admin') newData.grade = 1;
                     axios
                       .put(
-                        'http://i02c110.p.ssafy.io:8887/api/auth/updatemem',
+                        'https://i02c110.p.ssafy.io:8887/api/auth/updatemem',
                         newData,
                         {
                           headers: {
@@ -101,15 +107,10 @@ const MyPageAdmin = () => {
               new Promise(resolve => {
                 setTimeout(() => {
                   resolve();
-                  // setState(prevState => {
-                  //   const data = [...prevState.data];
-                  //   data.splice(data.indexOf(oldData), 1);
-                  //   return { ...prevState, data };
-                  // });
                   const idx = oldData.idx;
                   axios
                     .delete(
-                      'http://i02c110.p.ssafy.io:8887/api/auth/deleteadmin/' +
+                      'https://i02c110.p.ssafy.io:8887/api/auth/deleteadmin/' +
                         idx,
                       {
                         headers: {
@@ -132,7 +133,7 @@ const MyPageAdmin = () => {
       ) : (
         <LoadingBackdrop loading={!!userInfo} />
       )}
-    </div>
+    </MyPageAdminWrapper>
   );
 };
 

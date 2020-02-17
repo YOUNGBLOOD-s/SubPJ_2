@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage';
 import AdminPage from './pages/AdminPage';
 import DetailPage from './pages/DetailPage';
 import ManagePage from './pages/ManagePage';
+import AddProduct from './components/manage/productManage/AddProduct/AddProduct';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route component={AdminPage} path="/admin" />
       {/* 광고주 관리 */}
       <Route component={ManagePage} path="/manage" />
+      <Route component={AddProduct} path="/add" />
     </>
   );
 };

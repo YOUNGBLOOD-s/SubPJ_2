@@ -13,7 +13,10 @@ const useStyles = makeStyles(theme => ({
 const LoadingBackdrop = ({ loading }) => {
   const classes = useStyles();
   return (
-    <Backdrop className={classes.backdrop} open={loading}>
+    <Backdrop
+      className={classes.backdrop}
+      open={loading === undefined ? false : loading}
+    >
       <CircularProgress color="inherit" />
     </Backdrop>
   );
