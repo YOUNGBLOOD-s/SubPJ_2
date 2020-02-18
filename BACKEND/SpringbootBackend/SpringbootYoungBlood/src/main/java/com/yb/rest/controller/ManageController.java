@@ -202,8 +202,24 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-
-			if (grade > 0) {
+			//광고주가 보유하고있는 nation테이블 갯수(사이즈)와 grade에따라 비교해준다
+			boolean InsertAccess = true;
+			List<Nation> listAccess = ser.nationList(customer);
+			int size= listAccess.size();
+			System.out.println(size+" "+grade+" "+customer);
+			if(grade==2) { //실버일떄
+			//grade가 2이면  2개
+				if(size>=2) InsertAccess = false; 
+			}else if ( grade ==3) {
+			//grade가 3이면 5개
+				if(size>=5) InsertAccess = false;
+			}else if(grade ==4) {
+			//grade가 4이면 6개.
+				if(size>=10) InsertAccess = false;
+			}else if (grade == 1) {
+				//관리자이므로 그냥 통과
+			}
+			if (grade > 0 && InsertAccess) {
 				ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getContinents(), customer + "", nat.getWeight(), nat.getSpeech(), nat.getPrice(),
 						nat.getS_date(), nat.getF_date());
 				int last = Integer.MIN_VALUE;
