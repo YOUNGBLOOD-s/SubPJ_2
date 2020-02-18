@@ -249,6 +249,7 @@ public class AdController {
 			maxpage++;
 		List<Integer> list = ser.selectIdxs();
 		List<Integer> filterlist = ser.selectFilterIdxs(continents);
+//		List<Nation> confilterlist = ser.selectFilterIdxs(continents, pageIdx+"");
 		if (list.size() > 0) {
 			//필터가 적용 되었다면??
 			if (continents.equals("1") || continents.equals("2") || continents.equals("3") || continents.equals("4")|| continents.equals("5")) {
@@ -256,7 +257,6 @@ public class AdController {
 						Map<String, Object> con = new HashMap<String, Object>();
 						int idx = filterlist.get(i);	
 						Nation nation = ser.getNationdetail(idx);
-//						List<Nation> confilterlist = ser.selectFilterIdxs(continents, pageIdx+"");
 							Monthtb mon = manser.monthInfo(idx);
 							List<Image> img = manser.imagesInfo(idx);
 							List<Route> rou = manser.contentsInfo(idx);
@@ -387,6 +387,7 @@ public class AdController {
 				}
 			
 			} else if (list.size() == 0){
+				maxpage--;
 				result.put("lastpage", true);
 			}
 			result.put("lastpageidx", maxpage);

@@ -27,8 +27,13 @@ import java.net.URLEncoder;
 public class SpeechController {
 
 	private static final String BUCKET_NAME = "nearbyad";
-	private static final String ACCESS_KEY = GetKEY.getAccesskey();
-	private static final String SECRET_KEY = GetKEY.getSecretkey();
+
+//	private static final String ACCESS_KEY = GetKEY.getAccesskey();
+//	private static final String SECRET_KEY = GetKEY.getSecretkey();
+
+	private static final String ACCESS_KEY = "AKIAZ442F2KIPEUGT67B";
+	private static final String SECRET_KEY = "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";
+
 
 	private static AmazonS3 amazonS3; // 인스턴스를 초기화한다.
 	private static SpeechController aws = new SpeechController();

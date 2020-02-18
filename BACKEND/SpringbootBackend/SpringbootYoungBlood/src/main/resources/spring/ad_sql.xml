@@ -51,7 +51,7 @@
 	</select>
 	
 	<select id="selectContinentFilterList" resultType="nation" parameterType="map">
-	select * from nationtb where continents=#{continents} limit 12 offset #{page};
+	select * from nationtb where continents=#{continents} limit 12 offset #{pageIdx};
 	</select>
 	
 	<select id="selectNationdetail" resultType="nation" parameterType="map">
