@@ -247,6 +247,7 @@ public class StaController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> userstdata(@RequestHeader(value="Authorization") String token, @PathVariable String nationIdx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
+		if(token==null || token=="") return new ResponseEntity<Map<String, Object>>(result, HttpStatus.NOT_FOUND);
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
