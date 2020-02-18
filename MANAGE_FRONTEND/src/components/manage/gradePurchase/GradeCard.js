@@ -43,7 +43,6 @@ const GradePriceSub = styled.span`
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    marginBottom: '1rem',
     textAlign: 'center',
   },
   hr: {
@@ -55,7 +54,9 @@ const useStyles = makeStyles({
   },
 });
 
-const GradeCard = ({ title, image, grade, price, option }) => {
+const GradeCard = ({ info }) => {
+  const { title, grade, price, option } = info;
+  const image = process.env.PUBLIC_URL + info.image;
   const classes = useStyles();
 
   const token = sessionStorage.getItem('access_token');
@@ -92,32 +93,30 @@ const GradeCard = ({ title, image, grade, price, option }) => {
   };
 
   return (
-    <>
-      <Card className={classes.root} onClick={onClick}>
-        <CardActionArea>
-          <CardContent>
-            <GradeImgWrapper>
-              <img src={image} alt="" />
-            </GradeImgWrapper>
-            <GradeTitle>{title}</GradeTitle>
-            <GradePrice>
-              &#8361; {price}
-              <GradePriceSub>per month</GradePriceSub>
-            </GradePrice>
-            <hr className={classes.hr} />
-            {option.map((item, idx) => {
-              return (
-                <GradeContent key={idx}>
-                  <i className={`fas fa-check ${classes.check}`}></i>
-                  &nbsp; {item}
-                </GradeContent>
-              );
-            })}
-            <GradeContentWrapper></GradeContentWrapper>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </>
+    <Card className={classes.root} onClick={onClick}>
+      <CardActionArea>
+        <CardContent>
+          <GradeImgWrapper>
+            <img src={image} alt="" />
+          </GradeImgWrapper>
+          <GradeTitle>{title}</GradeTitle>
+          <GradePrice>
+            &#8361; {price}
+            <GradePriceSub>per month</GradePriceSub>
+          </GradePrice>
+          <hr className={classes.hr} />
+          {option.map((item, idx) => {
+            return (
+              <GradeContent key={idx}>
+                <i className={`fas fa-check ${classes.check}`}></i>
+                &nbsp; {item}
+              </GradeContent>
+            );
+          })}
+          <GradeContentWrapper></GradeContentWrapper>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
