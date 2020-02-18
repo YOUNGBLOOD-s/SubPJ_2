@@ -19,9 +19,12 @@ const ImageWrapper = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
   height: 600px;
   width: auto;
+  @media only screen and (max-width: 600px) {
+    width: 300px;
+    height: auto;
+  }
   border-radius: 10px;
 `;
 
