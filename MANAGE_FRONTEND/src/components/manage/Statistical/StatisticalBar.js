@@ -25,8 +25,11 @@ const StyledChip = styled.div`
   }
 `;
 
+let prev = 1;
+
 const StatisticalBar = ({ setData }) => {
   const handleClick = type => {
+    if (type === prev) return;
     if (type === 1) {
       axios
         .get('https://i02c110.p.ssafy.io:8887/api/statistics/3hour')
@@ -52,6 +55,7 @@ const StatisticalBar = ({ setData }) => {
         })
         .catch(err => console.log(err));
     }
+    prev = type;
   };
   return (
     <StatisticalBarWrapper>
