@@ -1,6 +1,7 @@
 import React from 'react';
 import gradeType from '../../lib/data/gradeType';
 import styled from 'styled-components';
+import palette from '../../lib/styles/palette';
 
 const OwnerWrapper = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ const OwnerWrapper = styled.div`
     font-size: 1.5rem;
     padding: 1rem;
     .text {
+      color: ${palette.grey[500]};
       font-weight: bold;
       text-align: center;
       font-size: 1rem;
