@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdItem from './AdItem';
 import styled from 'styled-components';
-import TitleBar from '../Detail/common/TitleBar';
 import { useSelector, useDispatch } from 'react-redux';
 import { allAdList, initilizeAds } from '../../modules/ads';
 import component from '../../lib/material/component';
@@ -24,16 +23,20 @@ const FilterWrapper = styled.div`
 
 const AdItems = () => {
   const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState('');
-  const { ads, loading } = useSelector(({ ads, loading }) => ({
+  const [sort, setSort] = useState('DESC');
+  const [continents, setContinents] = useState(null);
+
+  const { ads, loading, lastpage } = useSelector(({ ads, loading }) => ({
     ads: ads.all_ads,
+    lastpage: ads.all_ads_lastpage,
     loading: loading['ads/ALL_AD_LIST'],
   }));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(allAdList({ page, continent: 0, sort: 1 }));
-  }, [dispatch, page, filter]);
+    console.log('ddd');
+    dispatch(allAdList({ page, continents, sort }));
+  }, [dispatch, page, continents, sort]);
 
   useEffect(() => {
     return () => {
@@ -67,7 +70,13 @@ const AdItems = () => {
               </component.Grid>
             ))}
             <component.Grid item xs={12}>
-              <Pagination />
+              <Pagination
+                currentPage={page}
+                lastPage={lastpage}
+                setPage={setPage}
+                setContinents={setContinents}
+                setSort={setSort}
+              />
             </component.Grid>
           </>
         ) : (

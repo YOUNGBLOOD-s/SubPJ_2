@@ -38,24 +38,34 @@ export function* adsSaga() {
 
 const initialState = {
   user_ads: null,
+  user_ads_lastpage: 0,
   all_ads: null,
+  all_ads_lastpage: 0,
   error: null,
 };
 
 const ads = handleActions(
   {
     [INITILIZE_ADS]: () => initialState,
-    [USER_AD_LIST_SUCCESS]: (state, { payload: ads }) => ({
+    [USER_AD_LIST_SUCCESS]: (
+      state,
+      { payload: { resvalue, lastpageidx } },
+    ) => ({
       ...state,
-      user_ads: ads.resvalue,
+      user_ads: resvalue,
+      user_ads_lastpage: lastpageidx,
     }),
     [USER_AD_LIST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
     }),
-    [ALL_AD_LIST_SUCCESS]: (state, { payload: { AllNationDatas } }) => ({
+    [ALL_AD_LIST_SUCCESS]: (
+      state,
+      { payload: { AllNationDatas, lastpageidx } },
+    ) => ({
       ...state,
       all_ads: AllNationDatas,
+      all_ads_lastpage: lastpageidx,
       error: null,
     }),
     [ALL_AD_LIST_FAILURE]: (state, { payload: error }) => ({

@@ -14,7 +14,7 @@ export const removeList = ({ token, id }) =>
     headers: { Authorization: token },
   });
 
-export const allAdList = ({ page, continent, sort }) =>
+export const allAdList = ({ page, continents, sort }) =>
   client.get(
-    `https://i02c110.p.ssafy.io:8887/api/all?page=${page}&continents=${continent}&sort=${sort}`,
+    `https://i02c110.p.ssafy.io:8887/api/ad/all?page=${page}&continents=${continents}&sort=${sort}`,
   );
