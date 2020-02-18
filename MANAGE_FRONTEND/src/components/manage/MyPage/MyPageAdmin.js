@@ -42,6 +42,7 @@ const MyPageAdmin = () => {
         columns: [
           { title: '아이디', field: 'username', editable: 'onAdd' },
           { title: '등급', field: 'grade', type: 'numeric' },
+          { title: '비밀번호', field: 'password' },
           { title: '회사명', field: 'company' },
         ],
         data: userInfo.data.toJS(),

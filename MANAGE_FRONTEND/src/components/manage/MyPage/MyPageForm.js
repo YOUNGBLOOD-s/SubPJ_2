@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 const MyFormBlcok = styled.div`
   margin: 0 auto;
@@ -51,7 +52,7 @@ const Footer = styled.div`
   }
 `;
 
-const MyPageForm = ({ userInfo, setUserInfo }) => {
+const MyPageForm = ({ userInfo, setUserInfo, history }) => {
   const token = sessionStorage.getItem('access_token');
   const form = useRef(null);
   const [password, setPassword] = useState('');
@@ -113,7 +114,10 @@ const MyPageForm = ({ userInfo, setUserInfo }) => {
           Authorization: token,
         },
       })
-      .then(res => alert('정보가 변경되었습니다.'))
+      .then(() => {
+        alert('정보가 변경되었습니다.');
+        history.push('/manage');
+      })
       .catch(err => alert('정보 변경에 실패했습니다.'));
   };
 
@@ -176,4 +180,4 @@ const MyPageForm = ({ userInfo, setUserInfo }) => {
   );
 };
 
-export default MyPageForm;
+export default withRouter(MyPageForm);

@@ -5,7 +5,6 @@ import palette from '../../../lib/styles/palette';
 import component from '../../../lib/material/component';
 import { Map } from 'immutable';
 import axios from 'axios';
-import StyledTextField from '../../common/StyledTextField';
 import { useSelector } from 'react-redux';
 import gradeType from '../../../lib/data/gradeType';
 
@@ -14,8 +13,27 @@ const MyFormBlcok = styled.div`
   margin-top: 4rem;
   max-width: 500px;
   height: 100%;
-  padding: 1rem;
+  padding:1rem;
 `;
+
+const StyledTextField = withStyles({
+  root: {
+    marginBottom: '1rem',
+    // 포커스시 라벨 색상
+    '& label.Mui-focused': {
+      color: palette.teal[500],
+    },
+    '& .MuiOutlinedInput-root': {
+      // 기본 필드 보더 색상
+      '& fieldset': {
+        borderColor: 'black',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: palette.teal[600],
+      },
+    },
+  },
+})(component.TextField);
 
 const StyledButton = withStyles({
   root: {
