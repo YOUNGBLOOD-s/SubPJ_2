@@ -68,7 +68,8 @@ public class MemberController {
 			TimeZone time = TimeZone.getTimeZone("Asia/Seoul");
 			df.setTimeZone(time);
 			String expstring = df.format(exDate);
-			System.out.println("만료 => " + expstring);
+			System.out.println("아래 토큰 만료 시간을 안내해 드립니다 => " + expstring);
+			Date calculatedexDate = calendar.getTime();
 			
 			
 			Map<String, Object> headers = new HashMap<>();
@@ -76,12 +77,13 @@ public class MemberController {
 			headers.put("alg", "HS256");
 
 			Map<String, Object> payloads = new HashMap<>();
-			payloads.put("exp", exDate);
+			payloads.put("exp", expstring);
 			payloads.put("username", username);
 
 			jwt = Jwts.builder()
 					.setHeader(headers)
 					.setClaims(payloads)
+					.setExpiration(calculatedexDate)
 					.signWith(SignatureAlgorithm.HS256, key.getBytes()).compact();
 			
 			System.out.println(jwt);
@@ -190,7 +192,8 @@ public class MemberController {
 				String jwt = createToken(login.getUsername());
 				
 				//토큰 만료시간
-				Date expdate = new Date();//c.getExpiration();
+				Claims c = verification(jwt);
+				Date expdate = c.getExpiration();
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss (z Z)");
 				TimeZone time = TimeZone.getTimeZone("Asia/Seoul");
 				df.setTimeZone(time);
@@ -204,7 +207,7 @@ public class MemberController {
 				
 				msg.put("username", login.getUsername());
 				msg.put("token", jwt);
-				msg.put("ex", expstring);
+				msg.put("expiration_Timeout", expstring);
 				msg.put("now", str);
 				
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
