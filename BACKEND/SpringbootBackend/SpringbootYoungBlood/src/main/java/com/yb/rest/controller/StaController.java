@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yb.rest.service.IStaService;
 import com.yb.rest.vo.Click;
 
+import io.jsonwebtoken.Claims;
 import io.swagger.annotations.ApiOperation;
 
 
@@ -78,7 +81,7 @@ public class StaController {
 			for(int i=0; i<12; i++) {
 				Map<String, Object> value = new HashMap<>();
 				value.put("idx", i);
-				value.put("month", year+"-"+startIdx);
+				value.put("name", year+"-"+startIdx);
 				value.put("click", click[startIdx]);
 				value.put("qr", qr[startIdx]);
 				startIdx--;
@@ -140,7 +143,7 @@ public class StaController {
 			for(int i=1; i<=15; i++) {
 				Map<String, Object> value = new HashMap<>();
 				value.put("idx", i);
-				value.put("day", year+"-"+String.format("%02d", month)+"-"+String.format("%02d", startIdx));
+				value.put("name", year+"-"+String.format("%02d", month)+"-"+String.format("%02d", startIdx));
 				value.put("click", click[startIdx]);
 				value.put("qr", qr[startIdx]);
 				startIdx--;
@@ -221,9 +224,9 @@ public class StaController {
 						qrCnt+=qr[j];
 					}
 				}
-				value.put("end_hour", startHour);
+				String axis = "-" + startHour;
 				startHour=startHour==2?24:startHour==1?23:startHour-2;
-				value.put("atart_hour", startHour);
+				value.put("name", startHour+axis);
 				value.put("click", clickCnt);
 				value.put("qr", qrCnt);
 				list.add(value);
@@ -235,6 +238,52 @@ public class StaController {
 			result.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());
 			re = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+		}
+		return re;
+	}
+	
+	@GetMapping("/statistics/usr/{nationIdx}")
+	@ApiOperation(value = "statistics api 사용자 토큰 받아서 해당 사용자 click, qr count만 전송")
+	public @ResponseBody ResponseEntity<Map<String, Object>> userstdata(@RequestHeader(value="Authorization") String token, @PathVariable String nationIdx) {
+		ResponseEntity<Map<String, Object>> re = null;
+		Map<String, Object> result = new HashMap<>();
+		try {
+			Claims de = MemberController.verification(token);
+			String username = (String) de.get("username");	
+			result.put("username", username);
+			List<Integer> idxs = ser.selectAllNationIdxs(username);
+
+			if(nationIdx==null || nationIdx=="") {
+				for(int i=0; i<idxs.size(); i++) {
+					Map<String, Object> map = new HashMap<>(); 
+					int nationIdx_ = idxs.get(i);
+					int click = ser.getClickSum(nationIdx_);
+					int qr = ser.getQrSum(nationIdx_);
+					map.put("click", click);
+					map.put("qr", qr);
+					result.put(nationIdx_+"", map);
+				}
+			} else {
+				boolean flag = false;
+				for(int i=0; i<idxs.size(); i++) {
+					if(nationIdx.equals(idxs.get(i)+"")) flag = true;
+				}
+				if(flag) {
+					Map<String, Object> map = new HashMap<>();
+					int click = ser.getClickSum(Integer.parseInt(nationIdx));
+					int qr = ser.getQrSum(Integer.parseInt(nationIdx));
+					map.put("click", click);
+					map.put("qr", qr);
+					result.put(nationIdx+"", map);
+					re = new ResponseEntity<>(result, HttpStatus.OK);
+				} else {
+					re = new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+				}
+			}
+		} catch(Exception e) {
+			result.put("resmsg", e.getMessage());
+			System.out.println(e.getMessage());
+			re = new ResponseEntity<Map<String, Object>>(result, HttpStatus.NOT_FOUND);
 		}
 		return re;
 	}

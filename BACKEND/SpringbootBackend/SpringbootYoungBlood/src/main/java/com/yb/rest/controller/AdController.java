@@ -44,7 +44,7 @@ import com.yb.rest.vo.Sensor;
 
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin
+@CrossOrigin(origins = {"*"}, maxAge=6000)
 @RestController
 @RequestMapping("/api/ad")
 public class AdController {
@@ -417,9 +417,9 @@ public class AdController {
 	}
 
 	/** 상담 완료/미완료 flag 값 swap */
-	@GetMapping("/counsel/completed/{idx}")
+	@PutMapping("/counsel/completed/{idx}")
 	@ApiOperation(value="상담 완료 변수 swap")
-	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@PathVariable int idx) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {

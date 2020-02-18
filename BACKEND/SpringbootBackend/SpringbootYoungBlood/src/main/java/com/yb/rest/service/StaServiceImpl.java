@@ -19,6 +19,21 @@ public class StaServiceImpl implements IStaService{
 	public List<Click> getDateList(Map map) {
 		return repo.getDateList(map);
 	}
+
+	@Override
+	public List<Integer> selectAllNationIdxs(String username) {
+		return repo.selectAllNationIdxs(username);
+	}
+
+	@Override
+	public int getClickSum(int nationIdx) {
+		return repo.getClickSum(nationIdx);
+	}
+
+	@Override
+	public int getQrSum(int nationIdx) {
+		return repo.getQrSum(nationIdx);
+	}
 	
 	
 }
