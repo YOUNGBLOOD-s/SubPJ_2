@@ -58,7 +58,7 @@ public class ChatbotController {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
 			sb.append(li.get(i).getKo_name()).append("\n");
-			sb.append("https://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
+			sb.append("http://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
 		}
 		map.put("result", sb);
 		return map;
@@ -72,7 +72,7 @@ public class ChatbotController {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
 			sb.append(li.get(i).getKo_name()).append("\n");
-			sb.append("https://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
+			sb.append("http://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
 		}
 		map.put("result", sb);
 		return map;
@@ -87,7 +87,7 @@ public class ChatbotController {
 		for (int i = 0; i < li.size(); i++) {
 			sb.append(li.get(i).getKo_name()).append("\n");
 			System.out.println(li.get(i).getKo_name());
-			sb.append("https://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
+			sb.append("http://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
 		}
 		map.put("result", sb);
 		return map;
@@ -101,7 +101,7 @@ public class ChatbotController {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
 			sb.append(li.get(i).getKo_name()).append("\n");
-			sb.append("https://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
+			sb.append("http://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
 		}
 		map.put("result", sb);
 		return map;
@@ -115,7 +115,7 @@ public class ChatbotController {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < li.size(); i++) {
 			sb.append(li.get(i).getKo_name()).append("\n");
-			sb.append("https://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
+			sb.append("http://i02c110.p.ssafy.io:8282/detail/" + li.get(i).getIdx()).append("\n");
 		}
 		map.put("result", sb);
 		return map;
@@ -130,7 +130,7 @@ public class ChatbotController {
 		for (int i = 0; i < li.size(); i++) {
 			Nation tmp = nationSer.getNationdetail(Integer.parseInt(li.get(i).getNation()));
 			sb.append(tmp.getKo_name()).append("\n");
-			sb.append("https://i02c110.p.ssafy.io:8282/detail/" + tmp.getIdx()).append("\n");
+			sb.append("http://i02c110.p.ssafy.io:8282/detail/" + tmp.getIdx()).append("\n");
 		}
 		map.put("result", sb);
 		return map;
@@ -173,7 +173,7 @@ public class ChatbotController {
 		sb.append("출발 일자: "+s_dateLi.get(0).getS_date()).append("\n");
 		sb.append("도착 일자: "+s_dateLi.get(0).getF_date()).append("\n\n");
 		
-		sb.append("https://i02c110.p.ssafy.io:8282/detail/"+s_dateLi.get(0).getIdx()).append("\n");
+		sb.append("http://i02c110.p.ssafy.io:8282/detail/"+s_dateLi.get(0).getIdx()).append("\n");
 		map.put("result", sb);
 		return map;
 	}
