@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getQrDetail, increaseQrView } from '../modules/qr';
 import Price from '../components/Detail/Price';
 import GoToMainButton from '../components/Detail/GoToMainButton';
+import { Helmet } from 'react-helmet-async';
 
 const DetailPageWrapper = styled.div`
   max-width: 1000px;
@@ -48,6 +49,13 @@ const DetailPage = ({ match, history, location }) => {
     <>
       {!loading && nation ? (
         <div>
+          <Helmet>
+            <title>{nation.name} - NEARBY AD</title>
+            <meta property="og:title" content={nation.name} />
+            <meta property="og:image" content={nation.thumbnail} />
+            <meta property="og:site_name" content="NEARBY AD" />
+            <meta property="og:description" content={nation.speech} />
+          </Helmet>
           <BasicInformation country={nation} />
           <DetailPageWrapper>
             <Price price={nation.price} />

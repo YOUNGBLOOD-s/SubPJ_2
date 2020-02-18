@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import ProductDetail from '../components/product/ProductDetail';
 import AdminAppbar from '../components/common/AdminAppbar';
 import MyPageAdmin from '../components/manage/MyPage/MyPageAdmin';
+import { Helmet } from 'react-helmet-async';
 
 const AdminPage = ({ history }) => {
   const { user } = useSelector(({ user }) => ({
@@ -21,6 +22,9 @@ const AdminPage = ({ history }) => {
 
   return (
     <div>
+      <Helmet>
+        <title>관리자패널 - NEARBY AD</title>
+      </Helmet>
       <ButtonAppbarContainer />
       <AdminAppbar />
       <Route component={MyProducts} path="/admin" exact />

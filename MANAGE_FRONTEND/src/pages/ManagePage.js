@@ -3,6 +3,7 @@ import ManageContainer from '../components/manage/ManageContainer';
 import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUser } from '../modules/user';
+import { Helmet } from 'react-helmet-async';
 
 const ManagePage = ({ history }) => {
   const { user } = useSelector(({ user }) => ({
@@ -24,6 +25,9 @@ const ManagePage = ({ history }) => {
 
   return (
     <>
+      <Helmet>
+        <title>광고관리 - NEARBY AD</title>
+      </Helmet>
       <ButtonAppbarContainer />
       <ManageContainer />
     </>
