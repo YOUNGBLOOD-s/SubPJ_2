@@ -66,10 +66,10 @@ const MyProducts = () => {
   return (
     <MyProductsWrapper>
       <component.Grid container>
-        <component.Grid item xs={10}>
+        <component.Grid item xs={6}>
           <TitleBar>광고 목록</TitleBar>
         </component.Grid>
-        <component.Grid item xs={2}>
+        <component.Grid item xs={6}>
           <AddProductLink>광고 추가</AddProductLink>
         </component.Grid>
       </component.Grid>

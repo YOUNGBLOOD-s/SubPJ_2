@@ -13,6 +13,7 @@ const MyFormBlcok = styled.div`
   margin-top: 4rem;
   max-width: 500px;
   height: 100%;
+  padding:1rem;
 `;
 
 const StyledTextField = withStyles({
