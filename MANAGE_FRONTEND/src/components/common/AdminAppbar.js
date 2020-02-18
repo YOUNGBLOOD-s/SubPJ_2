@@ -24,7 +24,6 @@ const AdminAppbar = () => {
       <LinkWrapper>
         <StyledLink to="/admin">광고목록</StyledLink>
         <StyledLink to="/admin/users">유저관리</StyledLink>
-        <StyledLink to="/admin/add">광고추가</StyledLink>
       </LinkWrapper>
     </AppBarWrapper>
   );

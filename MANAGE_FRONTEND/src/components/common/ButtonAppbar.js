@@ -37,22 +37,19 @@ const ButtonAppBar = ({ user, onLogout }) => {
           </component.Typography>
           {user ? (
             <>
-              <component.Typography className={classes.welcome}>
-                환영합니다. {user.username}님
-              </component.Typography>
+              <component.Typography
+                className={classes.welcome}
+              ></component.Typography>
               {user.username === 'admin' ? (
                 <Link to="/admin">
                   <component.Button className={classes.button} color="inherit">
-                    <span role="img" aria-label="img">
-                      😎
-                    </span>
-                    ADMINPAGE
+                    {user.username}
                   </component.Button>
                 </Link>
               ) : (
                 <Link to="/manage">
                   <component.Button className={classes.button} color="inherit">
-                    내 광고관리
+                    {user.username}
                   </component.Button>
                 </Link>
               )}
