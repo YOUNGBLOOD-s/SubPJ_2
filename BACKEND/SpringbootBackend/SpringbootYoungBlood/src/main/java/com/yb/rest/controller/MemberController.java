@@ -1,9 +1,13 @@
 package com.yb.rest.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,52 +58,68 @@ public class MemberController {
         String jwt = "";
         try {
 			String key = GetKEY.getKey();
-			Date exDate = new Date(System.currentTimeMillis() + 60000*30);
+			Date exDate = new Date();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(exDate);
+			calendar.add(Calendar.MINUTE,30);
+			exDate = calendar.getTime();
+			
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss (z Z)");
+			TimeZone time = TimeZone.getTimeZone("Asia/Seoul");
+			df.setTimeZone(time);
+			String expstring = df.format(exDate);
+			System.out.println("아래 토큰 만료 시간을 안내해 드립니다 => " + expstring);
+			Date calculatedexDate = calendar.getTime();
+			
+			
 			Map<String, Object> headers = new HashMap<>();
 			headers.put("typ", "JWT");
 			headers.put("alg", "HS256");
 
 			Map<String, Object> payloads = new HashMap<>();
-			Date now = new Date();
-		
-			now.setTime(now.getTime());
-
-			payloads.put("exp", exDate);
+			payloads.put("exp", expstring);
 			payloads.put("username", username);
 
 			jwt = Jwts.builder()
 					.setHeader(headers)
 					.setClaims(payloads)
-					.setExpiration(exDate)
+					.setExpiration(calculatedexDate)
 					.signWith(SignatureAlgorithm.HS256, key.getBytes()).compact();
 			
-		} catch(Exception e) {
-			System.out.println("너 !!!! 또!!!!!!!!!! 키 확인 안 했지????????");
+			System.out.println(jwt);
+			System.out.println("토큰 생성 완료!");
+		}
+        catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println(jwt);
-		System.out.println("토큰 생성 완료!");
-		System.out.println("==============");
+        System.out.println("==============");
 		return jwt;
 	}
 	
 	
 	public static String verification_(String token) {
-        String resultMsg = "";
+        if(token=="") return "notfound";
+		String resultMsg = "";
 		try {
 			Jwts.parser().setSigningKey(GetKEY.getKey().getBytes()).parseClaimsJws(token).getBody();
 			resultMsg = "ok";
 		} catch(ExpiredJwtException jw) {
 			resultMsg = "expiredTokenDate";
 		} catch(Exception e) {
-			System.out.println("너 !!!! 또!!!!!!!!!! 키 확인 안 했지????????");
-			System.out.println(e.getMessage());
 			resultMsg = "exception";
 		}
-        System.out.println("==============");
 		return resultMsg;
 	}
 	
+	public static Claims verification_c(String token) {
+		Claims c = null;
+		try {
+			c = Jwts.parser().setSigningKey(GetKEY.getKey().getBytes()).parseClaimsJws(token).getBody();
+		} catch(ExpiredJwtException jw) {
+		} catch(Exception e) {
+		}
+		return c;
+	}
 	
 	
 	/** Claims 객체 */
@@ -112,9 +132,14 @@ public class MemberController {
 					.setSigningKey(GetKEY.getKey().getBytes())
 					.parseClaimsJws(token)
 					.getBody();
+				System.out.println("토큰 이상 없음");
+			} else if(resultMsg.equals("notfound") || resultMsg.equals("exception")) {
+				System.out.println("token이 없거나, 잘못된 접근입니다.");
+			} else if(resultMsg.equals("expiredTokenDate")) {
+				System.out.println("토큰 만료");
 			}
 		} catch(Exception e) {
-			System.out.println("verification() error");
+			System.out.println("verification() Exception");
 		}
 		return c;
 	}
@@ -164,8 +189,27 @@ public class MemberController {
 			String realpassword_256 = ser.getPassword(login.getUsername());
 			String inputpassword_256 = ser.getSHA256(login.getPassword());
 			if (realpassword_256.equals(inputpassword_256)) {
+				String jwt = createToken(login.getUsername());
+				
+				//토큰 만료시간
+				Claims c = verification(jwt);
+				Date expdate = c.getExpiration();
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss (z Z)");
+				TimeZone time = TimeZone.getTimeZone("Asia/Seoul");
+				df.setTimeZone(time);
+				String expstring = df.format(expdate);
+				
+				//현재시간
+				Date now = new Date();
+				DateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss (z Z)");
+				dayTime.setTimeZone(time);
+				String str = dayTime.format(now);
+				
 				msg.put("username", login.getUsername());
-				msg.put("token", createToken(login.getUsername()));
+				msg.put("token", jwt);
+				msg.put("expiration_Timeout", expstring);
+				msg.put("now", str);
+				
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK); // correct
 				System.out.println("로그인 성공!");
 			} else {
@@ -192,6 +236,7 @@ public class MemberController {
 		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = verification(token);
+			if(de==null) return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			msg.put("username", de.get("username"));
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch(Exception e) {
@@ -211,6 +256,7 @@ public class MemberController {
 		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = MemberController.verification(token);
+			if(de==null) return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			int customer = manser.getIdx(username);
@@ -240,6 +286,7 @@ public class MemberController {
 		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = MemberController.verification(token);
+			if(de==null) return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
 			String realpassword_256 = ser.getPassword(username);
