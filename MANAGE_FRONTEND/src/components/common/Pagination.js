@@ -26,6 +26,9 @@ const Pagination = ({ lastPage, setPage, currentPage }) => {
 
   const createPaging = () => {
     let comps = [];
+
+    // TODO: 10개 이상 넘어갈때 줄여서 보여주기
+
     for (let i = 1; i <= lastPage; i++) {
       comps.push(
         <PageItem active={i === currentPage} onClick={() => setPage(i)}>
