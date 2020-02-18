@@ -16,6 +16,25 @@ const MyFormBlcok = styled.div`
   height: 100%;
 `;
 
+const StyledTextField = withStyles({
+  root: {
+    marginBottom: '1rem',
+    // 포커스시 라벨 색상
+    '& label.Mui-focused': {
+      color: palette.teal[500],
+    },
+    '& .MuiOutlinedInput-root': {
+      // 기본 필드 보더 색상
+      '& fieldset': {
+        borderColor: 'black',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: palette.teal[600],
+      },
+    },
+  },
+})(component.TextField);
+
 const StyledButton = withStyles({
   root: {
     backgroundColor: palette.theme[400],

@@ -87,7 +87,7 @@ const MainAD = () => {
   const [datas, setDatas] = useState(null);
 
   const onDoubleClick = (id, index) => {
-    Axios.get('https://i02c110.p.ssafy.io:8887/api/click/' + id)
+    Axios.get('https://i02c110.p.ssafy.io:8887/api/ad/click/' + id)
       .then(res => console.log(res))
       .catch(err => console.log('Click Count 요청 실패!'));
     setPid(index);
