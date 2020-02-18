@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import component from '../../lib/material/component';
 
-const AddProductLinkWrapper = styled.div``;
+const AddProductLinkWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 
 const AddProductLink = ({ children }) => {
   return (

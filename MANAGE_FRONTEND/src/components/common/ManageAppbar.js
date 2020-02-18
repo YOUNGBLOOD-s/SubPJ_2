@@ -7,7 +7,7 @@ import { getCurrentUser } from '../../modules/user';
 
 const AppBarWrapper = styled.div`
   background-color: ${palette.grey[200]};
-  padding: 1rem;
+  padding: 0.5rem;
 `;
 
 const LinkWrapper = styled.div`
@@ -17,7 +17,13 @@ const LinkWrapper = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  margin-right: 1rem;
+  margin-right: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  :hover {
+    background-color: ${palette.grey[500]};
+    transition-duration: 0.5s;
+  }
 `;
 
 const ManageAppbar = () => {

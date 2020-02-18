@@ -93,8 +93,7 @@ const BasicInformation = ({ country }) => {
   return (
     <BasicInformationBlock>
       <ImageWrapper>
-        {/* FIXME: 썸네일 경로 변경되면 toLowerCase() 제거 */}
-        <StyledImg src={thumbnail.toLowerCase()} alt="썸네일" />
+        <StyledImg src={thumbnail} alt="썸네일" />
       </ImageWrapper>
       <TextWrapper>
         <StyledTitle>
