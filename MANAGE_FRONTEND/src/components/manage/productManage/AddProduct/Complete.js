@@ -117,7 +117,11 @@ const Complete = ({ classes, step, steps }) => {
             onClick={handleNextAndComplete}
             className={classes.button}
           >
-            {step === steps.length - 1 ? '완료' : '다음'}
+            {step === steps.length - 1
+              ? completed.routes && completed.images
+                ? '다음'
+                : '등록'
+              : '다음'}
           </component.Button>
         </component.Grid>
       </component.Grid>

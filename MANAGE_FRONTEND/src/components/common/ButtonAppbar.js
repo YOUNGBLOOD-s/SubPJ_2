@@ -1,87 +1,74 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
 import component from '../../lib/material/component';
 import palette from '../../lib/styles/palette';
+import Logo from './Logo';
+import styled from 'styled-components';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    backgroundColor: palette.theme[300],
-    color: 'white',
-  },
-  title: {
-    flexGrow: 1,
-  },
-  welcome: {
-    marginLeft: '0.5rem',
-  },
-  button: {
-    padding: 0,
-    marginLeft: '0.5rem',
-  },
-}));
+const NavBar = styled.div`
+  background-color: ${palette.theme[100]};
+`;
+
+const NavBarWrapper = styled.div`
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-right: 1rem;
+  a {
+    margin-right: 1rem;
+    :last-child {
+      margin-right: 0;
+    }
+  }
+`;
 
 const ButtonAppBar = ({ user, onLogout }) => {
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="inherit" className={classes.paper}>
-        <Toolbar>
-          <component.Typography variant="h6" className={classes.title}>
-            <Link to="/">NEARBY AD</Link>
-          </component.Typography>
+    <NavBar>
+      <NavBarWrapper>
+        <Link to="/">
+          <Logo />
+        </Link>
+        <ButtonWrapper>
           {user ? (
             <>
-              <component.Typography className={classes.welcome}>
-                환영합니다. {user.username}님
-              </component.Typography>
               {user.username === 'admin' ? (
                 <Link to="/admin">
-                  <component.Button className={classes.button} color="inherit">
-                    <span role="img" aria-label="img">
-                      😎
-                    </span>
-                    ADMINPAGE
+                  <component.Button color="inherit">
+                    {user.username}
                   </component.Button>
                 </Link>
               ) : (
                 <Link to="/manage">
-                  <component.Button className={classes.button} color="inherit">
-                    내 광고관리
+                  <component.Button color="inherit">
+                    {user.username}
                   </component.Button>
                 </Link>
               )}
 
-              <component.Button
-                className={classes.button}
-                color="inherit"
-                onClick={onLogout}
-              >
+              <component.Button color="inherit" onClick={onLogout}>
                 로그아웃
               </component.Button>
             </>
           ) : (
             <>
               <Link to="/register">
-                <component.Button className={classes.button} color="inherit">
-                  회원가입
-                </component.Button>
+                <component.Button color="inherit">회원가입</component.Button>
               </Link>
               <Link to="/login">
-                <component.Button className={classes.button} color="inherit">
-                  로그인
-                </component.Button>
+                <component.Button color="inherit">로그인</component.Button>
               </Link>
             </>
           )}
-        </Toolbar>
-      </AppBar>
-    </div>
+        </ButtonWrapper>
+      </NavBarWrapper>
+    </NavBar>
   );
 };
 

@@ -86,7 +86,6 @@ const SlideIcon = styled(Fab)`
 `;
 
 const BasicInformation = ({ country }) => {
-  console.log(country);
   const { name, thumbnail, en_name, temp, humid } = country;
   const onSlideClick = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });

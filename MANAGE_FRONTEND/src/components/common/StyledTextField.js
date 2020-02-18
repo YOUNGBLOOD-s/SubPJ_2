@@ -1,5 +1,5 @@
 import { withStyles } from '@material-ui/core/styles';
-import palette from '../../lib/styles/palette';
+// import palette from '../../lib/styles/palette';
 import component from '../../lib/material/component';
 
 const StyledTextField = withStyles({

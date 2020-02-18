@@ -71,8 +71,8 @@ const MonthForm = ({ nationId, update, data, setUpdating }) => {
           <div>
             <h4>해당 여행 상품의 온도 (℃)</h4>
             <component.Grid container spacing={1}>
-              {monthes.map(month => (
-                <component.Grid item xs={3} sm={2} md={1} key={month.idx}>
+              {monthes.map((month, idx) => (
+                <component.Grid item xs={3} sm={2} md={1} key={idx}>
                   <StyledTextField
                     label={`${month}월`}
                     variant="filled"
@@ -87,8 +87,8 @@ const MonthForm = ({ nationId, update, data, setUpdating }) => {
           </div>
           <h4>해당 여행 상품의 월별 습도 (%) </h4>
           <component.Grid container spacing={1}>
-            {monthes.map(month => (
-              <component.Grid item xs={3} sm={2} md={1} key={month.idx}>
+            {monthes.map((month, idx) => (
+              <component.Grid item xs={3} sm={2} md={1} key={idx}>
                 <StyledTextField
                   label={`${month}월`}
                   variant="filled"

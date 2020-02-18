@@ -4,26 +4,51 @@ import AuthForm from '../../components/auth/AuthForm';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import { withRouter } from 'react-router-dom';
 import { check } from '../../modules/user';
+import { useState } from 'react';
 
 const RegisterForm = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
-    form: auth.register,
-    auth: auth.auth,
-    authError: auth.authError,
-    user: user.user,
-  }));
+  const { form, auth, authError, user, loading } = useSelector(
+    ({ auth, user, loading }) => ({
+      form: auth.register,
+      auth: auth.auth,
+      authError: auth.authError,
+      user: user.user,
+      loading: loading['auth/REGISTER'],
+    }),
+  );
 
   const onChange = e => {
     const { name, value } = e.target;
     dispatch(changeField({ form: 'register', key: name, value }));
   };
 
+  const [error, setError] = useState(null);
+
   const onSubmit = e => {
     e.preventDefault();
     const { username, password, passwordConfirm, company } = form;
+    if (!password || !username || !passwordConfirm || !company) {
+      setError('모든 필드를 채워주세요.');
+      return;
+    }
     if (password !== passwordConfirm) {
-      // TODO : 오류처리
+      setError('비밀번호가 동일하지 않습니다.');
+      return;
+    }
+
+    if (username.length > 15) {
+      setError('아이디가 너무 깁니다. 아이디는 15자 이하입니다.');
+      return;
+    }
+
+    if (password.length > 30 || passwordConfirm.length > 30) {
+      setError('패스워드가 너무 깁니다. 패스워드는 30자 이하입니다.');
+      return;
+    }
+
+    if (company.length > 20) {
+      setError('회사명이 너무 깁니다. 회사명은 20자 이하입니다.');
       return;
     }
 
@@ -37,8 +62,10 @@ const RegisterForm = ({ history }) => {
   // auth 값 및 authError 값 중 무엇이 유효한지에 따른 작업을 한다.
   useEffect(() => {
     if (authError) {
-      console.log('오류 발생');
-      console.log(authError);
+      const { status } = authError.response;
+      if (status === 409) {
+        setError('이미 존재하는 아이디입니다.');
+      }
       return;
     }
     if (auth) {
@@ -66,7 +93,8 @@ const RegisterForm = ({ history }) => {
       onChange={onChange}
       onSubmit={onSubmit}
       form={form}
-      error={authError}
+      error={error}
+      loading={loading}
     />
   );
 };
