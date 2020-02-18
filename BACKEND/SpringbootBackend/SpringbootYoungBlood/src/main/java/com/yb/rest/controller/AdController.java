@@ -416,9 +416,9 @@ public class AdController {
 	}
 
 	/** 상담 완료/미완료 flag 값 swap */
-	@PutMapping("/counsel/completed/{idx}")
+	@PutMapping("/counsel/completed")
 	@ApiOperation(value="상담 완료 변수 swap")
-	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@RequestParam(value = "idx") int idx) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@RequestParam int idx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {

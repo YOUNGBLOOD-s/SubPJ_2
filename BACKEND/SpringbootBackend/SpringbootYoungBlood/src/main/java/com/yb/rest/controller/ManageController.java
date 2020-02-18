@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/man")
 public class ManageController {
 
 	@Autowired
@@ -53,8 +53,8 @@ public class ManageController {
 	// token =
 	// "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODA0NTU4MzY2ODQsInVzZXJuYW1lIjoiYWRtaW4ifQ.hstghy7DypqOI3wj2-7trxtpgps3VvzAvD1ri9deLl4";
 
-		/** 사용자 상품 전체보기 */
-	@GetMapping("/man/nation/list")
+	/** 사용자 상품 전체보기 */
+	@GetMapping("/nation/list")
 	@ApiOperation(value = "사용자 상품정보 리스트 조회")
 	public ResponseEntity<Map<String, Object>> nationList(@RequestHeader(value = "Authorization") String token,
 			@RequestParam("page") String page) {
@@ -125,7 +125,7 @@ public class ManageController {
 	}
 	
 	/** 사용자 상품 보기 서비스 */
-	@GetMapping("/man/nation/{idx}")
+	@GetMapping("/nation/{idx}")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
 	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -190,7 +190,7 @@ public class ManageController {
 	}
 
 	/** 사용자 상품 등록 */
-	@PostMapping("/man/nation/insert")
+	@PostMapping("/nation/insert")
 	@ApiOperation(value = "사용자 상품정보(nation)  등록")
 	public ResponseEntity<Map<String, Object>> nationInsert(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Nation nat) {
@@ -227,7 +227,7 @@ public class ManageController {
 	}
 
 	/** 사용자 상품 삭제 */
-	@DeleteMapping("/man/nation/delete/{idx}")
+	@DeleteMapping("/nation/delete/{idx}")
 	@ApiOperation(value = "사용자 상품정보(nation) 삭제 (cascade).")
 	public ResponseEntity<Map<String, Object>> nationDelete(@RequestHeader(value = "Authorization") String token,
 			@PathVariable("idx") String idx) {
@@ -255,7 +255,7 @@ public class ManageController {
 	}
 
 	/** 사용자 상품 수정 */
-	@PutMapping("/man/nation/update/{idx}")
+	@PutMapping("/nation/update/{idx}")
 	@ApiOperation(value = "사용자 상품정보(nation) 수정")
 	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Nation nat, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -294,7 +294,7 @@ public class ManageController {
 	}
 
 	/** 상품 월별정보 리스트 */
-	@GetMapping("/man/monthtb/list")
+	@GetMapping("/monthtb/list")
 	@ApiOperation(value = "상품 월별정보(month) 리스트")
 	public ResponseEntity<Map<String, Object>> monthInfo(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -326,7 +326,7 @@ public class ManageController {
 	}
 
 	/** 상품 월별정보 등록 */
-	@PostMapping("/man/monthtb/insert")
+	@PostMapping("/monthtb/insert")
 	@ApiOperation(value = "상품 월별정보(month) 등록")
 	public ResponseEntity<Map<String, Object>> monthInsert(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Monthtb montb) {
@@ -354,7 +354,7 @@ public class ManageController {
 	}
 
 	/** 상품 월별정보 수정 */
-	@PutMapping("/man/monthtb/update/{idx}")
+	@PutMapping("/monthtb/update/{idx}")
 	@ApiOperation(value = "상품 월별정보(month) 수정")
 	public ResponseEntity<Map<String, Object>> monthUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Monthtb montb, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -383,7 +383,7 @@ public class ManageController {
 	}
 
 	/** 상품 월별정보 삭제 */
-	@DeleteMapping("/man/monthtb/delete/{nation}")
+	@DeleteMapping("/monthtb/delete/{nation}")
 	@ApiOperation(value = "상품 월별정보(month) 삭제")
 	public ResponseEntity<Map<String, Object>> monthDelete(@RequestHeader(value = "Authorization") String token,
 			@PathVariable("nation") String nation) {
@@ -411,7 +411,7 @@ public class ManageController {
 	}
 
 	/** 콘텐츠 정보 조회하기 */
-	@GetMapping("/man/contents/list")
+	@GetMapping("/contents/list")
 	@ApiOperation(value = "상품 콘텐츠 정보(contents) 리스트 조회")
 	public ResponseEntity<Map<String, Object>> ContentsList(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -444,7 +444,7 @@ public class ManageController {
 	}
 
 	/** 콘텐츠 정보 추가하기 */
-	@PostMapping("/man/contents/add")
+	@PostMapping("/contents/add")
 	@ApiOperation(value = "상품 콘텐츠 정보(contents) 추가")
 	public ResponseEntity<Map<String, Object>> ContentsInsert(@RequestHeader(value = "Authorization") String token,
 			@RequestBody List<Route> route) {
@@ -473,7 +473,7 @@ public class ManageController {
 	}
 
 	/** 콘텐츠 정보 수정하기 */
-	@PutMapping("/man/contents/update/{idx}")
+	@PutMapping("/contents/update/{idx}")
 	@ApiOperation(value = "상품 콘텐츠 정보(contents) 수정")
 	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Route route, @PathVariable("idx") int idx) {
@@ -503,7 +503,7 @@ public class ManageController {
 	}
 
 	/** 콘텐츠 정보 삭제하기 */
-	@DeleteMapping("/man/contents/del/{idx}/{nation}")
+	@DeleteMapping("/contents/del/{idx}/{nation}")
 	@ApiOperation(value = "상품 콘텐츠 정보(contents) 삭제")
 	public ResponseEntity<Map<String, Object>> ContentsDelete(@RequestHeader(value = "Authorization") String token,
 			@PathVariable("idx") int idx, @PathVariable("nation") int nation) {
@@ -535,7 +535,7 @@ public class ManageController {
 	}
 
 	/** 이미지 정보 조회하기 */
-	@GetMapping("man/image/list")
+	@GetMapping("/image/list")
 	@ApiOperation(value = "상품 이미지정보(image) 리스트 조회")
 	public ResponseEntity<Map<String, Object>> imageList(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
@@ -566,7 +566,7 @@ public class ManageController {
 	}
 
 	/** 이미지 정보 추가 */
-	@PostMapping("/man/image/insert")
+	@PostMapping("/image/insert")
 	@ApiOperation(value = "상품 이미지정보(image) 추가")
 	public ResponseEntity<Map<String, Object>> imageInsert(@RequestHeader(value = "Authorization") String token,
 			@RequestBody List<Image> imgs) {
@@ -599,7 +599,7 @@ public class ManageController {
 	}
 
 	/** 이미지 정보 수정 */
-	@PutMapping("/man/image/update/{idx}")
+	@PutMapping("/image/update/{idx}")
 	@ApiOperation(value = "이미지 정보(image) 수정")
 	public ResponseEntity<Map<String, Object>> imageUpdate(@RequestHeader(value = "Authorization") String token,
 			@RequestBody Image img, @PathVariable("idx") int idx) {
@@ -629,7 +629,7 @@ public class ManageController {
 	}
 
 	/** 이미지 정보 삭제 */
-	@DeleteMapping("/man/image/delete/{idx}")
+	@DeleteMapping("/image/delete/{idx}")
 	@ApiOperation(value = "상품 이미지 정보(image) 삭제 ")
 	public ResponseEntity<Map<String, Object>> imageDelete(@RequestHeader(value = "Authorization") String token,
 			@PathVariable("idx") String idx) {
