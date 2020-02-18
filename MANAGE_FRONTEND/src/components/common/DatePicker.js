@@ -1,6 +1,5 @@
 import React from 'react';
 import koLocale from 'date-fns/locale/ko';
-import palette from '../../lib/styles/palette';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -11,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 const StyledDatePicker = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: palette.theme[200],
+      // color: palette.theme[200],
     },
   },
 })(KeyboardDatePicker);

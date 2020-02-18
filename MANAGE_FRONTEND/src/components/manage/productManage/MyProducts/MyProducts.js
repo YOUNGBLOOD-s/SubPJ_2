@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import LoadingBackdrop from '../../../common/LoadingBackdrop';
 import AddProductLink from '../../../common/AddProductLink';
 import palette from '../../../../lib/styles/palette';
+import Pagination from '../../../common/Pagination';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
@@ -36,12 +37,12 @@ const NoAdContent = styled.div`
 
 const MyProducts = () => {
   const [page, setPage] = useState(1);
-  const lastPage = 3;
   const dispatch = useDispatch();
-  const { ads, loading, error, user } = useSelector(
+  const { ads, loading, error, user, lastpage } = useSelector(
     ({ ads, loading, user }) => ({
       ads: ads.user_ads,
       error: ads.error,
+      lastpage: ads.user_ads_lastpage,
       loading: loading['ads/USER_AD_LIST'],
       user: user.user,
     }),
@@ -57,18 +58,6 @@ const MyProducts = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const increasePage = () => {
-    if (page !== lastPage) {
-      setPage(page + 1);
-    }
-  };
-
-  const decreasePage = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
 
   if (error) {
     return <div>{error.message}</div>;
@@ -108,28 +97,13 @@ const MyProducts = () => {
                   ))}
                 </component.Grid>
               </AdListWraaper>
-              <component.Grid container spacing={1}>
-                <component.Grid item xs={6}>
-                  <component.Button
-                    onClick={decreasePage}
-                    disabled={page === 1}
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                  >
-                    이전 페이지
-                  </component.Button>
-                </component.Grid>
-                <component.Grid item xs={6}>
-                  <component.Button
-                    onClick={increasePage}
-                    disabled={page === lastPage}
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                  >
-                    다음 페이지
-                  </component.Button>
+              <component.Grid container>
+                <component.Grid item xs={12}>
+                  <Pagination
+                    currentPage={page}
+                    setPage={setPage}
+                    lastPage={lastpage}
+                  />
                 </component.Grid>
               </component.Grid>
             </>

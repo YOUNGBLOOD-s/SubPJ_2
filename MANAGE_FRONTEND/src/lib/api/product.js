@@ -46,5 +46,5 @@ export const updateMonthtable = ({ id, form, token }) =>
     },
   );
 
-export const toggleCounsel = ({ id, form, token }) =>
-  client.put(`https://i02c110.p.ssafy.io:8887/api/counsel/completed/${id}`);
+export const toggleCounsel = ({ id }) =>
+  client.put(`https://i02c110.p.ssafy.io:8887/api/ad/counsel/completed/${id}`);

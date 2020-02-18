@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initializeStep } from '../../../../modules/stepper';
 import { initializeForm } from '../../../../modules/form';
 import styled from 'styled-components';
+import AddProductBar from './AddProductBar';
 
 const AddProductContainer = styled.div``;
 
@@ -14,7 +15,6 @@ const AddProductWrapper = styled.div`
 
 const AddProduct = ({ history }) => {
   const dispatch = useDispatch();
-  // TODO: 모든 단계가 완료되었다면 컴포넌트 시작시 초기화..
   useEffect(() => {
     dispatch(initializeStep());
     dispatch(initializeForm());
@@ -38,6 +38,7 @@ const AddProduct = ({ history }) => {
   return (
     <AddProductContainer>
       <AddProductWrapper>
+        <AddProductBar />
         <ProductStepper />
       </AddProductWrapper>
     </AddProductContainer>
