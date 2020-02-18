@@ -4,7 +4,7 @@ import palette from '../../lib/styles/palette';
 import Logo from '../common/Logo';
 
 const PosterWrapper = styled.div`
-  height: 30vh;
+  height: 95vh;
   background-color: ${palette.grey[300]};
   display: flex;
   flex-direction: column;
