@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import component from '../../lib/material/component';
 import StyledTextField from '../common/StyledTextField';
+import LoadingBackdrop from '../common/LoadingBackdrop';
 
 const AuthFormBlcok = styled.div`
   margin: 0 auto;
@@ -37,10 +38,17 @@ const Footer = styled.div`
   }
 `;
 
-const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
+const ErrorMessage = styled.div`
+  text-align: center;
+  margin-bottom: 1rem;
+  color: ${palette.red[600]};
+`;
+
+const AuthForm = ({ type, form, onChange, onSubmit, error, loading }) => {
   const text = textMap[type];
   return (
     <AuthFormBlcok>
+      {loading && <LoadingBackdrop loading={loading} />}
       <AuthFormWrapper onSubmit={onSubmit}>
         <StyledTextField
           label="아이디"
@@ -81,7 +89,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
             />
           </>
         )}
-        <p>{error ? error.message : ''}</p>
+        {error ? <ErrorMessage>{error}</ErrorMessage> : null}
         <StyledButton variant="contained" type="submit">
           {text}
         </StyledButton>

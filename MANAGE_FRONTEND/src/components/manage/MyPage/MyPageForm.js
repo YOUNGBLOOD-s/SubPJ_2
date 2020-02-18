@@ -104,7 +104,6 @@ const MyPageForm = ({ userInfo, setUserInfo, history }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(data.toJS());
     if (password !== passwordConfirm) {
       alert('비밀번호 확인이 일치하지 않습니다!');
       return;

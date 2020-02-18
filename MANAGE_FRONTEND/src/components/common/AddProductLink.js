@@ -9,7 +9,12 @@ const AddProductLink = ({ children }) => {
   return (
     <AddProductLinkWrapper>
       <Link to="/add">
-        <component.Button fullWidth color="secondary" variant="contained">
+        <component.Button
+          size="small"
+          fullWidth
+          color="secondary"
+          variant="contained"
+        >
           {children}
         </component.Button>
       </Link>

@@ -62,7 +62,7 @@ const ScheduleWrapper = styled.div`
 `;
 
 const AdItem = ({ ad }) => {
-  const { name, speech, price, en_name, idx: id, image, s_date, f_date } = ad;
+  const { name, en_name, idx: id, image, s_date, f_date } = ad;
 
   return (
     <AdItemBlock>

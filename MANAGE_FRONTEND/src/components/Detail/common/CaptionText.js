@@ -6,7 +6,7 @@ const StyledText = styled.div`
   font-size: 1rem;
   color: ${palette.theme[200]};
   font-family: 'Noto Sans KR', sans-serif;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0 1rem 0;
 `;
 
 const CaptionText = ({ children }) => {

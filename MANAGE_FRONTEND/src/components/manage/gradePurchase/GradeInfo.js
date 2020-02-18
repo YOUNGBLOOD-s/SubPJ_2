@@ -63,26 +63,26 @@ const DescriptionContent = styled.div`
   line-height: 2.5rem;
 `;
 
-const MobileDescriptionContent = styled.div`
-  line-height: 6rem;
-  font-size: 1.1rem;
-  @media only screen and (max-width: 1430px) {
-    line-height: 4rem;
-    font-size: 90%;
-  }
-  @media only screen and (max-width: 1300px) {
-    line-height: 3rem;
-    font-size: 87%;
-  }
-  @media only screen and (max-width: 1060px) {
-    line-height: 2rem;
-    font-size: 85%;
-  }
-  @media only screen and (max-width: 960px) {
-    font-size: 1.1rem;
-    line-height: 3rem;
-  }
-`;
+// const MobileDescriptionContent = styled.div`
+//   line-height: 6rem;
+//   font-size: 1.1rem;
+//   @media only screen and (max-width: 1430px) {
+//     line-height: 4rem;
+//     font-size: 90%;
+//   }
+//   @media only screen and (max-width: 1300px) {
+//     line-height: 3rem;
+//     font-size: 87%;
+//   }
+//   @media only screen and (max-width: 1060px) {
+//     line-height: 2rem;
+//     font-size: 85%;
+//   }
+//   @media only screen and (max-width: 960px) {
+//     font-size: 1.1rem;
+//     line-height: 3rem;
+//   }
+// `;
 
 const GradeInfo = () => {
   const classes = useStyles();
