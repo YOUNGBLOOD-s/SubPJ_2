@@ -23,7 +23,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
+@RestController
+@RequestMapping("/api")
 public class SpeechController {
 
 	private static final String BUCKET_NAME = "nearbyad";
