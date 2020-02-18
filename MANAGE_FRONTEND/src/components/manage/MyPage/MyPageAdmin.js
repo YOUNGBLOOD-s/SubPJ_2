@@ -33,6 +33,7 @@ const MyPageAdmin = () => {
       .catch(err => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const MyPageAdmin = () => {
 
       setState(prevState => {
         const data = [...prevState.data];
+        // eslint-disable-next-line array-callback-return
         data.map((item, index) => {
           data[index].password = '';
         });

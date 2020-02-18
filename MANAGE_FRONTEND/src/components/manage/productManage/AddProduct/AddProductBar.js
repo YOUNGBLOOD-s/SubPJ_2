@@ -2,7 +2,7 @@ import React from 'react';
 import component from '../../../../lib/material/component';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { initializeStep } from '../../../../modules/stepper';
 import { initializeForm } from '../../../../modules/auth';
 

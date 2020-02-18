@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import MaterialCard from '../../../common/MaterialCard';
 import component from '../../../../lib/material/component';
 import { prevStep, nextStep } from '../../../../modules/stepper';
-import palette from '../../../../lib/styles/palette';
 import AlertDialog from '../../../common/AlertDialog';
 
 const ImageForm = ({ type }) => {
