@@ -6,6 +6,10 @@ import component from '../../../lib/material/component';
 import { Map, List } from 'immutable';
 import axios from 'axios';
 import StyledTextField from '../../common/StyledTextField';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { dispatch } from '../../../../node_modules/rxjs/internal/observable/range';
+import { getCurrentUser } from '../../../modules/user';
 
 const MyFormBlcok = styled.div`
   margin: 0 auto;
@@ -39,6 +43,10 @@ const Footer = styled.div`
 const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
   const form = useRef(null);
 
+  const { member } = useSelector(({ user }) => ({
+    member: user.member,
+  }));
+
   const handleClick = () => {
     setOpen(true);
   };
@@ -68,6 +76,12 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
 
   return (
     <MyFormBlcok>
+      {member && (
+        <div>
+          <h1>{member.username}</h1>
+          <h1>{member.grade}</h1>
+        </div>
+      )}
       <MyFormWrapper onSubmit={onSubmit}>
         <StyledTextField
           label="비밀번호"
