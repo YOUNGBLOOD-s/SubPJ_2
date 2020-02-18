@@ -1,4 +1,4 @@
-import React, { PureComponent, useState, useEffect } from 'react';
+import React from 'react';
 import {
   AreaChart,
   Area,
@@ -7,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
 } from 'recharts';
-import axios from 'axios';
 import LoadingBackdrop from '../../common/LoadingBackdrop';
 
 const Example = ({ data }) => {

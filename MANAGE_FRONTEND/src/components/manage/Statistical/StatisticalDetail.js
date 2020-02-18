@@ -28,7 +28,6 @@ const StatisticalDetail = ({ history }) => {
     axios
       .get('https://i02c110.p.ssafy.io:8887/api/statistics/3hour')
       .then(res => {
-        console.log(res.data.list);
         setData(res.data.list);
       })
       .catch(err => console.log(err));

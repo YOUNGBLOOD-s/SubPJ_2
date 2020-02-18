@@ -34,7 +34,6 @@ const StatisticalBar = ({ setData }) => {
       axios
         .get('https://i02c110.p.ssafy.io:8887/api/statistics/3hour')
         .then(res => {
-          console.log(res.data.list);
           setData(res.data.list);
         })
         .catch(err => console.log(err));
@@ -42,7 +41,6 @@ const StatisticalBar = ({ setData }) => {
       axios
         .get('https://i02c110.p.ssafy.io:8887/api/statistics/15day')
         .then(res => {
-          console.log(res.data.list);
           setData(res.data.list);
         })
         .catch(err => console.log(err));
@@ -50,7 +48,6 @@ const StatisticalBar = ({ setData }) => {
       axios
         .get('https://i02c110.p.ssafy.io:8887/api/statistics/1month')
         .then(res => {
-          console.log(res.data.list);
           setData(res.data.list);
         })
         .catch(err => console.log(err));
