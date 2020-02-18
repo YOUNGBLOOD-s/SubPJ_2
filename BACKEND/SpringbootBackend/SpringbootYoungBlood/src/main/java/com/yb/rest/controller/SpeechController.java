@@ -22,14 +22,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Date;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.ApiOperation;
 
 public class SpeechController {
 
@@ -74,7 +67,7 @@ public class SpeechController {
 
 				// 랜덤한 이름으로 mp3 파일 생성
 				// String tempname = Long.valueOf(new Date().getTime()).toString();
-				String filepath = "C:\\SSAFY\\" + idx + ".mp3";
+				String filepath = "/home/ubuntu/NEARBYAD/backend/speech/" + idx + ".mp3";
 				File f = new File(filepath);
 				f.createNewFile();
 				OutputStream outputStream = new FileOutputStream(f);
