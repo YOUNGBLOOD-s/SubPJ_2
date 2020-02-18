@@ -57,7 +57,7 @@ public class AdController {
 
 	@ExceptionHandler(Exception.class)
 	public void ExceptionMethod(Exception e) {
-
+		
 	}
 
 	/** 나라 상세정보 조회 */
@@ -416,9 +416,9 @@ public class AdController {
 	}
 
 	/** 상담 완료/미완료 flag 값 swap */
-	@PutMapping("/counsel/completed")
+	@GetMapping("/counsel/completed/{idx}")
 	@ApiOperation(value="상담 완료 변수 swap")
-	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@RequestParam int idx) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> updateCounselflag(@PathVariable int idx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
