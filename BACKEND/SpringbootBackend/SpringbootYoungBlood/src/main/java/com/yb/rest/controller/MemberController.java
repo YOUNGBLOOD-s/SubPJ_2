@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +27,7 @@ import com.yb.rest.service.IMemService;
 import com.yb.rest.vo.Member;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.swagger.annotations.ApiOperation;
@@ -54,6 +54,7 @@ public class MemberController {
         String jwt = "";
         try {
 			String key = GetKEY.getKey();
+			Date exDate = new Date(System.currentTimeMillis() + 60000*30);
 			Map<String, Object> headers = new HashMap<>();
 			headers.put("typ", "JWT");
 			headers.put("alg", "HS256");
@@ -63,13 +64,15 @@ public class MemberController {
 		
 			now.setTime(now.getTime());
 
-			payloads.put("exp", now);
+			payloads.put("exp", exDate);
 			payloads.put("username", username);
 
 			jwt = Jwts.builder()
 					.setHeader(headers)
 					.setClaims(payloads)
+					.setExpiration(exDate)
 					.signWith(SignatureAlgorithm.HS256, key.getBytes()).compact();
+			
 		} catch(Exception e) {
 			System.out.println("너 !!!! 또!!!!!!!!!! 키 확인 안 했지????????");
 			System.out.println(e.getMessage());
@@ -80,22 +83,39 @@ public class MemberController {
 		return jwt;
 	}
 	
-	/** 토큰 검증 */
-	public static Claims verification(String token) {
-        System.out.println("토큰을 검증할게요");
-        Claims c = null;
-        try {
-			c = Jwts.parser()
-					.setSigningKey(GetKEY.getKey().getBytes())
-					.parseClaimsJws(token)
-					.getBody();
+	
+	public static String verification_(String token) {
+        String resultMsg = "";
+		try {
+			Jwts.parser().setSigningKey(GetKEY.getKey().getBytes()).parseClaimsJws(token).getBody();
+			resultMsg = "ok";
+		} catch(ExpiredJwtException jw) {
+			resultMsg = "expiredTokenDate";
 		} catch(Exception e) {
 			System.out.println("너 !!!! 또!!!!!!!!!! 키 확인 안 했지????????");
 			System.out.println(e.getMessage());
+			resultMsg = "exception";
 		}
-        System.out.println("검증 객체를 보내드립니다.");
         System.out.println("==============");
-
+		return resultMsg;
+	}
+	
+	
+	
+	/** Claims 객체 */
+	public static Claims verification(String token) {
+		Claims c = null;
+		try {
+			String resultMsg = verification_(token);
+			if(resultMsg.equals("ok")) {
+				c = Jwts.parser()
+					.setSigningKey(GetKEY.getKey().getBytes())
+					.parseClaimsJws(token)
+					.getBody();
+			}
+		} catch(Exception e) {
+			System.out.println("verification() error");
+		}
 		return c;
 	}
 	

@@ -10,6 +10,18 @@
 		from clicktb
 		where date <![CDATA[ >= ]]>#{target} AND date <![CDATA[ <= ]]> #{today};
 	</select>
-
 	
+	<select id="getnationIdxs" parameterType="String" resultType="int">
+	select idx
+	from nationtb
+	where customer = (select idx from membertb where username=#{username});
+	</select>
+	
+	<select id="getclicksum" parameterType="int" resultType="int">
+	select sum(click_cnt) from clicktb where nation=#{nationIdx};
+	</select>
+	
+	<select id="getqrsum" parameterType="int" resultType="int">
+	select sum(qr_cnt) from clicktb where nation=#{nationIdx};
+	</select>
 </mapper>
