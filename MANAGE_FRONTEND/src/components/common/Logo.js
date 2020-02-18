@@ -8,7 +8,7 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
 `;
 
 const SubTitle = withStyles({

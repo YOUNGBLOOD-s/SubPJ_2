@@ -123,9 +123,15 @@ const ProductDetail = ({ match, history }) => {
             {product.month ? (
               <Month month={product.month} user={user} />
             ) : (
-              <NoData>
-                <MonthForm nationId={id} />
-              </NoData>
+              <>
+                {user.username === 'admin' ? (
+                  <NoData>
+                    <MonthForm nationId={id} />
+                  </NoData>
+                ) : (
+                  <NoData>관리자에게 문의해주세요.</NoData>
+                )}
+              </>
             )}
           </MaterialCard>
 

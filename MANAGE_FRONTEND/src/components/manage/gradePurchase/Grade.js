@@ -1,9 +1,39 @@
 import React from 'react';
 import GradeCard from './GradeCard';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import GradeInfo from './GradeInfo';
 import styled from 'styled-components';
+
+const GradeWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem 0;
+  flex-wrap: wrap;
+
+  .card-wrapper {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    :last-child {
+      margin-right: 0;
+    }
+    @media (max-width: 600px) {
+      margin-right: 0;
+    }
+  }
+`;
+
+const Grade = () => {
+  return (
+    <GradeWrapper>
+      {gradeInfo.map((info, idx) => (
+        <div className="card-wrapper" key={idx}>
+          <GradeCard info={info} />
+        </div>
+      ))}
+    </GradeWrapper>
+  );
+};
+
+export default Grade;
 
 const gradeInfo = [
   {
@@ -28,60 +58,3 @@ const gradeInfo = [
     option: ['시간당 15회 광고 노출', '10개 광고 등록 가능'],
   },
 ];
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  bg: {
-    // background: 'linear-gradient(to bottom, transparent, #bdbdbd, black)',
-  },
-  bgtop: {
-    // background: '#f0f0f0',
-    // background: 'linear-gradient(to bottom, white, #eaeaea)',
-  },
-}));
-
-const HeaderText = styled.h1`
-  text-align: center;
-  font-weight: bolder;
-  font-size: 3rem;
-  margin: 0;
-  padding: 2rem;
-`;
-
-const Grade = () => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.bgtop}>
-      <HeaderText />
-      <Grid container className={classes.root}>
-        <Grid item xs={12}>
-          <Grid container justify="center" spacing={3}>
-            {gradeInfo.map(({ title, grade, price, image, option }) => {
-              return (
-                <Grid key={grade} item>
-                  <GradeCard
-                    image={process.env.PUBLIC_URL + image}
-                    title={title}
-                    grade={grade}
-                    price={price}
-                    option={option}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <div className={classes.bg}>
-        <HeaderText />
-        <GradeInfo />
-      </div>
-    </div>
-  );
-};
-
-export default Grade;

@@ -10,6 +10,8 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import reformDate from '../../lib/utill/reformDate';
 import DatePicker from '../common/DatePicker';
 import StyledTextField from '../common/StyledTextField';
+import isEmail from '../../lib/utill/isEmail';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const ReservationFormBlock = styled.div`
   padding: 1rem 0.5rem;
@@ -41,6 +43,11 @@ const CompleteText = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   margin: 1rem 0;
 `;
+
+const ageArray = [];
+for (let i = 10; i <= 120; i++) {
+  ageArray.push(i);
+}
 
 // 이하 컴포넌트
 
@@ -86,8 +93,18 @@ const ReservationForm = ({ nationId }) => {
       return;
     }
     // 이메일 검증
-    if (!form.email.includes('@')) {
+    if (!isEmail(form.email)) {
       setError({ ...error, email: true });
+      return;
+    }
+
+    if (form.text === '') {
+      setError({ ...error, text: true });
+      return;
+    }
+
+    if (form.name === '' || form.name.length > 20) {
+      setError({ ...error, name: true });
       return;
     }
 
@@ -159,18 +176,24 @@ const ReservationForm = ({ nationId }) => {
                   />
                 </component.Grid>
                 <component.Grid item xs={4}>
-                  {/* TODO: 기본값은 ? */}
                   <StyledTextField
                     id="age"
                     label="나이"
                     variant="outlined"
                     type="number"
                     name="age"
+                    select
                     fullWidth
                     value={form.age}
                     onChange={onChange}
                     error={error.age}
-                  />
+                  >
+                    {ageArray.map(value => (
+                      <MenuItem key={value} value={value}>
+                        {value}
+                      </MenuItem>
+                    ))}
+                  </StyledTextField>
                 </component.Grid>
               </component.Grid>
               <StyledTextField

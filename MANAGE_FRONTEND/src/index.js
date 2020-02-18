@@ -12,6 +12,7 @@ import rootReducer from './modules';
 import { rootSaga } from './modules/index';
 import { tempSetUser, check } from './modules/user';
 import dotenv from 'dotenv';
+import { HelmetProvider } from 'react-helmet-async';
 dotenv.config();
 
 const sagaMiddleware = createSagaMiddleware();
@@ -45,7 +46,9 @@ initKakao();
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),

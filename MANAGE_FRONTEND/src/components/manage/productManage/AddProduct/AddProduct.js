@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import AddProductBar from './AddProductBar';
 
 const AddProductContainer = styled.div`
+  padding: 3rem 0;
   height: 100%;
 `;
 

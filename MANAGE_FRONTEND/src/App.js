@@ -9,6 +9,7 @@ import ManagePage from './pages/ManagePage';
 import AddProduct from './components/manage/productManage/AddProduct/AddProduct';
 import Footer from './components/common/Footer';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet-async';
 
 const AppWrapper = styled.div`
   height: -webkit-fill-available;
@@ -23,6 +24,9 @@ const Content = styled.div`
 const App = () => {
   return (
     <AppWrapper>
+      <Helmet>
+        <title>네곁에 - NEARBY AD</title>
+      </Helmet>
       <Content>
         <Route component={MainPage} path="/" exact />
         <Route component={DetailPage} path="/detail/:id" />
