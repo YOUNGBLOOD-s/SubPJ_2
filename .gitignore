@@ -237,3 +237,10 @@ sketch
 
 .vscode/
 sftp.json
+
+
+FRONTEND/build/
+FRONTEND/cert/
+FRONTEND/fullchain.pem
+FRONTEND/privkey.pem
+MANAGE_FRONTEND/build/
