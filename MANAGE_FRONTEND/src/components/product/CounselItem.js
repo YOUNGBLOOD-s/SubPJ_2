@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import component from '../../lib/material/component';
@@ -25,7 +25,6 @@ const CounselItem = ({ counsel }) => {
 
   const dispatch = useDispatch();
   const onToggle = () => {
-    console.log(counsel, !completed);
     dispatch(
       toggleProductCounsel({
         id: idx,

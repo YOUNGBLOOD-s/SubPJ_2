@@ -6,7 +6,9 @@ import { initializeForm } from '../../../../modules/form';
 import styled from 'styled-components';
 import AddProductBar from './AddProductBar';
 
-const AddProductContainer = styled.div``;
+const AddProductContainer = styled.div`
+  height: 100%;
+`;
 
 const AddProductWrapper = styled.div`
   max-width: 1000px;

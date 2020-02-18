@@ -8,7 +8,6 @@ import component from '../../../../lib/material/component';
 import { prevStep, nextStep } from '../../../../modules/stepper';
 import palette from '../../../../lib/styles/palette';
 import AlertDialog from '../../../common/AlertDialog';
-import CancelButton from './CancelButton';
 
 const ImageForm = ({ type }) => {
   const { imageUrl } = useSelector(({ form }) => ({
@@ -35,14 +34,6 @@ const Dsecription = styled.div`
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 1rem;
-`;
-
-const ErrorMessage = styled.div`
-  border: 1px solid ${palette.red[300]};
-  padding: 1rem;
-  border-radius: 3px;
-  text-align: center;
-  color: ${palette.red[600]};
 `;
 
 const ImageAddForm = ({ classes, steps, step }) => {

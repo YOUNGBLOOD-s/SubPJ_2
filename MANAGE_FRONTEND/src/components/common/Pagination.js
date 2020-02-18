@@ -31,7 +31,7 @@ const Pagination = ({ lastPage, setPage, currentPage }) => {
 
     for (let i = 1; i <= lastPage; i++) {
       comps.push(
-        <PageItem active={i === currentPage} onClick={() => setPage(i)}>
+        <PageItem active={i === currentPage} onClick={() => setPage(i)} key={i}>
           {i}
         </PageItem>,
       );
