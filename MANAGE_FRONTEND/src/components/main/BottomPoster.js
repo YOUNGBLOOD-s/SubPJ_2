@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../common/Logo';
 import getImageUrl from '../../lib/utill/getImageUrl';
+import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 
 const PosterWrapper = styled.div`
   position: relative;
-  height: 95vh;
+  height: 100vh;
 `;
 
 const ImageWrapper = styled.div``;
 
 const StyledImage = styled.img`
   width: 100%;
-  height: 95vh;
+  height: 100vh;
   opacity: 0.3;
   object-fit: cover;
 `;
@@ -31,10 +31,10 @@ const TextWrapper = styled.div`
 `;
 
 const Text = styled.div`
-  font-family: 'Nanum Myeongjo', serif;
+  font-family: 'Handon3gyeopsal600g';
   font-weight: bold;
   margin-bottom: 1rem;
-  font-size: 3rem;
+  font-size: 1.8rem;
   @media (max-width: 600px) {
     font-size: 1.8rem;
   }
@@ -43,40 +43,35 @@ const Text = styled.div`
   }
 `;
 
-const SlideBtn = styled.div`
-  font-family: 'GmarketSansLight';
-  border: 2px solid black;
+const StyledLink = styled(Link)`
+  margin-top: 3rem;
+  font-family: 'Handon3gyeopsal600g';
+  background-color: ${palette.theme[200]};
   font-weight: bold;
-  border-radius: 1.5rem;
-  padding: 0.5rem 1.3rem;
-  margin-top: 2rem;
-  cursor: pointer;
+  font-size: 1.8rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: white;
   :hover {
-    background-color: ${palette.grey[200]};
+    background-color: ${palette.theme[400]};
     transition-duration: 0.5s;
   }
 `;
 
-const MainPoster = () => {
-  const onSlideClick = () => {
-    window.scrollTo({ top: window.innerHeight + 50, behavior: 'smooth' });
-  };
+const BottomPoster = () => {
   return (
     <PosterWrapper>
       <ImageWrapper>
-        <StyledImage src={getImageUrl('static', 'mainposter.jpg')} alt="" />
+        <StyledImage src={getImageUrl('static', 'bottomposter.jpg')} alt="" />
       </ImageWrapper>
       <TextWrapper>
-        <Text>마치 네 곁에 있는 것처럼,</Text>
-        <Text>나에게 딱 맞는 광고 플랫폼</Text>
-        <Logo />
-        <SlideBtn onClick={onSlideClick}>
-          <i className="fas fa-angle-double-down"></i>
-          {'  '}SLIDE
-        </SlideBtn>
+        <Text>광고 통계 및 매니지먼트,</Text>
+        <Text>사용자의 니즈를 채워주는 맞춤형 광고</Text>
+        <Text>지금 바로 시작하세요</Text>
+        <StyledLink to="/login">로그인</StyledLink>
       </TextWrapper>
     </PosterWrapper>
   );
 };
 
-export default MainPoster;
+export default BottomPoster;
