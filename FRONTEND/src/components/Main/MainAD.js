@@ -10,6 +10,9 @@ import { LazyImageProvider } from '../common/LazyImage/LazyImageContext';
 import LazyImage from '../common/LazyImage/LazyImage';
 import ClickNotice from '../common/ClickNotice';
 import Sound from 'react-sound';
+import getImageUrl from '../../lib/util/getImageUrl';
+import getSpeechUrl from '../../lib/util/getSpeechUrl';
+import LazySound from '../common/LazyImage/LazySound';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -141,7 +144,11 @@ const MainAD = () => {
                         </TitleWrapper>
                         <Content>{content}</Content>
                       </div>
-                      <LazyImage isQR={false} src={thumbnail} alt="" />
+                      <LazyImage
+                        isQR={false}
+                        src={getImageUrl('md', thumbnail)}
+                        alt=""
+                      />
                     </div>
                     <LazyImage
                       isQR={true}
@@ -150,15 +157,7 @@ const MainAD = () => {
                       alt=""
                     />
                     <ClickNotice />
-                    <Sound
-                      url="https://nearbyad.s3.ap-northeast-2.amazonaws.com/speech/31.mp3"
-                      playStatus={Sound.status.PLAYING}
-                      playFromPosition={300 /* in milliseconds */}
-                      onLoading={Sound.handleSongLoading}
-                      onPlaying={Sound.handleSongPlaying}
-                      onFinishedPlaying={Sound.handleSongFinishedPlaying}
-                      loop={true}
-                    />
+                    <LazySound src={getSpeechUrl(id)} />
                   </div>
                 );
               })}

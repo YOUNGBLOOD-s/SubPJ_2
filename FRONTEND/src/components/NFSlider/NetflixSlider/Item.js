@@ -4,13 +4,14 @@ import SliderContext from './context';
 import ShowDetailsButton from './ShowDetailsButton';
 import Mark from './Mark';
 import './Item.scss';
+import getImageUrl from '../../../lib/util/getImageUrl';
 
 const Item = ({ detail }) => (
   <SliderContext.Consumer>
     {({ onSelectSlide, currentSlide, elementRef }) => {
       const isActive = currentSlide && currentSlide.id === detail.id;
 
-      const path = detail.img;
+      const path = getImageUrl('sm', detail.img);
 
       return (
         <div

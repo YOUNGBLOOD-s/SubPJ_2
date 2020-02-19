@@ -3,6 +3,7 @@ import './Content.scss';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import OpacityIcon from '@material-ui/icons/Opacity';
 import styled from 'styled-components';
+import getImageUrl from '../../../lib/util/getImageUrl';
 
 const WeatherWrapper = styled.div`
   display: flex;
@@ -99,7 +100,7 @@ const Content = ({ detail }) => {
         <div
           className="content__background__image"
           style={{
-            backgroundImage: `url(${detail.img})`,
+            backgroundImage: `url(${getImageUrl('md', detail.img)})`,
           }}
         />
       </div>

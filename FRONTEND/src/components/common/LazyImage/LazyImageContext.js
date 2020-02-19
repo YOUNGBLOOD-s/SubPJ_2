@@ -5,7 +5,14 @@ import LazyLoad from 'vanilla-lazyload';
 const Context = createContext();
 
 // Add the image class name our LazyLoad plugin should look for
-const options = { elements_selector: ['.lazyImage__img', '.lazyImage__qr'] };
+const options = {
+  elements_selector: [
+    '.lazyImage__img',
+    '.lazyImage__qr',
+    '.lazySound',
+    '.lazySound__sound',
+  ],
+};
 
 export const LazyImageProvider = ({ children }) => {
   // Create the state that will hold the LazyLoad API
