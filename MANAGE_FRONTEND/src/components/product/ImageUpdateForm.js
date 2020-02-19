@@ -1,12 +1,15 @@
 import React from 'react';
 import ImageUploader from '../common/ImageUploader';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateProductImage } from '../../modules/product';
 import { useState } from 'react';
 import component from '../../lib/material/component';
 
 const ImageUpdateForm = ({ image, setUpdating }) => {
   const { idx: id, type, url, nation } = image;
+  const { en_name } = useSelector(({ product }) => ({
+    en_name: product.product.nation.en_name,
+  }));
 
   const [form, setForm] = useState({
     nation,
@@ -35,6 +38,7 @@ const ImageUpdateForm = ({ image, setUpdating }) => {
           imageUrl={form.url}
           setImageUrl={setImageUrl}
           inputId={`image-${type}`}
+          en_name={en_name}
         />
       </component.Grid>
       <component.Grid item xs={6}>

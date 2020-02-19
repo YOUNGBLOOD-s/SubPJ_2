@@ -27,7 +27,7 @@ const StyledInput = styled.input`
   display: none;
 `;
 
-const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
+const ImageUploader = ({ imageUrl, setImageUrl, inputId, en_name }) => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const UploadInput = useRef(null);
@@ -49,7 +49,7 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
     });
 
     const timestamp = new Date().getTime();
-    const photoKey = `uploaded/${timestamp + file.name}`;
+    const photoKey = `${en_name}_${timestamp + file.name}`;
     const uploaded = new AWS.S3.ManagedUpload({
       params: {
         Bucket: albumBucketName,
@@ -62,8 +62,10 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
     const promise = uploaded.promise();
     promise
       .then(data => {
-        const { Location } = data;
-        setImageUrl(Location);
+        console.log(data);
+        const { key } = data;
+        console.log(key);
+        setImageUrl(key);
         setLoading(false);
       })
       .catch(err => {

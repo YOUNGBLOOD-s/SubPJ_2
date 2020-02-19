@@ -3,7 +3,7 @@ import component from '../../../../lib/material/component';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { nextStep, prevStep } from '../../../../modules/stepper';
 import axios from 'axios';
 import { selectNation } from '../../../../modules/form';
@@ -124,7 +124,9 @@ const NationAddForm = ({ classes, steps, step }) => {
         .then(res => {
           // TODO: 이 인덱스를 리덕스로 글로벌 보관해서 사용해야함
           const { nationidx } = res.data;
-          dispatch(selectNation(nationidx));
+          dispatch(
+            selectNation({ nationId: nationidx, en_name: product.en_name }),
+          );
           dispatch(nextStep());
         })
         .catch(err => {
@@ -174,14 +176,14 @@ const NationAddForm = ({ classes, steps, step }) => {
   return (
     <StyledForm>
       <component.Grid container spacing={1}>
-        <component.Grid item xs={6}>
+        <component.Grid item xs={12} sm={6}>
           <DatePicker
             label="여행 출발 일자"
             onChange={handleSDateChange}
             value={product.s_date}
           />
         </component.Grid>
-        <component.Grid item xs={6}>
+        <component.Grid item xs={12} sm={6}>
           <DatePicker
             label="여행 도착 일자"
             onChange={handleFDateChange}

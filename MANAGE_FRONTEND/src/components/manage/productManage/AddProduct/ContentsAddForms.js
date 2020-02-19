@@ -41,7 +41,7 @@ const CenteredBox = styled.div`
   align-items: center;
 `;
 
-const ContentsAddForm = ({ nationId }) => {
+const ContentsAddForm = ({ nationId, en_name }) => {
   const initialState = {
     day: '1', // 컨텐츠의 일자
     seq: '1', // 순서
@@ -131,6 +131,7 @@ const ContentsAddForm = ({ nationId }) => {
                   imageUrl={content.image}
                   setImageUrl={setImageUrl}
                   inputId={`content-image-${content.day}-${content.seq}`}
+                  en_name={en_name}
                 />
               </component.Grid>
             </component.Grid>
@@ -242,17 +243,21 @@ const ContentsAddForm = ({ nationId }) => {
 };
 
 const ContentAddForms = ({ classes, steps, step }) => {
-  const { nationId, routes } = useSelector(({ form }) => ({
+  const { nationId, routes, en_name } = useSelector(({ form }) => ({
     nationId: form.nationId,
     routes: form.routes,
+    en_name: form.en_name,
   }));
   const [error, setError] = useState(false);
   const [contentForms, setContentForms] = useState([
-    <ContentsAddForm nationId={nationId} />,
+    <ContentsAddForm nationId={nationId} en_name={en_name} />,
   ]);
 
   const addForm = () => {
-    setContentForms([...contentForms, <ContentsAddForm nationId={nationId} />]);
+    setContentForms([
+      ...contentForms,
+      <ContentsAddForm nationId={nationId} en_name={en_name} />,
+    ]);
   };
 
   const dispatch = useDispatch();

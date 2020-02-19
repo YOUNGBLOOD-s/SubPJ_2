@@ -26,8 +26,11 @@ const [
 ] = createRequestActionTypes('form/ADD_IMAGES_LIST');
 
 export const initializeForm = createAction(INITIALIZE_FORM);
-export const selectNation = createAction(SELECT_NATION, nationId => nationId);
-export const resetNation = createAction(RESET_NATION, nationId => nationId);
+export const selectNation = createAction(
+  SELECT_NATION,
+  ({ nationId, en_name }) => ({ nationId, en_name }),
+);
+export const resetNation = createAction(RESET_NATION);
 export const addRoute = createAction(ADD_ROUTE, route => route);
 export const removeRoute = createAction(REMOVE_ROUTE, route => route);
 export const selectImageNation = createAction(
@@ -58,6 +61,7 @@ export function* formSaga() {
 
 const initialState = {
   nationId: null,
+  en_name: '',
   routes: [],
   images: [
     { nation: '', type: 1, url: '' },
@@ -78,13 +82,15 @@ const initialState = {
 const form = handleActions(
   {
     [INITIALIZE_FORM]: () => initialState,
-    [SELECT_NATION]: (state, { payload: id }) => ({
+    [SELECT_NATION]: (state, { payload: { nationId, en_name } }) => ({
       ...state,
-      nationId: id,
+      nationId,
+      en_name,
     }),
     [RESET_NATION]: state => ({
       ...state,
       nationId: null,
+      en_name: '',
     }),
     [ADD_ROUTE]: (state, { payload: route }) => {
       let new_routes = state.routes;
