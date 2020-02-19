@@ -228,6 +228,7 @@ public class ManageController {
 					last = Math.max(last, Integer.parseInt(list.get(i).getIdx()));
 				}
 				msg.put("nationidx", last);
+				msg.put("en_name", nat.getEn_name());
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 				SpeechController.tts(nat.getSpeech(), last+"");
 				
@@ -235,6 +236,9 @@ public class ManageController {
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			}
 		} catch (Exception e) {
+			if(e.getMessage().contains("Duplicate")) {
+				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.CONFLICT);
+			}
 			msg.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -474,8 +478,12 @@ public class ManageController {
 			int grade = ser.searchGrade(customer);
 
 			if (grade > 0) {
-				for (int i = 0; i < route.size(); i++)
+				for (int i = 0; i < route.size(); i++) {
+					String path = route.get(i).getImage();
+					String newpath = path.split("_")[0] + "/" + path.split("_")[1] + "_" +path.split("_")[2];
+					route.get(i).setImage(newpath);
 					adser.insertRoutes(route.get(i));
+				}
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -504,6 +512,9 @@ public class ManageController {
 
 			if (grade == 1) {
 				route.setIdx(idx+"");
+				String path = route.getImage();
+				String newpath = path.split("_")[0] + "/" + path.split("_")[1] + "_" +path.split("_")[2];
+				route.setImage(newpath);
 				adser.updateRoutes(route);
 				msg.put("inputContents", route);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -593,13 +604,15 @@ public class ManageController {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			System.out.println("상품 이미지 정보 추가! user => " + username);
-			System.out.println(imgs);
+			
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
 
 			if (grade > 0) {
 				for (int i = 0; i < imgs.size(); i++) {
+					String path = imgs.get(i).getUrl();
+					String newpath = path.split("_")[0] + "/" + path.split("_")[1] + "_" +path.split("_")[2];
+					imgs.get(i).setUrl(newpath);
 					ser.insertImagetb(imgs.get(i));
 				}
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -630,6 +643,10 @@ public class ManageController {
 
 			if (grade == 1) {
 				img.setIdx(idx+"");
+				String path = img.getUrl();
+				String newpath = path.split("_")[0] + "/" + path.split("_")[1] + "_" +path.split("_")[2];
+				img.setUrl(newpath);
+				
 				ser.updateImagetb(img);
 				msg.put("update", img);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
