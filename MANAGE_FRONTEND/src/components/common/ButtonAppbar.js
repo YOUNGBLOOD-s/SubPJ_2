@@ -32,26 +32,13 @@ const ButtonAppBar = ({ user, onLogout }) => {
   return (
     <NavBar>
       <NavBarWrapper>
-        <Link to="/">
+        <Link to="/management">
           <Logo />
         </Link>
         <ButtonWrapper>
           {user ? (
             <>
-              {user.username === 'admin' ? (
-                <Link to="/admin">
-                  <component.Button color="inherit">
-                    {user.username}
-                  </component.Button>
-                </Link>
-              ) : (
-                <Link to="/manage">
-                  <component.Button color="inherit">
-                    {user.username}
-                  </component.Button>
-                </Link>
-              )}
-
+              <span>{user.username}</span>
               <component.Button color="inherit" onClick={onLogout}>
                 로그아웃
               </component.Button>

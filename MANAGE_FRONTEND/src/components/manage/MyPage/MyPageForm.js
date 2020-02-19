@@ -7,9 +7,17 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
 const MyFormBlcok = styled.div`
-  margin: 0 auto;
-  margin-top: 4rem;
-  max-width: 500px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 2rem;
+  }
 `;
 
 const StyledTextField = withStyles({
@@ -123,6 +131,7 @@ const MyPageForm = ({ userInfo, setUserInfo, history }) => {
 
   return (
     <MyFormBlcok>
+      <div className="title">나의 정보 수정</div>
       <MyFormWrapper onSubmit={onSubmit} ref={form}>
         <StyledTextField
           label="아이디"

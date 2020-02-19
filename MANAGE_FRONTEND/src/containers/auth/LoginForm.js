@@ -48,15 +48,18 @@ const LoginForm = ({ history }) => {
 
   useEffect(() => {
     if (authError) {
-      const { status } = authError.response;
-      if (status === 401) {
-        setError('아이디 또는 비밀번호가 올바르지 않습니다.');
-      }
+      if (authError.response) {
+        const { status } = authError.response;
+        if (status === 401) {
+          setError('아이디 또는 비밀번호가 올바르지 않습니다.');
+        }
 
-      if (status === 404) {
-        setError('존재하지 않는 사용자입니다.');
-      }
+        if (status === 404) {
+          setError('존재하지 않는 사용자입니다.');
+        }
 
+        return;
+      }
       return;
     }
     if (auth) {
@@ -67,7 +70,7 @@ const LoginForm = ({ history }) => {
 
   useEffect(() => {
     if (user) {
-      history.push('/');
+      history.push('/management');
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {

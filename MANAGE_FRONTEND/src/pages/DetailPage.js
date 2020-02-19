@@ -12,6 +12,7 @@ import { getQrDetail, increaseQrView } from '../modules/qr';
 import Price from '../components/Detail/Price';
 import GoToMainButton from '../components/Detail/GoToMainButton';
 import { Helmet } from 'react-helmet-async';
+import getImageUrl from '../lib/utill/getImageUrl';
 
 const DetailPageWrapper = styled.div`
   max-width: 1000px;
@@ -52,7 +53,10 @@ const DetailPage = ({ match, history, location }) => {
           <Helmet>
             <title>{nation.name} - NEARBY AD</title>
             <meta property="og:title" content={nation.name} />
-            <meta property="og:image" content={nation.thumbnail} />
+            <meta
+              property="og:image"
+              content={getImageUrl('sm', nation.thumbnail)}
+            />
             <meta property="og:site_name" content="NEARBY AD" />
             <meta property="og:description" content={nation.speech} />
           </Helmet>

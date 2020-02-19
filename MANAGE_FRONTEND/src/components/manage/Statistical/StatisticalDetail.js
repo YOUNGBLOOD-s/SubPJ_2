@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import Example from './Chart';
 import styled from 'styled-components';
 import StatisticalBar from './StatisticalBar';
@@ -10,20 +9,8 @@ const StatisticalDetailWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const StatisticalDetail = ({ history }) => {
+const StatisticalDetail = () => {
   const [data, setData] = useState(null);
-
-  const { member } = useSelector(({ user }) => ({
-    member: user.member,
-  }));
-
-  // grade 0일 때 등급 구매 페이지로 이동
-  useEffect(() => {
-    if (member && member.grade === 0) {
-      history.push('/manage/grade');
-    }
-  }, [member, history]);
-
   useEffect(() => {
     axios
       .get('https://i02c110.p.ssafy.io:8887/api/statistics/3hour')
@@ -35,6 +22,7 @@ const StatisticalDetail = ({ history }) => {
 
   return (
     <StatisticalDetailWrapper>
+      <h1>이제 곧 나의 광고 안으로 들어갈 컴포넌트입니다</h1>
       <StatisticalBar setData={setData} />
       <Example data={data} />
     </StatisticalDetailWrapper>
