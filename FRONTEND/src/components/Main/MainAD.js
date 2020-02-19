@@ -9,6 +9,7 @@ import LoadingBackdrop from '../common/LoadingBackdrop';
 import { LazyImageProvider } from '../common/LazyImage/LazyImageContext';
 import LazyImage from '../common/LazyImage/LazyImage';
 import ClickNotice from '../common/ClickNotice';
+import Sound from 'react-sound';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -95,7 +96,7 @@ const MainAD = () => {
   };
 
   const itemNum = 8;
-  const carouselTerm = 3000;
+  const carouselTerm = 10000;
   const reqTerm = carouselTerm * (itemNum + 1);
 
   const getItems = () => {
@@ -149,12 +150,20 @@ const MainAD = () => {
                       alt=""
                     />
                     <ClickNotice />
+                    <Sound
+                      url="https://nearbyad.s3.ap-northeast-2.amazonaws.com/speech/31.mp3"
+                      playStatus={Sound.status.PLAYING}
+                      playFromPosition={300 /* in milliseconds */}
+                      onLoading={Sound.handleSongLoading}
+                      onPlaying={Sound.handleSongPlaying}
+                      onFinishedPlaying={Sound.handleSongFinishedPlaying}
+                      loop={true}
+                    />
                   </div>
                 );
               })}
             </Carousel>
           </LazyImageProvider>
-
           <FullScreenDialog data={datas[pid]} setOpen={setOpen} open={open} />
         </>
       ) : (
