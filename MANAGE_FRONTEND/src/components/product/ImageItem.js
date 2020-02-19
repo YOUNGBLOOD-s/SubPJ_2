@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import ImageUpdateForm from './ImageUpdateForm';
 import component from '../../lib/material/component';
+import getImageUrl from '../../lib/utill/getSpeechUrl';
 
 const ImageWrapper = styled.div`
   display: flex;
@@ -46,7 +47,11 @@ const ImageItem = ({ image, user }) => {
       ) : (
         <component.Grid container spacing={1}>
           <component.Grid item xs={12}>
-            <img className="image" src={url} alt={typeName[type]} />
+            <img
+              className="image"
+              src={getImageUrl('sm', url)}
+              alt={typeName[type]}
+            />
           </component.Grid>
           {user && user.username === 'admin' && (
             <component.Grid item xs={12}>

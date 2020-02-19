@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../common/Logo';
+import getImageUrl from '../../lib/utill/getImageUrl';
 
 const PosterWrapper = styled.div`
   position: relative;
@@ -39,10 +40,7 @@ const MainPoster = () => {
   return (
     <PosterWrapper>
       <ImageWrapper>
-        <StyledImage
-          src="https://images.unsplash.com/photo-1558285549-2a06f9a5fe65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-          alt=""
-        />
+        <StyledImage src={getImageUrl('static', 'mainposter.jpg')} alt="" />
       </ImageWrapper>
       <TextWrapper>
         <Text>마치 네 곁에 있는 것처럼,</Text>

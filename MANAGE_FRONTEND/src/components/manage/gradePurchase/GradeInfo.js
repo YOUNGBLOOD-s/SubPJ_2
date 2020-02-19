@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import palette from '../../../lib/styles/palette';
+import getImageUrl from '../../../lib/utill/getImageUrl';
 
 const InfoWrapper = styled.div``;
 
@@ -75,8 +76,6 @@ const CheckIcon = () => (
 );
 
 const GradeInfo = () => {
-  const static_url =
-    'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/manage';
   return (
     <InfoWrapper>
       {/* 첫번째 설명 */}
@@ -84,7 +83,7 @@ const GradeInfo = () => {
         <Grid container>
           <Grid item xs={12} md={6}>
             <ImageWrapper>
-              <Image src={static_url + '/info1.PNG'} />
+              <Image src={getImageUrl('static', 'info1.png')} />
             </ImageWrapper>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -115,7 +114,7 @@ const GradeInfo = () => {
         <Grid container direction="row-reverse">
           <Grid item xs={12} md={6}>
             <ImageWrapper>
-              <Image src={static_url + '/info2.PNG'} />
+              <Image src={getImageUrl('static', 'info2.png')} />
             </ImageWrapper>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -152,7 +151,7 @@ const GradeInfo = () => {
         <Grid container>
           <Grid item xs={12} md={6}>
             <MobileImgWrapper>
-              <MobileImage src={static_url + '/minfo1.PNG'} />
+              <MobileImage src={getImageUrl('static', 'minfo1.png')} />
             </MobileImgWrapper>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -177,7 +176,7 @@ const GradeInfo = () => {
         <Grid container direction="row-reverse">
           <Grid item xs={12} md={6}>
             <MobileImgWrapper>
-              <MobileImage src={static_url + '/minfo2.PNG'} />
+              <MobileImage src={getImageUrl('static', 'minfo2.png')} />
             </MobileImgWrapper>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -202,7 +201,7 @@ const GradeInfo = () => {
         <Grid container>
           <Grid item xs={12} md={6}>
             <MobileImgWrapper>
-              <MobileImage src={static_url + '/minfo3.PNG'} />
+              <MobileImage src={getImageUrl('static', 'minfo3.png')} />
             </MobileImgWrapper>
           </Grid>
           <Grid item xs={12} md={6}>

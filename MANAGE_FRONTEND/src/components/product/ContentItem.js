@@ -4,6 +4,7 @@ import component from '../../lib/material/component';
 import palette from '../../lib/styles/palette';
 import { useState } from 'react';
 import ContentUpdateForm from './ContentUpdateForm';
+import getImageUrl from '../../lib/utill/getImageUrl';
 
 const ContentsWrapper = styled.div`
   border: 1px solid ${palette.grey[200]};
@@ -50,7 +51,7 @@ const ContentItem = ({ content, user }) => {
           )}
           <component.Grid item xs={12}>
             <ImageWrapper>
-              <StyledImg src={image} />
+              <StyledImg src={getImageUrl('sm', image)} />
             </ImageWrapper>
             <component.Typography variant="body1">
               {detail}

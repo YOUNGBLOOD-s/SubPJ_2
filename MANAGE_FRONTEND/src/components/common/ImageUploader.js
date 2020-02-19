@@ -3,6 +3,7 @@ import AWS from 'aws-sdk';
 import component from '../../lib/material/component';
 import styled from 'styled-components';
 import LinearLoader from './LinearLoader';
+import getImageUrl from '../../lib/utill/getImageUrl';
 
 const ImageWrapper = styled.div`
   width: 100%;
@@ -64,9 +65,7 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId, en_name }) => {
     const promise = uploaded.promise();
     promise
       .then(data => {
-        console.log(data);
         const { key } = data;
-        console.log(key);
         setImageUrl(key);
         setLoading(false);
       })
@@ -120,7 +119,7 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId, en_name }) => {
             <StyledImg
               src={
                 imageUrl
-                  ? imageUrl
+                  ? getImageUrl('sm', imageUrl)
                   : 'https://crestaproject.com/demo/lontano-pro/wp-content/themes/lontano-pro/images/no-image-slide.png'
               }
               alt="날씨별 이미지"

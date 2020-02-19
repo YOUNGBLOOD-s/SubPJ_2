@@ -7,6 +7,7 @@ import DirectionsCarOutlinedIcon from '@material-ui/icons/DirectionsCarOutlined'
 import DirectionsBoatOutlinedIcon from '@material-ui/icons/DirectionsBoatOutlined';
 import palette from '../../lib/styles/palette';
 import component from '../../lib/material/component';
+import getImageUrl from '../../lib/utill/getImageUrl';
 
 const TravelIcons = ({ type }) => {
   const IconStyle = { color: palette.theme[300] };
@@ -103,7 +104,7 @@ const TravelRouteItem = ({ dayRoutes }) => {
           <GridItem item xs={11}>
             <component.Grid item xs={12}>
               {/* TODO: image 수정되면 toLowerCase()삭제 */}
-              <RouteImage src={image.toLowerCase()} alt="경로별 이미지" />
+              <RouteImage src={getImageUrl('md', image)} alt="경로별 이미지" />
             </component.Grid>
             {/* NOTICE: title과 detail이 같은 경우는 경유지? 같은느낌. 디테일 생략 */}
             {title === detail ? null : (
