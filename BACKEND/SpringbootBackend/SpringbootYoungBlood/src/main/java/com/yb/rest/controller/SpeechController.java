@@ -38,15 +38,18 @@ public class SpeechController {
 
 	private static AmazonS3 amazonS3; // 인스턴스를 초기화한다.
 	private static SpeechController aws = new SpeechController();
+	
 	public SpeechController() {
 		// 인증 객체를 생성한다.
+		
+	}
+
+	public static void tts(String sentence, String idx) {
 		AWSCredentials awsCredentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
 		// https://s3.console.aws.amazon.com/s3/buckets/static.preeplus.com/?region=ap-northeast-2&tab=overview
 		amazonS3 = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_NORTHEAST_2)
 				.withCredentials(new AWSStaticCredentialsProvider(awsCredentials)).build();
-	}
-
-	public static void tts(String sentence, String idx) {
+		
 		String clientId = "vqipsxwgmf";// 애플리케이션 클라이언트 아이디값";
 		String clientSecret = "rxj0tJnnv9tgRrbr82IjUGDssiMOykunS5SNW8j9";// 애플리케이션 클라이언트 시크릿값";
 		try {
@@ -106,11 +109,14 @@ public class SpeechController {
 				PutObjectRequest putObjectRequest = new PutObjectRequest(BUCKET_NAME + "/speech", idx+".mp3", file);
 				putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 				amazonS3.putObject(putObjectRequest);
+				System.out.println("null아님zz");
 			} catch (AmazonServiceException ase) {
 				ase.printStackTrace();
+				System.out.println("null임 ㅋㅋ");
 			} finally {
 				amazonS3 = null;
 			}
 		}
+		
 	}
 }

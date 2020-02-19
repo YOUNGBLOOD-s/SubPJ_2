@@ -44,7 +44,7 @@ public class ManageController {
 
 	@Autowired
 	private IAdService adser;
-
+	
 	@ExceptionHandler(Exception.class)
 	public void ExceptionMethod(Exception e) {
 
@@ -60,19 +60,18 @@ public class ManageController {
 			@RequestParam("page") String page) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		List<NationDTO> list = null;
 		List<Nation> sizelist = null;
 		Member member = new Member();
 		int pageIdx = 0;
 		if (page == null)
 			pageIdx = 1;
-		else {
+		else{
 			pageIdx = Integer.parseInt(page);
 		}
-		pageIdx = (pageIdx - 1) * 12;
-
+		pageIdx = (pageIdx-1) * 12;
+		
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -84,9 +83,9 @@ public class ManageController {
 
 			if (grade == 1) {
 				list = ser.nationListAll_page(customer, pageIdx);
-				sizelist = ser.nationListAll(customer);
-				int maxpage = sizelist.size() / 12;
-				if (sizelist.size() % 12 > 0)
+				sizelist= ser.nationListAll(customer);
+				int maxpage = sizelist.size()/12;
+				if(sizelist.size()%12>0)
 					maxpage++;
 				// 해당 nation에 이미지를 불러오고...
 				for (int i = 0; i < list.size(); i++) {
@@ -101,8 +100,8 @@ public class ManageController {
 			} else if (grade >= 2) {
 				list = ser.nationList_page(customer, pageIdx);
 				sizelist = ser.nationList(customer);
-				int maxpage = sizelist.size() / 12;
-				if (sizelist.size() % 12 > 0)
+				int maxpage = sizelist.size()/12;
+				if(sizelist.size()%12>0)
 					maxpage++;
 				for (int i = 0; i < list.size(); i++) {
 					int idx = Integer.parseInt(list.get(i).getIdx());
@@ -111,12 +110,12 @@ public class ManageController {
 					list.get(i).setOwner(owner);
 				}
 				msg.put("lastpageidx", maxpage);
-				msg.put("resvalue", list);
+				msg.put("resvalue", list);				
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			}
-
+			
 		} catch (Exception e) {
 			msg.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());
@@ -124,12 +123,11 @@ public class ManageController {
 		}
 		return res;
 	}
-
+	
 	/** 사용자 상품 보기 서비스 */
 	@GetMapping("/nation/{idx}")
 	@ApiOperation(value = "광고주의 등록 상품정보 보기 서비스.")
-	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token,
-			@PathVariable("idx") int idx) {
+	public ResponseEntity<Map<String, Object>> nationInfo(@RequestHeader(value = "Authorization") String token, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		Nation nat = new Nation();
@@ -143,10 +141,10 @@ public class ManageController {
 			int customer = ser.getIdx(username);
 			int own = ser.selectCustomer(idx);
 			member = ser.selectMemberInfo(own);
-			// System.out.println(member.toString());
-
+			//System.out.println(member.toString());
+			
 			Owner owner = new Owner(member.getUsername(), member.getCompany(), member.getGrade());
-
+			
 			int grade = ser.searchGrade(customer);
 			if (grade == 1) {
 				List<Counsel> counlist = ser.selectCounsellist(idx);
@@ -198,49 +196,49 @@ public class ManageController {
 			@RequestBody Nation nat) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-			// 광고주가 보유하고있는 nation테이블 갯수(사이즈)와 grade에따라 비교해준다
+			//광고주가 보유하고있는 nation테이블 갯수(사이즈)와 grade에따라 비교해준다
 			boolean InsertAccess = true;
 			List<Nation> listAccess = ser.nationList(customer);
-			int size = listAccess.size();
-			System.out.println(size + " " + grade + " " + customer);
-			if (grade == 2) { // 실버일떄
-				// grade가 2이면 2개
-				if (size >= 2)
-					InsertAccess = false;
-			} else if (grade == 3) {
-				// grade가 3이면 5개
-				if (size >= 5)
-					InsertAccess = false;
-			} else if (grade == 4) {
-				// grade가 4이면 6개.
-				if (size >= 10)
-					InsertAccess = false;
-			} else if (grade == 1) {
-				// 관리자이므로 그냥 통과
+			int size= listAccess.size();
+			System.out.println(size+" "+grade+" "+customer);
+			if(grade==2) { //실버일떄
+			//grade가 2이면  2개
+				if(size>=2) InsertAccess = false; 
+			}else if ( grade ==3) {
+			//grade가 3이면 5개
+				if(size>=5) InsertAccess = false;
+			}else if(grade ==4) {
+			//grade가 4이면 6개.
+				if(size>=10) InsertAccess = false;
+			}else if (grade == 1) {
+				//관리자이므로 그냥 통과
 			}
 			if (grade > 0 && InsertAccess) {
-				ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getContinents(), customer + "",
-						nat.getWeight(), nat.getSpeech(), nat.getPrice(), nat.getS_date(), nat.getF_date());
+				ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getContinents(), customer + "", nat.getWeight(), nat.getSpeech(), nat.getPrice(),
+						nat.getS_date(), nat.getF_date());
 				int last = Integer.MIN_VALUE;
 				List<Nation> list = ser.nationList(customer);
 				for (int i = 0; i < list.size(); i++) {
 					last = Math.max(last, Integer.parseInt(list.get(i).getIdx()));
 				}
 				msg.put("nationidx", last);
+				msg.put("en_name", nat.getEn_name());
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-				SpeechController.tts(nat.getSpeech(), last + "");
-
+				SpeechController.tts(nat.getSpeech(), last+"");
+				
 			} else {
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 			}
 		} catch (Exception e) {
+			if(e.getMessage().contains("Duplicate")) {
+				return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.CONFLICT);
+			}
 			msg.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -255,8 +253,7 @@ public class ManageController {
 			@PathVariable("idx") String idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -280,12 +277,10 @@ public class ManageController {
 	/** 사용자 상품 수정 */
 	@PutMapping("/nation/update/{idx}")
 	@ApiOperation(value = "사용자 상품정보(nation) 수정")
-	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token,
-			@RequestBody Nation nat, @PathVariable("idx") int idx) {
+	public ResponseEntity<Map<String, Object>> nationUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Nation nat, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -304,7 +299,7 @@ public class ManageController {
 				map.put("s_date", nat.getS_date());
 				map.put("f_date", nat.getF_date());
 				ser.nationupdate(map);
-
+				
 				msg.put("updateNation", map);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
@@ -357,8 +352,7 @@ public class ManageController {
 			@RequestBody Monthtb montb) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -382,12 +376,10 @@ public class ManageController {
 	/** 상품 월별정보 수정 */
 	@PutMapping("/monthtb/update/{idx}")
 	@ApiOperation(value = "상품 월별정보(month) 수정")
-	public ResponseEntity<Map<String, Object>> monthUpdate(@RequestHeader(value = "Authorization") String token,
-			@RequestBody Monthtb montb, @PathVariable("idx") int idx) {
+	public ResponseEntity<Map<String, Object>> monthUpdate(@RequestHeader(value = "Authorization") String token, @RequestBody Monthtb montb, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -417,8 +409,7 @@ public class ManageController {
 			@PathVariable("nation") String nation) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -445,8 +436,7 @@ public class ManageController {
 	public ResponseEntity<Map<String, Object>> ContentsList(@RequestHeader(value = "Authorization") String token) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -480,8 +470,7 @@ public class ManageController {
 			@RequestBody List<Route> route) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -489,8 +478,12 @@ public class ManageController {
 			int grade = ser.searchGrade(customer);
 
 			if (grade > 0) {
-				for (int i = 0; i < route.size(); i++)
+				for (int i = 0; i < route.size(); i++) {
+					String path = route.get(i).getImage();
+					String newpath = path.split("_")[0] + "/" + path.split("_")[1];
+					route.get(i).setImage(newpath);
 					adser.insertRoutes(route.get(i));
+				}
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			} else {
 				return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
@@ -510,8 +503,7 @@ public class ManageController {
 			@RequestBody Route route, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -519,7 +511,10 @@ public class ManageController {
 			int grade = ser.searchGrade(customer);
 
 			if (grade == 1) {
-				route.setIdx(idx + "");
+				route.setIdx(idx+"");
+				String path = route.getImage();
+				String newpath = path.split("_")[0] + "/" + path.split("_")[1];
+				route.setImage(newpath);
 				adser.updateRoutes(route);
 				msg.put("inputContents", route);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -541,8 +536,7 @@ public class ManageController {
 			@PathVariable("idx") int idx, @PathVariable("nation") int nation) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
@@ -574,8 +568,7 @@ public class ManageController {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		List<Image> list = null;
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -606,19 +599,20 @@ public class ManageController {
 			@RequestBody List<Image> imgs) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			msg.put("username", de.get("username"));
 			String username = (String) de.get("username");
-			System.out.println("상품 이미지 정보 추가! user => " + username);
-			System.out.println(imgs);
+			
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
 
 			if (grade > 0) {
 				for (int i = 0; i < imgs.size(); i++) {
+					String path = imgs.get(i).getUrl();
+					String newpath = path.split("_")[0] + "/" + path.split("_")[1];
+					imgs.get(i).setUrl(newpath);
 					ser.insertImagetb(imgs.get(i));
 				}
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -640,8 +634,7 @@ public class ManageController {
 			@RequestBody Image img, @PathVariable("idx") int idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
-		if (token == "" || token == null)
-			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED); 
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");
@@ -649,7 +642,11 @@ public class ManageController {
 			int grade = ser.searchGrade(customer);
 
 			if (grade == 1) {
-				img.setIdx(idx + "");
+				img.setIdx(idx+"");
+				String path = img.getUrl();
+				String newpath = path.split("_")[0] + "/" + path.split("_")[1];
+				img.setUrl(newpath);
+				
 				ser.updateImagetb(img);
 				msg.put("update", img);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -720,7 +717,7 @@ public class ManageController {
 		return res;
 	}
 	
-	/** 매니저가 recoNum 수정하기. 강기동 02 19  */
+	/** recoNum 수정 */
 	@PutMapping("/manager/reco/update/{num}")
 	@ApiOperation(value = "관리저가 recoNum(광고송출갯수) 수정하기. num이 5일경우 센서5개 기본5")
 	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token,

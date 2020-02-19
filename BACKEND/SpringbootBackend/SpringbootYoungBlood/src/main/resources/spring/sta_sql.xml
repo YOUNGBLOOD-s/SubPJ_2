@@ -8,7 +8,8 @@
 	<select id="getdatalist" parameterType="map" resultType="click">
 		select *
 		from clicktb
-		where date <![CDATA[ >= ]]>#{target} AND date <![CDATA[ <= ]]> #{today};
+		where date <![CDATA[ >= ]]>#{target} AND date <![CDATA[ <= ]]> #{today} AND
+		idx in (select idx from clicktb where nation in (select idx from nationtb where customer= (select idx from membertb where username=#{username})));
 	</select>
 	
 	<select id="getnationIdxs" parameterType="String" resultType="int">

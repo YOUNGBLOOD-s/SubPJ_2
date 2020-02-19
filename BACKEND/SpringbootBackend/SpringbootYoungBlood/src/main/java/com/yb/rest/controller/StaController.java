@@ -2,7 +2,6 @@ package com.yb.rest.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -43,25 +42,64 @@ public class StaController {
 
 	}
 	
-	@GetMapping("/statistics/1month")
+	@GetMapping("/statistics/1month/{nationIdx}")
 	@ApiOperation(value = "오늘 날짜부터 1년 전까지의 통계 데이터")
-	public @ResponseBody ResponseEntity<Map<String, Object>> yearSta() {
+	public @ResponseBody ResponseEntity<Map<String, Object>> yearSta(@RequestHeader(value="Authorization") String token, @PathVariable String nationIdx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Calendar cal = Calendar.getInstance();
 		DateFormat df = new SimpleDateFormat("YYYY-MM-dd HH");
 		Date date = new Date();
 		Map<String, Object> result = new HashMap<>();
+		if(token==null || token=="") return new ResponseEntity<Map<String, Object>>(result, HttpStatus.NOT_FOUND);
 		try {
+			Claims de = MemberController.verification(token);
+			String username = (String) de.get("username");	
+			result.put("username", username);
+			List<Integer> idxs = ser.selectAllNationIdxs(username);
+			
 			cal.setTime(date);
 			df.format(date);
 			String today = df.format(date);		
 			cal.add(Calendar.MONTH, -11);
 			String target = df.format(cal.getTime());
-
+			
+			//user의 기간 안에 있는 click객체 다 뽑앗슴
 			Map<String, Object> map = new HashMap<>();
 			map.put("today", today);
 			map.put("target", target);
+			map.put("username", username);
 			List<Click> findList = ser.getDateList(map);
+			
+			
+			//만약 nationIdx가 ""이면, 전체 카운트 해 ㅋㅋ
+			if(nationIdx==null || nationIdx=="") {
+				int click = 0;
+				int qr = 0;
+				for(int i=0; i<findList.size(); i++) {
+					click = ser.getClickSum(Integer.parseInt(findList.get(i).getClick_cnt()));
+					qr = ser.getQrSum(Integer.parseInt(findList.get(i).getQr_cnt()));
+				}
+				Map<String, Object> value = new HashMap<>(); 
+				value.put("click", click);
+				value.put("qr", qr);
+				result.put("value", value);
+			} else { //nation이 usr꺼 맞앙?
+				boolean flag = false;
+				for(int i=0; i<idxs.size(); i++) {
+					if(idxs.get(i)==Integer.parseInt(nationIdx)) {
+						flag = true;
+						break;
+					}
+				}
+				if(flag) { //usr꺼 맞으면??
+					
+				} else {
+					
+				}
+			}
+			//
+			
+			
 		
 			int[] click = new int[13];
 			int[] qr = new int[13];
