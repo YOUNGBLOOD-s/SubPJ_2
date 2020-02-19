@@ -55,7 +55,6 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			result.put("username", username);
-			List<Integer> idxs = ser.selectAllNationIdxs(username);
 			
 			cal.setTime(date);
 			df.format(date);
@@ -70,40 +69,11 @@ public class StaController {
 			map.put("username", username);
 			List<Click> findList = ser.getDateList(map);
 			
-			
-			//만약 nationIdx가 ""이면, 전체 카운트 해 ㅋㅋ
-			if(nationIdx==null || nationIdx=="") {
-				int click = 0;
-				int qr = 0;
-				for(int i=0; i<findList.size(); i++) {
-					click = ser.getClickSum(Integer.parseInt(findList.get(i).getClick_cnt()));
-					qr = ser.getQrSum(Integer.parseInt(findList.get(i).getQr_cnt()));
-				}
-				Map<String, Object> value = new HashMap<>(); 
-				value.put("click", click);
-				value.put("qr", qr);
-				result.put("value", value);
-			} else { //nation이 usr꺼 맞앙?
-				boolean flag = false;
-				for(int i=0; i<idxs.size(); i++) {
-					if(idxs.get(i)==Integer.parseInt(nationIdx)) {
-						flag = true;
-						break;
-					}
-				}
-				if(flag) { //usr꺼 맞으면??
-					
-				} else {
-					
-				}
-			}
-			//
-			
-			
-		
 			int[] click = new int[13];
 			int[] qr = new int[13];
 			for(int i=0; i<findList.size(); i++) {
+				if(!findList.get(i).getNation().equals(nationIdx)) continue;
+				
 				String month = findList.get(i).getDate().split("-")[1];
 				int c = Integer.parseInt(findList.get(i).getClick_cnt());
 				int q = Integer.parseInt(findList.get(i).getQr_cnt());
@@ -141,7 +111,7 @@ public class StaController {
 	
 	@GetMapping("/statistics/15day")
 	@ApiOperation(value = "오늘 날짜부터 15일 전까지의 통계 데이터")
-	public @ResponseBody ResponseEntity<Map<String, Object>> monthSta() {
+	public @ResponseBody ResponseEntity<Map<String, Object>> monthSta(@RequestHeader(value="Authorization") String token, @PathVariable String nationIdx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Calendar cal = Calendar.getInstance();
 		DateFormat df = new SimpleDateFormat("YYYY-MM-dd HH");
@@ -158,7 +128,8 @@ public class StaController {
 			map.put("today", today);
 			map.put("target", target);
 			List<Click> findList = ser.getDateList(map);
-		
+			System.out.println(findList);
+			
 			int[] click = new int[32];
 			int[] qr = new int[32];
 			int year = Integer.parseInt(today.substring(0,4));
@@ -169,6 +140,8 @@ public class StaController {
        
        
 			for(int i=0; i<findList.size(); i++) {
+				if(!findList.get(i).getNation().equals(nationIdx)) continue;
+				
 				String day = findList.get(i).getDate().substring(8,10);
 				int c = Integer.parseInt(findList.get(i).getClick_cnt());
 				int q = Integer.parseInt(findList.get(i).getQr_cnt());
@@ -203,7 +176,7 @@ public class StaController {
 	
 	@GetMapping("/statistics/3hour")
 	@ApiOperation(value = "오늘 날짜부터 1일 전까지의 데이터를 3시간씩 묶은 통계 데이터")
-	public @ResponseBody ResponseEntity<Map<String, Object>> hourSta() {
+	public @ResponseBody ResponseEntity<Map<String, Object>> hourSta(@RequestHeader(value="Authorization") String token, @PathVariable String nationIdx) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Calendar cal = Calendar.getInstance();
 		DateFormat df = new SimpleDateFormat("YYYY-MM-dd HH");
@@ -226,6 +199,8 @@ public class StaController {
 			int hours=Integer.parseInt(today.substring(11,13));
    
 			for(int i=0; i<findList.size(); i++) {
+				if(!findList.get(i).getNation().equals(nationIdx)) continue;
+				
 				String hour = findList.get(i).getDate().substring(11,13);
 				int c = Integer.parseInt(findList.get(i).getClick_cnt());
 				int q = Integer.parseInt(findList.get(i).getQr_cnt());

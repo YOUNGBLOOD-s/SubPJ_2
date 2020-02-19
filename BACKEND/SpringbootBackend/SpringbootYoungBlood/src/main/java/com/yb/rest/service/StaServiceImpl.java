@@ -34,6 +34,16 @@ public class StaServiceImpl implements IStaService{
 	public int getQrSum(int nationIdx) {
 		return repo.getQrSum(nationIdx);
 	}
+
+	@Override
+	public int getClickSum(Map map) {
+		return repo.getClickSum(map);
+	}
+
+	@Override
+	public int getQrSum(Map map) {
+		return repo.getQrSum(map);
+	}
 	
 	
 }

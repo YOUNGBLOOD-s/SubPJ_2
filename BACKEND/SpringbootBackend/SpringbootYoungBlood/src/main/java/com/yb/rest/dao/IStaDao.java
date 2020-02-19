@@ -10,4 +10,6 @@ public interface IStaDao {
 	public List<Integer> selectAllNationIdxs(String username);
 	public int getClickSum(int nationIdx);
 	public int getQrSum(int nationIdx);
+	public int getClickSum(Map map);
+	public int getQrSum(Map map);
 }
