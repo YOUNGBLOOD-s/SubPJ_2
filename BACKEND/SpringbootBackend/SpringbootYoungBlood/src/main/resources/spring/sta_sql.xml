@@ -39,4 +39,8 @@
 	AND nation = #{nationIdx};
 	</select>
 	
+	<select id="vernation" parameterType="map" resultType="int">
+	select * from clicktb where nation=#{nationIdx};
+	</select>
+	
 </mapper>

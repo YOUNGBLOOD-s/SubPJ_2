@@ -17,6 +17,7 @@ public class StaDaoImpl implements IStaDao {
 
 	@Override
 	public List<Click> getDateList(Map map) {
+		System.out.println(map.get(""));
 		return session.selectList("sta.getdatalist", map);
 	}
 
@@ -43,6 +44,13 @@ public class StaDaoImpl implements IStaDao {
 	@Override
 	public int getQrSum(Map map) {
 		return session.selectOne("sta.getqrsum_", map);
+	}
+
+	@Override
+	public boolean vernation(Map map) {
+		List<Integer> list = session.selectList("sta.vernation", map);
+		if(list.size()>0) return true;
+		return false;
 	}
 
 }
