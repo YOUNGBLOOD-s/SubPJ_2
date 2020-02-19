@@ -238,6 +238,7 @@ public class SensorController {
 			System.out.println("!!!weight() ERROR!!!");
 			System.out.println(e);
 			List<Integer> list = ser.selectIdxs();
+			System.out.println("왜 에러가 나..? => " + list);
 			List<Integer> send = new LinkedList<>();
 			//num*2로 바꿈
 			if (list.size() < num*2) {
