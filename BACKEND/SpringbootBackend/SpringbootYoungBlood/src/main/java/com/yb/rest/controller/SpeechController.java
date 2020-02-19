@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class SpeechController {
 
-	private static final String BUCKET_NAME = "nearbyad";
+	private static final String BUCKET_NAME = "nearbyad-thumbnail-resized";
 	private static final String ACCESS_KEY = GetKEY.getAccesskey();
 	private static final String SECRET_KEY = GetKEY.getSecretkey();
 

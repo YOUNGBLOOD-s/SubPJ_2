@@ -35,4 +35,14 @@ public class StaDaoImpl implements IStaDao {
 		return session.selectOne("sta.getqrsum", nationIdx);
 	}
 
+	@Override
+	public int getClickSum(Map map) {
+		return session.selectOne("sta.getclicksum_", map);
+	}
+
+	@Override
+	public int getQrSum(Map map) {
+		return session.selectOne("sta.getqrsum_", map);
+	}
+
 }
