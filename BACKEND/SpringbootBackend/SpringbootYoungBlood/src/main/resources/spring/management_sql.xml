@@ -205,5 +205,10 @@
 	select num from reconumtb;
 	</select>
 	
+	<update id="recoNumUpdate" parameterType="map">
+	update reconumtb set num=#{num} where num=#{rnum}
+	</update>
+	
+	
 </mapper>
  

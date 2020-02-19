@@ -180,4 +180,9 @@ public class ManServiceImpl implements IManService {
 		
 	}
 
+	@Override
+	public void recoNumUpdate(int num, int rNum) {
+		repo.recoNumUpdate(num, rNum);
+	}
+
 }

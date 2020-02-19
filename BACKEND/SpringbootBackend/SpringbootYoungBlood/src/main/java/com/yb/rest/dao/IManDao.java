@@ -19,6 +19,7 @@ public interface IManDao {
 	public Nation selectNationCustomer(int customer);
 	public Member selectMemberInfo(int customer);
 	public int selectCustomer(int idx);
+	public void recoNumUpdate(int num,int rNum);
 	
 	/** 나라테이블CRUD */
 	public List<Nation> nationList(int customer);
