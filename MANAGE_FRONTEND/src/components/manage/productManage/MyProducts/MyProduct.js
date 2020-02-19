@@ -83,9 +83,9 @@ const ScheduleWrapper = styled.div`
 const FlyIcon = ({ type }) => {
   switch (type) {
     case 'up':
-      return <i class="fas fa-plane-departure"></i>;
+      return <i className="fas fa-plane-departure"></i>;
     case 'down':
-      return <i class="fas fa-plane-arrival"></i>;
+      return <i className="fas fa-plane-arrival"></i>;
 
     default:
       return null;

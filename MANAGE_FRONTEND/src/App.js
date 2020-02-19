@@ -3,14 +3,12 @@ import { Route, Switch } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import AdminPage from './pages/AdminPage';
 import DetailPage from './pages/DetailPage';
-import ManagePage from './pages/ManagePage';
-import AddProduct from './components/manage/productManage/AddProduct/AddProduct';
 import Footer from './components/common/Footer';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import NotFound from './pages/NotFound';
+import ManagementPage from './pages/ManagementPage';
 
 const AppWrapper = styled.div`
   height: -webkit-fill-available;
@@ -36,11 +34,7 @@ const App = () => {
           <Route component={DetailPage} path="/detail/:id" exact />
           <Route component={LoginPage} path="/login" exact />
           <Route component={RegisterPage} path="/register" exact />
-          {/* 어드민 */}
-          <Route component={AdminPage} path="/admin" />
-          {/* 광고주 관리 */}
-          <Route component={ManagePage} path="/manage" />
-          <Route component={AddProduct} path="/add" exact />
+          <Route component={ManagementPage} path="/management" />
           <Route component={NotFound} />
         </Switch>
       </Content>

@@ -6,14 +6,14 @@ import palette from '../../lib/styles/palette';
 
 const PosterWrapper = styled.div`
   position: relative;
-  height: 95vh;
+  height: 100vh;
 `;
 
 const ImageWrapper = styled.div``;
 
 const StyledImage = styled.img`
   width: 100%;
-  height: 95vh;
+  height: 100vh;
   opacity: 0.3;
   object-fit: cover;
 `;
@@ -59,7 +59,7 @@ const SlideBtn = styled.div`
 
 const MainPoster = () => {
   const onSlideClick = () => {
-    window.scrollTo({ top: window.innerHeight + 50, behavior: 'smooth' });
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
   return (
     <PosterWrapper>

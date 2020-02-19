@@ -11,7 +11,7 @@ const AddProductLinkWrapper = styled.div`
 const AddProductLink = ({ children }) => {
   return (
     <AddProductLinkWrapper>
-      <Link to="/add">
+      <Link to="/management/add">
         <component.Button
           size="small"
           fullWidth

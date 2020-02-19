@@ -82,7 +82,7 @@ const RegisterForm = ({ history }) => {
 
   useEffect(() => {
     if (user) {
-      history.push('/');
+      history.push('/management');
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {

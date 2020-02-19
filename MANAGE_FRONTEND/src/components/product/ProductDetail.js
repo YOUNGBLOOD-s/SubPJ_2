@@ -35,6 +35,7 @@ const ProductDetail = ({ match, history }) => {
   const { id } = match.params;
   const token = sessionStorage.getItem('access_token');
   const dispatch = useDispatch();
+
   const { product, loading, user, member } = useSelector(
     ({ product, loading, user }) => ({
       product: product.product,
@@ -46,9 +47,17 @@ const ProductDetail = ({ match, history }) => {
 
   useEffect(() => {
     if (member && member.grade === 0) {
-      history.push('/manage/grade');
+      history.push('/management/grade');
     }
   }, [member, history]);
+
+  useEffect(() => {
+    if (user && user.username !== 'admin') {
+      if (product && user.username !== product.owner.username) {
+        history.push('/management');
+      }
+    }
+  }, [user, product, history]);
 
   useEffect(() => {
     dispatch(getProduct({ id, token }));

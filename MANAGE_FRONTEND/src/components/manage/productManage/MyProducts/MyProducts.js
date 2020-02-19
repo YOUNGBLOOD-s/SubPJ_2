@@ -47,6 +47,7 @@ const MyProducts = () => {
       user: user.user,
     }),
   );
+
   const token = sessionStorage.getItem('access_token');
   useEffect(() => {
     dispatch(userAdList({ page, token }));
@@ -81,13 +82,7 @@ const MyProducts = () => {
                 <component.Grid container spacing={1}>
                   {ads.map(ad => (
                     <component.Grid item xs={12} sm={6} md={4} key={ad.idx}>
-                      <Link
-                        to={
-                          user.username === 'admin'
-                            ? `/admin/product/${ad.idx}`
-                            : `/manage/product/${ad.idx}`
-                        }
-                      >
+                      <Link to={`/management/product/${ad.idx}`}>
                         <MyProduct
                           ad={ad}
                           isAdmin={user.username === 'admin'}
