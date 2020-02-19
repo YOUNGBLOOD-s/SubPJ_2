@@ -117,3 +117,8 @@ CREATE TABLE IF NOT EXISTS `clicktb` (
     on delete cascade
 );
 desc clicktb;
+
+CREATE TABLE IF NOT EXISTS `reconumtb`(
+	num int primary key
+);
+desc reconumtb;

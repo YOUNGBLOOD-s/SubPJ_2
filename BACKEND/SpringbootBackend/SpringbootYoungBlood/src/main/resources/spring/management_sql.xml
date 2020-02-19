@@ -201,5 +201,9 @@
 	select customer from nationtb where idx=#{idx};
 	</select>
 	
+	<select id="selectRecoNumber" resultType="int">
+	select num from reconumtb;
+	</select>
+	
 </mapper>
  

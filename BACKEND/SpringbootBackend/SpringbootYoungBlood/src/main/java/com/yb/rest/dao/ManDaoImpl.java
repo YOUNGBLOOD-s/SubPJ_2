@@ -177,5 +177,10 @@ public class ManDaoImpl implements IManDao {
 		return session.selectOne("management.selectCustomer", idx);
 	}
 
+	@Override
+	public int selectRecoNumber() {
+		return session.selectOne("management.selectRecoNumber");
+	}
+
 	
 }

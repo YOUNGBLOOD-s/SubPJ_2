@@ -29,6 +29,7 @@ public interface IManDao {
 	public void nationdelete(String idx, String customer);
 	public void nationupdate(Map map);
 	public String selectNation_image(int idx);
+	public int selectRecoNumber();
 	
 	/** 월별테이블CRUD */
 	public List<Monthtb> monthList(int customer);
