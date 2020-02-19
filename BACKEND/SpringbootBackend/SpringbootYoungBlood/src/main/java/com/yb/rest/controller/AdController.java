@@ -232,7 +232,7 @@ public class AdController {
 		List<Map<String, Object>> Countrylist = new LinkedList<>();
 		ArrayList<Nation> tmplist = new ArrayList<Nation>();
 		int pageIdx = 0;
-		if (page == null)
+		if (page == null|| page.equals("1") || page.equals("0"))
 			pageIdx = 1;
 		else {
 			pageIdx = Integer.parseInt(page);
@@ -240,7 +240,7 @@ public class AdController {
 		pageIdx = (pageIdx - 1) * 12;
 		int pageIdxfin = pageIdx + 12;
 		List<Integer> checksize = ser.selectIdxs();
-		int maxpage = checksize.size() / 12;
+		int maxpage = checksize.size() / 12; // 11: 0
 		if (checksize.size() % 12 > 0)
 			maxpage++;
 		List<Integer> list = ser.selectIdxs();
@@ -275,7 +275,7 @@ public class AdController {
 					con.put("f_date", nation.getF_date());
 					Countrylist.add(con);
 				}
-				if (Countrylist.size() > 12) {
+				if (Countrylist.size() > 12) { //pagination
 					for (int i = pageIdx; i < pageIdx + 12; i++) {
 						if (Countrylist.size() <= i)
 							break;
@@ -332,18 +332,13 @@ public class AdController {
 					maxpage++;
 
 			} else { // continents 필터가 적용 안되었다면??
-				list.clear();
+				list.clear(); 
 				list = ser.selectIdxs_page(pageIdx);
 				System.out.println(list);
 				for (int i = 0; i < list.size(); i++) {
 					Map<String, Object> con = new HashMap<String, Object>();
 					int idx = list.get(i);
 					Nation nation = ser.getNationdetail(idx);
-					Monthtb mon = manser.monthInfo(idx);
-					List<Image> img = manser.imagesInfo(idx);
-					List<Route> rou = manser.contentsInfo(idx);
-					if (mon == null || img == null || rou == null)
-						continue;
 					con.put("idx", nation.getIdx());
 					con.put("en_name", nation.getEn_name());
 					con.put("name", nation.getKo_name());
@@ -381,7 +376,6 @@ public class AdController {
 			}
 		} else if (list.size() == 0) {
 			maxpage--;
-			result.put("lastpage", true);
 		}
 		result.put("lastpageidx", maxpage);
 		re = new ResponseEntity<>(result, HttpStatus.OK);

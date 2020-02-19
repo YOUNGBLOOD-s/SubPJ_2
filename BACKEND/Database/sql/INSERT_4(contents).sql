@@ -152,6 +152,7 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
 	values(9, 3, 3, '보트사파리', '수상에서 즐기는 사파리 보트사파리!', 'kenya/landmark6.png', '쵸베국립공원에서 보트사파리', '버스');
 
+
 -- 16 상해
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
 	values(16, 1, 1, '신천지', '유럽풍의 벽돌 건물들이 늘어선 고풍스러운 신천지 관광', 'shanghai/landmark1.png', '인천공항에서 상해', '버스');
