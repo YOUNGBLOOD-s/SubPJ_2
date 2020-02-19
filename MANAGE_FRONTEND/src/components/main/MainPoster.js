@@ -101,7 +101,7 @@ const MainPoster = () => {
       </TextWrapper>
       <SlideBtn onClick={onSlideClick}>
         <i className="fas fa-angle-double-down"></i>
-        {'  '}SLIDE
+        {'  '}추천 목록 SLIDE
       </SlideBtn>
       <ManagementLink to="/login">MANAGEMENT ></ManagementLink>
     </PosterWrapper>

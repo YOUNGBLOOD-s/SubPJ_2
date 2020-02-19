@@ -39,21 +39,23 @@ const Text = styled.div`
     font-size: 1.8rem;
   }
   @media (max-width: 360px) {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 `;
 
 const StyledLink = styled(Link)`
-  margin-top: 3rem;
-  font-family: 'Handon3gyeopsal600g';
-  background-color: ${palette.theme[200]};
+  font-family: 'GmarketSansLight';
+  border: 1px solid ${palette.grey[500]};
+  color: ${palette.grey[700]};
   font-weight: bold;
-  font-size: 1.8rem;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  color: white;
+  border-radius: 3px;
+  padding: 0.7rem 1.3rem;
+  cursor: pointer;
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+  }
   :hover {
-    background-color: ${palette.theme[400]};
+    background-color: ${palette.grey[200]};
     transition-duration: 0.5s;
   }
 `;
@@ -68,7 +70,7 @@ const BottomPoster = () => {
         <Text>광고 통계 및 매니지먼트,</Text>
         <Text>사용자의 니즈를 채워주는 맞춤형 광고</Text>
         <Text>지금 바로 시작하세요</Text>
-        <StyledLink to="/login">로그인</StyledLink>
+        <StyledLink to="/login">LOGIN</StyledLink>
       </TextWrapper>
     </PosterWrapper>
   );
