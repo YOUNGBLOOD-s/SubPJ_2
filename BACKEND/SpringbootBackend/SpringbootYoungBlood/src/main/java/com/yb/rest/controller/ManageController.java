@@ -44,7 +44,7 @@ public class ManageController {
 
 	@Autowired
 	private IAdService adser;
-
+	
 	@ExceptionHandler(Exception.class)
 	public void ExceptionMethod(Exception e) {
 
@@ -480,7 +480,7 @@ public class ManageController {
 			if (grade > 0) {
 				for (int i = 0; i < route.size(); i++) {
 					String path = route.get(i).getImage();
-					String newpath = path.split("_")[0] + "/" + path.split("_")[1] + "_" +path.split("_")[2];
+					String newpath = path.split("_")[0] + "/" + path.split("_")[1];
 					route.get(i).setImage(newpath);
 					adser.insertRoutes(route.get(i));
 				}
@@ -513,7 +513,7 @@ public class ManageController {
 			if (grade == 1) {
 				route.setIdx(idx+"");
 				String path = route.getImage();
-				String newpath = path.split("_")[0] + "/" + path.split("_")[1] + "_" +path.split("_")[2];
+				String newpath = path.split("_")[0] + "/" + path.split("_")[1];
 				route.setImage(newpath);
 				adser.updateRoutes(route);
 				msg.put("inputContents", route);
@@ -611,7 +611,7 @@ public class ManageController {
 			if (grade > 0) {
 				for (int i = 0; i < imgs.size(); i++) {
 					String path = imgs.get(i).getUrl();
-					String newpath = path.split("_")[0] + "/" + path.split("_")[1] + "_" +path.split("_")[2];
+					String newpath = path.split("_")[0] + "/" + path.split("_")[1];
 					imgs.get(i).setUrl(newpath);
 					ser.insertImagetb(imgs.get(i));
 				}
@@ -644,7 +644,7 @@ public class ManageController {
 			if (grade == 1) {
 				img.setIdx(idx+"");
 				String path = img.getUrl();
-				String newpath = path.split("_")[0] + "/" + path.split("_")[1] + "_" +path.split("_")[2];
+				String newpath = path.split("_")[0] + "/" + path.split("_")[1];
 				img.setUrl(newpath);
 				
 				ser.updateImagetb(img);
