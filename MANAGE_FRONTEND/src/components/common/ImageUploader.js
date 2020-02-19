@@ -48,8 +48,10 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId, en_name }) => {
       }),
     });
 
+    const type = file.name.substring(file.name.lastIndexOf('.') + 1);
+    const lowercaseType = type.toLowerCase();
     const timestamp = new Date().getTime();
-    const photoKey = `${en_name}_${timestamp + file.name}`;
+    const photoKey = `${en_name}_${timestamp}.${lowercaseType}`;
     const uploaded = new AWS.S3.ManagedUpload({
       params: {
         Bucket: albumBucketName,
