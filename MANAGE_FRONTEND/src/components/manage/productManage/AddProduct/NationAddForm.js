@@ -143,18 +143,22 @@ const NationAddForm = ({ classes, steps, step }) => {
           dispatch(nextStep());
         })
         .catch(err => {
-          const { status } = err.response;
-          if (status === 409) {
-            setErrors({
-              ...errors,
-              en_name: true,
-              ko_name: true,
-            });
-            setErrorText({
-              ...errorText,
-              ko_name: '중복된 한글 국가명입니다.',
-              en_name: '중복된 영문 국가명입니다.',
-            });
+          if (err && err.response) {
+            const { status } = err.response;
+            if (status === 409) {
+              setErrors({
+                ...errors,
+                en_name: true,
+                ko_name: true,
+              });
+              setErrorText({
+                ...errorText,
+                ko_name: '중복된 한글 국가명입니다.',
+                en_name: '중복된 영문 국가명입니다.',
+              });
+            }
+          } else {
+            console.log(err);
           }
         });
     }

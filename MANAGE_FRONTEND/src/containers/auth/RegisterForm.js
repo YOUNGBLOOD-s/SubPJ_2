@@ -62,9 +62,13 @@ const RegisterForm = ({ history }) => {
   // auth 값 및 authError 값 중 무엇이 유효한지에 따른 작업을 한다.
   useEffect(() => {
     if (authError) {
-      const { status } = authError.response;
-      if (status === 409) {
-        setError('이미 존재하는 아이디입니다.');
+      if (authError.response) {
+        const { status } = authError.response;
+
+        if (status === 409) {
+          setError('이미 존재하는 아이디입니다.');
+        }
+        return;
       }
       return;
     }
