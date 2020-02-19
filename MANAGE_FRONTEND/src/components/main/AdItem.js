@@ -73,7 +73,7 @@ const AdItem = ({ ad }) => {
         </ImageWrapper>
         <ContentWrapper>
           <div className="ko-name">
-            {name} <span className="en-name">{en_name}</span>
+            {name} <span className="en-name">{en_name.toUpperCase()}</span>
           </div>
           <ScheduleWrapper>
             <div className="date-box">
