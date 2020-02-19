@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import axios from 'axios';
+import getImageUrl from '../../../lib/utill/getImageUrl';
 
 const GradeImgWrapper = styled.div`
   text-align: center;
@@ -97,7 +98,7 @@ const GradeCard = ({ info }) => {
       <CardActionArea>
         <CardContent>
           <GradeImgWrapper>
-            <img src={image} alt="" />
+            <img src={getImageUrl('static', image)} alt="" />
           </GradeImgWrapper>
           <GradeTitle>{title}</GradeTitle>
           <GradePrice>

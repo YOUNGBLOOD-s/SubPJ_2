@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import getImageUrl from '../../lib/utill/getImageUrl';
 
 const AdItemBlock = styled.div`
   position: relative;
@@ -68,7 +69,7 @@ const AdItem = ({ ad }) => {
     <AdItemBlock>
       <Link to={`/detail/${id}`}>
         <ImageWrapper>
-          <img className="image" src={image} alt="" />
+          <img className="image" src={getImageUrl('md', image)} alt="" />
         </ImageWrapper>
         <ContentWrapper>
           <div className="ko-name">

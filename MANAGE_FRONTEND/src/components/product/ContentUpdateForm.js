@@ -4,10 +4,13 @@ import ImageUploader from '../common/ImageUploader';
 import StyledTextField from '../common/StyledTextField';
 import transportArr from '../../lib/data/transportArr';
 import MenuItem from '@material-ui/core/MenuItem';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateProductContent } from '../../modules/product';
 
 const ContentUpdateForm = ({ content, setUpdating }) => {
+  const { en_name } = useSelector(({ product }) => ({
+    en_name: product.product.nation.en_name,
+  }));
   const [form, setForm] = useState({
     nation: content.nation,
     day: content.day,
@@ -48,6 +51,7 @@ const ContentUpdateForm = ({ content, setUpdating }) => {
           imageUrl={form.image}
           inputId={`content-${content.day}-${content.seq}`}
           setImageUrl={setImageUrl}
+          en_name={en_name}
         />
       </component.Grid>
       <component.Grid item xs={12} sm={6}>

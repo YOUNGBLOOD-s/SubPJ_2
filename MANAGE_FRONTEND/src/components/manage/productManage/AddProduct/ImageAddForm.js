@@ -8,7 +8,7 @@ import component from '../../../../lib/material/component';
 import { prevStep, nextStep } from '../../../../modules/stepper';
 import AlertDialog from '../../../common/AlertDialog';
 
-const ImageForm = ({ type }) => {
+const ImageForm = ({ type, en_name }) => {
   const { imageUrl } = useSelector(({ form }) => ({
     imageUrl: form.images[type - 1].url,
   }));
@@ -23,6 +23,7 @@ const ImageForm = ({ type }) => {
       imageUrl={imageUrl}
       setImageUrl={setImageUrl}
       inputId={`image-add-${type}`}
+      en_name={en_name}
     />
   );
 };
@@ -36,9 +37,10 @@ const Dsecription = styled.div`
 `;
 
 const ImageAddForm = ({ classes, steps, step }) => {
-  const { nationId, images } = useSelector(({ form }) => ({
+  const { nationId, images, en_name } = useSelector(({ form }) => ({
     nationId: form.nationId,
     images: form.images,
+    en_name: form.en_name,
   }));
 
   const [error, setError] = useState(false);
@@ -95,7 +97,7 @@ const ImageAddForm = ({ classes, steps, step }) => {
           <component.Grid item xs={12} sm={6} key={type.type}>
             <MaterialCard>
               <Dsecription>{type.description}</Dsecription>
-              <ImageForm type={type.type} />
+              <ImageForm type={type.type} en_name={en_name} />
             </MaterialCard>
           </component.Grid>
         ))}

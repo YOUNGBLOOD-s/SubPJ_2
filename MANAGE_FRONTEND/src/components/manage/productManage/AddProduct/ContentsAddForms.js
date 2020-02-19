@@ -12,6 +12,7 @@ import ImageUploader from '../../../common/ImageUploader';
 import { prevStep, nextStep } from '../../../../modules/stepper';
 import transportArr from '../../../../lib/data/transportArr';
 import AlertDialog from '../../../common/AlertDialog';
+import getImageUrl from '../../../../lib/utill/getImageUrl';
 
 const StyledTextField = withStyles({
   root: {
@@ -41,7 +42,7 @@ const CenteredBox = styled.div`
   align-items: center;
 `;
 
-const ContentsAddForm = ({ nationId }) => {
+const ContentsAddForm = ({ nationId, en_name }) => {
   const initialState = {
     day: '1', // 컨텐츠의 일자
     seq: '1', // 순서
@@ -91,7 +92,7 @@ const ContentsAddForm = ({ nationId }) => {
             <component.Grid container spacing={1}>
               <component.Grid item xs={4}>
                 <img
-                  src={content.image}
+                  src={getImageUrl('sm', content.image)}
                   alt={content.detail}
                   style={{ width: '100%', height: '100px', objectFit: 'cover' }}
                 />
@@ -131,6 +132,7 @@ const ContentsAddForm = ({ nationId }) => {
                   imageUrl={content.image}
                   setImageUrl={setImageUrl}
                   inputId={`content-image-${content.day}-${content.seq}`}
+                  en_name={en_name}
                 />
               </component.Grid>
             </component.Grid>
@@ -242,17 +244,21 @@ const ContentsAddForm = ({ nationId }) => {
 };
 
 const ContentAddForms = ({ classes, steps, step }) => {
-  const { nationId, routes } = useSelector(({ form }) => ({
+  const { nationId, routes, en_name } = useSelector(({ form }) => ({
     nationId: form.nationId,
     routes: form.routes,
+    en_name: form.en_name,
   }));
   const [error, setError] = useState(false);
   const [contentForms, setContentForms] = useState([
-    <ContentsAddForm nationId={nationId} />,
+    <ContentsAddForm nationId={nationId} en_name={en_name} />,
   ]);
 
   const addForm = () => {
-    setContentForms([...contentForms, <ContentsAddForm nationId={nationId} />]);
+    setContentForms([
+      ...contentForms,
+      <ContentsAddForm nationId={nationId} en_name={en_name} />,
+    ]);
   };
 
   const dispatch = useDispatch();

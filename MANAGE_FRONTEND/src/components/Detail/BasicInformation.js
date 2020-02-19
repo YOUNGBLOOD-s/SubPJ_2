@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Fab from '@material-ui/core/Fab';
+import getImageUrl from '../../lib/utill/getImageUrl';
 
 const BasicInformationBlock = styled.div`
   position: relative;
@@ -93,7 +94,7 @@ const BasicInformation = ({ country }) => {
   return (
     <BasicInformationBlock>
       <ImageWrapper>
-        <StyledImg src={thumbnail} alt="썸네일" />
+        <StyledImg src={getImageUrl('md', thumbnail)} alt="썸네일" />
       </ImageWrapper>
       <TextWrapper>
         <StyledTitle>

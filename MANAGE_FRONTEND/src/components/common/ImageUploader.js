@@ -3,6 +3,7 @@ import AWS from 'aws-sdk';
 import component from '../../lib/material/component';
 import styled from 'styled-components';
 import LinearLoader from './LinearLoader';
+import getImageUrl from '../../lib/utill/getImageUrl';
 
 const ImageWrapper = styled.div`
   width: 100%;
@@ -27,7 +28,7 @@ const StyledInput = styled.input`
   display: none;
 `;
 
-const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
+const ImageUploader = ({ imageUrl, setImageUrl, inputId, en_name }) => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const UploadInput = useRef(null);
@@ -48,8 +49,10 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
       }),
     });
 
+    const type = file.name.substring(file.name.lastIndexOf('.') + 1);
+    const lowercaseType = type.toLowerCase();
     const timestamp = new Date().getTime();
-    const photoKey = `uploaded/${timestamp + file.name}`;
+    const photoKey = `${en_name}_${timestamp}.${lowercaseType}`;
     const uploaded = new AWS.S3.ManagedUpload({
       params: {
         Bucket: albumBucketName,
@@ -62,8 +65,8 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
     const promise = uploaded.promise();
     promise
       .then(data => {
-        const { Location } = data;
-        setImageUrl(Location);
+        const { key } = data;
+        setImageUrl(key);
         setLoading(false);
       })
       .catch(err => {
@@ -116,7 +119,7 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId }) => {
             <StyledImg
               src={
                 imageUrl
-                  ? imageUrl
+                  ? getImageUrl('sm', imageUrl)
                   : 'https://crestaproject.com/demo/lontano-pro/wp-content/themes/lontano-pro/images/no-image-slide.png'
               }
               alt="날씨별 이미지"
