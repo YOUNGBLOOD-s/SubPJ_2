@@ -7,7 +7,7 @@ import getImageUrl from '../../../lib/utill/getImageUrl';
 const InfoWrapper = styled.div``;
 
 const GridWrapper = styled.div`
-  padding: 5rem 0;
+  padding: 7rem 0;
   background-color: ${props => (props.color ? props.color : '')};
   @media (max-width: 600px) {
     padding: 2rem 0;
@@ -39,6 +39,8 @@ const DescriptionWrapper = styled.div`
     margin: 1rem 0;
   }
   .title {
+    font-family: 'NotoSerifKR';
+    margin-bottom: 0.5rem;
     font-size: 2.5rem;
     text-align: center;
     @media (max-width: 600px) {
