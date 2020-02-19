@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { withLazyImageContext } from './LazyImageContext';
-import styled from 'styled-components';
 import './lazyImage.css';
 
 const LazyImage = ({ src, isQR, lazyLoad }) => {

@@ -6,12 +6,7 @@ const Context = createContext();
 
 // Add the image class name our LazyLoad plugin should look for
 const options = {
-  elements_selector: [
-    '.lazyImage__img',
-    '.lazyImage__qr',
-    '.lazySound',
-    '.lazySound__sound',
-  ],
+  elements_selector: ['.lazyImage__img', '.lazyImage__qr', '.lazySound'],
 };
 
 export const LazyImageProvider = ({ children }) => {

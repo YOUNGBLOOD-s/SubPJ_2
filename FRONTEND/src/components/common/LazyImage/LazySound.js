@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { withLazyImageContext } from './LazyImageContext';
+import { withLazySoundContext } from './LazySoundContext';
 import Sound from 'react-sound';
 import './lazyImage.css';
 
@@ -20,7 +20,7 @@ const LazySound = ({ src, lazyLoad }) => {
         className="lazySound__sound"
         url={src}
         playStatus={Sound.status.PLAYING}
-        playFromPosition={300 /* in milliseconds */}
+        playFromPosition={0 /* in milliseconds */}
         onLoading={Sound.handleSongLoading}
         onPlaying={Sound.handleSongPlaying}
         onFinishedPlaying={Sound.handleSongFinishedPlaying}
@@ -29,4 +29,4 @@ const LazySound = ({ src, lazyLoad }) => {
   );
 };
 
-export default withLazyImageContext(LazySound);
+export default withLazySoundContext(LazySound);
