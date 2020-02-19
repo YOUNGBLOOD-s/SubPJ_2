@@ -30,6 +30,7 @@ const ContentWrapper = styled.div`
     }
   }
   .price {
+    font-family: 'GmarketSansLight';
     text-align: end;
     font-size: 1.5rem;
     font-weight: bold;

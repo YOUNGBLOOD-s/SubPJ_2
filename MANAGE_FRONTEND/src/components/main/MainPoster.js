@@ -30,10 +30,15 @@ const TextWrapper = styled.div`
 
 const Text = styled.div`
   font-family: 'Nanum Myeongjo', serif;
-  /* font-family: 'MapoFlowerIsland'; */
   font-weight: bold;
   margin-bottom: 1rem;
-  font-size: 2rem;
+  font-size: 3rem;
+  @media (max-width: 600px) {
+    font-size: 1.8rem;
+  }
+  @media (max-width: 360px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const MainPoster = () => {
