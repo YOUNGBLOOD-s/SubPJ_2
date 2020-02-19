@@ -706,7 +706,7 @@ public class ManageController {
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
 			//현재 노출중인 광고의 갯수.
-			if (customer == 1) {
+			if (grade == 1) {
 				recoNum = ser.selectRecoNumber();
 				System.out.println(recoNum);
 				msg.put("resvalue", recoNum);
@@ -719,5 +719,35 @@ public class ManageController {
 		}
 		return res;
 	}
+	
+	/** 매니저가 recoNum 수정하기. 강기동 02 19  */
+	@PutMapping("/manager/reco/update/{num}")
+	@ApiOperation(value = "관리저가 recoNum(광고송출갯수) 수정하기. num이 5일경우 센서5개 기본5")
+	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token,
+			@PathVariable("num") int num) {
+		ResponseEntity<Map<String, Object>> res = null;
+		Map<String, Object> msg = new HashMap<String, Object>();
+
+		try {
+			Claims de = MemberController.verification(token);
+			String username = (String) de.get("username");
+			int customer = ser.getIdx(username);
+			int grade = ser.searchGrade(customer);
+			System.out.println(grade);
+			if (grade == 1) {
+				int recoNum = ser.selectRecoNumber();
+				ser.recoNumUpdate(num, recoNum);
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+			} else {
+				return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			}
+		} catch (Exception e) {
+			msg.put("resmsg", e.getMessage());
+			System.out.println(e.getMessage());
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
+		}
+		return res;
+	}
+	
 
 }

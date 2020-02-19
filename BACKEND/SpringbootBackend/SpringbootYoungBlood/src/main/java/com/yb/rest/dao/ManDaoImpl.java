@@ -182,5 +182,14 @@ public class ManDaoImpl implements IManDao {
 		return session.selectOne("management.selectRecoNumber");
 	}
 
+	@Override
+	public void recoNumUpdate(int num, int rNum) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("num", num);
+		map.put("rnum", rNum);
+		session.update("management.recoNumUpdate", map);
+		
+	}
+
 	
 }
