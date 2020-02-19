@@ -98,7 +98,7 @@ const BasicInformation = ({ country }) => {
       </ImageWrapper>
       <TextWrapper>
         <StyledTitle>
-          <div className="title_en">{en_name}</div>
+          <div className="title_en">{en_name.toUpperCase()}</div>
           <div className="title">{name}</div>
         </StyledTitle>
         <CountryInfoWrapper>

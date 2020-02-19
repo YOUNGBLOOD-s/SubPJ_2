@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import CardMedia from '@material-ui/core/CardMedia';
 import palette from '../../../../lib/styles/palette';
 import gradeType from '../../../../lib/data/gradeType';
+import getImageUrl from '../../../../lib/utill/getImageUrl';
 
 const useStyles = makeStyles({
   root: {
@@ -53,10 +54,19 @@ const ScheduleWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     font-weight: 400;
-    .text {
-      color: ${palette.grey[600]};
+    .wrapper {
+      color: ${palette.theme[300]};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+      .text {
+        color: ${palette.grey[600]};
+        margin-left: 0.5rem;
+      }
     }
     .date {
+      font-family: 'GmarketSansLight';
       font-weight: bold;
     }
   }
@@ -70,25 +80,39 @@ const ScheduleWrapper = styled.div`
   }
 `;
 
+const FlyIcon = ({ type }) => {
+  switch (type) {
+    case 'up':
+      return <i class="fas fa-plane-departure"></i>;
+    case 'down':
+      return <i class="fas fa-plane-arrival"></i>;
+
+    default:
+      return null;
+  }
+};
+
 const MyProduct = ({ ad, isAdmin }) => {
   const classes = useStyles();
   const { ko_name, en_name, s_date, f_date, price, url } = ad;
   const { company, username, grade } = ad.owner;
   return (
     <Card className={classes.root} variant="outlined">
-      <CardMedia className={classes.media} image={url} title={ko_name} />
+      <CardMedia
+        className={classes.media}
+        image={getImageUrl('sm', url)}
+        title={ko_name}
+      />
       <CardContent>
         <ContentWrapper>
           <div className="ko-name">
-            {ko_name} <span className="en-name">{en_name}</span>
+            {ko_name} <span className="en-name">{en_name.toUpperCase()}</span>
           </div>
           <ScheduleWrapper>
             <div className="date-box">
-              <div className="text">
-                <span role="img" aria-label="img">
-                  🛫
-                </span>{' '}
-                출발일
+              <div className="wrapper">
+                <FlyIcon type="up" />
+                <div className="text">출발일</div>
               </div>
               <div className="date">{s_date}</div>
             </div>
@@ -96,11 +120,9 @@ const MyProduct = ({ ad, isAdmin }) => {
               <div className="bar" />
             </div>
             <div className="date-box">
-              <div className="text">
-                <span role="img" aria-label="img">
-                  🛬
-                </span>{' '}
-                도착일
+              <div className="wrapper">
+                <FlyIcon type="down" />
+                <div className="text">도착일</div>
               </div>
               <div className="date">{f_date}</div>
             </div>

@@ -12,7 +12,7 @@ import { getQrDetail, increaseQrView } from '../modules/qr';
 import Price from '../components/Detail/Price';
 import GoToMainButton from '../components/Detail/GoToMainButton';
 import { Helmet } from 'react-helmet-async';
-import getImageUrl from '../lib/utill/getSpeechUrl';
+import getImageUrl from '../lib/utill/getImageUrl';
 
 const DetailPageWrapper = styled.div`
   max-width: 1000px;

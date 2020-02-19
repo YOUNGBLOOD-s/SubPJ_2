@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import ImageUpdateForm from './ImageUpdateForm';
 import component from '../../lib/material/component';
-import getImageUrl from '../../lib/utill/getSpeechUrl';
+import getImageUrl from '../../lib/utill/getImageUrl';
 
 const ImageWrapper = styled.div`
   display: flex;
@@ -26,12 +26,12 @@ const ImageWrapper = styled.div`
   }
 `;
 
-// type : 정도 (1-추움, 2-더움, 3-밝음, 4-어두움)
+// type : 정도 (1-밝고 더움, 2-밝고 추움, 3-어둡고 더움, 4-어둡고 추움)
 const typeName = {
-  1: '🥶 추운 이미지',
-  2: '🥵 더운 이미지',
-  3: '🌞 밝은 이미지',
-  4: '🌚 어두운 이미지',
+  1: '밝고 더운 이미지',
+  2: '밝고 추운 이미지',
+  3: '어둡고 더운 이미지',
+  4: '어둡고 추운 이미지',
 };
 
 const ImageItem = ({ image, user }) => {

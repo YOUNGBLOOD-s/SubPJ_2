@@ -66,8 +66,11 @@ const ImageUploader = ({ imageUrl, setImageUrl, inputId, en_name }) => {
     promise
       .then(data => {
         const { key } = data;
+        // 의도적으로 지연시킴.
         setImageUrl(key);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 4000);
       })
       .catch(err => {
         console.error(err);
