@@ -67,7 +67,7 @@ const ProductDetail = ({ match, history }) => {
     try {
       const token = sessionStorage.getItem('access_token');
       await removeList({ token, id });
-      history.push('/admin');
+      history.push('/management');
     } catch (e) {
       console.log(e);
     }

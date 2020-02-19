@@ -46,7 +46,7 @@ const PleasePurchase = () => {
       </div>
       <div className="text">광고주로 등록하고</div>
       <div className="text">최상의 광고 효과를 누리세요!</div>
-      <StyledLink to="/manage/grade">
+      <StyledLink to="/management/grade">
         <span role="img" aria-label="img">
           🛒
         </span>{' '}

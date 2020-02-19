@@ -35,7 +35,7 @@ const AddProduct = ({ history }) => {
     }
     // 등급이 0인경우 구매하고 오라고하자
     if (member && member.grade === 0) {
-      history.push('/manage/grade');
+      history.push('/management/grade');
     }
   }, [user, member, history]);
 

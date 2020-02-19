@@ -66,18 +66,18 @@ const MyProducts = () => {
 
   return (
     <MyProductsWrapper>
-      <component.Grid container>
-        <component.Grid item xs={6}>
-          <TitleBar>광고 목록</TitleBar>
-        </component.Grid>
-        <component.Grid item xs={6}>
-          <AddProductLink>광고 추가</AddProductLink>
-        </component.Grid>
-      </component.Grid>
       {!loading && ads ? (
         <>
           {ads.length > 0 ? (
             <>
+              <component.Grid container>
+                <component.Grid item xs={6}>
+                  <TitleBar>광고 목록</TitleBar>
+                </component.Grid>
+                <component.Grid item xs={6}>
+                  <AddProductLink>광고 추가</AddProductLink>
+                </component.Grid>
+              </component.Grid>
               <AdListWraaper>
                 <component.Grid container spacing={1}>
                   {ads.map(ad => (

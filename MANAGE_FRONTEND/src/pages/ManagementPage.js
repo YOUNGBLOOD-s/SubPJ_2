@@ -9,14 +9,10 @@ import { getCurrentUser } from '../modules/user';
 import LoadingBackdrop from '../components/common/LoadingBackdrop';
 import ManagementAppBar from '../components/common/ManagementAppBar';
 
-const ManagementPageWrapper = styled.div`
-  height: -webkit-fill-available;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Content = styled.div`
+const ContentWrapper = styled.div`
   flex-grow: 1;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -39,22 +35,20 @@ const ManagementPage = ({ history }) => {
   }, [user, history]);
 
   return (
-    <ManagementPageWrapper>
+    <>
       <Helmet>
         <title>매니지먼트 - NEARBY AD</title>
       </Helmet>
       <ButtonAppbarContainer />
-      <Content>
+      {user && <ManagementAppBar user={user} />}
+      <ContentWrapper>
         {user ? (
-          <>
-            <ManagementAppBar user={user} />
-            {user.username === 'admin' ? <AdminPage /> : <ManagePage />}
-          </>
+          <>{user.username === 'admin' ? <AdminPage /> : <ManagePage />}</>
         ) : (
           <LoadingBackdrop />
         )}
-      </Content>
-    </ManagementPageWrapper>
+      </ContentWrapper>
+    </>
   );
 };
 

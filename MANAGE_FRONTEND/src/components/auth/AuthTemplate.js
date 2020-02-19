@@ -28,12 +28,6 @@ const Box = styled.div`
   width: 270px;
 `;
 
-const SubTitle = withStyles({
-  root: {
-    fontWeight: 'bold',
-  },
-})(component.Typography);
-
 const AuthTemplate = ({ children }) => {
   return (
     <AuthTemplateBlock>
