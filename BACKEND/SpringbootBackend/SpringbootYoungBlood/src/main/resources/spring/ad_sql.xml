@@ -156,7 +156,7 @@
 	</select>
 	
 	<select id="selectidxs_page" parameterType="int" resultType="int">
-	select idx from nationtb limit 12 offset #{pageidx};
+	select idx from nationtb where idx in (select nation from imagetb) and idx in (select nation from monthtb) and idx in (select nation from contentstb) order by idx limit 12 offset #{idx};
 	</select>
 	
 	<select id="selectNation" resultType="int" parameterType="int">
