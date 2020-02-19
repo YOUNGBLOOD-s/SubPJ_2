@@ -8,7 +8,6 @@ const TitleWrapper = styled.div`
   align-items: center;
   padding: 0.5rem 1rem;
   .eng {
-    font-family: 'NanumBarunGothic';
     font-size: 0.8rem;
   }
   .title {

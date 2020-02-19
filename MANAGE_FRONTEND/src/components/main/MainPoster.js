@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from '../common/Logo';
 import getImageUrl from '../../lib/utill/getImageUrl';
+import palette from '../../lib/styles/palette';
 
 const PosterWrapper = styled.div`
   position: relative;
@@ -41,7 +42,24 @@ const Text = styled.div`
   }
 `;
 
+const SlideBtn = styled.div`
+  font-family: 'GmarketSansLight';
+  border: 2px solid black;
+  font-weight: bold;
+  border-radius: 1.5rem;
+  padding: 0.5rem 1.3rem;
+  margin-top: 2rem;
+  cursor: pointer;
+  :hover {
+    background-color: ${palette.grey[200]};
+    transition-duration: 0.5s;
+  }
+`;
+
 const MainPoster = () => {
+  const onSlideClick = () => {
+    window.scrollTo({ top: window.innerHeight + 50, behavior: 'smooth' });
+  };
   return (
     <PosterWrapper>
       <ImageWrapper>
@@ -51,6 +69,10 @@ const MainPoster = () => {
         <Text>마치 네 곁에 있는 것처럼,</Text>
         <Text>나에게 딱 맞는 광고 플랫폼</Text>
         <Logo />
+        <SlideBtn onClick={onSlideClick}>
+          <i className="fas fa-angle-double-down"></i>
+          {'  '}SLIDE
+        </SlideBtn>
       </TextWrapper>
     </PosterWrapper>
   );
