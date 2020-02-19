@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
 import component from '../../lib/material/component';
+import Logo from '../common/Logo';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ const AuthTemplateBlock = styled.div`
 `;
 
 const Box = styled.div`
-  width: 360px;
+  width: 270px;
 `;
 
 const SubTitle = withStyles({
@@ -38,10 +39,7 @@ const AuthTemplate = ({ children }) => {
     <AuthTemplateBlock>
       <Box>
         <TitleWrapper>
-          <component.Typography variant="caption">
-            NEARBY AD
-          </component.Typography>
-          <SubTitle variant="h2">네곁에.</SubTitle>
+          <Logo />
         </TitleWrapper>
         {children}
       </Box>
