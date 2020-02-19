@@ -257,24 +257,24 @@ public class AdController {
 						Map<String, Object> con = new HashMap<String, Object>();
 						int idx = filterlist.get(i);	
 						Nation nation = ser.getNationdetail(idx);
-							Monthtb mon = manser.monthInfo(idx);
-							List<Image> img = manser.imagesInfo(idx);
-							List<Route> rou = manser.contentsInfo(idx);
-							if (mon == null || img == null || rou == null) continue;			
-							con.put("idx", nation.getIdx());
-							con.put("en_name", nation.getEn_name());
-							con.put("name", nation.getKo_name());
-							con.put("dust", nation.getDust());
-							con.put("continents", nation.getContinents());
-							con.put("showcnt", nation.getShowcnt());
-							con.put("customer", nation.getCustomer());
-							con.put("weight", nation.getWeight());
-							con.put("speech", nation.getSpeech());
-							con.put("price", nation.getPrice());
-							con.put("type", nation.getType());
-							con.put("image", nation.getUrl());
-							con.put("s_date", nation.getS_date());
-							con.put("f_date", nation.getF_date());		
+						Monthtb mon = manser.monthInfo(idx);
+						List<Image> img = manser.imagesInfo(idx);
+						List<Route> rou = manser.contentsInfo(idx);
+						if (mon == null || img == null || rou == null) continue;			
+						con.put("idx", nation.getIdx());
+						con.put("en_name", nation.getEn_name());
+						con.put("name", nation.getKo_name());
+						con.put("dust", nation.getDust());
+						con.put("continents", nation.getContinents());
+						con.put("showcnt", nation.getShowcnt());
+						con.put("customer", nation.getCustomer());
+						con.put("weight", nation.getWeight());
+						con.put("speech", nation.getSpeech());
+						con.put("price", nation.getPrice());
+						con.put("type", nation.getType());
+						con.put("image", nation.getUrl());
+						con.put("s_date", nation.getS_date());
+						con.put("f_date", nation.getF_date());		
 						if (list.size() == 12) {
 							result.put("lastpage", false);
 						} else {// 라스트페이지일 경우 true
@@ -337,7 +337,8 @@ public class AdController {
 				} else {
 					list.clear();
 					list = ser.selectIdxs_page(pageIdx);
-					for (int i = 0; i < list.size(); i++) {		
+					System.out.println(list);
+					for (int i = 0; i < list.size(); i++) {
 						Map<String, Object> con = new HashMap<String, Object>();
 						int idx = list.get(i);
 						Nation nation = ser.getNationdetail(idx);
@@ -383,15 +384,14 @@ public class AdController {
 							}					
 						});
 					}
-					result.put("AllNationDatas", Countrylist);
+//					result.put("AllNationDatas", Countrylist);
 				}
-			
 			} else if (list.size() == 0){
 				maxpage--;
 				result.put("lastpage", true);
 			}
 			result.put("lastpageidx", maxpage);
-//			result.put("AllNationDatas", Countrylist);
+			result.put("AllNationDatas", Countrylist);
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 			return re;
 		}
