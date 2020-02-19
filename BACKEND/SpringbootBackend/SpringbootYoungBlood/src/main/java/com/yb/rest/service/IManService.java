@@ -18,6 +18,7 @@ public interface IManService {
 	public Nation selectNationCustomer(int customer);
 	public Member selectMemberInfo(int customer);
 	public int selectCustomer(int idx);
+	public int selectRecoNumber();
 	
 	/**나라 CRUD*/
 	public List<Nation> nationList(int customer);

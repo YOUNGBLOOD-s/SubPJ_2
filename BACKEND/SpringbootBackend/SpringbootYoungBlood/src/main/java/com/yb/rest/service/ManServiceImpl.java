@@ -174,4 +174,10 @@ public class ManServiceImpl implements IManService {
 		return repo.selectCustomer(idx);
 	}
 
+	@Override
+	public int selectRecoNumber() {
+		return repo.selectRecoNumber();
+		
+	}
+
 }

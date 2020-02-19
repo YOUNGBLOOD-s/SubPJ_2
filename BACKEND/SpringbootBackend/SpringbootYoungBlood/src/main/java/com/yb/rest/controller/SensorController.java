@@ -580,8 +580,8 @@ public class SensorController {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
 		try {
-			
-			List<Integer> nation = weightcal();
+			int num = manser.selectRecoNumber();
+			List<Integer> nation = weightcal(num);
 			
 			
 			System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
@@ -682,6 +682,7 @@ public class SensorController {
 				Countrylist.add(data);
 			}
 			result.put("datas", Countrylist);
+			result.put("datasize", Countrylist.size());
 			// System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
 			// System.out.println(Countrylist);
 			System.out.println("==============");
