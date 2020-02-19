@@ -11,6 +11,7 @@ import continentsArray from '../../../../lib/data/continentsArray';
 import StyledTextField from '../../../common/StyledTextField';
 import DatePicker from '../../../common/DatePicker';
 import reformDate from '../../../../lib/utill/reformDate';
+import isAlpha from '../../../../lib/utill/isAlpha';
 
 const StyledForm = styled.form`
   display: flex;
@@ -70,6 +71,18 @@ const NationAddForm = ({ classes, steps, step }) => {
     if (forms.en_name.length > 50) {
       error_set.en_name = true;
       error_msg.en_name += '영문 국가명이 너무 깁니다.';
+      isError = true;
+    }
+
+    let isEnglish = true;
+    for (let i = 0; i < forms.en_name.length; i++) {
+      if (!isAlpha(forms.en_name[i])) {
+        isEnglish = false;
+      }
+    }
+    if (!isEnglish) {
+      error_set.en_name = true;
+      error_msg.en_name += '영문만 입력가능합니다.';
       isError = true;
     }
 
