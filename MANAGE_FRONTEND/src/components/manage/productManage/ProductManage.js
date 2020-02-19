@@ -1,28 +1,33 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import MyProducts from './MyProducts/MyProducts';
 import { useSelector } from 'react-redux';
+import LoadingBackdrop from '../../common/LoadingBackdrop';
+import PleasePurchase from '../../common/PleasePurchase';
 
 const ProductManageWrapper = styled.div`
   max-width: 1000px;
   margin: 0 auto;
+  flex-grow: 1;
+  display: flex;
 `;
 
-const ProductManage = ({ history }) => {
-  const { member } = useSelector(({ user }) => ({
+const ProductManage = () => {
+  const { member, loading } = useSelector(({ user, loading }) => ({
     member: user.member,
+    loading: loading['user/GET_CURRENT_USER'],
   }));
 
-  useEffect(() => {
-    if (member && member.grade === 0) {
-      history.push('/manage/grade');
-    }
-  }, [member, history]);
-
   return (
-    <ProductManageWrapper>
-      <MyProducts />
-    </ProductManageWrapper>
+    <>
+      {!loading && member ? (
+        <ProductManageWrapper>
+          {member && member.grade === 0 ? <PleasePurchase /> : <MyProducts />}
+        </ProductManageWrapper>
+      ) : (
+        <LoadingBackdrop loading={loading} />
+      )}
+    </>
   );
 };
 

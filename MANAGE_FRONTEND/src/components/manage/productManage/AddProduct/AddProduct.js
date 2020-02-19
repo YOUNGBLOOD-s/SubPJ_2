@@ -29,10 +29,12 @@ const AddProduct = ({ history }) => {
   }));
 
   useEffect(() => {
-    if (!user) {
+    //  멤버정보를 못구하면 홈으로
+    if (!user || !member) {
       history.push('/');
     }
 
+    // 등급이 0인경우 구매하고 오라고하자
     if (member && member.grade === 0) {
       history.push('/manage/grade');
     }

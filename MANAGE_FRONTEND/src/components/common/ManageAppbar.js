@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUser } from '../../modules/user';
 
 const AppBarWrapper = styled.div`
   background-color: ${palette.grey[200]};
@@ -27,24 +25,11 @@ const StyledLink = styled(Link)`
 `;
 
 const ManageAppbar = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [dispatch]);
-
-  const { member } = useSelector(({ user }) => ({
-    member: user.member,
-  }));
   return (
     <AppBarWrapper>
       <LinkWrapper>
-        {member && member.grade !== 0 && (
-          <>
-            <StyledLink to="/manage">광고통계</StyledLink>
-            <StyledLink to="/manage/product">나의광고</StyledLink>
-          </>
-        )}
+        <StyledLink to="/manage">광고통계</StyledLink>
+        <StyledLink to="/manage/product">나의광고</StyledLink>
         <StyledLink to="/manage/mypage">마이페이지</StyledLink>
         <StyledLink to="/manage/grade">등급구매</StyledLink>
       </LinkWrapper>
