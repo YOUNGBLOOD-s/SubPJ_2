@@ -43,4 +43,8 @@
 	select * from clicktb where nation=#{nationIdx};
 	</select>
 	
+	<select id="veruser" parameterType="String" resultType="nation">
+	select * from nationtb where customer = (select idx from membertb where username=#{username});
+	</select>
+	
 </mapper>

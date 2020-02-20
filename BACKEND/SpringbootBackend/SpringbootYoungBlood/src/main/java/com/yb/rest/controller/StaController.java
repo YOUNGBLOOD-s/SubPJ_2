@@ -55,13 +55,9 @@ public class StaController {
 		try {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
-			result.put("username", username);
 			
-			map = new HashMap<>();
-			map.put("username", username);
-			map.put("nationIdx", nationIdx);
-			boolean flag = ser.vernation(map);
-			if(!flag) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+			//user 확인
+			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 			
 			cal.setTime(date);
 			df.format(date);
@@ -132,6 +128,8 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			result.put("username", username);
+			
+			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 			
 			Map<String, Object> map = new HashMap<>();
 			map.put("username", username);
@@ -211,7 +209,8 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			result.put("username", username);
-			List<Integer> idxs = ser.selectAllNationIdxs(username);
+			
+			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 			
 			map = new HashMap<>();
 			map.put("username", username);
@@ -308,6 +307,8 @@ public class StaController {
 			result.put("username", username);
 			List<Integer> idxs = ser.selectAllNationIdxs(username);
 
+			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+			
 			if(nationIdx==null || nationIdx=="") {
 				for(int i=0; i<idxs.size(); i++) {
 					Map<String, Object> map = new HashMap<>(); 

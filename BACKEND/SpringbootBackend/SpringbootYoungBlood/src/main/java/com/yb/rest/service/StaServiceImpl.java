@@ -49,6 +49,11 @@ public class StaServiceImpl implements IStaService{
 	public boolean vernation(Map map) {
 		return repo.vernation(map);
 	}
+
+	@Override
+	public boolean verUser(String username) {
+		return repo.verUser(username);
+	}
 	
 	
 }
