@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { toggleProductCounsel } from '../../modules/product';
 
 const CounselItemWrapper = styled.div`
-  min-width: 400px;
+  max-width: 600px;
   border: 1px solid ${palette.grey[200]};
   border-radius: 3px;
   padding: 1rem;
@@ -34,39 +34,39 @@ const CounselItem = ({ counsel }) => {
   return (
     <CounselItemWrapper>
       <component.Grid container>
-        <component.Grid item xs={2}>
+        <component.Grid item xs={12} sm={2}>
           <span className="title">상담신청일</span>
         </component.Grid>
-        <component.Grid item xs={10}>
+        <component.Grid item xs={12} sm={10}>
           <div>
             {year}년 {month}월 {day}일
           </div>
         </component.Grid>
-        <component.Grid item xs={2}>
+        <component.Grid item xs={12} sm={2}>
           <span className="title">성명(연령)</span>
         </component.Grid>
-        <component.Grid item xs={10}>
+        <component.Grid item xs={12} sm={10}>
           <div>
             {name} ({age})
           </div>
         </component.Grid>
-        <component.Grid item xs={2}>
+        <component.Grid item xs={12} sm={2}>
           <span className="title">이메일</span>
         </component.Grid>
-        <component.Grid item xs={10}>
+        <component.Grid item xs={12} sm={10}>
           <div>{email}</div>
         </component.Grid>
-        <component.Grid item xs={2}>
+        <component.Grid item xs={12} sm={2}>
           <span className="title">연락처</span>
         </component.Grid>
-        <component.Grid item xs={10}>
+        <component.Grid item xs={12} sm={10}>
           <div>{tel}</div>
         </component.Grid>
-        <component.Grid item xs={12}>
+        <component.Grid item xs={12} sm={12}>
           <span className="title">상담내용</span>
           <p>{text}</p>
         </component.Grid>
-        <component.Grid item xs={12}>
+        <component.Grid item xs={12} sm={12}>
           <component.Button
             fullWidth
             color="primary"
