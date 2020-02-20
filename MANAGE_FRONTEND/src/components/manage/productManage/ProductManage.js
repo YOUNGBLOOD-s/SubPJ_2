@@ -6,8 +6,6 @@ import LoadingBackdrop from '../../common/LoadingBackdrop';
 import PleasePurchase from '../../common/PleasePurchase';
 
 const ProductManageWrapper = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
   flex-grow: 1;
   display: flex;
 `;

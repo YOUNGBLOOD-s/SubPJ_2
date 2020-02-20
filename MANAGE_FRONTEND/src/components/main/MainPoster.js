@@ -56,11 +56,11 @@ const ManagementLink = styled(Link)`
   cursor: pointer;
   right: 2%;
   top: 5%;
-  @media (max-width: 600px) {
+  /* @media (max-width: 600px) {
     font-size: 0.8rem;
     right: 0;
     transform: translate(-50%, 0);
-  }
+  } */
   :hover {
     background-color: ${palette.grey[200]};
     transition-duration: 0.5s;

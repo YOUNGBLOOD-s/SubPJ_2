@@ -3,7 +3,7 @@ import component from '../../../../lib/material/component';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { nextStep, prevStep } from '../../../../modules/stepper';
 import axios from 'axios';
 import { selectNation } from '../../../../modules/form';
