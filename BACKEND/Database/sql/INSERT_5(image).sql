@@ -63,13 +63,13 @@ insert into imagetb(nation, type, url)
     values(6, 4, 'switzerland/darkc.png');
 -- 하와이
 insert into imagetb(nation, type, url)
-    values(7, 1, 'hawai/lightw.png');
+    values(7, 1, 'hawaii/lightw.png');
 insert into imagetb(nation, type, url)
-    values(7, 2, 'hawai/lightc.png');
+    values(7, 2, 'hawaii/lightc.png');
 insert into imagetb(nation, type, url)
-    values(7, 3, 'hawai/darkw.png');
+    values(7, 3, 'hawaii/darkw.png');
 insert into imagetb(nation, type, url)
-    values(7, 4, 'hawai/darkc.png');
+    values(7, 4, 'hawaii/darkc.png');
     
 -- 두바이+이집트
 insert into imagetb(nation, type, url)
@@ -100,15 +100,17 @@ insert into imagetb(nation, type, url)
     values(10, 3, 'hongkong/darkw.png');
 insert into imagetb(nation, type, url)
     values(10, 4, 'hongkong/darkc.png');
+
 -- 후쿠오카
 insert into imagetb(nation, type, url)
-    values(11, 1, 'hukuoka/lightw.png');
+    values(11, 1, 'fukuoka/lightw.png');
 insert into imagetb(nation, type, url)
-    values(11, 2, 'hukuoka/lightc.png');
+    values(11, 2, 'fukuoka/lightc.png');
 insert into imagetb(nation, type, url)
-    values(11, 3, 'hukuoka/darkw.png');
+    values(11, 3, 'fukuoka/darkw.png');
 insert into imagetb(nation, type, url)
-    values(11, 4, 'hukuoka/darkc.png');
+    values(11, 4, 'fukuoka/darkc.png');
+
 --  오사카12
 insert into imagetb(nation, type, url)
     values(12, 1, 'osaka/lightw.png');

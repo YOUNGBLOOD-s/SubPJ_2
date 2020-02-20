@@ -200,7 +200,7 @@ public class ManageController {
 		Map<String, Object> msg = new HashMap<String, Object>();
 		try {
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
-			SpeechController.tts("캐나다오로라, 캐나다로키, 나이아가라폭포, 나만을 위한 여행과 가족과 함께 하는 여행!", 20+"");
+			SpeechController.tts("캐나다오로라, 캐나다로키, 나이아가라폭포, 나만을 위한 여행과 가족과 함께 하는 여행!", 20 + "");
 
 		} catch (Exception e) {
 
@@ -533,9 +533,10 @@ public class ManageController {
 	@PutMapping("/contents/update/{idx}")
 	@ApiOperation(value = "상품 콘텐츠 정보(contents) 수정")
 	public ResponseEntity<Map<String, Object>> ContentsUpdate(@RequestHeader(value = "Authorization") String token,
-			@RequestBody Route route, @PathVariable("idx") int idx) {
+			@RequestBody Route route, @PathVariable("idx") String idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
+		String newpath = null;
 		if (token == "" || token == null)
 			return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
@@ -543,11 +544,22 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-
 			if (grade == 1) {
-				route.setIdx(idx + "");
+				route.setIdx(idx);
 				String path = route.getImage();
-				String newpath = path.split("_")[0] + "/" + path.split("_")[1];
+				if(path.contains("/")) {
+					newpath = path;
+					System.out.println("0new:"+newpath);
+				}else if(path.contains("_")) {
+					if(path.contains("america_west")) {//이녀석만 예외처리.. 
+						int underidx = path.lastIndexOf("_");
+						newpath = path.substring(0,underidx)+"/"+path.substring(5);
+						System.out.println("1amw:"+newpath);
+					}else {
+						newpath = path.split("_")[0] + "/" + path.split("_")[1];
+						System.out.println("2new:"+newpath);
+					}
+				}
 				route.setImage(newpath);
 				adser.updateRoutes(route);
 				msg.put("inputContents", route);
@@ -668,7 +680,7 @@ public class ManageController {
 	@PutMapping("/image/update/{idx}")
 	@ApiOperation(value = "이미지 정보(image) 수정")
 	public ResponseEntity<Map<String, Object>> imageUpdate(@RequestHeader(value = "Authorization") String token,
-			@RequestBody Image img, @PathVariable("idx") int idx) {
+			@RequestBody Image img, @PathVariable("idx") String idx) {
 		ResponseEntity<Map<String, Object>> res = null;
 		Map<String, Object> msg = new HashMap<String, Object>();
 		if (token == "" || token == null)
@@ -678,13 +690,24 @@ public class ManageController {
 			String username = (String) de.get("username");
 			int customer = ser.getIdx(username);
 			int grade = ser.searchGrade(customer);
-
+			String newpath = null;
 			if (grade == 1) {
-				img.setIdx(idx + "");
+				img.setIdx(idx);
 				String path = img.getUrl();
-				String newpath = path.split("_")[0] + "/" + path.split("_")[1];
+				if(path.contains("/")) {
+					newpath = path;
+					System.out.println("0new:"+newpath);
+				}else if(path.contains("_")) {
+					if(path.contains("america_west")) {//이녀석만 예외처리.. 
+						int underidx = path.lastIndexOf("_");
+						newpath = path.substring(0,underidx)+"/"+path.substring(5);
+						System.out.println("1amw:"+newpath);
+					}else {
+						newpath = path.split("_")[0] + "/" + path.split("_")[1];
+						System.out.println("2new:"+newpath);
+					}
+				}
 				img.setUrl(newpath);
-
 				ser.updateImagetb(img);
 				msg.put("update", img);
 				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
