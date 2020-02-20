@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
     "immutable": "^4.0.0-rc.12",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
