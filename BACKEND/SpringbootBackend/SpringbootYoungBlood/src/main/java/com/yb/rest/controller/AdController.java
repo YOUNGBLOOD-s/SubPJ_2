@@ -1,5 +1,6 @@
 package com.yb.rest.controller;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -168,9 +170,10 @@ public class AdController {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			SimpleDateFormat monthformat = new SimpleDateFormat("YYYY-MM-dd hh");
-			Date date = new Date();
-			String today = monthformat.format(date);
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
+			TimeZone time = TimeZone.getTimeZone("Asia/Seoul");
+			df.setTimeZone(time);
+			String today = df.format(new Date());
 
 			Map<String, Object> value = new HashMap<String, Object>();
 			value.put("nation", id);
@@ -198,9 +201,11 @@ public class AdController {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			SimpleDateFormat monthformat = new SimpleDateFormat("YYYY-MM-dd");
-			Date date = new Date();
-			String today = monthformat.format(date);
+			
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
+			TimeZone time = TimeZone.getTimeZone("Asia/Seoul");
+			df.setTimeZone(time);
+			String today = df.format(new Date());
 
 			Map<String, Object> value = new HashMap<String, Object>();
 			value.put("nation", id);
@@ -390,7 +395,6 @@ public class AdController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			System.out.println(counvalue.toString());
-
 			ser.updateCounsel(counvalue.getAge(), counvalue.getName(), counvalue.getEmail(), counvalue.getTel(),
 					counvalue.getDate(), counvalue.getText(), counvalue.getNation());
 			int lastIdx = ser.selectlastIdx();

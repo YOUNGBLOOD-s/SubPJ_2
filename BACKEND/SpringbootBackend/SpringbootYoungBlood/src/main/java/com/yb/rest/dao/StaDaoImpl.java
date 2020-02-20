@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yb.rest.vo.Click;
+import com.yb.rest.vo.Nation;
 
 @Repository
 public class StaDaoImpl implements IStaDao {
@@ -17,6 +18,7 @@ public class StaDaoImpl implements IStaDao {
 
 	@Override
 	public List<Click> getDateList(Map map) {
+		System.out.println(map.get(""));
 		return session.selectList("sta.getdatalist", map);
 	}
 
@@ -43,6 +45,20 @@ public class StaDaoImpl implements IStaDao {
 	@Override
 	public int getQrSum(Map map) {
 		return session.selectOne("sta.getqrsum_", map);
+	}
+
+	@Override
+	public boolean vernation(Map map) {
+		List<Integer> list = session.selectList("sta.vernation", map);
+		if(list.size()>0) return true;
+		return false;
+	}
+
+	@Override
+	public boolean verUser(String username) {
+		List<Nation> list = session.selectList("sta.veruser", username);
+		if(list.size()>0) return true;
+		return false;
 	}
 
 }
