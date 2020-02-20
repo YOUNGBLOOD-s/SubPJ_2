@@ -150,8 +150,12 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
 	values(9, 3, 2, '쵸베국립공원', '각종 물새, 하바, 코끼리, 악어를 눈앞에서 볼 수 있는 쵸베국립공원', 'kenya/landmark5.png', '케이프반도에서 쵸베국립공원', '차량');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
+<<<<<<< Updated upstream
 	values(9, 3, 3, '보트사파리', '수상에서 즐기는 사파리 보트사파리!', 'kenya/landmark6.png', '쵸베국립공원에서 보트사파리', '버스');
 
+=======
+	values(9, 3, 3, '보트사파리', '수상에서 즐기는 사파리 보트사파리!', 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/kenya/landmark6.png', '쵸베국립공원에서 보트사파리', '버스');
+>>>>>>> Stashed changes
 
 -- 16 상해
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
@@ -251,23 +255,23 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 
 -- 하와이 7
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 1, 1, '블로홀', '시원하게 솟아오르는 파도 하로나 블로홀', 'hawai/landmark1.png', '인천공항에서 하와이', '비행기');
+	values(7, 1, 1, '블로홀', '시원하게 솟아오르는 파도 하로나 블로홀', 'hawaii/landmark1.png', '인천공항에서 하와이', '비행기');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 1, 2, '다이아몬드헤드 분화구', '짙푸른 바다 수평선과 구름의 조화 다이아몬드 헤드 분화구', 'hawai/landmark2.png', '숙소에서 다이아몬드 헤드 분화구', '버스');
+	values(7, 1, 2, '다이아몬드헤드 분화구', '짙푸른 바다 수평선과 구름의 조화 다이아몬드 헤드 분화구', 'hawaii/landmark2.png', '숙소에서 다이아몬드 헤드 분화구', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 2, 1, '하나우마베이', '때묻지 않은 투명한 바닷속 산호초 탐험 하나우마베이', 'hawai/landmark3.png', '다이아몬드헤드분화구에서 하나우마베이', '버스');
+	values(7, 2, 1, '하나우마베이', '때묻지 않은 투명한 바닷속 산호초 탐험 하나우마베이', 'hawaii/landmark3.png', '다이아몬드헤드분화구에서 하나우마베이', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 2, 2, '마카푸 포인트', '투명한 바다가 만들어낸 그림같은 경치 마카푸 포인트', 'hawai/landmark4.png', '하나우마베이에서 마카푸포인트', '버스');
+	values(7, 2, 2, '마카푸 포인트', '투명한 바다가 만들어낸 그림같은 경치 마카푸 포인트', 'hawaii/landmark4.png', '하나우마베이에서 마카푸포인트', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 3, 1, '와이키키비치', '자유로운 풍경이 매력적인 하와이 최고의 비치 와이키키비치', 'hawai/landmark5.png', '마카푸포인트에서 와이키키비치', '버스');
+	values(7, 3, 1, '와이키키비치', '자유로운 풍경이 매력적인 하와이 최고의 비치 와이키키비치', 'hawaii/landmark5.png', '마카푸포인트에서 와이키키비치', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 4, 1, '알라모아나 비치파크', '여유로운 해변 공원 알라모아나 비치파크 자유투어', 'hawai/landmark6.png', '와이키키비치에서 알라모아나비치파크', '버스');
+	values(7, 4, 1, '알라모아나 비치파크', '여유로운 해변 공원 알라모아나 비치파크 자유투어', 'hawaii/landmark6.png', '와이키키비치에서 알라모아나비치파크', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 4, 2, '킹 카메하메하 동상', '하와이 원주민 왕구의 초대 대왕 킹 카메하메하 동상', 'hawai/landmark7.png', '알라모아나 비치파크에서 킹 카메하메하 동상', '버스');
+	values(7, 4, 2, '킹 카메하메하 동상', '하와이 원주민 왕구의 초대 대왕 킹 카메하메하 동상', 'hawaii/landmark7.png', '알라모아나 비치파크에서 킹 카메하메하 동상', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 5, 1, '카우아이데이', '하와이 추천 선택 관광 마우이데이, 카우아이데이 투어', 'hawai/landmark8.png', '킹 카메하메하 동상에서 마우이데이 / 카우아이데이', '버스');
+	values(7, 5, 1, '카우아이데이', '하와이 추천 선택 관광 마우이데이, 카우아이데이 투어', 'hawaii/landmark8.png', '킹 카메하메하 동상에서 마우이데이 / 카우아이데이', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(7, 5, 2, '다이아몬드헤드트래킹', '추천 체험 선택관광 다이아몬드헤드 트래킹', 'hawai/landmark9.png', '카우아이데이 에서 다이아몬드헤드', '버스');
+	values(7, 5, 2, '다이아몬드헤드트래킹', '추천 체험 선택관광 다이아몬드헤드 트래킹', 'hawaii/landmark9.png', '카우아이데이 에서 다이아몬드헤드', '버스');
 
 -- 홍콩 10
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
@@ -292,19 +296,19 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 
 -- 후쿠오카 11
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(11, 1, 1, '개구리절', '3000여개의 독특한 개구리 조형물이 있는 개구리절', 'hukuoka/landmark1.png', '인천국제공항에서 후쿠오카공항', '비행기');
+	values(11, 1, 1, '개구리절', '3000여개의 독특한 개구리 조형물이 있는 개구리절', 'fukuoka/landmark1.png', '인천국제공항에서 후쿠오카공항', '비행기');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(11, 1, 2, '히타이이치코소주공장', '맑은 물을 이용해 풍미가 진하고 술맛이 좋은 보리소주로 유명한 히타이이치코소주공장', 'hukuoka/landmark2.png', '후쿠오카공항에서 히타이이치코소주공장', '버스');
+	values(11, 1, 2, '히타이이치코소주공장', '맑은 물을 이용해 풍미가 진하고 술맛이 좋은 보리소주로 유명한 히타이이치코소주공장', 'fukuoka/landmark2.png', '후쿠오카공항에서 히타이이치코소주공장', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(11, 1, 3, '마메다마치', '전통가옥이 잘 보존되어 있는 마메다마치', 'hukuoka/landmark3.png', '히타이이치코 소주공장에서 마메다마치', '버스');
+	values(11, 1, 3, '마메다마치', '전통가옥이 잘 보존되어 있는 마메다마치', 'fukuoka/landmark3.png', '히타이이치코 소주공장에서 마메다마치', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(11, 2, 1, '긴린호수', '계절마다 아름다운 풍경을 자아내는 긴린호수', 'hukuoka/landmark4.png', '마메다마치에서 긴린호수', '버스');
+	values(11, 2, 1, '긴린호수', '계절마다 아름다운 풍경을 자아내는 긴린호수', 'fukuoka/landmark4.png', '마메다마치에서 긴린호수', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(11, 2, 2, '유노하나 재배지', '온천의 꽃이라 불리는 유노하나 재배지', 'hukuoka/landmark5.png', '긴린호수에서 유노하나 재배지', '버스');
+	values(11, 2, 2, '유노하나 재배지', '온천의 꽃이라 불리는 유노하나 재배지', 'fukuoka/landmark5.png', '긴린호수에서 유노하나 재배지', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(11, 3, 1, '고쿠라성', '에도시대부터 번창했던 도시였음을 보여주는 고쿠라성', 'hukuoka/landmark6.png', '유노하나에서 고쿠라성', '버스');
+	values(11, 3, 1, '고쿠라성', '에도시대부터 번창했던 도시였음을 보여주는 고쿠라성', 'fukuoka/landmark6.png', '유노하나에서 고쿠라성', '버스');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-	values(11, 3, 2, '텐만궁', '학문의 신을 모시는 다자이후 텐만궁', 'hukuoka/landmark7.png', '고쿠라성에서 텐만궁', '버스');
+	values(11, 3, 2, '텐만궁', '학문의 신을 모시는 다자이후 텐만궁', 'fukuoka/landmark7.png', '고쿠라성에서 텐만궁', '버스');
 
 
 -- 오사카 12

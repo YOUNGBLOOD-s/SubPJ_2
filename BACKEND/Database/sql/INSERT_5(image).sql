@@ -63,13 +63,13 @@ insert into imagetb(nation, type, url)
     values(6, 4, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/switzerland/darkc.png');
 -- 하와이
 insert into imagetb(nation, type, url)
-    values(7, 1, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hawai/lightw.png');
+    values(7, 1, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hawaii/lightw.png');
 insert into imagetb(nation, type, url)
-    values(7, 2, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hawai/lightc.png');
+    values(7, 2, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hawaii/lightc.png');
 insert into imagetb(nation, type, url)
-    values(7, 3, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hawai/darkw.png');
+    values(7, 3, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hawaii/darkw.png');
 insert into imagetb(nation, type, url)
-    values(7, 4, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hawai/darkc.png');
+    values(7, 4, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hawaii/darkc.png');
     
 -- 두바이+이집트
 insert into imagetb(nation, type, url)
@@ -102,13 +102,13 @@ insert into imagetb(nation, type, url)
     values(10, 4, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hongkong/darkc.png');
 -- 후쿠오카
 insert into imagetb(nation, type, url)
-    values(11, 1, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hukuoka/lightw.png');
+    values(11, 1, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/fukuoka/lightw.png');
 insert into imagetb(nation, type, url)
-    values(11, 2, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hukuoka/lightc.png');
+    values(11, 2, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/fukuoka/lightc.png');
 insert into imagetb(nation, type, url)
-    values(11, 3, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hukuoka/darkw.png');
+    values(11, 3, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/fukuoka/darkw.png');
 insert into imagetb(nation, type, url)
-    values(11, 4, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/hukuoka/darkc.png');
+    values(11, 4, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/fukuoka/darkc.png');
 --  오사카12
 insert into imagetb(nation, type, url)
     values(12, 1, 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/osaka/lightw.png');
