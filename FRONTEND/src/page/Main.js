@@ -1,6 +1,6 @@
-import React from "react";
-import MainAD from "../components/Main/MainAD";
-import MainADSpeaker from "../components/Main/MainADSpeaker";
+import React from 'react';
+import MainAD from '../components/Main/MainAD';
+import MainADSpeaker from '../components/Main/MainADSpeaker';
 
 const Main = () => {
   return (

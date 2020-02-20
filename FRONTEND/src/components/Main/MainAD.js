@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import { withRouter } from "react-router-dom";
-import FullScreenDialog from "../common/FullScreenDialog";
-import Axios from "../../../node_modules/axios/index";
-import LoadingBackdrop from "../common/LoadingBackdrop";
-import { LazyImageProvider } from "../common/LazyImage/LazyImageContext";
-import LazyImage from "../common/LazyImage/LazyImage";
-import ClickNotice from "../common/ClickNotice";
-import getImageUrl from "../../lib/util/getImageUrl";
+import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
+import { withRouter } from 'react-router-dom';
+import FullScreenDialog from '../common/FullScreenDialog';
+import Axios from '../../../node_modules/axios/index';
+import LoadingBackdrop from '../common/LoadingBackdrop';
+import { LazyImageProvider } from '../common/LazyImage/LazyImageContext';
+import LazyImage from '../common/LazyImage/LazyImage';
+import ClickNotice from '../common/ClickNotice';
+import getImageUrl from '../../lib/util/getImageUrl';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -88,11 +88,12 @@ const MainAD = () => {
   const [datas, setDatas] = useState(null);
   const [reqterm, setReqterm] = useState(null);
   const cs = useRef(null);
+  let reqInt = null;
 
   const onDoubleClick = (id, index) => {
-    Axios.get("https://i02c110.p.ssafy.io:8887/api/ad/click/" + id)
+    Axios.get('https://i02c110.p.ssafy.io:8887/api/ad/click/' + id)
       .then(res => console.log(res))
-      .catch(err => console.log("Click Count 요청 실패!"));
+      .catch(err => console.log('Click Count 요청 실패!'));
     setPid(index);
     setOpen(true);
   };
@@ -101,7 +102,7 @@ const MainAD = () => {
   let datasize = null;
 
   const getItems = () => {
-    Axios.get("https://i02c110.p.ssafy.io:8887/api/sensor/reco")
+    Axios.get('https://i02c110.p.ssafy.io:8887/api/sensor/reco')
       .then(res => {
         setDatas(res.data.datas);
 
@@ -117,7 +118,8 @@ const MainAD = () => {
 
   useEffect(() => {
     if (reqterm) {
-      setInterval(() => {
+      clearInterval(reqInt);
+      reqInt = setInterval(() => {
         if (open === false) getItems();
       }, reqterm);
     }
@@ -152,7 +154,7 @@ const MainAD = () => {
                     <LazyImageProvider>
                       <LazyImage
                         isQR={false}
-                        src={getImageUrl("md", thumbnail)}
+                        src={getImageUrl('md', thumbnail)}
                         alt=""
                       />
                     </LazyImageProvider>
