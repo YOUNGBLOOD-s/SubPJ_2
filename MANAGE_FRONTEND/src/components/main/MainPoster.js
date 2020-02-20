@@ -4,7 +4,6 @@ import Logo from '../common/Logo';
 import getImageUrl from '../../lib/utill/getImageUrl';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const PosterWrapper = styled.div`
   position: relative;
@@ -54,13 +53,9 @@ const ManagementLink = styled(Link)`
   border-radius: 3px;
   padding: 0.7rem 1.3rem;
   cursor: pointer;
-  right: 2%;
+  left: 50%;
   top: 5%;
-  /* @media (max-width: 600px) {
-    font-size: 0.8rem;
-    right: 0;
-    transform: translate(-50%, 0);
-  } */
+  transform: translate(-50%, 0);
   :hover {
     background-color: ${palette.grey[200]};
     transition-duration: 0.5s;

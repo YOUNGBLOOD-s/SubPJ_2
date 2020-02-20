@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
-import component from '../../lib/material/component';
 import Logo from '../common/Logo';
 
 const TitleWrapper = styled.div`

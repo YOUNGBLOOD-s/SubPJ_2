@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import component from '../../lib/material/component';
 import palette from '../../lib/styles/palette';
 import Logo from './Logo';
 import styled from 'styled-components';

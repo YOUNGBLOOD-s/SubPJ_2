@@ -36,14 +36,13 @@ const NoAdContent = styled.div`
 const MyProducts = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const { ads, loading, error, user, lastpage, member } = useSelector(
+  const { ads, loading, error, user, lastpage } = useSelector(
     ({ ads, loading, user }) => ({
       ads: ads.user_ads,
       error: ads.error,
       lastpage: ads.user_ads_lastpage,
       loading: loading['ads/USER_AD_LIST'],
       user: user.user,
-      member: user.member,
     }),
   );
 
