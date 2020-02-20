@@ -23,7 +23,7 @@ const Image = styled.img`
   height: 600px;
   width: auto;
   @media (max-width: 600px) {
-    width: 300px;
+    width: 70%;
     height: auto;
   }
   border-radius: 10px;

@@ -69,7 +69,7 @@ const MyPageForm = ({ userInfo, setUserInfo, history }) => {
   const { data } = userInfo;
   const username = data.get('username');
   const company = data.get('company');
-  const grade = data.get('grade');
+  // const grade = data.get('grade');
 
   const onChangePassword = e => {
     const { name, value } = e.target;
@@ -124,9 +124,9 @@ const MyPageForm = ({ userInfo, setUserInfo, history }) => {
       })
       .then(() => {
         alert('정보가 변경되었습니다.');
-        history.push('/manage');
+        history.push('/management');
       })
-      .catch(err => alert('정보 변경에 실패했습니다.'));
+      .catch(() => alert('정보 변경에 실패했습니다.'));
   };
 
   return (
@@ -140,15 +140,6 @@ const MyPageForm = ({ userInfo, setUserInfo, history }) => {
           value={username}
           name="username"
           autoComplete="username"
-          disabled={true}
-        />
-        <StyledTextField
-          label="등급"
-          variant="outlined"
-          value={grade}
-          name="grade"
-          type="text"
-          autoComplete="grade"
           disabled={true}
         />
         <StyledTextField

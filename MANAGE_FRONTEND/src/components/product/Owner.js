@@ -20,6 +20,12 @@ const OwnerWrapper = styled.div`
       text-align: center;
       font-size: 1rem;
     }
+    .info {
+      font-size: 1.5rem;
+      @media (max-width: 600px) {
+        font-size: 1rem;
+      }
+    }
   }
 `;
 
@@ -29,15 +35,15 @@ const Owner = ({ owner }) => {
     <OwnerWrapper>
       <div className="Info-box">
         <div className="text">유저명</div>
-        <div>{username}</div>
+        <div className="info">{username}</div>
       </div>
       <div className="Info-box">
         <div className="text">회사명</div>
-        <div>{company}</div>
+        <div className="info">{company}</div>
       </div>
       <div className="Info-box">
         <div className="text">등급</div>
-        <div>{gradeType[grade]}</div>
+        <div className="info">{gradeType[grade]}</div>
       </div>
     </OwnerWrapper>
   );

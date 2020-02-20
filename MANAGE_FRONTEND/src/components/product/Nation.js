@@ -11,7 +11,6 @@ const InfoBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
   padding: 0.5rem 0;
   .text {
     color: ${palette.grey[500]};

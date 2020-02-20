@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentUser } from '../../modules/user';
-import LoadingBackdrop from './LoadingBackdrop';
 
 const AppBarWrapper = styled.div`
   background-color: ${palette.grey[200]};
   padding: 0.5rem;
 `;
-
 const LinkWrapper = styled.div`
   max-width: 1000px;
   margin: 0 auto;
@@ -28,11 +24,6 @@ const StyledLink = styled(Link)`
 `;
 
 const ManagementAppBar = ({ user }) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [dispatch]);
-
   return (
     <AppBarWrapper>
       <LinkWrapper>

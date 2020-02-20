@@ -73,6 +73,7 @@ const MyInfoWrapper = styled.div`
       text-align: center;
       font-size: 1.5rem;
       color: ${palette.grey[600]};
+      margin-bottom: 0.5rem;
     }
     .username {
       margin-bottom: 1rem;
@@ -83,6 +84,14 @@ const MyInfoWrapper = styled.div`
       }
     }
   }
+`;
+
+const TextWrapper = styled.div`
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Grade = styled.div`
@@ -154,6 +163,10 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
           </div>
         </MyInfoWrapper>
       )}
+      <TextWrapper>
+        <div>정보 수정을 위해</div>
+        <div>패스워드를 입력하세요.</div>
+      </TextWrapper>
       <MyFormWrapper onSubmit={onSubmit}>
         <StyledTextField
           label="비밀번호"

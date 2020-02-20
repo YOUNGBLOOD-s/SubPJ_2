@@ -45,7 +45,7 @@ const NotFound = () => {
         </span>{' '}
         페이지를 찾을 수 없습니다!
       </div>
-      <StyledLink to="/">메인페이지로</StyledLink>
+      <StyledLink to="/management">메인페이지로</StyledLink>
     </NotFoundWrapper>
   );
 };
