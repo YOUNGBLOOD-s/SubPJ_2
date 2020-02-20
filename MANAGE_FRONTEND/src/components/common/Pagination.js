@@ -25,6 +25,13 @@ const PageItem = styled.div`
 const Pagination = ({ lastPage, setPage, currentPage }) => {
   const [components, setComponents] = useState([]);
 
+  const onClick = i => {
+    // 클릭시 페이지 설정하고
+    setPage(i);
+    // 맨위에서 클라이언트 높이만큼 뺀높이로 가자
+    window.scrollTo(0, window.innerHeight);
+  };
+
   const createPaging = () => {
     let comps = [];
 
@@ -32,7 +39,7 @@ const Pagination = ({ lastPage, setPage, currentPage }) => {
 
     for (let i = 1; i <= lastPage; i++) {
       comps.push(
-        <PageItem active={i === currentPage} onClick={() => setPage(i)} key={i}>
+        <PageItem active={i === currentPage} onClick={() => onClick(i)} key={i}>
           {i}
         </PageItem>,
       );
