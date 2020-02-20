@@ -3,7 +3,7 @@ import component from '../../../../lib/material/component';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { nextStep, prevStep } from '../../../../modules/stepper';
 import axios from 'axios';
 import { selectNation } from '../../../../modules/form';
@@ -294,7 +294,7 @@ const NationAddForm = ({ classes, steps, step }) => {
             onClick={handleNextAndAdd}
             className={classes.button}
           >
-            {step === steps.length - 1 ? '완료' : '다음'}
+            다음
           </component.Button>
         </component.Grid>
       </component.Grid>

@@ -10,6 +10,7 @@ import LoadingBackdrop from '../../../common/LoadingBackdrop';
 import AddProductLink from '../../../common/AddProductLink';
 import palette from '../../../../lib/styles/palette';
 import Pagination from '../../../common/Pagination';
+import MyProductPending from './MyProductPending';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
@@ -35,13 +36,14 @@ const NoAdContent = styled.div`
 const MyProducts = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const { ads, loading, error, user, lastpage } = useSelector(
+  const { ads, loading, error, user, lastpage, member } = useSelector(
     ({ ads, loading, user }) => ({
       ads: ads.user_ads,
       error: ads.error,
       lastpage: ads.user_ads_lastpage,
       loading: loading['ads/USER_AD_LIST'],
       user: user.user,
+      member: user.member,
     }),
   );
 
@@ -81,9 +83,27 @@ const MyProducts = () => {
               <component.Grid container spacing={1}>
                 {ads.map(ad => (
                   <component.Grid item xs={12} sm={6} md={4} key={ad.idx}>
-                    <Link to={`/management/product/${ad.idx}`}>
-                      <MyProduct ad={ad} isAdmin={user.username === 'admin'} />
-                    </Link>
+                    {ad.flag !== '0' ? (
+                      <Link to={`/management/product/${ad.idx}`}>
+                        <MyProduct
+                          ad={ad}
+                          isAdmin={user.username === 'admin'}
+                        />
+                      </Link>
+                    ) : (
+                      <>
+                        {user.username === 'admin' ? (
+                          <Link to={`/management/product/${ad.idx}`}>
+                            <MyProduct
+                              ad={ad}
+                              isAdmin={user.username === 'admin'}
+                            />
+                          </Link>
+                        ) : (
+                          <MyProductPending ad={ad} />
+                        )}
+                      </>
+                    )}
                   </component.Grid>
                 ))}
               </component.Grid>
