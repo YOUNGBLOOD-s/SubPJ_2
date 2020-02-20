@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
 import axios from 'axios';
 import getImageUrl from '../../../lib/utill/getImageUrl';
+import { useDispatch } from 'react-redux';
+import { getCurrentUser } from '../../../modules/user';
 
 const GradeImgWrapper = styled.div`
   text-align: center;
@@ -63,7 +65,7 @@ const GradeCard = ({ info }) => {
   const classes = useStyles();
 
   const token = sessionStorage.getItem('access_token');
-
+  const dispatch = useDispatch();
   const gradeAlert = {
     '-1': '등급 구매에 실패하였습니다.',
     '0': '현재 등급과 동일하여 구매가 취소되었습니다.',
@@ -83,8 +85,9 @@ const GradeCard = ({ info }) => {
       )
       .then(res => {
         res.data.value === 0 ? alert(gradeAlert[0]) : alert(gradeAlert[1]);
+        dispatch(getCurrentUser(token));
       })
-      .catch(err => {
+      .catch(() => {
         alert(gradeAlert[-1]);
       });
   };

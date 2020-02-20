@@ -128,25 +128,25 @@ const Nation = ({ nation, user }) => {
                 <component.Grid item xs={6} sm={3}>
                   <InfoBox>
                     <div className="text">광고 노출 횟수</div>
-                    <div>{showcnt}</div>
+                    <div className="info">{showcnt}</div>
                   </InfoBox>
                 </component.Grid>
                 <component.Grid item xs={6} sm={3}>
                   <InfoBox>
                     <div className="text">가중치</div>
-                    <div>{weight}</div>
+                    <div className="info">{weight}</div>
                   </InfoBox>
                 </component.Grid>
                 <component.Grid item xs={6} sm={3}>
                   <InfoBox>
                     <div className="text">현재 TYPE</div>
-                    <div>{type}</div>
+                    <div className="info">{type}</div>
                   </InfoBox>
                 </component.Grid>
                 <component.Grid item xs={6} sm={3}>
                   <InfoBox>
                     <div className="text">현재 FLAG</div>
-                    <div>{flag}</div>
+                    <div className="info">{flag}</div>
                   </InfoBox>
                 </component.Grid>
               </>
