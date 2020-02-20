@@ -17,6 +17,7 @@ import component from '../../lib/material/component';
 import DeleteAlertDialog from '../common/DeleteAlertDialog';
 import MonthForm from './MonthForm';
 import Counsels from './Counsels';
+import StatisticalDetail from '../manage/Statistical/StatisticalDetail';
 
 const DetailContainer = styled.div`
   padding: 1rem;
@@ -89,6 +90,8 @@ const ProductDetail = ({ match, history }) => {
           ) : (
             <NoData>상담예약이 없습니다.</NoData>
           )}
+
+          <StatisticalDetail />
 
           {/* NATION */}
           <TitleBar>광고 정보</TitleBar>
