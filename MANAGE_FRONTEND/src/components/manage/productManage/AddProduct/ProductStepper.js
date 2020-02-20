@@ -72,7 +72,7 @@ const ProductStepper = ({ history }) => {
   const onClick = () => {
     dispatch(initializeForm());
     dispatch(initializeStep());
-    history.push('/');
+    history.push('/management');
   };
 
   return (
