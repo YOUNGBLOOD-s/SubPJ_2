@@ -7,8 +7,11 @@ import styled from 'styled-components';
 
 const MyPageAdminWrapper = styled.div`
   max-width: 1000px;
+  flex-grow: 1;
   margin: 0 auto;
   padding: 1rem;
+  display: flex;
+  align-items: center;
 `;
 
 const MyPageAdmin = () => {
