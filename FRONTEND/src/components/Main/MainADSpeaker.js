@@ -4,12 +4,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { withRouter } from "react-router-dom";
 import FullScreenDialog from "../common/FullScreenDialog";
-import Axios from "../../../node_modules/axios/index";
+import Axios from "axios";
 import LoadingBackdrop from "../common/LoadingBackdrop";
 import { LazyImageProvider } from "../common/LazyImage/LazyImageContext";
 import LazyImage from "../common/LazyImage/LazyImage";
 import ClickNotice from "../common/ClickNotice";
 import getImageUrl from "../../lib/util/getImageUrl";
+import getSpeechUrl from "../../lib/util/getSpeechUrl";
+import SoundPlayer from "../common/SoundPlayer";
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -82,11 +84,13 @@ const MainADBlock = styled.div`
   }
 `;
 
-const MainAD = () => {
+const MainADSpeaker = () => {
   const [pid, setPid] = useState(1);
   const [open, setOpen] = useState(false);
   const [datas, setDatas] = useState(null);
+  const [soundtimer, setSoundtimer] = useState([]);
   const [reqterm, setReqterm] = useState(null);
+  const [currentidx, setCurrentidx] = useState(0);
   const cs = useRef(null);
 
   const onDoubleClick = (id, index) => {
@@ -99,6 +103,7 @@ const MainAD = () => {
 
   const carouselTerm = 3000;
   let datasize = null;
+  let setCur = null;
 
   const getItems = () => {
     Axios.get("https://i02c110.p.ssafy.io:8887/api/sensor/reco")
@@ -111,17 +116,35 @@ const MainAD = () => {
       .catch(err => console.log(err));
   };
 
+  const getCurrent = () => {
+    // clearInterval(setCur);
+    // setCurrent(cs.current.state.selectedItem);
+    setInterval(() => {
+      setCurrentidx(cs.current.state.selectedItem);
+    }, carouselTerm + 500);
+  };
+
   useEffect(() => {
     getItems();
   }, []);
 
   useEffect(() => {
     if (reqterm) {
+      // getCurrent();
       setInterval(() => {
+        soundtimer.map(item => {
+          clearTimeout(item);
+        });
+        setSoundtimer([]);
+        // getCurrent();
         if (open === false) getItems();
       }, reqterm);
     }
   }, [reqterm]);
+
+  useEffect(() => {
+    // console.log(current);
+  }, [currentidx]);
 
   return (
     <MainADBlock>
@@ -164,6 +187,14 @@ const MainAD = () => {
                       alt=""
                     />
                   </LazyImageProvider>
+                  <SoundPlayer
+                    id={id}
+                    src={getSpeechUrl(id)}
+                    delay={1000 + carouselTerm * index}
+                    current={currentidx}
+                    soundtimer={soundtimer}
+                    setSoundtimer={setSoundtimer}
+                  />
                   <ClickNotice />
                 </div>
               );
@@ -178,4 +209,4 @@ const MainAD = () => {
   );
 };
 
-export default withRouter(MainAD);
+export default withRouter(MainADSpeaker);
