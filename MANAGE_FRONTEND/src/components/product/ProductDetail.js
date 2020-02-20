@@ -91,8 +91,8 @@ const ProductDetail = ({ match, history }) => {
           )}
 
           {/* NATION */}
-          <TitleBar>광고 기본 설정</TitleBar>
-          <CaptionText>광고의 기본설정입니다.</CaptionText>
+          <TitleBar>광고 정보</TitleBar>
+          <CaptionText>광고의 기본정보입니다.</CaptionText>
           <MaterialCard>
             {product.nation ? (
               <Nation nation={product.nation} user={user} />

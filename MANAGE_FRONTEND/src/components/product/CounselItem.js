@@ -67,14 +67,17 @@ const CounselItem = ({ counsel }) => {
           <p>{text}</p>
         </component.Grid>
         <component.Grid item xs={12} sm={12}>
-          <component.Button
-            fullWidth
-            color="primary"
-            variant="outlined"
-            onClick={onToggle}
-          >
-            {completed ? '완료 해제' : '완료 하기'}
-          </component.Button>
+          <div style={{ textAlign: 'end' }}>
+            <component.Button
+              // fullWidth
+              size="small"
+              color="primary"
+              variant="outlined"
+              onClick={onToggle}
+            >
+              {completed ? '완료 취소' : '완료 하기'}
+            </component.Button>
+          </div>
         </component.Grid>
       </component.Grid>
     </CounselItemWrapper>

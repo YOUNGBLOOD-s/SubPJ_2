@@ -12,20 +12,25 @@ const InfoBox = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  padding: 1rem;
+  padding: 0.5rem 0;
   .text {
     color: ${palette.grey[500]};
     font-weight: bold;
     text-align: center;
     font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .info {
+    font-size: 1.5rem;
+    @media (max-width: 600px) {
+      font-size: 1rem;
+    }
   }
 `;
 
-const OutputWrapper = styled.div`
-  border: 1px solid black;
-`;
-
 const Title = styled.div`
+  margin-top: 3rem;
+  margin-bottom: 1rem;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
@@ -62,56 +67,56 @@ const Nation = ({ nation, user }) => {
             <component.Grid item xs={6} sm={3}>
               <InfoBox>
                 <div className="text">ID</div>
-                <div>{idx}</div>
+                <div className="info">{idx}</div>
               </InfoBox>
             </component.Grid>
             <component.Grid item xs={6} sm={3}>
               <InfoBox>
                 <div className="text">한글명</div>
-                <div>{ko_name}</div>
+                <div className="info">{ko_name}</div>
               </InfoBox>
             </component.Grid>
             <component.Grid item xs={6} sm={3}>
               <InfoBox>
                 <div className="text">영문명</div>
-                <div>{en_name}</div>
+                <div className="info">{en_name}</div>
               </InfoBox>
             </component.Grid>
             <component.Grid item xs={6} sm={3}>
               <InfoBox>
                 <div className="text">대륙</div>
-                <div>{getContinetName(continents)}</div>
+                <div className="info">{getContinetName(continents)}</div>
               </InfoBox>
             </component.Grid>
             <component.Grid item xs={6}>
               <InfoBox>
                 <div className="text">미세먼지</div>
-                <div>{dustType(dust)}</div>
+                <div className="info">{dustType(dust)}</div>
               </InfoBox>
             </component.Grid>
             <component.Grid item xs={6}>
               <InfoBox>
                 <div className="text">가격</div>
-                <div>{Number(price).toLocaleString()}원</div>
+                <div className="info">{Number(price).toLocaleString()}원</div>
               </InfoBox>
             </component.Grid>
             <component.Grid item xs={6}>
               <InfoBox>
                 <div className="text">출발일자</div>
-                <div>{s_date}</div>
+                <div className="info">{s_date}</div>
               </InfoBox>
             </component.Grid>
             <component.Grid item xs={6}>
               <InfoBox>
                 <div className="text">도착일자</div>
-                <div>{f_date}</div>
+                <div className="info">{f_date}</div>
               </InfoBox>
             </component.Grid>
 
             <component.Grid item xs={12}>
               <InfoBox>
                 <div className="text">TTS 문구</div>
-                <div>{speech}</div>
+                <div className="info">{speech}</div>
               </InfoBox>
             </component.Grid>
             {/* 어드민만 보이는 부분 */}
