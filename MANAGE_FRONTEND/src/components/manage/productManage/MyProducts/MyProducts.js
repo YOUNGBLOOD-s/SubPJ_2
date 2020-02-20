@@ -10,15 +10,13 @@ import LoadingBackdrop from '../../../common/LoadingBackdrop';
 import AddProductLink from '../../../common/AddProductLink';
 import palette from '../../../../lib/styles/palette';
 import Pagination from '../../../common/Pagination';
+import MyProductPending from './MyProductPending';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-`;
-
-const AdListWraaper = styled.div`
-  margin: 1rem 0;
 `;
 
 const NoAdContent = styled.div`
@@ -70,28 +68,45 @@ const MyProducts = () => {
         <>
           {ads.length > 0 ? (
             <>
-              <component.Grid container>
-                <component.Grid item xs={6}>
-                  <TitleBar>광고 목록</TitleBar>
+              <div style={{ marginBottom: '1rem' }}>
+                <component.Grid container>
+                  <component.Grid item xs={6}>
+                    <TitleBar>광고 목록</TitleBar>
+                  </component.Grid>
+                  <component.Grid item xs={6}>
+                    <AddProductLink>광고 추가</AddProductLink>
+                  </component.Grid>
                 </component.Grid>
-                <component.Grid item xs={6}>
-                  <AddProductLink>광고 추가</AddProductLink>
-                </component.Grid>
-              </component.Grid>
-              <AdListWraaper>
-                <component.Grid container spacing={1}>
-                  {ads.map(ad => (
-                    <component.Grid item xs={12} sm={6} md={4} key={ad.idx}>
+              </div>
+
+              <component.Grid container spacing={1}>
+                {ads.map(ad => (
+                  <component.Grid item xs={12} sm={6} md={4} key={ad.idx}>
+                    {ad.flag !== '0' ? (
                       <Link to={`/management/product/${ad.idx}`}>
                         <MyProduct
                           ad={ad}
                           isAdmin={user.username === 'admin'}
                         />
                       </Link>
-                    </component.Grid>
-                  ))}
-                </component.Grid>
-              </AdListWraaper>
+                    ) : (
+                      <>
+                        {user.username === 'admin' ? (
+                          <Link to={`/management/product/${ad.idx}`}>
+                            <MyProduct
+                              ad={ad}
+                              isAdmin={user.username === 'admin'}
+                            />
+                          </Link>
+                        ) : (
+                          <MyProductPending ad={ad} />
+                        )}
+                      </>
+                    )}
+                  </component.Grid>
+                ))}
+              </component.Grid>
+
               <component.Grid container>
                 <component.Grid item xs={12}>
                   <Pagination

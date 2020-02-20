@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 
 const PleasePurchaseWrapper = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

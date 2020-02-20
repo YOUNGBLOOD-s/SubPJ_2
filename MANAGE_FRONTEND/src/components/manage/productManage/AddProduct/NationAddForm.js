@@ -3,7 +3,7 @@ import component from '../../../../lib/material/component';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { nextStep, prevStep } from '../../../../modules/stepper';
 import axios from 'axios';
 import { selectNation } from '../../../../modules/form';
@@ -12,10 +12,15 @@ import StyledTextField from '../../../common/StyledTextField';
 import DatePicker from '../../../common/DatePicker';
 import reformDate from '../../../../lib/utill/reformDate';
 import isAlpha from '../../../../lib/utill/isAlpha';
+import palette from '../../../../lib/styles/palette';
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+`;
+
+const ErrorText = styled.div`
+  color: ${palette.red[600]};
 `;
 
 const NationAddForm = ({ classes, steps, step }) => {
@@ -28,6 +33,8 @@ const NationAddForm = ({ classes, steps, step }) => {
     s_date: reformDate(new Date()),
     f_date: reformDate(new Date()),
   });
+
+  const [disabled, setDisabled] = useState(false);
 
   const [errors, setErrors] = useState({
     en_name: false,
@@ -157,6 +164,10 @@ const NationAddForm = ({ classes, steps, step }) => {
                 en_name: '중복된 영문 국가명입니다.',
               });
             }
+
+            if (status === 403) {
+              setDisabled(true);
+            }
           } else {
             console.log(err);
           }
@@ -280,6 +291,13 @@ const NationAddForm = ({ classes, steps, step }) => {
             helperText={errorText.speech}
           />
         </component.Grid>
+
+        {disabled && (
+          <component.Grid item xs={12}>
+            <ErrorText>허용된 상품 생성 개수가 부족합니다.</ErrorText>
+            <ErrorText>상위 등급을 구매하거나 관리자에게 문의하세요.</ErrorText>
+          </component.Grid>
+        )}
         <component.Grid item xs={12}>
           <component.Button
             disabled={step === 0}
@@ -293,8 +311,9 @@ const NationAddForm = ({ classes, steps, step }) => {
             color="primary"
             onClick={handleNextAndAdd}
             className={classes.button}
+            disabled={disabled}
           >
-            {step === steps.length - 1 ? '완료' : '다음'}
+            다음
           </component.Button>
         </component.Grid>
       </component.Grid>

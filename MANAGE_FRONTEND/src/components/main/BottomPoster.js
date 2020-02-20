@@ -43,7 +43,8 @@ const Text = styled.div`
   }
 `;
 
-const StyledLink = styled(Link)`
+const ManagementLink = styled(Link)`
+  margin-top: 2rem;
   font-family: 'GmarketSansLight';
   border: 1px solid ${palette.grey[500]};
   color: ${palette.grey[700]};
@@ -51,11 +52,8 @@ const StyledLink = styled(Link)`
   border-radius: 3px;
   padding: 0.7rem 1.3rem;
   cursor: pointer;
-  @media (max-width: 600px) {
-    font-size: 0.8rem;
-  }
   :hover {
-    background-color: ${palette.grey[200]};
+    background-color: ${palette.grey[100]};
     transition-duration: 0.5s;
   }
 `;
@@ -70,7 +68,7 @@ const BottomPoster = () => {
         <Text>광고 통계 및 매니지먼트,</Text>
         <Text>사용자의 니즈를 채워주는 맞춤형 광고</Text>
         <Text>지금 바로 시작하세요</Text>
-        <StyledLink to="/login">LOGIN</StyledLink>
+        <ManagementLink to="/login">MANAGEMENT 시작하기</ManagementLink>
       </TextWrapper>
     </PosterWrapper>
   );

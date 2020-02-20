@@ -9,6 +9,7 @@ const AdItemBlock = styled.div`
 `;
 
 const ImageWrapper = styled.div`
+  height: 600px;
   .image {
     width: 100%;
     height: 600px;

@@ -5,6 +5,7 @@ import palette from '../../lib/styles/palette';
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 1rem;
 `;
 
 const PageItem = styled.div`
