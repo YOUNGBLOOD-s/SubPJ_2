@@ -91,11 +91,12 @@ const ProductDetail = ({ match, history }) => {
             <NoData>상담예약이 없습니다.</NoData>
           )}
 
-          <StatisticalDetail />
-
           {/* NATION */}
           <TitleBar>광고 정보</TitleBar>
           <CaptionText>광고의 기본정보입니다.</CaptionText>
+          {product.nation && (
+            <StatisticalDetail nationIdx={product.nation.idx} />
+          )}
           <MaterialCard>
             {product.nation ? (
               <Nation nation={product.nation} user={user} />
