@@ -12,4 +12,6 @@ public interface IStaDao {
 	public int getQrSum(int nationIdx);
 	public int getClickSum(Map map);
 	public int getQrSum(Map map);
+	public boolean vernation(Map map);
+	public boolean verUser(String username);
 }

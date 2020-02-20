@@ -24,30 +24,30 @@ public class AppConfig {
 		// 이놈이 데이터소스랑 디비 정보 가지고있는거 연결해주는거
 	}
 	
-//	@Bean
-//    public ServletWebServerFactory servletContainer() {
-//
-//        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory(){
-//            @Override
-//            protected void postProcessContext(Context context) {
-//                SecurityConstraint securityConstraint = new SecurityConstraint();
-//                securityConstraint.setUserConstraint("CONFIDENTIAL");
-//                SecurityCollection collection = new SecurityCollection();
-//                collection.addPattern("/*");
-//                securityConstraint.addCollection(collection);
-//                context.addConstraint(securityConstraint);
-//            }
-//        };
-//        tomcat.addAdditionalTomcatConnectors(createSslConnector());
-//        return tomcat;
-//    }
-//
-//    private Connector createSslConnector() {
-//        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-//        connector.setScheme("http");
-//        connector.setSecure(false);
-//        connector.setPort(8283);
-//        connector.setRedirectPort(8887);
-//        return connector;
-//    }
+	@Bean
+    public ServletWebServerFactory servletContainer() {
+
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory(){
+            @Override
+            protected void postProcessContext(Context context) {
+                SecurityConstraint securityConstraint = new SecurityConstraint();
+                securityConstraint.setUserConstraint("CONFIDENTIAL");
+                SecurityCollection collection = new SecurityCollection();
+                collection.addPattern("/*");
+                securityConstraint.addCollection(collection);
+                context.addConstraint(securityConstraint);
+            }
+        };
+        tomcat.addAdditionalTomcatConnectors(createSslConnector());
+        return tomcat;
+    }
+
+    private Connector createSslConnector() {
+        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+        connector.setScheme("http");
+        connector.setSecure(false);
+        connector.setPort(8283);
+        connector.setRedirectPort(8887);
+        return connector;
+    }
 }
