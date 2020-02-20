@@ -97,7 +97,7 @@ const MainADDemon = () => {
     setOpen(true);
   };
 
-  const carouselTerm = 3000;
+  const carouselTerm = 10000;
   const reqterm = carouselTerm * 10;
 
   const getItems = () => {
