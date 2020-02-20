@@ -3,28 +3,35 @@ import Example from './Chart';
 import styled from 'styled-components';
 import StatisticalBar from './StatisticalBar';
 import axios from 'axios';
+import { getStatistical } from '../../../modules/statistical';
+import { useDispatch } from 'react-redux';
 
 const StatisticalDetailWrapper = styled.div`
   max-width: 1000px;
   margin: 0 auto;
 `;
 
-const StatisticalDetail = () => {
-  const [data, setData] = useState(null);
+const StatisticalDetail = ({ nationIdx }) => {
+  const dispatch = useDispatch();
+  const token = sessionStorage.getItem('access_token');
+  // /api/statistics/15day/{nationIdx}
+  // 오늘 날짜부터 15일 전까지의 통계 데이터
+  // /api/statistics/1month/{nationIdx}
+  // 오늘 날짜부터 1년 전까지의 통계 데이터
+  // /api/statistics/3hour/{nationIdx}
+  // 오늘 날짜부터 1일 전까지의 데이터를 3시간씩 묶은 통계 데이터
+  // /api/statistics/usr/{nationIdx}
+  // statistics api 사용자 토큰 받아서 해당 사용자 click, qr count만 전송
+  const dayType = '15day';
+
   useEffect(() => {
-    axios
-      .get('https://i02c110.p.ssafy.io:8887/api/statistics/3hour')
-      .then(res => {
-        setData(res.data.list);
-      })
-      .catch(err => console.log(err));
-  }, []);
+    dispatch(getStatistical({ token, nationIdx, dayType }));
+  }, [token, nationIdx, dayType, dispatch]);
 
   return (
     <StatisticalDetailWrapper>
-      <h1>이제 곧 나의 광고 안으로 들어갈 컴포넌트입니다</h1>
-      <StatisticalBar setData={setData} />
-      <Example data={data} />
+      {/* <StatisticalBar setData={setData} /> */}
+      {/* <Example data={data} /> */}
     </StatisticalDetailWrapper>
   );
 };
