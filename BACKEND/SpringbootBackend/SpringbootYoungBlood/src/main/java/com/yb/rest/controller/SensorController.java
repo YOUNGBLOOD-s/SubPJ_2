@@ -29,8 +29,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yb.rest.service.IAdService;
 import com.yb.rest.service.IManService;
 import com.yb.rest.vo.ForScore;
+import com.yb.rest.vo.Image;
 import com.yb.rest.vo.Monthtb;
 import com.yb.rest.vo.Nation;
+import com.yb.rest.vo.Route;
 import com.yb.rest.vo.Sendtofront;
 import com.yb.rest.vo.Sensor;
 
@@ -47,6 +49,7 @@ public class SensorController {
 	@Autowired
 	private IManService manser;
 
+	
 	@ExceptionHandler(Exception.class)
 	public void ExceptionMethod(Exception e) {
 
@@ -71,10 +74,9 @@ public class SensorController {
 		System.out.println("==============");
 	}
 
-	//정희수 02-19
 	/** 가중치를 계산하는 메소드 */
 	@SuppressWarnings("finally")
-	@GetMapping("/sensor/weightcal2")
+	@GetMapping("/sensor/weightcal")
 	@ApiOperation(value = "인자 num을 가지는 weightcal")
 	public List<Integer> weightcal(int num) {
 		System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
@@ -206,10 +208,14 @@ public class SensorController {
 			}
 			Random rand = new Random();
 			//이부분을 num으로 바꿈
+			//센서 기반으로 뽑은 데이터 제외한 데이터 갯수
+			System.out.println("group size 4이하???? => "+gradeGroup.size());
 			for (int h = 0; h < num; h++) {
 				int randomIdx = rand.nextInt(gradeGroup.size());
+				System.out.println("랜덤idx"+randomIdx);
 				int randomElement = gradeGroup.get(randomIdx) - 1;
 				Monthtb m = ser.selectTemps(randomElement);
+				System.out.println(m.toString());
 				float elementTemp = nMonth == 1 ? m.getTem1()
 						: nMonth == 2 ? m.getTem2()
 								: nMonth == 3 ? m.getTem3()
@@ -228,7 +234,9 @@ public class SensorController {
 				finalScore += lig < 50 ? 5 : 10;
 				finalScore += elementTemp < 22 ? 1 : 0;
 				finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
+				System.out.println("어디서???");
 				ser.updateType(new ForScore(randomElement, finalScore));
+				System.out.println("터지니??");
 				result.add(randomElement);
 				gradeGroup.remove(randomIdx);
 			}
@@ -259,8 +267,6 @@ public class SensorController {
 	//기존의 weightcal
 	/** 가중치를 계산하는 메소드 */
 	@SuppressWarnings("finally")
-	@GetMapping("/sensor/weightcal")
-	@ApiOperation(value = "가중치 계산")
 	public List<Integer> weightcal() {
 		System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
 		List<Integer> result = null;
@@ -444,25 +450,22 @@ public class SensorController {
 		List<Nation> everyNation = ser.selectNations();
 		for (int i = 0; i < everyNation.size(); i++) {
 			String idx = everyNation.get(i).getIdx();
-			if (ser.getFlag(idx) == 1) // flag==1 이미 다 횟수 사용함
+			Monthtb mon = manser.monthInfo(Integer.parseInt(idx));
+			List<Image> img = manser.imagesInfo(Integer.parseInt(idx));
+			List<Route> rou = manser.contentsInfo(Integer.parseInt(idx));
+			if (ser.getFlag(idx) == 1 || mon == null || img == null || rou == null) // flag==1 이미 다 횟수 사용함
 				continue;
 			gradeGroup.add(Integer.parseInt(idx));
 		}
 		return gradeGroup;
 	}
 
-	//정희수 02-19
 	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. @throws JsonProcessingException */
-	@GetMapping("/sensor/reco/{num}")
-	@ApiOperation(value = "num을 받아 나라 선택 수 다르게")
 	public @ResponseBody ResponseEntity<Map<String, Object>> selectnation(@PathVariable("num") int num) throws JsonProcessingException {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> result = new HashMap<>();
 		try {
-			
 			List<Integer> nation = weightcal(num);
-			
-			
 			System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
 			System.out.println(nation);
 			checkshowcnt(nation);
@@ -573,7 +576,6 @@ public class SensorController {
 		return re;
 	}
 	
-	//기존의 reco
 	/** 센서값을 받아 거기에 맞는 추천 나라를 객체 배열로 전송한다. @throws JsonProcessingException */
 	@GetMapping("/sensor/reco")
 	@ApiOperation(value = "임베디드 센서 값을 통해 추천 나라를 프론트에 전송합니다.")
@@ -583,8 +585,7 @@ public class SensorController {
 		try {
 			int num = manser.selectRecoNumber();
 			List<Integer> nation = weightcal(num);
-			
-			
+
 			System.out.println("안녕하세요. 추천해 드릴 나라의 idx 번호는 다음과 같습니다.");
 			System.out.println(nation);
 			checkshowcnt(nation);
@@ -684,8 +685,6 @@ public class SensorController {
 			}
 			result.put("datas", Countrylist);
 			result.put("datasize", Countrylist.size());
-			// System.out.println("자, 이제 아래와 같은 정보를 보내드릴게요.");
-			// System.out.println(Countrylist);
 			System.out.println("==============");
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
@@ -695,8 +694,6 @@ public class SensorController {
 		}
 		return re;
 	}
-	
-	
 	
 	/** 나라의 showcnt 검증하는 메소드 */
 	@GetMapping("/sensor/updateflag")
