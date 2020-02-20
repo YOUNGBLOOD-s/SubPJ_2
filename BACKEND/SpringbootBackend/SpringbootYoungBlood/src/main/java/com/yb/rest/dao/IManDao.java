@@ -26,7 +26,7 @@ public interface IManDao {
 	public List<Nation> nationListAll(int customer);
 	public List<NationDTO> nationList_page(int customer,int pageIdx);
 	public List<NationDTO> nationListAll_page(int customer,int pageIdx);
-	public void nationinsert(String en_name, String ko_name, String continents, String customer, String weight, String speech, String price, String s_date, String f_date);
+	public void nationinsert(String en_name, String ko_name, String continents, String customer, String speech, String price, String s_date, String f_date);
 	public void nationdelete(String idx, String customer);
 	public void nationupdate(Map map);
 	public String selectNation_image(int idx);

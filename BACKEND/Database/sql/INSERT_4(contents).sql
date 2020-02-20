@@ -150,12 +150,7 @@ insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
 	values(9, 3, 2, '쵸베국립공원', '각종 물새, 하바, 코끼리, 악어를 눈앞에서 볼 수 있는 쵸베국립공원', 'kenya/landmark5.png', '케이프반도에서 쵸베국립공원', '차량');
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)
-<<<<<<< Updated upstream
 	values(9, 3, 3, '보트사파리', '수상에서 즐기는 사파리 보트사파리!', 'kenya/landmark6.png', '쵸베국립공원에서 보트사파리', '버스');
-
-=======
-	values(9, 3, 3, '보트사파리', '수상에서 즐기는 사파리 보트사파리!', 'https://nearbyad.s3.ap-northeast-2.amazonaws.com/image/kenya/landmark6.png', '쵸베국립공원에서 보트사파리', '버스');
->>>>>>> Stashed changes
 
 -- 16 상해
 insert into contentstb(nation, day, seq, title, detail, image, tofrom, transport)

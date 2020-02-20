@@ -12,11 +12,22 @@ public class Nation {
 				+ weight + ", speech=" + speech + ", price=" + price + ", s_date=" + s_date + ", f_date=" + f_date
 				+ ", type=" + type + ", flag=" + flag + ", url=" + url + "]";
 	}
-
 	public Nation() {
 
 	}
 	
+	public Nation(String en_name, String ko_name, String continents, String customer, String speech, String price,
+			String s_date, String f_date) {
+		super();
+		this.en_name = en_name;
+		this.ko_name = ko_name;
+		this.continents = continents;
+		this.customer = customer;
+		this.speech = speech;
+		this.price = price;
+		this.s_date = s_date;
+		this.f_date = f_date;
+	}
 	public Nation(String en_name, String ko_name, String continents, String customer, String weight, String speech,
 			String price, String s_date, String f_date) {
 		super();

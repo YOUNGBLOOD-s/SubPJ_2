@@ -209,13 +209,10 @@ public class SensorController {
 			Random rand = new Random();
 			//이부분을 num으로 바꿈
 			//센서 기반으로 뽑은 데이터 제외한 데이터 갯수
-			System.out.println("group size 4이하???? => "+gradeGroup.size());
 			for (int h = 0; h < num; h++) {
 				int randomIdx = rand.nextInt(gradeGroup.size());
-				System.out.println("랜덤idx"+randomIdx);
 				int randomElement = gradeGroup.get(randomIdx) - 1;
 				Monthtb m = ser.selectTemps(randomElement);
-				System.out.println(m.toString());
 				float elementTemp = nMonth == 1 ? m.getTem1()
 						: nMonth == 2 ? m.getTem2()
 								: nMonth == 3 ? m.getTem3()
@@ -234,33 +231,23 @@ public class SensorController {
 				finalScore += lig < 50 ? 5 : 10;
 				finalScore += elementTemp < 22 ? 1 : 0;
 				finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
-				System.out.println("어디서???");
 				ser.updateType(new ForScore(randomElement, finalScore));
-				System.out.println("터지니??");
 				result.add(randomElement);
 				gradeGroup.remove(randomIdx);
 			}
+			
 			System.out.println("길고 긴 weight()의 끝");
 			System.out.println("==============");
+			return result;
 		} catch (Exception e) {
 			System.out.println("!!!weight() ERROR!!!");
 			System.out.println(e);
-			List<Integer> list = ser.selectIdxs();
-			System.out.println("왜 에러가 나..? => " + list);
 			List<Integer> send = new LinkedList<>();
 			//num*2로 바꿈
-			if (list.size() < num*2) {
-				for (int i = 0; i < list.size(); i++) {
-					send.add(list.get(i));
-				}
-			} else {
-				for (int i = 0; i < num*2; i++) {
-					send.add(list.get(i));
-				}
+			for(int i=1; i<=num*2; i++) {
+				send.add(i);
 			}
 			return send;
-		} finally {
-			return result;
 		}
 	}
 	

@@ -57,7 +57,7 @@ public class StaController {
 			String username = (String) de.get("username");	
 			
 			//user 확인
-			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+			if(!ser.verUser(username) || !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 			
 			cal.setTime(date);
 			df.format(date);
@@ -129,7 +129,7 @@ public class StaController {
 			String username = (String) de.get("username");	
 			result.put("username", username);
 			
-			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+			if(!ser.verUser(username) || !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 			
 			Map<String, Object> map = new HashMap<>();
 			map.put("username", username);
@@ -210,7 +210,7 @@ public class StaController {
 			String username = (String) de.get("username");	
 			result.put("username", username);
 			
-			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+			if(!ser.verUser(username)|| !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 			
 			map = new HashMap<>();
 			map.put("username", username);
