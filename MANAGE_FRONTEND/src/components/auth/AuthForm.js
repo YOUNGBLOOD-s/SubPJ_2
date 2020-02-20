@@ -95,7 +95,9 @@ const AuthForm = ({ type, form, onChange, onSubmit, error, loading }) => {
           {text}
         </StyledButton>
         <Footer>
-          <Link to="/">광고목록</Link>
+          <Link to="/" style={{ color: palette.cyan[500] }}>
+            {'📃 목록으로'}
+          </Link>
           {type === 'login' ? (
             <Link to="/register">회원가입</Link>
           ) : (

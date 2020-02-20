@@ -1,7 +1,7 @@
 const getImageUrl = (size, filename) => {
   const URL = process.env.REACT_APP_BUCKET_URL;
 
-  if (filename && filename.includes('_')) {
+  if (filename && filename.includes('_') && !filename.includes('/')) {
     const split_filename = filename.split('_');
     filename = `${split_filename[0]}/${split_filename[1]}`;
   }
