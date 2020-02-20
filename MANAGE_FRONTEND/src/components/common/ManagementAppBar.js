@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link, withRouter } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 
 const AppBarWrapper = styled.div`
@@ -21,22 +21,39 @@ const StyledLink = styled(Link)`
     background-color: ${palette.grey[500]};
     transition-duration: 0.5s;
   }
+
+  ${props => {
+    if (props.to === props.pathname) {
+      return css({ backgroundColor: palette.grey[500] });
+    }
+  }}
 `;
 
-const ManagementAppBar = ({ user }) => {
+const ManagementAppBar = ({ user, location }) => {
+  const { pathname } = location;
   return (
     <AppBarWrapper>
       <LinkWrapper>
         {user.username === 'admin' ? (
           <>
-            <StyledLink to="/management">광고목록</StyledLink>
-            <StyledLink to="/management/users">유저관리</StyledLink>
+            <StyledLink pathname={pathname} to="/management">
+              광고목록
+            </StyledLink>
+            <StyledLink pathname={pathname} to="/management/users">
+              유저관리
+            </StyledLink>
           </>
         ) : (
           <>
-            <StyledLink to="/management">내정보</StyledLink>
-            <StyledLink to="/management/product">광고관리</StyledLink>
-            <StyledLink to="/management/grade">등급구매</StyledLink>
+            <StyledLink pathname={pathname} to="/management">
+              내정보
+            </StyledLink>
+            <StyledLink pathname={pathname} to="/management/product">
+              광고관리
+            </StyledLink>
+            <StyledLink pathname={pathname} to="/management/grade">
+              등급구매
+            </StyledLink>
           </>
         )}
       </LinkWrapper>
@@ -44,4 +61,4 @@ const ManagementAppBar = ({ user }) => {
   );
 };
 
-export default ManagementAppBar;
+export default withRouter(ManagementAppBar);
