@@ -9,6 +9,7 @@ const TitleWrapper = styled.div`
   padding: 0.5rem 1rem;
   .eng {
     font-size: 0.8rem;
+    margin-top: 0.2rem;
   }
   .title {
     font-family: 'GmarketSansLight';

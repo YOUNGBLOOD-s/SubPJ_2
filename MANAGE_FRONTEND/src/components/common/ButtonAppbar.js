@@ -53,9 +53,11 @@ const ButtonAppBar = ({ user, onLogout }) => {
   return (
     <NavBar>
       <NavBarWrapper>
-        <Link to="/management">
-          <Logo />
-        </Link>
+        <div style={{ marginLeft: '1rem' }}>
+          <Link to="/management">
+            <Logo />
+          </Link>
+        </div>
         <ButtonWrapper>
           {user ? (
             <LoggedInWrapper>
