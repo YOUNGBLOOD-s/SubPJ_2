@@ -1,15 +1,15 @@
 const getImageUrl = (size, filename) => {
-  const URL = 'https://nearbyad-thumbnail-resized.s3-us-west-2.amazonaws.com';
+  const URL = process.env.REACT_APP_BUCKET_URL;
   switch (size) {
-    case 'sm':
+    case "sm":
       return `${URL}/${size}/${filename}`;
-    case 'md':
+    case "md":
       return `${URL}/${size}/${filename}`;
-    case 'lg':
+    case "lg":
       return `${URL}/${size}/${filename}`;
-    case 'origin':
+    case "origin":
       return `${URL}/${size}/${filename}`;
-    case 'static':
+    case "static":
       return `${URL}/static/${filename}`;
     default:
       return `${URL}/nocontent.img`;

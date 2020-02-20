@@ -1,5 +1,5 @@
 const getSpeechUrl = index => {
-  const URL = 'https://nearbyad-thumbnail-resized.s3-us-west-2.amazonaws.com';
+  const URL = process.env.REACT_APP_BUCKET_URL;
   return `${URL}/speech/${index}.mp3`;
 };
 

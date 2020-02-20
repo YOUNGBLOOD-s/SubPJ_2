@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { withLazyImageContext } from './LazyImageContext';
-import Sound from 'react-sound';
-import './lazyImage.css';
+import React, { useEffect } from "react";
+import { withLazySoundContext } from "./LazySoundContext";
+import "./lazyImage.css";
 
 const LazySound = ({ src, lazyLoad }) => {
   // Calculate the aspect ratio
@@ -15,18 +14,15 @@ const LazySound = ({ src, lazyLoad }) => {
   // Set the placeholder size on our wrapper div
   return (
     <div className="lazySound">
-      {/* Add data-src */}
-      <Sound
+      <audio
         className="lazySound__sound"
-        url={src}
-        playStatus={Sound.status.PLAYING}
-        playFromPosition={300 /* in milliseconds */}
-        onLoading={Sound.handleSongLoading}
-        onPlaying={Sound.handleSongPlaying}
-        onFinishedPlaying={Sound.handleSongFinishedPlaying}
+        controls="controls"
+        autoPlay="autoPlay"
+        style={{ display: "none" }}
+        data-src={src}
       />
     </div>
   );
 };
 
-export default withLazyImageContext(LazySound);
+export default withLazySoundContext(LazySound);
