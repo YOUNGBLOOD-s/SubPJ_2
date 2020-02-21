@@ -93,7 +93,7 @@ const MyProducts = () => {
                       </Link>
                     ) : (
                       <>
-                        {user.username === 'admin' ? (
+                        {user.username !== '일단해제' ? (
                           <Link to={`/management/product/${ad.idx}`}>
                             <MyProduct
                               ad={ad}

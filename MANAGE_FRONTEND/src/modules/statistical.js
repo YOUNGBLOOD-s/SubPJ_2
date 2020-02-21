@@ -9,7 +9,7 @@ const [
   GET_STATISTICAL,
   GET_STATISTICAL_SUCCESS,
   GET_STATISTICAL_FAILURE,
-] = createRequestActionTypes('manager/GET_STATISTICAL');
+] = createRequestActionTypes('statistical/GET_STATISTICAL');
 
 export const getStatistical = createAction(
   GET_STATISTICAL,

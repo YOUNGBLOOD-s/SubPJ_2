@@ -6,7 +6,7 @@ const CompareChartWrapper = styled.div`
   height: 300px;
 `;
 
-const Example = ({ origianlData }) => {
+const PieChart = ({ origianlData }) => {
   const { qr, click } = origianlData;
   const data = useMemo(() => {
     return [
@@ -94,4 +94,4 @@ const Example = ({ origianlData }) => {
   );
 };
 
-export default Example;
+export default PieChart;
