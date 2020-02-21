@@ -75,7 +75,6 @@ public class SensorController {
 	}
 
 	/** 가중치를 계산하는 메소드 */
-	@SuppressWarnings("finally")
 	@GetMapping("/sensor/weightcal")
 	@ApiOperation(value = "인자 num을 가지는 weightcal")
 	public List<Integer> weightcal(int num) {
@@ -83,13 +82,16 @@ public class SensorController {
 		List<Integer> result = null;
 		try {
 			Sensor sen = ser.selectData(1);
+			System.out.println("zzz");
 			float tmp = sen.getTemp();
 			float hu = sen.getHumid();
 			float dus = sen.getDust();
 			float lig = sen.getRough();
 			Calendar calender = new GregorianCalendar(Locale.KOREA);
 			int nMonth = calender.get(Calendar.MONTH) + 1;
+			System.out.println("??");
 			List<Monthtb> li = ser.selectAll();
+			System.out.println("!!!");
 			ArrayList<Sensor> nations = new ArrayList<>();
 			boolean up = true;
 			if (tmp >= 22) {
@@ -163,7 +165,7 @@ public class SensorController {
 				int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
 				ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
 			}
-
+			System.out.println("ser.updateScore 터짐");
 			Collections.sort(nations, new Comparator<Sensor>() {
 				@Override
 				public int compare(Sensor o1, Sensor o2) {
@@ -182,6 +184,7 @@ public class SensorController {
 				// 최종 idx,점수 리스트에 바로 담기
 				finallist.add(new ForScore(idx, ser.getScore(idx)));
 			}
+			System.out.println("ser.getDust 또는 ser.updateScore 또는 ser.getScore 터짐");
 
 			Collections.sort(finallist, new Comparator<ForScore>() {
 				@Override
@@ -200,12 +203,17 @@ public class SensorController {
 				ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
 				result.add(finallist.get(i).getIdx());
 			}
+			System.out.println("ser.updateType 터짐");
+			
 			ArrayList<Integer> gradeGroup = haeun();
+			System.out.println("haeun 터짐");
 			//이부분을 num으로 바꿈
 			if (gradeGroup.size() < num) {
 				ser.updateshowandflag();
 				gradeGroup = haeun();
 			}
+			System.out.println("ser.updateshowandflag 터짐");
+			
 			Random rand = new Random();
 			//이부분을 num으로 바꿈
 			//센서 기반으로 뽑은 데이터 제외한 데이터 갯수
@@ -213,27 +221,22 @@ public class SensorController {
 				int randomIdx = rand.nextInt(gradeGroup.size());
 				int randomElement = gradeGroup.get(randomIdx) - 1;
 				Monthtb m = ser.selectTemps(randomElement);
-				float elementTemp = nMonth == 1 ? m.getTem1()
-						: nMonth == 2 ? m.getTem2()
-								: nMonth == 3 ? m.getTem3()
-										: nMonth == 4 ? m.getTem4()
-												: nMonth == 5 ? m.getTem5()
-														: nMonth == 6 ? m.getTem6()
-																: nMonth == 7 ? m.getTem7()
-																		: nMonth == 8 ? m.getTem8()
-																				: nMonth == 9 ? m.getTem9()
-																						: nMonth == 10 ? m.getTem10()
-																								: nMonth == 11
-																										? m.getTem11()
-																										: m.getTem12();
-
+				System.out.println("터지면 안돼.."+m.toString());
+				float elementTemp = nMonth == 1 ? m.getTem1(): nMonth == 2 ? m.getTem2(): nMonth == 3 ? m.getTem3(): nMonth == 4 ? m.getTem4()
+									: nMonth == 5 ? m.getTem5(): nMonth == 6 ? m.getTem6(): nMonth == 7 ? m.getTem7(): nMonth == 8 ? m.getTem8()
+									: nMonth == 9 ? m.getTem9(): nMonth == 10 ? m.getTem10(): nMonth == 11? m.getTem11(): m.getTem12();
+				System.out.println("터지니?");
 				int finalScore = 0;
 				finalScore += lig < 50 ? 5 : 10;
 				finalScore += elementTemp < 22 ? 1 : 0;
 				finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
+				System.out.println("응?");
 				ser.updateType(new ForScore(randomElement, finalScore));
+				System.out.println("왜 ㅠ");
 				result.add(randomElement);
+				System.out.println("진짜");
 				gradeGroup.remove(randomIdx);
+				System.out.println("너 뭐야..?");
 			}
 			
 			System.out.println("길고 긴 weight()의 끝");
@@ -243,7 +246,6 @@ public class SensorController {
 			System.out.println("!!!weight() ERROR!!!");
 			System.out.println(e);
 			List<Integer> send = new LinkedList<>();
-			//num*2로 바꿈
 			for(int i=1; i<=num*2; i++) {
 				send.add(i);
 			}
