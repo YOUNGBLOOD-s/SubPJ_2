@@ -82,16 +82,13 @@ public class SensorController {
 		List<Integer> result = null;
 		try {
 			Sensor sen = ser.selectData(1);
-			System.out.println("zzz");
 			float tmp = sen.getTemp();
 			float hu = sen.getHumid();
 			float dus = sen.getDust();
 			float lig = sen.getRough();
 			Calendar calender = new GregorianCalendar(Locale.KOREA);
 			int nMonth = calender.get(Calendar.MONTH) + 1;
-			System.out.println("??");
 			List<Monthtb> li = ser.selectAll();
-			System.out.println("!!!");
 			ArrayList<Sensor> nations = new ArrayList<>();
 			boolean up = true;
 			if (tmp >= 22) {
@@ -165,7 +162,6 @@ public class SensorController {
 				int gap = (int) Math.abs(tmp - nations.get(j).getTemp());
 				ser.updateScore(new ForScore(nations.get(j).getIdx(), gap / 5 == 0 ? 10 : (gap / 5 * 10)));
 			}
-			System.out.println("ser.updateScore 터짐");
 			Collections.sort(nations, new Comparator<Sensor>() {
 				@Override
 				public int compare(Sensor o1, Sensor o2) {
@@ -194,14 +190,25 @@ public class SensorController {
 			});
 
 			result = new LinkedList<>();
-			//이부분을 num으로 바꿈
-			for (int i = 0; i < num; i++) {
+			int fin = 1;
+			for (int i = 0; i < finallist.size(); i++) {
+				if(fin==num) break;
 				int finalScore = 0;
 				finalScore += lig < 50 ? 5 : 10;
 				finalScore += nations.get(i).getTemp() < 22 ? 1 : 0;
 				finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
 				ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
-				result.add(finallist.get(i).getIdx());
+				
+				Monthtb mon = manser.monthInfo(finallist.get(i).getIdx());
+				List<Image> img = manser.imagesInfo(finallist.get(i).getIdx());
+				List<Route> rou = manser.contentsInfo(finallist.get(i).getIdx());
+				if (mon == null || img == null || rou == null) {
+					continue;
+				}
+				else {
+					result.add(finallist.get(i).getIdx());
+					fin++;
+				}
 			}
 			System.out.println("ser.updateType 터짐");
 			
@@ -253,9 +260,7 @@ public class SensorController {
 		}
 	}
 	
-	//기존의 weightcal
 	/** 가중치를 계산하는 메소드 */
-	@SuppressWarnings("finally")
 	public List<Integer> weightcal() {
 		System.out.println("조금만 기다려주세요. 가중치를 계산 중 입니다.");
 		List<Integer> result = null;
