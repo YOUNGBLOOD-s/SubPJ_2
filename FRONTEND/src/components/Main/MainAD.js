@@ -10,11 +10,7 @@ import { LazyImageProvider } from '../common/LazyImage/LazyImageContext';
 import { LazySoundProvider } from '../common/LazyImage/LazySoundContext';
 import LazyImage from '../common/LazyImage/LazyImage';
 import ClickNotice from '../common/ClickNotice';
-import Sound from 'react-sound';
 import getImageUrl from '../../lib/util/getImageUrl';
-import getSpeechUrl from '../../lib/util/getSpeechUrl';
-import LazySound from '../common/LazyImage/LazySound';
-import SoundPlayer from '../common/SoundPlayer';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -91,11 +87,9 @@ const MainAD = () => {
   const [pid, setPid] = useState(1);
   const [open, setOpen] = useState(false);
   const [datas, setDatas] = useState(null);
-  const [soundtimer, setSoundtimer] = useState([]);
-
-  let where = 0;
-
-  useEffect(() => {}, [where]);
+  const [reqterm, setReqterm] = useState(null);
+  const cs = useRef(null);
+  let reqInt = null;
 
   const onDoubleClick = (id, index) => {
     Axios.get('https://i02c110.p.ssafy.io:8887/api/ad/click/' + id)
@@ -105,30 +99,35 @@ const MainAD = () => {
     setOpen(true);
   };
 
-  const itemNum = 8;
-  const carouselTerm = 10000;
-  var reqTerm = carouselTerm * itemNum + 2000;
+  const carouselTerm = 3000;
+  let datasize = null;
 
   const getItems = () => {
     Axios.get('https://i02c110.p.ssafy.io:8887/api/sensor/reco')
-      // Axios.get('http://192.168.100.66:8887/api/sensor/reco') // test backend
       .then(res => {
         setDatas(res.data.datas);
-        setSoundtimer([]);
+        datasize = res.data.datasize;
+        setReqterm(carouselTerm * datasize)
       })
       .catch(err => console.log(err));
   };
 
   useEffect(() => {
     getItems();
-    setInterval(() => {
-      if (open === false) getItems();
-    }, reqTerm);
   }, []);
+
+  useEffect(() => {
+    if (reqterm) {
+      clearInterval(reqInt);
+      reqInt = setInterval(() => {
+        if (open === false) getItems();
+      }, reqterm);
+    }
+  }, [reqterm]);
 
   return (
     <MainADBlock>
-      {datas ? (
+      {datas && reqterm ? (
         <>
           <Carousel
             infiniteLoop
@@ -140,6 +139,7 @@ const MainAD = () => {
             transitionTime={1000}
             interval={carouselTerm}
             stopOnHover={false}
+            ref={cs}
           >
             {datas.map(({ id, name, en_name, content, thumbnail }, index) => {
               return (
@@ -158,29 +158,14 @@ const MainAD = () => {
                         alt=""
                       />
                     </LazyImageProvider>
-                    {/* <Sound
-                      onPlaying={8000}
-                      url={getSpeechUrl(id)}
-                      playStatus={Sound.status.PAUSED}
-                      playFromPosition={0}
-                      onLoading={Sound.handleSongLoading}
-                      onPlaying={Sound.handleSongPlaying}
-                      onFinishedPlaying={Sound.handleSongFinishedPlaying}
-                    /> */}
                   </div>
-                  <LazyImage
-                    isQR={true}
-                    // src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://portfolio.choiys.kr`}
-                    src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://i02c110.p.ssafy.io:8282/detail/${id}?qr=true`}
-                    alt=""
-                  />
-                  <SoundPlayer
-                    src={getSpeechUrl(id)}
-                    delay={1000 + 10000 * index}
-                    soundtimer={soundtimer}
-                    setSoundtimer={setSoundtimer}
-                  />
-
+                  <LazyImageProvider>
+                    <LazyImage
+                      isQR={true}
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://i02c110.p.ssafy.io:8282/detail/${id}?qr=true`}
+                      alt=""
+                    />
+                  </LazyImageProvider>
                   <ClickNotice />
                 </div>
               );

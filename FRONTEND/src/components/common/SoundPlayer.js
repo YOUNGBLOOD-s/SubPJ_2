@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
 
-const SoundPlayer = ({ delay, src, soundtimer, setSoundtimer }) => {
+const SoundPlayer = ({
+  id,
+  delay,
+  src,
+  soundtimer,
+  setSoundtimer,
+  current
+}) => {
   return (
     <audio
       muted
-      style={{ display: 'none' }}
+      style={{ display: "none" }}
       controls="controls"
-      onLoadedData={e => {
-        const audioPlayer = e.target;
-        const timer = setTimeout(() => {
-          audioPlayer.play();
-          audioPlayer.muted = null;
-        }, delay);
-        let data = soundtimer.concat(timer);
-        setSoundtimer(data);
-      }}
+      id={`audio${id}`}
     >
       <source src={src} type="audio/mp3" />>
     </audio>

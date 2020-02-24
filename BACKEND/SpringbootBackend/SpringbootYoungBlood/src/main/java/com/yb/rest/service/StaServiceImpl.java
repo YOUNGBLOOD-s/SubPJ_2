@@ -34,6 +34,26 @@ public class StaServiceImpl implements IStaService{
 	public int getQrSum(int nationIdx) {
 		return repo.getQrSum(nationIdx);
 	}
+
+	@Override
+	public int getClickSum(Map map) {
+		return repo.getClickSum(map);
+	}
+
+	@Override
+	public int getQrSum(Map map) {
+		return repo.getQrSum(map);
+	}
+
+	@Override
+	public boolean vernation(Map map) {
+		return repo.vernation(map);
+	}
+
+	@Override
+	public boolean verUser(String username) {
+		return repo.verUser(username);
+	}
 	
 	
 }

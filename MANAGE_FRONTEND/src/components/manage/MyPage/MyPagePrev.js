@@ -9,11 +9,12 @@ import { useSelector } from 'react-redux';
 import gradeType from '../../../lib/data/gradeType';
 
 const MyFormBlcok = styled.div`
-  margin: 0 auto;
-  margin-top: 4rem;
-  max-width: 500px;
-  height: 100%;
-  padding:1rem;
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledTextField = withStyles({
@@ -46,6 +47,7 @@ const MyFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 500px;
 `;
 
 const Footer = styled.div`
@@ -58,19 +60,46 @@ const Footer = styled.div`
 `;
 
 const MyInfoWrapper = styled.div`
-  border: 1px solid ${palette.grey[300]};
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
   margin-bottom: 1rem;
-  .username {
+
+  .wrapper {
+    margin-bottom: 1rem;
+    .text {
+      text-align: center;
+      font-size: 1.5rem;
+      color: ${palette.grey[600]};
+      margin-bottom: 0.5rem;
+    }
+    .username {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      font-family: 'Handon3gyeopsal600g';
+      @media (max-width: 600px) {
+        font-size: 1.5rem;
+      }
+    }
   }
 `;
 
+const TextWrapper = styled.div`
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Grade = styled.div`
+  font-family: 'Handon3gyeopsal600g';
+  font-size: 2rem;
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
   color: ${props => {
     if (props.grade === 0) {
       return palette.grey[900];
@@ -124,10 +153,20 @@ const MyPagePrev = ({ setAuth, token, setOpen, setUserInfo }) => {
     <MyFormBlcok>
       {member && (
         <MyInfoWrapper>
-          <div className="username">{member.username}</div>
-          <Grade grade={member.grade}>{gradeType[member.grade]}</Grade>
+          <div className="wrapper">
+            <div className="text">나의 등급</div>
+            <Grade grade={member.grade}>{gradeType[member.grade]}</Grade>
+          </div>
+          <div className="wrapper">
+            <div className="text">유저명</div>
+            <div className="username">{member.username}</div>
+          </div>
         </MyInfoWrapper>
       )}
+      <TextWrapper>
+        <div>정보 수정을 위해</div>
+        <div>패스워드를 입력하세요.</div>
+      </TextWrapper>
       <MyFormWrapper onSubmit={onSubmit}>
         <StyledTextField
           label="비밀번호"

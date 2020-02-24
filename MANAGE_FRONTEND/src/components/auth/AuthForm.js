@@ -31,7 +31,8 @@ const textMap = {
 
 const Footer = styled.div`
   margin-top: 1rem;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
   a {
     color: ${palette.grey[500]};
     text-decoration: underline;
@@ -94,6 +95,9 @@ const AuthForm = ({ type, form, onChange, onSubmit, error, loading }) => {
           {text}
         </StyledButton>
         <Footer>
+          <Link to="/" style={{ color: palette.cyan[500] }}>
+            {'📃 목록으로'}
+          </Link>
           {type === 'login' ? (
             <Link to="/register">회원가입</Link>
           ) : (

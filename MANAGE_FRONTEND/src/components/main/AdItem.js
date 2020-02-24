@@ -9,6 +9,7 @@ const AdItemBlock = styled.div`
 `;
 
 const ImageWrapper = styled.div`
+  height: 600px;
   .image {
     width: 100%;
     height: 600px;
@@ -73,7 +74,7 @@ const AdItem = ({ ad }) => {
         </ImageWrapper>
         <ContentWrapper>
           <div className="ko-name">
-            {name} <span className="en-name">{en_name}</span>
+            {name} <span className="en-name">{en_name.toUpperCase()}</span>
           </div>
           <ScheduleWrapper>
             <div className="date-box">

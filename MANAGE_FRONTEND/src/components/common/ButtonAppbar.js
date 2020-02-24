@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import component from '../../lib/material/component';
 import palette from '../../lib/styles/palette';
 import Logo from './Logo';
 import styled from 'styled-components';
@@ -28,41 +27,52 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+const LoggedInWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  .username {
+    font-family: 'GmarketSansLight';
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+`;
+
+const StyledButton = styled.div`
+  font-family: 'GmarketSansLight';
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 0.7rem;
+  border-radius: 5px;
+  :hover {
+    background-color: ${palette.red[300]};
+    transition-duration: 0.5s;
+  }
+`;
+
 const ButtonAppBar = ({ user, onLogout }) => {
   return (
     <NavBar>
       <NavBarWrapper>
-        <Link to="/">
-          <Logo />
-        </Link>
+        <div style={{ marginLeft: '1rem' }}>
+          <Link to="/management">
+            <Logo />
+          </Link>
+        </div>
         <ButtonWrapper>
           {user ? (
-            <>
-              {user.username === 'admin' ? (
-                <Link to="/admin">
-                  <component.Button color="inherit">
-                    {user.username}
-                  </component.Button>
-                </Link>
-              ) : (
-                <Link to="/manage">
-                  <component.Button color="inherit">
-                    {user.username}
-                  </component.Button>
-                </Link>
-              )}
-
-              <component.Button color="inherit" onClick={onLogout}>
-                로그아웃
-              </component.Button>
-            </>
+            <LoggedInWrapper>
+              <div className="username">
+                {user.username ? user.username : '알수없는유저'}
+              </div>
+              <StyledButton onClick={onLogout}>로그아웃</StyledButton>
+            </LoggedInWrapper>
           ) : (
             <>
               <Link to="/register">
-                <component.Button color="inherit">회원가입</component.Button>
+                <StyledButton>회원가입</StyledButton>
               </Link>
               <Link to="/login">
-                <component.Button color="inherit">로그인</component.Button>
+                <StyledButton>로그인</StyledButton>
               </Link>
             </>
           )}

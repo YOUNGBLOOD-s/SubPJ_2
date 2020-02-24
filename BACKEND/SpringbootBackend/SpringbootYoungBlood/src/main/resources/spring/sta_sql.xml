@@ -8,7 +8,11 @@
 	<select id="getdatalist" parameterType="map" resultType="click">
 		select *
 		from clicktb
-		where date <![CDATA[ >= ]]>#{target} AND date <![CDATA[ <= ]]> #{today};
+		where date <![CDATA[ >= ]]>#{target} AND date <![CDATA[ <= ]]> #{today} AND
+		idx in (select idx from clicktb 
+				where nation in (select idx from nationtb 
+								where customer= (select idx from membertb 
+												where username=#{username})));
 	</select>
 	
 	<select id="getnationIdxs" parameterType="String" resultType="int">
@@ -21,7 +25,26 @@
 	select sum(click_cnt) from clicktb where nation=#{nationIdx};
 	</select>
 	
+	<select id="getclicksum_" parameterType="map" resultType="int">
+	select sum(click_cnt) from clicktb where date <![CDATA[ >= ]]>#{target} AND date <![CDATA[ <= ]]> #{today} 
+	AND nation = #{nationIdx};
+	</select>
+	
 	<select id="getqrsum" parameterType="int" resultType="int">
 	select sum(qr_cnt) from clicktb where nation=#{nationIdx};
 	</select>
+	
+	<select id="getqrsum_" parameterType="int" resultType="int">
+	select sum(qr_cnt) from clicktb where date <![CDATA[ >= ]]>#{target} AND date <![CDATA[ <= ]]> #{today} 
+	AND nation = #{nationIdx};
+	</select>
+	
+	<select id="vernation" parameterType="map" resultType="int">
+	select * from clicktb where nation=#{nationIdx};
+	</select>
+	
+	<select id="veruser" parameterType="String" resultType="nation">
+	select * from nationtb where customer = (select idx from membertb where username=#{username});
+	</select>
+	
 </mapper>

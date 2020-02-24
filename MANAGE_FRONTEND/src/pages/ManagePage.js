@@ -1,35 +1,24 @@
-import React, { useEffect } from 'react';
-import ManageContainer from '../components/manage/ManageContainer';
-import ButtonAppbarContainer from '../containers/common/ButtonAppbarContainer';
-import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUser } from '../modules/user';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Route } from 'react-router-dom';
+import MyPage from '../components/manage/MyPage/MyPage';
+import GradeDetail from '../components/manage/gradePurchase/GradeDetail';
+import ProductManage from '../components/manage/productManage/ProductManage';
+import ProductDetail from '../components/product/ProductDetail';
+import AddProduct from '../components/manage/productManage/AddProduct/AddProduct';
 
-const ManagePage = ({ history }) => {
-  const { user } = useSelector(({ user }) => ({
-    user: user.user,
-  }));
-
-  const token = sessionStorage.getItem('access_token');
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCurrentUser(token));
-  }, [token, dispatch]);
-
-  // USER가 아니면 못들어옵니다.
-  useEffect(() => {
-    if (!user) {
-      history.push('/');
-    }
-  }, [user, history]);
-
+const ManagePage = () => {
   return (
     <>
       <Helmet>
         <title>광고관리 - NEARBY AD</title>
       </Helmet>
-      <ButtonAppbarContainer />
-      <ManageContainer />
+      {/* 이하 grade === 0 이면, /grade로 이동시키기  */}
+      <Route component={MyPage} path="/management" exact />
+      <Route component={GradeDetail} path="/management/grade" exact />
+      <Route component={AddProduct} path="/management/add" exact />
+      <Route component={ProductManage} path="/management/product" exact />
+      <Route component={ProductDetail} path="/management/product/:id" />
     </>
   );
 };

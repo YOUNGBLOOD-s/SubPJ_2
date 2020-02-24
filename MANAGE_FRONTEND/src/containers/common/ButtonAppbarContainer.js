@@ -14,7 +14,7 @@ const ButtonAppbarContainer = ({ history }) => {
   const onLogout = () => {
     dispatch(logout()); // 로그아웃 액션 디스패치
     dispatch(authLogout()); // auth삭제 액션 디스패치
-    history.push('/'); // 로그아웃시 메인페이지로 이동시키기
+    history.push('/login'); // 로그아웃시 메인페이지로 이동시키기
   };
 
   return <ButtonAppBar user={user} onLogout={onLogout} />;

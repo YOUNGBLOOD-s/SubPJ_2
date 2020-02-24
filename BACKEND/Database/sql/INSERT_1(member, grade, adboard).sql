@@ -29,3 +29,7 @@ select * from imagetb;
 desc adboardtb;
 select * from adboardtb;
 insert into adboardtb(temp, humid, info) values(23.5, 38.4, '첫번째 테스트용 전광판');
+
+-- reco 
+desc reconumtb;
+insert into reconumtb(num) values(5);

@@ -45,7 +45,7 @@ export default function CounselDialog({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            끄기
+            닫기
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
-import component from '../../lib/material/component';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -9,19 +7,22 @@ const TitleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0.5rem 1rem;
+  .eng {
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+  }
+  .title {
+    font-family: 'GmarketSansLight';
+    font-size: 2rem;
+    font-weight: bold;
+  }
 `;
-
-const SubTitle = withStyles({
-  root: {
-    fontWeight: 'bold',
-  },
-})(component.Typography);
 
 const Logo = () => {
   return (
     <TitleWrapper>
-      <component.Typography variant="caption">NEARBY AD</component.Typography>
-      <SubTitle variant="h4">네곁에.</SubTitle>
+      <div className="eng">NEARBY AD</div>
+      <div className="title">네곁에.</div>
     </TitleWrapper>
   );
 };

@@ -35,6 +35,7 @@ const ProductDetail = ({ match, history }) => {
   const { id } = match.params;
   const token = sessionStorage.getItem('access_token');
   const dispatch = useDispatch();
+
   const { product, loading, user, member } = useSelector(
     ({ product, loading, user }) => ({
       product: product.product,
@@ -46,9 +47,17 @@ const ProductDetail = ({ match, history }) => {
 
   useEffect(() => {
     if (member && member.grade === 0) {
-      history.push('/manage/grade');
+      history.push('/management/grade');
     }
   }, [member, history]);
+
+  useEffect(() => {
+    if (user && user.username !== 'admin') {
+      if (product && user.username !== product.owner.username) {
+        history.push('/management');
+      }
+    }
+  }, [user, product, history]);
 
   useEffect(() => {
     dispatch(getProduct({ id, token }));
@@ -58,7 +67,7 @@ const ProductDetail = ({ match, history }) => {
     try {
       const token = sessionStorage.getItem('access_token');
       await removeList({ token, id });
-      history.push('/admin');
+      history.push('/management');
     } catch (e) {
       console.log(e);
     }
@@ -82,8 +91,8 @@ const ProductDetail = ({ match, history }) => {
           )}
 
           {/* NATION */}
-          <TitleBar>광고 기본 설정</TitleBar>
-          <CaptionText>광고의 기본설정입니다.</CaptionText>
+          <TitleBar>광고 정보</TitleBar>
+          <CaptionText>광고의 기본정보입니다.</CaptionText>
           <MaterialCard>
             {product.nation ? (
               <Nation nation={product.nation} user={user} />

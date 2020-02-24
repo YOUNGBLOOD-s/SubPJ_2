@@ -1,12 +1,12 @@
-import React, { createContext, useState, useEffect } from 'react';
-import LazyLoad from 'vanilla-lazyload';
+import React, { createContext, useState, useEffect } from "react";
+import LazyLoad from "vanilla-lazyload";
 
 // Create a new React context
 const Context = createContext();
 
 // Add the image class name our LazyLoad plugin should look for
 const options = {
-  elements_selector: ['.lazyImage__img', '.lazyImage__qr', '.lazySound'],
+  elements_selector: [".lazyImage__img", ".lazyImage__qr"]
 };
 
 export const LazyImageProvider = ({ children }) => {

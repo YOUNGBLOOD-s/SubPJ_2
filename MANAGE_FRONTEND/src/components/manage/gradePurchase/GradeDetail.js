@@ -4,10 +4,10 @@ import GradeInfo from './GradeInfo';
 
 const GradeDetail = () => {
   return (
-    <div>
-      <Grade />
+    <>
       <GradeInfo />
-    </div>
+      <Grade />
+    </>
   );
 };
 

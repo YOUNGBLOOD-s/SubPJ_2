@@ -1,11 +1,15 @@
-import React from "react";
-import MainAD from "../components/Main/MainAD";
+import React from 'react';
+import MainAD from '../components/Main/MainAD';
+import MainADSpeaker from '../components/Main/MainADSpeaker';
+import MainADDemon from '../components/Main/MainADDemon';
 
 const Main = () => {
   return (
     <div>
       {/* <Header /> */}
-      <MainAD></MainAD>
+      {/* <MainADSpeaker></MainADSpeaker> */}
+      {/* <MainAD></MainAD> */}
+      <MainADDemon></MainADDemon>
     </div>
   );
 };

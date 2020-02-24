@@ -14,6 +14,7 @@ const GradeImgWrapper = styled.div`
 `;
 
 const GradeTitle = styled.div`
+  font-family: 'GmarketSansLight';
   font-size: 2rem;
   margin-bottom: 1rem;
 `;
@@ -30,15 +31,16 @@ const GradeContent = styled.div`
 `;
 
 const GradePrice = styled.div`
+  font-family: 'GmarketSansLight';
   font-size: 1.5rem;
   font-weight: bolder;
+  margin-top: 0.5rem;
 `;
 
 const GradePriceSub = styled.span`
+  font-family: 'GmarketSansLight';
   color: #cdcdcd;
   font-size: 1rem;
-  margin-left: 1rem;
-  font-weight: normal;
 `;
 
 const useStyles = makeStyles({
@@ -101,10 +103,8 @@ const GradeCard = ({ info }) => {
             <img src={getImageUrl('static', image)} alt="" />
           </GradeImgWrapper>
           <GradeTitle>{title}</GradeTitle>
-          <GradePrice>
-            &#8361; {price}
-            <GradePriceSub>per month</GradePriceSub>
-          </GradePrice>
+          <GradePriceSub>per month</GradePriceSub>
+          <GradePrice>&#8361; {price}</GradePrice>
           <hr className={classes.hr} />
           {option.map((item, idx) => {
             return (

@@ -63,14 +63,14 @@ const NationUpdateForm = ({ nation, setUpdating }) => {
       {loading && <LoadingBackdrop loading={loading} />}
 
       <component.Grid container spacing={1}>
-        <component.Grid item xs={6}>
+        <component.Grid item xs={12} sm={6}>
           <DatePicker
             value={form.s_date}
             onChange={handleSdateChange}
             label={'출발 날짜 설정'}
           />
         </component.Grid>
-        <component.Grid item xs={6}>
+        <component.Grid item xs={12} sm={6}>
           <DatePicker
             value={form.f_date}
             onChange={handleFdateChange}
@@ -102,6 +102,7 @@ const NationUpdateForm = ({ nation, setUpdating }) => {
             onChange={onChange}
             value={form.en_name}
             name="en_name"
+            disabled
             autoComplete="en_name"
             fullWidth
           />
