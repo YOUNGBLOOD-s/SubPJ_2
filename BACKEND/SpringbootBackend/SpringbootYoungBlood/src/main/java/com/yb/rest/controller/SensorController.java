@@ -177,10 +177,14 @@ public class SensorController {
 				minus += ser.getDust(idx) * 10; // 미세먼지 마이너스 값
 				originScore -= minus;
 				ser.updateScore(new ForScore(idx, originScore));
+				
 				// 최종 idx,점수 리스트에 바로 담기
+				Monthtb mon = manser.monthInfo(idx);
+				List<Image> img = manser.imagesInfo(idx);
+				List<Route> rou = manser.contentsInfo(idx);
 				finallist.add(new ForScore(idx, ser.getScore(idx)));
+				
 			}
-			System.out.println("ser.getDust 또는 ser.updateScore 또는 ser.getScore 터짐");
 
 			Collections.sort(finallist, new Comparator<ForScore>() {
 				@Override
@@ -191,59 +195,36 @@ public class SensorController {
 
 			result = new LinkedList<>();
 			int fin = 1;
-			for (int i = 0; i < finallist.size(); i++) {
-				if(fin==num) break;
+			for (int i = 0; i < num; i++) {
 				int finalScore = 0;
 				finalScore += lig < 50 ? 5 : 10;
 				finalScore += nations.get(i).getTemp() < 22 ? 1 : 0;
 				finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
 				ser.updateType(new ForScore(finallist.get(i).getIdx(), finalScore));
-				
-				Monthtb mon = manser.monthInfo(finallist.get(i).getIdx());
-				List<Image> img = manser.imagesInfo(finallist.get(i).getIdx());
-				List<Route> rou = manser.contentsInfo(finallist.get(i).getIdx());
-				if (mon == null || img == null || rou == null) {
-					continue;
-				}
-				else {
-					result.add(finallist.get(i).getIdx());
-					fin++;
-				}
+				result.add(finallist.get(i).getIdx());
 			}
-			System.out.println("ser.updateType 터짐");
 			
 			ArrayList<Integer> gradeGroup = haeun();
-			System.out.println("haeun 터짐");
-			//이부분을 num으로 바꿈
 			if (gradeGroup.size() < num) {
 				ser.updateshowandflag();
 				gradeGroup = haeun();
 			}
-			System.out.println("ser.updateshowandflag 터짐");
-			
+		
 			Random rand = new Random();
-			//이부분을 num으로 바꿈
-			//센서 기반으로 뽑은 데이터 제외한 데이터 갯수
 			for (int h = 0; h < num; h++) {
 				int randomIdx = rand.nextInt(gradeGroup.size());
-				int randomElement = gradeGroup.get(randomIdx) - 1;
+				int randomElement = gradeGroup.get(randomIdx);
 				Monthtb m = ser.selectTemps(randomElement);
-				System.out.println("터지면 안돼.."+m.toString());
 				float elementTemp = nMonth == 1 ? m.getTem1(): nMonth == 2 ? m.getTem2(): nMonth == 3 ? m.getTem3(): nMonth == 4 ? m.getTem4()
 									: nMonth == 5 ? m.getTem5(): nMonth == 6 ? m.getTem6(): nMonth == 7 ? m.getTem7(): nMonth == 8 ? m.getTem8()
 									: nMonth == 9 ? m.getTem9(): nMonth == 10 ? m.getTem10(): nMonth == 11? m.getTem11(): m.getTem12();
-				System.out.println("터지니?");
 				int finalScore = 0;
 				finalScore += lig < 50 ? 5 : 10;
 				finalScore += elementTemp < 22 ? 1 : 0;
 				finalScore = finalScore == 5 ? 3 : finalScore == 10 ? 1 : finalScore == 6 ? 4 : 2;
-				System.out.println("응?");
 				ser.updateType(new ForScore(randomElement, finalScore));
-				System.out.println("왜 ㅠ");
 				result.add(randomElement);
-				System.out.println("진짜");
 				gradeGroup.remove(randomIdx);
-				System.out.println("너 뭐야..?");
 			}
 			
 			System.out.println("길고 긴 weight()의 끝");
@@ -252,11 +233,12 @@ public class SensorController {
 		} catch (Exception e) {
 			System.out.println("!!!weight() ERROR!!!");
 			System.out.println(e);
-			List<Integer> send = new LinkedList<>();
-			for(int i=1; i<=num*2; i++) {
-				send.add(i);
+			List<Integer> nationidx = ser.selectIdxs();
+			for(int i=0; i<nationidx.size(); i++) {
+				if(result.size()==num*2) break;
+				if(!result.contains(nationidx.get(i))) result.add(nationidx.get(i));
 			}
-			return send;
+			return result;
 		}
 	}
 	

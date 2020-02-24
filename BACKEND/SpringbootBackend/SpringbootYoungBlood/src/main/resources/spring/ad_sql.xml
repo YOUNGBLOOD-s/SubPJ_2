@@ -168,7 +168,7 @@
 	<select id="selectTemps" resultType="monthtb" parameterType="int">
 	select *
 	from monthtb 
-	where nation=(select idx from nationtb where idx=#{idx});
+	where nation=#{idx};
 	</select>
 	
 	<delete id="deleteCounsel" parameterType="int">
