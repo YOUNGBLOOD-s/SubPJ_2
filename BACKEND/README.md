@@ -1,6 +1,6 @@
 # NEARBYAD-BACKEND
 
-## :dart: API
+## :dart: API Docs
 | resource    | description         |
 | -------- | ------------ |
 | `/sensor` | sensor 기반 |
@@ -12,6 +12,41 @@
 | `/statistics` | 통계 |
 | `/chat` | 챗봇 |
 
+### sensor
+| URL    |      Method    | URL Params | Data Params |
+| -------- | ------------ | -------- | ------------ |
+| `/api/sensor/sensor` | GET | temp=[String], hum=[String], light=[String], dust=[Stirng] | |
+| `/api/sensor/weightcal` | GET | | |
+| `/api/sensor/reco` | GET | | |
+
+#### /api/sensor/weightcal
+* Success Response
+  * code : 200
+  * content
+     
+        {
+          "datas" : [
+                    "thumbnail" :
+                    "name" :
+                    "en_name" :
+                    "details" : [
+                                  "imgs" :
+                                  "temps" :
+                                  "price" :
+                                  "name" :
+                                  "en_name" :
+                                  "id" :
+                                  "humid" :
+                                  "content" :
+                                ]
+                    "id" :
+                    "content" :
+                    ]
+           "datasize" :
+         }
+* Error Response
+  * code : 404
+  * content : `{ "resmsg" : }`
 
 ## :dart: DataBase
 
@@ -26,16 +61,10 @@
 | grade    | int          |      |            | 0       |                |
 
   * idx : 일련번호
-
   * username : user id
-
   * password : user password
-
   * company : user company info
-
   * grade : 등급 (0-Basic, 1-admin, 2-Silver, 3-Gold, 4-Platinum)
-
-
 
 
 ### gradetb
@@ -49,7 +78,7 @@
 * name : 등급이름 (Basic - 일반회원, admin - 관리자, Silver - 일반광고주, Gold - 중간광고주, Platinum- 고오급광고주)
 * volume : 광고가능 횟수 (Basic:0, admin:1000, silver:5, gold:10, platinum:20)
 
-  ### nationtb
+### nationtb
 
 | Field      | Type         | Null | Key        | Default | Extra      |
 | ---------- | ------------ | ---- | ---------- | ------- | -------------- |
@@ -84,7 +113,7 @@
   * flag : 유효 값( 0-true, 1-false) 
 
 
-  ### monthtb
+### monthtb
 
 | Field  | Type  | Null | Key    | Default | Extra          |
 | ------ | ----- | ---- | ------ | ------- | -------------- |
@@ -101,7 +130,7 @@
   * hum1-hum12 : 1월-12월 평균습도
 
 
-  ### contentstb
+### contentstb
 
 | Field     | Type           | Null | Key        | Default | Extra     |
 | --------- | -------------- | ---- | ---------- | ------- | ----------|
@@ -126,7 +155,7 @@
   * transport : 이동수단
 
 
-  ### imagetb
+### imagetb
 
 | Field  | Type         | Null | Key    | Default | Extra          |
 | ------ | ------------ | ---- | ------ | ------- | -------------- |
@@ -141,7 +170,7 @@
   * url : 이미지 url 
 
 
-  ### adboardtb
+### adboardtb
 
 | Field | Type         | Null | Key    | Default | Extra          |
 | ----- | ------------ | ---- | ------ | ------- | -------------- |
@@ -192,3 +221,9 @@
 * click_cnt : 클릭 횟수
 * qr_cnt : QR 코드 인식 횟수
 * date : 인식된 시간
+
+
+### reconumtb
+| Field | Type         | Null | Key    | Default | Extra          |
+| ----- | ------------ | ---- | ------ | ------- | -------------- |
+| num | int(11) | NO | **PK** || NULL |

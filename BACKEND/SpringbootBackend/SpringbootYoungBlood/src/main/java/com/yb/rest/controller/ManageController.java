@@ -227,7 +227,6 @@ public class ManageController {
 			boolean InsertAccess = true;
 			List<Nation> listAccess = ser.nationList(customer);
 			int size = listAccess.size();
-			System.out.println(size + " " + grade + " " + customer);
 			if (grade == 2) { // 실버일떄
 				// grade가 2이면 2개
 				if (size >= 2)
@@ -245,7 +244,7 @@ public class ManageController {
 			}
 			if (grade > 0 && InsertAccess) {
 				ser.nationinsert(nat.getEn_name(), nat.getKo_name(), nat.getContinents(), customer + "",
-						nat.getWeight(), nat.getSpeech(), nat.getPrice(), nat.getS_date(), nat.getF_date());
+						nat.getSpeech(), nat.getPrice(), nat.getS_date(), nat.getF_date());
 				int last = Integer.MIN_VALUE;
 				List<Nation> list = ser.nationList(customer);
 				for (int i = 0; i < list.size(); i++) {
@@ -257,7 +256,7 @@ public class ManageController {
 				SpeechController.tts(nat.getSpeech(), last + "");
 
 			} else {
-				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+				res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.FORBIDDEN);
 			}
 		} catch (Exception e) {
 			if (e.getMessage().contains("Duplicate")) {

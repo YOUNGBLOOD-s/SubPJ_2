@@ -56,9 +56,12 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			
-			//user 확인
-			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
-			
+			if(!username.equals("admin")) {
+				if(!ser.verUser(username)) {
+					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+				}
+			}
+
 			cal.setTime(date);
 			df.format(date);
 			String today = df.format(date);		
@@ -128,14 +131,15 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			result.put("username", username);
+			System.out.println("관리자야?? => " + username);
 			
-			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
-			
+			if(!username.equals("admin") && !ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+
 			Map<String, Object> map = new HashMap<>();
 			map.put("username", username);
 			map.put("nationIdx", nationIdx);
 			boolean flag = ser.vernation(map);
-			if(!flag) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
 			
 			cal.setTime(date);
 			df.format(date);
@@ -210,13 +214,13 @@ public class StaController {
 			String username = (String) de.get("username");	
 			result.put("username", username);
 			
-			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+			if(!ser.verUser(username) && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 			
 			map = new HashMap<>();
 			map.put("username", username);
 			map.put("nationIdx", nationIdx);
 			boolean flag = ser.vernation(map);
-			if(!flag) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
 			
 			cal.setTime(date);
 			df.format(date);
