@@ -7,6 +7,7 @@ import FullScreenDialog from '../common/FullScreenDialog';
 import Axios from '../../../node_modules/axios/index';
 import LoadingBackdrop from '../common/LoadingBackdrop';
 import { LazyImageProvider } from '../common/LazyImage/LazyImageContext';
+import { LazySoundProvider } from '../common/LazyImage/LazySoundContext';
 import LazyImage from '../common/LazyImage/LazyImage';
 import ClickNotice from '../common/ClickNotice';
 import getImageUrl from '../../lib/util/getImageUrl';
@@ -105,9 +106,8 @@ const MainAD = () => {
     Axios.get('https://i02c110.p.ssafy.io:8887/api/sensor/reco')
       .then(res => {
         setDatas(res.data.datas);
-
         datasize = res.data.datasize;
-        setReqterm(carouselTerm * datasize);
+        setReqterm(carouselTerm * datasize)
       })
       .catch(err => console.log(err));
   };
