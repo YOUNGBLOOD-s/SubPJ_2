@@ -154,10 +154,27 @@ public class MemberController {
 		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
 		try {
 			Claims de = verification(token);
-			if(de==null) return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			if(de==null) 
+				return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			
 			String username = (String) de.get("username");
 			String refresh_token = createToken(username);
+			if(refresh_token==null || refresh_token=="" || refresh_token.equals("")) 
+				return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.NOT_FOUND);
+			
+			Claims rede = verification(refresh_token);
+			if(rede==null) 
+				return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			
+			Date expdate = rede.getExpiration();
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss (z Z)");
+			TimeZone time = TimeZone.getTimeZone("Asia/Seoul");
+			df.setTimeZone(time);
+			String expstring = df.format(expdate);
+			
+			msg.put("username", username);
 			msg.put("token", refresh_token);
+			msg.put("expiration_Timeout", expstring);
 			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			System.out.println("토큰 갱신 완료");
 		} catch(Exception e) {
