@@ -1,23 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
+
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
-
-const useStyles = makeStyles({
-  root: {
-    position: 'fixed',
-    bottom: '4rem',
-    left: '1rem',
-  },
-});
+import SessionContent from './SessionContent';
 
 const SessionAlert = () => {
-  const classes = useStyles();
   const [time, setTime] = useState(0);
 
   const { auth } = useSelector(({ auth }) => ({
@@ -47,15 +36,23 @@ const SessionAlert = () => {
   }, [auth]);
 
   const onClick = () => {
-    //TODO: 토큰 요청 시 세션 갱신 API로 교체하기
+    //TODO: 로그아웃 시 세션스토리지에서 expiration_time 지우기
+    const original_token = sessionStorage.getItem('access_token');
     axios
-      .post('https://i02c110.p.ssafy.io:8887/api/auth/login', {
-        username: 'choiys',
-        password: 'choiys',
-      })
+      .post(
+        'https://i02c110.p.ssafy.io:8887/api/auth/refresh',
+        {},
+        {
+          headers: {
+            Authorization: original_token,
+          },
+        },
+      )
       .then(res => {
         const expiration_time = res.data.expiration_Timeout;
+        const token = res.data.token;
         sessionStorage.setItem('expiration_time', expiration_time);
+        sessionStorage.setItem('access_token', token);
         setTime(expiration_time);
       })
       .catch(err => console.log(err));
@@ -63,16 +60,7 @@ const SessionAlert = () => {
 
   return (
     <>
-      <Chip
-        className={classes.root}
-        icon={<FaceIcon />}
-        label={'세션 만료 : ' + time}
-        clickable
-        color="primary"
-        onClick={onClick}
-        deleteIcon={<DoneIcon />}
-        variant="outlined"
-      />
+      <SessionContent label={'세션 만료 : ' + time} onClick={onClick} />
     </>
   );
 };

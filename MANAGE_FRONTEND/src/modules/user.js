@@ -37,6 +37,7 @@ function logoutSaga() {
   try {
     localStorage.removeItem('user');
     sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('expiration_time');
   } catch (e) {
     console.log(e);
   }
