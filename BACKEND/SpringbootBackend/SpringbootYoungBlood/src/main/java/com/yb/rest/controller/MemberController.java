@@ -144,6 +144,29 @@ public class MemberController {
 		return c;
 	}
 	
+	/** 토큰 갱신 */
+	@PostMapping("/auth/refresh")
+	@ApiOperation(value = "토큰 갱신")
+	public ResponseEntity<Map<String, Object>> refresh(@RequestHeader(value="Authorization") String token) {
+		System.out.println("토큰을 갱신합니다.");
+		ResponseEntity<Map<String, Object>> res = null;	
+		Map<String, Object> msg = new HashMap<String, Object>();
+		if(token=="" || token==null) return new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		try {
+			Claims de = verification(token);
+			if(de==null) return res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+			String username = (String) de.get("username");
+			String refresh_token = createToken(username);
+			msg.put("token", refresh_token);
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+			System.out.println("토큰 갱신 완료");
+		} catch(Exception e) {
+			res = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.UNAUTHORIZED);
+		}
+		System.out.println("==============");
+		return res;
+	} 
+	
 	/** 회원가입 */
 	@PostMapping("/auth/register")
 	@ApiOperation(value = "회원가입 ")
