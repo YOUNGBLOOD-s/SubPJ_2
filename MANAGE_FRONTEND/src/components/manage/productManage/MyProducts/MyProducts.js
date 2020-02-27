@@ -11,6 +11,7 @@ import AddProductLink from '../../../common/AddProductLink';
 import palette from '../../../../lib/styles/palette';
 import Pagination from '../../../common/Pagination';
 import MyProductPending from './MyProductPending';
+import { getManagerInfo } from '../../../../modules/manager';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
@@ -49,6 +50,7 @@ const MyProducts = () => {
   const token = sessionStorage.getItem('access_token');
   useEffect(() => {
     dispatch(userAdList({ page, token }));
+    dispatch(getManagerInfo(token));
   }, [dispatch, page, token]);
 
   useEffect(() => {
@@ -91,7 +93,7 @@ const MyProducts = () => {
                       </Link>
                     ) : (
                       <>
-                        {user.username === 'admin' ? (
+                        {user.username !== '일단해제' ? (
                           <Link to={`/management/product/${ad.idx}`}>
                             <MyProduct
                               ad={ad}

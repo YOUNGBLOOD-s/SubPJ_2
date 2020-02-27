@@ -36,9 +36,6 @@ const Text = styled.div`
   margin-bottom: 1rem;
   font-size: 1.8rem;
   @media (max-width: 600px) {
-    font-size: 1.8rem;
-  }
-  @media (max-width: 360px) {
     font-size: 1rem;
   }
 `;

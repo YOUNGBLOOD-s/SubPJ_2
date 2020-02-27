@@ -37,9 +37,6 @@ const Text = styled.div`
   margin-bottom: 1rem;
   font-size: 3rem;
   @media (max-width: 600px) {
-    font-size: 1.8rem;
-  }
-  @media (max-width: 360px) {
     font-size: 1.3rem;
   }
 `;
@@ -98,7 +95,7 @@ const MainPoster = () => {
         <i className="fas fa-angle-double-down"></i>
         {'  '}추천 목록 SLIDE
       </SlideBtn>
-      <ManagementLink to="/login">MANAGEMENT ></ManagementLink>
+      <ManagementLink to="/login">MANAGEMENT</ManagementLink>
     </PosterWrapper>
   );
 };

@@ -19,12 +19,12 @@ const NavBarWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   margin-right: 1rem;
-  a {
+  /* a {
     margin-right: 1rem;
     :last-child {
       margin-right: 0;
     }
-  }
+  } */
 `;
 
 const LoggedInWrapper = styled.div`
@@ -59,22 +59,16 @@ const ButtonAppBar = ({ user, onLogout }) => {
           </Link>
         </div>
         <ButtonWrapper>
-          {user ? (
+          {user && (
             <LoggedInWrapper>
               <div className="username">
                 {user.username ? user.username : '알수없는유저'}
               </div>
+              <Link to="/">
+                <StyledButton>광고메인</StyledButton>
+              </Link>
               <StyledButton onClick={onLogout}>로그아웃</StyledButton>
             </LoggedInWrapper>
-          ) : (
-            <>
-              <Link to="/register">
-                <StyledButton>회원가입</StyledButton>
-              </Link>
-              <Link to="/login">
-                <StyledButton>로그인</StyledButton>
-              </Link>
-            </>
           )}
         </ButtonWrapper>
       </NavBarWrapper>

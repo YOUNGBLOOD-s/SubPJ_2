@@ -10,13 +10,8 @@ import { Helmet } from 'react-helmet-async';
 import NotFound from './pages/NotFound';
 import ManagementPage from './pages/ManagementPage';
 
-const AppWrapper = styled.div`
-  height: -webkit-fill-available;
-  display: flex;
-  flex-direction: column;
-`;
-
 const Content = styled.div`
+  height: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -24,7 +19,7 @@ const Content = styled.div`
 
 const App = () => {
   return (
-    <AppWrapper>
+    <>
       <Helmet>
         <title>네곁에 - NEARBY AD</title>
       </Helmet>
@@ -39,7 +34,7 @@ const App = () => {
         </Switch>
       </Content>
       <Footer />
-    </AppWrapper>
+    </>
   );
 };
 

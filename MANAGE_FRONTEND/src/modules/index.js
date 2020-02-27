@@ -8,6 +8,8 @@ import ads, { adsSaga } from './ads';
 import form, { formSaga } from './form';
 import product, { productSaga } from './product';
 import qr, { qrSaga } from './qr';
+import manager, { managerSaga } from './manager';
+import statistical, { statisticalSaga } from './statistical';
 
 const rootReducer = combineReducers({
   auth,
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   ads,
   product,
   qr,
+  manager,
+  statistical,
 });
 
 export function* rootSaga() {
@@ -28,6 +32,8 @@ export function* rootSaga() {
     productSaga(),
     qrSaga(),
     formSaga(),
+    managerSaga(),
+    statisticalSaga(),
   ]);
 }
 
