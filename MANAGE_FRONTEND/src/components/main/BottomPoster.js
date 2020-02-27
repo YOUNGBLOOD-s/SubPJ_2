@@ -31,7 +31,7 @@ const TextWrapper = styled.div`
 `;
 
 const Text = styled.div`
-  font-family: 'Handon3gyeopsal600g';
+  font-family: 'Nanum Myeongjo', serif;
   font-weight: bold;
   margin-bottom: 1rem;
   font-size: 1.8rem;
@@ -65,7 +65,7 @@ const BottomPoster = () => {
         <Text>광고 통계 및 매니지먼트,</Text>
         <Text>사용자의 니즈를 채워주는 맞춤형 광고</Text>
         <Text>지금 바로 시작하세요</Text>
-        <ManagementLink to="/login">MANAGEMENT 시작하기</ManagementLink>
+        <ManagementLink to="/login">MANAGEMENT</ManagementLink>
       </TextWrapper>
     </PosterWrapper>
   );
