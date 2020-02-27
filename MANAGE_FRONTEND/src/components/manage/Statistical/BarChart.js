@@ -9,7 +9,7 @@ import { useMemo } from 'react';
 // you'll often use just a few of them.
 
 const BarChartWrapper = styled.div`
-  height: 500px;
+  height: 400px;
 `;
 
 const BarChart = ({ originalData, type }) => {
@@ -45,7 +45,7 @@ const BarChart = ({ originalData, type }) => {
         data={Data}
         keys={['qr', 'click']}
         indexBy="name"
-        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 30, bottom: 60, left: 60 }}
         padding={0.3}
         colors={{ scheme: 'nivo' }}
         defs={[
@@ -74,8 +74,7 @@ const BarChart = ({ originalData, type }) => {
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: 0,
-          legend: '시간대',
+          tickRotation: -45,
           legendPosition: 'middle',
           legendOffset: 32,
         }}
@@ -93,13 +92,13 @@ const BarChart = ({ originalData, type }) => {
         legends={[
           {
             dataFrom: 'keys',
-            anchor: 'bottom-right',
-            direction: 'column',
+            anchor: 'top',
+            direction: 'row',
             justify: false,
-            translateX: 120,
-            translateY: 0,
+            translateX: 0,
+            translateY: -50,
             itemsSpacing: 2,
-            itemWidth: 100,
+            itemWidth: 60,
             itemHeight: 20,
             itemDirection: 'left-to-right',
             itemOpacity: 0.85,

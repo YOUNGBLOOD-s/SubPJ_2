@@ -3,7 +3,7 @@ import { ResponsivePie } from '@nivo/pie';
 import styled from 'styled-components';
 
 const CompareChartWrapper = styled.div`
-  height: 300px;
+  height: 400px;
 `;
 
 const PieChart = ({ origianlData }) => {
