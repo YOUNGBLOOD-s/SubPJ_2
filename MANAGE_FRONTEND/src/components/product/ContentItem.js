@@ -23,6 +23,17 @@ const StyledImg = styled.img`
   border-radius: 3px;
 `;
 
+const TitleWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const Title = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+`;
+
 const ContentItem = ({ content, user }) => {
   const { day, seq, title, detail, image, tofrom, transport } = content;
   const [updating, setUpdating] = useState(false);
@@ -33,9 +44,11 @@ const ContentItem = ({ content, user }) => {
       ) : (
         <component.Grid container>
           <component.Grid item xs={user && user.username === 'admin' ? 9 : 12}>
-            <component.Typography variant="h6">
-              {day}일차 {seq}번째 [{title}]
-            </component.Typography>
+            <TitleWrapper>
+              <Title>
+                {day}일차 {seq}번째 [{title}]
+              </Title>
+            </TitleWrapper>
           </component.Grid>
           {user && user.username === 'admin' && (
             <component.Grid item xs={3}>
@@ -44,6 +57,7 @@ const ContentItem = ({ content, user }) => {
                 color="primary"
                 fullWidth
                 onClick={() => setUpdating(true)}
+                size="small"
               >
                 수정
               </component.Button>
