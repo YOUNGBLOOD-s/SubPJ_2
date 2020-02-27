@@ -7,22 +7,30 @@ const TitleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0.5rem 1rem;
-  .eng {
-    font-size: 0.8rem;
-    margin-top: 0.2rem;
+`;
+
+const Eng = styled.div`
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  @media (max-width: 600px) {
+    font-size: 0.6rem;
   }
-  .title {
-    font-family: 'GmarketSansLight';
-    font-size: 2rem;
-    font-weight: bold;
+`;
+
+const Kor = styled.div`
+  font-family: 'GmarketSansLight';
+  font-weight: bold;
+  font-size: 2rem;
+  @media (max-width: 600px) {
+    font-size: 1rem;
   }
 `;
 
 const Logo = () => {
   return (
     <TitleWrapper>
-      <div className="eng">NEARBY AD</div>
-      <div className="title">네곁에.</div>
+      <Eng>NEARBY AD</Eng>
+      <Kor>네곁에.</Kor>
     </TitleWrapper>
   );
 };

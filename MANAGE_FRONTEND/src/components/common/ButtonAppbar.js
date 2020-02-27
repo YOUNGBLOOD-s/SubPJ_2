@@ -34,6 +34,9 @@ const LoggedInWrapper = styled.div`
     font-family: 'GmarketSansLight';
     margin-right: 0.5rem;
     font-size: 1rem;
+    @media (max-width: 600px) {
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -46,6 +49,9 @@ const StyledButton = styled.div`
   :hover {
     background-color: ${palette.red[300]};
     transition-duration: 0.5s;
+  }
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
   }
 `;
 
