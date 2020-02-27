@@ -102,6 +102,8 @@ body {
 #root {
   min-height: 100%;
   font-family: 'NanumBarunGothic', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 추후 회원 인증 페이지에서 
