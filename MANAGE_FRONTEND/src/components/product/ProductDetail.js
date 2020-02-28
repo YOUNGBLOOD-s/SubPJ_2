@@ -12,9 +12,6 @@ import MaterialCard from '../common/MaterialCard';
 import TitleBar from '../Detail/common/TitleBar';
 import CaptionText from '../Detail/common/CaptionText';
 import LoadingBackdrop from '../common/LoadingBackdrop';
-import { removeList } from '../../lib/api/ad';
-import component from '../../lib/material/component';
-import DeleteAlertDialog from '../common/DeleteAlertDialog';
 import MonthForm from './MonthForm';
 import Counsels from './Counsels';
 import StatisticalDetail from '../manage/Statistical/StatisticalDetail';
@@ -64,27 +61,24 @@ const ProductDetail = ({ match, history }) => {
     dispatch(getProduct({ id, token }));
   }, [id, token, dispatch]);
 
-  const onRemoveAd = async () => {
-    try {
-      const token = sessionStorage.getItem('access_token');
-      await removeList({ token, id });
-      history.push('/management');
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <DetailContainer>
       {!loading && product ? (
         <DetailWrapper>
-          {/* OWNER */}
-          <TitleBar>광고 소유자</TitleBar>
-          <CaptionText>광고 소유자의 정보입니다.</CaptionText>
+          {/* NATION */}
+          <TitleBar>광고 정보</TitleBar>
+          <CaptionText>광고의 기본정보입니다.</CaptionText>
           <MaterialCard>
-            {product.owner ? <Owner owner={product.owner} /> : <NoData />}
+            {product.nation ? (
+              <Nation nation={product.nation} user={user} />
+            ) : (
+              <NoData />
+            )}
           </MaterialCard>
+
           {/* COUNSEL */}
+          <TitleBar>상담예약정보</TitleBar>
+          <CaptionText>현재 상담예약 정보입니다.</CaptionText>
           {product.counselList ? (
             <Counsels counsels={product.counselList} user={user} />
           ) : (
@@ -96,17 +90,6 @@ const ProductDetail = ({ match, history }) => {
           <MaterialCard>
             {product.nation && (
               <StatisticalDetail nationIdx={product.nation.idx} />
-            )}
-          </MaterialCard>
-
-          {/* NATION */}
-          <TitleBar>광고 정보</TitleBar>
-          <CaptionText>광고의 기본정보입니다.</CaptionText>
-          <MaterialCard>
-            {product.nation ? (
-              <Nation nation={product.nation} user={user} />
-            ) : (
-              <NoData />
             )}
           </MaterialCard>
 
@@ -153,15 +136,12 @@ const ProductDetail = ({ match, history }) => {
             )}
           </MaterialCard>
 
-          {/* DELETE */}
-          {user && user.username === 'admin' && (
-            <DeleteAlertDialog>
-              {/* children으로 삭제 버튼 넣어줌 */}
-              <component.Button onClick={onRemoveAd} color="secondary">
-                전체삭제
-              </component.Button>
-            </DeleteAlertDialog>
-          )}
+          {/* OWNER */}
+          <TitleBar>광고 소유자</TitleBar>
+          <CaptionText>광고 소유자의 정보입니다.</CaptionText>
+          <MaterialCard>
+            {product.owner ? <Owner owner={product.owner} /> : <NoData />}
+          </MaterialCard>
         </DetailWrapper>
       ) : (
         <LoadingBackdrop loading={loading} />

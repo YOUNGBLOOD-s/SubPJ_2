@@ -12,6 +12,7 @@ import palette from '../../../../lib/styles/palette';
 import Pagination from '../../../common/Pagination';
 import MyProductPending from './MyProductPending';
 import { getManagerInfo } from '../../../../modules/manager';
+// import BroadCastControl from './BroadCastControl';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
@@ -66,6 +67,7 @@ const MyProducts = () => {
 
   return (
     <MyProductsWrapper>
+      {/* <BroadCastControl /> */}
       {!loading && ads ? (
         <>
           {ads.length > 0 ? (
@@ -84,7 +86,7 @@ const MyProducts = () => {
               <component.Grid container spacing={1}>
                 {ads.map(ad => (
                   <component.Grid item xs={12} sm={6} md={4} key={ad.idx}>
-                    {ad.flag !== '0' ? (
+                    {ad.completed ? (
                       <Link to={`/management/product/${ad.idx}`}>
                         <MyProduct
                           ad={ad}
@@ -93,7 +95,7 @@ const MyProducts = () => {
                       </Link>
                     ) : (
                       <>
-                        {user.username !== '일단해제' ? (
+                        {user.username === 'admin' ? (
                           <Link to={`/management/product/${ad.idx}`}>
                             <MyProduct
                               ad={ad}

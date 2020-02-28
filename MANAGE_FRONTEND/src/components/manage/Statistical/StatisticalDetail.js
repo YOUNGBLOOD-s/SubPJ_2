@@ -42,13 +42,12 @@ const DayTypeBtn = styled.button`
 const ChartWrapper = styled.div`
   min-height: 400px;
   ${props =>
-    props.loading
-      ? `
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  `
-      : null}
+    props.isLoading &&
+    css({
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    })}
 `;
 
 const StatisticalDetail = ({ nationIdx }) => {
@@ -102,7 +101,7 @@ const StatisticalDetail = ({ nationIdx }) => {
           </li>
         </ul>
       </DayTypeNav>
-      <ChartWrapper loading={loading}>
+      <ChartWrapper isLoading={loading}>
         {!loading && data ? (
           <>
             {dayType === 'usr' && data[nationIdx] && (

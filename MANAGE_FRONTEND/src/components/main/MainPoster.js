@@ -44,8 +44,8 @@ const Text = styled.div`
 const ManagementLink = styled(Link)`
   position: absolute;
   font-family: 'GmarketSansLight';
-  border: 1px solid ${palette.grey[400]};
-  color: ${palette.grey[700]};
+  border: 2px solid ${palette.deepPurple[400]};
+  color: ${palette.deepPurple[400]};
   font-weight: bold;
   border-radius: 3px;
   padding: 0.7rem 1.3rem;
@@ -53,8 +53,9 @@ const ManagementLink = styled(Link)`
   left: 50%;
   top: 5%;
   transform: translate(-50%, 0);
+  background-color: ${palette.deepPurple[50]};
   :hover {
-    background-color: ${palette.grey[200]};
+    background-color: ${palette.deepPurple[100]};
     transition-duration: 0.5s;
   }
 `;
@@ -95,7 +96,7 @@ const MainPoster = () => {
         <i className="fas fa-angle-double-down"></i>
         {'  '}추천 목록 SLIDE
       </SlideBtn>
-      <ManagementLink to="/login">MANAGEMENT</ManagementLink>
+      <ManagementLink to="/login">관리페이지 전환</ManagementLink>
     </PosterWrapper>
   );
 };

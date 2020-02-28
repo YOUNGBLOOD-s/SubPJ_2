@@ -48,3 +48,6 @@ export const updateMonthtable = ({ id, form, token }) =>
 
 export const toggleCounsel = ({ id }) =>
   client.put(`https://i02c110.p.ssafy.io:8887/api/ad/counsel/completed/${id}`);
+
+export const toggleCompleted = ({ id }) =>
+  client.put(`https://i02c110.p.ssafy.io:8887/api/ad/nation/completed/${id}`);

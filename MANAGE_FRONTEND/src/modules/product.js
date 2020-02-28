@@ -47,6 +47,12 @@ const [
   TOGGLE_PRODUCT_COUNSEL_FAILURE,
 ] = createRequestActionTypes('product/TOGGLE_PRODUCT_COUNSEL');
 
+const [
+  TOGGLE_PRODUCT_COMPLETED,
+  TOGGLE_PRODUCT_COMPLETED_SUCCESS,
+  TOGGLE_PRODUCT_COMPLETED_FAILURE,
+] = createRequestActionTypes('product/TOGGLE_PRODUCT_COMPLETED');
+
 export const getProduct = createAction(GET_PRODUCT, ({ id, token }) => ({
   id,
   token,
@@ -80,6 +86,11 @@ export const toggleProductCounsel = createAction(
   ({ id, form, token }) => ({ id, form, token }),
 );
 
+export const toggleProductCompleted = createAction(
+  TOGGLE_PRODUCT_COMPLETED,
+  ({ id }) => ({ id }),
+);
+
 const getProductSaga = createRequestSaga(GET_PRODUCT, productAPI.productInfo);
 const addProductMonthtableSaga = createRequestSaga(
   ADD_PRODUCT_MONTHTABLE,
@@ -106,6 +117,12 @@ const toggleProductCounselSaga = createRequestSaga(
   TOGGLE_PRODUCT_COUNSEL,
   productAPI.toggleCounsel,
 );
+
+const toggleProductCompletedSaga = createRequestSaga(
+  TOGGLE_PRODUCT_COMPLETED,
+  productAPI.toggleCompleted,
+);
+
 export function* productSaga() {
   yield takeLatest(GET_PRODUCT, getProductSaga);
   yield takeLatest(ADD_PRODUCT_MONTHTABLE, addProductMonthtableSaga);
@@ -114,6 +131,7 @@ export function* productSaga() {
   yield takeLatest(UPDATE_PRODUCT_CONTENT, updateProductContentSaga);
   yield takeLatest(UPDATE_PRODUCT_MONTHTABLE, updateProductMonthtableSage);
   yield takeLatest(TOGGLE_PRODUCT_COUNSEL, toggleProductCounselSaga);
+  yield takeLatest(TOGGLE_PRODUCT_COMPLETED, toggleProductCompletedSaga);
 }
 
 const initialState = {
@@ -128,7 +146,8 @@ const initialState = {
   addErrors: {
     month: null,
   },
-  toggleError: null,
+  toggleCounselError: null,
+  toggleCompletedError: null,
 };
 
 const product = handleActions(
@@ -269,7 +288,22 @@ const product = handleActions(
     },
     [TOGGLE_PRODUCT_COUNSEL_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      toggleError: error,
+      toggleCounselError: error,
+    }),
+    [TOGGLE_PRODUCT_COMPLETED_SUCCESS]: (state, { payload: { nation } }) => ({
+      ...state,
+      product: {
+        ...state.product,
+        nation: {
+          ...state.product.nation,
+          completed: nation.completed,
+        },
+      },
+      toggleCompletedError: null,
+    }),
+    [TOGGLE_PRODUCT_COMPLETED_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      toggleCompletedError: error,
     }),
   },
   initialState,

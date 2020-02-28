@@ -21,7 +21,7 @@ const DeleteAlertDialog = ({ children }) => {
     <div>
       <Button
         fullWidth
-        variant="outlined"
+        variant="contained"
         color="secondary"
         onClick={handleClickOpen}
       >
