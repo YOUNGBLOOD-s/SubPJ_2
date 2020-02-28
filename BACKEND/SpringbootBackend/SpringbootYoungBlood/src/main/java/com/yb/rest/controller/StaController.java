@@ -60,8 +60,10 @@ public class StaController {
 				if(!ser.verUser(username)) {
 					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 				}
+			} else {
+				username = ser.selectUser(Integer.parseInt(nationIdx));
 			}
-
+			
 			cal.setTime(date);
 			df.format(date);
 			String today = df.format(date);		
@@ -136,6 +138,8 @@ public class StaController {
 				if(!ser.verUser(username)) {
 					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 				}
+			} else {
+				username = ser.selectUser(Integer.parseInt(nationIdx));
 			}
 //			
 //			Map<String, Object> map = new HashMap<>();
@@ -221,6 +225,8 @@ public class StaController {
 				if(!ser.verUser(username)) {
 					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 				}
+			} else {
+				username = ser.selectUser(Integer.parseInt(nationIdx));
 			}
 //			map = new HashMap<>();
 //			map.put("username", username);
@@ -321,7 +327,7 @@ public class StaController {
 				if(!ser.verUser(username)) {
 					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 				}
-			}
+			} 
 			
 			if(nationIdx==null || nationIdx=="") {
 				for(int i=0; i<idxs.size(); i++) {

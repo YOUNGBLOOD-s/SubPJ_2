@@ -61,4 +61,9 @@ public class StaDaoImpl implements IStaDao {
 		return false;
 	}
 
+	@Override
+	public String selectUser(int nationIdx) {
+		return session.selectOne("sta.selectUser", nationIdx);
+	}
+
 }

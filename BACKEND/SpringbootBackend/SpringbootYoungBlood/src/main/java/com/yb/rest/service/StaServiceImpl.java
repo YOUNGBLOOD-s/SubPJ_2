@@ -54,6 +54,11 @@ public class StaServiceImpl implements IStaService{
 	public boolean verUser(String username) {
 		return repo.verUser(username);
 	}
+
+	@Override
+	public String selectUser(int nationIdx) {
+		return repo.selectUser(nationIdx);
+	}
 	
 	
 }

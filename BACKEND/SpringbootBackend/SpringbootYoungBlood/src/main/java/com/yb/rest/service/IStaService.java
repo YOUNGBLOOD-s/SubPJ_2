@@ -14,4 +14,5 @@ public interface IStaService {
 	public int getQrSum(Map map);
 	public boolean vernation(Map map);
 	public boolean verUser(String username);
+	public String selectUser(int nationIdx);
 }
