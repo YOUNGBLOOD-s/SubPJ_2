@@ -191,5 +191,9 @@
 	select * from counseltb where idx=#{idx}
 	</select>
 	
+	<select id="getnation" parameterType="int" resultType="nation">
+	select * from nationtb where idx=#{nationIdx};
+	</select>
+	
 </mapper>
  

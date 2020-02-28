@@ -248,4 +248,9 @@ public class AdDaoImpl implements IAdDao {
 		session.update("sendtofront.updateNCompleted", nationIdx);
 	}
 
+	@Override
+	public Nation getnation(int nationIdx) {
+		return session.selectOne("sendtofront.getnation", nationIdx);
+	}
+
 }

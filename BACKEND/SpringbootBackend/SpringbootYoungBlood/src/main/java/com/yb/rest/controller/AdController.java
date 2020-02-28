@@ -447,8 +447,8 @@ public class AdController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			ser.updateNCompleted(nationIdx);
-			//Nation nation = se
-			//result.put("nation", nation);
+			Nation nation = ser.getnation(nationIdx);
+			result.put("nation", nation);
 			
 			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {

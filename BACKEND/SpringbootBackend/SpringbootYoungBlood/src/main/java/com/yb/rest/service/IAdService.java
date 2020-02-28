@@ -49,6 +49,7 @@ public interface IAdService {
 	public List<Nation> selectNations();
 	public void updateFlag(int idx);
 	public void updateNCompleted(int nationIdx);
+	public Nation getnation(int nationIdx);
 	
 	/** click & QRcode */
 	public void updateshowandflag();
