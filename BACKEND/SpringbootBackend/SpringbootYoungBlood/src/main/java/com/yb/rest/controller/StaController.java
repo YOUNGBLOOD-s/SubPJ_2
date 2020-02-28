@@ -131,16 +131,19 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			result.put("username", username);
-			System.out.println("관리자야?? => " + username);
 			
-			if(!username.equals("admin") && !ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
-
-			Map<String, Object> map = new HashMap<>();
-			map.put("username", username);
-			map.put("nationIdx", nationIdx);
-			boolean flag = ser.vernation(map);
-			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
-			
+			if(!username.equals("admin")) {
+				if(!ser.verUser(username)) {
+					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+				}
+			}
+//			
+//			Map<String, Object> map = new HashMap<>();
+//			map.put("username", username);
+//			map.put("nationIdx", nationIdx);
+//			boolean flag = ser.vernation(map);
+//			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+//			
 			cal.setTime(date);
 			df.format(date);
 			String today = df.format(date);
@@ -214,14 +217,17 @@ public class StaController {
 			String username = (String) de.get("username");	
 			result.put("username", username);
 			
-			if(!ser.verUser(username) && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
-			
-			map = new HashMap<>();
-			map.put("username", username);
-			map.put("nationIdx", nationIdx);
-			boolean flag = ser.vernation(map);
-			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
-			
+			if(!username.equals("admin")) {
+				if(!ser.verUser(username)) {
+					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+				}
+			}
+//			map = new HashMap<>();
+//			map.put("username", username);
+//			map.put("nationIdx", nationIdx);
+//			boolean flag = ser.vernation(map);
+//			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+//			
 			cal.setTime(date);
 			df.format(date);
 			String today = df.format(date);
@@ -311,7 +317,11 @@ public class StaController {
 			result.put("username", username);
 			List<Integer> idxs = ser.selectAllNationIdxs(username);
 
-			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+			if(!username.equals("admin")) {
+				if(!ser.verUser(username)) {
+					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+				}
+			}
 			
 			if(nationIdx==null || nationIdx=="") {
 				for(int i=0; i<idxs.size(); i++) {
@@ -328,6 +338,7 @@ public class StaController {
 				for(int i=0; i<idxs.size(); i++) {
 					if(nationIdx.equals(idxs.get(i)+"")) flag = true;
 				}
+				if(username.equals("admin")) flag=true;
 				if(flag) {
 					Map<String, Object> map = new HashMap<>();
 					int click = ser.getClickSum(Integer.parseInt(nationIdx));
