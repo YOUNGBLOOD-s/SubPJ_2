@@ -7,36 +7,53 @@ import axios from 'axios';
 import SessionContent from './SessionContent';
 
 const SessionAlert = () => {
-  const [time, setTime] = useState(0);
+  const [tmin, setTmin] = useState(0);
+  const [tsec, setTsec] = useState(0);
 
   const { auth } = useSelector(({ auth }) => ({
     auth: auth.auth,
   }));
 
-  useEffect(() => {
+  let timerInterval = null;
+
+  const Timer = () => {
     const expiration_time = sessionStorage.getItem('expiration_time');
-    if (expiration_time) setTime(expiration_time);
+    if (!expiration_time) {
+      clearInterval(timerInterval);
+      return;
+    }
+    const leftTime =
+      parseInt(
+        new Date(expiration_time.split(' (')[0]).getTime() / 1000 -
+          new Date().getTime() / 1000,
+      ) + 1;
+    const min = parseInt(leftTime / 60);
+    const sec = leftTime % 60;
+    setTmin(min);
+    setTsec(sec);
+  };
+
+  useEffect(() => {
+    clearInterval(timerInterval);
+    if (sessionStorage.getItem('expiration_time') != null) {
+      Timer();
+      timerInterval = setInterval(Timer, 1000);
+    }
   }, []);
 
   useEffect(() => {
     if (auth) {
-      //TODO: setInterval 등 사용해서 타이머 구현해서 세션 남은 시간 알려주기
       const expiration_time = auth.expiration_Timeout;
-      const leftTime = parseInt(
-        new Date(expiration_time.split(' (')[0]).getTime() / 1000 -
-          new Date().getTime() / 1000,
-      );
-      const min = parseInt(leftTime / 60);
-      const sec = leftTime % 60;
-      console.log('분: ' + min);
-      console.log('초: ' + sec);
       sessionStorage.setItem('expiration_time', expiration_time);
-      setTime(expiration_time);
+      clearInterval(timerInterval);
+      if (sessionStorage.getItem('expiration_time') != null) {
+        Timer();
+        timerInterval = setInterval(Timer, 1000);
+      }
     }
   }, [auth]);
 
   const onClick = () => {
-    //TODO: 로그아웃 시 세션스토리지에서 expiration_time 지우기
     const original_token = sessionStorage.getItem('access_token');
     axios
       .post(
@@ -53,14 +70,17 @@ const SessionAlert = () => {
         const token = res.data.token;
         sessionStorage.setItem('expiration_time', expiration_time);
         sessionStorage.setItem('access_token', token);
-        setTime(expiration_time);
+
+        clearInterval(timerInterval);
+        Timer();
+        setInterval(Timer, 1000);
       })
       .catch(err => console.log(err));
   };
 
   return (
     <>
-      <SessionContent label={'세션 만료 : ' + time} onClick={onClick} />
+      <SessionContent min={tmin} sec={tsec} onClick={onClick} />
     </>
   );
 };

@@ -12,13 +12,13 @@ const useStyles = makeStyles({
   },
 });
 
-const SessionContent = ({ label, onClick }) => {
+const SessionContent = ({ min, sec, onClick }) => {
   const classes = useStyles();
   return (
     <Chip
       className={classes.root}
       icon={<FaceIcon />}
-      label={label}
+      label={'세션 만료 : ' + min + '분 ' + sec + '초'}
       clickable
       color="primary"
       onClick={onClick}
