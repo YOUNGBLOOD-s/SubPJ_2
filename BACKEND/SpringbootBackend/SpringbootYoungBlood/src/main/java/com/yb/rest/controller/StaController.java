@@ -321,42 +321,20 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			result.put("username", username);
-			List<Integer> idxs = ser.selectAllNationIdxs(username);
-
+			
 			if(!username.equals("admin")) {
 				if(!ser.verUser(username)) {
 					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 				}
 			} 
-			
-			if(nationIdx==null || nationIdx=="") {
-				for(int i=0; i<idxs.size(); i++) {
-					Map<String, Object> map = new HashMap<>(); 
-					int nationIdx_ = idxs.get(i);
-					int click = ser.getClickSum(nationIdx_);
-					int qr = ser.getQrSum(nationIdx_);
-					map.put("click", click);
-					map.put("qr", qr);
-					result.put(nationIdx_+"", map);
-				}
-			} else {
-				boolean flag = false;
-				for(int i=0; i<idxs.size(); i++) {
-					if(nationIdx.equals(idxs.get(i)+"")) flag = true;
-				}
-				if(username.equals("admin")) flag=true;
-				if(flag) {
-					Map<String, Object> map = new HashMap<>();
-					int click = ser.getClickSum(Integer.parseInt(nationIdx));
-					int qr = ser.getQrSum(Integer.parseInt(nationIdx));
-					map.put("click", click);
-					map.put("qr", qr);
-					result.put(nationIdx+"", map);
-					re = new ResponseEntity<>(result, HttpStatus.OK);
-				} else {
-					re = new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
-				}
-			}
+					
+			Map<String, Object> map = new HashMap<>();
+			int click = ser.getClickSum(Integer.parseInt(nationIdx));
+			int qr = ser.getQrSum(Integer.parseInt(nationIdx));
+			map.put("click", click);
+			map.put("qr", qr);
+			result.put(nationIdx+"", map);
+			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch(Exception e) {
 			result.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());
