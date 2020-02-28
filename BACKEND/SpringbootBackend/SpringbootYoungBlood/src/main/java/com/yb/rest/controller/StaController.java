@@ -60,8 +60,10 @@ public class StaController {
 				if(!ser.verUser(username)) {
 					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 				}
+			} else {
+				username = ser.selectUser(Integer.parseInt(nationIdx));
 			}
-
+			
 			cal.setTime(date);
 			df.format(date);
 			String today = df.format(date);		
@@ -131,16 +133,21 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			result.put("username", username);
-			System.out.println("관리자야?? => " + username);
 			
-			if(!username.equals("admin") && !ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
-
-			Map<String, Object> map = new HashMap<>();
-			map.put("username", username);
-			map.put("nationIdx", nationIdx);
-			boolean flag = ser.vernation(map);
-			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
-			
+			if(!username.equals("admin")) {
+				if(!ser.verUser(username)) {
+					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+				}
+			} else {
+				username = ser.selectUser(Integer.parseInt(nationIdx));
+			}
+//			
+//			Map<String, Object> map = new HashMap<>();
+//			map.put("username", username);
+//			map.put("nationIdx", nationIdx);
+//			boolean flag = ser.vernation(map);
+//			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+//			
 			cal.setTime(date);
 			df.format(date);
 			String today = df.format(date);
@@ -214,14 +221,19 @@ public class StaController {
 			String username = (String) de.get("username");	
 			result.put("username", username);
 			
-			if(!ser.verUser(username) && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
-			
-			map = new HashMap<>();
-			map.put("username", username);
-			map.put("nationIdx", nationIdx);
-			boolean flag = ser.vernation(map);
-			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
-			
+			if(!username.equals("admin")) {
+				if(!ser.verUser(username)) {
+					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
+				}
+			} else {
+				username = ser.selectUser(Integer.parseInt(nationIdx));
+			}
+//			map = new HashMap<>();
+//			map.put("username", username);
+//			map.put("nationIdx", nationIdx);
+//			boolean flag = ser.vernation(map);
+//			if(!flag && !username.equals("admin")) return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+//			
 			cal.setTime(date);
 			df.format(date);
 			String today = df.format(date);
@@ -309,37 +321,20 @@ public class StaController {
 			Claims de = MemberController.verification(token);
 			String username = (String) de.get("username");	
 			result.put("username", username);
-			List<Integer> idxs = ser.selectAllNationIdxs(username);
-
-			if(!ser.verUser(username)) return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 			
-			if(nationIdx==null || nationIdx=="") {
-				for(int i=0; i<idxs.size(); i++) {
-					Map<String, Object> map = new HashMap<>(); 
-					int nationIdx_ = idxs.get(i);
-					int click = ser.getClickSum(nationIdx_);
-					int qr = ser.getQrSum(nationIdx_);
-					map.put("click", click);
-					map.put("qr", qr);
-					result.put(nationIdx_+"", map);
+			if(!username.equals("admin")) {
+				if(!ser.verUser(username)) {
+					return new ResponseEntity<>(result, HttpStatus.FORBIDDEN);
 				}
-			} else {
-				boolean flag = false;
-				for(int i=0; i<idxs.size(); i++) {
-					if(nationIdx.equals(idxs.get(i)+"")) flag = true;
-				}
-				if(flag) {
-					Map<String, Object> map = new HashMap<>();
-					int click = ser.getClickSum(Integer.parseInt(nationIdx));
-					int qr = ser.getQrSum(Integer.parseInt(nationIdx));
-					map.put("click", click);
-					map.put("qr", qr);
-					result.put(nationIdx+"", map);
-					re = new ResponseEntity<>(result, HttpStatus.OK);
-				} else {
-					re = new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
-				}
-			}
+			} 
+					
+			Map<String, Object> map = new HashMap<>();
+			int click = ser.getClickSum(Integer.parseInt(nationIdx));
+			int qr = ser.getQrSum(Integer.parseInt(nationIdx));
+			map.put("click", click);
+			map.put("qr", qr);
+			result.put(nationIdx+"", map);
+			re = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch(Exception e) {
 			result.put("resmsg", e.getMessage());
 			System.out.println(e.getMessage());

@@ -29,16 +29,19 @@ public class StaDaoImpl implements IStaDao {
 
 	@Override
 	public int getClickSum(int nationIdx) {
+		if( session.selectOne("sta.getclicksum", nationIdx)==null) return 0;
 		return session.selectOne("sta.getclicksum", nationIdx);
 	}
 
 	@Override
 	public int getQrSum(int nationIdx) {
+		if(session.selectOne("sta.getqrsum", nationIdx)==null) return 0;
 		return session.selectOne("sta.getqrsum", nationIdx);
 	}
 
 	@Override
 	public int getClickSum(Map map) {
+		if (session.selectOne("sta.getclicksum_", map)==null) return 0;
 		return session.selectOne("sta.getclicksum_", map);
 	}
 
@@ -59,6 +62,11 @@ public class StaDaoImpl implements IStaDao {
 		List<Nation> list = session.selectList("sta.veruser", username);
 		if(list.size()>0) return true;
 		return false;
+	}
+
+	@Override
+	public String selectUser(int nationIdx) {
+		return session.selectOne("sta.selectUser", nationIdx);
 	}
 
 }

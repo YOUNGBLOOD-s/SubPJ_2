@@ -90,6 +90,13 @@
 	where idx=#{idx};
 	</update>
 	
+	<update id="updateNCompleted" parameterType="int">
+	update nationtb
+	set completed = completed xor 1
+	where idx=#{nationIdx};
+	</update>
+	
+	
 	<insert id="insertCounvalue" parameterType="counsel">
 	insert into
 	counseltb(nation, age, name, email, tel, date, text)
@@ -182,6 +189,10 @@
 	
 	<select id="selectCounsel" parameterType="int" resultType="counsel">
 	select * from counseltb where idx=#{idx}
+	</select>
+	
+	<select id="getnation" parameterType="int" resultType="nation">
+	select * from nationtb where idx=#{nationIdx};
 	</select>
 	
 </mapper>

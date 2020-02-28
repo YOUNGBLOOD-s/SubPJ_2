@@ -47,4 +47,8 @@
 	select * from nationtb where customer = (select idx from membertb where username=#{username});
 	</select>
 	
+	<select id="selectUser" parameterType="int" resultType="String">
+	select username from membertb where idx = (select customer from nationtb where idx=#{nationIdx});
+	</select>
+	
 </mapper>

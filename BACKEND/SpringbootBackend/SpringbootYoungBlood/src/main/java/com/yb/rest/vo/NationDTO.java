@@ -5,7 +5,8 @@ public class NationDTO {
 			type, flag;
 	private Owner owner;
 	private String url;
-
+	private boolean completed;
+	
 	public Owner getOwner() {
 		return owner;
 	}
@@ -18,9 +19,37 @@ public class NationDTO {
 
 	}
 
-	// latest for chatbot VO
+	public NationDTO(String idx, String en_name, String ko_name, String dust, String continents, String showcnt,
+			String customer, String weight, String speech, String price, String s_date, String f_date, String type,
+			String flag, Owner owner, String url, boolean completed) {
+		super();
+		this.idx = idx;
+		this.en_name = en_name;
+		this.ko_name = ko_name;
+		this.dust = dust;
+		this.continents = continents;
+		this.showcnt = showcnt;
+		this.customer = customer;
+		this.weight = weight;
+		this.speech = speech;
+		this.price = price;
+		this.s_date = s_date;
+		this.f_date = f_date;
+		this.type = type;
+		this.flag = flag;
+		this.owner = owner;
+		this.url = url;
+		this.completed = completed;
+	}
 
-	// 2020-02-05 정희수 flag 값 수정
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+
 	public String getFlag() {
 		return flag;
 	}
