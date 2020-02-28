@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUser } from '../modules/user';
 import LoadingBackdrop from '../components/common/LoadingBackdrop';
 import ManagementAppBar from '../components/common/ManagementAppBar';
+import SessionAlert from '../components/common/SessionAlert';
 
 const ContentWrapper = styled.div`
   flex-grow: 1;
@@ -40,6 +41,7 @@ const ManagementPage = ({ history }) => {
         <title>매니지먼트 - NEARBY AD</title>
       </Helmet>
       <ButtonAppbarContainer />
+      {user && <SessionAlert />}
       {user && <ManagementAppBar user={user} />}
       <ContentWrapper>
         {user ? (
