@@ -90,6 +90,13 @@
 	where idx=#{idx};
 	</update>
 	
+	<update id="updateNCompleted" parameterType="int">
+	update nationtb
+	set completed = completed xor 1
+	where idx=#{nationIdx};
+	</update>
+	
+	
 	<insert id="insertCounvalue" parameterType="counsel">
 	insert into
 	counseltb(nation, age, name, email, tel, date, text)

@@ -234,4 +234,9 @@ public class AdServiceImpl implements IAdService {
 
 	}
 
+	@Override
+	public void updateNCompleted(int nationIdx) {
+		repo.updateNCompleted(nationIdx);
+	}
+
 }

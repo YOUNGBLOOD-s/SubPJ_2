@@ -47,6 +47,7 @@ public interface IAdDao {
 	public void updateType(ForScore forScore);	
 	public int getType(int idx);
 	public void updateFlag(int idx);
+	public void updateNCompleted(int nationIdx);
 	
 	/** click & QRcode */
 	public void updateClickcnt(Map map);

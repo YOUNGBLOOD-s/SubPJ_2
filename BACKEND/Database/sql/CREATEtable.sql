@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `nationtb` (
      s_date date,
      f_date date,
      flag int default 0, # 1:false 0:true
+     completed boolean default false,
      foreign key (customer) references membertb(idx)
      on delete cascade
 );

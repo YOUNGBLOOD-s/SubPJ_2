@@ -438,4 +438,22 @@ public class AdController {
 		}
 		return re;
 	}
+	
+	/** 나라 완료/미완료 completed 변수 */
+	@PutMapping("/nation/completed/{idx}")
+	@ApiOperation(value = "nationtb completed 변경함")
+	public @ResponseBody ResponseEntity<Map<String, Object>> updatenationflag(@PathVariable("idx") int nationIdx) {
+		ResponseEntity<Map<String, Object>> re = null;
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			ser.updateNCompleted(nationIdx);
+			//Nation nation = se
+			//result.put("nation", nation);
+			
+			re = new ResponseEntity<>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			re = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+		}
+		return re;
+	}
 }

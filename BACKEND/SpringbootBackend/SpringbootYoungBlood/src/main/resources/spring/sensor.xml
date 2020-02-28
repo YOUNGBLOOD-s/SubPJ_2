@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 희수 2020-01-23 -->
 <mapper namespace="sensor">
 	
 	<update id="update" parameterType="sen">
