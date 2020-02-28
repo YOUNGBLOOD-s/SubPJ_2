@@ -5,6 +5,10 @@ import { getContinetName } from '../../lib/data/continentsArray';
 import { dustType } from '../../lib/data/dustType';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import DeleteAlertDialog from '../common/DeleteAlertDialog';
+import { removeList } from '../../lib/api/ad';
+import { withRouter } from 'react-router-dom';
+import NationCompleteToggle from './NationCompleteToggle';
 
 const InfoBox = styled.div`
   display: flex;
@@ -33,7 +37,7 @@ const Title = styled.div`
   /* text-align: center; */
 `;
 
-const Nation = ({ nation, user }) => {
+const Nation = ({ nation, user, history }) => {
   const [updating, setUpdating] = useState(false);
   // 수정가능한 필드
   const {
@@ -48,10 +52,21 @@ const Nation = ({ nation, user }) => {
     dust, // 미세먼지 수치 (1-좋음, 2-보통, 3-나쁨, 4-매우나쁨)
     weight, // 가중치
     showcnt, // 광고 카운트
+    completed,
   } = nation;
 
   // 보여주기만 할 필드
   const { type, flag } = nation;
+
+  const token = sessionStorage.getItem('access_token');
+  const onRemoveAd = async () => {
+    try {
+      await removeList({ token, id: idx });
+      history.push('/management');
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div>
@@ -60,6 +75,16 @@ const Nation = ({ nation, user }) => {
           <NationUpdateForm nation={nation} setUpdating={setUpdating} />
         ) : (
           <component.Grid container spacing={1}>
+            <component.Grid item xs={12}>
+              <InfoBox>
+                <div className="text">승인상태</div>
+                <NationCompleteToggle
+                  completed={completed}
+                  idx={idx}
+                  user={user}
+                />
+              </InfoBox>
+            </component.Grid>
             <component.Grid item xs={6}>
               <InfoBox>
                 <div className="text">대륙</div>
@@ -150,16 +175,30 @@ const Nation = ({ nation, user }) => {
               </>
             )}
             {user && user.username === 'admin' && (
-              <component.Grid item xs={12}>
-                <component.Button
-                  variant="outlined"
-                  color="primary"
-                  onClick={() => setUpdating(true)}
-                  fullWidth
-                >
-                  수정
-                </component.Button>
-              </component.Grid>
+              <>
+                <component.Grid item xs={6}>
+                  <component.Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setUpdating(true)}
+                    fullWidth
+                  >
+                    수정
+                  </component.Button>
+                </component.Grid>
+                <component.Grid item xs={6}>
+                  <DeleteAlertDialog>
+                    {/* children으로 삭제 버튼 넣어줌 */}
+                    <component.Button
+                      onClick={onRemoveAd}
+                      variant="contained"
+                      color="secondary"
+                    >
+                      전체삭제
+                    </component.Button>
+                  </DeleteAlertDialog>
+                </component.Grid>
+              </>
             )}
           </component.Grid>
         )}
@@ -168,4 +207,4 @@ const Nation = ({ nation, user }) => {
   );
 };
 
-export default Nation;
+export default withRouter(Nation);
