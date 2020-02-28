@@ -12,7 +12,7 @@ import palette from '../../../../lib/styles/palette';
 import Pagination from '../../../common/Pagination';
 import MyProductPending from './MyProductPending';
 import { getManagerInfo } from '../../../../modules/manager';
-import BroadCastControl from './BroadCastControl';
+// import BroadCastControl from './BroadCastControl';
 
 const MyProductsWrapper = styled.div`
   padding: 1rem;
@@ -67,7 +67,7 @@ const MyProducts = () => {
 
   return (
     <MyProductsWrapper>
-      <BroadCastControl />
+      {/* <BroadCastControl /> */}
       {!loading && ads ? (
         <>
           {ads.length > 0 ? (
