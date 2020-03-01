@@ -18,6 +18,12 @@ const ContentWrapper = styled.div`
   flex-direction: column;
 `;
 
+const SessionWrapper = styled.div`
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
+`;
+
 const ManagementPage = ({ history }) => {
   const token = sessionStorage.getItem('access_token');
   const dispatch = useDispatch();
@@ -41,7 +47,11 @@ const ManagementPage = ({ history }) => {
         <title>매니지먼트 - NEARBY AD</title>
       </Helmet>
       <ButtonAppbarContainer />
-      {user && <SessionAlert />}
+      {user && (
+        <SessionWrapper>
+          <SessionAlert />
+        </SessionWrapper>
+      )}
       {user && <ManagementAppBar user={user} />}
       <ContentWrapper>
         {user ? (
